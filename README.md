@@ -1,0 +1,60 @@
+<p align="center">
+<b>WORK IN PROGRESS</b>
+<br>
+<b>This repository is not officialy related to SymbiFlow at the moment.</b>
+</p>
+
+<p align="center">
+  <a title="'doc' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Adoc"><img alt="'doc' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/doc?longCache=true&style=flat-square&label=doc&logo=GitHub%20Actions&logoColor=fff"></a>
+</p>
+
+This repository contains scripts and GitHub Actions (GHA) YAML workflows for building and deploying the docker images that are used and/or published by [SymbiFlow](https://github.com/SymbiFlow). All of them are pushed to [hub.docker.com/u/symbiflow](https://hub.docker.com/u/symbiflow).
+
+----
+
+## Proposed collaboration flow
+
+- This repository provides base images for building and for runtime.
+- Each project:
+  - Uses base building images for building their own tools.
+  - Produces cache images based on `scratch`, and/or other reusable packages.
+  - Produces ready-to-use images based on the runtime base image.
+- This repository merges multiple tools into ready-to-use images for specific use cases.
+- Users consume the ready-to-use images that include a single tool, or the ones including many of them.
+
+Some projects don't use containers at all. In some of those cases, all images are generated in this repository. However, the workload is expected to be distributed between multiple projects in the ecosystem.
+
+## Tools/projects
+
+The following is a non-exhaustive list of projects that we'd like to support in this repository:
+
+- [ ] [bitman](https://github.com/khoapham/bitman)
+- [ ] [cocotb](https://github.com/cocotb/cocotb)
+- [ ] [ghdl](https://github.com/ghdl/ghdl)
+- [ ] [ghdl-yosys-plugin](https://github.com/ghdl/ghdl-yosys-plugin)
+- [ ] [graphviz](https://graphviz.org/)
+- [ ] [gtkwave](https://github.com/gtkwave/gtkwave)
+- [ ] [icestorm](https://github.com/cliffordwolf/icestorm)
+- [ ] [iverilog](https://github.com/steveicarus/iverilog)
+- [ ] [netlistsvg](https://github.com/nturley/netlistsvg)
+- [ ] [nextpnr](https://github.com/YosysHQ/nextpnr)
+- [ ] [openocd](http://openocd.org/)
+- [ ] [prjtrellis](https://github.com/SymbiFlow/prjtrellis)
+- [ ] [symbiyosys](https://github.com/YosysHQ/SymbiYosys)
+- [ ] [verilator](https://github.com/verilator/verilator)
+- [ ] [vunit](https://github.com/VUnit/vunit)
+- [ ] [yosys](https://github.com/YosysHQ/yosys)
+
+## References
+
+- [SymbiFlow/symbiflow-examples](https://github.com/SymbiFlow/symbiflow-examples)
+- [hub.docker.com/u/symbiflow](https://hub.docker.com/u/symbiflow)
+- [ghdl/docker](https://github.com/ghdl/docker)
+- [ghdl/setup-ghdl-ci](https://github.com/ghdl/setup-ghdl-ci)
+- [dbhi/qus](https://github.com/dbhi/qus)
+- [dbhi/docker](https://github.com/dbhi/docker)
+- [alpin3/ulx3s](https://github.com/alpin3/ulx3s)
+- [open-tool-forge/fpga-toolchain](https://github.com/open-tool-forge/fpga-toolchain)
+- [im-tomu/fomu-toolchain](https://github.com/im-tomu/fomu-toolchain)
+- [eine/elide](https://github.com/eine/elide/tree/master/elide/docker)
+- [hackfin/ghdl-cross.mk](https://github.com/hackfin/ghdl-cross.mk)

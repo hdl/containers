@@ -1,0 +1,36 @@
+name: 'doc'
+
+on:
+  pull_request:
+  push:
+    paths:
+      - '.github/workflows/doc.yml'
+      - 'doc/*'
+  schedule:
+    - cron: '0 0 * * 4'
+
+jobs:
+
+  asciidoc:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Build site
+      run: docker run -v $(pwd)/doc:/documents/ asciidoctor/docker-asciidoctor asciidoctor index.adoc
+
+    - name: Publish site to gh-pages (doc)
+      if: github.event_name != 'pull_request'
+      run: |
+        mkdir pages
+        cd pages
+        git init
+        cp ../.git/config ./.git/config
+        touch .nojekyll
+        mv ../doc/index.html ./
+        git add .
+        git config --local user.email "push@gha"
+        git config --local user.name "GHA"
+        git commit -am "update ${{ github.sha }}"
+        git push -u origin +HEAD:gh-pages

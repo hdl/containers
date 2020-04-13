@@ -1,0 +1,27 @@
+name: 'z3'
+
+on:
+  push:
+  schedule:
+    - cron: '0 0 * * 5'
+
+env:
+  CI: true
+  DOCKER_BUILDKIT: 1
+  DOCKER_USER: ${{ secrets.DOCKER_USER }}
+  DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+
+jobs:
+
+  z3:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build images
+      run: |
+        docker build -t symbiflow/pkg:z3 - < z3.dockerfile
+    - name: Deploy to hub.docker.com
+      run: |
+        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+        docker push symbiflow/pkg:z3
+        docker logout

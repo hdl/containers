@@ -1,0 +1,27 @@
+name: 'prog'
+
+on:
+  push:
+  schedule:
+    - cron: '0 0 * * 5'
+
+env:
+  CI: true
+  DOCKER_BUILDKIT: 1
+  DOCKER_USER: ${{ secrets.DOCKER_USER }}
+  DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+
+jobs:
+
+  prog:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build images
+      run: |
+        docker build -t symbiflow/prog - < prog.dockerfile
+    - name: Deploy to hub.docker.com
+      run: |
+        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+        docker push symbiflow/prog
+        docker logout

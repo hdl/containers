@@ -1,0 +1,20 @@
+= SymbiFlow containers
+:toc: left
+:toclevels: 4
+:repotree: https://github.com/eine/symbiflow-containers/tree/master/
+:toc-title: SymbiFlow containers
+:icons: font
+
+== Context
+
+This project started in GitHub repository https://github.com/ghdl/ghdl[ghdl/ghdl] (which was named tgingold/ghdl back then). The main purpose was testing GHDL on multiple GNU/Linux distributions (Debian, Ubuntu and Fedora), since https://travis-ci.org/[Travis CI] supported Ubuntu only and Docker. For each target platform, two images were used, one for building and another one for testing.
+
+Later, most of the Docker related sources were split to repository https://github.com/ghdl/docker[ghdl/docker]. There, some additional simulation tools were added, such as http://vunit.github.io/[VUnit] and http://gtkwave.sourceforge.net/[GtkWave]. Images including the https://github.com/ghdl/ghdl-language-server[ghdl-language-server] were also added. When synthesis features were added to GHDL, and since it provides a plugin for https://github.com/YosysHQ/yosys[Yosys], tools for providing a complete open source workflow were requested. Those were https://github.com/YosysHQ/nextpnr[nextpnr], https://github.com/YosysHQ/icestorm[icestorm], https://github.com/YosysHQ/prjtrellis[prjtrellis], https://github.com/YosysHQ/SymbiYosys[SymbiYosys], etc.
+
+At some point, ghdl/docker had as much content related to non-GHDL tools, as resources related to the organisation. At the same time, https://symbiflow.github.io[SymbiFlow] aimed at gathering open source projects for providing an integrated open source EDA solution. However, it did not have official container images and https://symbiflow.github.io/developers.html[help was wanted].
+
+This repository was created for moving out from ghdl/docker all the tools which are not part of GHDL. At the same time, other known Verilog tools were added.
+
+== Contributing
+
+*TBW*
