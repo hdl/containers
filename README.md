@@ -30,6 +30,7 @@ The following is a non-exhaustive list of projects that we'd like to support in 
 
 - [ ] [bitman](https://github.com/khoapham/bitman)
 - [ ] [cocotb](https://github.com/cocotb/cocotb)
+- [ ] [fujprog](https://github.com/kost/fujprog)
 - [ ] [ghdl](https://github.com/ghdl/ghdl)
 - [ ] [ghdl-yosys-plugin](https://github.com/ghdl/ghdl-yosys-plugin)
 - [ ] [graphviz](https://graphviz.org/)
@@ -38,6 +39,7 @@ The following is a non-exhaustive list of projects that we'd like to support in 
 - [ ] [iverilog](https://github.com/steveicarus/iverilog)
 - [ ] [netlistsvg](https://github.com/nturley/netlistsvg)
 - [ ] [nextpnr](https://github.com/YosysHQ/nextpnr)
+- [ ] [openFPGALoader](https://github.com/trabucayre/openFPGALoader)
 - [ ] [openocd](http://openocd.org/)
 - [ ] [prjtrellis](https://github.com/SymbiFlow/prjtrellis)
 - [ ] [symbiyosys](https://github.com/YosysHQ/SymbiYosys)
