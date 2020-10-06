@@ -47,14 +47,19 @@ The following is a non-exhaustive list of projects that we'd like to support in 
 
 ## References
 
-- [SymbiFlow/symbiflow-examples](https://github.com/SymbiFlow/symbiflow-examples)
-- [hub.docker.com/u/symbiflow](https://hub.docker.com/u/symbiflow)
-- [ghdl/docker](https://github.com/ghdl/docker)
-- [ghdl/setup-ghdl-ci](https://github.com/ghdl/setup-ghdl-ci)
-- [dbhi/qus](https://github.com/dbhi/qus)
-- [dbhi/docker](https://github.com/dbhi/docker)
-- [alpin3/ulx3s](https://github.com/alpin3/ulx3s)
+- SymbiFlow:
+  - [SymbiFlow/symbiflow-examples](https://github.com/SymbiFlow/symbiflow-examples)
+  - [SymbiFlow/make-env](https://github.com/SymbiFlow/make-env)
+    - [bit.ly/edda-conda-eda-spec](http://bit.ly/edda-conda-eda-spec): Conda based system for FPGA and ASIC Dev
+    - [Support providing the environment using docker rather than conda #15](https://github.com/SymbiFlow/make-env/issues/15)
+- GHDL:
+  - [ghdl/docker](https://github.com/ghdl/docker)
+  - [ghdl/setup-ghdl-ci](https://github.com/ghdl/setup-ghdl-ci)
+- DBHI:
+  - [dbhi/qus](https://github.com/dbhi/qus)
+  - [dbhi/docker](https://github.com/dbhi/docker)
 - [open-tool-forge/fpga-toolchain](https://github.com/open-tool-forge/fpga-toolchain)
 - [im-tomu/fomu-toolchain](https://github.com/im-tomu/fomu-toolchain)
+- [alpin3/ulx3s](https://github.com/alpin3/ulx3s)
 - [eine/elide](https://github.com/eine/elide/tree/master/elide/docker)
 - [hackfin/ghdl-cross.mk](https://github.com/hackfin/ghdl-cross.mk)
