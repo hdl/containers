@@ -13,6 +13,8 @@
   -->
   <a title="'icestorm' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aicestorm"><img alt="'icestorm' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/icestorm?longCache=true&style=flat-square&label=icestorm&logo=GitHub%20Actions&logoColor=fff"></a><!--
   -->
+  <a title="'prjtrellis' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aprjtrellis"><img alt="'prjtrellis' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/prjtrellis?longCache=true&style=flat-square&label=prjtrellis&logo=GitHub%20Actions&logoColor=fff"></a><!--
+  -->
   <a title="'yosys' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Ayosys"><img alt="'yosys' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/yosys?longCache=true&style=flat-square&label=yosys&logo=GitHub%20Actions&logoColor=fff"></a>
 </p>
 
@@ -60,7 +62,9 @@ The following is a non-exhaustive list of projects that we'd like to support in 
 - [ ] [nextpnr](https://github.com/YosysHQ/nextpnr)
 - [ ] [openFPGALoader](https://github.com/trabucayre/openFPGALoader)
 - [ ] [openocd](http://openocd.org/)
-- [ ] [prjtrellis](https://github.com/SymbiFlow/prjtrellis)
+- [x] [prjtrellis](https://github.com/SymbiFlow/prjtrellis)
+  - [![symbiflow/prjtrellis:latest Docker pulls](https://img.shields.io/docker/image-size/symbiflow/prjtrellis/latest?longCache=true&style=flat-square&label=symbiflow%2Fprjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/prjtrellis/tags)
+  - [![symbiflow/pkg:prjtrellis Docker pulls](https://img.shields.io/docker/image-size/symbiflow/pkg/prjtrellis?longCache=true&style=flat-square&label=symbiflow%2Fpkg:prjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 - [ ] [symbiyosys](https://github.com/YosysHQ/SymbiYosys)
 - [ ] [verilator](https://github.com/verilator/verilator)
 - [ ] [vunit](https://github.com/VUnit/vunit)
