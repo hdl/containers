@@ -5,7 +5,9 @@
 </p>
 
 <p align="center">
-  <a title="'doc' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Adoc"><img alt="'doc' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/doc?longCache=true&style=flat-square&label=doc&logo=GitHub%20Actions&logoColor=fff"></a>
+  <a title="'doc' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Adoc"><img alt="'doc' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/doc?longCache=true&style=flat-square&label=doc&logo=GitHub%20Actions&logoColor=fff"></a><!--
+  -->
+  <a title="'base' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Abase"><img alt="'base' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/base?longCache=true&style=flat-square&label=base&logo=GitHub%20Actions&logoColor=fff"></a>
 </p>
 
 This repository contains scripts and GitHub Actions (GHA) YAML workflows for building and deploying the docker images that are used and/or published by [SymbiFlow](https://github.com/SymbiFlow). All of them are pushed to [hub.docker.com/u/symbiflow](https://hub.docker.com/u/symbiflow).
@@ -14,13 +16,21 @@ This repository contains scripts and GitHub Actions (GHA) YAML workflows for bui
 
 ## Proposed collaboration flow
 
-- This repository provides base images for building and for runtime.
-- Each project:
-  - Uses base building images for building their own tools.
-  - Produces cache images based on `scratch`, and/or other reusable packages.
-  - Produces ready-to-use images based on the runtime base image.
-- This repository merges multiple tools into ready-to-use images for specific use cases.
-- Users consume the ready-to-use images that include a single tool, or the ones including many of them.
+This repository provides base images for building and for runtime:
+
+- [![symbiflow/build:base Docker pulls](https://img.shields.io/docker/image-size/symbiflow/build/base?longCache=true&style=flat-square&label=symbiflow%2Fbuild:base&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/build/tags) Debian Buster with updated `ca-certificates`, `curl` and Python 3.
+- [![symbiflow/build:build Docker pulls](https://img.shields.io/docker/image-size/symbiflow/build/build?longCache=true&style=flat-square&label=symbiflow%2Fbuild:build&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/build/tags) based on `base`, includes `clang` and `make`.
+- [![symbiflow/build:dev Docker pulls](https://img.shields.io/docker/image-size/symbiflow/build/dev?longCache=true&style=flat-square&label=symbiflow%2Fbuild:dev&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/build/tags) based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
+
+Then, each project:
+
+- Uses base building images for building their own tools.
+- Produces cache images based on `scratch`, and/or other reusable packages.
+- Produces ready-to-use images based on the runtime base image.
+
+Last, this repository merges multiple tools into ready-to-use images for specific use cases.
+
+Finally, users consume the ready-to-use images that include a single tool, or the ones including many of them.
 
 Some projects don't use containers at all. In some of those cases, all images are generated in this repository. However, the workload is expected to be distributed between multiple projects in the ecosystem.
 

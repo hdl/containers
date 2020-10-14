@@ -18,7 +18,8 @@ RUN apt-get update -qq \
     clang \
     make
 
-ENV CXX clang
+ENV CC clang
+ENV CXX clang++
 
 #---
 
