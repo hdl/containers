@@ -9,6 +9,8 @@
   -->
   <a title="'base' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Abase"><img alt="'base' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/base?longCache=true&style=flat-square&label=base&logo=GitHub%20Actions&logoColor=fff"></a><!--
   -->
+</p>
+<p align="center">
   <a title="'gtkwave' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Agtkwave"><img alt="'gtkwave' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/gtkwave?longCache=true&style=flat-square&label=gtkwave&logo=GitHub%20Actions&logoColor=fff"></a><!--
   -->
   <a title="'icestorm' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aicestorm"><img alt="'icestorm' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/icestorm?longCache=true&style=flat-square&label=icestorm&logo=GitHub%20Actions&logoColor=fff"></a><!--
@@ -51,7 +53,8 @@ The following is a non-exhaustive list of projects that we'd like to support in 
 - [ ] [fujprog](https://github.com/kost/fujprog)
 - [ ] [ghdl](https://github.com/ghdl/ghdl)
 - [ ] [ghdl-yosys-plugin](https://github.com/ghdl/ghdl-yosys-plugin)
-- [ ] [graphviz](https://graphviz.org/)
+- [x] [graphviz](https://graphviz.org/)
+  - In `symbiflow/yosys`.
 - [x] [gtkwave](https://github.com/gtkwave/gtkwave)
   - [![symbiflow/pkg:gtkwave Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/gtkwave?longCache=true&style=flat-square&label=symbiflow%2Fpkg:gtkwave&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 - [x] [icestorm](https://github.com/cliffordwolf/icestorm)
@@ -68,9 +71,11 @@ The following is a non-exhaustive list of projects that we'd like to support in 
 - [ ] [symbiyosys](https://github.com/YosysHQ/SymbiYosys)
 - [ ] [verilator](https://github.com/verilator/verilator)
 - [ ] [vunit](https://github.com/VUnit/vunit)
+- [ ] [Yices 2](https://github.com/SRI-CSL/yices2)
 - [x] [yosys](https://github.com/YosysHQ/yosys)
   - [![symbiflow/yosys:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/yosys/latest?longCache=true&style=flat-square&label=symbiflow%2Fyosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/yosys/tags)
   - [![symbiflow/pkg:yosys Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/yosys?longCache=true&style=flat-square&label=symbiflow%2Fpkg:yosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
+- [ ] [z3](https://github.com/Z3Prover/z3)
 
 ## References
 
