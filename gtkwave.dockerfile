@@ -1,12 +1,8 @@
-ARG IMAGE="debian:buster-slim"
+FROM symbiflow/build:build AS build
 
-#---
-
-FROM $IMAGE AS build
 RUN apt-get update -qq \
  && apt-get -y install \
    build-essential \
-   clang \
    flex \
    gawk \
    gperf \
