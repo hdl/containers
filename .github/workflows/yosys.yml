@@ -5,25 +5,26 @@ on:
   schedule:
     - cron: '0 0 * * 5'
 
-env:
-  CI: true
-  DOCKER_BUILDKIT: 1
-  DOCKER_USER: ${{ secrets.DOCKER_USER }}
-  DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
-
 jobs:
 
   yosys:
     runs-on: ubuntu-latest
     steps:
+
     - uses: actions/checkout@v2
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
     - name: Build images
       run: |
         docker build -t symbiflow/pkg:yosys --target=pkg - < yosys.dockerfile
         docker build -t symbiflow/yosys - < yosys.dockerfile
-    - name: Deploy to hub.docker.com
+
+    - name: Deploy to DockerHub
       run: |
-        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
         docker push symbiflow/pkg:yosys
         docker push symbiflow/yosys
-        docker logout
