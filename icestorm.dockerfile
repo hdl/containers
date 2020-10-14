@@ -22,7 +22,7 @@ RUN cd /tmp/icestorm/iceprog \
 
 FROM scratch AS pkg
 COPY --from=build /opt/iceprog /iceprog
-COPY --from=build /opt/icestorm /icepricestormog
+COPY --from=build /opt/icestorm /icestorm
 
 #---
 

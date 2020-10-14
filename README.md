@@ -7,7 +7,9 @@
 <p align="center">
   <a title="'doc' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Adoc"><img alt="'doc' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/doc?longCache=true&style=flat-square&label=doc&logo=GitHub%20Actions&logoColor=fff"></a><!--
   -->
-  <a title="'base' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Abase"><img alt="'base' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/base?longCache=true&style=flat-square&label=base&logo=GitHub%20Actions&logoColor=fff"></a>
+  <a title="'base' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Abase"><img alt="'base' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/base?longCache=true&style=flat-square&label=base&logo=GitHub%20Actions&logoColor=fff"></a><!--
+  -->
+  <a title="'icestorm' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aicestorm"><img alt="'icestorm' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/icestorm?longCache=true&style=flat-square&label=icestorm&logo=GitHub%20Actions&logoColor=fff"></a>
 </p>
 
 This repository contains scripts and GitHub Actions (GHA) YAML workflows for building and deploying the docker images that are used and/or published by [SymbiFlow](https://github.com/SymbiFlow). All of them are pushed to [hub.docker.com/u/symbiflow](https://hub.docker.com/u/symbiflow).
@@ -45,7 +47,9 @@ The following is a non-exhaustive list of projects that we'd like to support in 
 - [ ] [ghdl-yosys-plugin](https://github.com/ghdl/ghdl-yosys-plugin)
 - [ ] [graphviz](https://graphviz.org/)
 - [ ] [gtkwave](https://github.com/gtkwave/gtkwave)
-- [ ] [icestorm](https://github.com/cliffordwolf/icestorm)
+- [x] [icestorm](https://github.com/cliffordwolf/icestorm)
+  - [![symbiflow/icestorm:latest Docker pulls](https://img.shields.io/docker/image-size/symbiflow/icestorm/latest?longCache=true&style=flat-square&label=symbiflow%2Ficestorm&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/icestorm/tags)
+  - [![symbiflow/pkg:icestorm Docker pulls](https://img.shields.io/docker/image-size/symbiflow/pkg/icestorm?longCache=true&style=flat-square&label=symbiflow%2Fpkg:icestorm&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 - [ ] [iverilog](https://github.com/steveicarus/iverilog)
 - [ ] [netlistsvg](https://github.com/nturley/netlistsvg)
 - [ ] [nextpnr](https://github.com/YosysHQ/nextpnr)
