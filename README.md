@@ -26,9 +26,9 @@ This repository contains scripts and GitHub Actions (GHA) YAML workflows for bui
 
 This repository provides base images for building and for runtime:
 
-- [![symbiflow/build:base Docker pulls](https://img.shields.io/docker/image-size/symbiflow/build/base?longCache=true&style=flat-square&label=symbiflow%2Fbuild:base&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/build/tags) Debian Buster with updated `ca-certificates`, `curl` and Python 3.
-- [![symbiflow/build:build Docker pulls](https://img.shields.io/docker/image-size/symbiflow/build/build?longCache=true&style=flat-square&label=symbiflow%2Fbuild:build&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/build/tags) based on `base`, includes `clang` and `make`.
-- [![symbiflow/build:dev Docker pulls](https://img.shields.io/docker/image-size/symbiflow/build/dev?longCache=true&style=flat-square&label=symbiflow%2Fbuild:dev&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/build/tags) based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
+- [![symbiflow/build:base Docker image size](https://img.shields.io/docker/image-size/symbiflow/build/base?longCache=true&style=flat-square&label=symbiflow%2Fbuild:base&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/build/tags) Debian Buster with updated `ca-certificates`, `curl` and Python 3.
+- [![symbiflow/build:build Docker image size](https://img.shields.io/docker/image-size/symbiflow/build/build?longCache=true&style=flat-square&label=symbiflow%2Fbuild:build&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/build/tags) based on `base`, includes `clang` and `make`.
+- [![symbiflow/build:dev Docker image size](https://img.shields.io/docker/image-size/symbiflow/build/dev?longCache=true&style=flat-square&label=symbiflow%2Fbuild:dev&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/build/tags) based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
 
 Then, each project:
 
@@ -53,24 +53,24 @@ The following is a non-exhaustive list of projects that we'd like to support in 
 - [ ] [ghdl-yosys-plugin](https://github.com/ghdl/ghdl-yosys-plugin)
 - [ ] [graphviz](https://graphviz.org/)
 - [x] [gtkwave](https://github.com/gtkwave/gtkwave)
-  - [![symbiflow/pkg:gtkwave Docker pulls](https://img.shields.io/docker/image-size/symbiflow/pkg/gtkwave?longCache=true&style=flat-square&label=symbiflow%2Fpkg:gtkwave&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
+  - [![symbiflow/pkg:gtkwave Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/gtkwave?longCache=true&style=flat-square&label=symbiflow%2Fpkg:gtkwave&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 - [x] [icestorm](https://github.com/cliffordwolf/icestorm)
-  - [![symbiflow/icestorm:latest Docker pulls](https://img.shields.io/docker/image-size/symbiflow/icestorm/latest?longCache=true&style=flat-square&label=symbiflow%2Ficestorm&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/icestorm/tags)
-  - [![symbiflow/pkg:icestorm Docker pulls](https://img.shields.io/docker/image-size/symbiflow/pkg/icestorm?longCache=true&style=flat-square&label=symbiflow%2Fpkg:icestorm&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
+  - [![symbiflow/icestorm:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/icestorm/latest?longCache=true&style=flat-square&label=symbiflow%2Ficestorm&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/icestorm/tags)
+  - [![symbiflow/pkg:icestorm Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/icestorm?longCache=true&style=flat-square&label=symbiflow%2Fpkg:icestorm&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 - [ ] [iverilog](https://github.com/steveicarus/iverilog)
 - [ ] [netlistsvg](https://github.com/nturley/netlistsvg)
 - [ ] [nextpnr](https://github.com/YosysHQ/nextpnr)
 - [ ] [openFPGALoader](https://github.com/trabucayre/openFPGALoader)
 - [ ] [openocd](http://openocd.org/)
 - [x] [prjtrellis](https://github.com/SymbiFlow/prjtrellis)
-  - [![symbiflow/prjtrellis:latest Docker pulls](https://img.shields.io/docker/image-size/symbiflow/prjtrellis/latest?longCache=true&style=flat-square&label=symbiflow%2Fprjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/prjtrellis/tags)
-  - [![symbiflow/pkg:prjtrellis Docker pulls](https://img.shields.io/docker/image-size/symbiflow/pkg/prjtrellis?longCache=true&style=flat-square&label=symbiflow%2Fpkg:prjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
+  - [![symbiflow/prjtrellis:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/prjtrellis/latest?longCache=true&style=flat-square&label=symbiflow%2Fprjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/prjtrellis/tags)
+  - [![symbiflow/pkg:prjtrellis Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/prjtrellis?longCache=true&style=flat-square&label=symbiflow%2Fpkg:prjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 - [ ] [symbiyosys](https://github.com/YosysHQ/SymbiYosys)
 - [ ] [verilator](https://github.com/verilator/verilator)
 - [ ] [vunit](https://github.com/VUnit/vunit)
 - [x] [yosys](https://github.com/YosysHQ/yosys)
-  - [![symbiflow/yosys:latest Docker pulls](https://img.shields.io/docker/image-size/symbiflow/yosys/latest?longCache=true&style=flat-square&label=symbiflow%2Fyosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/yosys/tags)
-  - [![symbiflow/pkg:yosys Docker pulls](https://img.shields.io/docker/image-size/symbiflow/pkg/yosys?longCache=true&style=flat-square&label=symbiflow%2Fpkg:yosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
+  - [![symbiflow/yosys:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/yosys/latest?longCache=true&style=flat-square&label=symbiflow%2Fyosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/yosys/tags)
+  - [![symbiflow/pkg:yosys Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/yosys?longCache=true&style=flat-square&label=symbiflow%2Fpkg:yosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 
 ## References
 
