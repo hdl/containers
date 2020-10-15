@@ -19,6 +19,10 @@
   -->
   <a title="'prjtrellis' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aprjtrellis"><img alt="'prjtrellis' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/prjtrellis?longCache=true&style=flat-square&label=prjtrellis&logo=GitHub%20Actions&logoColor=fff"></a><!--
   -->
+</p>
+<p align="center">
+  <a title="'symbiyosys' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Asymbiyosys"><img alt="'symbiyosys' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/symbiyosys?longCache=true&style=flat-square&label=symbiyosys&logo=GitHub%20Actions&logoColor=fff"></a><!--
+  -->
   <a title="'yosys' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Ayosys"><img alt="'yosys' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/yosys?longCache=true&style=flat-square&label=yosys&logo=GitHub%20Actions&logoColor=fff"></a><!--
   -->
   <a title="'z3' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Az3"><img alt="'z3' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/z3?longCache=true&style=flat-square&label=z3&logo=GitHub%20Actions&logoColor=fff"></a>
@@ -80,7 +84,8 @@ The following is a non-exhaustive list of projects that we'd like to support in 
 - [x] [prjtrellis](https://github.com/SymbiFlow/prjtrellis)
   - [![symbiflow/prjtrellis:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/prjtrellis/latest?longCache=true&style=flat-square&label=symbiflow%2Fprjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/prjtrellis/tags)
   - [![symbiflow/pkg:prjtrellis Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/prjtrellis?longCache=true&style=flat-square&label=symbiflow%2Fpkg:prjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
-- [ ] [symbiyosys](https://github.com/YosysHQ/SymbiYosys)
+- [x] [symbiyosys](https://github.com/YosysHQ/SymbiYosys)
+  - [![symbiflow/pkg:symbiyosys Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/symbiyosys?longCache=true&style=flat-square&label=symbiflow%2Fpkg:symbiyosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 - [ ] [verilator](https://github.com/verilator/verilator)
 - [ ] [vunit](https://github.com/VUnit/vunit)
 - [ ] [Yices 2](https://github.com/SRI-CSL/yices2)
