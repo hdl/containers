@@ -19,7 +19,9 @@
   -->
   <a title="'prjtrellis' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aprjtrellis"><img alt="'prjtrellis' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/prjtrellis?longCache=true&style=flat-square&label=prjtrellis&logo=GitHub%20Actions&logoColor=fff"></a><!--
   -->
-  <a title="'yosys' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Ayosys"><img alt="'yosys' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/yosys?longCache=true&style=flat-square&label=yosys&logo=GitHub%20Actions&logoColor=fff"></a>
+  <a title="'yosys' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Ayosys"><img alt="'yosys' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/yosys?longCache=true&style=flat-square&label=yosys&logo=GitHub%20Actions&logoColor=fff"></a><!--
+  -->
+  <a title="'z3' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Az3"><img alt="'z3' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/z3?longCache=true&style=flat-square&label=z3&logo=GitHub%20Actions&logoColor=fff"></a>
 </p>
 <p align="center">
   <a title="'prog' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aprog"><img alt="'prog' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/prog?longCache=true&style=flat-square&label=prog&logo=GitHub%20Actions&logoColor=fff"></a><!--
@@ -85,7 +87,8 @@ The following is a non-exhaustive list of projects that we'd like to support in 
 - [x] [yosys](https://github.com/YosysHQ/yosys)
   - [![symbiflow/yosys:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/yosys/latest?longCache=true&style=flat-square&label=symbiflow%2Fyosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/yosys/tags)
   - [![symbiflow/pkg:yosys Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/yosys?longCache=true&style=flat-square&label=symbiflow%2Fpkg:yosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
-- [ ] [z3](https://github.com/Z3Prover/z3)
+- [x] [z3](https://github.com/Z3Prover/z3)
+  - [![symbiflow/pkg:z3 Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/z3?longCache=true&style=flat-square&label=symbiflow%2Fpkg:z3&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 
 ## Images including multiple tools
 
