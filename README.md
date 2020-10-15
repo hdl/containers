@@ -19,6 +19,10 @@
   -->
   <a title="'yosys' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Ayosys"><img alt="'yosys' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/yosys?longCache=true&style=flat-square&label=yosys&logo=GitHub%20Actions&logoColor=fff"></a>
 </p>
+<p align="center">
+  <a title="'prog' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aprog"><img alt="'prog' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/prog?longCache=true&style=flat-square&label=prog&logo=GitHub%20Actions&logoColor=fff"></a><!--
+  -->
+</p>
 
 This repository contains scripts and GitHub Actions (GHA) YAML workflows for building and deploying the docker images that are used and/or published by [SymbiFlow](https://github.com/SymbiFlow). All of them are pushed to [hub.docker.com/u/symbiflow](https://hub.docker.com/u/symbiflow).
 
@@ -64,7 +68,8 @@ The following is a non-exhaustive list of projects that we'd like to support in 
 - [ ] [netlistsvg](https://github.com/nturley/netlistsvg)
 - [ ] [nextpnr](https://github.com/YosysHQ/nextpnr)
 - [ ] [openFPGALoader](https://github.com/trabucayre/openFPGALoader)
-- [ ] [openocd](http://openocd.org/)
+- [x] [openocd](http://openocd.org/)
+  - In `symbiflow/prog`.
 - [x] [prjtrellis](https://github.com/SymbiFlow/prjtrellis)
   - [![symbiflow/prjtrellis:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/prjtrellis/latest?longCache=true&style=flat-square&label=symbiflow%2Fprjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/prjtrellis/tags)
   - [![symbiflow/pkg:prjtrellis Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/prjtrellis?longCache=true&style=flat-square&label=symbiflow%2Fpkg:prjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
@@ -76,6 +81,12 @@ The following is a non-exhaustive list of projects that we'd like to support in 
   - [![symbiflow/yosys:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/yosys/latest?longCache=true&style=flat-square&label=symbiflow%2Fyosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/yosys/tags)
   - [![symbiflow/pkg:yosys Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/yosys?longCache=true&style=flat-square&label=symbiflow%2Fpkg:yosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 - [ ] [z3](https://github.com/Z3Prover/z3)
+
+## Images including multiple tools
+
+- [![symbiflow/prog:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/prog/latest?longCache=true&style=flat-square&label=symbiflow%2Fprog&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/prog/tags)
+  - iceprog
+  - openocd
 
 ## References
 

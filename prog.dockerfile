@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM symbiflow/build:base
 COPY --from=symbiflow/pkg:icestorm /iceprog /
 
 RUN apt-get update -qq \
