@@ -15,6 +15,8 @@
   -->
   <a title="'icestorm' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aicestorm"><img alt="'icestorm' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/icestorm?longCache=true&style=flat-square&label=icestorm&logo=GitHub%20Actions&logoColor=fff"></a><!--
   -->
+  <a title="'nextpnr' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Anextpnr"><img alt="'nextpnr' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/nextpnr?longCache=true&style=flat-square&label=nextpnr&logo=GitHub%20Actions&logoColor=fff"></a><!--
+  -->
   <a title="'prjtrellis' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aprjtrellis"><img alt="'prjtrellis' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/prjtrellis?longCache=true&style=flat-square&label=prjtrellis&logo=GitHub%20Actions&logoColor=fff"></a><!--
   -->
   <a title="'yosys' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Ayosys"><img alt="'yosys' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/yosys?longCache=true&style=flat-square&label=yosys&logo=GitHub%20Actions&logoColor=fff"></a>
@@ -66,7 +68,10 @@ The following is a non-exhaustive list of projects that we'd like to support in 
   - [![symbiflow/pkg:icestorm Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/icestorm?longCache=true&style=flat-square&label=symbiflow%2Fpkg:icestorm&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 - [ ] [iverilog](https://github.com/steveicarus/iverilog)
 - [ ] [netlistsvg](https://github.com/nturley/netlistsvg)
-- [ ] [nextpnr](https://github.com/YosysHQ/nextpnr)
+- [x] [nextpnr](https://github.com/YosysHQ/nextpnr)
+  - [![symbiflow/nextpnr:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/nextpnr/latest?longCache=true&style=flat-square&label=symbiflow%2Fnextpnr&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/nextpnr/tags)
+  - [![symbiflow/nextpnr:ice40 Docker image size](https://img.shields.io/docker/image-size/symbiflow/nextpnr/ice40?longCache=true&style=flat-square&label=symbiflow%2Fnextpnr:ice40&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/nextpnr/tags)
+  - [![symbiflow/nextpnr:ecp5 Docker image size](https://img.shields.io/docker/image-size/symbiflow/nextpnr/ecp5?longCache=true&style=flat-square&label=symbiflow%2Fnextpnr:ecp5&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/nextpnr/tags)
 - [ ] [openFPGALoader](https://github.com/trabucayre/openFPGALoader)
 - [x] [openocd](http://openocd.org/)
   - In `symbiflow/prog`.
