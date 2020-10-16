@@ -120,6 +120,10 @@ The following is a non-exhaustive list of projects that we'd like to support in 
   - Yosys
   - z3
 
+## Development
+
+*NOTE: Currently, there is no triggering mechanism set up between different GitHub repositories. All the workflows in this repo are triggered by CRON jobs.*
+
 ## References
 
 - SymbiFlow:
