@@ -1,6 +1,4 @@
-ARG IMAGE="ghdl/synth:beta"
-
-FROM $IMAGE
+FROM symbiflow/ghdl:yosys
 
 COPY --from=symbiflow/pkg:z3 /z3 /
 COPY --from=symbiflow/pkg:symbiyosys /symbiyosys /

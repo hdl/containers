@@ -11,6 +11,8 @@
   -->
 </p>
 <p align="center">
+  <a title="'ghdl' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aghdl"><img alt="'ghdl' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/ghdl?longCache=true&style=flat-square&label=ghdl&logo=GitHub%20Actions&logoColor=fff"></a><!--
+  -->
   <a title="'gtkwave' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Agtkwave"><img alt="'gtkwave' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/gtkwave?longCache=true&style=flat-square&label=gtkwave&logo=GitHub%20Actions&logoColor=fff"></a><!--
   -->
   <a title="'icestorm' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aicestorm"><img alt="'icestorm' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/icestorm?longCache=true&style=flat-square&label=icestorm&logo=GitHub%20Actions&logoColor=fff"></a><!--
@@ -28,6 +30,8 @@
   <a title="'z3' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Az3"><img alt="'z3' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/z3?longCache=true&style=flat-square&label=z3&logo=GitHub%20Actions&logoColor=fff"></a>
 </p>
 <p align="center">
+  <a title="'formal' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aformal"><img alt="'formal' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/formal?longCache=true&style=flat-square&label=formal&logo=GitHub%20Actions&logoColor=fff"></a><!--
+  -->
   <a title="'prog' workflow Status" href="https://github.com/eine/symbiflow-containers/actions?query=workflow%3Aprog"><img alt="'prog' workflow Status" src="https://img.shields.io/github/workflow/status/eine/symbiflow-containers/prog?longCache=true&style=flat-square&label=prog&logo=GitHub%20Actions&logoColor=fff"></a><!--
   -->
 </p>
@@ -63,10 +67,14 @@ The following is a non-exhaustive list of projects that we'd like to support in 
 - [ ] [bitman](https://github.com/khoapham/bitman)
 - [ ] [cocotb](https://github.com/cocotb/cocotb)
 - [ ] [fujprog](https://github.com/kost/fujprog)
-- [ ] [ghdl](https://github.com/ghdl/ghdl)
-- [ ] [ghdl-yosys-plugin](https://github.com/ghdl/ghdl-yosys-plugin)
+- [x] [ghdl](https://github.com/ghdl/ghdl)
+  - [![symbiflow/ghdl:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/ghdl/latest?longCache=true&style=flat-square&label=symbiflow%2Fghdl&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/ghdl/tags)
+  - [![symbiflow/ghdl:yosys Docker image size](https://img.shields.io/docker/image-size/symbiflow/ghdl/yosys?longCache=true&style=flat-square&label=symbiflow%2Fghdl:yosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/ghdl/tags)
+  - In `symbiflow/formal`.
+- [x] [ghdl-yosys-plugin](https://github.com/ghdl/ghdl-yosys-plugin)
+  - In `symbiflow/ghdl:yosys` and `symbiflow/formal`.
 - [x] [graphviz](https://graphviz.org/)
-  - In `symbiflow/yosys`.
+  - In `symbiflow/yosys`, `symbiflow/ghdl:yosys` and `symbiflow/formal`.
 - [x] [gtkwave](https://github.com/gtkwave/gtkwave)
   - [![symbiflow/pkg:gtkwave Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/gtkwave?longCache=true&style=flat-square&label=symbiflow%2Fpkg:gtkwave&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 - [x] [icestorm](https://github.com/cliffordwolf/icestorm)
@@ -86,20 +94,31 @@ The following is a non-exhaustive list of projects that we'd like to support in 
   - [![symbiflow/pkg:prjtrellis Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/prjtrellis?longCache=true&style=flat-square&label=symbiflow%2Fpkg:prjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
 - [x] [symbiyosys](https://github.com/YosysHQ/SymbiYosys)
   - [![symbiflow/pkg:symbiyosys Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/symbiyosys?longCache=true&style=flat-square&label=symbiflow%2Fpkg:symbiyosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
+  - In `symbiflow/formal`.
 - [ ] [verilator](https://github.com/verilator/verilator)
 - [ ] [vunit](https://github.com/VUnit/vunit)
 - [ ] [Yices 2](https://github.com/SRI-CSL/yices2)
 - [x] [yosys](https://github.com/YosysHQ/yosys)
   - [![symbiflow/yosys:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/yosys/latest?longCache=true&style=flat-square&label=symbiflow%2Fyosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/yosys/tags)
   - [![symbiflow/pkg:yosys Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/yosys?longCache=true&style=flat-square&label=symbiflow%2Fpkg:yosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
+  - In `symbiflow/ghdl:yosys` and `symbiflow/formal`.
 - [x] [z3](https://github.com/Z3Prover/z3)
   - [![symbiflow/pkg:z3 Docker image size](https://img.shields.io/docker/image-size/symbiflow/pkg/z3?longCache=true&style=flat-square&label=symbiflow%2Fpkg:z3&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/pkg/tags)
+  - In `symbiflow/formal`.
 
 ## Images including multiple tools
 
 - [![symbiflow/prog:latest Docker image size](https://img.shields.io/docker/image-size/symbiflow/prog/latest?longCache=true&style=flat-square&label=symbiflow%2Fprog&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/prog/tags)
   - iceprog
   - openocd
+
+- [![symbiflow/formal Docker image size](https://img.shields.io/docker/image-size/symbiflow/formal/latest?longCache=true&style=flat-square&label=symbiflow%2Fformal&logo=Docker&logoColor=fff)](https://hub.docker.com/r/symbiflow/formal/tags)
+  - GHDL
+  - ghdl-yosys-plugin
+  - graphviz
+  - Symbiyosys
+  - Yosys
+  - z3
 
 ## References
 
