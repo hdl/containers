@@ -8,6 +8,8 @@ on:
       - 'doc/*'
   schedule:
     - cron: '0 0 * * 4'
+  repository_dispatch:
+    types: [ doc ]
 
 jobs:
 
