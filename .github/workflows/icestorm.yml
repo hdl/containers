@@ -23,10 +23,10 @@ jobs:
 
     - name: Build images
       run: |
-        docker build -t symbiflow/pkg:icestorm --target=pkg - < icestorm.dockerfile
-        docker build -t symbiflow/icestorm - < icestorm.dockerfile
+        docker build -t hdlc/pkg:icestorm --target=pkg - < icestorm.dockerfile
+        docker build -t hdlc/icestorm - < icestorm.dockerfile
 
     - name: Deploy to DockerHub
       run: |
-        docker push symbiflow/pkg:icestorm
-        docker push symbiflow/icestorm
+        docker push hdlc/pkg:icestorm
+        docker push hdlc/icestorm

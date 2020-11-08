@@ -1,4 +1,4 @@
-FROM symbiflow/build:build AS build
+FROM hdlc/build:build AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -26,5 +26,5 @@ COPY --from=build /opt/icestorm /icestorm
 
 #---
 
-FROM symbiflow/build:base
+FROM hdlc/build:base
 COPY --from=build /opt/icestorm /

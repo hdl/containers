@@ -1,4 +1,4 @@
-FROM symbiflow/build:build AS build
+FROM hdlc/build:build AS build
 
 RUN apt-get update -qq \
  && apt-get -y install \

@@ -23,8 +23,8 @@ jobs:
 
     - name: Build images
       run: |
-        docker build -t symbiflow/prog - < prog.dockerfile
+        docker build -t hdlc/prog - < prog.dockerfile
 
     - name: Deploy to DockerHub
       run: |
-        docker push symbiflow/prog
+        docker push hdlc/prog

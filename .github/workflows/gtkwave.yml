@@ -23,8 +23,8 @@ jobs:
 
     - name: Build images
       run: |
-        docker build -t symbiflow/pkg:gtkwave - < gtkwave.dockerfile
+        docker build -t hdlc/pkg:gtkwave - < gtkwave.dockerfile
 
     - name: Deploy to DockerHub
       run: |
-        docker push symbiflow/pkg:gtkwave
+        docker push hdlc/pkg:gtkwave

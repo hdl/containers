@@ -1,12 +1,12 @@
 FROM alpine as get
 RUN apk add --no-cache --update git \
- && git clone --recurse-submodules https://github.com/SymbiFlow/prjtrellis /tmp/prjtrellis \
+ && git clone --recurse-submodules https://github.com/symbiflow/prjtrellis /tmp/prjtrellis \
  && cd /tmp/prjtrellis \
  && git describe --tags > libtrellis/git_version
 
 #---
 
-FROM symbiflow/build:dev AS build
+FROM hdlc/build:dev AS build
 COPY --from=get /tmp/prjtrellis /tmp/prjtrellis
 
 ENV LDFLAGS "-Wl,--copy-dt-needed-entries"
@@ -23,7 +23,7 @@ COPY --from=build /opt/prjtrellis /prjtrellis
 
 #---
 
-FROM symbiflow/build:base
+FROM hdlc/build:base
 COPY --from=build /opt/prjtrellis /
 
 RUN apt-get update -qq \

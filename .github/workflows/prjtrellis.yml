@@ -23,10 +23,10 @@ jobs:
 
     - name: Build images
       run: |
-        docker build -t symbiflow/pkg:prjtrellis --target=pkg - < prjtrellis.dockerfile
-        docker build -t symbiflow/prjtrellis - < prjtrellis.dockerfile
+        docker build -t hdlc/pkg:prjtrellis --target=pkg - < prjtrellis.dockerfile
+        docker build -t hdlc/prjtrellis - < prjtrellis.dockerfile
 
     - name: Deploy to DockerHub
       run: |
-        docker push symbiflow/pkg:prjtrellis
-        docker push symbiflow/prjtrellis
+        docker push hdlc/pkg:prjtrellis
+        docker push hdlc/prjtrellis

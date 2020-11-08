@@ -23,10 +23,10 @@ jobs:
 
     - name: Build images
       run: |
-        docker build -t symbiflow/pkg:yosys --target=pkg - < yosys.dockerfile
-        docker build -t symbiflow/yosys - < yosys.dockerfile
+        docker build -t hdlc/pkg:yosys --target=pkg - < yosys.dockerfile
+        docker build -t hdlc/yosys - < yosys.dockerfile
 
     - name: Deploy to DockerHub
       run: |
-        docker push symbiflow/pkg:yosys
-        docker push symbiflow/yosys
+        docker push hdlc/pkg:yosys
+        docker push hdlc/yosys

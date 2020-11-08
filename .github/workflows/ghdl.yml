@@ -23,10 +23,10 @@ jobs:
 
     - name: Build images
       run: |
-        docker build -t symbiflow/ghdl --target=run - < ghdl.dockerfile
-        docker build -t symbiflow/ghdl:yosys - < ghdl.dockerfile
+        docker build -t hdlc/ghdl --target=run - < ghdl.dockerfile
+        docker build -t hdlc/ghdl:yosys - < ghdl.dockerfile
 
     - name: Deploy to DockerHub
       run: |
-        docker push symbiflow/ghdl
-        docker push symbiflow/ghdl:yosys
+        docker push hdlc/ghdl
+        docker push hdlc/ghdl:yosys

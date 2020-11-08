@@ -1,4 +1,4 @@
-FROM symbiflow/build:build AS base
+FROM hdlc/build:build AS base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

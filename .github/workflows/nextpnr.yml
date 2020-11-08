@@ -23,12 +23,12 @@ jobs:
 
     - name: Build images
       run: |
-        docker build -t symbiflow/nextpnr:ice40 --target=ice40 - < nextpnr.dockerfile
-        docker build -t symbiflow/nextpnr:ecp5 --target=ecp5 - < nextpnr.dockerfile
-        docker build -t symbiflow/nextpnr - < nextpnr.dockerfile
+        docker build -t hdlc/nextpnr:ice40 --target=ice40 - < nextpnr.dockerfile
+        docker build -t hdlc/nextpnr:ecp5 --target=ecp5 - < nextpnr.dockerfile
+        docker build -t hdlc/nextpnr - < nextpnr.dockerfile
 
     - name: Deploy to DockerHub
       run: |
-        docker push symbiflow/nextpnr:ice40
-        docker push symbiflow/nextpnr:ecp5
-        docker push symbiflow/nextpnr
+        docker push hdlc/nextpnr:ice40
+        docker push hdlc/nextpnr:ecp5
+        docker push hdlc/nextpnr

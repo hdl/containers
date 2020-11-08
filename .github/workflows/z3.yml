@@ -23,8 +23,8 @@ jobs:
 
     - name: Build images
       run: |
-        docker build -t symbiflow/pkg:z3 - < z3.dockerfile
+        docker build -t hdlc/pkg:z3 - < z3.dockerfile
 
     - name: Deploy to hub.docker.com
       run: |
-        docker push symbiflow/pkg:z3
+        docker push hdlc/pkg:z3

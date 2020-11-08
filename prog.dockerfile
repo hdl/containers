@@ -1,5 +1,5 @@
-FROM symbiflow/build:base
-COPY --from=symbiflow/pkg:icestorm /iceprog /
+FROM hdlc/build:base
+COPY --from=hdlc/pkg:icestorm /iceprog /
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

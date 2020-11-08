@@ -23,12 +23,12 @@ jobs:
 
     - name: Build images
       run: |
-        docker build -t symbiflow/build:base  --target base  - < base.dockerfile
-        docker build -t symbiflow/build:build --target build - < base.dockerfile
-        docker build -t symbiflow/build:dev - < base.dockerfile
+        docker build -t hdlc/build:base  --target base  - < base.dockerfile
+        docker build -t hdlc/build:build --target build - < base.dockerfile
+        docker build -t hdlc/build:dev - < base.dockerfile
 
     - name: Deploy to DockerHub
       run: |
-        docker push symbiflow/build:base
-        docker push symbiflow/build:build
-        docker push symbiflow/build:dev
+        docker push hdlc/build:base
+        docker push hdlc/build:build
+        docker push hdlc/build:dev

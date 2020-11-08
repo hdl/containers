@@ -1,7 +1,7 @@
-FROM symbiflow/ghdl:yosys
+FROM hdlc/ghdl:yosys
 
-COPY --from=symbiflow/pkg:z3 /z3 /
-COPY --from=symbiflow/pkg:symbiyosys /symbiyosys /
+COPY --from=hdlc/pkg:z3 /z3 /
+COPY --from=hdlc/pkg:symbiyosys /symbiyosys /
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

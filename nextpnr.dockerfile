@@ -1,4 +1,4 @@
-FROM symbiflow/build:dev AS build
+FROM hdlc/build:dev AS build
 
 ENV LDFLAGS "-Wl,--copy-dt-needed-entries"
 
@@ -10,7 +10,7 @@ RUN apt-get update -qq \
 #---
 
 FROM build AS build-ice40
-COPY --from=symbiflow/icestorm /usr/local/share/icebox /usr/local/share/icebox
+COPY --from=hdlc/icestorm /usr/local/share/icebox /usr/local/share/icebox
 
 RUN mkdir -p /tmp/nextpnr/build \
  && cd /tmp/nextpnr \
@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/nextpnr/build \
 #---
 
 FROM build AS build-ecp5
-COPY --from=symbiflow/pkg:prjtrellis /prjtrellis /
+COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
 RUN mkdir -p /tmp/nextpnr/build \
  && cd /tmp/nextpnr \
@@ -44,7 +44,7 @@ RUN mkdir -p /tmp/nextpnr/build \
 #---
 
 FROM build-ice40 AS build-all
-COPY --from=symbiflow/pkg:prjtrellis /prjtrellis /
+COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
 RUN cd /tmp/nextpnr/build \
  && cmake .. \
@@ -57,7 +57,7 @@ RUN cd /tmp/nextpnr/build \
 
 #---
 
-FROM symbiflow/build:base AS base
+FROM hdlc/build:base AS base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

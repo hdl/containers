@@ -1,4 +1,4 @@
-FROM symbiflow/yosys AS base
+FROM hdlc/yosys AS base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -10,11 +10,11 @@ RUN apt-get update -qq \
 
 FROM ghdl/pkg:buster-mcode AS build
 
-# TODO Build GHDL on symbiflow/build:build instead of picking ghdl/pkg:buster-mcode
+# TODO Build GHDL on hdlc/build:build instead of picking ghdl/pkg:buster-mcode
 
 #--
 
-FROM symbiflow/build:base AS run
+FROM hdlc/build:base AS run
 
 COPY --from=build / /opt/ghdl
 

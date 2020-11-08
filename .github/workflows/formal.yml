@@ -23,8 +23,8 @@ jobs:
 
     - name: Build images
       run: |
-        docker build -t symbiflow/formal - < formal.dockerfile
+        docker build -t hdlc/formal - < formal.dockerfile
 
     - name: Deploy to DockerHub
       run: |
-        docker push symbiflow/formal
+        docker push hdlc/formal

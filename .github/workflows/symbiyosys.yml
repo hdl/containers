@@ -23,8 +23,8 @@ jobs:
 
     - name: Build images
       run: |
-        docker build -t symbiflow/pkg:symbiyosys - < symbiyosys.dockerfile
+        docker build -t hdlc/pkg:symbiyosys - < symbiyosys.dockerfile
 
     - name: Deploy to DockerHub
       run: |
-        docker push symbiflow/pkg:symbiyosys
+        docker push hdlc/pkg:symbiyosys
