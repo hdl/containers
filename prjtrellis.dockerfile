@@ -1,6 +1,6 @@
 FROM alpine as get
 RUN apk add --no-cache --update git \
- && git clone --recurse-submodules https://github.com/symbiflow/prjtrellis /tmp/prjtrellis \
+ && git clone --recurse-submodules https://github.com/YosysHQ/prjtrellis /tmp/prjtrellis \
  && cd /tmp/prjtrellis \
  && git describe --tags > libtrellis/git_version
 
