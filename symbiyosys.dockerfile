@@ -4,7 +4,6 @@ RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     binutils \
     g++ \
-    make \
     python3-distutils \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && update-ca-certificates  \

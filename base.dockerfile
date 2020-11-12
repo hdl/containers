@@ -4,6 +4,7 @@ RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     ca-certificates \
     curl \
+    make \
     python3 \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && update-ca-certificates \
@@ -15,8 +16,7 @@ FROM base AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    clang \
-    make
+    clang
 
 ENV CC clang
 ENV CXX clang++
