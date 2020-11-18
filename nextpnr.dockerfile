@@ -10,7 +10,7 @@ RUN apt-get update -qq \
 #---
 
 FROM build AS build-ice40
-COPY --from=hdlc/icestorm /usr/local/share/icebox /usr/local/share/icebox
+COPY --from=hdlc/pkg:icestorm /icestorm/usr/local/share/icebox /usr/local/share/icebox
 
 RUN mkdir -p /tmp/nextpnr/build \
  && cd /tmp/nextpnr \
