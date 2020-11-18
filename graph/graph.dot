@@ -1,0 +1,307 @@
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Dockerfiles
+
+  { node [shape=note, color=blue, fontcolor=blue]
+    d_base       [label=base       ];
+    d_formal     [label=formal     ];
+    d_ghdl       [label=ghdl       ];
+    d_gtkwave    [label=gtkwave    ];
+    d_icestorm   [label=icestorm   ];
+    d_nextpnr    [label=nextpnr    ];
+    d_prjtrellis [label=prjtrellis ];
+    d_prog       [label=prog       ];
+    d_symbiyosys [label=symbiyosys ];
+    d_yosys      [label=yosys      ];
+    d_z3         [label=z3         ];
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    "build:base"
+    "build:build"
+    "build:dev"
+    "formal"
+    "ghdl"
+    "ghdl:yosys"
+    "pkg:gtkwave"
+    "pkg:icestorm"
+    "icestorm"
+    "nextpnr:ice40"
+    "nextpnr:ecp5"
+    "nextpnr"
+    "pkg:prjtrellis"
+    "prjtrellis"
+    "prog"
+    "pkg:symbiyosys"
+    "pkg:yosys"
+    "yosys"
+    "pkg:z3"
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange]
+    { rank=same
+      "debian:buster-slim";
+      "scratch"           ;
+    }
+
+    "alpine";
+    "ghdl/pkg:buster-mcode";
+  }
+
+  # Workflows
+
+  subgraph cluster_base {
+    d_base -> {
+      "build:base",
+      "build:build",
+      "build:dev"
+    } [style=dotted];
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_base_debian" [label="debian:buster-slim"]
+    }
+  }
+
+  subgraph cluster_formal {
+    d_formal ->
+    "formal" [style=dotted];
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_formal_ghdl" [label="ghdl:yosys"]
+      "p_formal_symbiyosys" [label="pkg:symbiyosys"]
+      "p_formal_z3" [label="pkg:z3"]
+    }
+  }
+
+  subgraph cluster_ghdl {
+    d_ghdl -> { rank=same
+      "ghdl",
+      "ghdl:yosys"
+    } [style=dotted];
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_ghdl_build:base" [label="build:base"]
+      "p_ghdl_yosys" [label="yosys"]
+      "p_ghdl_buster" [label="ghdl/pkg:buster-mcode"]
+    }
+  }
+
+  subgraph cluster_gtkwave {
+    d_gtkwave ->
+    "pkg:gtkwave" [style=dotted];
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_gtkwave_build:build" [label="build:build"]
+      "p_gtkwave_scratch" [label="scratch"]
+    }
+  }
+
+  subgraph cluster_icestorm {
+    d_icestorm -> { rank=same
+      "pkg:icestorm",
+      "icestorm"
+    } [style=dotted];
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_icestorm_scratch" [label="scratch"]
+      "p_icestorm_build:base" [label="build:base"]
+      "p_icestorm_build:build" [label="build:build"]
+    }
+  }
+
+  subgraph cluster_nextpnr {
+    d_nextpnr -> { rank=same
+      "nextpnr:ice40",
+      "nextpnr:ecp5",
+      "nextpnr"
+    } [style=dotted];
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_nextpnr_build:base" [label="build:base"]
+      "p_nextpnr_build:dev" [label="build:dev"]
+      "p_nextpnr_icestorm" [label="pkg:icestorm"]
+      "p_nextpnr_prjtrellis" [label="pkg:prjtrellis"]
+    }
+  }
+
+  subgraph cluster_prjtrellis {
+    d_prjtrellis -> { rank=same
+      "pkg:prjtrellis",
+      "prjtrellis"
+    } [style=dotted];
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_prjtrellis_alpine" [label="alpine"]
+      "p_prjtrellis_scratch" [label="scratch"]
+      "p_prjtrellis_build:base" [label="build:base"]
+      "p_prjtrellis_build:dev" [label="build:dev"]
+    }
+  }
+
+  subgraph cluster_prog {
+    d_prog ->
+    "prog" [style=dotted];
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_prog_icestorm" [label="pkg:icestorm"]
+      "p_prog_build:base" [label="build:base"]
+    }
+  }
+
+  subgraph cluster_symbiyosys {
+    d_symbiyosys ->
+    "pkg:symbiyosys" [style=dotted];
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_symbiyosys_scratch" [label="scratch"]
+      "p_symbiyosys_build:base" [label="build:base"]
+    }
+  }
+
+  subgraph cluster_yosys {
+    d_yosys -> { rank=same
+      "pkg:yosys",
+      "yosys"
+    } [style=dotted];
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_yosys_build:build" [label="build:build"]
+      "p_yosys_scratch" [label="scratch"]
+    }
+  }
+
+  subgraph cluster_z3 {
+    d_z3 ->
+    "pkg:z3" [style=dotted];
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_z3_scratch" [label="scratch"]
+      "p_z3_build:base" [label="build:base"]
+    }
+  }
+
+  { rank=same
+    d_gtkwave
+    d_icestorm
+    d_prjtrellis
+    d_symbiyosys
+    d_yosys
+    d_z3
+  }
+
+  { rank=same
+    d_ghdl
+    d_nextpnr
+    d_prog
+  }
+
+  # Dockerfile dependencies
+
+  "debian:buster-slim" -> "p_base_debian" -> d_base;
+
+  "ghdl:yosys" -> "p_formal_ghdl" -> d_formal;
+  "pkg:symbiyosys" -> "p_formal_symbiyosys" -> d_formal;
+  "pkg:z3" -> "p_formal_z3" -> d_formal;
+
+  "ghdl/pkg:buster-mcode" -> "p_ghdl_buster" -> d_ghdl;
+
+  "build:base" -> "p_ghdl_build:base" -> d_ghdl;
+  "yosys" -> "p_ghdl_yosys" -> d_ghdl;
+
+  "build:build" -> "p_gtkwave_build:build" -> d_gtkwave;
+  "scratch" -> "p_gtkwave_scratch" -> d_gtkwave;
+
+  "build:build" -> "p_icestorm_build:build" ->  d_icestorm;
+  "build:base" -> "p_icestorm_build:base" -> d_icestorm;
+  "scratch" -> "p_icestorm_scratch" -> d_icestorm;
+
+  "build:dev" -> "p_nextpnr_build:dev" -> d_nextpnr;
+  "build:base" -> "p_nextpnr_build:base" -> d_nextpnr;
+  "pkg:icestorm" -> "p_nextpnr_icestorm" -> d_nextpnr;
+  "pkg:prjtrellis" -> "p_nextpnr_prjtrellis" -> d_nextpnr;
+
+  "build:dev" -> "p_prjtrellis_build:dev" -> d_prjtrellis;
+  "alpine" -> "p_prjtrellis_alpine" -> d_prjtrellis;
+
+  "build:base" -> "p_prjtrellis_build:base" -> d_prjtrellis;
+  "scratch" -> "p_prjtrellis_scratch" -> d_prjtrellis;
+
+  "build:base" -> "p_prog_build:base" -> d_prog;
+  "pkg:icestorm" -> "p_prog_icestorm" -> d_prog;
+
+  "build:base" -> "p_symbiyosys_build:base" -> d_symbiyosys;
+  "scratch" -> "p_symbiyosys_scratch" -> d_symbiyosys;
+
+  "build:build" -> "p_yosys_build:build" -> d_yosys;
+  "scratch" -> "p_yosys_scratch" -> d_yosys;
+
+  "build:base" -> "p_z3_build:base" -> d_z3;
+  "scratch" -> "p_z3_scratch" -> d_z3;
+
+  # Image dependencies
+
+  { edge [style=dashed]
+    "p_base_debian" -> "build:base" -> "build:build" -> "build:dev";
+
+    "p_prog_build:base" -> "prog";
+
+    "p_ghdl_build:base" -> "ghdl";
+
+    "p_nextpnr_build:base" -> {
+      "nextpnr",
+      "nextpnr:ice40",
+      "nextpnr:ecp5"
+    };
+
+    "p_formal_ghdl" -> "formal";
+
+    "p_gtkwave_scratch" -> "pkg:gtkwave";
+
+    "p_icestorm_build:base" -> "icestorm";
+    "p_icestorm_scratch" -> "pkg:icestorm";
+
+    "p_prjtrellis_scratch" -> "pkg:prjtrellis";
+    "p_prjtrellis_build:base" -> "prjtrellis";
+
+    "p_symbiyosys_scratch" -> "pkg:symbiyosys";
+
+    "p_yosys_scratch" -> "pkg:yosys";
+    "p_yosys_build:build" -> "yosys";
+
+    "p_ghdl_yosys" -> "ghdl:yosys";
+
+    "p_z3_scratch" -> "pkg:z3";
+  }
+
+  { edge [style=dashed, color=grey]
+    {
+      "p_formal_symbiyosys",
+      "p_formal_z3"
+     } -> "formal";
+
+    "p_ghdl_buster" -> {
+      "ghdl",
+      "ghdl:yosys"
+    };
+
+    "p_prog_icestorm" -> "prog";
+
+    "p_nextpnr_icestorm" -> {
+      "nextpnr",
+      "nextpnr:ice40"
+    };
+
+    "p_nextpnr_prjtrellis" -> {
+      "nextpnr",
+      "nextpnr:ecp5"
+     };
+  }
+
+}
