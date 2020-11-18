@@ -1,0 +1,54 @@
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+  node [fontsize=8];
+  edge [fontsize=8];
+
+  { rank=same
+    image_ext [shape=cylinder, color=orange, fontcolor=orange, label=""];
+    image_hdl [shape=cylinder, label=""];
+    image_hdlpkg [shape=cylinder, label=""];
+    deps [shape=none, label="Publicly available images which the workflow depends on:\l- Black: own, generated in other workflows of this project\l- Orange: external, generated somewhere else\l"]
+  }
+
+  subgraph cluster_legend {
+    test [shape=folder, color=magenta, fontcolor=magenta, label="Test"];
+    image [shape=cylinder, label="Image"];
+    image_base [shape=cylinder, color=grey, fontcolor=grey, label=""];
+    image_dep [shape=cylinder, color=grey, fontcolor=grey, label=""];
+    image_pkg [shape=cylinder, color=grey, fontcolor=grey, label=""];
+    dockerfile [shape=note, color=blue, fontcolor=blue, label="Dockerfile"];
+    {
+      image_base,
+      image_dep,
+      image_pkg
+    } -> dockerfile;
+    dockerfile -> image [style=dotted, label="Image\ngenerated\nby"];
+    image_base -> image [style=dashed, label="Image\nbased\non"];
+    image_pkg -> image [style=dashed, color=gray, label="Image\nimports\nfrom"];
+    image -> test;
+  }
+  { rank=same
+    image_base
+    image_dep
+    image_pkg
+    shadow [shape=none, label="Shadows of the images the workflow depends on.\lShown for ease of visualisation only.\l"];
+  }
+  { rank=same
+    dockerfile
+    workflow [shape=none, label="A cluster represents a GitHub Actions workflow, which\ltypically uses a single dockerfile.\l The workflow and the dockerfile are named after the tools.\l"];
+  }
+  { rank=same
+    image
+    desc [shape=none, label="Each image has, at least and at most, two black input edges, one\ldotted and one dashed. It can optionally have other gray input edges.\l"];
+  }
+  { rank=same
+    test
+    test_desc [shape=none, label="Each image has a test script, which is executed in a temporary\lcontainer before pushing the image to DockerHub.\lTests which are not implemented yet are shown in Red.\l"];
+  }
+  image_ext -> image_dep;
+  image_hdl -> image_base;
+  image_hdlpkg -> image_pkg;
+
+}

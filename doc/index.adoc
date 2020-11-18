@@ -34,7 +34,9 @@ Then, for each project, a dockerfile and a GitHub Actions workflow are created. 
 * Ready-to-use images based on the runtime base image are produced.
 * Ready-to-use images are tested before uploading.
 
-Moreover, multiple tools are merged into ready-to-use images for specific use cases.
+Depending on the tool, _package_ images are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for specific use cases.
+
+Before working on adding or extending the support for a tool, please check the https://github.com/hdl/containers/issues[issues] and https://github.com/hdl/containers/pulls[pull requests], for avoiding duplicated effort in case anyone is already working on it. You can also join the chat at https://gitter.im/hdl/community[gitter.im/hdl/community].
 
 NOTE: Currently, many projects don't use containers at all, hence, all images are generated in this repository. However, the workload is expected to be distributed between multiple projects in the ecosystem.
 
@@ -42,9 +44,21 @@ NOTE: At the moment, there is no triggering mechanism set up between different G
 
 === Graph
 
-Subdir link:{repotree}graph/[`graph/`] contains the source of a `digraph` (https://graphviz.org/[Graphviz]), where the relations between workflows, dockerfiles, images and tests are shown.
+Understanding how all the pieces in this project fit together might be daunting for newcomers. Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem. Subdir link:{repotree}graph/[`graph/`] contains the source of a https://en.wikipedia.org/wiki/Directed_graph[directed graph], where the relations between workflows, dockerfiles, images and tests are shown.
 
-image::graph.svg[title='link:graph.svg[Workflows, dockerfiles, images and tests]']
+(https://graphviz.org/[Graphviz])'s `digraph` format is used, hence, the graph can be rendered to multiple image formats. The SVG output is shown in xref:img-graph[xrefstyle=short]. Multiple colours and arrow types are used for describing different dependency types. All of those are explained in the legend: xref:img-legend[xrefstyle=short].
+
+[#img-graph]
+.Workflows, dockerfiles, images and tests.
+[link=graph.svg]
+image::graph.svg['Workflows, dockerfiles, images and tests', align='center']
+
+[#img-legend]
+.Legend of the directed graph.
+[link=legend.svg]
+image::legend.svg['Legend of the directed graph', align='center']
+
+IMPORTANT: When contributing modifications to the workflows, the dockerfiles or the tests, it is of utmost importance to update the graph accordingly.
 
 == References
 
