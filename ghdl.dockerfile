@@ -1,4 +1,12 @@
-FROM hdlc/yosys AS base
+FROM ghdl/pkg:buster-mcode AS build
+
+# TODO Build GHDL on hdlc/build:build instead of picking ghdl/pkg:buster-mcode
+
+#--
+
+FROM hdlc/build:base AS run
+
+COPY --from=build / /usr/local/
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -8,15 +16,7 @@ RUN apt-get update -qq \
 
 #--
 
-FROM ghdl/pkg:buster-mcode AS build
-
-# TODO Build GHDL on hdlc/build:build instead of picking ghdl/pkg:buster-mcode
-
-#--
-
-FROM hdlc/build:base AS run
-
-COPY --from=build / /opt/ghdl
+FROM hdlc/yosys AS base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
