@@ -42,7 +42,9 @@ NOTE: At the moment, there is no triggering mechanism set up between different G
 
 === Graph
 
-Subdir link:{repotree}graph/[`graph/`] contains the source of a `digraph` (https://graphviz.org/[Graphviz]), where the relations between images and dockerfiles are shown.
+Subdir link:{repotree}graph/[`graph/`] contains the source of a `digraph` (https://graphviz.org/[Graphviz]), where the relations between workflows, dockerfiles, images and tests are shown.
+
+image::graph.svg[title='link:graph.svg[Workflows, dockerfiles, images and tests]']
 
 == References
 

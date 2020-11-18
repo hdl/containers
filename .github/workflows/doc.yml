@@ -17,14 +17,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: Build hdlc/doc
+      run: |
+        docker build -t hdlc/doc - <<-EOF
+        FROM asciidoctor/docker-asciidoctor
+        RUN apk add -U --no-cache graphviz
+        EOF
+
     - uses: actions/checkout@v2
 
-    # Equivalent local execution: docker run -v /$(pwd)/doc://documents/ asciidoctor/docker-asciidoctor asciidoctor index.adoc
     - name: Build site
-      uses: docker://asciidoctor/docker-asciidoctor
-      with:
-        entrypoint: asciidoctor
-        args: doc/index.adoc
+      run: docker run -v /$(pwd)://documents/ hdlc/doc ./doc/make.sh
+      # BUG: the following 'uses' should be equivalent to the 'run' command above.
+      #      Unfortunately, GitHub tries to build a custom image before running the
+      #      first step. At that point, image 'hdlc/doc' does not exist, so it fails.
+      #  uses: docker://hdlc/doc
+      #  with:
+      #    args: doc/make.sh
 
     - name: Publish site to gh-pages (doc)
       if: github.event_name != 'pull_request'
@@ -35,6 +44,7 @@ jobs:
         cp ../.git/config ./.git/config
         touch .nojekyll
         mv ../doc/index.html ./
+        mv ../doc/graph.svg ./
         git add .
         git config --local user.email "push@gha"
         git config --local user.name "GHA"
