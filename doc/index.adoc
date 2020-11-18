@@ -13,6 +13,52 @@ Later, most of the Docker related sources were split to repository https://githu
 
 At some point, ghdl/docker had as much content related to non-GHDL tools, as resources related to the organisation. At the same time, https://symbiflow.github.io[SymbiFlow] aimed at gathering open source projects for providing an integrated open source EDA solution. However, it did not have official container images and https://symbiflow.github.io/developers.html[help was wanted]. This repository was intially created for moving all the tools which were not part of GHDL, from ghdl/docker to symbiflow/containers. However, apart from adding known Verilog tools, the scope was widened. Hence, the repository was published in https://github.com/hdl/containers[hdl/containers].
 
+== Usage
+
+Users can consume the ready-to-use images that include a single tool, or the ones including many of them.
+
+_TBW_
+
 == Contributing
 
-*TBW*
+This repository provides a set of base images for building and for runtime: link:{repotree}base.dockerfile[`base.dockerfile`]. All the images in the ecosystem are based on these:
+
+* https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/base?longCache=true&style=flat-square&label=hdlc%2Fbuild:base&logo=Docker&logoColor=fff[title='hdlc/build:base Docker image size']] Debian Buster with updated `ca-certificates`, `curl` and Python 3.
+* https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/build?longCache=true&style=flat-square&label=hdlc%2Fbuild:build&logo=Docker&logoColor=fff[title='hdlc/build:build Docker image size']] based on `base`, includes `clang` and `make`.
+* https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/dev?longCache=true&style=flat-square&label=hdlc%2Fbuild:dev&logo=Docker&logoColor=fff[title='hdlc/build:dev Docker image size']] based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
+
+Then, for each project, a dockerfile and a GitHub Actions workflow are created. Those are used for:
+
+* Tools are built using base images.
+* Cache images based on `scratch` (and/or other reusable packages) are produced.
+* Ready-to-use images based on the runtime base image are produced.
+* Ready-to-use images are tested before uploading.
+
+Moreover, multiple tools are merged into ready-to-use images for specific use cases.
+
+NOTE: Currently, many projects don't use containers at all, hence, all images are generated in this repository. However, the workload is expected to be distributed between multiple projects in the ecosystem.
+
+NOTE: At the moment, there is no triggering mechanism set up between different GitHub repositories. All the workflows in this repo are triggered by CRON jobs.
+
+=== Graph
+
+Subdir link:{repotree}graph/[`graph/`] contains the source of a `digraph` (https://graphviz.org/[Graphviz]), where the relations between images and dockerfiles are shown.
+
+== References
+
+* SymbiFlow:
+** https://github.com/SymbiFlow/symbiflow-examples[SymbiFlow/symbiflow-examples]
+** https://github.com/SymbiFlow/make-env[SymbiFlow/make-env]
+*** http://bit.ly/edda-conda-eda-spec[bit.ly/edda-conda-eda-spec]: Conda based system for FPGA and ASIC Dev
+*** https://github.com/SymbiFlow/make-env/issues/15[Support providing the environment using docker rather than conda #15]
+* GHDL:
+** https://github.com/ghdl/docker[ghdl/docker]
+** https://github.com/ghdl/setup-ghdl-ci[ghdl/setup-ghdl-ci]
+* DBHI:
+** https://github.com/dbhi/qus[dbhi/qus]
+** https://github.com/dbhi/docker[dbhi/docker]
+* https://github.com/open-tool-forge/fpga-toolchain[open-tool-forge/fpga-toolchain]
+* https://github.com/im-tomu/fomu-toolchain[im-tomu/fomu-toolchain]
+* https://github.com/alpin3/ulx3s[alpin3/ulx3s]
+* https://github.com/eine/elide/tree/master/elide/docker[eine/elide]
+* https://github.com/hackfin/ghdl-cross.mk[hackfin/ghdl-cross.mk]
