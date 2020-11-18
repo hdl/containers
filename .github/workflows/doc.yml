@@ -19,8 +19,12 @@ jobs:
 
     - uses: actions/checkout@v2
 
+    # Equivalent local execution: docker run -v /$(pwd)/doc://documents/ asciidoctor/docker-asciidoctor asciidoctor index.adoc
     - name: Build site
-      run: docker run -v $(pwd)/doc:/documents/ asciidoctor/docker-asciidoctor asciidoctor index.adoc
+      uses: docker://asciidoctor/docker-asciidoctor
+      with:
+        entrypoint: asciidoctor
+        args: doc/index.adoc
 
     - name: Publish site to gh-pages (doc)
       if: github.event_name != 'pull_request'
