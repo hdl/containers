@@ -26,6 +26,16 @@ jobs:
         docker build -t hdlc/pkg:icestorm --target=pkg - < icestorm.dockerfile
         docker build -t hdlc/icestorm - < icestorm.dockerfile
 
+    - name: TODO test hdlc/pkg:icestorm
+      uses: docker://alpine
+      with:
+        args: ./test/todo.sh
+
+    - name: TODO test hdlc/icestorm
+      uses: docker://hdlc/icestorm
+      with:
+        args: ./test/todo.sh
+
     - name: Deploy to DockerHub
       run: |
         docker push hdlc/pkg:icestorm

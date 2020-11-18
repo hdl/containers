@@ -26,6 +26,16 @@ jobs:
         docker build -t hdlc/pkg:prjtrellis --target=pkg - < prjtrellis.dockerfile
         docker build -t hdlc/prjtrellis - < prjtrellis.dockerfile
 
+    - name: TODO test hdlc/pkg:prjtrellis
+      uses: docker://alpine
+      with:
+        args: ./test/todo.sh
+
+    - name: TODO test hdlc/prjtrellis
+      uses: docker://hdlc/prjtrellis
+      with:
+        args: ./test/todo.sh
+
     - name: Deploy to DockerHub
       run: |
         docker push hdlc/pkg:prjtrellis

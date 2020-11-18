@@ -26,6 +26,14 @@ jobs:
         docker build -t hdlc/ghdl --target=run - < ghdl.dockerfile
         docker build -t hdlc/ghdl:yosys - < ghdl.dockerfile
 
+    - uses: docker://hdlc/ghdl
+      with:
+        args: ./test/ghdl.sh
+
+    - uses: docker://hdlc/ghdl:yosys
+      with:
+        args: ./test/ghdl--yosys.sh
+
     - name: Deploy to DockerHub
       run: |
         docker push hdlc/ghdl

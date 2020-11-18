@@ -25,6 +25,11 @@ jobs:
       run: |
         docker build -t hdlc/pkg:z3 - < z3.dockerfile
 
+    - name: TODO test hdlc/pkg:z3
+      uses: docker://alpine
+      with:
+        args: ./test/todo.sh
+
     - name: Deploy to hub.docker.com
       run: |
         docker push hdlc/pkg:z3

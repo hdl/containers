@@ -25,6 +25,11 @@ jobs:
       run: |
         docker build -t hdlc/prog - < prog.dockerfile
 
+    - name: TODO test hdlc/prog
+      uses: docker://hdlc/prog
+      with:
+        args: ./test/todo.sh
+
     - name: Deploy to DockerHub
       run: |
         docker push hdlc/prog

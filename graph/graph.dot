@@ -58,70 +58,107 @@ digraph G {
   # Workflows
 
   subgraph cluster_base {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_base_debian" [label="debian:buster-slim"]
+    }
+
     d_base -> {
       "build:base",
       "build:build",
       "build:dev"
     } [style=dotted];
+
     { rank=same
-      node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_base_debian" [label="debian:buster-slim"]
+      node [shape=folder, color=red, fontcolor=red];
+      "t_build:base" [label="build--base"];
+      "t_build:build" [label="build--build"];
+      "t_build:dev" [label="build--dev"];
     }
+
+    "build:base" -> "t_build:base";
+    "build:build" -> "t_build:build";
+    "build:dev" -> "t_build:dev";
   }
 
   subgraph cluster_formal {
-    d_formal ->
-    "formal" [style=dotted];
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_formal_ghdl" [label="ghdl:yosys"]
       "p_formal_symbiyosys" [label="pkg:symbiyosys"]
       "p_formal_z3" [label="pkg:z3"]
     }
+
+    d_formal ->
+    "formal" [style=dotted];
+
+    "t_formal" [shape=folder, color=red, fontcolor=red, label="formal"];
+
+    "formal" -> "t_formal";
   }
 
   subgraph cluster_ghdl {
-    d_ghdl -> { rank=same
-      "ghdl",
-      "ghdl:yosys"
-    } [style=dotted];
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_ghdl_build:base" [label="build:base"]
       "p_ghdl_yosys" [label="yosys"]
       "p_ghdl_buster" [label="ghdl/pkg:buster-mcode"]
     }
+
+    d_ghdl -> { rank=same
+      "ghdl",
+      "ghdl:yosys"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_ghdl" [label="ghdl"];
+      "t_ghdl:yosys" [label="ghdl--yosys"];
+    }
+
+    "ghdl" -> "t_ghdl";
+    "ghdl:yosys" -> "t_ghdl:yosys";
   }
 
   subgraph cluster_gtkwave {
-    d_gtkwave ->
-    "pkg:gtkwave" [style=dotted];
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_gtkwave_build:build" [label="build:build"]
       "p_gtkwave_scratch" [label="scratch"]
     }
+
+    d_gtkwave ->
+    "pkg:gtkwave" [style=dotted];
+
+    "t_pkg:gtkwave" [shape=folder, color=red, fontcolor=red, label="todo"];
+
+    "pkg:gtkwave" -> "t_pkg:gtkwave";
   }
 
   subgraph cluster_icestorm {
-    d_icestorm -> { rank=same
-      "pkg:icestorm",
-      "icestorm"
-    } [style=dotted];
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_icestorm_scratch" [label="scratch"]
       "p_icestorm_build:base" [label="build:base"]
       "p_icestorm_build:build" [label="build:build"]
     }
+
+    d_icestorm -> { rank=same
+      "pkg:icestorm",
+      "icestorm"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_icestorm" [label="todo"];
+      "t_pkg:icestorm" [label="todo"];
+    }
+
+    "icestorm" -> "t_icestorm";
+    "pkg:icestorm" -> "t_pkg:icestorm";
   }
 
   subgraph cluster_nextpnr {
-    d_nextpnr -> { rank=same
-      "nextpnr:ice40",
-      "nextpnr:ecp5",
-      "nextpnr"
-    } [style=dotted];
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_nextpnr_build:base" [label="build:base"]
@@ -129,13 +166,26 @@ digraph G {
       "p_nextpnr_icestorm" [label="pkg:icestorm"]
       "p_nextpnr_prjtrellis" [label="pkg:prjtrellis"]
     }
+
+    d_nextpnr -> { rank=same
+      "nextpnr:ice40",
+      "nextpnr:ecp5",
+      "nextpnr"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_nextpnr" [label="todo"];
+      "t_nextpnr:ice40" [label="todo"];
+      "t_nextpnr:ecp5" [label="todo"];
+    }
+
+    "nextpnr" -> "t_nextpnr";
+    "nextpnr:ice40" -> "t_nextpnr:ice40";
+    "nextpnr:ecp5" -> "t_nextpnr:ecp5";
   }
 
   subgraph cluster_prjtrellis {
-    d_prjtrellis -> { rank=same
-      "pkg:prjtrellis",
-      "prjtrellis"
-    } [style=dotted];
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_prjtrellis_alpine" [label="alpine"]
@@ -143,48 +193,87 @@ digraph G {
       "p_prjtrellis_build:base" [label="build:base"]
       "p_prjtrellis_build:dev" [label="build:dev"]
     }
+
+    d_prjtrellis -> { rank=same
+      "pkg:prjtrellis",
+      "prjtrellis"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_prjtrellis" [label="todo"];
+      "t_pkg:prjtrellis" [label="todo"];
+    }
+
+    "prjtrellis" -> "t_prjtrellis";
+    "pkg:prjtrellis" -> "t_pkg:prjtrellis";
   }
 
   subgraph cluster_prog {
-    d_prog ->
-    "prog" [style=dotted];
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_prog_icestorm" [label="pkg:icestorm"]
       "p_prog_build:base" [label="build:base"]
     }
+
+    d_prog ->
+    "prog" [style=dotted];
+
+    "t_prog" [shape=folder, color=red, fontcolor=red, label="todo"];
+
+    "prog" -> "t_prog";
   }
 
   subgraph cluster_symbiyosys {
-    d_symbiyosys ->
-    "pkg:symbiyosys" [style=dotted];
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_symbiyosys_scratch" [label="scratch"]
       "p_symbiyosys_build:base" [label="build:base"]
     }
+
+    d_symbiyosys ->
+    "pkg:symbiyosys" [style=dotted];
+
+    "t_pkg:symbiyosys" [shape=folder, color=red, fontcolor=red, label="todo"];
+
+    "pkg:symbiyosys" -> "t_pkg:symbiyosys";
   }
 
   subgraph cluster_yosys {
-    d_yosys -> { rank=same
-      "pkg:yosys",
-      "yosys"
-    } [style=dotted];
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_yosys_build:build" [label="build:build"]
       "p_yosys_scratch" [label="scratch"]
     }
+
+    d_yosys -> { rank=same
+      "pkg:yosys",
+      "yosys"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_yosys" [label="todo"];
+      "t_pkg:yosys" [label="todo"];
+    }
+
+    "yosys" -> "t_yosys";
+    "pkg:yosys" -> "t_pkg:yosys";
   }
 
   subgraph cluster_z3 {
-    d_z3 ->
-    "pkg:z3" [style=dotted];
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_z3_scratch" [label="scratch"]
       "p_z3_build:base" [label="build:base"]
     }
+
+    d_z3 ->
+    "pkg:z3" [style=dotted];
+
+    "t_pkg:z3" [shape=folder, color=red, fontcolor=red, label="todo"];
+
+    "pkg:z3" -> "t_pkg:z3";
   }
 
   { rank=same

@@ -27,6 +27,18 @@ jobs:
         docker build -t hdlc/build:build --target build - < base.dockerfile
         docker build -t hdlc/build:dev - < base.dockerfile
 
+    - uses: docker://hdlc/build:base
+      with:
+        args: ./test/build--base.sh
+
+    - uses: docker://hdlc/build:build
+      with:
+        args: ./test/build--build.sh
+
+    - uses: docker://hdlc/build:dev
+      with:
+        args: ./test/build--dev.sh
+
     - name: Deploy to DockerHub
       run: |
         docker push hdlc/build:base

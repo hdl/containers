@@ -26,6 +26,16 @@ jobs:
         docker build -t hdlc/pkg:yosys --target=pkg - < yosys.dockerfile
         docker build -t hdlc/yosys - < yosys.dockerfile
 
+    - name: TODO test hdlc/pkg:yosys
+      uses: docker://alpine
+      with:
+        args: ./test/todo.sh
+
+    - name: TODO test hdlc/yosys
+      uses: docker://hdlc/yosys
+      with:
+        args: ./test/todo.sh
+
     - name: Deploy to DockerHub
       run: |
         docker push hdlc/pkg:yosys

@@ -25,6 +25,10 @@ jobs:
       run: |
         docker build -t hdlc/formal - < formal.dockerfile
 
+    - uses: docker://hdlc/formal
+      with:
+        args: ./test/formal.sh
+
     - name: Deploy to DockerHub
       run: |
         docker push hdlc/formal

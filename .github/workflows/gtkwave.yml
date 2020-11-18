@@ -25,6 +25,11 @@ jobs:
       run: |
         docker build -t hdlc/pkg:gtkwave - < gtkwave.dockerfile
 
+    - name: TODO test hdlc/pkg:gtkwave
+      uses: docker://alpine
+      with:
+        args: ./test/todo.sh
+
     - name: Deploy to DockerHub
       run: |
         docker push hdlc/pkg:gtkwave
