@@ -9,7 +9,7 @@ on:
 
 jobs:
 
-  ghdl:
+  ghdl-yosys-plugin:
     runs-on: ubuntu-latest
     steps:
 

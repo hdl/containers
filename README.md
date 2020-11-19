@@ -21,6 +21,8 @@
   -->
   <a title="'yosys' workflow Status" href="https://github.com/hdl/containers/actions?query=workflow%3Ayosys"><img alt="'yosys' workflow Status" src="https://img.shields.io/github/workflow/status/hdl/containers/yosys?longCache=true&style=flat-square&label=yosys&logo=GitHub%20Actions&logoColor=fff"></a><!--
   -->
+  <a title="'ghdl-yosys-plugin' workflow Status" href="https://github.com/hdl/containers/actions?query=workflow%3Aghdl-yosys-plugin"><img alt="'ghdl-yosys-plugin' workflow Status" src="https://img.shields.io/github/workflow/status/hdl/containers/ghdl-yosys-plugin?longCache=true&style=flat-square&label=ghdl-yosys-plugin&logo=GitHub%20Actions&logoColor=fff"></a><!--
+  -->
   <a title="'z3' workflow Status" href="https://github.com/hdl/containers/actions?query=workflow%3Az3"><img alt="'z3' workflow Status" src="https://img.shields.io/github/workflow/status/hdl/containers/z3?longCache=true&style=flat-square&label=z3&logo=GitHub%20Actions&logoColor=fff"></a>
 </p>
 <p align="center">
@@ -39,10 +41,12 @@ This repository contains scripts and GitHub Actions (GHA) YAML workflows for bui
 - [ ] [fujprog](https://github.com/kost/fujprog)
 - [x] [ghdl](https://github.com/ghdl/ghdl)
   - [![hdlc/ghdl:latest Docker image size](https://img.shields.io/docker/image-size/hdlc/ghdl/latest?longCache=true&style=flat-square&label=hdlc%2Fghdl&logo=Docker&logoColor=fff)](https://hub.docker.com/r/hdlc/ghdl/tags)
-  - [![hdlc/ghdl:yosys Docker image size](https://img.shields.io/docker/image-size/hdlc/ghdl/yosys?longCache=true&style=flat-square&label=hdlc%2Fghdl:yosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/hdlc/ghdl/tags)
-  - In `hdlc/formal`.
-- [x] [ghdl-yosys-plugin](https://github.com/ghdl/ghdl-yosys-plugin)
+  - [![hdlc/pkg:ghdl Docker image size](https://img.shields.io/docker/image-size/hdlc/pkg/ghdl?longCache=true&style=flat-square&label=hdlc%2Fpkg:ghdl&logo=Docker&logoColor=fff)](https://hub.docker.com/r/hdlc/pkg/tags)
   - In `hdlc/ghdl:yosys` and `hdlc/formal`.
+- [x] [ghdl-yosys-plugin](https://github.com/ghdl/ghdl-yosys-plugin)
+  - [![hdlc/ghdl:yosys Docker image size](https://img.shields.io/docker/image-size/hdlc/ghdl/yosys?longCache=true&style=flat-square&label=hdlc%2Fghdl:yosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/hdlc/ghdl/tags)
+  - [![hdlc/pkg:ghdl-yosys-plugin Docker image size](https://img.shields.io/docker/image-size/hdlc/pkg/ghdl-yosys-plugin?longCache=true&style=flat-square&label=hdlc%2Fpkg:ghdl-yosys-plugin&logo=Docker&logoColor=fff)](https://hub.docker.com/r/hdlc/pkg/tags)
+  - In `hdlc/formal`.
 - [x] [graphviz](https://graphviz.org/)
   - In `hdlc/yosys`, `hdlc/ghdl:yosys` and `hdlc/formal`.
 - [x] [gtkwave](https://github.com/gtkwave/gtkwave)
