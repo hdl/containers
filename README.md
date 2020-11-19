@@ -33,7 +33,9 @@
 This repository contains scripts and GitHub Actions (GHA) YAML workflows for building, testing and deploying OCI images (aka Docker images) including open source EDA tooling. All of them are pushed to [hub.docker.com/u/hdlc](https://hub.docker.com/u/hdlc). See [hdl.github.io/containers](https://hdl.github.io/containers) for further details and contributing guidelines.
 
 - [ ] [bitman](https://github.com/khoapham/bitman)
+- [ ] [boolector](https://github.com/boolector/boolector)
 - [ ] [cocotb](https://github.com/cocotb/cocotb)
+- [ ] [CVC4](https://github.com/CVC4/CVC4)
 - [ ] [fujprog](https://github.com/kost/fujprog)
 - [x] [ghdl](https://github.com/ghdl/ghdl)
   - [![hdlc/ghdl:latest Docker image size](https://img.shields.io/docker/image-size/hdlc/ghdl/latest?longCache=true&style=flat-square&label=hdlc%2Fghdl&logo=Docker&logoColor=fff)](https://hub.docker.com/r/hdlc/ghdl/tags)
@@ -60,6 +62,7 @@ This repository contains scripts and GitHub Actions (GHA) YAML workflows for bui
 - [x] [prjtrellis](https://github.com/hdlc/prjtrellis)
   - [![hdlc/prjtrellis:latest Docker image size](https://img.shields.io/docker/image-size/hdlc/prjtrellis/latest?longCache=true&style=flat-square&label=hdlc%2Fprjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/hdlc/prjtrellis/tags)
   - [![hdlc/pkg:prjtrellis Docker image size](https://img.shields.io/docker/image-size/hdlc/pkg/prjtrellis?longCache=true&style=flat-square&label=hdlc%2Fpkg:prjtrellis&logo=Docker&logoColor=fff)](https://hub.docker.com/r/hdlc/pkg/tags)
+- [ ] [Super Prove](https://github.com/sterin/super-prove-build)
 - [x] [symbiyosys](https://github.com/YosysHQ/SymbiYosys)
   - [![hdlc/pkg:symbiyosys Docker image size](https://img.shields.io/docker/image-size/hdlc/pkg/symbiyosys?longCache=true&style=flat-square&label=hdlc%2Fpkg:symbiyosys&logo=Docker&logoColor=fff)](https://hub.docker.com/r/hdlc/pkg/tags)
   - In `hdlc/formal`.
