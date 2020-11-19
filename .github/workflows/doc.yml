@@ -5,7 +5,8 @@ on:
   push:
     paths:
       - '.github/workflows/doc.yml'
-      - 'doc/*'
+      - 'doc/**'
+      - 'graph/**'
   schedule:
     - cron: '0 0 * * 4'
   repository_dispatch:
