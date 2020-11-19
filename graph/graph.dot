@@ -302,6 +302,7 @@ digraph G {
   }
 
   { rank=same
+    d_ghdl
     d_gtkwave
     d_icestorm
     d_prjtrellis
@@ -311,7 +312,7 @@ digraph G {
   }
 
   { rank=same
-    d_ghdl
+    d_ghdlYosysPlugin
     d_nextpnr
     d_prog
   }
