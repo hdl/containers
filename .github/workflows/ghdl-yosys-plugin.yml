@@ -1,11 +1,11 @@
-name: 'ghdl'
+name: 'ghdl-yosys-plugin'
 
 on:
   push:
   schedule:
     - cron: '0 0 * * 5'
   repository_dispatch:
-    types: [ ghdl ]
+    types: [ ghdl-yosys-plugin ]
 
 jobs:
 
@@ -23,19 +23,19 @@ jobs:
 
     - name: Build images
       run: |
-        docker build -t hdlc/pkg:ghdl --target=pkg - < ghdl.dockerfile
-        docker build -t hdlc/ghdl - < ghdl.dockerfile
+        docker build -t hdlc/pkg:ghdl-yosys-plugin --target=pkg - < ghdl-yosys-plugin.dockerfile
+        docker build -t hdlc/ghdl:yosys - < ghdl-yosys-plugin.dockerfile
 
-    - name: TODO test hdlc/pkg:ghdl
+    - name: TODO test hdlc/pkg:ghdl-yosys-plugin
       uses: docker://alpine
       with:
         args: ./test/todo.sh
 
-    - uses: docker://hdlc/ghdl
+    - uses: docker://hdlc/ghdl:yosys
       with:
-        args: ./test/ghdl.sh
+        args: ./test/ghdl--yosys.sh
 
     - name: Deploy to DockerHub
       run: |
-        docker push hdlc/pkg:ghdl
-        docker push hdlc/ghdl
+        docker push hdlc/pkg:ghdl-yosys-plugin
+        docker push hdlc/ghdl:yosys
