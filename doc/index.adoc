@@ -15,9 +15,19 @@ At some point, ghdl/docker had as much content related to non-GHDL tools, as res
 
 == Usage
 
-Users can consume the ready-to-use images that include a single tool, or the ones including many of them.
+Official guidelines and recommendations for using containers suggest keeping containers small and specific for each tool/purpose. That fits well with the field of web _microservices_, which communicate through TCP/IP and which need to be composed, scaled and balanced all around the globe.
 
-_TBW_
+However, tooling in other camps is expected to communicate using a shared or local filesystem and/or pipes; therefore, many users treat containters as _lightweight virtual machines_. That is, they put all the tools in a single (heavy) container. Those containers are typically not moved around as frequently as _microservices_, but cached on developers' workstations.
+
+In this project, both paradigms are supported; fine-grained images are available, as well as all-in-one images.
+
+=== Fine-grained pulling
+
+Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named `hdlc/<TOOL_NAME>`. Since all of them are based on the same root image, pulling multiple images involves retrieving a few additional layer only. Therefore, this is the recommended approach for CI or other environments with limited resources. There is an example at https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile[ghdl-yosys-blink: Makefile] showcasing how to use this fine-grained approach with a makefile. Moreover, https://gitlab.com/rodrigomelo9/pyfpga[PyFPGA] is a Python Class for vendor-independent FPGA development which runs GHDL, Yosys, etc. in containers.
+
+=== All-in-one images
+
+Multiple tools from fine-grained images are included in larger images for common use cases. These are named `hdlc/<MAIN_USAGE>`. This is the recommended approach for users who are less familiar with containers and want a quick replacement for full-featured virtual machines. Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one imags.
 
 == Contributing
 
@@ -34,7 +44,7 @@ Then, for each project, a dockerfile and a GitHub Actions workflow are created. 
 * Ready-to-use images based on the runtime base image are produced.
 * Ready-to-use images are tested before uploading.
 
-Depending on the tool, _package_ images are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for specific use cases.
+Depending on the tool, _package_ images are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for common use cases.
 
 Before working on adding or extending the support for a tool, please check the https://github.com/hdl/containers/issues[issues] and https://github.com/hdl/containers/pulls[pull requests], for avoiding duplicated effort in case anyone is already working on it. You can also join the chat at https://gitter.im/hdl/community[gitter.im/hdl/community].
 
@@ -62,17 +72,17 @@ IMPORTANT: When contributing modifications to the workflows, the dockerfiles or 
 
 == References
 
-* SymbiFlow:
-** https://github.com/SymbiFlow/symbiflow-examples[SymbiFlow/symbiflow-examples]
-** https://github.com/SymbiFlow/make-env[SymbiFlow/make-env]
-*** http://bit.ly/edda-conda-eda-spec[bit.ly/edda-conda-eda-spec]: Conda based system for FPGA and ASIC Dev
-*** https://github.com/SymbiFlow/make-env/issues/15[Support providing the environment using docker rather than conda #15]
 * GHDL:
 ** https://github.com/ghdl/docker[ghdl/docker]
 ** https://github.com/ghdl/setup-ghdl-ci[ghdl/setup-ghdl-ci]
 * DBHI:
 ** https://github.com/dbhi/qus[dbhi/qus]
 ** https://github.com/dbhi/docker[dbhi/docker]
+* SymbiFlow:
+** https://github.com/SymbiFlow/symbiflow-examples[SymbiFlow/symbiflow-examples]
+** https://github.com/SymbiFlow/make-env[SymbiFlow/make-env]
+*** http://bit.ly/edda-conda-eda-spec[bit.ly/edda-conda-eda-spec]: Conda based system for FPGA and ASIC Dev
+*** https://github.com/SymbiFlow/make-env/issues/15[Support providing the environment using docker rather than conda #15]
 * https://github.com/open-tool-forge/fpga-toolchain[open-tool-forge/fpga-toolchain]
 * https://github.com/im-tomu/fomu-toolchain[im-tomu/fomu-toolchain]
 * https://github.com/alpin3/ulx3s[alpin3/ulx3s]
