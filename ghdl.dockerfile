@@ -6,7 +6,7 @@ FROM ghdl/pkg:buster-mcode AS build
 
 FROM scratch AS pkg
 
-COPY --from=build / /ghdl/
+COPY --from=build / /ghdl/usr/local/
 
 #--
 

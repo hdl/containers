@@ -15,22 +15,22 @@ COPY --from=hdlc/pkg:ghdl /ghdl /opt/ghdl
 RUN mkdir /tmp/ghdl-yosys-plugin && cd /tmp/ghdl-yosys-plugin \
  && curl -fsSL https://codeload.github.com/ghdl/ghdl-yosys-plugin/tar.gz/master | tar xzf - --strip-components=1
 
-RUN cp -vr /opt/ghdl/* /usr/local \
+RUN cp -vr /opt/ghdl/* / \
  && cd /tmp/ghdl-yosys-plugin \
  && make \
- && cp ghdl.so /opt/ghdl/lib/ghdl_yosys.so
+ && cp ghdl.so /opt/ghdl/usr/local/lib/ghdl_yosys.so
 
 #---
 
 FROM hdlc/pkg:ghdl AS pkg
 
-COPY --from=plugin /opt/ghdl/lib/ghdl_yosys.so /ghdl/lib/ghdl_yosys.so
+COPY --from=plugin /opt/ghdl/usr/local/lib/ghdl_yosys.so /ghdl/usr/local/lib/ghdl_yosys.so
 
 #---
 
 FROM base
 
-COPY --from=plugin /opt/ghdl /usr/local
+COPY --from=pkg /ghdl /
 
 RUN yosys-config --exec mkdir -p --datdir/plugins \
  && yosys-config --exec ln -s /usr/local/lib/ghdl_yosys.so --datdir/plugins/ghdl.so
