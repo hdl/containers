@@ -28,7 +28,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build site
-      run: docker run -v /$(pwd)://documents/ hdlc/doc ./doc/make.sh
+      run: docker run --rm -v /$(pwd)://documents/ hdlc/doc ./doc/make.sh
       # BUG: the following 'uses' should be equivalent to the 'run' command above.
       #      Unfortunately, GitHub tries to build a custom image before running the
       #      first step. At that point, image 'hdlc/doc' does not exist, so it fails.
