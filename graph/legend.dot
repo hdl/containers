@@ -18,7 +18,7 @@ digraph G {
     image_base [shape=cylinder, color=grey, fontcolor=grey, label=""];
     image_dep [shape=cylinder, color=grey, fontcolor=grey, label=""];
     image_pkg [shape=cylinder, color=grey, fontcolor=grey, label=""];
-    dockerfile [shape=note, color=blue, fontcolor=blue, label="Dockerfile"];
+    dockerfile [shape=note, color=dodgerblue, fontcolor=dodgerblue, label="Dockerfile"];
     {
       image_base,
       image_dep,
@@ -41,7 +41,7 @@ digraph G {
   }
   { rank=same
     image
-    desc [shape=none, label="Each image has, at least and at most, two black input edges, one\ldotted and one dashed. It can optionally have other gray input edges.\l"];
+    desc [shape=none, label="Image(s) generated in the workflow:\l- Green: fine-grained ready-to-use image.\l- Brown: ready-to-use image including several tools.\l- Blue: package image, not executable.\lEach image has, at least and at most, two black input edges, one\ldotted and one dashed. It can optionally have other gray input edges.\l"];
   }
   { rank=same
     test

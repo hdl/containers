@@ -5,7 +5,7 @@ digraph G {
 
   # Dockerfiles
 
-  { node [shape=note, color=blue, fontcolor=blue]
+  { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
     d_base             [label="base"];
     d_formal           [label="formal"];
     d_ghdl             [label="ghdl"];
@@ -26,24 +26,30 @@ digraph G {
     "build:base"
     "build:build"
     "build:dev"
-    "formal"
-    "ghdl"
-    "pkg:ghdl"
-    "pkg:ghdl-yosys-plugin"
-    "ghdl:yosys"
-    "pkg:gtkwave"
-    "pkg:icestorm"
-    "icestorm"
-    "nextpnr:ice40"
-    "nextpnr:ecp5"
-    "nextpnr"
-    "pkg:prjtrellis"
-    "prjtrellis"
-    "prog"
-    "pkg:symbiyosys"
-    "pkg:yosys"
-    "yosys"
-    "pkg:z3"
+    { node [color=limegreen, fontcolor=limegreen]
+      "ghdl"
+      "ghdl:yosys"
+      "icestorm"
+      "nextpnr:ice40"
+      "nextpnr:ecp5"
+      "nextpnr"
+      "prjtrellis"
+      "yosys"
+    }
+    { node [color=mediumblue, fontcolor=mediumblue]
+      "pkg:ghdl"
+      "pkg:ghdl-yosys-plugin"
+      "pkg:gtkwave"
+      "pkg:icestorm"
+      "pkg:prjtrellis"
+      "pkg:symbiyosys"
+      "pkg:yosys"
+      "pkg:z3"
+    }
+    { node [color=brown, fontcolor=brown]
+      "formal"
+      "prog"
+    }
   }
 
   # External images
