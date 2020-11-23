@@ -27,14 +27,16 @@ jobs:
         docker build -t hdlc/icestorm - < icestorm.dockerfile
 
     - name: TODO test hdlc/pkg:icestorm
-      uses: docker://alpine
-      with:
-        args: ./test/todo.sh
+      run: docker run --rm -v $(pwd):/wrk alpine /wrk/test/todo.sh
+      #uses: docker://alpine
+      #with:
+      #  args: ./test/todo.sh
 
     - name: TODO test hdlc/icestorm
-      uses: docker://hdlc/icestorm
-      with:
-        args: ./test/todo.sh
+      run: docker run --rm -v $(pwd):/wrk hdlc/icestorm /wrk/test/todo.sh
+      #uses: docker://hdlc/icestorm
+      #with:
+      #  args: ./test/todo.sh
 
     - name: Deploy to DockerHub
       run: |

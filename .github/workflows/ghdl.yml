@@ -27,13 +27,15 @@ jobs:
         docker build -t hdlc/ghdl - < ghdl.dockerfile
 
     - name: TODO test hdlc/pkg:ghdl
-      uses: docker://alpine
-      with:
-        args: ./test/todo.sh
+      run: docker run --rm -v $(pwd):/wrk alpine /wrk/test/todo.sh
+      #uses: docker://alpine
+      #with:
+      #  args: ./test/todo.sh
 
-    - uses: docker://hdlc/ghdl
-      with:
-        args: ./test/ghdl.sh
+    - run: docker run --rm -v $(pwd):/wrk hdlc/ghdl /wrk/test/ghdl.sh
+      #uses: docker://hdlc/ghdl
+      #with:
+      #  args: ./test/ghdl.sh
 
     - name: Deploy to DockerHub
       run: |

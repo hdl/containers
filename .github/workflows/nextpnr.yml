@@ -28,19 +28,22 @@ jobs:
         docker build -t hdlc/nextpnr - < nextpnr.dockerfile
 
     - name: TODO test hdlc/nextpnr:ice40
-      uses: docker://hdlc/nextpnr:ice40
-      with:
-        args: ./test/todo.sh
+      run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr:ice40 /wrk/test/todo.sh
+      #uses: docker://hdlc/nextpnr:ice40
+      #with:
+      #  args: ./test/todo.sh
 
     - name: TODO test hdlc/nextpnr:ecp5
-      uses: docker://hdlc/nextpnr:ecp5
-      with:
-        args: ./test/todo.sh
+      run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr:ecp5 /wrk/test/todo.sh
+      #uses: docker://hdlc/nextpnr:ecp5
+      #with:
+      #  args: ./test/todo.sh
 
     - name: TODO test hdlc/nextpnr
-      uses: docker://hdlc/nextpnr
-      with:
-        args: ./test/todo.sh
+      run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr /wrk/test/todo.sh
+      #uses: docker://hdlc/nextpnr
+      #with:
+      #  args: ./test/todo.sh
 
     - name: Deploy to DockerHub
       run: |

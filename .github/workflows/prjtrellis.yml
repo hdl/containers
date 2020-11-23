@@ -27,14 +27,16 @@ jobs:
         docker build -t hdlc/prjtrellis - < prjtrellis.dockerfile
 
     - name: TODO test hdlc/pkg:prjtrellis
-      uses: docker://alpine
-      with:
-        args: ./test/todo.sh
+      run: docker run --rm -v $(pwd):/wrk alpine /wrk/test/todo.sh
+      #uses: docker://alpine
+      #with:
+      #  args: ./test/todo.sh
 
     - name: TODO test hdlc/prjtrellis
-      uses: docker://hdlc/prjtrellis
-      with:
-        args: ./test/todo.sh
+      run: docker run --rm -v $(pwd):/wrk hdlc/prjtrellis /wrk/test/todo.sh
+      #uses: docker://hdlc/prjtrellis
+      #with:
+      #  args: ./test/todo.sh
 
     - name: Deploy to DockerHub
       run: |

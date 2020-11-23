@@ -27,13 +27,15 @@ jobs:
         docker build -t hdlc/ghdl:yosys - < ghdl-yosys-plugin.dockerfile
 
     - name: TODO test hdlc/pkg:ghdl-yosys-plugin
-      uses: docker://alpine
-      with:
-        args: ./test/todo.sh
+      run: docker run --rm -v $(pwd):/wrk alpine /wrk/test/todo.sh
+      #uses: docker://alpine
+      #with:
+      #  args: ./test/todo.sh
 
-    - uses: docker://hdlc/ghdl:yosys
-      with:
-        args: ./test/ghdl--yosys.sh
+    - run: docker run --rm -v $(pwd):/wrk hdlc/ghdl:yosys /wrk/test/ghdl--yosys.sh
+      #uses: docker://hdlc/ghdl:yosys
+      #with:
+      #  args: ./test/ghdl--yosys.sh
 
     - name: Deploy to DockerHub
       run: |
