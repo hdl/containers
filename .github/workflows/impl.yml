@@ -1,0 +1,36 @@
+name: 'impl'
+
+on:
+  push:
+  schedule:
+    - cron: '0 0 * * 5'
+  repository_dispatch:
+    types: [ impl ]
+
+jobs:
+
+  impl:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - name: Build images
+      run: |
+        docker build -t hdlc/impl - < impl.dockerfile
+
+    - name: TODO test hdlc/impl
+      run: docker run --rm -v $(pwd):/wrk hdlc/impl /wrk/test/todo.sh
+      #uses: docker://hdlc/impl
+      #with:
+      #  args: ./test/todo.sh
+
+    - name: Deploy to DockerHub
+      run: |
+        docker push hdlc/impl

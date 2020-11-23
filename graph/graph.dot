@@ -12,6 +12,7 @@ digraph G {
     d_ghdlYosysPlugin  [label="ghdl-yosys-plugin"];
     d_gtkwave          [label="gtkwave"];
     d_icestorm         [label="icestorm"];
+    d_impl             [label="impl"];
     d_nextpnr          [label="nextpnr"];
     d_prjtrellis       [label="prjtrellis"];
     d_prog             [label="prog"];
@@ -48,6 +49,7 @@ digraph G {
     }
     { node [color=brown, fontcolor=brown]
       "formal"
+      "impl"
       "prog"
     }
   }
@@ -187,6 +189,21 @@ digraph G {
 
     "icestorm" -> "t_icestorm";
     "pkg:icestorm" -> "t_pkg:icestorm";
+  }
+
+  subgraph cluster_impl {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_impl_nextpnr" [label="nextpnr"]
+      "p_impl_pkg:ghdl-yosys-plugin" [label="pkg:ghdl-yosys-plugin"]
+      "p_impl_pkg:yosys" [label="pkg:yosys"]
+    }
+
+    d_impl -> "impl" [style=dotted];
+
+    "t_impl" [label="todo", shape=folder, color=red, fontcolor=red];
+
+    "impl" -> "t_impl";
   }
 
   subgraph cluster_nextpnr {
@@ -341,9 +358,13 @@ digraph G {
   "build:build" -> "p_gtkwave_build:build" -> d_gtkwave;
   "scratch" -> "p_gtkwave_scratch" -> d_gtkwave;
 
-  "build:build" -> "p_icestorm_build:build" ->  d_icestorm;
+  "build:build" -> "p_icestorm_build:build" -> d_icestorm;
   "build:base" -> "p_icestorm_build:base" -> d_icestorm;
   "scratch" -> "p_icestorm_scratch" -> d_icestorm;
+
+  "pkg:ghdl-yosys-plugin" -> "p_impl_pkg:ghdl-yosys-plugin" -> d_impl;
+  "pkg:yosys" -> "p_impl_pkg:yosys" -> d_impl;
+  "nextpnr" -> "p_impl_nextpnr" -> d_impl;
 
   "build:dev" -> "p_nextpnr_build:dev" -> d_nextpnr;
   "build:base" -> "p_nextpnr_build:base" -> d_nextpnr;
@@ -391,6 +412,8 @@ digraph G {
     "p_icestorm_build:base" -> "icestorm";
     "p_icestorm_scratch" -> "pkg:icestorm";
 
+    "p_impl_nextpnr" -> "impl";
+
     "p_prjtrellis_scratch" -> "pkg:prjtrellis";
     "p_prjtrellis_build:base" -> "prjtrellis";
 
@@ -417,6 +440,9 @@ digraph G {
     };
 
     "p_prog_icestorm" -> "prog";
+
+    "p_impl_pkg:ghdl-yosys-plugin" -> "impl";
+    "p_impl_pkg:yosys" -> "impl";
 
     "p_nextpnr_icestorm" -> {
       "nextpnr",
