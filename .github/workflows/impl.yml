@@ -2,6 +2,7 @@
 #   Unai Martinez-Corral
 #
 # Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2021 Sebastian Birke <git@se-bi.de>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,9 +44,19 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild impl impl
+    - run: dockerBuild impl:ice40      impl ice40
+    - run: dockerBuild impl:icestorm   impl icestorm
+    - run: dockerBuild impl:ecp5       impl ecp5
+    - run: dockerBuild impl:prjtrellis impl prjtrellis
+    - run: dockerBuild impl:pnr        impl pnr
+    - run: dockerBuild impl:latest     impl latest
 
-    - run: dockerTest impl
+    - run: dockerTest  impl:ice40      impl--ice40
+    - run: dockerTest  impl:icestorm   impl--icestorm
+    - run: dockerTest  impl:ecp5       impl--ecp5
+    - run: dockerTest  impl:prjtrellis impl--prjtrellis
+    - run: dockerTest  impl:pnr        impl--pnr
+    - run: dockerTest  impl:latest     impl
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -54,5 +65,20 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush impl
+    - run: dockerPush impl:ice40
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+
+    - run: dockerPush impl:icestorm
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+
+    - run: dockerPush impl:ecp5
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+
+    - run: dockerPush impl:prjtrellis
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+
+    - run: dockerPush impl:pnr
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+
+    - run: dockerPush impl:latest
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
