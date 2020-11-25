@@ -32,11 +32,10 @@ jobs:
       #with:
       #  args: ./test/todo.sh
 
-    - name: TODO test hdlc/yosys
-      run: docker run --rm -v $(pwd):/wrk hdlc/yosys /wrk/test/todo.sh
+    - run: docker run --rm -v $(pwd):/wrk hdlc/yosys /wrk/test/yosys.sh
       #uses: docker://hdlc/yosys
       #with:
-      #  args: ./test/todo.sh
+      #  args: ./test/yosys.sh
 
     - name: Deploy to DockerHub
       run: |

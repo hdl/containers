@@ -14,6 +14,8 @@ jobs:
     steps:
 
     - uses: actions/checkout@v2
+      with:
+        submodules: recursive
 
     - name: Login to DockerHub
       uses: docker/login-action@v1
@@ -32,11 +34,10 @@ jobs:
       #with:
       #  args: ./test/todo.sh
 
-    - name: TODO test hdlc/icestorm
-      run: docker run --rm -v $(pwd):/wrk hdlc/icestorm /wrk/test/todo.sh
+    - run: docker run --rm -v $(pwd):/wrk hdlc/icestorm /wrk/test/icestorm.sh
       #uses: docker://hdlc/icestorm
       #with:
-      #  args: ./test/todo.sh
+      #  args: ./test/icestorm.sh
 
     - name: Deploy to DockerHub
       run: |

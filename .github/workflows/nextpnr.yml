@@ -14,6 +14,8 @@ jobs:
     steps:
 
     - uses: actions/checkout@v2
+      with:
+        submodules: recursive
 
     - name: Login to DockerHub
       uses: docker/login-action@v1
@@ -27,23 +29,20 @@ jobs:
         docker build -t hdlc/nextpnr:ecp5 --target=ecp5 - < nextpnr.dockerfile
         docker build -t hdlc/nextpnr - < nextpnr.dockerfile
 
-    - name: TODO test hdlc/nextpnr:ice40
-      run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr:ice40 /wrk/test/todo.sh
+    - run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr:ice40 /wrk/test/nextpnr--ice40.sh
       #uses: docker://hdlc/nextpnr:ice40
       #with:
-      #  args: ./test/todo.sh
+      #  args: ./test/nextpnr-ice40.sh
 
-    - name: TODO test hdlc/nextpnr:ecp5
-      run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr:ecp5 /wrk/test/todo.sh
+    - run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr:ecp5 /wrk/test/nextpnr--ecp5.sh
       #uses: docker://hdlc/nextpnr:ecp5
       #with:
-      #  args: ./test/todo.sh
+      #  args: ./test/nextpnr-ecp5.sh
 
-    - name: TODO test hdlc/nextpnr
-      run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr /wrk/test/todo.sh
+    - run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr /wrk/test/nextpnr.sh
       #uses: docker://hdlc/nextpnr
       #with:
-      #  args: ./test/todo.sh
+      #  args: ./test/nextpnr.sh
 
     - name: Deploy to DockerHub
       run: |

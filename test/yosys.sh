@@ -7,4 +7,6 @@ cd $(dirname "$0")
 echo "CC: $CC"
 echo "CXX: $CXX"
 
-cmake --version
+./smoke-tests/yosys.sh
+
+yosys --version

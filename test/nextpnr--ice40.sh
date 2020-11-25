@@ -7,4 +7,4 @@ cd $(dirname "$0")
 echo "CC: $CC"
 echo "CXX: $CXX"
 
-cmake --version
+./smoke-tests/nextpnr-ice40.sh
