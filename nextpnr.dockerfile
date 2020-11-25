@@ -73,6 +73,11 @@ COPY --from=hdlc/pkg:icestorm /icestorm /
 
 #---
 
+FROM scratch AS pkg-ice40
+COPY --from=build-ice40 /opt/nextpnr /nextpnr-ice40
+
+#---
+
 FROM build-gitfetch AS build-ecp5
 COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
@@ -97,6 +102,11 @@ COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
 #---
 
+FROM scratch AS pkg-ecp5
+COPY --from=build-ecp5 /opt/nextpnr /nextpnr-ecp5
+
+#---
+
 FROM build-ice40 AS build-all
 COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
@@ -108,6 +118,11 @@ RUN cd /tmp/nextpnr/build \
    -DUSE_OPENMP=ON \
  && make -j $(nproc) \
  && make DESTDIR=/opt/nextpnr install
+
+#---
+
+FROM scratch AS pkg-all
+COPY --from=build-all /opt/nextpnr /nextpnr-all
 
 #---
 

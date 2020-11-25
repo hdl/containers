@@ -45,10 +45,16 @@ jobs:
 
     - run: dockerBuild nextpnr:ice40      nextpnr ice40
     - run: dockerBuild nextpnr:icestorm   nextpnr icestorm
+    - run: dockerBuild pkg:nextpnr-ice40  nextpnr pkg-ice40
     - run: dockerBuild nextpnr:ecp5       nextpnr ecp5
     - run: dockerBuild nextpnr:prjtrellis nextpnr prjtrellis
+    - run: dockerBuild pkg:nextpnr-ecp5   nextpnr pkg-ecp5
+    - run: dockerBuild pkg:nextpnr-all    nextpnr pkg-all
     - run: dockerBuild nextpnr            nextpnr
 
+    - run: dockerTestPkg nextpnr-ice40
+    - run: dockerTestPkg nextpnr-ecp5
+    - run: dockerTestPkg nextpnr-all
     - run: dockerTest nextpnr:ice40
     - run: dockerTest nextpnr:icestorm
     - run: dockerTest nextpnr:ecp5
@@ -68,11 +74,20 @@ jobs:
     - run: dockerPush nextpnr:icestorm
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
+    - run: dockerPush pkg:nextpnr-ice40
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+
     - run: dockerPush nextpnr:ecp5
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
     - run: dockerPush nextpnr:prjtrellis
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
+    - run: dockerPush pkg:nextpnr-ecp5
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+
     - run: dockerPush nextpnr
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+
+    - run: dockerPush pkg:nextpnr-all
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
