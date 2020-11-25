@@ -93,6 +93,7 @@ icestorm:
   use:
     - 'icestorm'
   in:
+    - 'impl:icestorm'
     - 'impl'
     - 'prog'
   otherin:
@@ -132,6 +133,7 @@ prjtrellis:
   use:
     - 'prjtrellis'
   in:
+    - 'impl:prjtrellis'
     - 'impl'
   otherin:
     - 'nextpnr:prjtrellis'

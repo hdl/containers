@@ -1,5 +1,6 @@
 # Authors:
 #   Unai Martinez-Corral
+#   Sebastian Birke      <git@se-bi.de>
 #
 # Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
@@ -43,9 +44,21 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild impl impl
+    - run: dockerBuild impl:ecp5       impl ecp5
+    - run: dockerBuild impl:ice40      impl ice40
+    - run: dockerBuild impl:generic    impl generic
+    - run: dockerBuild impl:icestorm   impl icestorm
+    - run: dockerBuild impl:prjtrellis impl prjtrellis
+    - run: dockerBuild impl:pnr        impl pnr
+    - run: dockerBuild impl            impl
 
-    - run: dockerTest impl
+    - run: dockerTest  impl:ecp5       impl--ecp5
+    - run: dockerTest  impl:ice40      impl--ice40
+    - run: dockerTest  impl:generic    impl--generic
+    - run: dockerTest  impl:icestorm   impl--icestorm
+    - run: dockerTest  impl:prjtrellis impl--prjtrellis
+    - run: dockerTest  impl:pnr        impl--pnr
+    - run: dockerTest  impl            impl
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -57,4 +70,10 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush
+        impl:ecp5
+        impl:ice40
+        impl:generic
+        impl:icestorm
+        impl:prjtrellis
+        impl:pnr
         impl
