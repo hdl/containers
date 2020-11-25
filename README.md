@@ -40,6 +40,7 @@ This repository contains scripts and GitHub Actions (GHA) YAML workflows for bui
 - [ ] [boolector](https://github.com/boolector/boolector)
 - [ ] [cocotb](https://github.com/cocotb/cocotb)
 - [ ] [CVC4](https://github.com/CVC4/CVC4)
+- [ ] [ecpprog](https://github.com/gregdavill/ecpprog)
 - [ ] [fujprog](https://github.com/kost/fujprog)
 - [x] [ghdl](https://github.com/ghdl/ghdl)
   - [![hdlc/ghdl:latest Docker image size](https://img.shields.io/docker/image-size/hdlc/ghdl/latest?longCache=true&style=flat-square&label=hdlc%2Fghdl&logo=Docker&logoColor=fff)](https://hub.docker.com/r/hdlc/ghdl/tags)
