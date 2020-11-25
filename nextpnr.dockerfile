@@ -57,6 +57,11 @@ RUN cd /tmp/nextpnr/build \
 
 #---
 
+FROM scratch AS pkg-ice40
+COPY --from=build-ice40 /opt/nextpnr /nextpnr-ice40
+
+#---
+
 FROM base AS ice40
 COPY --from=build-ice40 /opt/nextpnr /
 
@@ -64,11 +69,6 @@ COPY --from=build-ice40 /opt/nextpnr /
 
 FROM ice40 AS icestorm
 COPY --from=hdlc/pkg:icestorm /icestorm /
-
-#---
-
-FROM scratch AS pkg-ice40
-COPY --from=build-ice40 /opt/nextpnr /nextpnr-ice40
 
 #---
 
@@ -86,6 +86,11 @@ RUN cd /tmp/nextpnr/build \
 
 #---
 
+FROM scratch AS pkg-ecp5
+COPY --from=build-ecp5 /opt/nextpnr /nextpnr-ecp5
+
+#---
+
 FROM base AS ecp5
 COPY --from=build-ecp5 /opt/nextpnr /
 
@@ -93,11 +98,6 @@ COPY --from=build-ecp5 /opt/nextpnr /
 
 FROM ecp5 AS prjtrellis
 COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
-
-#---
-
-FROM scratch AS pkg-ecp5
-COPY --from=build-ecp5 /opt/nextpnr /nextpnr-ecp5
 
 #---
 
@@ -115,17 +115,17 @@ RUN cd /tmp/nextpnr/build \
 
 #---
 
-FROM base AS generic
-COPY --from=build-generic /opt/nextpnr /
-
-#---
-
 FROM scratch AS pkg-generic
 COPY --from=build-generic /opt/nextpnr /nextpnr-generic
 
 #---
 
-FROM base AS all
+FROM base AS generic
+COPY --from=build-generic /opt/nextpnr /
+
+#---
+
+FROM base
 COPY --from=build-ice40 /opt/nextpnr /
 COPY --from=build-ecp5 /opt/nextpnr /
 COPY --from=build-generic /opt/nextpnr /
