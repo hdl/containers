@@ -67,6 +67,11 @@ COPY --from=hdlc/pkg:icestorm /icestorm /
 
 #---
 
+FROM scratch AS pkg-ice40
+COPY --from=build-ice40 /opt/nextpnr /nextpnr-ice40
+
+#---
+
 FROM build AS build-ecp5
 COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
@@ -91,12 +96,17 @@ COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
 #---
 
-FROM build-ice40 AS build-all
+FROM scratch AS pkg-ecp5
+COPY --from=build-ecp5 /opt/nextpnr /nextpnr-ecp5
+
+#---
+
+FROM build-ice40 AS build-generic
 COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
 RUN cd /tmp/nextpnr/build \
  && cmake .. \
-   -DARCH=all \
+   -DARCH=generic \
    -DBUILD_GUI=OFF \
    -DBUILD_PYTHON=ON \
    -DUSE_OPENMP=ON \
@@ -105,5 +115,17 @@ RUN cd /tmp/nextpnr/build \
 
 #---
 
+FROM base AS generic
+COPY --from=build-generic /opt/nextpnr /
+
+#---
+
+FROM scratch AS pkg-generic
+COPY --from=build-generic /opt/nextpnr /nextpnr-generic
+
+#---
+
 FROM base AS all
-COPY --from=build-all /opt/nextpnr /
+COPY --from=build-ice40 /opt/nextpnr /
+COPY --from=build-ecp5 /opt/nextpnr /
+COPY --from=build-generic /opt/nextpnr /

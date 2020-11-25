@@ -102,10 +102,15 @@ icestorm:
 
 nextpnr:
   url: 'https://hdl.github.io/awesome/items/nextpnr'
+  pkg:
+    - 'nextpnr-ice40'
+    - 'nextpnr-ecp5'
+    - 'nextpnr-generic'
   use:
     - 'nextpnr'
     - 'nextpnr:ice40'
     - 'nextpnr:ecp5'
+    - 'nextpnr:generic'
     - 'nextpnr:icestorm'
     - 'nextpnr:prjtrellis'
   in:
