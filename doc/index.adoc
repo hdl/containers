@@ -1,7 +1,7 @@
 = HDL containers
 :toc: left
 :toclevels: 4
-:repotree: https://github.com/hdl/containers/tree/master/
+:repotree: https://github.com/hdl/containers/tree/main/
 :toc-title: HDL containers
 :icons: font
 
