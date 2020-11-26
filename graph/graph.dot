@@ -183,7 +183,7 @@ digraph G {
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
-      "t_icestorm" [label="todo"];
+      "t_icestorm" [label="icestorm"];
       "t_pkg:icestorm" [label="todo"];
     }
 
@@ -201,7 +201,7 @@ digraph G {
 
     d_impl -> "impl" [style=dotted];
 
-    "t_impl" [label="todo", shape=folder, color=red, fontcolor=red];
+    "t_impl" [label="impl", shape=folder, color=red, fontcolor=red];
 
     "impl" -> "t_impl";
   }
@@ -223,9 +223,9 @@ digraph G {
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
-      "t_nextpnr" [label="todo"];
-      "t_nextpnr:ice40" [label="todo"];
-      "t_nextpnr:ecp5" [label="todo"];
+      "t_nextpnr" [label="nextpnr"];
+      "t_nextpnr:ice40" [label="nextpnr--ice40"];
+      "t_nextpnr:ecp5" [label="nextpnr--ecp5"];
     }
 
     "nextpnr" -> "t_nextpnr";
@@ -249,7 +249,7 @@ digraph G {
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
-      "t_prjtrellis" [label="todo"];
+      "t_prjtrellis" [label="prjtrellis"];
       "t_pkg:prjtrellis" [label="todo"];
     }
 
@@ -267,7 +267,7 @@ digraph G {
     d_prog ->
     "prog" [style=dotted];
 
-    "t_prog" [shape=folder, color=red, fontcolor=red, label="todo"];
+    "t_prog" [shape=folder, color=red, fontcolor=red, label="prog"];
 
     "prog" -> "t_prog";
   }
@@ -301,7 +301,7 @@ digraph G {
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
-      "t_yosys" [label="todo"];
+      "t_yosys" [label="yosys"];
       "t_pkg:yosys" [label="todo"];
     }
 
