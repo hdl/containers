@@ -6,6 +6,14 @@
 :icons: font
 :docinfo: shared
 
+[.text-center]
+https://github.com/hdl/containers[image:https://img.shields.io/badge/hdl-containers-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/containers GitHub repository']]
+https://github.com/hdl/smoke-tests[image:https://img.shields.io/badge/hdl-smoke--tests-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/smoke-tests GitHub repository']] |
+https://gitter.im/hdl/community[image:https://img.shields.io/gitter/room/hdl/community.svg?longCache=true&style=flat-square&logo=gitter&logoColor=4db797&color=4db797[title='hdl/community on gitter.im']] |
+https://github.com/hdl/awesome[image:https://img.shields.io/badge/hdl-awesome-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/awesome GitHub repository']]
+https://github.com/hdl/constraints[image:https://img.shields.io/badge/hdl-constraints-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/constraints GitHub repository']]
+https://github.com/hdl/MINGW-packages[image:https://img.shields.io/badge/hdl-MINGW--packages-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/MINGW-packages GitHub repository']]
+
 == Context
 
 This project started in GitHub repository https://github.com/ghdl/ghdl[ghdl/ghdl] (which was named tgingold/ghdl back then). The main purpose was testing GHDL on multiple GNU/Linux distributions (Debian, Ubuntu and Fedora), since https://travis-ci.org/[Travis CI] supported Ubuntu only and Docker. For each target platform, two images were used, one for building and another one for testing.
