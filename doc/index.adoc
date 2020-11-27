@@ -79,6 +79,30 @@ graphviz::../graph/legend.dot[format="svg", align="center"]
 
 IMPORTANT: When contributing modifications to the workflows, the dockerfiles or the tests, it is of utmost importance to update the graph accordingly.
 
+== Continuous Integration (CI)
+
+[.text-center]
+https://github.com/hdl/containers/actions?query=workflow%3Adoc[image:https://img.shields.io/github/workflow/status/hdl/containers/doc/main?longCache=true&style=flat-square&label=doc&logo=GitHub%20Actions&logoColor=fff[title="'doc' workflow Status"]]
+https://github.com/hdl/containers/actions?query=workflow%3Abase[image:https://img.shields.io/github/workflow/status/hdl/containers/base/main?longCache=true&style=flat-square&label=base&logo=GitHub%20Actions&logoColor=fff[title="'base' workflow Status"]]
+
+[.text-center]
+https://github.com/hdl/containers/actions?query=workflow%3Aghdl[image:https://img.shields.io/github/workflow/status/hdl/containers/ghdl/main?longCache=true&style=flat-square&label=ghdl&logo=GitHub%20Actions&logoColor=fff[title="'ghdl' workflow Status"]]
+https://github.com/hdl/containers/actions?query=workflow%3Agtkwave[image:https://img.shields.io/github/workflow/status/hdl/containers/gtkwave/main?longCache=true&style=flat-square&label=gtkwave&logo=GitHub%20Actions&logoColor=fff[title="'gtkwave' workflow Status"]]
+https://github.com/hdl/containers/actions?query=workflow%3Aicestorm[image:https://img.shields.io/github/workflow/status/hdl/containers/icestorm/main?longCache=true&style=flat-square&label=icestorm&logo=GitHub%20Actions&logoColor=fff[title="'icestorm' workflow Status"]]
+https://github.com/hdl/containers/actions?query=workflow%3Aprjtrellis[image:https://img.shields.io/github/workflow/status/hdl/containers/prjtrellis/main?longCache=true&style=flat-square&label=prjtrellis&logo=GitHub%20Actions&logoColor=fff[title="'prjtrellis' workflow Status"]]
+https://github.com/hdl/containers/actions?query=workflow%3Asymbiyosys[image:https://img.shields.io/github/workflow/status/hdl/containers/symbiyosys/main?longCache=true&style=flat-square&label=symbiyosys&logo=GitHub%20Actions&logoColor=fff[title="'symbiyosys' workflow Status"]]
+https://github.com/hdl/containers/actions?query=workflow%3Ayosys[image:https://img.shields.io/github/workflow/status/hdl/containers/yosys/main?longCache=true&style=flat-square&label=yosys&logo=GitHub%20Actions&logoColor=fff[title="'yosys' workflow Status"]]
+https://github.com/hdl/containers/actions?query=workflow%3Az3[image:https://img.shields.io/github/workflow/status/hdl/containers/z3/main?longCache=true&style=flat-square&label=z3&logo=GitHub%20Actions&logoColor=fff[title="'z3' workflow Status"]]
+
+[.text-center]
+https://github.com/hdl/containers/actions?query=workflow%3Aghdl-yosys-plugin[image:https://img.shields.io/github/workflow/status/hdl/containers/ghdl-yosys-plugin/main?longCache=true&style=flat-square&label=ghdl-yosys-plugin&logo=GitHub%20Actions&logoColor=fff[title="'ghdl-yosys-plugin' workflow Status"]]
+https://github.com/hdl/containers/actions?query=workflow%3Anextpnr[image:https://img.shields.io/github/workflow/status/hdl/containers/nextpnr/main?longCache=true&style=flat-square&label=nextpnr&logo=GitHub%20Actions&logoColor=fff[title="'nextpnr' workflow Status"]]
+
+[.text-center]
+https://github.com/hdl/containers/actions?query=workflow%3Aformal[image:https://img.shields.io/github/workflow/status/hdl/containers/formal/main?longCache=true&style=flat-square&label=formal&logo=GitHub%20Actions&logoColor=fff[title="'formal' workflow Status"]]
+https://github.com/hdl/containers/actions?query=workflow%3Aimpl[image:https://img.shields.io/github/workflow/status/hdl/containers/impl/main?longCache=true&style=flat-square&label=impl&logo=GitHub%20Actions&logoColor=fff[title="'impl' workflow Status"]]
+https://github.com/hdl/containers/actions?query=workflow%3Aprog[image:https://img.shields.io/github/workflow/status/hdl/containers/prog/main?longCache=true&style=flat-square&label=prog&logo=GitHub%20Actions&logoColor=fff[title="'prog' workflow Status"]]
+
 == References
 
 * GHDL:
