@@ -1,0 +1,4 @@
+.vscode
+doc/*.svg
+doc/.asciidoctor
+doc/index.html
