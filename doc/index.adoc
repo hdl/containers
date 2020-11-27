@@ -61,12 +61,12 @@ Understanding how all the pieces in this project fit together might be daunting 
 [#img-graph]
 .Workflows, dockerfiles, images and tests.
 [link=graph.svg]
-image::graph.svg['Workflows, dockerfiles, images and tests', align='center']
+graphviz::../graph/graph.dot[format="svg", align="center"]
 
 [#img-legend]
 .Legend of the directed graph.
 [link=legend.svg]
-image::legend.svg['Legend of the directed graph', align='center']
+graphviz::../graph/legend.dot[format="svg", align="center"]
 
 IMPORTANT: When contributing modifications to the workflows, the dockerfiles or the tests, it is of utmost importance to update the graph accordingly.
 
