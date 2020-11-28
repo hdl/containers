@@ -22,7 +22,8 @@ jobs:
       run: |
         docker build -t hdlc/doc - <<-EOF
         FROM asciidoctor/docker-asciidoctor
-        RUN apk add -U --no-cache graphviz
+        RUN apk add -U --no-cache graphviz python3 \
+         && ln -s /usr/bin/python3 /usr/bin/python
         EOF
 
     - uses: actions/checkout@v2

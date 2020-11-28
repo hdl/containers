@@ -14,6 +14,34 @@ https://github.com/hdl/awesome[image:https://img.shields.io/badge/hdl-awesome-f2
 https://github.com/hdl/constraints[image:https://img.shields.io/badge/hdl-constraints-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/constraints GitHub repository']]
 https://github.com/hdl/MINGW-packages[image:https://img.shields.io/badge/hdl-MINGW--packages-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/MINGW-packages GitHub repository']]
 
+'''
+
+This repository contains scripts and GitHub Actions (GHA) YAML workflows for building, testing and deploying https://opencontainers.org/[OCI] images (aka Docker images) including open source EDA tooling. All of them are pushed to https://hub.docker.com/u/hdlc[hub.docker.com/u/hdlc].
+
+include::tools.adoc[]
+
+Images including multiple tools:
+
+* **I**mplementation: https://hub.docker.com/r/hdlc/impl/tags[image:https://img.shields.io/docker/image-size/hdlc/impl?longCache=true&style=flat-square&label=hdlc%2Fimpl&logo=Docker&logoColor=fff[title='hdlc/impl:latest Docker image size']]
+* **F**ormal: https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal?longCache=true&style=flat-square&label=hdlc%2Fformal&logo=Docker&logoColor=fff[title='hdlc/formal:latest Docker image size']]
+* **P**rogramming: https://hub.docker.com/r/hdlc/prog/tags[image:https://img.shields.io/docker/image-size/hdlc/prog?longCache=true&style=flat-square&label=hdlc%2Fprog&logo=Docker&logoColor=fff[title='hdlc/prog:latest Docker image size']]
+
+To Do:
+
+* https://github.com/khoapham/bitman[bitman]
+* https://github.com/boolector/boolector[boolector]
+* https://github.com/cocotb/cocotb[cocotb]
+* https://github.com/CVC4/CVC4[CVC4]
+* https://github.com/gregdavill/ecpprog[ecpprog]
+* https://github.com/kost/fujprog[fujprog]
+* https://github.com/steveicarus/iverilog[iverilog]
+* https://github.com/nturley/netlistsvg[netlistsvg]
+* https://github.com/trabucayre/openFPGALoader[openFPGALoader]
+* https://github.com/sterin/super-prove-build[Super Prove]
+* https://github.com/verilator/verilator[verilator]
+* https://github.com/VUnit/vunit[vunit]
+* https://github.com/SRI-CSL/yices2[Yices 2]
+
 == Context
 
 This project started in GitHub repository https://github.com/ghdl/ghdl[ghdl/ghdl] (which was named tgingold/ghdl back then). The main purpose was testing GHDL on multiple GNU/Linux distributions (Debian, Ubuntu and Fedora), since https://travis-ci.org/[Travis CI] supported Ubuntu only and Docker. For each target platform, two images were used, one for building and another one for testing.
@@ -61,6 +89,15 @@ NOTE: Currently, many projects don't use containers at all, hence, all images ar
 
 NOTE: At the moment, there is no triggering mechanism set up between different GitHub repositories. All the workflows in this repo are triggered by CRON jobs.
 
+[IMPORTANT]
+====
+When contributing modifications to the workflows, the dockerfiles or the tests, it is of utmost importance to update the following accordingly:
+
+* Table of tools/imagess
+* Graph
+* CI shields
+====
+
 === Graph
 
 Understanding how all the pieces in this project fit together might be daunting for newcomers. Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem. Subdir link:{repotree}graph/[`graph/`] contains the source of a https://en.wikipedia.org/wiki/Directed_graph[directed graph], where the relations between workflows, dockerfiles, images and tests are shown.
@@ -76,8 +113,6 @@ graphviz::../graph/graph.dot[format="svg", align="center"]
 .Legend of the directed graph.
 [link=legend.svg]
 graphviz::../graph/legend.dot[format="svg", align="center"]
-
-IMPORTANT: When contributing modifications to the workflows, the dockerfiles or the tests, it is of utmost importance to update the graph accordingly.
 
 == Continuous Integration (CI)
 
