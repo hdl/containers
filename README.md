@@ -1,5 +1,5 @@
 <p align="center">
-  <a title="hdl.github.io/containers" href="https://hdl.github.io/containers/doc"><img src="https://img.shields.io/website.svg?label=hdl.github.io%2Fcontainers&longCache=true&style=flat-square&url=http%3A%2F%2Fhdl.github.io%2Fcontainers%2Findex.html&logo=Asciidoctor&logoColor=fff"></a><!--
+  <a title="hdl.github.io/containers" href="https://hdl.github.io/containers"><img src="https://img.shields.io/website.svg?label=hdl.github.io%2Fcontainers&longCache=true&style=flat-square&url=http%3A%2F%2Fhdl.github.io%2Fcontainers%2Findex.html&logo=Asciidoctor&logoColor=fff"></a><!--
   -->
 </p>
 
