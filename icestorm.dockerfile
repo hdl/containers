@@ -6,7 +6,7 @@ RUN apt-get update -qq \
 
 RUN mkdir /tmp/icestorm \
  && cd /tmp/icestorm \
- && curl -fsSL https://codeload.github.com/cliffordwolf/icestorm/tar.gz/master | tar xzf - --strip-components=1 \
+ && curl -fsSL https://codeload.github.com/YosysHQ/icestorm/tar.gz/master | tar xzf - --strip-components=1 \
  && ICEPROG=0 make -j $(nproc) \
  && ICEPROG=0 make DESTDIR=/opt/icestorm install
 
