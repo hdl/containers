@@ -43,6 +43,10 @@ To Do:
 * https://github.com/verilator/verilator[verilator]
 * https://github.com/VUnit/vunit[vunit]
 * https://github.com/SRI-CSL/yices2[Yices 2]
+* https://github.com/SymbiFlow/prjxray[Project X-Ray (Xilinx 7 Series tooling)]
+* https://github.com/SymbiFlow/prjuray[Project U-Ray (Xilinx Ultrascale Series tooling)]
+* https://github.com/SymbiFlow/symbiflow-arch-defs[SymbiFlow Architecture Definitions + Tooling (Xilinx 7 Series, QuickLogic)]
+* https://github.com/verilog-to-routing/vtr-verilog-to-routing[Verilog To Routing]
 
 == Context
 
