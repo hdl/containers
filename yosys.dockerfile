@@ -28,7 +28,7 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /tmp/yosys && cd /tmp/yosys \
- && curl -fsSL https://codeload.github.com/cliffordwolf/yosys/tar.gz/master | tar xzf - --strip-components=1 \
+ && curl -fsSL https://codeload.github.com/YosysHQ/yosys/tar.gz/master | tar xzf - --strip-components=1 \
  && make -j $(nproc) \
  && make DESTDIR=/opt/yosys install \
  && make test
