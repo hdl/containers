@@ -113,7 +113,7 @@ def shield_dockerhub_split_tag(item):
 
 with (Path(__file__).resolve().parent/'tools.adoc').open('w') as fptr:
 
-    fptr.write('[cols="6, 6, 6, 1, 1, 1, 8"]\n')
+    fptr.write('[cols="6, 6, 6, 1, 1, 1, 8", stripes=even]\n')
 
     fptr.write('''|===
 .2+^.h|Tool
