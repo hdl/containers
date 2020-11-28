@@ -120,7 +120,7 @@ with (Path(__file__).resolve().parent/'tools.adoc').open('w') as fptr:
 2+^.h|Image
 4+^.h|Included in
 ^.h|Package
-^.h|Use
+^.h|Ready-to-use
 ^.h| I
 ^.h| F
 ^.h| P
