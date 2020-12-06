@@ -30,23 +30,23 @@ Images including multiple tools:
 
 To Do:
 
-* https://github.com/khoapham/bitman[bitman]
-* https://github.com/boolector/boolector[boolector]
-* https://github.com/cocotb/cocotb[cocotb]
+* https://github.com/khoapham/bitman[BitMan]
+* https://hdl.github.io/awesome/items/boolector[Boolector]
+* https://hdl.github.io/awesome/items/cocotb[cocotb]
 * https://github.com/CVC4/CVC4[CVC4]
-* https://github.com/gregdavill/ecpprog[ecpprog]
-* https://github.com/kost/fujprog[fujprog]
-* https://github.com/steveicarus/iverilog[iverilog]
-* https://github.com/nturley/netlistsvg[netlistsvg]
-* https://github.com/trabucayre/openFPGALoader[openFPGALoader]
+* https://hdl.github.io/awesome/items/ecpprog[ecpprog]
+* https://hdl.github.io/awesome/items/fujprog[fujprog]
+* https://hdl.github.io/awesome/items/iverilog[iverilog]
+* https://hdl.github.io/awesome/items/netlistsvg[netlistsvg]
+* https://hdl.github.io/awesome/items/openfpgaloader[openFPGALoader]
 * https://github.com/sterin/super-prove-build[Super Prove]
-* https://github.com/verilator/verilator[verilator]
-* https://github.com/VUnit/vunit[vunit]
-* https://github.com/SRI-CSL/yices2[Yices 2]
-* https://github.com/SymbiFlow/prjxray[Project X-Ray (Xilinx 7 Series tooling)]
+* https://hdl.github.io/awesome/items/verilator[Verilator]
+* https://hdl.github.io/awesome/items/vunit[VUnit]
+* https://hdl.github.io/awesome/items/yices2[Yices 2]
+* https://hdl.github.io/awesome/items/prjxray[Project X-Ray (Xilinx 7 Series tooling)]
 * https://github.com/SymbiFlow/prjuray[Project U-Ray (Xilinx Ultrascale Series tooling)]
 * https://github.com/SymbiFlow/symbiflow-arch-defs[SymbiFlow Architecture Definitions + Tooling (Xilinx 7 Series, QuickLogic)]
-* https://github.com/verilog-to-routing/vtr-verilog-to-routing[Verilog To Routing]
+* https://hdl.github.io/awesome/items/vtr[Verilog To Routing]
 
 == Context
 

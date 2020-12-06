@@ -4,7 +4,7 @@ from pathlib import Path
 
 tools = {
     'ghdl': {
-        'url': 'https://github.com/ghdl/ghdl',
+        'url': 'https://hdl.github.io/awesome/items/ghdl',
         'pkg': ['ghdl'],
         'use': ['ghdl'],
         'in': [
@@ -14,7 +14,7 @@ tools = {
         'otherin': ['ghdl:yosys']
     },
     'ghdl-yosys-plugin': {
-        'url': 'https://github.com/ghdl/ghdl-yosys-plugin',
+        'url': 'https://hdl.github.io/awesome/items/ghdl-yosys-plugin',
         'pkg': ['ghdl-yosys-plugin'],
         'use': ['ghdl:yosys'],
         'in': [
@@ -23,7 +23,7 @@ tools = {
         ]
     },
     'graphviz': {
-        'url': 'https://graphviz.org/',
+        'url': 'https://hdl.github.io/awesome/items/graphviz',
         'in': [
             'impl',
             'formal'
@@ -34,12 +34,12 @@ tools = {
         ]
     },
     'gtkwave': {
-        'url': 'https://github.com/gtkwave/gtkwave',
+        'url': 'https://hdl.github.io/awesome/items/gtkwave',
         'pkg': ['gtkwave'],
         'in': []
     },
     'icestorm': {
-        'url': 'https://github.com/YosysHQ/icestorm',
+        'url': 'https://hdl.github.io/awesome/items/icestorm',
         'pkg': ['icestorm'],
         'use': ['icestorm'],
         'in': [
@@ -53,7 +53,7 @@ tools = {
         ]
     },
     'nextpnr': {
-        'url': 'https://github.com/YosysHQ/nextpnr',
+        'url': 'https://hdl.github.io/awesome/items/nextpnr',
         'use': [
             'nextpnr',
             'nextpnr:ice40',
@@ -62,11 +62,11 @@ tools = {
         'in': ['impl']
     },
     'openocd': {
-        'url': 'http://openocd.org/',
+        'url': 'https://hdl.github.io/awesome/items/openocd',
         'in': ['prog']
     },
     'prjtrellis': {
-        'url': 'https://github.com/YosysHQ/prjtrellis',
+        'url': 'https://hdl.github.io/awesome/items/prjtrellis',
         'pkg': ['prjtrellis'],
         'use': ['prjtrellis'],
         'in': [
@@ -79,12 +79,12 @@ tools = {
         ]
     },
     'symbiyosys': {
-        'url': 'https://github.com/YosysHQ/SymbiYosys',
+        'url': 'https://hdl.github.io/awesome/items/symbiyosys',
         'pkg': ['symbiyosys'],
         'in': ['formal']
     },
     'yosys': {
-        'url': 'https://github.com/YosysHQ/yosys',
+        'url': 'https://hdl.github.io/awesome/items/yosys',
         'pkg': ['yosys'],
         'use': ['yosys'],
         'in': [
@@ -94,7 +94,7 @@ tools = {
         'otherin': ['ghdl:yosys']
     },
     'z3': {
-        'url': 'https://github.com/Z3Prover/z3',
+        'url': 'https://hdl.github.io/awesome/items/z3',
         'pkg': ['z3'],
         'in': ['formal']
     },
