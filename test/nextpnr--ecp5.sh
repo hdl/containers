@@ -27,4 +27,6 @@ cd $(dirname "$0")
 
 ./smoke-tests/nextpnr-ecp5.sh
 
+nextpnr-ecp5 --version
+
 ./_todo.sh

@@ -27,4 +27,6 @@ cd $(dirname "$0")
 
 ./smoke-tests/prjtrellis.sh
 
+ecppack --version
+
 ./_todo.sh
