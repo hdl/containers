@@ -39,15 +39,14 @@ RUN apt-get update -qq \
     flex \
     gawk \
     gcc \
-    git \
     iverilog \
     pkg-config \
     zlib1g-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /tmp/yosys && cd /tmp/yosys \
- && curl -fsSL https://codeload.github.com/YosysHQ/yosys/tar.gz/master | tar xzf - --strip-components=1 \
+RUN git clone https://github.com/YosysHQ/yosys.git /tmp/yosys \
+ && cd /tmp/yosys \
  && make -j $(nproc) \
  && make DESTDIR=/opt/yosys install \
  && make test
