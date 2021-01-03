@@ -13,6 +13,9 @@ on:
   repository_dispatch:
     types: [ doc ]
 
+env:
+  DOCKER_BUILDKIT: 1
+
 jobs:
 
   asciidoc:

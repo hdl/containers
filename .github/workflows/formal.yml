@@ -8,6 +8,9 @@ on:
   repository_dispatch:
     types: [ formal ]
 
+env:
+  DOCKER_BUILDKIT: 1
+
 jobs:
 
   formal:

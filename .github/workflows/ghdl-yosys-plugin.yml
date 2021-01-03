@@ -8,6 +8,9 @@ on:
   repository_dispatch:
     types: [ ghdl-yosys-plugin ]
 
+env:
+  DOCKER_BUILDKIT: 1
+
 jobs:
 
   ghdl-yosys-plugin:

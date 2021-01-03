@@ -8,6 +8,9 @@ on:
   repository_dispatch:
     types: [ icestorm ]
 
+env:
+  DOCKER_BUILDKIT: 1
+
 jobs:
 
   icestorm:
