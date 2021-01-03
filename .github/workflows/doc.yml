@@ -9,6 +9,7 @@ on:
       - 'graph/**'
   schedule:
     - cron: '0 0 * * 4'
+  workflow_dispatch:
   repository_dispatch:
     types: [ doc ]
 
