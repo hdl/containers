@@ -73,8 +73,18 @@ COPY --from=build-ice40 /opt/nextpnr /
 
 #---
 
+FROM ice40 AS icestorm
+COPY --from=hdlc/pkg:icestorm /icestorm /
+
+#---
+
 FROM base AS ecp5
 COPY --from=build-ecp5 /opt/nextpnr /
+
+#---
+
+FROM ecp5 AS prjtrellis
+COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
 #---
 

@@ -47,9 +47,7 @@ tools = {
             'prog'
         ],
         'otherin': [
-            'nextpnr',
-            'nextpnr:ice40',
-            'nextpnr:ecp5',
+            'nextpnr:icestorm',
         ]
     },
     'nextpnr': {
@@ -57,7 +55,9 @@ tools = {
         'use': [
             'nextpnr',
             'nextpnr:ice40',
-            'nextpnr:ecp5'
+            'nextpnr:ecp5',
+            'nextpnr:icestorm',
+            'nextpnr:prjtrellis'
         ],
         'in': ['impl']
     },
@@ -73,9 +73,7 @@ tools = {
             'impl'
         ],
         'otherin': [
-            'nextpnr',
-            'nextpnr:ice40',
-            'nextpnr:ecp5',
+            'nextpnr:prjtrellis',
         ]
     },
     'symbiyosys': {

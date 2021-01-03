@@ -32,7 +32,9 @@ digraph G {
       "ghdl:yosys"
       "icestorm"
       "nextpnr:ice40"
+      "nextpnr:icestorm"
       "nextpnr:ecp5"
+      "nextpnr:prjtrellis"
       "nextpnr"
       "prjtrellis"
       "yosys"
@@ -222,15 +224,24 @@ digraph G {
     } [style=dotted];
 
     { rank=same
+      "nextpnr:ice40",
+      "nextpnr:ecp5"
+    };
+
+    { rank=same
       node [shape=folder, color=red, fontcolor=red];
       "t_nextpnr" [label="nextpnr"];
       "t_nextpnr:ice40" [label="nextpnr--ice40"];
       "t_nextpnr:ecp5" [label="nextpnr--ecp5"];
+      "t_nextpnr:icestorm" [label="nextpnr--icestorm"];
+      "t_nextpnr:prjtrellis" [label="nextpnr--prjtrellis"];
     }
 
     "nextpnr" -> "t_nextpnr";
     "nextpnr:ice40" -> "t_nextpnr:ice40";
+    "nextpnr:icestorm" -> "t_nextpnr:icestorm";
     "nextpnr:ecp5" -> "t_nextpnr:ecp5";
+    "nextpnr:prjtrellis" -> "t_nextpnr:prjtrellis";
   }
 
   subgraph cluster_prjtrellis {
@@ -405,6 +416,9 @@ digraph G {
       "nextpnr:ecp5"
     };
 
+    "nextpnr:ice40" -> "nextpnr:icestorm";
+    "nextpnr:ecp5" -> "nextpnr:prjtrellis";
+
     "p_formal_ghdl" -> "formal";
 
     "p_gtkwave_scratch" -> "pkg:gtkwave";
@@ -444,15 +458,9 @@ digraph G {
     "p_impl_pkg:ghdl-yosys-plugin" -> "impl";
     "p_impl_pkg:yosys" -> "impl";
 
-    "p_nextpnr_icestorm" -> {
-      "nextpnr",
-      "nextpnr:ice40"
-    };
+    "p_nextpnr_icestorm" -> "nextpnr:icestorm";
 
-    "p_nextpnr_prjtrellis" -> {
-      "nextpnr",
-      "nextpnr:ecp5"
-     };
+    "p_nextpnr_prjtrellis" -> "nextpnr:prjtrellis";
   }
 
 }
