@@ -25,16 +25,10 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - name: Build images
-      run: |
-        docker build -t hdlc/pkg:z3 - < z3.dockerfile
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - name: TODO test hdlc/pkg:z3
-      run: docker run --rm -v $(pwd):/wrk alpine /wrk/test/todo.sh
-      #uses: docker://alpine
-      #with:
-      #  args: ./test/todo.sh
+    - run: dockerBuild hdlc/pkg:z3 z3
 
-    - name: Deploy to hub.docker.com
-      run: |
-        docker push hdlc/pkg:z3
+# TODO    - name: dockerTest hdlc/pkg:z3
+
+    - run: dockerPush hdlc/pkg:z3

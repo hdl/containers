@@ -27,23 +27,13 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - name: Build images
-      run: |
-        docker build -t hdlc/pkg:yosys --target=pkg - < yosys.dockerfile
-        docker build -t hdlc/yosys - < yosys.dockerfile
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - name: TODO test hdlc/pkg:yosys
-      run: docker run --rm -v $(pwd):/wrk alpine /wrk/test/todo.sh
-      #uses: docker://alpine
-      #with:
-      #  args: ./test/todo.sh
+    - run: dockerBuild hdlc/pkg:yosys yosys pkg
+    - run: dockerBuild hdlc/yosys     yosys
 
-    - run: docker run --rm -v $(pwd):/wrk hdlc/yosys /wrk/test/yosys.sh
-      #uses: docker://hdlc/yosys
-      #with:
-      #  args: ./test/yosys.sh
+# TODO    - name: dockerTest hdlc/pkg:yosys
+    - run: dockerTest  hdlc/yosys     yosys
 
-    - name: Deploy to DockerHub
-      run: |
-        docker push hdlc/pkg:yosys
-        docker push hdlc/yosys
+    - run: dockerPush  hdlc/pkg:yosys
+    - run: dockerPush  hdlc/yosys

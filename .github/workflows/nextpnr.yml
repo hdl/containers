@@ -27,50 +27,22 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - name: Build nextpnr:ice40
-      run: docker build -t hdlc/nextpnr:ice40 --target=ice40 - < nextpnr.dockerfile
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - name: Build nextpnr:icestorm
-      run: docker build -t hdlc/nextpnr:icestorm --target=icestorm - < nextpnr.dockerfile
+    - run: dockerBuild hdlc/nextpnr:ice40       nextpnr ice40
+    - run: dockerBuild hdlc/nextpnr:icestorm    nextpnr icestorm
+    - run: dockerBuild hdlc/nextpnr:ecp5        nextpnr ecp5
+    - run: dockerBuild hdlc/nextpnr:prjtrellis  nextpnr prjtrellis
+    - run: dockerBuild hdlc/nextpnr             nextpnr
 
-    - name: Build nextpnr:ecp5
-      run: docker build -t hdlc/nextpnr:ecp5 --target=ecp5 - < nextpnr.dockerfile
+    - run: dockerTest  hdlc/nextpnr:ice40       nextpnr--ice40
+    - run: dockerTest  hdlc/nextpnr:icestorm    nextpnr--icestorm
+    - run: dockerTest  hdlc/nextpnr:ecp5        nextpnr--ecp5
+    - run: dockerTest  hdlc/nextpnr:prjtrellis  nextpnr--prjtrellis
+    - run: dockerTest  hdlc/nextpnr             nextpnr
 
-    - name: Build nextpnr:prjtrellis
-      run: docker build -t hdlc/nextpnr:prjtrellis --target=prjtrellis - < nextpnr.dockerfile
-
-    - name: Build nextpnr:nextpnr
-      run: docker build -t hdlc/nextpnr - < nextpnr.dockerfile
-
-    - run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr:ice40 /wrk/test/nextpnr--ice40.sh
-      #uses: docker://hdlc/nextpnr:ice40
-      #with:
-      #  args: ./test/nextpnr-ice40.sh
-
-    - run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr:icestorm /wrk/test/nextpnr--icestorm.sh
-      #uses: docker://hdlc/nextpnr:icestorm
-      #with:
-      #  args: ./test/nextpnr-icestorm.sh
-
-    - run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr:ecp5 /wrk/test/nextpnr--ecp5.sh
-      #uses: docker://hdlc/nextpnr:ecp5
-      #with:
-      #  args: ./test/nextpnr-ecp5.sh
-
-    - run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr:prjtrellis /wrk/test/nextpnr--prjtrellis.sh
-      #uses: docker://hdlc/nextpnr:prjtrellis
-      #with:
-      #  args: ./test/nextpnr-prjtrellis.sh
-
-    - run: docker run --rm -v $(pwd):/wrk hdlc/nextpnr /wrk/test/nextpnr.sh
-      #uses: docker://hdlc/nextpnr
-      #with:
-      #  args: ./test/nextpnr.sh
-
-    - name: Deploy to DockerHub
-      run: |
-        docker push hdlc/nextpnr:ice40
-        docker push hdlc/nextpnr:icestorm
-        docker push hdlc/nextpnr:ecp5
-        docker push hdlc/nextpnr:prjtrellis
-        docker push hdlc/nextpnr
+    - run: dockerPush  hdlc/nextpnr:ice40
+    - run: dockerPush  hdlc/nextpnr:icestorm
+    - run: dockerPush  hdlc/nextpnr:ecp5
+    - run: dockerPush  hdlc/nextpnr:prjtrellis
+    - run: dockerPush  hdlc/nextpnr

@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+set -e
+
+_image="$1"
+
+docker push "${_image}"

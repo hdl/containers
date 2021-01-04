@@ -25,16 +25,10 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - name: Build images
-      run: |
-        docker build -t hdlc/pkg:gtkwave - < gtkwave.dockerfile
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - name: TODO test hdlc/pkg:gtkwave
-      run: docker run --rm -v $(pwd):/wrk alpine /wrk/test/todo.sh
-      #uses: docker://alpine
-      #with:
-      #  args: ./test/todo.sh
+    - run: dockerBuild hdlc/pkg:gtkwave gtkwave
 
-    - name: Deploy to DockerHub
-      run: |
-        docker push hdlc/pkg:gtkwave
+# TODO    - run: dockerTest hdlc/pkg:gtkwave
+
+    - run: dockerPush hdlc/pkg:gtkwave

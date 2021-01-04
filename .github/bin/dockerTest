@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+set -e
+
+_image="$1"
+_script="$2".sh
+
+docker run --rm -v $(pwd):/wrk "${_image}" /wrk/test/"${_script}"

@@ -25,16 +25,10 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - name: Build images
-      run: |
-        docker build -t hdlc/pkg:symbiyosys - < symbiyosys.dockerfile
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - name: TODO test hdlc/pkg:symbiyosys
-      run: docker run --rm -v $(pwd):/wrk alpine /wrk/test/todo.sh
-      #uses: docker://alpine
-      #with:
-      #  args: ./test/todo.sh
+    - run: dockerBuild hdlc/pkg:symbiyosys symbiyosys
 
-    - name: Deploy to DockerHub
-      run: |
-        docker push hdlc/pkg:symbiyosys
+# TODO    - name: dockerTest hdlc/pkg:symbiyosys
+
+    - run: dockerPush hdlc/pkg:symbiyosys

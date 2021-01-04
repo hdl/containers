@@ -27,23 +27,13 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - name: Build images
-      run: |
-        docker build -t hdlc/pkg:icestorm --target=pkg - < icestorm.dockerfile
-        docker build -t hdlc/icestorm - < icestorm.dockerfile
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - name: TODO test hdlc/pkg:icestorm
-      run: docker run --rm -v $(pwd):/wrk alpine /wrk/test/todo.sh
-      #uses: docker://alpine
-      #with:
-      #  args: ./test/todo.sh
+    - run: dockerBuild hdlc/pkg:icestorm icestorm pkg
+    - run: dockerBuild hdlc/icestorm     icestorm
 
-    - run: docker run --rm -v $(pwd):/wrk hdlc/icestorm /wrk/test/icestorm.sh
-      #uses: docker://hdlc/icestorm
-      #with:
-      #  args: ./test/icestorm.sh
+# TODO    - run: dockerTest hdlc/pkg:icestorm
+    - run: dockerTest  hdlc/icestorm     icestorm
 
-    - name: Deploy to DockerHub
-      run: |
-        docker push hdlc/pkg:icestorm
-        docker push hdlc/icestorm
+    - run: dockerPush  hdlc/pkg:icestorm
+    - run: dockerPush  hdlc/icestorm

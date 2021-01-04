@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+set -e
+
+_image="$1"
+_dockerfile="$2".dockerfile
+
+_target=''
+if [ -n "$3" ]; then
+  _target='--target='"$3"
+fi
+
+docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 \
+  -t "${_image}" ${_target} \
+  - < "${_dockerfile}"

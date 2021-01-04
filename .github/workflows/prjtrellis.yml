@@ -27,23 +27,13 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - name: Build images
-      run: |
-        docker build -t hdlc/pkg:prjtrellis --target=pkg - < prjtrellis.dockerfile
-        docker build -t hdlc/prjtrellis - < prjtrellis.dockerfile
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - name: TODO test hdlc/pkg:prjtrellis
-      run: docker run --rm -v $(pwd):/wrk alpine /wrk/test/todo.sh
-      #uses: docker://alpine
-      #with:
-      #  args: ./test/todo.sh
+    - run: dockerBuild hdlc/pkg:prjtrellis prjtrellis pkg
+    - run: dockerBuild hdlc/prjtrellis     prjtrellis
 
-    - run: docker run --rm -v $(pwd):/wrk hdlc/prjtrellis /wrk/test/prjtrellis.sh
-      #uses: docker://hdlc/prjtrellis
-      #with:
-      #  args: ./test/prjtrellis.sh
+# TODO    - run: dockerTest hdlc/pkg:prjtrellis
+    - run: dockerTest  hdlc/prjtrellis     prjtrellis
 
-    - name: Deploy to DockerHub
-      run: |
-        docker push hdlc/pkg:prjtrellis
-        docker push hdlc/prjtrellis
+    - run: dockerPush  hdlc/pkg:prjtrellis
+    - run: dockerPush  hdlc/prjtrellis

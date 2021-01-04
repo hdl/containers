@@ -27,23 +27,13 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - name: Build images
-      run: |
-        docker build -t hdlc/pkg:ghdl --target=pkg - < ghdl.dockerfile
-        docker build -t hdlc/ghdl - < ghdl.dockerfile
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - name: TODO test hdlc/pkg:ghdl
-      run: docker run --rm -v $(pwd):/wrk alpine /wrk/test/todo.sh
-      #uses: docker://alpine
-      #with:
-      #  args: ./test/todo.sh
+    - run: dockerBuild hdlc/pkg:ghdl  ghdl  pkg
+    - run: dockerBuild hdlc/ghdl      ghdl
 
-    - run: docker run --rm -v $(pwd):/wrk hdlc/ghdl /wrk/test/ghdl.sh
-      #uses: docker://hdlc/ghdl
-      #with:
-      #  args: ./test/ghdl.sh
+# TODO    - run: dockerTest hdlc/pkg:ghdl
+    - run: dockerTest  hdlc/ghdl      ghdl
 
-    - name: Deploy to DockerHub
-      run: |
-        docker push hdlc/pkg:ghdl
-        docker push hdlc/ghdl
+    - run: dockerPush  hdlc/pkg:ghdl
+    - run: dockerPush  hdlc/ghdl

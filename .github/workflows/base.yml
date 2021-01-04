@@ -25,29 +25,16 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - name: Build images
-      run: |
-        docker build -t hdlc/build:base  --target base  - < base.dockerfile
-        docker build -t hdlc/build:build --target build - < base.dockerfile
-        docker build -t hdlc/build:dev - < base.dockerfile
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: docker run --rm -v $(pwd):/wrk hdlc/build:base /wrk/test/build--base.sh
-      #uses: docker://hdlc/build:base
-      #with:
-      #  args: ./test/build--base.sh
+    - run: dockerBuild hdlc/build:base   base          base
+    - run: dockerBuild hdlc/build:build  base          build
+    - run: dockerBuild hdlc/build:dev    base
 
-    - run: docker run --rm -v $(pwd):/wrk hdlc/build:build /wrk/test/build--build.sh
-      #uses: docker://hdlc/build:build
-      #with:
-      #  args: ./test/build--build.sh
+    - run: dockerTest  hdlc/build:base   build--base
+    - run: dockerTest  hdlc/build:build  build--build
+    - run: dockerTest  hdlc/build:dev    build--dev
 
-    - run: docker run --rm -v $(pwd):/wrk hdlc/build:dev /wrk/test/build--dev.sh
-      #uses: docker://hdlc/build:dev
-      #with:
-      #  args: ./test/build--dev.sh
-
-    - name: Deploy to DockerHub
-      run: |
-        docker push hdlc/build:base
-        docker push hdlc/build:build
-        docker push hdlc/build:dev
+    - run: dockerPush  hdlc/build:base
+    - run: dockerPush  hdlc/build:build
+    - run: dockerPush  hdlc/build:dev

@@ -25,23 +25,13 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - name: Build images
-      run: |
-        docker build -t hdlc/pkg:ghdl-yosys-plugin --target=pkg - < ghdl-yosys-plugin.dockerfile
-        docker build -t hdlc/ghdl:yosys - < ghdl-yosys-plugin.dockerfile
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - name: TODO test hdlc/pkg:ghdl-yosys-plugin
-      run: docker run --rm -v $(pwd):/wrk alpine /wrk/test/todo.sh
-      #uses: docker://alpine
-      #with:
-      #  args: ./test/todo.sh
+    - run: dockerBuild hdlc/pkg:ghdl-yosys-plugin  ghdl-yosys-plugin  pkg
+    - run: dockerBuild hdlc/ghdl:yosys             ghdl-yosys-plugin
 
-    - run: docker run --rm -v $(pwd):/wrk hdlc/ghdl:yosys /wrk/test/ghdl--yosys.sh
-      #uses: docker://hdlc/ghdl:yosys
-      #with:
-      #  args: ./test/ghdl--yosys.sh
+# TODO    - run: dockerTest hdlc/pkg:ghdl-yosys-plugin
+    - run: dockerTest  hdlc/ghdl:yosys             ghdl--yosys
 
-    - name: Deploy to DockerHub
-      run: |
-        docker push hdlc/pkg:ghdl-yosys-plugin
-        docker push hdlc/ghdl:yosys
+    - run: dockerPush  hdlc/pkg:ghdl-yosys-plugin
+    - run: dockerPush  hdlc/ghdl:yosys

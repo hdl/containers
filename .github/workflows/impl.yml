@@ -27,15 +27,10 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - name: Build images
-      run: |
-        docker build -t hdlc/impl - < impl.dockerfile
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: docker run --rm -v $(pwd):/wrk hdlc/impl /wrk/test/impl.sh
-      #uses: docker://hdlc/impl
-      #with:
-      #  args: ./test/impl.sh
+    - run: dockerBuild hdlc/impl impl
 
-    - name: Deploy to DockerHub
-      run: |
-        docker push hdlc/impl
+    - run: dockerTest  hdlc/impl impl
+
+    - run: dockerPush  hdlc/impl
