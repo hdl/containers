@@ -1,3 +1,14 @@
+FROM hdlc/build:base AS base
+
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    libboost-all-dev \
+    libomp5-7 \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
+
+#---
+
 FROM hdlc/build:dev AS build
 
 ENV LDFLAGS "-Wl,--copy-dt-needed-entries"
@@ -26,6 +37,16 @@ RUN mkdir -p /tmp/nextpnr/build \
 
 #---
 
+FROM base AS ice40
+COPY --from=build-ice40 /opt/nextpnr /
+
+#---
+
+FROM ice40 AS icestorm
+COPY --from=hdlc/pkg:icestorm /icestorm /
+
+#---
+
 FROM build AS build-ecp5
 COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
@@ -43,6 +64,16 @@ RUN mkdir -p /tmp/nextpnr/build \
 
 #---
 
+FROM base AS ecp5
+COPY --from=build-ecp5 /opt/nextpnr /
+
+#---
+
+FROM ecp5 AS prjtrellis
+COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
+
+#---
+
 FROM build-ice40 AS build-all
 COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
@@ -54,37 +85,6 @@ RUN cd /tmp/nextpnr/build \
    -DUSE_OPENMP=ON \
  && make -j $(nproc) \
  && make DESTDIR=/opt/nextpnr install
-
-#---
-
-FROM hdlc/build:base AS base
-
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    libboost-all-dev \
-    libomp5-7 \
- && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists/*
-
-#---
-
-FROM base AS ice40
-COPY --from=build-ice40 /opt/nextpnr /
-
-#---
-
-FROM ice40 AS icestorm
-COPY --from=hdlc/pkg:icestorm /icestorm /
-
-#---
-
-FROM base AS ecp5
-COPY --from=build-ecp5 /opt/nextpnr /
-
-#---
-
-FROM ecp5 AS prjtrellis
-COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
 #---
 
