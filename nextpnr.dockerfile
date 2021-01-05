@@ -1,5 +1,6 @@
 # Authors:
 #   Anton Blanchard
+#   Sebastian Birke      <git@se-bi.de>
 #   Unai Martinez-Corral
 #
 # Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
@@ -36,16 +37,16 @@ ENV LDFLAGS "-Wl,--copy-dt-needed-entries"
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     libeigen3-dev \
-    libomp-dev
+    libomp-dev \
+ && git clone https://github.com/YosysHQ/nextpnr.git /tmp/nextpnr \
+ && mkdir /tmp/nextpnr/build/
 
 #---
 
 FROM build AS build-ice40
 COPY --from=hdlc/pkg:icestorm /icestorm/usr/local/share/icebox /usr/local/share/icebox
 
-RUN git clone https://github.com/YosysHQ/nextpnr.git /tmp/nextpnr \
- && mkdir /tmp/nextpnr/build/ \
- && cd /tmp/nextpnr/build \
+RUN cd /tmp/nextpnr/build \
  && cmake .. \
    -DARCH=ice40 \
    -DBUILD_GUI=OFF \
@@ -69,9 +70,7 @@ COPY --from=hdlc/pkg:icestorm /icestorm /
 FROM build AS build-ecp5
 COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
-RUN git clone https://github.com/YosysHQ/nextpnr.git /tmp/nextpnr \
- && mkdir /tmp/nextpnr/build/ \
- && cd /tmp/nextpnr/build \
+RUN cd /tmp/nextpnr/build \
  && cmake .. \
    -DARCH=ecp5 \
    -DBUILD_GUI=OFF \
