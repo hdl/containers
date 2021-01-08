@@ -22,9 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Build hdlc/doc
+    - name: Build hdlc/doc:asciidoctor-py
       run: |
-        docker build -t hdlc/doc - <<-EOF
+        docker build -t hdlc/doc:asciidoctor-py - <<-EOF
         FROM asciidoctor/docker-asciidoctor
         RUN apk add -U --no-cache graphviz python3 \
          && ln -s /usr/bin/python3 /usr/bin/python
@@ -33,13 +33,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build site
-      run: docker run --rm -v /$(pwd)://documents/ hdlc/doc ./doc/make.sh
-      # BUG: the following 'uses' should be equivalent to the 'run' command above.
-      #      Unfortunately, GitHub tries to build a custom image before running the
-      #      first step. At that point, image 'hdlc/doc' does not exist, so it fails.
-      #  uses: docker://hdlc/doc
-      #  with:
-      #    args: doc/make.sh
+      run: docker run --rm -v /$(pwd)://documents/ hdlc/doc:asciidoctor-py ./doc/make.sh
 
     - name: Publish site to gh-pages (doc)
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -58,3 +52,13 @@ jobs:
         git config --local user.name "GHA"
         git commit -am "update ${{ github.sha }}"
         git push -u origin +HEAD:gh-pages
+
+    - name: Login to DockerHub
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - run: dockerPush hdlc/doc:asciidoctor-py
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
