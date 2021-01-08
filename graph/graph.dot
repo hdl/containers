@@ -223,10 +223,10 @@ digraph G {
       "nextpnr"
     } [style=dotted];
 
-    { rank=same
-      "nextpnr:ice40",
-      "nextpnr:ecp5"
-    };
+    d_nextpnr -> { rank=same
+      "nextpnr:icestorm",
+      "nextpnr:prjtrellis"
+    } [style=dotted];
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
