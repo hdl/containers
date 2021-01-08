@@ -15,8 +15,7 @@ RUN mkdir /tmp/z3 && cd /tmp/z3 \
  && python3 scripts/mk_make.py \
  && cd build \
  && make \
- && make DESTDIR=/opt/z3 install \
- && tar -zcvf /tmp/z3.tgz -C /opt/z3/usr/ .
+ && make DESTDIR=/opt/z3 install
 
 #---
 
