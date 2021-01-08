@@ -17,6 +17,7 @@ digraph G {
     d_prjtrellis       [label="prjtrellis"];
     d_prog             [label="prog"];
     d_symbiyosys       [label="symbiyosys"];
+    d_yices2           [label="yices2"];
     d_yosys            [label="yosys"];
     d_z3               [label="z3"];
   }
@@ -46,6 +47,7 @@ digraph G {
       "pkg:icestorm"
       "pkg:prjtrellis"
       "pkg:symbiyosys"
+      "pkg:yices2"
       "pkg:yosys"
       "pkg:z3"
     }
@@ -100,6 +102,7 @@ digraph G {
       "p_formal_ghdl" [label="ghdl:yosys"]
       "p_formal_symbiyosys" [label="pkg:symbiyosys"]
       "p_formal_z3" [label="pkg:z3"]
+      "p_formal_yices2" [label="pkg:yices2"]
     }
 
     d_formal ->
@@ -298,6 +301,21 @@ digraph G {
     "pkg:symbiyosys" -> "t_pkg:symbiyosys";
   }
 
+  subgraph cluster_yices2 {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_yices2_scratch" [label="scratch"]
+      "p_yices2_build:base" [label="build:base"]
+    }
+
+    d_yices2 ->
+    "pkg:yices2" [style=dotted];
+
+    "t_pkg:yices2" [shape=folder, color=red, fontcolor=red, label="todo"];
+
+    "pkg:yices2" -> "t_pkg:yices2";
+  }
+
   subgraph cluster_yosys {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
@@ -341,6 +359,7 @@ digraph G {
     d_icestorm
     d_prjtrellis
     d_symbiyosys
+    d_yices2
     d_yosys
     d_z3
   }
@@ -357,6 +376,7 @@ digraph G {
 
   "ghdl:yosys" -> "p_formal_ghdl" -> d_formal;
   "pkg:symbiyosys" -> "p_formal_symbiyosys" -> d_formal;
+  "pkg:yices2" -> "p_formal_yices2" -> d_formal;
   "pkg:z3" -> "p_formal_z3" -> d_formal;
 
   "scratch" -> "p_ghdl_scratch" -> d_ghdl;
@@ -393,6 +413,9 @@ digraph G {
 
   "build:base" -> "p_symbiyosys_build:base" -> d_symbiyosys;
   "scratch" -> "p_symbiyosys_scratch" -> d_symbiyosys;
+
+  "build:base" -> "p_yices2_build:base" -> d_yices2;
+  "scratch" -> "p_yices2_scratch" -> d_yices2;
 
   "build:build" -> "p_yosys_build:build" -> d_yosys;
   "scratch" -> "p_yosys_scratch" -> d_yosys;
@@ -433,6 +456,8 @@ digraph G {
 
     "p_symbiyosys_scratch" -> "pkg:symbiyosys";
 
+    "p_yices2_scratch" -> "pkg:yices2";
+
     "p_yosys_scratch" -> "pkg:yosys";
     "p_yosys_build:build" -> "yosys";
 
@@ -445,6 +470,7 @@ digraph G {
   { edge [style=dashed, color=grey]
     {
       "p_formal_symbiyosys",
+      "p_formal_yices2"
       "p_formal_z3"
      } -> "formal";
 
