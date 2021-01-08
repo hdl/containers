@@ -14,7 +14,7 @@ RUN mkdir /tmp/z3 && cd /tmp/z3 \
  && curl -fsSL https://codeload.github.com/Z3Prover/z3/tar.gz/master | tar xzf - --strip-components=1 \
  && python3 scripts/mk_make.py \
  && cd build \
- && make \
+ && make PREFIX=/usr/local \
  && make DESTDIR=/opt/z3 install
 
 #---
