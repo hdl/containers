@@ -99,7 +99,7 @@ NOTE: At the moment, there is no triggering mechanism set up between different G
 ====
 When contributing modifications to the workflows, the dockerfiles or the tests, it is of utmost importance to update the following accordingly:
 
-* Table of tools/imagess
+* Table of tools/images
 * Graph
 * CI shields
 ====
