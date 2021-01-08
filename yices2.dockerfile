@@ -1,10 +1,8 @@
-FROM hdlc/build:base AS build
+FROM hdlc/build:build AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     binutils \
-    g++ \
-    make \
     autoconf \
     gperf \
     libgmp-dev \
