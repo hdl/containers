@@ -83,7 +83,7 @@ This repository provides a set of base images for building and for runtime: link
 Then, for each project, a dockerfile and a GitHub Actions workflow are created. Those are used for:
 
 * Tools are built using base images.
-* Cache images based on `scratch` (and/or other reusable packages) are produced.
+* Package images based on `scratch` (and/or other reusable packages) are produced.
 * Ready-to-use images based on the runtime base image are produced.
 * Ready-to-use images are tested before uploading.
 
