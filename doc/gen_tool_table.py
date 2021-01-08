@@ -81,6 +81,11 @@ tools = {
         'pkg': ['symbiyosys'],
         'in': ['formal']
     },
+    'yices2': {
+        'url': 'https://hdl.github.io/awesome/items/yices2',
+        'pkg': ['yices2'],
+        'in': ['formal']
+    },
     'yosys': {
         'url': 'https://hdl.github.io/awesome/items/yosys',
         'pkg': ['yosys'],
@@ -95,7 +100,7 @@ tools = {
         'url': 'https://hdl.github.io/awesome/items/z3',
         'pkg': ['z3'],
         'in': ['formal']
-    },
+    }
 }
 
 
