@@ -21,16 +21,18 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Login to DockerHub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
-
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
     - run: dockerBuild hdlc/formal formal
 
     - run: dockerTest  hdlc/formal formal
 
+    - name: Login to DockerHub
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
     - run: dockerPush  hdlc/formal
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

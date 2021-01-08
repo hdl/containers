@@ -21,12 +21,6 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Login to DockerHub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
-
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
     - run: dockerBuild hdlc/pkg:icestorm icestorm pkg
@@ -35,5 +29,15 @@ jobs:
 # TODO    - run: dockerTest hdlc/pkg:icestorm
     - run: dockerTest  hdlc/icestorm     icestorm
 
+    - name: Login to DockerHub
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
     - run: dockerPush  hdlc/pkg:icestorm
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+
     - run: dockerPush  hdlc/icestorm
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

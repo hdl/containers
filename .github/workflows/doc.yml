@@ -42,7 +42,7 @@ jobs:
       #    args: doc/make.sh
 
     - name: Publish site to gh-pages (doc)
-      if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: |
         mkdir pages
         cd pages
