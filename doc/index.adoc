@@ -38,7 +38,6 @@ To Do:
 * https://hdl.github.io/awesome/items/iverilog[iverilog]
 * https://hdl.github.io/awesome/items/netlistsvg[netlistsvg]
 * https://hdl.github.io/awesome/items/openfpgaloader[openFPGALoader]
-* https://github.com/sterin/super-prove-build[Super Prove]
 * https://hdl.github.io/awesome/items/verilator[Verilator]
 * https://hdl.github.io/awesome/items/vunit[VUnit]
 * https://hdl.github.io/awesome/items/prjxray[Project X-Ray (Xilinx 7 Series tooling)]
@@ -162,6 +161,12 @@ include::shield_gha.adoc[]
 +
 --
 :workflow: prjtrellis
+include::shield_gha.adoc[]
+--
+* {blank}
++
+--
+:workflow: superprove
 include::shield_gha.adoc[]
 --
 * {blank}
