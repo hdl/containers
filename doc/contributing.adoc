@@ -1,0 +1,47 @@
+== Contributing
+
+This repository provides a set of base images for building and for runtime: link:{repotree}base.dockerfile[`base.dockerfile`]. All the images in the ecosystem are based on these:
+
+* https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/base?longCache=true&style=flat-square&label=hdlc%2Fbuild:base&logo=Docker&logoColor=fff[title='hdlc/build:base Docker image size']] Debian Buster with updated `ca-certificates`, `curl` and Python 3.
+* https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/build?longCache=true&style=flat-square&label=hdlc%2Fbuild:build&logo=Docker&logoColor=fff[title='hdlc/build:build Docker image size']] based on `base`, includes `clang` and `make`.
+* https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/dev?longCache=true&style=flat-square&label=hdlc%2Fbuild:dev&logo=Docker&logoColor=fff[title='hdlc/build:dev Docker image size']] based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
+
+Then, for each project, a dockerfile and a GitHub Actions workflow are created. Those are used for:
+
+* Tools are built using base images.
+* Package images based on `scratch` (and/or other reusable packages) are produced.
+* Ready-to-use images based on the runtime base image are produced.
+* Ready-to-use images are tested before uploading.
+
+Depending on the tool, _package_ images are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for common use cases.
+
+Before working on adding or extending the support for a tool, please check the https://github.com/hdl/containers/issues[issues] and https://github.com/hdl/containers/pulls[pull requests], for avoiding duplicated effort in case anyone is already working on it. You can also join the chat at https://gitter.im/hdl/community[gitter.im/hdl/community].
+
+NOTE: Currently, many projects don't use containers at all, hence, all images are generated in this repository. However, the workload is expected to be distributed between multiple projects in the ecosystem.
+
+NOTE: At the moment, there is no triggering mechanism set up between different GitHub repositories. All the workflows in this repo are triggered by CRON jobs.
+
+[IMPORTANT]
+====
+When contributing modifications to the workflows, the dockerfiles or the tests, it is of utmost importance to update the following accordingly:
+
+* Table of tools/images
+* Graph
+* CI shields
+====
+
+=== Graph
+
+Understanding how all the pieces in this project fit together might be daunting for newcomers. Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem. Subdir link:{repotree}graph/[`graph/`] contains the source of a https://en.wikipedia.org/wiki/Directed_graph[directed graph], where the relations between workflows, dockerfiles, images and tests are shown.
+
+(https://graphviz.org/[Graphviz])'s `digraph` format is used, hence, the graph can be rendered to multiple image formats. The SVG output is shown in xref:img-graph[xrefstyle=short]. Multiple colours and arrow types are used for describing different dependency types. All of those are explained in the legend: xref:img-legend[xrefstyle=short].
+
+[#img-graph]
+.Workflows, dockerfiles, images and tests.
+[link=graph.svg]
+graphviz::../graph/graph.dot[format="svg", align="center"]
+
+[#img-legend]
+.Legend of the directed graph.
+[link=legend.svg]
+graphviz::../graph/legend.dot[format="svg", align="center"]

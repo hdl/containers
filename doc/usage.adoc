@@ -1,0 +1,23 @@
+== Usage
+
+Official guidelines and recommendations for using containers suggest keeping containers small and specific for each tool/purpose. That fits well with the field of web _microservices_, which communicate through TCP/IP and which need to be composed, scaled and balanced all around the globe.
+
+However, tooling in other camps is expected to communicate using a shared or local filesystem and/or pipes; therefore, many users treat containters as _lightweight virtual machines_. That is, they put all the tools in a single (heavy) container. Those containers are typically not moved around as frequently as _microservices_, but cached on developers' workstations.
+
+In this project, both paradigms are supported; fine-grained images are available, as well as all-in-one images.
+
+=== Fine-grained pulling
+
+Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named `hdlc/<TOOL_NAME>`. Since all of them are based on the same root image, pulling multiple images involves retrieving a few additional layers only. Therefore, this is the recommended approach for CI or other environments with limited resources.
+
+* There is an example at https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile[ghdl-yosys-blink: Makefile] showcasing how to use this fine-grained approach with a makefile.
+* At https://github.com/marph91/icestick-remote[marph91/icestick-remote] the CI workflow for synthesis uses this approach.
+* Moreover, https://gitlab.com/rodrigomelo9/pyfpga[PyFPGA] is a Python Class for vendor-independent FPGA development, which runs GHDL, Yosys, etc. in containers.
+
+NOTE: These images are coloured [lime]#GREEN# in the <<Graph>>.
+
+=== All-in-one images
+
+Multiple tools from fine-grained images are included in larger images for common use cases. These are named `hdlc/<MAIN_USAGE>`. This is the recommended approach for users who are less familiar with containers and want a quick replacement for full-featured virtual machines. Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one imags.
+
+NOTE: These images are coloured [maroon]#BROWN# in the <<Graph>>.

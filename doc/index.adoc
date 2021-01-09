@@ -9,7 +9,7 @@
 [.text-center]
 https://github.com/hdl/containers[image:https://img.shields.io/badge/hdl-containers-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/containers GitHub repository']]
 https://github.com/hdl/smoke-tests[image:https://img.shields.io/badge/hdl-smoke--tests-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/smoke-tests GitHub repository']] |
-https://gitter.im/hdl/community[image:https://img.shields.io/gitter/room/hdl/community.svg?longCache=true&style=flat-square&logo=gitter&logoColor=4db797&color=4db797[title='hdl/community on gitter.im']] |
+https://gitter.im/hdl/community[image:https://img.shields.io/gitter/room/hdl/community.svg?longCache=true&style=flat-square&logo=gitter&logoColor=fff&color=4db797[title='hdl/community on gitter.im']] |
 https://github.com/hdl/awesome[image:https://img.shields.io/badge/hdl-awesome-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/awesome GitHub repository']]
 https://github.com/hdl/constraints[image:https://img.shields.io/badge/hdl-constraints-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/constraints GitHub repository']]
 https://github.com/hdl/MINGW-packages[image:https://img.shields.io/badge/hdl-MINGW--packages-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/MINGW-packages GitHub repository']]
@@ -26,9 +26,9 @@ Images including multiple tools:
 
 * **I**mplementation: https://hub.docker.com/r/hdlc/impl/tags[image:https://img.shields.io/docker/image-size/hdlc/impl?longCache=true&style=flat-square&label=hdlc%2Fimpl&logo=Docker&logoColor=fff[title='hdlc/impl:latest Docker image size']]
 * **F**ormal:
-** https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal?longCache=true&style=flat-square&label=hdlc%2Fformal&logo=Docker&logoColor=fff[title='hdlc/formal:latest Docker image size']] all solvers depending on Python 3.
-** https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal:min?longCache=true&style=flat-square&label=hdlc%2Fformal:min&logo=Docker&logoColor=fff[title='hdlc/formal:latest Docker image size']] Z3 only.
-** https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal:all?longCache=true&style=flat-square&label=hdlc%2Fformal:all&logo=Docker&logoColor=fff[title='hdlc/formal:latest Docker image size']] all solvers, depending on either Python 2 or Python 3.
+** https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal/latest?longCache=true&style=flat-square&label=hdlc%2Fformal&logo=Docker&logoColor=fff[title='hdlc/formal:latest Docker image size']] all solvers depending on Python 3.
+** https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal/min?longCache=true&style=flat-square&label=hdlc%2Fformal:min&logo=Docker&logoColor=fff[title='hdlc/formal:min Docker image size']] Z3 only.
+** https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal/all?longCache=true&style=flat-square&label=hdlc%2Fformal:all&logo=Docker&logoColor=fff[title='hdlc/formal:all Docker image size']] all solvers, depending on either Python 2 or Python 3.
 * **P**rogramming: https://hub.docker.com/r/hdlc/prog/tags[image:https://img.shields.io/docker/image-size/hdlc/prog?longCache=true&style=flat-square&label=hdlc%2Fprog&logo=Docker&logoColor=fff[title='hdlc/prog:latest Docker image size']]
 
 To Do:
@@ -48,77 +48,11 @@ To Do:
 * https://github.com/SymbiFlow/symbiflow-arch-defs[SymbiFlow Architecture Definitions + Tooling (Xilinx 7 Series, QuickLogic)]
 * https://hdl.github.io/awesome/items/vtr[Verilog To Routing]
 
-== Context
+include::context.adoc[]
 
-This project started in GitHub repository https://github.com/ghdl/ghdl[ghdl/ghdl] (which was named tgingold/ghdl back then). The main purpose was testing GHDL on multiple GNU/Linux distributions (Debian, Ubuntu and Fedora), since https://travis-ci.org/[Travis CI] supported Ubuntu only and Docker. For each target platform, two images were used, one for building and another one for testing.
+include::usage.adoc[]
 
-Later, most of the Docker related sources were split to repository https://github.com/ghdl/docker[ghdl/docker]. There, some additional simulation tools were added, such as http://vunit.github.io/[VUnit] and http://gtkwave.sourceforge.net/[GtkWave]. Images including the https://github.com/ghdl/ghdl-language-server[ghdl-language-server] were also added. When synthesis features were added to GHDL, and since it provides a plugin for https://github.com/YosysHQ/yosys[Yosys], tools for providing a complete open source workflow were requested. Those were https://github.com/YosysHQ/nextpnr[nextpnr], https://github.com/YosysHQ/icestorm[icestorm], https://github.com/YosysHQ/prjtrellis[prjtrellis], https://github.com/YosysHQ/SymbiYosys[SymbiYosys], etc.
-
-At some point, ghdl/docker had as much content related to non-GHDL tools, as resources related to the organisation. At the same time, https://symbiflow.github.io[SymbiFlow] aimed at gathering open source projects for providing an integrated open source EDA solution. However, it did not have official container images and https://symbiflow.github.io/developers.html[help was wanted]. This repository was intially created for moving all the tools which were not part of GHDL, from ghdl/docker to symbiflow/containers. However, apart from adding known Verilog tools, the scope was widened. Hence, the repository was published in https://github.com/hdl/containers[hdl/containers].
-
-== Usage
-
-Official guidelines and recommendations for using containers suggest keeping containers small and specific for each tool/purpose. That fits well with the field of web _microservices_, which communicate through TCP/IP and which need to be composed, scaled and balanced all around the globe.
-
-However, tooling in other camps is expected to communicate using a shared or local filesystem and/or pipes; therefore, many users treat containters as _lightweight virtual machines_. That is, they put all the tools in a single (heavy) container. Those containers are typically not moved around as frequently as _microservices_, but cached on developers' workstations.
-
-In this project, both paradigms are supported; fine-grained images are available, as well as all-in-one images.
-
-=== Fine-grained pulling
-
-Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named `hdlc/<TOOL_NAME>`. Since all of them are based on the same root image, pulling multiple images involves retrieving a few additional layer only. Therefore, this is the recommended approach for CI or other environments with limited resources. There is an example at https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile[ghdl-yosys-blink: Makefile] showcasing how to use this fine-grained approach with a makefile. Moreover, https://gitlab.com/rodrigomelo9/pyfpga[PyFPGA] is a Python Class for vendor-independent FPGA development which runs GHDL, Yosys, etc. in containers.
-
-=== All-in-one images
-
-Multiple tools from fine-grained images are included in larger images for common use cases. These are named `hdlc/<MAIN_USAGE>`. This is the recommended approach for users who are less familiar with containers and want a quick replacement for full-featured virtual machines. Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one imags.
-
-== Contributing
-
-This repository provides a set of base images for building and for runtime: link:{repotree}base.dockerfile[`base.dockerfile`]. All the images in the ecosystem are based on these:
-
-* https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/base?longCache=true&style=flat-square&label=hdlc%2Fbuild:base&logo=Docker&logoColor=fff[title='hdlc/build:base Docker image size']] Debian Buster with updated `ca-certificates`, `curl` and Python 3.
-* https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/build?longCache=true&style=flat-square&label=hdlc%2Fbuild:build&logo=Docker&logoColor=fff[title='hdlc/build:build Docker image size']] based on `base`, includes `clang` and `make`.
-* https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/dev?longCache=true&style=flat-square&label=hdlc%2Fbuild:dev&logo=Docker&logoColor=fff[title='hdlc/build:dev Docker image size']] based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
-
-Then, for each project, a dockerfile and a GitHub Actions workflow are created. Those are used for:
-
-* Tools are built using base images.
-* Package images based on `scratch` (and/or other reusable packages) are produced.
-* Ready-to-use images based on the runtime base image are produced.
-* Ready-to-use images are tested before uploading.
-
-Depending on the tool, _package_ images are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for common use cases.
-
-Before working on adding or extending the support for a tool, please check the https://github.com/hdl/containers/issues[issues] and https://github.com/hdl/containers/pulls[pull requests], for avoiding duplicated effort in case anyone is already working on it. You can also join the chat at https://gitter.im/hdl/community[gitter.im/hdl/community].
-
-NOTE: Currently, many projects don't use containers at all, hence, all images are generated in this repository. However, the workload is expected to be distributed between multiple projects in the ecosystem.
-
-NOTE: At the moment, there is no triggering mechanism set up between different GitHub repositories. All the workflows in this repo are triggered by CRON jobs.
-
-[IMPORTANT]
-====
-When contributing modifications to the workflows, the dockerfiles or the tests, it is of utmost importance to update the following accordingly:
-
-* Table of tools/images
-* Graph
-* CI shields
-====
-
-=== Graph
-
-Understanding how all the pieces in this project fit together might be daunting for newcomers. Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem. Subdir link:{repotree}graph/[`graph/`] contains the source of a https://en.wikipedia.org/wiki/Directed_graph[directed graph], where the relations between workflows, dockerfiles, images and tests are shown.
-
-(https://graphviz.org/[Graphviz])'s `digraph` format is used, hence, the graph can be rendered to multiple image formats. The SVG output is shown in xref:img-graph[xrefstyle=short]. Multiple colours and arrow types are used for describing different dependency types. All of those are explained in the legend: xref:img-legend[xrefstyle=short].
-
-[#img-graph]
-.Workflows, dockerfiles, images and tests.
-[link=graph.svg]
-graphviz::../graph/graph.dot[format="svg", align="center"]
-
-[#img-legend]
-.Legend of the directed graph.
-[link=legend.svg]
-graphviz::../graph/legend.dot[format="svg", align="center"]
+include::contributing.adoc[]
 
 == Continuous Integration (CI)
 
@@ -137,12 +71,6 @@ include::shield_gha.adoc[]
 include::shield_gha.adoc[]
 --
 a|* {blank}
-+
---
-:workflow: boolector
-include::shield_gha.adoc[]
---
-* {blank}
 +
 --
 :workflow: ghdl
@@ -169,6 +97,18 @@ include::shield_gha.adoc[]
 * {blank}
 +
 --
+:workflow: yosys
+include::shield_gha.adoc[]
+--
+a|* {blank}
++
+--
+:workflow: boolector
+include::shield_gha.adoc[]
+--
+* {blank}
++
+--
 :workflow: superprove
 include::shield_gha.adoc[]
 --
@@ -182,12 +122,6 @@ include::shield_gha.adoc[]
 +
 --
 :workflow: yices2
-include::shield_gha.adoc[]
---
-* {blank}
-+
---
-:workflow: yosys
 include::shield_gha.adoc[]
 --
 * {blank}
