@@ -81,6 +81,11 @@ tools = {
             'nextpnr:prjtrellis',
         ]
     },
+    'superprove': {
+        'url': 'https://hdl.github.io/awesome/items/superprove',
+        'pkg': ['superprove'],
+        'in': ['formal']
+    },
     'symbiyosys': {
         'url': 'https://hdl.github.io/awesome/items/symbiyosys',
         'pkg': ['symbiyosys'],
