@@ -7,6 +7,7 @@ digraph G {
 
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
     d_base             [label="base"];
+    d_boolector        [label="boolector"];
     d_formal           [label="formal"];
     d_ghdl             [label="ghdl"];
     d_ghdlYosysPlugin  [label="ghdl-yosys-plugin"];
@@ -41,6 +42,7 @@ digraph G {
       "yosys"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
+      "pkg:boolector"
       "pkg:ghdl"
       "pkg:ghdl-yosys-plugin"
       "pkg:gtkwave"
@@ -96,17 +98,31 @@ digraph G {
     "build:dev" -> "t_build:dev";
   }
 
+  subgraph cluster_boolector {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_boolector_scratch" [label="scratch"]
+      "p_boolector_build:build" [label="build:build"]
+    }
+
+    d_boolector -> "pkg:boolector" [style=dotted];
+
+    "t_pkg:boolector" [shape=folder, color=red, fontcolor=red, label="todo"];
+
+    "pkg:boolector" -> "t_pkg:boolector";
+  }
+
   subgraph cluster_formal {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_formal_boolector" [label="pkg:boolector"]
       "p_formal_ghdl" [label="ghdl:yosys"]
       "p_formal_symbiyosys" [label="pkg:symbiyosys"]
       "p_formal_z3" [label="pkg:z3"]
       "p_formal_yices2" [label="pkg:yices2"]
     }
 
-    d_formal ->
-    "formal" [style=dotted];
+    d_formal -> "formal" [style=dotted];
 
     "t_formal" [shape=folder, color=red, fontcolor=red, label="formal"];
 
@@ -165,8 +181,7 @@ digraph G {
       "p_gtkwave_scratch" [label="scratch"]
     }
 
-    d_gtkwave ->
-    "pkg:gtkwave" [style=dotted];
+    d_gtkwave -> "pkg:gtkwave" [style=dotted];
 
     "t_pkg:gtkwave" [shape=folder, color=red, fontcolor=red, label="todo"];
 
@@ -278,8 +293,7 @@ digraph G {
       "p_prog_build:base" [label="build:base"]
     }
 
-    d_prog ->
-    "prog" [style=dotted];
+    d_prog -> "prog" [style=dotted];
 
     "t_prog" [shape=folder, color=red, fontcolor=red, label="prog"];
 
@@ -293,8 +307,7 @@ digraph G {
       "p_symbiyosys_build:base" [label="build:base"]
     }
 
-    d_symbiyosys ->
-    "pkg:symbiyosys" [style=dotted];
+    d_symbiyosys -> "pkg:symbiyosys" [style=dotted];
 
     "t_pkg:symbiyosys" [shape=folder, color=red, fontcolor=red, label="todo"];
 
@@ -305,11 +318,10 @@ digraph G {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_yices2_scratch" [label="scratch"]
-      "p_yices2_build:base" [label="build:base"]
+      "p_yices2_build:build" [label="build:build"]
     }
 
-    d_yices2 ->
-    "pkg:yices2" [style=dotted];
+    d_yices2 -> "pkg:yices2" [style=dotted];
 
     "t_pkg:yices2" [shape=folder, color=red, fontcolor=red, label="todo"];
 
@@ -342,11 +354,10 @@ digraph G {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_z3_scratch" [label="scratch"]
-      "p_z3_build:base" [label="build:base"]
+      "p_z3_build:build" [label="build:build"]
     }
 
-    d_z3 ->
-    "pkg:z3" [style=dotted];
+    d_z3 -> "pkg:z3" [style=dotted];
 
     "t_pkg:z3" [shape=folder, color=red, fontcolor=red, label="todo"];
 
@@ -354,6 +365,7 @@ digraph G {
   }
 
   { rank=same
+    d_boolector
     d_ghdl
     d_gtkwave
     d_icestorm
@@ -374,8 +386,12 @@ digraph G {
 
   "debian:buster-slim" -> "p_base_debian" -> d_base;
 
+  "build:build" -> "p_boolector_build:build" -> d_boolector;
+  "scratch" -> "p_boolector_scratch" -> d_boolector;
+
   "ghdl:yosys" -> "p_formal_ghdl" -> d_formal;
   "pkg:symbiyosys" -> "p_formal_symbiyosys" -> d_formal;
+  "pkg:boolector" -> "p_formal_boolector" -> d_formal;
   "pkg:yices2" -> "p_formal_yices2" -> d_formal;
   "pkg:z3" -> "p_formal_z3" -> d_formal;
 
@@ -414,13 +430,13 @@ digraph G {
   "build:base" -> "p_symbiyosys_build:base" -> d_symbiyosys;
   "scratch" -> "p_symbiyosys_scratch" -> d_symbiyosys;
 
-  "build:base" -> "p_yices2_build:base" -> d_yices2;
+  "build:build" -> "p_yices2_build:build" -> d_yices2;
   "scratch" -> "p_yices2_scratch" -> d_yices2;
 
   "build:build" -> "p_yosys_build:build" -> d_yosys;
   "scratch" -> "p_yosys_scratch" -> d_yosys;
 
-  "build:base" -> "p_z3_build:base" -> d_z3;
+  "build:build" -> "p_z3_build:build" -> d_z3;
   "scratch" -> "p_z3_scratch" -> d_z3;
 
   # Image dependencies
@@ -429,6 +445,8 @@ digraph G {
     "p_base_debian" -> "build:base" -> "build:build" -> "build:dev";
 
     "p_prog_build:base" -> "prog";
+
+    "p_boolector_scratch" -> "pkg:boolector";
 
     "p_ghdl_scratch" -> "pkg:ghdl";
     "p_ghdl_build:base" -> "ghdl";
@@ -469,6 +487,7 @@ digraph G {
 
   { edge [style=dashed, color=grey]
     {
+      "p_formal_boolector",
       "p_formal_symbiyosys",
       "p_formal_yices2"
       "p_formal_z3"

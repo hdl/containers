@@ -31,7 +31,6 @@ Images including multiple tools:
 To Do:
 
 * https://github.com/khoapham/bitman[BitMan]
-* https://hdl.github.io/awesome/items/boolector[Boolector]
 * https://hdl.github.io/awesome/items/cocotb[cocotb]
 * https://github.com/CVC4/CVC4[CVC4]
 * https://hdl.github.io/awesome/items/ecpprog[ecpprog]
@@ -138,6 +137,12 @@ include::shield_gha.adoc[]
 a|* {blank}
 +
 --
+:workflow: boolector
+include::shield_gha.adoc[]
+--
+* {blank}
++
+--
 :workflow: ghdl
 include::shield_gha.adoc[]
 --
@@ -168,6 +173,12 @@ include::shield_gha.adoc[]
 * {blank}
 +
 --
+:workflow: yices2
+include::shield_gha.adoc[]
+--
+* {blank}
++
+--
 :workflow: yosys
 include::shield_gha.adoc[]
 --
@@ -175,12 +186,6 @@ include::shield_gha.adoc[]
 +
 --
 :workflow: z3
-include::shield_gha.adoc[]
---
-* {blank}
-+
---
-:workflow: yices2
 include::shield_gha.adoc[]
 --
 a|* {blank}

@@ -3,6 +3,11 @@
 from pathlib import Path
 
 tools = {
+    'boolector': {
+        'url': 'https://hdl.github.io/awesome/items/boolector',
+        'pkg': ['boolector'],
+        'in': ['formal']
+    },
     'ghdl': {
         'url': 'https://hdl.github.io/awesome/items/ghdl',
         'pkg': ['ghdl'],
