@@ -59,7 +59,7 @@ jobs:
         mv ../doc/index.html ./
         mv ../doc/*.svg ./
         mkdir img
-        cp ../doc/img/icon.png ./img
+        cp ../doc/img/* ./img/
         git add .
         git config --local user.email "push@gha"
         git config --local user.name "GHA"

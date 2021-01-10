@@ -6,29 +6,18 @@ This repository provides a set of base images for building and for runtime: link
 * https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/build?longCache=true&style=flat-square&label=hdlc%2Fbuild:build&logo=Docker&logoColor=fff[title='hdlc/build:build Docker image size']] based on `base`, includes `clang` and `make`.
 * https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/dev?longCache=true&style=flat-square&label=hdlc%2Fbuild:dev&logo=Docker&logoColor=fff[title='hdlc/build:dev Docker image size']] based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
 
-Then, for each project, a dockerfile and a GitHub Actions workflow are created. Those are used for:
+Then, for each project/tool there are a dockerfile, a GitHub Actions workflow, and one or more test scripts. Those are used for:
 
-* Tools are built using base images.
+* Tools are built using `hdlc/build` images.
 * Package images based on `scratch` (and/or other reusable packages) are produced.
-* Ready-to-use images based on the runtime base image are produced.
+* Ready-to-use images based on the runtime base image (`hdlc/build:base`) are produced.
 * Ready-to-use images are tested before uploading.
 
-Depending on the tool, _package_ images are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for common use cases.
+In some dockerfiles/workflows, <<Package images>> are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for common use cases (such as `hdlc/impl`, `hdlc/formal` or `hdlc/prog`).
 
-Before working on adding or extending the support for a tool, please check the https://github.com/hdl/containers/issues[issues] and https://github.com/hdl/containers/pulls[pull requests], for avoiding duplicated effort in case anyone is already working on it. You can also join the chat at https://gitter.im/hdl/community[gitter.im/hdl/community].
+IMPORTANT: Before working on adding or extending the support for a tool, please check the https://github.com/hdl/containers/issues[issues] and https://github.com/hdl/containers/pulls[pull requests]; https://github.com/hdl/containers/issues/new[open an issue] or https://gitter.im/hdl/community[let us know through the chat]. Due to its distributed nature, someone might be working on that already!
 
 NOTE: Currently, many projects don't use containers at all, hence, all images are generated in this repository. However, the workload is expected to be distributed between multiple projects in the ecosystem.
-
-NOTE: At the moment, there is no triggering mechanism set up between different GitHub repositories. All the workflows in this repo are triggered by CRON jobs.
-
-[IMPORTANT]
-====
-When contributing modifications to the workflows, the dockerfiles or the tests, it is of utmost importance to update the following accordingly:
-
-* Table of tools/images
-* Graph
-* CI shields
-====
 
 === Graph
 
@@ -45,3 +34,92 @@ graphviz::../graph/graph.dot[format="svg", align="center"]
 .Legend of the directed graph.
 [link=legend.svg]
 graphviz::../graph/legend.dot[format="svg", align="center"]
+
+=== Package images
+
+Each tool/project is built once only in this image/container ecosystem. However, some (many) of the tools need to be included in multiple images for different purposes. Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each tool/project. Therefore, `hdlc/pkg:*` images are created/used (coloured [blue]#BLUE# in the <<Graph>>). These are all based on `scratch` and are not runnable. Instead, they contain pre-built artifacts, to be then added into other images through `COPY --from=`.
+
+Since `hdlc/pkg:*` images are not runnable _per se_, but an intermediate utility, the usage of environment variables `PREFIX` and `DESTDIR` in the dockerfiles might be misleading. All the tools in the ecosystem are expected to be installed into `/usr/local`, the standard location for user built tools in most GNU/Linux distributions. Hence:
+
+* `PREFIX` should typically not need to be modified. Most of the tools will default to `PREFIX=/usr/local`, which is correct. Yet, some tools might default to `/` or `/usr`. In those cases, setting it explicitly is required.
+* `DESTDIR` must be set to an empty location when calling `make install` or when copying the artifacts otherhow. The content of the corresponding package images is taken from that empty location. Therefore, if `DESTDIR` was unset, the artifacts of the tool might potentially be mixed with other existing assets in `/usr/local`. In most of the dockerfiles, `/opt/TOOL_NAME` is used as the temporary empty location.
+
+Despite the usage of these variables being documented in https://www.gnu.org/prep/standards/html_node/index.html[GNU Coding Standards], `DESTDIR` seems not to be very used, except by packagers. As a result, contributors might need to patch the build scripts upstream. Sometimes `DESTDIR` is not supported at all, or it is supported but some lines in the makefiles are missing it. Do not hesitate to reach for help through the issues or the chat!
+
+=== Build
+
+A helper script is provided in link:{repotree}.github/bin/[`.github/bin/`] to ease building images, by hiding all common options:
+
+* `dockerBuild IMAGE_NAME DOCKERFILE_NAME [TARGET_STAGE]`
+** IMAGE_NAME: image name without `hdlc/` prefix.
+** DOCKERFILE_NAME: name of the dockerfile to be used.
+** (optional) TARGET_STAGE: name of that target stage in the dockerfile.
+
+=== Inspect
+
+All ready-to-use images (coloured [green]#GREEN# or [maroon]#BROWN# in the <<Graph>>) are runnable. Therefore, users/contributors can run containers and test the tools interactively or through scripting. However, since `hdlc/pkg` images are not runnable, creating another image is required in order to inspect their content from a container. For instance:
+
+[source, dockerfile]
+----
+FROM busybox
+COPY --from=hdlc/pkg:TOOL_NAME /TOOL_NAME /
+----
+
+In fact, link:{repotree}.github/bin/dockerTestPkg[`.github/bin/dockerTestPkg`] uses a similar dockerfile for running `*.pkg.sh` scripts from link:{repotree}test/[`test/`]. See <<Test>>.
+
+Alternatively, or as a complement, https://github.com/wagoodman/dive[wagoodman/dive] is a lightweight tool with a nice terminal based GUI for exploring layers and contents of container images. It can be downloaded as a tarball/zipfile, or used as a container:
+
+[source, bash]
+----
+docker run --rm -it \
+  -v //var/run/docker.sock://var/run/docker.sock \
+  wagoodman/dive \
+  hdlc/IMAGE[:TAG]
+----
+
+[#img-dive]
+.Inspection of `hdlc/pkg:yosys` with https://github.com/wagoodman/dive[wagoodman/dive].
+[link=img/dive.png]
+image::img/dive.png[wagoodman/dive, align="center"]
+
+=== Test
+
+There is a test script in link:{repotree}test/[`test/`] for each image in this ecosystem, according to the following convention:
+
+* Scripts for package images, `hdlc/pkg:TOOL_NAME`, are named `TOOL_NAME.pkg.sh`.
+* Scripts for other images, `hdlc/NAME[:TAG]`, are named `NAME[--TAG].sh`.
+* Other helper scripts are named `_*.sh`.
+
+Furthermore, https://github.com/hdl/smoke-tests[hdl/smoke-test] is a submodule of this repository (link:{repotree}test/[`test/smoke-test`]). Smoke-tests contains fine grained tests that cover the most important functionalities of the tools. Those are used in other packaging projects too. Therefore, container tests are expected to execute the smoke-tests corresponding to the tools available in the image, before executing more specific tests.
+
+There are a couple of helper scripts in link:{repotree}.github/bin/[`.github/bin/`], for testing the images. Those are used in CI but can be useful locally too:
+
+* `dockerTest IMAGE_NAME [SCRIPT_NAME]`
+** IMAGE_NAME: image name without `hdlc/` prefix.
+** (optional) SCRIPT_NAME: name of the test script, only required if it does not match `echo IMAGE_NAME | sed 's#:#--#'`.
+* `dockerTestPkg TAG_NAME [DIR_NAME]`
+** TAG_NAME: tag name (i.e. image name without `hdlc/pkg:` prefix).
+** (optional) DIR_NAME: directory name inside the package image which needs to be copied to the temporary image for testing.
+
+=== Step by step checklist
+
+1. Create or update dockerfile(s).
+** For each tool, a https://docs.docker.com/engine/reference/builder/[Dockerfile] recipe exists. All dockerfiles must use, at least, two stages.
+*** One stage, named `build`, is to be based on `hdlc/build:base` or `hdlc/build:build` or `hdlc/build:dev`. In this first stage, you need to add the missing build dependencies. Then, build the tool/project using the standard `PREFIX`, but install to a custom location using `DESTDIR`. See <<Package images>>.
+*** If the tool/project is to be used standalone, create an stage based on `hdlc/build:base`. Install runtime dependencies only.
+*** If the tool/project is to be packaged, create an stage based on `scratch`.
+*** In any case, copy the tool artifacts from the build stage using `COPY --from=STAGE_NAME`. In practice, several dockerfiles produce at least one package image and one ready-to-use image. Therefore, dockerfiles will likely have more than two stages.
+** Some tools are to be added to existing images which include several tools (coloured [maroon]#BROWN# in the <<Graph>>). After creating the dockerfile where the corresponding package image is defined, add `COPY --from=hdlc/pkg:TOOL_NAME` statements to the dockerfiles of multi-tool images.
+2. Build and test the dockerfile(s) locally. Use helper scripts from link:{repotree}.github/bin[`.github/bin`] as explained in <<Build>> and <<Test>>.
+** If a new tool was added, or a new image is to be generated, a test script needs to be added to link:{repotree}test/[`test/`]. See <<Test>> for naming guidelines.
+** Be careful with the order. If you add a new tool and include it in one of the multi-tool images, the package image needs to be built first.
+3. Create or update workflow(s).
+** For each dockerfile, a GitHub Actions workflow is added to link:{repotree}.github/workflows[`.github/workflows/`]. Find documentation at https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions[Workflow syntax for GitHub Actions]. Copying some of the existing workflows in this repo, and adapting it is suggested.
+** In each workflow, all the images produced from stages of the corresponding dockerfile are built, tested and pushed. `dockerBuild`, `dockerTest`, `dockerTestPkg` and `dockerPush` scripts from link:{repotree}.github/bin[`.github/bin`] are used.
+4. Update documentation
+** If a new tool was added,
+*** Ensure that the tool is listed at https://github.com/hdl/awesome[hdl/awesome], since that's where all the tool/projects in the table point to.
+*** If a tool from the _To Do_ list was added, remove it from the list.
+*** Add a shield/badge to the table in <<Continuous Integration (CI)>>.
+** Edit link:{repotree}doc/tools.yaml[`doc/tools.yaml`]. The table in <<Tools and images>> is autogenerated from that YAML file, using link:{repotree}doc/gen_tool_table.py[`doc/gen_tool_table.py`]
+** Update the <<Graph>>.

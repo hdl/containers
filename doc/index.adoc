@@ -162,6 +162,8 @@ include::shield_gha.adoc[]
 --
 |===
 
+NOTE: At the moment, there is no triggering mechanism set up between different GitHub repositories. All the workflows in this repo are triggered by push event, CRON jobs, or manually.
+
 == References
 
 * GHDL:
