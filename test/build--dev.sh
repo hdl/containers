@@ -7,3 +7,5 @@ cd $(dirname "$0")
 ./env.sh
 
 cmake --version
+
+./todo.sh

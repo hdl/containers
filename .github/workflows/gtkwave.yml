@@ -24,7 +24,7 @@ jobs:
 
     - run: dockerBuild hdlc/pkg:gtkwave gtkwave
 
-# TODO    - run: dockerTest hdlc/pkg:gtkwave
+    - run: dockerTestPkg gtkwave
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

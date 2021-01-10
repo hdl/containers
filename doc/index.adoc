@@ -56,7 +56,7 @@ include::contributing.adoc[]
 
 == Continuous Integration (CI)
 
-[cols="4*.^", frame=none, grid=none]
+[cols="5*.^", frame=none, grid=none]
 |===
 a|* {blank}
 +
@@ -103,6 +103,18 @@ include::shield_gha.adoc[]
 a|* {blank}
 +
 --
+:workflow: ghdl-yosys-plugin
+include::shield_gha.adoc[]
+--
+* {blank}
++
+--
+:workflow: nextpnr
+include::shield_gha.adoc[]
+--
+a|* {blank}
++
+--
 :workflow: boolector
 include::shield_gha.adoc[]
 --
@@ -128,18 +140,6 @@ include::shield_gha.adoc[]
 +
 --
 :workflow: z3
-include::shield_gha.adoc[]
---
-a|* {blank}
-+
---
-:workflow: ghdl-yosys-plugin
-include::shield_gha.adoc[]
---
-* {blank}
-+
---
-:workflow: nextpnr
 include::shield_gha.adoc[]
 --
 a|* {blank}

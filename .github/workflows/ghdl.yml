@@ -27,7 +27,7 @@ jobs:
     - run: dockerBuild hdlc/pkg:ghdl  ghdl  pkg
     - run: dockerBuild hdlc/ghdl      ghdl
 
-# TODO    - run: dockerTest hdlc/pkg:ghdl
+    - run: dockerTestPkg ghdl
     - run: dockerTest  hdlc/ghdl      ghdl
 
     - name: Login to DockerHub

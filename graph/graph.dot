@@ -118,7 +118,7 @@ digraph G {
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
       "t_ghdl" [label="ghdl"];
-      "t_pkg:ghdl" [label="todo"];
+      "t_pkg:ghdl" [label="ghdl.pkg"];
     }
 
     "ghdl" -> "t_ghdl";
@@ -139,7 +139,7 @@ digraph G {
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
-      "t_pkg:ghdl-yosys-plugin" [label="todo"];
+      "t_pkg:ghdl-yosys-plugin" [label="ghdl-yosys-plugin.pkg"];
       "t_ghdl:yosys" [label="ghdl--yosys"];
     }
 
@@ -156,7 +156,7 @@ digraph G {
 
     d_gtkwave -> "pkg:gtkwave" [style=dotted];
 
-    "t_pkg:gtkwave" [shape=folder, color=red, fontcolor=red, label="todo"];
+    "t_pkg:gtkwave" [shape=folder, color=red, fontcolor=red, label="gtkwave.pkg"];
 
     "pkg:gtkwave" -> "t_pkg:gtkwave";
   }
@@ -177,7 +177,7 @@ digraph G {
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
       "t_icestorm" [label="icestorm"];
-      "t_pkg:icestorm" [label="todo"];
+      "t_pkg:icestorm" [label="icestorm.pkg"];
     }
 
     "icestorm" -> "t_icestorm";
@@ -252,7 +252,7 @@ digraph G {
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
       "t_prjtrellis" [label="prjtrellis"];
-      "t_pkg:prjtrellis" [label="todo"];
+      "t_pkg:prjtrellis" [label="prjtrellis.pkg"];
     }
 
     "prjtrellis" -> "t_prjtrellis";
@@ -282,7 +282,7 @@ digraph G {
 
     d_symbiyosys -> "pkg:symbiyosys" [style=dotted];
 
-    "t_pkg:symbiyosys" [shape=folder, color=red, fontcolor=red, label="todo"];
+    "t_pkg:symbiyosys" [shape=folder, color=red, fontcolor=red, label="symbiyosys.pkg"];
 
     "pkg:symbiyosys" -> "t_pkg:symbiyosys";
   }
@@ -302,7 +302,7 @@ digraph G {
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
       "t_yosys" [label="yosys"];
-      "t_pkg:yosys" [label="todo"];
+      "t_pkg:yosys" [label="yosys.pkg"];
     }
 
     "yosys" -> "t_yosys";
@@ -318,7 +318,7 @@ digraph G {
 
     d_boolector -> "pkg:boolector" [style=dotted];
 
-    "t_pkg:boolector" [shape=folder, color=red, fontcolor=red, label="todo"];
+    "t_pkg:boolector" [shape=folder, color=red, fontcolor=red, label="boolector.pkg"];
 
     "pkg:boolector" -> "t_pkg:boolector";
   }
@@ -332,7 +332,7 @@ digraph G {
 
     d_superprove -> "pkg:superprove" [style=dotted];
 
-    "t_pkg:superprove" [shape=folder, color=red, fontcolor=red, label="todo"];
+    "t_pkg:superprove" [shape=folder, color=red, fontcolor=red, label="superprove.pkg"];
 
     "pkg:superprove" -> "t_pkg:superprove";
   }
@@ -346,7 +346,7 @@ digraph G {
 
     d_yices2 -> "pkg:yices2" [style=dotted];
 
-    "t_pkg:yices2" [shape=folder, color=red, fontcolor=red, label="todo"];
+    "t_pkg:yices2" [shape=folder, color=red, fontcolor=red, label="yices2.pkg"];
 
     "pkg:yices2" -> "t_pkg:yices2";
   }
@@ -360,7 +360,7 @@ digraph G {
 
     d_z3 -> "pkg:z3" [style=dotted];
 
-    "t_pkg:z3" [shape=folder, color=red, fontcolor=red, label="todo"];
+    "t_pkg:z3" [shape=folder, color=red, fontcolor=red, label="z3.pkg"];
 
     "pkg:z3" -> "t_pkg:z3";
   }

@@ -27,7 +27,7 @@ jobs:
     - run: dockerBuild hdlc/pkg:icestorm icestorm pkg
     - run: dockerBuild hdlc/icestorm     icestorm
 
-# TODO    - run: dockerTest hdlc/pkg:icestorm
+    - run: dockerTestPkg icestorm
     - run: dockerTest  hdlc/icestorm     icestorm
 
     - name: Login to DockerHub

@@ -27,7 +27,7 @@ jobs:
     - run: dockerBuild hdlc/pkg:yosys yosys pkg
     - run: dockerBuild hdlc/yosys     yosys
 
-# TODO    - name: dockerTest hdlc/pkg:yosys
+    - run: dockerTestPkg yosys
     - run: dockerTest  hdlc/yosys     yosys
 
     - name: Login to DockerHub

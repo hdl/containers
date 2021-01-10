@@ -27,7 +27,7 @@ jobs:
     - run: dockerBuild hdlc/pkg:prjtrellis prjtrellis pkg
     - run: dockerBuild hdlc/prjtrellis     prjtrellis
 
-# TODO    - run: dockerTest hdlc/pkg:prjtrellis
+    - run: dockerTestPkg prjtrellis
     - run: dockerTest  hdlc/prjtrellis     prjtrellis
 
     - name: Login to DockerHub

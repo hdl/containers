@@ -24,7 +24,7 @@ jobs:
 
     - run: dockerBuild hdlc/pkg:z3 z3
 
-# TODO    - name: dockerTest hdlc/pkg:z3
+    - run: dockerTestPkg z3
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

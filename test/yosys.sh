@@ -9,3 +9,5 @@ cd $(dirname "$0")
 ./smoke-tests/yosys.sh
 
 yosys --version
+
+./todo.sh

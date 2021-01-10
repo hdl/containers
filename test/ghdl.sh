@@ -9,3 +9,5 @@ cd $(dirname "$0")
 ./smoke-tests/ghdl.sh
 
 ghdl --version
+
+./todo.sh

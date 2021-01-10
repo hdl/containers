@@ -7,3 +7,5 @@ cd $(dirname "$0")
 ./env.sh
 
 ./smoke-tests/nextpnr.sh
+
+./todo.sh

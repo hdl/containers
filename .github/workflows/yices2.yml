@@ -24,7 +24,7 @@ jobs:
 
     - run: dockerBuild hdlc/pkg:yices2 yices2
 
-# TODO    - name: dockerTest hdlc/pkg:yices2
+    - run: dockerTestPkg yices2
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

@@ -45,7 +45,7 @@ digraph G {
   }
   { rank=same
     test
-    test_desc [shape=none, label="Each image has a test script, which is executed in a temporary\lcontainer before pushing the image to DockerHub.\lTests which are not implemented yet are shown in Red.\l"];
+    test_desc [shape=none, label="Each image has a test script, which is executed in a temporary\lcontainer before pushing the image to DockerHub.\lTests which are not complete yet are shown in Red.\l"];
   }
   image_ext -> image_dep;
   image_hdl -> image_base;

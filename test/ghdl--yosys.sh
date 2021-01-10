@@ -8,3 +8,5 @@ cd $(dirname "$0")
 
 ghdl --version
 yosys --version
+
+./todo.sh

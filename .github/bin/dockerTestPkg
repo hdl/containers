@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+set -e
+
+_tag="$1"
+
+_dir="${_tag}"
+if [ -n "$2" ]; then
+  _dir="$2"
+fi
+
+echo "::group::Build hdlc/tespkg:${_tag}"
+docker build -t hdlc/testpkg:"${_tag}" - <<-EOF
+FROM alpine
+RUN apk add -U --no-cache file tree
+COPY --from=hdlc/pkg:${_tag} /${_dir} /
+EOF
+echo '::endgroup::'
+
+docker run --rm -v /$(pwd)://wrk hdlc/testpkg:"${_tag}" //wrk/test/"${_tag}".pkg.sh

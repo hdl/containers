@@ -24,7 +24,7 @@ jobs:
 
     - run: dockerBuild hdlc/pkg:superprove superprove
 
-# TODO    - name: dockerTest hdlc/pkg:superprove
+    - run: dockerTestPkg superprove
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

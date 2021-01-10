@@ -24,7 +24,7 @@ jobs:
 
     - run: dockerBuild hdlc/pkg:symbiyosys symbiyosys
 
-# TODO    - name: dockerTest hdlc/pkg:symbiyosys
+    - run: dockerTestPkg symbiyosys
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

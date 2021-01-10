@@ -25,7 +25,7 @@ jobs:
     - run: dockerBuild hdlc/pkg:ghdl-yosys-plugin  ghdl-yosys-plugin  pkg
     - run: dockerBuild hdlc/ghdl:yosys             ghdl-yosys-plugin
 
-# TODO    - run: dockerTest hdlc/pkg:ghdl-yosys-plugin
+    - run: dockerTestPkg ghdl-yosys-plugin ghdl
     - run: dockerTest  hdlc/ghdl:yosys             ghdl--yosys
 
     - name: Login to DockerHub

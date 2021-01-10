@@ -7,3 +7,5 @@ cd $(dirname "$0")
 ./env.sh
 
 ./smoke-tests/prjtrellis.sh
+
+./todo.sh
