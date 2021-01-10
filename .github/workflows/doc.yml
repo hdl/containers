@@ -22,15 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Build hdlc/doc:asciidoctor-py
-      run: |
-        docker build -t hdlc/doc:asciidoctor-py - <<-EOF
-        FROM asciidoctor/docker-asciidoctor
-        RUN apk add -U --no-cache graphviz python3 \
-         && ln -s /usr/bin/python3 /usr/bin/python
-        EOF
-
     - uses: actions/checkout@v2
+
+    - run: docker build -t hdlc/doc:asciidoctor-py -f- . < doc--asciidoctor-py.dockerfile
 
     - name: Build site
       run: docker run --rm -v /$(pwd)://documents/ hdlc/doc:asciidoctor-py ./doc/make.sh

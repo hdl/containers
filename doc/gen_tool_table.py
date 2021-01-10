@@ -1,141 +1,19 @@
 #!/usr/bin/env python
 
+from sys import stdout
 from pathlib import Path
+from yaml import load, Loader, YAMLError
 
-tools = {
-    'boolector': {
-        'url': 'https://hdl.github.io/awesome/items/boolector',
-        'pkg': ['boolector'],
-        'in': [
-            'formal',
-            'formal:all',
-        ]
-    },
-    'ghdl': {
-        'url': 'https://hdl.github.io/awesome/items/ghdl',
-        'pkg': ['ghdl'],
-        'use': ['ghdl'],
-        'in': [
-            'impl',
-            'formal:min',
-            'formal',
-            'formal:all',
-        ],
-        'otherin': ['ghdl:yosys']
-    },
-    'ghdl-yosys-plugin': {
-        'url': 'https://hdl.github.io/awesome/items/ghdl-yosys-plugin',
-        'pkg': ['ghdl-yosys-plugin'],
-        'use': ['ghdl:yosys'],
-        'in': [
-            'impl',
-            'formal:min',
-            'formal',
-            'formal:all',
-        ]
-    },
-    'graphviz': {
-        'url': 'https://hdl.github.io/awesome/items/graphviz',
-        'in': [
-            'impl',
-            'formal:min',
-            'formal',
-            'formal:all',
-        ],
-        'otherin': [
-            'yosys',
-            'ghdl:yosys',
-        ]
-    },
-    'gtkwave': {
-        'url': 'https://hdl.github.io/awesome/items/gtkwave',
-        'pkg': ['gtkwave'],
-        'in': []
-    },
-    'icestorm': {
-        'url': 'https://hdl.github.io/awesome/items/icestorm',
-        'pkg': ['icestorm'],
-        'use': ['icestorm'],
-        'in': [
-            'impl',
-            'prog'
-        ],
-        'otherin': [
-            'nextpnr:icestorm',
-        ]
-    },
-    'nextpnr': {
-        'url': 'https://hdl.github.io/awesome/items/nextpnr',
-        'use': [
-            'nextpnr',
-            'nextpnr:ice40',
-            'nextpnr:ecp5',
-            'nextpnr:icestorm',
-            'nextpnr:prjtrellis'
-        ],
-        'in': ['impl']
-    },
-    'openocd': {
-        'url': 'https://hdl.github.io/awesome/items/openocd',
-        'in': ['prog']
-    },
-    'prjtrellis': {
-        'url': 'https://hdl.github.io/awesome/items/prjtrellis',
-        'pkg': ['prjtrellis'],
-        'use': ['prjtrellis'],
-        'in': [
-            'impl'
-        ],
-        'otherin': [
-            'nextpnr:prjtrellis',
-        ]
-    },
-    'superprove': {
-        'url': 'https://hdl.github.io/awesome/items/superprove',
-        'pkg': ['superprove'],
-        'in': [
-            'formal:all'
-        ]
-    },
-    'symbiyosys': {
-        'url': 'https://hdl.github.io/awesome/items/symbiyosys',
-        'pkg': ['symbiyosys'],
-        'in': [
-            'formal:min',
-            'formal',
-            'formal:all',
-        ]
-    },
-    'yices2': {
-        'url': 'https://hdl.github.io/awesome/items/yices2',
-        'pkg': ['yices2'],
-        'in': [
-            'formal',
-            'formal:all'
-        ]
-    },
-    'yosys': {
-        'url': 'https://hdl.github.io/awesome/items/yosys',
-        'pkg': ['yosys'],
-        'use': ['yosys'],
-        'in': [
-            'impl',
-            'formal:min',
-            'formal',
-            'formal:all',
-        ],
-        'otherin': ['ghdl:yosys']
-    },
-    'z3': {
-        'url': 'https://hdl.github.io/awesome/items/z3',
-        'pkg': ['z3'],
-        'in': [
-           'formal:min',
-           'formal',
-           'formal:all'
-        ]
-    }
-}
+
+ROOT = Path(__file__).resolve().parent
+
+_tools = ROOT / 'tools.yml'
+
+if not _tools.exists():
+    raise(Exception('Configuration file %s not found!' % str(_tools)))
+
+with _tools.open('r') as stream:
+    tools = load(stream, Loader=Loader)
 
 
 def shield_dockerhub(repo, tag):
@@ -148,7 +26,7 @@ def shield_dockerhub_split_tag(item):
     return shield_dockerhub(items[0], 'latest' if len(items)==1 else items[1])
 
 
-with (Path(__file__).resolve().parent/'tools.adoc').open('w') as fptr:
+with (ROOT/'tools.adoc').open('w') as fptr:
 
     fptr.write('[cols="6, 6, 6, 1, 1, 1, 8", stripes=even]\n')
 
@@ -177,10 +55,11 @@ with (Path(__file__).resolve().parent/'tools.adoc').open('w') as fptr:
         ))
         fptr.write('^.|%s\n' % ('-' if len(use) == 0 else use))
 
+        _in = var['in'] if 'in' in var else []
         #fptr.write('|%s\n' % ('Y' if 'synth' in var['in'] else '-'))
-        fptr.write('^.|%s\n' % ('I' if 'impl' in var['in'] else '-'))
-        fptr.write('^.|%s\n' % ('F' if 'formal' in var['in'] else '-'))
-        fptr.write('^.|%s\n' % ('P' if 'prog' in var['in'] else '-'))
+        fptr.write('^.|%s\n' % ('I' if 'impl' in _in else '-'))
+        fptr.write('^.|%s\n' % ('F' if 'formal' in _in else '-'))
+        fptr.write('^.|%s\n' % ('P' if 'prog' in _in else '-'))
 
         otherin = ', '.join('`%s`' % item for item in (
             var['otherin'] if 'otherin' in var else []

@@ -1,0 +1,160 @@
+boolector:
+  url: 'https://hdl.github.io/awesome/items/boolector'
+  pkg:
+    - 'boolector'
+  in:
+    - 'formal'
+    - 'formal:all'
+
+#---
+
+ghdl:
+  url: 'https://hdl.github.io/awesome/items/ghdl'
+  pkg:
+    - 'ghdl'
+  use:
+    - 'ghdl'
+  in:
+    - 'impl'
+    - 'formal:min'
+    - 'formal'
+    - 'formal:all'
+  otherin: ['ghdl:yosys']
+
+#---
+
+ghdl-yosys-plugin:
+  url: 'https://hdl.github.io/awesome/items/ghdl-yosys-plugin'
+  pkg:
+    - 'ghdl-yosys-plugin'
+  use:
+    - 'ghdl:yosys'
+  in:
+    - 'impl'
+    - 'formal:min'
+    - 'formal'
+    - 'formal:all'
+
+#---
+
+graphviz:
+  url: 'https://hdl.github.io/awesome/items/graphviz'
+  in:
+    - 'impl'
+    - 'formal:min'
+    - 'formal'
+    - 'formal:all'
+  otherin:
+    - 'yosys'
+    - 'ghdl:yosys'
+
+#---
+
+gtkwave:
+  url: 'https://hdl.github.io/awesome/items/gtkwave'
+  pkg:
+    - 'gtkwave'
+
+#---
+
+icestorm:
+  url: 'https://hdl.github.io/awesome/items/icestorm'
+  pkg:
+    - 'icestorm'
+  use:
+    - 'icestorm'
+  in:
+    - 'impl'
+    - 'prog'
+  otherin:
+    - 'nextpnr:icestorm'
+
+#---
+
+nextpnr:
+  url: 'https://hdl.github.io/awesome/items/nextpnr'
+  use:
+    - 'nextpnr'
+    - 'nextpnr:ice40'
+    - 'nextpnr:ecp5'
+    - 'nextpnr:icestorm'
+    - 'nextpnr:prjtrellis'
+  in:
+    - 'impl'
+
+#---
+
+openocd:
+  url: 'https://hdl.github.io/awesome/items/openocd'
+  in:
+    - 'prog'
+
+#---
+
+prjtrellis:
+  url: 'https://hdl.github.io/awesome/items/prjtrellis'
+  pkg:
+    - 'prjtrellis'
+  use:
+    - 'prjtrellis'
+  in:
+    - 'impl'
+  otherin:
+    - 'nextpnr:prjtrellis'
+
+#---
+
+superprove:
+  url: 'https://hdl.github.io/awesome/items/superprove'
+  pkg:
+    - 'superprove'
+  in:
+    - 'formal:all'
+
+#---
+
+symbiyosys:
+  url: 'https://hdl.github.io/awesome/items/symbiyosys'
+  pkg:
+    - 'symbiyosys'
+  in:
+    - 'formal:min'
+    - 'formal'
+    - 'formal:all'
+
+#---
+
+yices2:
+  url: 'https://hdl.github.io/awesome/items/yices2'
+  pkg:
+    - 'yices2'
+  in:
+    - 'formal'
+    - 'formal:all'
+
+#---
+
+yosys:
+  url: 'https://hdl.github.io/awesome/items/yosys'
+  pkg:
+    - 'yosys'
+  use:
+    - 'yosys'
+  in:
+    - 'impl'
+    - 'formal:min'
+    - 'formal'
+    - 'formal:all'
+  otherin:
+    - 'ghdl:yosys'
+
+#---
+
+z3:
+  url: 'https://hdl.github.io/awesome/items/z3'
+  pkg:
+    - 'z3'
+  in:
+    - 'formal:min'
+    - 'formal'
+    - 'formal:all'
