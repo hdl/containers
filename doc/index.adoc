@@ -25,7 +25,10 @@ include::tools.adoc[]
 Images including multiple tools:
 
 * **I**mplementation: https://hub.docker.com/r/hdlc/impl/tags[image:https://img.shields.io/docker/image-size/hdlc/impl?longCache=true&style=flat-square&label=hdlc%2Fimpl&logo=Docker&logoColor=fff[title='hdlc/impl:latest Docker image size']]
-* **F**ormal: https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal?longCache=true&style=flat-square&label=hdlc%2Fformal&logo=Docker&logoColor=fff[title='hdlc/formal:latest Docker image size']]
+* **F**ormal:
+** https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal?longCache=true&style=flat-square&label=hdlc%2Fformal&logo=Docker&logoColor=fff[title='hdlc/formal:latest Docker image size']] all solvers depending on Python 3.
+** https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal:min?longCache=true&style=flat-square&label=hdlc%2Fformal:min&logo=Docker&logoColor=fff[title='hdlc/formal:latest Docker image size']] Z3 only.
+** https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal:all?longCache=true&style=flat-square&label=hdlc%2Fformal:all&logo=Docker&logoColor=fff[title='hdlc/formal:latest Docker image size']] all solvers, depending on either Python 2 or Python 3.
 * **P**rogramming: https://hub.docker.com/r/hdlc/prog/tags[image:https://img.shields.io/docker/image-size/hdlc/prog?longCache=true&style=flat-square&label=hdlc%2Fprog&logo=Docker&logoColor=fff[title='hdlc/prog:latest Docker image size']]
 
 To Do:
