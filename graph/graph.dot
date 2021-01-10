@@ -17,8 +17,8 @@ digraph G {
     d_nextpnr          [label="nextpnr"];
     d_prjtrellis       [label="prjtrellis"];
     d_prog             [label="prog"];
-    d_symbiyosys       [label="symbiyosys"];
     d_superprove       [label="superprove"];
+    d_symbiyosys       [label="symbiyosys"];
     d_yices2           [label="yices2"];
     d_yosys            [label="yosys"];
     d_z3               [label="z3"];
@@ -49,8 +49,8 @@ digraph G {
       "pkg:gtkwave"
       "pkg:icestorm"
       "pkg:prjtrellis"
-      "pkg:symbiyosys"
       "pkg:superprove"
+      "pkg:symbiyosys"
       "pkg:yices2"
       "pkg:yosys"
       "pkg:z3"
@@ -410,8 +410,8 @@ digraph G {
 
   { rank=same
     d_boolector
-    d_symbiyosys
     d_superprove
+    d_symbiyosys
     d_yices2
     d_z3
   }
@@ -511,11 +511,11 @@ digraph G {
     "p_prjtrellis_scratch" -> "pkg:prjtrellis";
     "p_prjtrellis_build:base" -> "prjtrellis";
 
+    "p_superprove_scratch" -> "pkg:superprove";
+
     "p_symbiyosys_scratch" -> "pkg:symbiyosys";
 
     "p_yices2_scratch" -> "pkg:yices2";
-
-    "p_superprove_scratch" -> "pkg:superprove";
 
     "p_yosys_scratch" -> "pkg:yosys";
     "p_yosys_build:build" -> "yosys";
