@@ -4,8 +4,7 @@ set -e
 
 cd $(dirname "$0")
 
-echo "CC: $CC"
-echo "CXX: $CXX"
+./env.sh
 
 ./nextpnr--ecp5.sh
 ./prjtrellis.sh
