@@ -13,7 +13,7 @@ RUN mkdir /tmp/z3 && cd /tmp/z3 \
  && python3 scripts/mk_make.py \
  && cd build \
  && make PREFIX=/usr/local \
- && make DESTDIR=/opt/z3 install
+ && make DESTDIR=/opt/z3 PREFIX=/usr/local install
 
 #---
 
