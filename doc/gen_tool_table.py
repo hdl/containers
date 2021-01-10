@@ -6,7 +6,10 @@ tools = {
     'boolector': {
         'url': 'https://hdl.github.io/awesome/items/boolector',
         'pkg': ['boolector'],
-        'in': ['formal']
+        'in': [
+            'formal',
+            'formal:all',
+        ]
     },
     'ghdl': {
         'url': 'https://hdl.github.io/awesome/items/ghdl',
@@ -14,7 +17,9 @@ tools = {
         'use': ['ghdl'],
         'in': [
             'impl',
-            'formal'
+            'formal:min',
+            'formal',
+            'formal:all',
         ],
         'otherin': ['ghdl:yosys']
     },
@@ -24,14 +29,18 @@ tools = {
         'use': ['ghdl:yosys'],
         'in': [
             'impl',
-            'formal'
+            'formal:min',
+            'formal',
+            'formal:all',
         ]
     },
     'graphviz': {
         'url': 'https://hdl.github.io/awesome/items/graphviz',
         'in': [
             'impl',
-            'formal'
+            'formal:min',
+            'formal',
+            'formal:all',
         ],
         'otherin': [
             'yosys',
@@ -84,17 +93,26 @@ tools = {
     'superprove': {
         'url': 'https://hdl.github.io/awesome/items/superprove',
         'pkg': ['superprove'],
-        'in': ['formal']
+        'in': [
+            'formal:all'
+        ]
     },
     'symbiyosys': {
         'url': 'https://hdl.github.io/awesome/items/symbiyosys',
         'pkg': ['symbiyosys'],
-        'in': ['formal']
+        'in': [
+            'formal:min',
+            'formal',
+            'formal:all',
+        ]
     },
     'yices2': {
         'url': 'https://hdl.github.io/awesome/items/yices2',
         'pkg': ['yices2'],
-        'in': ['formal']
+        'in': [
+            'formal',
+            'formal:all'
+        ]
     },
     'yosys': {
         'url': 'https://hdl.github.io/awesome/items/yosys',
@@ -102,14 +120,20 @@ tools = {
         'use': ['yosys'],
         'in': [
             'impl',
-            'formal'
+            'formal:min',
+            'formal',
+            'formal:all',
         ],
         'otherin': ['ghdl:yosys']
     },
     'z3': {
         'url': 'https://hdl.github.io/awesome/items/z3',
         'pkg': ['z3'],
-        'in': ['formal']
+        'in': [
+           'formal:min',
+           'formal',
+           'formal:all'
+        ]
     }
 }
 
