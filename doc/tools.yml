@@ -27,6 +27,16 @@ boolector:
 
 #---
 
+cvc4:
+  url: 'https://hdl.github.io/awesome/items/cvc4'
+  pkg:
+    - 'cvc4'
+  in:
+    - 'formal'
+    - 'formal:all'
+
+#---
+
 ghdl:
   url: 'https://hdl.github.io/awesome/items/ghdl'
   pkg:
