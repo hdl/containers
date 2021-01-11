@@ -27,6 +27,7 @@ digraph G {
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
     d_base             [label="base"];
     d_boolector        [label="boolector"];
+    d_cvc4             [label="cvc4"];
     d_formal           [label="formal"];
     d_ghdl             [label="ghdl"];
     d_ghdlYosysPlugin  [label="ghdl-yosys-plugin"];
@@ -63,6 +64,7 @@ digraph G {
     }
     { node [color=mediumblue, fontcolor=mediumblue]
       "pkg:boolector"
+      "pkg:cvc4"
       "pkg:ghdl"
       "pkg:ghdl-yosys-plugin"
       "pkg:gtkwave"
@@ -342,6 +344,20 @@ digraph G {
     "pkg:boolector" -> "t_pkg:boolector";
   }
 
+  subgraph cluster_cvc4 {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_cvc4_scratch" [label="scratch"]
+      "p_cvc4_build:build" [label="build:build"]
+    }
+
+    d_cvc4 -> "pkg:cvc4" [style=dotted];
+
+    "t_pkg:cvc4" [shape=folder, color=red, fontcolor=red, label="cvc4.pkg"];
+
+    "pkg:cvc4" -> "t_pkg:cvc4";
+  }
+
   subgraph cluster_superprove {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
@@ -388,6 +404,7 @@ digraph G {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_formal_boolector" [label="pkg:boolector"]
+      "p_formal_cvc4" [label="pkg:cvc4"]
       "p_formal_ghdl" [label="ghdl:yosys"]
       "p_formal_symbiyosys" [label="pkg:symbiyosys"]
       "p_formal_superprove" [label="pkg:superprove"]
@@ -429,6 +446,7 @@ digraph G {
 
   { rank=same
     d_boolector
+    d_cvc4
     d_superprove
     d_symbiyosys
     d_yices2
@@ -442,9 +460,13 @@ digraph G {
   "build:build" -> "p_boolector_build:build" -> d_boolector;
   "scratch" -> "p_boolector_scratch" -> d_boolector;
 
+  "build:build" -> "p_cvc4_build:build" -> d_cvc4;
+  "scratch" -> "p_cvc4_scratch" -> d_cvc4;
+
   "ghdl:yosys" -> "p_formal_ghdl" -> d_formal;
   "pkg:symbiyosys" -> "p_formal_symbiyosys" -> d_formal;
   "pkg:boolector" -> "p_formal_boolector" -> d_formal;
+  "pkg:cvc4" -> "p_formal_cvc4" -> d_formal;
   "pkg:yices2" -> "p_formal_yices2" -> d_formal;
   "pkg:superprove" -> "p_formal_superprove" -> d_formal;
   "pkg:z3" -> "p_formal_z3" -> d_formal;
@@ -505,6 +527,8 @@ digraph G {
 
     "p_boolector_scratch" -> "pkg:boolector";
 
+    "p_cvc4_scratch" -> "pkg:cvc4";
+
     "p_ghdl_scratch" -> "pkg:ghdl";
     "p_ghdl_build:base" -> "ghdl";
 
@@ -553,6 +577,7 @@ digraph G {
 
     {
       "p_formal_boolector",
+      "p_formal_cvc4",
       "p_formal_yices2"
     } -> "formal";
 

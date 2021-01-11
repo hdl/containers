@@ -2,7 +2,7 @@
 #   Unai Martinez-Corral
 #   Torsten Meissner
 #
-# Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,34 +18,29 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM hdlc/ghdl:yosys AS min
+FROM hdlc/build:build AS build
 
-COPY --from=hdlc/pkg:z3 /z3 /
-COPY --from=hdlc/pkg:symbiyosys /symbiyosys /
-
-RUN apt-get update -qq \
+RUN mkdir /usr/share/man/man1 \
+ && apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    python3 \
+    cmake \
+    openjdk-11-jre-headless \
+    libgmp-dev \
+    python3-toml \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates  \
  && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir /tmp/cvc4 && cd /tmp/cvc4 \
+&& curl -fsSL https://codeload.github.com/CVC4/CVC4/tar.gz/master | tar xzf - --strip-components=1 \
+&& ./contrib/get-antlr-3.4 \
+&& ./contrib/get-cadical \
+&& ./configure.sh --cadical \
+&& cd build \
+&& make -j$(nproc) \
+&& make DESTDIR=/opt/cvc4 install
 
 #---
 
-FROM min AS latest
-
-COPY --from=hdlc/pkg:yices2 /yices2 /
-COPY --from=hdlc/pkg:boolector /boolector /
-COPY --from=hdlc/pkg:cvc4 /cvc4 /
-
-#---
-
-FROM latest
-
-COPY --from=hdlc/pkg:superprove /superprove /
-
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    python \
-    libpython2.7 \
- && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists/*
+FROM scratch
+COPY --from=build /opt/cvc4 /cvc4

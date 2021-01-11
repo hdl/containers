@@ -35,7 +35,6 @@ To Do:
 
 * https://github.com/khoapham/bitman[BitMan]
 * https://hdl.github.io/awesome/items/cocotb[cocotb]
-* https://github.com/CVC4/CVC4[CVC4]
 * https://hdl.github.io/awesome/items/ecpprog[ecpprog]
 * https://hdl.github.io/awesome/items/fujprog[fujprog]
 * https://hdl.github.io/awesome/items/iverilog[iverilog]
@@ -116,6 +115,12 @@ a|* {blank}
 +
 --
 :workflow: boolector
+include::shield_gha.adoc[]
+--
+* {blank}
++
+--
+:workflow: cvc4
 include::shield_gha.adoc[]
 --
 * {blank}
