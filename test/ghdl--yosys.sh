@@ -23,9 +23,9 @@ set -e
 
 cd $(dirname "$0")
 
-./env.sh
+./_env.sh
 
 ghdl --version
 yosys --version
 
-./todo.sh
+./_todo.sh

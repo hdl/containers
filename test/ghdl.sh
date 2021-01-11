@@ -23,10 +23,10 @@ set -e
 
 cd $(dirname "$0")
 
-./env.sh
+./_env.sh
 
 ./smoke-tests/ghdl.sh
 
 ghdl --version
 
-./todo.sh
+./_todo.sh

@@ -23,10 +23,10 @@ set -e
 
 cd $(dirname "$0")
 
-./env.sh
+./_env.sh
 
 ./smoke-tests/yosys.sh
 
 yosys --version
 
-./todo.sh
+./_todo.sh

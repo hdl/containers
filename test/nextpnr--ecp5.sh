@@ -23,8 +23,8 @@ set -e
 
 cd $(dirname "$0")
 
-./env.sh
+./_env.sh
 
 ./smoke-tests/nextpnr-ecp5.sh
 
-./todo.sh
+./_todo.sh

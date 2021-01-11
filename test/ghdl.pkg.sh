@@ -23,6 +23,6 @@ set -e
 
 cd $(dirname "$0")
 
-./tree.pkg.sh
+./_tree.sh
 
-./todo.sh
+./_todo.sh

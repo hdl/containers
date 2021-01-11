@@ -23,8 +23,8 @@ set -e
 
 cd $(dirname "$0")
 
-./tree.pkg.sh
+./_tree.sh
 
 file /usr/local/lib/ghdl_yosys.so
 
-./todo.sh
+./_todo.sh

@@ -23,10 +23,10 @@ set -e
 
 cd $(dirname "$0")
 
-./env.sh
+./_env.sh
 
 python3 --version
 
 curl --version
 
-./todo.sh
+./_todo.sh

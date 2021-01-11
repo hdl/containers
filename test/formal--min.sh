@@ -23,7 +23,7 @@ set -e
 
 cd $(dirname "$0")
 
-./env.sh
+./_env.sh
 
 ./smoke-tests/ghdl.sh
 ./smoke-tests/symbiyosys.sh
@@ -33,4 +33,4 @@ cd $(dirname "$0")
 ghdl --version
 yosys --version
 
-./todo.sh
+./_todo.sh

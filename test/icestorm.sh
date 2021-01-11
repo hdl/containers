@@ -23,8 +23,8 @@ set -e
 
 cd $(dirname "$0")
 
-./env.sh
+./_env.sh
 
 ./smoke-tests/icestorm.sh
 
-./todo.sh
+./_todo.sh

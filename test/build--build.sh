@@ -23,8 +23,8 @@ set -e
 
 cd $(dirname "$0")
 
-./env.sh
+./_env.sh
 
 clang --version
 
-./todo.sh
+./_todo.sh
