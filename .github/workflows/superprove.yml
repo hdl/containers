@@ -42,7 +42,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/pkg:superprove superprove
+    - run: dockerBuild pkg:superprove superprove
 
     - run: dockerTestPkg superprove
 
@@ -53,5 +53,5 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush hdlc/pkg:superprove
+    - run: dockerPush pkg:superprove
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

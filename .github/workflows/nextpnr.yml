@@ -43,17 +43,17 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/nextpnr:ice40       nextpnr ice40
-    - run: dockerBuild hdlc/nextpnr:icestorm    nextpnr icestorm
-    - run: dockerBuild hdlc/nextpnr:ecp5        nextpnr ecp5
-    - run: dockerBuild hdlc/nextpnr:prjtrellis  nextpnr prjtrellis
-    - run: dockerBuild hdlc/nextpnr             nextpnr
+    - run: dockerBuild nextpnr:ice40      nextpnr ice40
+    - run: dockerBuild nextpnr:icestorm   nextpnr icestorm
+    - run: dockerBuild nextpnr:ecp5       nextpnr ecp5
+    - run: dockerBuild nextpnr:prjtrellis nextpnr prjtrellis
+    - run: dockerBuild nextpnr            nextpnr
 
-    - run: dockerTest  hdlc/nextpnr:ice40       nextpnr--ice40
-    - run: dockerTest  hdlc/nextpnr:icestorm    nextpnr--icestorm
-    - run: dockerTest  hdlc/nextpnr:ecp5        nextpnr--ecp5
-    - run: dockerTest  hdlc/nextpnr:prjtrellis  nextpnr--prjtrellis
-    - run: dockerTest  hdlc/nextpnr             nextpnr
+    - run: dockerTest nextpnr:ice40
+    - run: dockerTest nextpnr:icestorm
+    - run: dockerTest nextpnr:ecp5
+    - run: dockerTest nextpnr:prjtrellis
+    - run: dockerTest nextpnr
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -62,17 +62,17 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush  hdlc/nextpnr:ice40
+    - run: dockerPush nextpnr:ice40
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
-    - run: dockerPush  hdlc/nextpnr:icestorm
+    - run: dockerPush nextpnr:icestorm
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
-    - run: dockerPush  hdlc/nextpnr:ecp5
+    - run: dockerPush nextpnr:ecp5
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
-    - run: dockerPush  hdlc/nextpnr:prjtrellis
+    - run: dockerPush nextpnr:prjtrellis
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
-    - run: dockerPush  hdlc/nextpnr
+    - run: dockerPush nextpnr
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

@@ -43,9 +43,9 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/prog prog
+    - run: dockerBuild prog prog
 
-    - run: dockerTest  hdlc/prog prog
+    - run: dockerTest prog
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -54,5 +54,5 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush  hdlc/prog
+    - run: dockerPush prog
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

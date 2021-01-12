@@ -41,7 +41,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/pkg:gtkwave gtkwave
+    - run: dockerBuild pkg:gtkwave gtkwave
 
     - run: dockerTestPkg gtkwave
 
@@ -52,5 +52,5 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush hdlc/pkg:gtkwave
+    - run: dockerPush pkg:gtkwave
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

@@ -43,11 +43,11 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/pkg:icestorm icestorm pkg
-    - run: dockerBuild hdlc/icestorm     icestorm
+    - run: dockerBuild pkg:icestorm icestorm pkg
+    - run: dockerBuild icestorm     icestorm
 
     - run: dockerTestPkg icestorm
-    - run: dockerTest  hdlc/icestorm     icestorm
+    - run: dockerTest icestorm
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -56,8 +56,8 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush  hdlc/pkg:icestorm
+    - run: dockerPush pkg:icestorm
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
-    - run: dockerPush  hdlc/icestorm
+    - run: dockerPush icestorm
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

@@ -23,4 +23,4 @@ set -e
 
 _image="$1"
 
-docker push "${_image}"
+docker push hdlc/"${_image}"

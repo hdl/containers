@@ -43,11 +43,11 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/pkg:yosys yosys pkg
-    - run: dockerBuild hdlc/yosys     yosys
+    - run: dockerBuild pkg:yosys yosys pkg
+    - run: dockerBuild yosys     yosys
 
     - run: dockerTestPkg yosys
-    - run: dockerTest  hdlc/yosys     yosys
+    - run: dockerTest yosys     yosys
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -56,8 +56,8 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush  hdlc/pkg:yosys
+    - run: dockerPush pkg:yosys
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
-    - run: dockerPush  hdlc/yosys
+    - run: dockerPush yosys
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

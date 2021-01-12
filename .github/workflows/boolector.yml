@@ -42,7 +42,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/pkg:boolector boolector
+    - run: dockerBuild pkg:boolector boolector
 
     - run: dockerTestPkg boolector
 
@@ -53,5 +53,5 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush hdlc/pkg:boolector
+    - run: dockerPush pkg:boolector
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

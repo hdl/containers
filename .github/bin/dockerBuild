@@ -30,5 +30,5 @@ if [ -n "$3" ]; then
 fi
 
 docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 \
-  -t "${_image}" ${_target} \
+  -t hdlc/"${_image}" ${_target} \
   - < "${_dockerfile}"

@@ -41,11 +41,11 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/pkg:ghdl-yosys-plugin  ghdl-yosys-plugin  pkg
-    - run: dockerBuild hdlc/ghdl:yosys             ghdl-yosys-plugin
+    - run: dockerBuild pkg:ghdl-yosys-plugin ghdl-yosys-plugin pkg
+    - run: dockerBuild ghdl:yosys            ghdl-yosys-plugin
 
     - run: dockerTestPkg ghdl-yosys-plugin ghdl
-    - run: dockerTest  hdlc/ghdl:yosys             ghdl--yosys
+    - run: dockerTest ghdl:yosys
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -54,8 +54,8 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush  hdlc/pkg:ghdl-yosys-plugin
+    - run: dockerPush pkg:ghdl-yosys-plugin
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
-    - run: dockerPush  hdlc/ghdl:yosys
+    - run: dockerPush ghdl:yosys
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

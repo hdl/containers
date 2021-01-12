@@ -44,13 +44,13 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/formal:min formal min
-    - run: dockerBuild hdlc/formal     formal latest
-    - run: dockerBuild hdlc/formal:all formal
+    - run: dockerBuild formal:min formal min
+    - run: dockerBuild formal     formal latest
+    - run: dockerBuild formal:all formal
 
-    - run: dockerTest  hdlc/formal:min formal--min
-    - run: dockerTest  hdlc/formal     formal
-    - run: dockerTest  hdlc/formal:all formal--all
+    - run: dockerTest formal:min
+    - run: dockerTest formal
+    - run: dockerTest formal:all
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -59,11 +59,11 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush  hdlc/formal:min
+    - run: dockerPush formal:min
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
-    - run: dockerPush  hdlc/formal
+    - run: dockerPush formal
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
-    - run: dockerPush  hdlc/formal:all
+    - run: dockerPush formal:all
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

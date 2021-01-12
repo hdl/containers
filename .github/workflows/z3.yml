@@ -41,7 +41,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/pkg:z3 z3
+    - run: dockerBuild pkg:z3 z3
 
     - run: dockerTestPkg z3
 
@@ -52,5 +52,5 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush hdlc/pkg:z3
+    - run: dockerPush pkg:z3
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

@@ -22,6 +22,10 @@
 set -e
 
 _image="$1"
-_script="$2".sh
 
-docker run --rm -v /$(pwd)://wrk "${_image}" //wrk/test/"${_script}"
+_script="`echo ${_image} | sed 's#:#--#'`"
+if [ -n "$2" ]; then
+  _script="$2"
+fi
+
+docker run --rm -v /$(pwd)://wrk hdlc/"${_image}" //wrk/test/"${_script}".sh

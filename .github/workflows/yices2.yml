@@ -42,7 +42,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/pkg:yices2 yices2
+    - run: dockerBuild pkg:yices2 yices2
 
     - run: dockerTestPkg yices2
 
@@ -53,5 +53,5 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush hdlc/pkg:yices2
+    - run: dockerPush pkg:yices2
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

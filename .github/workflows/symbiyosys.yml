@@ -42,7 +42,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/pkg:symbiyosys symbiyosys
+    - run: dockerBuild pkg:symbiyosys symbiyosys
 
     - run: dockerTestPkg symbiyosys
 
@@ -53,5 +53,5 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush hdlc/pkg:symbiyosys
+    - run: dockerPush pkg:symbiyosys
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

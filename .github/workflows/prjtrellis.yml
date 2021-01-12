@@ -43,11 +43,11 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild hdlc/pkg:prjtrellis prjtrellis pkg
-    - run: dockerBuild hdlc/prjtrellis     prjtrellis
+    - run: dockerBuild pkg:prjtrellis prjtrellis pkg
+    - run: dockerBuild prjtrellis     prjtrellis
 
     - run: dockerTestPkg prjtrellis
-    - run: dockerTest  hdlc/prjtrellis     prjtrellis
+    - run: dockerTest prjtrellis
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -56,8 +56,8 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush  hdlc/pkg:prjtrellis
+    - run: dockerPush pkg:prjtrellis
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
-    - run: dockerPush  hdlc/prjtrellis
+    - run: dockerPush prjtrellis
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
