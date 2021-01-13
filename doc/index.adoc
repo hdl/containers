@@ -177,8 +177,15 @@ NOTE: At the moment, there is no triggering mechanism set up between different G
 ** https://github.com/SymbiFlow/make-env[SymbiFlow/make-env]
 *** http://bit.ly/edda-conda-eda-spec[bit.ly/edda-conda-eda-spec]: Conda based system for FPGA and ASIC Dev
 *** https://github.com/SymbiFlow/make-env/issues/15[Support providing the environment using docker rather than conda #15]
-* https://github.com/open-tool-forge/fpga-toolchain[open-tool-forge/fpga-toolchain]
 * https://github.com/im-tomu/fomu-toolchain[im-tomu/fomu-toolchain]
 * https://github.com/alpin3/ulx3s[alpin3/ulx3s]
 * https://github.com/eine/elide/tree/master/elide/docker[eine/elide]
 * https://github.com/hackfin/ghdl-cross.mk[hackfin/ghdl-cross.mk]
+* USB/IP
+** https://github.com/gw0/docker-alpine-kernel-modules[gw0/docker-alpine-kernel-modules]
+** https://github.com/virtualhere/docker[virtualhere/docker]
+*** https://www.virtualhere.com/windows_server_software[Windows USB Server]
+*** https://www.virtualhere.com/usb_client_software[USB Client]
+*** https://www.virtualhere.com/linux_console[Linux Console Client]
+*** https://www.virtualhere.com/client_api[Client API]
+*** https://hub.docker.com/r/virtualhere/virtualhere-client[hub.docker.com/r/virtualhere/virtualhere-client]

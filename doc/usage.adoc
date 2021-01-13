@@ -83,16 +83,6 @@ sleep 4
 
 IMPORTANT: There is an issue/bug in _Docker Desktop_ (https://github.com/docker/for-win/issues/4548[docker/for-win#4548]) that prevents the container where the USB device is added from seeing it. The workaround is to execute the board programming tool in a sibling container. For example: `docker run --rm --privileged hdlc/prog iceprog -t`.
 
-==== References
-
-* https://github.com/gw0/docker-alpine-kernel-modules[gw0/docker-alpine-kernel-modules]
-* https://github.com/virtualhere/docker[virtualhere/docker]
-** https://www.virtualhere.com/windows_server_software[Windows USB Server]
-** https://www.virtualhere.com/usb_client_software[USB Client]
-** https://www.virtualhere.com/linux_console[Linux Console Client]
-** https://www.virtualhere.com/client_api[Client API]
-** https://hub.docker.com/r/virtualhere/virtualhere-client[hub.docker.com/r/virtualhere/virtualhere-client]
-
 ==== Alternatives
 
 [IMPORTANT]
