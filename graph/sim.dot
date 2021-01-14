@@ -25,15 +25,21 @@ digraph G {
   # Dockerfiles
 
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
-    d_gtkwave  [label="gtkwave"];
+    d_gtkwave   [label="gtkwave"];
+    d_verilator [label="verilator"];
   }
 
   # Images
 
   { node [shape=cylinder]
     "build:build"
+    "build:base"
+    { node [color=limegreen, fontcolor=limegreen]
+      "verilator"
+    }
     { node [color=mediumblue, fontcolor=mediumblue]
       "pkg:gtkwave"
+      "pkg:verilator"
     }
   }
 
@@ -45,6 +51,7 @@ digraph G {
 
   { rank=same
     "build:build"
+    "build:base"
     "scratch"
   }
 
@@ -64,15 +71,47 @@ digraph G {
     "pkg:gtkwave" -> "t_pkg:gtkwave";
   }
 
+  subgraph cluster_verilator {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_verilator_build:build" [label="build:build"]
+      "p_verilator_build:base" [label="build:base"]
+      "p_verilator_scratch" [label="scratch"]
+    }
+
+    d_verilator -> {
+      "verilator"
+      "pkg:verilator"
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      "t_verilator" [label="verilator"];
+      "t_pkg:verilator" [label="verilator.pkg"];
+    }
+
+    "verilator" -> "t_verilator";
+    "pkg:verilator" -> "t_pkg:verilator";
+  }
+
   # Dockerfile dependencies
 
   "build:build" -> "p_gtkwave_build:build" -> d_gtkwave;
   "scratch" -> "p_gtkwave_scratch" -> d_gtkwave;
 
+  "build:build" -> "p_verilator_build:build" -> d_verilator;
+  "build:base" -> "p_verilator_build:base" -> d_verilator;
+  "scratch" -> "p_verilator_scratch" -> d_verilator;
+
   # Image dependencies
 
   { edge [style=dashed]
     "p_gtkwave_scratch" -> "pkg:gtkwave";
+  }
+
+  { edge [style=dashed]
+    "p_verilator_build:base" -> "verilator";
+    "p_verilator_scratch" -> "pkg:verilator";
   }
 
 }

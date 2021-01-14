@@ -45,7 +45,6 @@ To Do:
 * https://hdl.github.io/awesome/items/iverilog[iverilog]
 * https://hdl.github.io/awesome/items/netlistsvg[netlistsvg]
 * https://hdl.github.io/awesome/items/openfpgaloader[openFPGALoader]
-* https://hdl.github.io/awesome/items/verilator[Verilator]
 * https://hdl.github.io/awesome/items/vunit[VUnit]
 * https://hdl.github.io/awesome/items/prjxray[Project X-Ray (Xilinx 7 Series tooling)]
 * https://github.com/SymbiFlow/prjuray[Project U-Ray (Xilinx Ultrascale Series tooling)]
@@ -67,11 +66,14 @@ a|* {blank}
 --
 GHAStatus:doc[]
 --
+
 * {blank}
 +
 --
 GHAStatus:base[]
 --
+
+
 a|* {blank}
 +
 --
@@ -81,6 +83,18 @@ GHAStatus:ghdl[]
 +
 --
 GHAStatus:gtkwave[]
+--
+* {blank}
++
+--
+GHAStatus:verilator[]
+--
+
+
+a|* {blank}
++
+--
+GHAStatus:ghdl-yosys-plugin[]
 --
 * {blank}
 +
@@ -97,16 +111,13 @@ GHAStatus:prjtrellis[]
 --
 GHAStatus:yosys[]
 --
-a|* {blank}
-+
---
-GHAStatus:ghdl-yosys-plugin[]
---
 * {blank}
 +
 --
 GHAStatus:nextpnr[]
 --
+
+
 a|* {blank}
 +
 --
@@ -137,6 +148,8 @@ GHAStatus:yices2[]
 --
 GHAStatus:z3[]
 --
+
+
 a|* {blank}
 +
 --

@@ -160,6 +160,15 @@ symbiyosys:
 
 #---
 
+verilator:
+  url: 'https://hdl.github.io/awesome/items/verilator'
+  pkg:
+    - 'verilator'
+  use:
+    - 'verilator'
+
+#---
+
 yices2:
   url: 'https://hdl.github.io/awesome/items/yices2'
   pkg:
