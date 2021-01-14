@@ -1,5 +1,6 @@
 # Authors:
 #   Unai Martinez-Corral
+#   Lucas Teske
 #
 # Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
@@ -17,7 +18,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: 'nextpnr'
+name: 'apicula'
 
 on:
   pull_request:
@@ -26,14 +27,14 @@ on:
     - cron: '0 0 * * 5'
   workflow_dispatch:
   repository_dispatch:
-    types: [ nextpnr ]
+    types: [ apicula ]
 
 env:
   DOCKER_BUILDKIT: 1
 
 jobs:
 
-  nextpnr:
+  apicula:
     runs-on: ubuntu-latest
     steps:
 
@@ -43,20 +44,11 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild nextpnr:ice40      nextpnr ice40
-    - run: dockerBuild nextpnr:icestorm   nextpnr icestorm
-    - run: dockerBuild nextpnr:ecp5       nextpnr ecp5
-    - run: dockerBuild nextpnr:prjtrellis nextpnr prjtrellis
-    - run: dockerBuild nextpnr:gowin      nextpnr gowin
-    - run: dockerBuild nextpnr:apicula    nextpnr apicula
-    - run: dockerBuild nextpnr            nextpnr
+    - run: dockerBuild pkg:apicula  apicula pkg
+    - run: dockerBuild apicula      apicula
 
-    - run: dockerTest nextpnr:ice40
-    - run: dockerTest nextpnr:icestorm
-    - run: dockerTest nextpnr:ecp5
-    - run: dockerTest nextpnr:prjtrellis
-    - run: dockerTest nextpnr:gowin
-    - run: dockerTest nextpnr
+    - run: dockerTestPkg apicula
+    - run: dockerTest apicula
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -65,20 +57,8 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush nextpnr:ice40
+    - run: dockerPush pkg:apicula
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
-    - run: dockerPush nextpnr:icestorm
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush nextpnr:ecp5
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush nextpnr:prjtrellis
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush nextpnr:gowin
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush nextpnr
+    - run: dockerPush apicula
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
