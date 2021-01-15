@@ -254,3 +254,12 @@ z3:
     - 'formal:min'
     - 'formal'
     - 'formal:all'
+
+#---
+
+apicula:
+  url: 'https://hdl.github.io/awesome/items/apicula'
+  pkg:
+    - 'apicula'
+  use:
+    - 'apicula'
