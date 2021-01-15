@@ -92,14 +92,43 @@ COPY --from=build-ecp5 /opt/nextpnr /
 FROM ecp5 AS prjtrellis
 COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
+
 #---
 
-FROM build-ice40 AS build-all
-COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
+FROM build AS build-gowin
+COPY --from=hdlc/apicula /usr/local/bin/gowin* /usr/local/bin
+COPY --from=hdlc/apicula /usr/local/lib/python3.7/dist-packages /usr/local/lib/python3.7/dist-packages
+
+RUN mkdir -p /tmp/nextpnr/build \
+ && cd /tmp/nextpnr \
+ && curl -fsSL https://codeload.github.com/YosysHQ/nextpnr/tar.gz/master | tar xzf - --strip-components=1 \
+ && cd build \
+ && cmake .. \
+   -DARCH=gowin \
+   -DBUILD_GUI=OFF \
+   -DBUILD_PYTHON=ON \
+   -DUSE_OPENMP=ON \
+ && make -j $(nproc) \
+ && make DESTDIR=/opt/nextpnr install
+
+#---
+
+FROM base AS gowin
+COPY --from=build-gowin /opt/nextpnr /
+
+#---
+
+FROM gowin AS apicula
+COPY --from=hdlc/apicula /usr/local/bin/gowin* /usr/local/bin
+COPY --from=hdlc/apicula /usr/local/lib/python3.7/dist-packages /usr/local/lib/python3.7/dist-packages
+
+#---
+
+FROM build AS build-generic
 
 RUN cd /tmp/nextpnr/build \
  && cmake .. \
-   -DARCH=all \
+   -DARCH=generic \
    -DBUILD_GUI=OFF \
    -DBUILD_PYTHON=ON \
    -DUSE_OPENMP=ON \
@@ -109,4 +138,7 @@ RUN cd /tmp/nextpnr/build \
 #---
 
 FROM base AS all
-COPY --from=build-all /opt/nextpnr /
+COPY --from=build-ice40 /opt/nextpnr /
+COPY --from=build-ecp5 /opt/nextpnr /
+COPY --from=build-gowin /opt/nextpnr /
+COPY --from=build-generic /opt/nextpnr /
