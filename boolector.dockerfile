@@ -25,7 +25,6 @@ RUN apt-get update -qq \
     binutils \
     cmake \
     autoconf \
-    git \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && update-ca-certificates  \
  && rm -rf /var/lib/apt/lists/*
