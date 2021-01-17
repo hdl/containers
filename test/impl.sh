@@ -29,7 +29,4 @@ cd $(dirname "$0")
 ./smoke-tests/nextpnr.sh
 ./smoke-tests/yosys.sh
 
-ghdl --version
-yosys --version
-
 ./_todo.sh

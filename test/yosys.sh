@@ -27,6 +27,4 @@ cd $(dirname "$0")
 
 ./smoke-tests/yosys.sh
 
-yosys --version
-
 ./_todo.sh

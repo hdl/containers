@@ -30,7 +30,4 @@ cd $(dirname "$0")
 ./smoke-tests/yosys.sh
 ./smoke-tests/z3.sh
 
-ghdl --version
-yosys --version
-
 ./_todo.sh

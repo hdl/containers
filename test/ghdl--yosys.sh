@@ -25,7 +25,7 @@ cd $(dirname "$0")
 
 ./_env.sh
 
-ghdl --version
-yosys --version
+./ghdl.sh
+./yosys.sh
 
 ./_todo.sh

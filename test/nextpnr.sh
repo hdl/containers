@@ -25,6 +25,11 @@ cd $(dirname "$0")
 
 ./_env.sh
 
-./smoke-tests/nextpnr.sh
+# TODO Cannot be run until nextpnr-gowin is added to containers
+#./smoke-tests/nextpnr.sh
+# Run individual smoke tests instead:
+./smoke-tests/nextpnr-ice40.sh
+./smoke-tests/nextpnr-ecp5.sh
+./smoke-tests/nextpnr-generic.sh
 
 ./_todo.sh
