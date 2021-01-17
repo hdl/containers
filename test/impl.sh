@@ -25,8 +25,8 @@ cd $(dirname "$0")
 
 ./_env.sh
 
-./smoke-tests/ghdl.sh
-./smoke-tests/nextpnr.sh
-./smoke-tests/yosys.sh
+./ghdl.sh
+./nextpnr.sh
+./yosys.sh
 
 ./_todo.sh
