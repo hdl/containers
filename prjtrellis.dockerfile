@@ -17,21 +17,15 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM alpine as get
-RUN apk add --no-cache --update git \
- && git clone --recurse-submodules https://github.com/YosysHQ/prjtrellis /tmp/prjtrellis \
- && cd /tmp/prjtrellis \
- && git describe --tags > libtrellis/git_version
-
 #---
 
 FROM hdlc/build:dev AS build
-COPY --from=get /tmp/prjtrellis /tmp/prjtrellis
 
 ENV LDFLAGS "-Wl,--copy-dt-needed-entries"
 
-RUN cd /tmp/prjtrellis/libtrellis \
- && cmake -DCURRENT_GIT_VERSION="$(cat git_version)" . \
+RUN git clone --recurse-submodules https://github.com/YosysHQ/prjtrellis /tmp/prjtrellis \
+ && cd /tmp/prjtrellis/libtrellis \
+ && cmake -DCURRENT_GIT_VERSION="$(git describe --tags)" . \
  && make -j $(nproc) \
  && make DESTDIR=/opt/prjtrellis install
 
