@@ -29,7 +29,6 @@ RUN apt-get update -qq \
     python-pip \
     python-wheel \
     python-dev \
-    git \
     zlib1g-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && update-ca-certificates  \
