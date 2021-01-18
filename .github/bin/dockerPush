@@ -21,6 +21,8 @@
 
 set -e
 
-_image="$1"
-
-docker push hdlc/"${_image}"
+for _image; do
+  echo "::group::$_image"
+  docker push hdlc/"${_image}"
+  echo '::endgroup::'
+done

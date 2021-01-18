@@ -53,5 +53,7 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush pkg:yices2
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      run: >-
+        dockerPush
+        pkg:yices2

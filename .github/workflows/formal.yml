@@ -59,11 +59,9 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush formal:min
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush formal
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush formal:all
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      run: >-
+        dockerPush
+        formal:min
+        formal
+        formal:all

@@ -56,11 +56,9 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush build:base
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush build:build
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush build:dev
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      run: >-
+        dockerPush
+        build:base
+        build:build
+        build:dev

@@ -69,14 +69,12 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush pkg:nextpnr-${{ matrix.arch }}
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush nextpnr:${{ matrix.arch }}
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush nextpnr:${{ matrix.prj }}
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      run: >-
+        dockerPush
+        pkg:nextpnr-${{ matrix.arch }}
+        nextpnr:${{ matrix.arch }}
+        nextpnr:${{ matrix.prj }}
 
 
   nextpnr:
@@ -105,11 +103,9 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush pkg:nextpnr-generic
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush nextpnr:generic
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush nextpnr
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      run: >-
+        dockerPush
+        pkg:nextpnr-generic
+        nextpnr:generic
+        nextpnr
