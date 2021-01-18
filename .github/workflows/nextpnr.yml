@@ -34,7 +34,53 @@ env:
 
 jobs:
 
+
+  nextpnr-prjs:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include: [
+          { arch: ice40, prj: icestorm   },
+          { arch: ecp5,  prj: prjtrellis },
+        ]
+    name: 'nextpnr · ${{ matrix.arch }} ${{ matrix.prj }}'
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+
+    - run: dockerBuild  pkg:nextpnr-${{ matrix.arch }}  nextpnr pkg-${{ matrix.arch }}
+    - run: dockerBuild  nextpnr:${{ matrix.arch }}      nextpnr ${{ matrix.arch }}
+    - run: dockerBuild  nextpnr:${{ matrix.prj }}       nextpnr ${{ matrix.prj }}
+
+    - run: dockerTestPkg  nextpnr-${{ matrix.arch }}
+    - run: dockerTest     nextpnr:${{ matrix.arch }}
+    - run: dockerTest     nextpnr:${{ matrix.prj }}
+
+    - name: Login to DockerHub
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - run: dockerPush pkg:nextpnr-${{ matrix.arch }}
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+
+    - run: dockerPush nextpnr:${{ matrix.arch }}
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+
+    - run: dockerPush nextpnr:${{ matrix.prj }}
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+
+
   nextpnr:
+    needs: [ nextpnr-prjs ]
     runs-on: ubuntu-latest
     steps:
 
@@ -44,22 +90,10 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild pkg:nextpnr-ice40   nextpnr pkg-ice40
-    - run: dockerBuild nextpnr:ice40       nextpnr ice40
-    - run: dockerBuild nextpnr:icestorm    nextpnr icestorm
-    - run: dockerBuild pkg:nextpnr-ecp5    nextpnr pkg-ecp5
-    - run: dockerBuild nextpnr:ecp5        nextpnr ecp5
-    - run: dockerBuild nextpnr:prjtrellis  nextpnr prjtrellis
     - run: dockerBuild pkg:nextpnr-generic nextpnr pkg-generic
     - run: dockerBuild nextpnr:generic     nextpnr generic
     - run: dockerBuild nextpnr             nextpnr
 
-    - run: dockerTestPkg nextpnr-ice40
-    - run: dockerTest nextpnr:ice40
-    - run: dockerTest nextpnr:icestorm
-    - run: dockerTestPkg nextpnr-ecp5
-    - run: dockerTest nextpnr:ecp5
-    - run: dockerTest nextpnr:prjtrellis
     - run: dockerTestPkg nextpnr-generic
     - run: dockerTest nextpnr:generic
     - run: dockerTest nextpnr
@@ -70,24 +104,6 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
-
-    - run: dockerPush pkg:nextpnr-ice40
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush nextpnr:ice40
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush nextpnr:icestorm
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush pkg:nextpnr-ecp5
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush nextpnr:ecp5
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-
-    - run: dockerPush nextpnr:prjtrellis
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
 
     - run: dockerPush pkg:nextpnr-generic
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

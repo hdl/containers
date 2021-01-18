@@ -101,8 +101,7 @@ COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
 #---
 
-FROM build-ice40 AS build-generic
-COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
+FROM build AS build-generic
 
 RUN cd /tmp/nextpnr/build \
  && cmake .. \
@@ -126,6 +125,6 @@ COPY --from=build-generic /opt/nextpnr /
 #---
 
 FROM base
-COPY --from=build-ice40 /opt/nextpnr /
-COPY --from=build-ecp5 /opt/nextpnr /
 COPY --from=build-generic /opt/nextpnr /
+COPY --from=hdlc/pkg:nextpnr-ice40 /opt/nextpnr /
+COPY --from=hdlc/pkg:nextpnr-ecp5 /opt/nextpnr /
