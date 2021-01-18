@@ -126,5 +126,5 @@ COPY --from=build-generic /opt/nextpnr /
 
 FROM base
 COPY --from=build-generic /opt/nextpnr /
-COPY --from=hdlc/pkg:nextpnr-ice40 /opt/nextpnr /
-COPY --from=hdlc/pkg:nextpnr-ecp5 /opt/nextpnr /
+COPY --from=hdlc/pkg:nextpnr-ice40 /nextpnr-ice40 /
+COPY --from=hdlc/pkg:nextpnr-ecp5 /nextpnr-ecp5 /
