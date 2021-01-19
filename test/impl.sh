@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 # Authors:
+#   Sebastian Birke <git@se-bi.de>
 #   Unai Martinez-Corral
-#   Sebastian Birke      <git@se-bi.de>
 #
 # Copyright 2020-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
@@ -26,13 +26,9 @@ cd $(dirname "$0")
 
 ./_env.sh
 
-./ghdl.sh
-./yosys.sh
-
-./nextpnr--ecp5.sh
-./prjtrellis.sh
-
-./nextpnr--ice40.sh
-./icestorm.sh
+./impl--prjtrellis.sh
+./impl--icestorm.sh
 
 ./nextpnr--generic.sh
+
+./_todo.sh

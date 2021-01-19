@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 # Authors:
+#   Sebastian Birke <git@se-bi.de>
 #   Unai Martinez-Corral
-#   Sebastian Birke      <git@se-bi.de>
 #
 # Copyright 2020-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
@@ -24,6 +24,11 @@ set -e
 
 cd $(dirname "$0")
 
+./_env.sh
+
 ./ghdl.sh
 ./yosys.sh
+
 ./nextpnr--generic.sh
+
+./_todo.sh

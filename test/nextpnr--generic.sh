@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # Authors:
-#   Sebastian Birke      <git@se-bi.de>
+#   Sebastian Birke <git@se-bi.de>
 #   Unai Martinez-Corral
 #
 # Copyright 2020-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>

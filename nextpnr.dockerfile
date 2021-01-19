@@ -1,6 +1,6 @@
 # Authors:
+#   Sebastian Birke <git@se-bi.de>
 #   Anton Blanchard
-#   Sebastian Birke      <git@se-bi.de>
 #   Unai Martinez-Corral
 #
 # Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
@@ -43,7 +43,7 @@ RUN apt-get update -qq \
 
 #---
 
-FROM build AS build-ice40
+FROM hdlc/build:nextpnr-build AS build-ice40
 COPY --from=hdlc/pkg:icestorm /icestorm/usr/local/share/icebox /usr/local/share/icebox
 
 RUN cd /tmp/nextpnr/build \
@@ -62,7 +62,7 @@ COPY --from=build-ice40 /opt/nextpnr /nextpnr-ice40
 
 #---
 
-FROM base AS ice40
+FROM hdlc/build:nextpnr-base AS ice40
 COPY --from=build-ice40 /opt/nextpnr /
 
 #---
@@ -72,7 +72,7 @@ COPY --from=hdlc/pkg:icestorm /icestorm /
 
 #---
 
-FROM build AS build-ecp5
+FROM hdlc/build:nextpnr-build AS build-ecp5
 COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
 RUN cd /tmp/nextpnr/build \
@@ -91,7 +91,7 @@ COPY --from=build-ecp5 /opt/nextpnr /nextpnr-ecp5
 
 #---
 
-FROM base AS ecp5
+FROM hdlc/build:nextpnr-base AS ecp5
 COPY --from=build-ecp5 /opt/nextpnr /
 
 #---
@@ -101,7 +101,7 @@ COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
 #---
 
-FROM build AS build-generic
+FROM hdlc/build:nextpnr-build AS build-generic
 
 RUN cd /tmp/nextpnr/build \
  && cmake .. \
@@ -119,7 +119,7 @@ COPY --from=build-generic /opt/nextpnr /nextpnr-generic
 
 #---
 
-FROM base AS generic
+FROM hdlc/build:nextpnr-base AS generic
 COPY --from=build-generic /opt/nextpnr /
 
 #---

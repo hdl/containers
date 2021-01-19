@@ -1,6 +1,6 @@
 # Authors:
+#   Sebastian Birke <git@se-bi.de>
 #   Unai Martinez-Corral
-#   Sebastian Birke      <git@se-bi.de>
 #
 # Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
@@ -34,7 +34,8 @@ env:
 
 jobs:
 
-  impl:
+
+  impl-build:
     runs-on: ubuntu-latest
     steps:
 
@@ -44,21 +45,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild impl:ecp5       impl ecp5
-    - run: dockerBuild impl:ice40      impl ice40
-    - run: dockerBuild impl:generic    impl generic
-    - run: dockerBuild impl:icestorm   impl icestorm
-    - run: dockerBuild impl:prjtrellis impl prjtrellis
-    - run: dockerBuild impl:pnr        impl pnr
-    - run: dockerBuild impl            impl
-
-    - run: dockerTest  impl:ecp5       impl--ecp5
-    - run: dockerTest  impl:ice40      impl--ice40
-    - run: dockerTest  impl:generic    impl--generic
-    - run: dockerTest  impl:icestorm   impl--icestorm
-    - run: dockerTest  impl:prjtrellis impl--prjtrellis
-    - run: dockerTest  impl:pnr        impl--pnr
-    - run: dockerTest  impl            impl
+    - run: dockerBuild  build:impl  impl  base
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -70,10 +57,78 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush
-        impl:ecp5
-        impl:ice40
+        build:impl
+
+
+  impl-prjs:
+    needs: [ impl-build ]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include: [
+          { arch: ice40, prj: icestorm   },
+          { arch: ecp5,  prj: prjtrellis },
+        ]
+    name: 'impl · ${{ matrix.arch }} ${{ matrix.prj }}'
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+
+    - run: dockerBuild  impl:${{ matrix.arch }}  impl ${{ matrix.arch }}
+    - run: dockerBuild  impl:${{ matrix.prj  }}  impl ${{ matrix.prj }}
+
+    - run: dockerTest  impl:${{ matrix.arch }}
+    - run: dockerTest  impl:${{ matrix.prj  }}
+
+    - name: Login to DockerHub
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      run: >-
+        dockerPush
+        impl:${{ matrix.arch }}
+        impl:${{ matrix.prj }}
+
+
+  impl:
+    needs: [ impl-build, impl-prjs ]
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+
+    - run: dockerBuild  impl:generic  impl  generic
+    - run: dockerBuild  impl:pnr      impl  pnr
+    - run: dockerBuild  impl          impl
+
+    - run: dockerTest  impl:generic
+    - run: dockerTest  impl:pnr
+    - run: dockerTest  impl
+
+    - name: Login to DockerHub
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      run: >-
+        dockerPush
         impl:generic
-        impl:icestorm
-        impl:prjtrellis
         impl:pnr
         impl

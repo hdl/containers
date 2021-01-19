@@ -1,5 +1,5 @@
 # Authors:
-#   Sebastian Birke      <git@se-bi.de>
+#   Sebastian Birke <git@se-bi.de>
 #   Unai Martinez-Corral
 #
 # Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
@@ -34,8 +34,35 @@ env:
 
 jobs:
 
+  nextpnr-build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+
+    - run: dockerBuild  build:nextpnr-base   nextpnr  base
+    - run: dockerBuild  build:nextpnr-build  nextpnr  build
+
+    - name: Login to DockerHub
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      run: >-
+        dockerPush
+        build:nextpnr-base
+        build:nextpnr-build
+
 
   nextpnr-prjs:
+    needs: [ nextpnr-build ]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -54,9 +81,9 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild  pkg:nextpnr-${{ matrix.arch }}  nextpnr pkg-${{ matrix.arch }}
-    - run: dockerBuild  nextpnr:${{ matrix.arch }}      nextpnr ${{ matrix.arch }}
-    - run: dockerBuild  nextpnr:${{ matrix.prj }}       nextpnr ${{ matrix.prj }}
+    - run: dockerBuild  pkg:nextpnr-${{ matrix.arch }}  nextpnr  pkg-${{ matrix.arch }}
+    - run: dockerBuild  nextpnr:${{ matrix.arch }}      nextpnr  ${{ matrix.arch }}
+    - run: dockerBuild  nextpnr:${{ matrix.prj }}       nextpnr  ${{ matrix.prj }}
 
     - run: dockerTestPkg  nextpnr-${{ matrix.arch }}
     - run: dockerTest     nextpnr:${{ matrix.arch }}
@@ -88,13 +115,13 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild pkg:nextpnr-generic nextpnr pkg-generic
-    - run: dockerBuild nextpnr:generic     nextpnr generic
-    - run: dockerBuild nextpnr             nextpnr
+    - run: dockerBuild  pkg:nextpnr-generic  nextpnr  pkg-generic
+    - run: dockerBuild  nextpnr:generic      nextpnr  generic
+    - run: dockerBuild  nextpnr              nextpnr
 
-    - run: dockerTestPkg nextpnr-generic
-    - run: dockerTest nextpnr:generic
-    - run: dockerTest nextpnr
+    - run: dockerTestPkg  nextpnr-generic
+    - run: dockerTest     nextpnr:generic
+    - run: dockerTest     nextpnr
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

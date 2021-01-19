@@ -1,6 +1,6 @@
 # Authors:
+#   Sebastian Birke <git@se-bi.de>
 #   Unai Martinez-Corral
-#   Sebastian Birke      <git@se-bi.de>
 #
 # Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
@@ -33,45 +33,38 @@ RUN apt-get update -qq \
 
 #---
 
-FROM base AS ecp5
-
-COPY --from=hdlc/pkg:nextpnr-ecp5 /nextpnr-ecp5 /
-
-#---
-
-FROM base AS ice40
-
+FROM hdlc/build:impl AS ice40
 COPY --from=hdlc/pkg:nextpnr-ice40 /nextpnr-ice40 /
-
-#---
-
-FROM base AS generic
-
-COPY --from=hdlc/pkg:nextpnr-generic /nextpnr-generic /
 
 #---
 
 FROM ice40 AS icestorm
-
 COPY --from=hdlc/pkg:icestorm /icestorm /
 
 #---
 
-FROM ecp5 AS prjtrellis
+FROM hdlc/build:impl AS ecp5
+COPY --from=hdlc/pkg:nextpnr-ecp5 /nextpnr-ecp5 /
 
+#---
+
+FROM ecp5 AS prjtrellis
 COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
 
 #---
 
-FROM base AS pnr
+FROM hdlc/build:impl AS generic
+COPY --from=hdlc/pkg:nextpnr-generic /nextpnr-generic /
 
+#---
+
+FROM hdlc/build:impl AS pnr
 COPY --from=hdlc/pkg:nextpnr-ecp5 /nextpnr-ecp5 /
 COPY --from=hdlc/pkg:nextpnr-ice40 /nextpnr-ice40 /
 COPY --from=hdlc/pkg:nextpnr-generic /nextpnr-generic /
 
 #---
 
-FROM pnr AS latest
-
+FROM pnr
 COPY --from=hdlc/pkg:icestorm /icestorm /
 COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
