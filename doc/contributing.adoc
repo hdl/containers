@@ -21,16 +21,41 @@ NOTE: Currently, many projects don't use containers at all, hence, all images ar
 
 === Graph
 
-Understanding how all the pieces in this project fit together might be daunting for newcomers. Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem. Subdir link:{repotree}graph/[`graph/`] contains the source of a https://en.wikipedia.org/wiki/Directed_graph[directed graph], where the relations between workflows, dockerfiles, images and tests are shown.
+Understanding how all the pieces in this project fit together might be daunting for newcomers. Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem. Subdir link:{repotree}graph/[`graph/`] contains the sources of https://en.wikipedia.org/wiki/Directed_graph[directed graphs], where the relations between workflows, dockerfiles, images and tests are shown.
 
-(https://graphviz.org/[Graphviz])'s `digraph` format is used, hence, the graph can be rendered to multiple image formats. The SVG output is shown in xref:img-graph[xrefstyle=short]. Multiple colours and arrow types are used for describing different dependency types. All of those are explained in the legend: xref:img-legend[xrefstyle=short].
+(https://graphviz.org/[Graphviz])'s `digraph` format is used, hence, graphs can be rendered to multiple image formats. The SVG output is shown in xref:img-graph[xrefstyle=short] describes which images are created in each map. See the details in the figure corresponding to the name of the subgraph:  Base (xref:img-graph-base[xrefstyle=short]), Sim (xref:img-graph-sim[xrefstyle=short]), Synth (xref:img-graph-synth[xrefstyle=short]), Impl (xref:img-graph-impl[xrefstyle=short]), Formal (xref:img-graph-formal[xrefstyle=short]). Multiple colours and arrow types are used for describing different dependency types. All of those are explained in the legend: xref:img-graph-legend[xrefstyle=short].
 
 [#img-graph]
 .Workflows, dockerfiles, images and tests.
 [link=graph.svg]
 graphviz::../graph/graph.dot[format="svg", align="center"]
 
-[#img-legend]
+[#img-graph-base]
+.Base: workflows, dockerfiles, images and tests.
+[link=base.svg]
+graphviz::../graph/base.dot[format="svg", align="center"]
+
+[#img-graph-sim]
+.Sim: workflows, dockerfiles, images and tests.
+[link=sim.svg]
+graphviz::../graph/sim.dot[format="svg", align="center"]
+
+[#img-graph-synth]
+.Synth: workflows, dockerfiles, images and tests.
+[link=synth.svg]
+graphviz::../graph/synth.dot[format="svg", align="center"]
+
+[#img-graph-impl]
+.Impl: workflows, dockerfiles, images and tests.
+[link=impl.svg]
+graphviz::../graph/impl.dot[format="svg", align="center"]
+
+[#img-graph-formal]
+.Formal: workflows, dockerfiles, images and tests.
+[link=formal.svg]
+graphviz::../graph/formal.dot[format="svg", align="center"]
+
+[#img-graph-legend]
 .Legend of the directed graph.
 [link=legend.svg]
 graphviz::../graph/legend.dot[format="svg", align="center"]

@@ -1,0 +1,170 @@
+# Authors:
+#   Unai Martinez-Corral
+#
+# Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Dockerfiles
+
+  { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_ghdl             [label="ghdl"];
+    d_ghdlYosysPlugin  [label="ghdl-yosys-plugin"];
+    d_yosys            [label="yosys"];
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    "build:base"
+    "build:build"
+    { node [color=limegreen, fontcolor=limegreen]
+      "ghdl"
+      "ghdl:yosys"
+      "yosys"
+    }
+    { node [color=mediumblue, fontcolor=mediumblue]
+      "pkg:ghdl"
+      "pkg:ghdl-yosys-plugin"
+      "pkg:yosys"
+    }
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange]
+    "scratch"
+    "ghdl/pkg:buster-mcode";
+  }
+
+  { rank=same
+    "build:base"
+    "build:build"
+    "scratch"
+    "ghdl/pkg:buster-mcode"
+  }
+
+  # Workflows
+
+  subgraph cluster_ghdl {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_ghdl_build:base" [label="build:base"]
+      "p_ghdl_scratch" [label="scratch"]
+      "p_ghdl_buster" [label="ghdl/pkg:buster-mcode"]
+    }
+
+    d_ghdl -> { rank=same
+      "ghdl",
+      "pkg:ghdl"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_ghdl" [label="ghdl"];
+      "t_pkg:ghdl" [label="ghdl.pkg"];
+    }
+
+    "ghdl" -> "t_ghdl";
+    "pkg:ghdl" -> "t_pkg:ghdl";
+  }
+
+  subgraph cluster_ghdlYosysPlugin {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_ghdl-yosys-plugin_yosys" [label="yosys"]
+      "p_ghdl-yosys-plugin_pkg:ghdl" [label="pkg:ghdl"]
+    }
+
+    d_ghdlYosysPlugin -> { rank=same
+      "pkg:ghdl-yosys-plugin",
+      "ghdl:yosys"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_pkg:ghdl-yosys-plugin" [label="ghdl-yosys-plugin.pkg"];
+      "t_ghdl:yosys" [label="ghdl--yosys"];
+    }
+
+    "pkg:ghdl-yosys-plugin" -> "t_pkg:ghdl-yosys-plugin";
+    "ghdl:yosys" -> "t_ghdl:yosys";
+  }
+
+  subgraph cluster_yosys {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_yosys_build:build" [label="build:build"]
+      "p_yosys_scratch" [label="scratch"]
+    }
+
+    d_yosys -> { rank=same
+      "pkg:yosys",
+      "yosys"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_yosys" [label="yosys"];
+      "t_pkg:yosys" [label="yosys.pkg"];
+    }
+
+    "yosys" -> "t_yosys";
+    "pkg:yosys" -> "t_pkg:yosys";
+  }
+
+  { rank=same
+    d_ghdl
+    d_yosys
+  }
+
+  # Dockerfile dependencies
+
+  "scratch" -> "p_ghdl_scratch" -> d_ghdl;
+  "ghdl/pkg:buster-mcode" -> "p_ghdl_buster" -> d_ghdl;
+  "build:base" -> "p_ghdl_build:base" -> d_ghdl;
+
+  "pkg:ghdl" -> "p_ghdl-yosys-plugin_pkg:ghdl" -> d_ghdlYosysPlugin;
+  "yosys" -> "p_ghdl-yosys-plugin_yosys" -> d_ghdlYosysPlugin;
+
+  "build:build" -> "p_yosys_build:build" -> d_yosys;
+  "scratch" -> "p_yosys_scratch" -> d_yosys;
+
+  # Image dependencies
+
+  { edge [style=dashed]
+    "p_ghdl_scratch" -> "pkg:ghdl";
+    "p_ghdl_build:base" -> "ghdl";
+
+    "p_yosys_scratch" -> "pkg:yosys";
+    "p_yosys_build:build" -> "yosys";
+
+    "p_ghdl-yosys-plugin_yosys" -> "ghdl:yosys";
+    "p_ghdl-yosys-plugin_pkg:ghdl" -> "pkg:ghdl-yosys-plugin";
+  }
+
+  { edge [style=dashed, color=grey]
+    "p_ghdl_buster" -> {
+      "ghdl",
+      "pkg:ghdl"
+    };
+  }
+
+}

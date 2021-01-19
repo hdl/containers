@@ -1,0 +1,261 @@
+# Authors:
+#   Unai Martinez-Corral
+#
+# Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Dockerfiles
+
+  { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_icestorm    [label="icestorm"];
+    d_impl        [label="impl"];
+    d_nextpnr     [label="nextpnr"];
+    d_prjtrellis  [label="prjtrellis"];
+    d_prog        [label="prog"];
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    "build:base"
+    "build:build"
+    "build:dev"
+    { node [color=limegreen, fontcolor=limegreen]
+      "icestorm"
+      "nextpnr:ice40"
+      "nextpnr:icestorm"
+      "nextpnr:ecp5"
+      "nextpnr:prjtrellis"
+      "nextpnr"
+      "prjtrellis"
+    }
+    { node [color=mediumblue, fontcolor=mediumblue]
+      "pkg:ghdl-yosys-plugin"
+      "pkg:icestorm"
+      "pkg:prjtrellis"
+      "pkg:yosys"
+    }
+    { node [color=brown, fontcolor=brown]
+      "impl"
+      "prog"
+    }
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange]
+    "scratch"
+    "alpine";
+  }
+
+  { rank=same
+    "build:base"
+    "build:build"
+    "build:dev"
+    "pkg:ghdl-yosys-plugin"
+    "pkg:yosys"
+    "scratch"
+    "alpine"
+  }
+
+  # Workflows
+
+  subgraph cluster_icestorm {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_icestorm_scratch" [label="scratch"]
+      "p_icestorm_build:base" [label="build:base"]
+      "p_icestorm_build:build" [label="build:build"]
+    }
+
+    d_icestorm -> { rank=same
+      "pkg:icestorm",
+      "icestorm"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_icestorm" [label="icestorm"];
+      "t_pkg:icestorm" [label="icestorm.pkg"];
+    }
+
+    "icestorm" -> "t_icestorm";
+    "pkg:icestorm" -> "t_pkg:icestorm";
+  }
+
+  subgraph cluster_impl {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_impl_nextpnr" [label="nextpnr"]
+      "p_impl_pkg:ghdl-yosys-plugin" [label="pkg:ghdl-yosys-plugin"]
+      "p_impl_pkg:yosys" [label="pkg:yosys"]
+    }
+
+    d_impl -> "impl" [style=dotted];
+
+    "t_impl" [label="impl", shape=folder, color=red, fontcolor=red];
+
+    "impl" -> "t_impl";
+  }
+
+  subgraph cluster_nextpnr {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_nextpnr_build:base" [label="build:base"]
+      "p_nextpnr_build:dev" [label="build:dev"]
+      "p_nextpnr_icestorm" [label="pkg:icestorm"]
+      "p_nextpnr_prjtrellis" [label="pkg:prjtrellis"]
+    }
+
+    d_nextpnr -> { rank=same
+      "nextpnr:ice40",
+      "nextpnr:ecp5",
+      "nextpnr"
+    } [style=dotted];
+
+    d_nextpnr -> { rank=same
+      "nextpnr:icestorm",
+      "nextpnr:prjtrellis"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_nextpnr" [label="nextpnr"];
+      "t_nextpnr:ice40" [label="nextpnr--ice40"];
+      "t_nextpnr:ecp5" [label="nextpnr--ecp5"];
+      "t_nextpnr:icestorm" [label="nextpnr--icestorm"];
+      "t_nextpnr:prjtrellis" [label="nextpnr--prjtrellis"];
+    }
+
+    "nextpnr" -> "t_nextpnr";
+    "nextpnr:ice40" -> "t_nextpnr:ice40";
+    "nextpnr:icestorm" -> "t_nextpnr:icestorm";
+    "nextpnr:ecp5" -> "t_nextpnr:ecp5";
+    "nextpnr:prjtrellis" -> "t_nextpnr:prjtrellis";
+  }
+
+  subgraph cluster_prjtrellis {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_prjtrellis_alpine" [label="alpine"]
+      "p_prjtrellis_scratch" [label="scratch"]
+      "p_prjtrellis_build:base" [label="build:base"]
+      "p_prjtrellis_build:dev" [label="build:dev"]
+    }
+
+    d_prjtrellis -> { rank=same
+      "pkg:prjtrellis",
+      "prjtrellis"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_prjtrellis" [label="prjtrellis"];
+      "t_pkg:prjtrellis" [label="prjtrellis.pkg"];
+    }
+
+    "prjtrellis" -> "t_prjtrellis";
+    "pkg:prjtrellis" -> "t_pkg:prjtrellis";
+  }
+
+  subgraph cluster_prog {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_prog_icestorm" [label="pkg:icestorm"]
+      "p_prog_build:base" [label="build:base"]
+    }
+
+    d_prog -> "prog" [style=dotted];
+
+    "t_prog" [shape=folder, color=red, fontcolor=red, label="prog"];
+
+    "prog" -> "t_prog";
+  }
+
+  { rank=same
+    d_icestorm
+    d_prjtrellis
+  }
+
+  { rank=same
+    d_nextpnr
+    d_prog
+  }
+
+  # Dockerfile dependencies
+
+  "build:build" -> "p_icestorm_build:build" -> d_icestorm;
+  "build:base" -> "p_icestorm_build:base" -> d_icestorm;
+  "scratch" -> "p_icestorm_scratch" -> d_icestorm;
+
+  "pkg:ghdl-yosys-plugin" -> "p_impl_pkg:ghdl-yosys-plugin" -> d_impl;
+  "pkg:yosys" -> "p_impl_pkg:yosys" -> d_impl;
+  "nextpnr" -> "p_impl_nextpnr" -> d_impl;
+
+  "build:dev" -> "p_nextpnr_build:dev" -> d_nextpnr;
+  "build:base" -> "p_nextpnr_build:base" -> d_nextpnr;
+  "pkg:icestorm" -> "p_nextpnr_icestorm" -> d_nextpnr;
+  "pkg:prjtrellis" -> "p_nextpnr_prjtrellis" -> d_nextpnr;
+
+  "build:dev" -> "p_prjtrellis_build:dev" -> d_prjtrellis;
+  "alpine" -> "p_prjtrellis_alpine" -> d_prjtrellis;
+
+  "build:base" -> "p_prjtrellis_build:base" -> d_prjtrellis;
+  "scratch" -> "p_prjtrellis_scratch" -> d_prjtrellis;
+
+  "build:base" -> "p_prog_build:base" -> d_prog;
+  "pkg:icestorm" -> "p_prog_icestorm" -> d_prog;
+
+  # Image dependencies
+
+  { edge [style=dashed]
+    "p_prog_build:base" -> "prog";
+
+    "p_nextpnr_build:base" -> {
+      "nextpnr",
+      "nextpnr:ice40",
+      "nextpnr:ecp5"
+    };
+
+    "nextpnr:ice40" -> "nextpnr:icestorm";
+    "nextpnr:ecp5" -> "nextpnr:prjtrellis";
+
+    "p_icestorm_build:base" -> "icestorm";
+    "p_icestorm_scratch" -> "pkg:icestorm";
+
+    "p_impl_nextpnr" -> "impl";
+
+    "p_prjtrellis_scratch" -> "pkg:prjtrellis";
+    "p_prjtrellis_build:base" -> "prjtrellis";
+  }
+
+  { edge [style=dashed, color=grey]
+    "p_prog_icestorm" -> "prog";
+
+    "p_impl_pkg:ghdl-yosys-plugin" -> "impl";
+    "p_impl_pkg:yosys" -> "impl";
+
+    "p_nextpnr_icestorm" -> "nextpnr:icestorm";
+
+    "p_nextpnr_prjtrellis" -> "nextpnr:prjtrellis";
+  }
+
+}
