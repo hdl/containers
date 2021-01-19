@@ -24,15 +24,6 @@ set -e
 
 cd $(dirname "$0")
 
-./_env.sh
-
 ./ghdl.sh
 ./yosys.sh
-
-./nextpnr--ecp5.sh
-./prjtrellis.sh
-
 ./nextpnr--ice40.sh
-./icestorm.sh
-
-./nextpnr--generic.sh
