@@ -39,21 +39,30 @@ digraph G {
     "build:build"
     "build:dev"
     { node [color=limegreen, fontcolor=limegreen]
+      "ghdl:yosys"
       "icestorm"
+      "prjtrellis"
       "nextpnr:ice40"
       "nextpnr:icestorm"
       "nextpnr:ecp5"
       "nextpnr:prjtrellis"
+      "nextpnr:generic"
       "nextpnr"
-      "prjtrellis"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
-      "pkg:ghdl-yosys-plugin"
       "pkg:icestorm"
       "pkg:prjtrellis"
-      "pkg:yosys"
+      "pkg:nextpnr-generic"
+      "pkg:nextpnr-ice40"
+      "pkg:nextpnr-ecp5"
     }
     { node [color=brown, fontcolor=brown]
+      "impl:generic"
+      "impl:ice40"
+      "impl:ecp5"
+      "impl:icestorm"
+      "impl:prjtrellis"
+      "impl:pnr"
       "impl"
       "prog"
     }
@@ -63,17 +72,14 @@ digraph G {
 
   { node [shape=cylinder, color=orange, fontcolor=orange]
     "scratch"
-    "alpine";
   }
 
   { rank=same
     "build:base"
     "build:build"
     "build:dev"
-    "pkg:ghdl-yosys-plugin"
-    "pkg:yosys"
+    "ghdl:yosys"
     "scratch"
-    "alpine"
   }
 
   # Workflows
@@ -104,28 +110,71 @@ digraph G {
   subgraph cluster_impl {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_impl_nextpnr" [label="nextpnr"]
-      "p_impl_pkg:ghdl-yosys-plugin" [label="pkg:ghdl-yosys-plugin"]
-      "p_impl_pkg:yosys" [label="pkg:yosys"]
+      "p_impl_ghdl:yosys"           [label="ghdl:yosys"]
+      "p_impl_pkg:nextpnr-generic"  [label="pkg:nextpnr-generic"]
+      "p_impl_pkg:nextpnr-ice40"    [label="pkg:nextpnr-ice40"]
+      "p_impl_pkg:nextpnr-ecp5"     [label="pkg:nextpnr-ecp5"]
+      "p_impl_pkg:icestorm"         [label="pkg:icestorm"]
+      "p_impl_pkg:prjtrellis"       [label="pkg:prjtrellis"]
     }
 
-    d_impl -> "impl" [style=dotted];
+    { node [shape=cylinder]
+      "build:impl"
+    }
 
-    "t_impl" [label="impl", shape=folder, color=red, fontcolor=red];
+    d_impl -> {
+      "build:impl"
+      "impl:generic"
+      "impl:ice40"
+      "impl:ecp5"
+      "impl:icestorm"
+      "impl:prjtrellis"
+      "impl:pnr"
+      "impl"
+    } [style=dotted];
 
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_impl:generic"    [label="impl--generic"];
+      "t_impl:ice40"      [label="impl--ice40"];
+      "t_impl:ecp5"       [label="impl--ecp5"];
+      "t_impl:icestorm"   [label="impl--icestorm"];
+      "t_impl:prjtrellis" [label="impl--prjtrellis"];
+      "t_impl:pnr"        [label="impl--pnr"];
+      "t_impl"            [label="impl"];
+    }
+
+    "impl:generic" -> "t_impl:generic";
+    "impl:ice40" -> "t_impl:ice40";
+    "impl:ecp5" -> "t_impl:ecp5";
+    "impl:icestorm" -> "t_impl:icestorm";
+    "impl:prjtrellis" -> "t_impl:prjtrellis";
+    "impl:pnr" -> "t_impl:pnr";
     "impl" -> "t_impl";
   }
 
   subgraph cluster_nextpnr {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_nextpnr_scratch" [label="scratch"]
       "p_nextpnr_build:base" [label="build:base"]
       "p_nextpnr_build:dev" [label="build:dev"]
       "p_nextpnr_icestorm" [label="pkg:icestorm"]
       "p_nextpnr_prjtrellis" [label="pkg:prjtrellis"]
     }
 
+    { node [shape=cylinder]
+      "build:nextpnr-base"
+      "build:nextpnr-build"
+    }
+
     d_nextpnr -> { rank=same
+      "build:nextpnr-base"
+      "build:nextpnr-build"
+    } [style=dotted];
+
+    d_nextpnr -> { rank=same
+      "nextpnr:generic",
       "nextpnr:ice40",
       "nextpnr:ecp5",
       "nextpnr"
@@ -136,26 +185,39 @@ digraph G {
       "nextpnr:prjtrellis"
     } [style=dotted];
 
+    d_nextpnr -> { rank=same
+      "pkg:nextpnr-generic",
+      "pkg:nextpnr-ice40",
+      "pkg:nextpnr-ecp5"
+    } [style=dotted];
+
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
-      "t_nextpnr" [label="nextpnr"];
-      "t_nextpnr:ice40" [label="nextpnr--ice40"];
-      "t_nextpnr:ecp5" [label="nextpnr--ecp5"];
-      "t_nextpnr:icestorm" [label="nextpnr--icestorm"];
-      "t_nextpnr:prjtrellis" [label="nextpnr--prjtrellis"];
+      "t_nextpnr"             [label="nextpnr"];
+      "t_nextpnr:generic"     [label="nextpnr--generic"];
+      "t_nextpnr:ice40"       [label="nextpnr--ice40"];
+      "t_nextpnr:ecp5"        [label="nextpnr--ecp5"];
+      "t_nextpnr:icestorm"    [label="nextpnr--icestorm"];
+      "t_nextpnr:prjtrellis"  [label="nextpnr--prjtrellis"];
+      "t_pkg:nextpnr-generic" [label="nextpnr-generic.pkg"];
+      "t_pkg:nextpnr-ice40"   [label="nextpnr-ice40.pkg"];
+      "t_pkg:nextpnr-ecp5"    [label="nextpnr-ecp5.pkg"];
     }
 
-    "nextpnr" -> "t_nextpnr";
+    "nextpnr:generic" -> "t_nextpnr:generic";
     "nextpnr:ice40" -> "t_nextpnr:ice40";
-    "nextpnr:icestorm" -> "t_nextpnr:icestorm";
     "nextpnr:ecp5" -> "t_nextpnr:ecp5";
+    "nextpnr" -> "t_nextpnr";
+    "nextpnr:icestorm" -> "t_nextpnr:icestorm";
     "nextpnr:prjtrellis" -> "t_nextpnr:prjtrellis";
+    "pkg:nextpnr-generic" -> "t_pkg:nextpnr-generic";
+    "pkg:nextpnr-ice40" -> "t_pkg:nextpnr-ice40";
+    "pkg:nextpnr-ecp5" -> "t_pkg:nextpnr-ecp5";
   }
 
   subgraph cluster_prjtrellis {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_prjtrellis_alpine" [label="alpine"]
       "p_prjtrellis_scratch" [label="scratch"]
       "p_prjtrellis_build:base" [label="build:base"]
       "p_prjtrellis_build:dev" [label="build:dev"]
@@ -206,17 +268,20 @@ digraph G {
   "build:base" -> "p_icestorm_build:base" -> d_icestorm;
   "scratch" -> "p_icestorm_scratch" -> d_icestorm;
 
-  "pkg:ghdl-yosys-plugin" -> "p_impl_pkg:ghdl-yosys-plugin" -> d_impl;
-  "pkg:yosys" -> "p_impl_pkg:yosys" -> d_impl;
-  "nextpnr" -> "p_impl_nextpnr" -> d_impl;
+  "ghdl:yosys" -> "p_impl_ghdl:yosys" -> d_impl;
+  "pkg:nextpnr-generic" -> "p_impl_pkg:nextpnr-generic" -> d_impl;
+  "pkg:nextpnr-ice40" -> "p_impl_pkg:nextpnr-ice40" -> d_impl;
+  "pkg:nextpnr-ecp5" -> "p_impl_pkg:nextpnr-ecp5" -> d_impl;
+  "pkg:icestorm" -> "p_impl_pkg:icestorm" -> d_impl;
+  "pkg:prjtrellis" -> "p_impl_pkg:prjtrellis" -> d_impl;
 
+  "scratch" -> "p_nextpnr_scratch" -> d_nextpnr;
   "build:dev" -> "p_nextpnr_build:dev" -> d_nextpnr;
   "build:base" -> "p_nextpnr_build:base" -> d_nextpnr;
   "pkg:icestorm" -> "p_nextpnr_icestorm" -> d_nextpnr;
   "pkg:prjtrellis" -> "p_nextpnr_prjtrellis" -> d_nextpnr;
 
   "build:dev" -> "p_prjtrellis_build:dev" -> d_prjtrellis;
-  "alpine" -> "p_prjtrellis_alpine" -> d_prjtrellis;
 
   "build:base" -> "p_prjtrellis_build:base" -> d_prjtrellis;
   "scratch" -> "p_prjtrellis_scratch" -> d_prjtrellis;
@@ -229,10 +294,17 @@ digraph G {
   { edge [style=dashed]
     "p_prog_build:base" -> "prog";
 
-    "p_nextpnr_build:base" -> {
+    "p_nextpnr_build:base" -> "build:nextpnr-base" -> {
       "nextpnr",
+      "nextpnr:generic",
       "nextpnr:ice40",
       "nextpnr:ecp5"
+    };
+
+    "p_nextpnr_scratch" -> {
+      "pkg:nextpnr-generic",
+      "pkg:nextpnr-ice40",
+      "pkg:nextpnr-ecp5"
     };
 
     "nextpnr:ice40" -> "nextpnr:icestorm";
@@ -241,7 +313,16 @@ digraph G {
     "p_icestorm_build:base" -> "icestorm";
     "p_icestorm_scratch" -> "pkg:icestorm";
 
-    "p_impl_nextpnr" -> "impl";
+    "p_impl_ghdl:yosys" -> "build:impl" -> {
+      "impl:generic"
+      "impl:ice40"
+      "impl:ecp5"
+      "impl:pnr"
+    };
+
+    "impl:ice40" -> "impl:icestorm";
+    "impl:ecp5" -> "impl:prjtrellis";
+    "impl:pnr" -> "impl";
 
     "p_prjtrellis_scratch" -> "pkg:prjtrellis";
     "p_prjtrellis_build:base" -> "prjtrellis";
@@ -250,12 +331,17 @@ digraph G {
   { edge [style=dashed, color=grey]
     "p_prog_icestorm" -> "prog";
 
-    "p_impl_pkg:ghdl-yosys-plugin" -> "impl";
-    "p_impl_pkg:yosys" -> "impl";
-
+    "pkg:nextpnr-ice40" -> "nextpnr";
+    "pkg:nextpnr-ecp5" -> "nextpnr";
     "p_nextpnr_icestorm" -> "nextpnr:icestorm";
-
     "p_nextpnr_prjtrellis" -> "nextpnr:prjtrellis";
+
+    "p_impl_pkg:icestorm" -> { "impl:icestorm", "impl" };
+    "p_impl_pkg:prjtrellis" -> { "impl:prjtrellis", "impl" };
+    "p_impl_pkg:nextpnr-generic" -> { "impl:generic", "impl:pnr" };
+    "p_impl_pkg:nextpnr-ice40" -> { "impl:ice40", "impl:pnr" };
+    "p_impl_pkg:nextpnr-ecp5" -> { "impl:ecp5", "impl:pnr" };
+
   }
 
 }
