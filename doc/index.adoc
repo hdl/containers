@@ -65,110 +65,92 @@ include::contributing.adoc[]
 a|* {blank}
 +
 --
-:workflow: doc
-include::shield_gha.adoc[]
+GHAStatus:doc[]
 --
 * {blank}
 +
 --
-:workflow: base
-include::shield_gha.adoc[]
+GHAStatus:base[]
 --
 a|* {blank}
 +
 --
-:workflow: ghdl
-include::shield_gha.adoc[]
+GHAStatus:ghdl[]
 --
 * {blank}
 +
 --
-:workflow: gtkwave
-include::shield_gha.adoc[]
+GHAStatus:gtkwave[]
 --
 * {blank}
 +
 --
-:workflow: icestorm
-include::shield_gha.adoc[]
+GHAStatus:icestorm[]
 --
 * {blank}
 +
 --
-:workflow: prjtrellis
-include::shield_gha.adoc[]
+GHAStatus:prjtrellis[]
 --
 * {blank}
 +
 --
-:workflow: yosys
-include::shield_gha.adoc[]
+GHAStatus:yosys[]
 --
 a|* {blank}
 +
 --
-:workflow: ghdl-yosys-plugin
-include::shield_gha.adoc[]
+GHAStatus:ghdl-yosys-plugin[]
 --
 * {blank}
 +
 --
-:workflow: nextpnr
-include::shield_gha.adoc[]
+GHAStatus:nextpnr[]
 --
 a|* {blank}
 +
 --
-:workflow: boolector
-include::shield_gha.adoc[]
+GHAStatus:boolector[]
 --
 * {blank}
 +
 --
-:workflow: cvc4
-include::shield_gha.adoc[]
+GHAStatus:cvc4[]
 --
 * {blank}
 +
 --
-:workflow: superprove
-include::shield_gha.adoc[]
+GHAStatus:superprove[]
 --
 * {blank}
 +
 --
-:workflow: symbiyosys
-include::shield_gha.adoc[]
+GHAStatus:symbiyosys[]
 --
 * {blank}
 +
 --
-:workflow: yices2
-include::shield_gha.adoc[]
+GHAStatus:yices2[]
 --
 * {blank}
 +
 --
-:workflow: z3
-include::shield_gha.adoc[]
+GHAStatus:z3[]
 --
 a|* {blank}
 +
 --
-:workflow: formal
-include::shield_gha.adoc[]
+GHAStatus:formal[]
 --
 * {blank}
 +
 --
-:workflow: impl
-include::shield_gha.adoc[]
+GHAStatus:impl[]
 --
 * {blank}
 +
 --
-:workflow: prog
-include::shield_gha.adoc[]
+GHAStatus:prog[]
 --
 |===
 

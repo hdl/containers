@@ -1,1 +1,0 @@
-https://github.com/hdl/containers/actions?query=workflow%3A{workflow}[image:https://img.shields.io/github/workflow/status/hdl/containers/{workflow}/main?longCache=true&style=flat-square&label={workflow}&logo=GitHub%20Actions&logoColor=fff[title="'{workflow}' workflow Status"]]
