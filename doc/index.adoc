@@ -25,16 +25,16 @@ include::tools.adoc[]
 Images including multiple tools:
 
 * **I**mplementation: GHDL + Yosys + nextpnr
-** https://hub.docker.com/r/hdlc/impl/tags[image:https://img.shields.io/docker/image-size/hdlc/impl/ice40?longCache=true&style=flat-square&label=hdlc%2Fimpl:ice40&logo=Docker&logoColor=fff[title='hdlc/impl:ice40 Docker image size']] nextpnr-ice40 only, and https://hub.docker.com/r/hdlc/impl/tags[image:https://img.shields.io/docker/image-size/hdlc/impl/icestorm?longCache=true&style=flat-square&label=hdlc%2Fimpl:icestorm&logo=Docker&logoColor=fff[title='hdlc/impl:icestorm Docker image size']] including icestorm.
-** https://hub.docker.com/r/hdlc/impl/tags[image:https://img.shields.io/docker/image-size/hdlc/impl/ecp5?longCache=true&style=flat-square&label=hdlc%2Fimpl:ecp5&logo=Docker&logoColor=fff[title='hdlc/impl:ecp5 Docker image size']] nextpnr-ecp5 only, and https://hub.docker.com/r/hdlc/impl/tags[image:https://img.shields.io/docker/image-size/hdlc/impl/prjtrellis?longCache=true&style=flat-square&label=hdlc%2Fimpl:prjtrellis&logo=Docker&logoColor=fff[title='hdlc/impl:prjtrellis Docker image size']] including prjtrellis.
-** https://hub.docker.com/r/hdlc/impl/tags[image:https://img.shields.io/docker/image-size/hdlc/impl/generic?longCache=true&style=flat-square&label=hdlc%2Fimpl:generic&logo=Docker&logoColor=fff[title='hdlc/impl:generic Docker image size']] nextpnr-generic only.
-** https://hub.docker.com/r/hdlc/impl/tags[image:https://img.shields.io/docker/image-size/hdlc/impl/pnr?longCache=true&style=flat-square&label=hdlc%2Fimpl:pnr&logo=Docker&logoColor=fff[title='hdlc/impl:pnr Docker image size']] all nextpnr targets (ecp5, ice40, and generic).
-** https://hub.docker.com/r/hdlc/impl/tags[image:https://img.shields.io/docker/image-size/hdlc/impl/latest?longCache=true&style=flat-square&label=hdlc%2Fimpl&logo=Docker&logoColor=fff[title='hdlc/impl:latest Docker image size']] impl:pnr, including icestorm and prjtrellis.
+** OCIImage:impl[ice40] nextpnr-ice40 only, and OCIImage:impl[icestorm] including icestorm.
+** OCIImage:impl[ecp5] nextpnr-ecp5 only, and OCIImage:impl[prjtrellis] including prjtrellis.
+** OCIImage:impl[generic] nextpnr-generic only.
+** OCIImage:impl[pnr] all nextpnr targets (ecp5, ice40, and generic).
+** OCIImage:impl[] impl:pnr, including icestorm and prjtrellis.
 * **F**ormal:
-** https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal/latest?longCache=true&style=flat-square&label=hdlc%2Fformal&logo=Docker&logoColor=fff[title='hdlc/formal:latest Docker image size']] all solvers depending on Python 3.
-** https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal/min?longCache=true&style=flat-square&label=hdlc%2Fformal:min&logo=Docker&logoColor=fff[title='hdlc/formal:min Docker image size']] Z3 only.
-** https://hub.docker.com/r/hdlc/formal/tags[image:https://img.shields.io/docker/image-size/hdlc/formal/all?longCache=true&style=flat-square&label=hdlc%2Fformal:all&logo=Docker&logoColor=fff[title='hdlc/formal:all Docker image size']] all solvers, depending on either Python 2 or Python 3.
-* **P**rogramming: https://hub.docker.com/r/hdlc/prog/tags[image:https://img.shields.io/docker/image-size/hdlc/prog?longCache=true&style=flat-square&label=hdlc%2Fprog&logo=Docker&logoColor=fff[title='hdlc/prog:latest Docker image size']]
+** OCIImage:formal[] all solvers depending on Python 3.
+** OCIImage:formal[min] Z3 only.
+** OCIImage:formal[all] all solvers, depending on either Python 2 or Python 3.
+* **P**rogramming: OCIImage:prog[]
 
 To Do:
 

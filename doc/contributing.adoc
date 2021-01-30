@@ -2,9 +2,9 @@
 
 This repository provides a set of base images for building and for runtime: link:{repotree}base.dockerfile[`base.dockerfile`]. All the images in the ecosystem are based on these:
 
-* https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/base?longCache=true&style=flat-square&label=hdlc%2Fbuild:base&logo=Docker&logoColor=fff[title='hdlc/build:base Docker image size']] Debian Buster with updated `ca-certificates`, `curl` and Python 3.
-* https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/build?longCache=true&style=flat-square&label=hdlc%2Fbuild:build&logo=Docker&logoColor=fff[title='hdlc/build:build Docker image size']] based on `base`, includes `clang` and `make`.
-* https://hub.docker.com/r/hdlc/build/tags[image:https://img.shields.io/docker/image-size/hdlc/build/dev?longCache=true&style=flat-square&label=hdlc%2Fbuild:dev&logo=Docker&logoColor=fff[title='hdlc/build:dev Docker image size']] based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
+* OCIImage:build[base] Debian Buster with updated `ca-certificates`, `curl` and Python 3.
+* OCIImage:build[build] based on `base`, includes `clang` and `make`.
+* OCIImage:build[dev] based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
 
 Then, for each project/tool there are a dockerfile, a GitHub Actions workflow, and one or more test scripts. Those are used for:
 

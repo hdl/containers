@@ -35,14 +35,9 @@ with _tools.open('r') as stream:
     tools = load(stream, Loader=Loader)
 
 
-def shield_dockerhub(repo, tag):
-    latest = f':{tag}' if tag != 'latest' else ''
-    return f'https://hub.docker.com/r/hdlc/{repo}/tags[image:https://img.shields.io/docker/image-size/hdlc/{repo}/{tag}?longCache=true&style=flat-square&label={repo}{latest}&logo=Docker&logoColor=fff[title=\'hdlc/{repo}:{tag} Docker image size\']]'
-
-
-def shield_dockerhub_split_tag(item):
+def _split_tag(item):
     items = item.split(':')
-    return shield_dockerhub(items[0], 'latest' if len(items)==1 else items[1])
+    return 'OCIImage:%s[%s]' % (items[0], 'latest' if len(items)==1 else items[1])
 
 
 with (ROOT/'tools.adoc').open('w') as fptr:
@@ -64,12 +59,12 @@ with (ROOT/'tools.adoc').open('w') as fptr:
         fptr.write('\n')
         fptr.write('^.|%s[%s]\n' % (var['url'], tool))
 
-        pkg = ' '.join(shield_dockerhub('pkg', item) for item in (
+        pkg = ' '.join('OCIImage:pkg[%s]' % item for item in (
             var['pkg'] if 'pkg' in var else [])
         )
         fptr.write('^.|%s\n' % ('-' if len(pkg) == 0 else pkg))
 
-        use = ' '.join(shield_dockerhub_split_tag(item) for item in (
+        use = ' '.join(_split_tag(item) for item in (
             var['use'] if 'use' in var else []
         ))
         fptr.write('^.|%s\n' % ('-' if len(use) == 0 else use))
