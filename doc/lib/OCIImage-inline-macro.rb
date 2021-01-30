@@ -33,10 +33,7 @@ Extensions.register do
     named :OCIImage
     name_positional_attributes 'tag'
     process do |parent, target, attrs|
-      tag = attrs['tag']
-      if tag == nil
-        tag = 'latest'
-      end
+      tag = attrs['tag'] || 'latest'
       if tag != 'latest'
         ctag = ":#{tag}"
       end
