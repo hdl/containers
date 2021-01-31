@@ -27,6 +27,13 @@ Multiple tools from fine-grained images are included in larger images for common
 NOTE: These images are coloured [maroon]#BROWN# in the <<Graph>>.
 
 
+=== Tools with GUI
+
+By default, tools with Graphical User Interface (GUI) cannot be used in containers, because there is no graphical server. However, there are multiple alternatives for making an https://en.wikipedia.org/wiki/X_Window_System[X11] or https://en.wikipedia.org/wiki/Wayland_(display_server_protocol)[Wayland] server visible to the container. https://github.com/mviereck/x11docker[mviereck/x11docker] and https://github.com/mviereck/runx[mviereck/runx] are full-featured helper scripts for setting up the environment and running GUI applications and desktop environments in OCI containers. GNU/Linux and Windows hosts are supported, and security related options are provided (such as cookie authentication). Users of GTKWave, nextpnr and other EDA tools will likely want to try x11docker (and runx).
+
+* https://joss.theoj.org/papers/10.21105/joss.01349[x11docker: Run GUI applications in Docker containers; Journal of Open Source Hardware].
+
+
 === USB/IP protocol support for Docker Desktop
 
 USB/IP protocol allows to pass USB device(s) from server(s) to client(s) over the network. As explained at https://www.kernel.org/doc/readme/tools-usb-usbip-README[kernel.org/doc/readme/tools-usb-usbip-README], on GNU/Linux, USB/IP is implemented as a few kernel modules with companion userspace tools. However, the default underlying Hyper-V VM machine (based on https://alpinelinux.org/[Alpine Linux]) shipped with _Docker Desktop_ (aka _docker-for-win_/_docker-for-mac_) does not include the required kernel modules. Fortunately, privileged docker containers allow to install missing kernel modules. The shell script in link:{repotree}usbip/[`usbip/`] supports customising the native VM in _Docker Desktop_ for adding USB over IP support.
