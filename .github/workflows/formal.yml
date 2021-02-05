@@ -44,6 +44,16 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
+    - run: >
+        dockerPull
+        hdlc/ghdl:yosys
+        hdlc/pkg:z3
+        hdlc/pkg:symbiyosys
+        hdlc/pkg:yices2
+        hdlc/pkg:boolector
+        hdlc/pkg:cvc4
+        hdlc/pkg:superprove
+
     - run: dockerBuild formal:min formal min
     - run: dockerBuild formal     formal latest
     - run: dockerBuild formal:all formal

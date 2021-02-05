@@ -45,6 +45,12 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
+    - run: >
+        dockerPull
+        hdlc/ghdl:yosys
+        hdlc/pkg:ghdl-yosys-plugin
+        hdlc/pkg:yosys
+
     - run: dockerBuild  build:impl  impl  base
 
     - name: Login to DockerHub
@@ -80,6 +86,12 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
+    - run: >
+        dockerPull
+        hdlc/build:impl
+        hdlc/pkg:nextpnr-${{ matrix.arch }}
+        hdlc/pkg:${{ matrix.prj }}
+
     - run: dockerBuild  impl:${{ matrix.arch }}  impl ${{ matrix.arch }}
     - run: dockerBuild  impl:${{ matrix.prj  }}  impl ${{ matrix.prj }}
 
@@ -110,6 +122,15 @@ jobs:
         submodules: recursive
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+
+    - run: >
+        dockerPull
+        hdlc/build:impl
+        hdlc/pkg:nextpnr-ice40
+        hdlc/pkg:nextpnr-ecp5
+        hdlc/pkg:nextpnr-generic
+        hdlc/pkg:icestorm
+        hdlc/pkg:prjtrellis
 
     - run: dockerBuild  impl:generic  impl  generic
     - run: dockerBuild  impl:pnr      impl  pnr
