@@ -47,7 +47,7 @@ jobs:
     - run: dockerBuild yosys     yosys
 
     - run: dockerTestPkg yosys
-    - run: dockerTest yosys     yosys
+    - run: dockerTest yosys
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
