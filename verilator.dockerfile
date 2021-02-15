@@ -1,4 +1,4 @@
-FROM hdlc/build:build AS base
+FROM hdlc/build:build AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -8,8 +8,6 @@ RUN apt-get update -qq \
     libfl-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
-
-FROM base AS build
 
 RUN git clone https://github.com/verilator/verilator \
  && cd verilator \
