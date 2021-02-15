@@ -148,6 +148,16 @@ icestorm:
 
 #---
 
+iverilog:
+  src: true
+  url: 'https://hdl.github.io/awesome/items/iverilog'
+  pkg:
+    - 'iverilog'
+  use:
+    - 'iverilog'
+
+#---
+
 klayout:
   src: true
   url: 'https://hdl.github.io/awesome/items/klayout'

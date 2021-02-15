@@ -26,6 +26,7 @@ digraph G {
 
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
     d_gtkwave   [label="gtkwave"];
+    d_iverilog  [label="iverilog"];
     d_verilator [label="verilator"];
     d_sim       [label="sim"];
     d_octave    [label="octave"];
@@ -40,12 +41,14 @@ digraph G {
     "build/build"
     "build/base"
     { node [color=limegreen, fontcolor=limegreen]
+      "iverilog"
       "verilator"
       "ghdl/llvm"
       "xyce"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
       "pkg/gtkwave"
+      "pkg/iverilog"
       "pkg/verilator"
       "pkg/osvb"
       "pkg/xyce"
@@ -87,6 +90,29 @@ digraph G {
     "t_pkg/gtkwave" [shape=folder, color=red, fontcolor=red, label="gtkwave.pkg"];
 
     "pkg/gtkwave" -> "t_pkg/gtkwave";
+  }
+
+  subgraph cluster_iverilog {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_iverilog_build/build" [label="build/build"]
+      "p_iverilog_build/base" [label="build/base"]
+      "p_iverilog_scratch" [label="scratch"]
+    }
+
+    d_iverilog -> {
+      "iverilog"
+      "pkg/iverilog"
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      "t_iverilog" [label="iverilog"];
+      "t_pkg/iverilog" [label="iverilog.pkg"];
+    }
+
+    "iverilog" -> "t_iverilog";
+    "pkg/iverilog" -> "t_pkg/iverilog";
   }
 
   subgraph cluster_verilator {
@@ -190,9 +216,14 @@ digraph G {
   "build/build" -> "p_gtkwave_build/build" -> d_gtkwave;
   "scratch" -> "p_gtkwave_scratch" -> d_gtkwave;
 
+  "build/build" -> "p_iverilog_build/build" -> d_iverilog;
+  "build/base" -> "p_iverilog_build/base" -> d_iverilog;
+  "scratch" -> "p_iverilog_scratch" -> d_iverilog;
+
   "build/build" -> "p_verilator_build/build" -> d_verilator;
   "build/base" -> "p_verilator_build/base" -> d_verilator;
   "scratch" -> "p_verilator_scratch" -> d_verilator;
+
 
   "build/build" -> "p_xyce_build/build" -> d_xyce;
   "build/base" -> "p_xyce_build/base" -> d_xyce;
@@ -205,6 +236,9 @@ digraph G {
 
   { edge [style=dashed]
     "p_gtkwave_scratch" -> "pkg/gtkwave";
+
+    "p_iverilog_build/base" -> "iverilog";
+    "p_iverilog_scratch" -> "pkg/iverilog";
 
     "p_verilator_build/base" -> "verilator";
     "p_verilator_scratch" -> "pkg/verilator";

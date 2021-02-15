@@ -30,6 +30,11 @@ GHAStatus:gtkwave[]
 * {blank}
 +
 --
+GHAStatus:iverilog[]
+--
+* {blank}
++
+--
 GHAStatus:verilator[]
 --
 * {blank}

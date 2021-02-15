@@ -51,6 +51,8 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "impl/generic": ["impl", "generic", None],
     "impl/pnr": ["impl", "pnr", None],
     "impl": ["impl", None, None],
+    "iverilog": ["iverilog", None, None],
+    "pkg/iverilog": ["iverilog", "pkg", None],
     "klayout": ["klayout", None, None],
     "pkg/klayout": ["klayout", "pkg", None],
     "magic": ["magic", None, None],
