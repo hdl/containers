@@ -182,6 +182,7 @@ NOTE: At the moment, there is no triggering mechanism set up between different G
 ** https://github.com/SymbiFlow/make-env[SymbiFlow/make-env]
 *** http://bit.ly/edda-conda-eda-spec[bit.ly/edda-conda-eda-spec]: Conda based system for FPGA and ASIC Dev
 *** https://github.com/SymbiFlow/make-env/issues/15[Support providing the environment using docker rather than conda #15]
+* https://github.com/limerainne/Dockerize-EDA[limerainne/Dockerize-EDA]
 * https://github.com/im-tomu/fomu-toolchain[im-tomu/fomu-toolchain]
 * https://github.com/alpin3/ulx3s[alpin3/ulx3s]
 * https://github.com/eine/elide/tree/master/elide/docker[eine/elide]
