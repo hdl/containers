@@ -116,6 +116,11 @@ GHAStatus:yosys[]
 --
 GHAStatus:nextpnr[]
 --
+* {blank}
++
+--
+GHAStatus:arachne-pnr[]
+--
 
 
 a|* {blank}

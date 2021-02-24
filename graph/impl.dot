@@ -25,6 +25,7 @@ digraph G {
   # Dockerfiles
 
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_arachnepnr  [label="arachne-pnr"];
     d_icestorm    [label="icestorm"];
     d_impl        [label="impl"];
     d_nextpnr     [label="nextpnr"];
@@ -39,6 +40,7 @@ digraph G {
     "build:build"
     "build:dev"
     { node [color=limegreen, fontcolor=limegreen]
+      "arachne-pnr"
       "ghdl:yosys"
       "icestorm"
       "prjtrellis"
@@ -50,6 +52,7 @@ digraph G {
       "nextpnr"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
+      "pkg:arachne-pnr"
       "pkg:icestorm"
       "pkg:prjtrellis"
       "pkg:nextpnr-generic"
@@ -84,11 +87,35 @@ digraph G {
 
   # Workflows
 
+  subgraph cluster_arachenpnr {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_arachnepnr_pkg:icestorm" [label="pkg:icestorm"]
+      "p_arachnepnr_build:build"  [label="build:build"]
+      "p_arachnepnr_build:base"   [label="build:base"]
+      "p_arachnepnr_scratch"      [label="scratch"]
+    }
+
+    d_arachnepnr -> {
+      "arachne-pnr"
+      "pkg:arachne-pnr"
+     } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red]
+      "t_arachne-pnr"     [label="arachne-pnr"];
+      "t_pkg:arachne-pnr" [label="arachne-pnr.pkg"];
+    }
+
+    "arachne-pnr" -> "t_arachne-pnr";
+    "pkg:arachne-pnr" -> "t_pkg:arachne-pnr";
+  }
+
   subgraph cluster_icestorm {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_icestorm_scratch" [label="scratch"]
-      "p_icestorm_build:base" [label="build:base"]
+      "p_icestorm_scratch"     [label="scratch"]
+      "p_icestorm_build:base"  [label="build:base"]
       "p_icestorm_build:build" [label="build:build"]
     }
 
@@ -99,7 +126,7 @@ digraph G {
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
-      "t_icestorm" [label="icestorm"];
+      "t_icestorm"     [label="icestorm"];
       "t_pkg:icestorm" [label="icestorm.pkg"];
     }
 
@@ -264,6 +291,11 @@ digraph G {
 
   # Dockerfile dependencies
 
+  "build:build" -> "p_arachnepnr_build:build" -> d_arachnepnr;
+  "build:base" -> "p_arachnepnr_build:base" -> d_arachnepnr;
+  "scratch" -> "p_arachnepnr_scratch" -> d_arachnepnr;
+  "pkg:icestorm" -> "p_arachnepnr_pkg:icestorm" -> d_arachnepnr;
+
   "build:build" -> "p_icestorm_build:build" -> d_icestorm;
   "build:base" -> "p_icestorm_build:base" -> d_icestorm;
   "scratch" -> "p_icestorm_scratch" -> d_icestorm;
@@ -292,6 +324,9 @@ digraph G {
   # Image dependencies
 
   { edge [style=dashed]
+    "p_arachnepnr_build:base" -> "arachne-pnr";
+    "p_arachnepnr_scratch" -> "pkg:arachne-pnr";
+
     "p_prog_build:base" -> "prog";
 
     "p_nextpnr_build:base" -> "build:nextpnr-base" -> {

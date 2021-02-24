@@ -17,6 +17,15 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+arache-pnr:
+  url: 'https://hdl.github.io/awesome/items/arachne-pnr'
+  pkg:
+    - 'arachne-pnr'
+  use:
+    - 'arachne-pnr'
+
+#---
+
 boolector:
   url: 'https://hdl.github.io/awesome/items/boolector'
   pkg:
