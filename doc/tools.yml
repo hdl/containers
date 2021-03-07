@@ -110,6 +110,15 @@ icestorm:
 
 #---
 
+klayout:
+  url: 'https://hdl.github.io/awesome/items/klayout'
+  pkg:
+    - 'klayout'
+  use:
+    - 'klayout'
+
+#---
+
 nextpnr:
   url: 'https://hdl.github.io/awesome/items/nextpnr'
   pkg:
