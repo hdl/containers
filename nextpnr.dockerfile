@@ -38,7 +38,7 @@ RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     libeigen3-dev \
     libomp-dev \
- && git clone https://github.com/YosysHQ/nextpnr.git /tmp/nextpnr \
+ && git clone --recursive https://github.com/YosysHQ/nextpnr.git /tmp/nextpnr \
  && mkdir /tmp/nextpnr/build/
 
 #---
