@@ -18,7 +18,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM hdlc/build:base AS build
+ARG REGISTRY='ghcr.io/hdl/debian-buster'
+
+#---
+
+FROM $REGISTRY/build:base AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

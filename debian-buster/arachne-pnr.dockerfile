@@ -17,9 +17,16 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM hdlc/build:build AS build
+ARG REGISTRY='ghcr.io/hdl/debian-buster'
 
-COPY --from=hdlc/pkg:icestorm /icestorm/usr/local/share/icebox /usr/local/share/icebox
+#---
+
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:icestorm AS pkg-icestorm
+
+FROM $REGISTRY/build:build AS build
+
+COPY --from=pkg-icestorm /icestorm/usr/local/share/icebox /usr/local/share/icebox
 
 RUN git clone https://github.com/YosysHQ/arachne-pnr.git /tmp/arachne-pnr \
  && cd /tmp/arachne-pnr \
@@ -33,5 +40,5 @@ COPY --from=build /opt/arachne-pnr /arachne-pnr
 
 #---
 
-FROM hdlc/build:base
+FROM $REGISTRY/build:base
 COPY --from=build /opt/arachne-pnr /

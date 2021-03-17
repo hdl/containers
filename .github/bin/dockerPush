@@ -21,8 +21,11 @@
 
 set -e
 
+_baseos="$1"
+shift
+
 for _image; do
-  echo "::group::$_image"
-  docker push hdlc/"${_image}"
+  echo "::group::${_baseos}/${_image}"
+  docker push ghcr.io/hdl/"${_baseos}"/"${_image}"
   echo '::endgroup::'
 done

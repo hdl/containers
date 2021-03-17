@@ -35,6 +35,11 @@ jobs:
 
   prjtrellis:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - debian-buster
     steps:
 
     - uses: actions/checkout@v2
@@ -43,21 +48,22 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild pkg:prjtrellis prjtrellis pkg
-    - run: dockerBuild prjtrellis     prjtrellis
+    - run: dockerBuild ${{ matrix.os }} pkg:prjtrellis prjtrellis pkg
+    - run: dockerBuild ${{ matrix.os }} prjtrellis     prjtrellis
 
-    - run: dockerTestPkg prjtrellis
-    - run: dockerTest prjtrellis
+    - run: dockerTestPkg ${{ matrix.os }} prjtrellis
+    - run: dockerTest ${{ matrix.os }} prjtrellis
 
-    - name: Login to DockerHub
+    - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        registry: ghcr.io
+        username: gha
+        password: ${{ github.token }}
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush
+        dockerPush ${{ matrix.os }}
         pkg:prjtrellis
         prjtrellis

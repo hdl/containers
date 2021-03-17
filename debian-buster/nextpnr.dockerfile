@@ -19,7 +19,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM hdlc/build:base AS base
+ARG REGISTRY='ghcr.io/hdl/debian-buster'
+
+#---
+
+FROM $REGISTRY/build:base AS base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -30,7 +34,7 @@ RUN apt-get update -qq \
 
 #---
 
-FROM hdlc/build:dev AS build
+FROM $REGISTRY/build:dev AS build
 
 ENV LDFLAGS "-Wl,--copy-dt-needed-entries"
 
@@ -43,8 +47,11 @@ RUN apt-get update -qq \
 
 #---
 
-FROM hdlc/build:nextpnr-build AS build-ice40
-COPY --from=hdlc/pkg:icestorm /icestorm/usr/local/share/icebox /usr/local/share/icebox
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:icestorm AS pkg-icestorm
+
+FROM $REGISTRY/build:nextpnr-build AS build-ice40
+COPY --from=pkg-icestorm /icestorm/usr/local/share/icebox /usr/local/share/icebox
 
 RUN cd /tmp/nextpnr/build \
  && cmake .. \
@@ -62,18 +69,21 @@ COPY --from=build-ice40 /opt/nextpnr /nextpnr-ice40
 
 #---
 
-FROM hdlc/build:nextpnr-base AS ice40
+FROM $REGISTRY/build:nextpnr-base AS ice40
 COPY --from=build-ice40 /opt/nextpnr /
 
 #---
 
 FROM ice40 AS icestorm
-COPY --from=hdlc/pkg:icestorm /icestorm /
+COPY --from=pkg-icestorm /icestorm /
 
 #---
 
-FROM hdlc/build:nextpnr-build AS build-ecp5
-COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:prjtrellis AS pkg-prjtrellis
+
+FROM $REGISTRY/build:nextpnr-build AS build-ecp5
+COPY --from=pkg-prjtrellis /prjtrellis /
 
 RUN cd /tmp/nextpnr/build \
  && cmake .. \
@@ -91,17 +101,17 @@ COPY --from=build-ecp5 /opt/nextpnr /nextpnr-ecp5
 
 #---
 
-FROM hdlc/build:nextpnr-base AS ecp5
+FROM $REGISTRY/build:nextpnr-base AS ecp5
 COPY --from=build-ecp5 /opt/nextpnr /
 
 #---
 
 FROM ecp5 AS prjtrellis
-COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
+COPY --from=pkg-prjtrellis /prjtrellis /
 
 #---
 
-FROM hdlc/build:nextpnr-build AS build-generic
+FROM $REGISTRY/build:nextpnr-build AS build-generic
 
 RUN cd /tmp/nextpnr/build \
  && cmake .. \
@@ -119,12 +129,16 @@ COPY --from=build-generic /opt/nextpnr /nextpnr-generic
 
 #---
 
-FROM hdlc/build:nextpnr-base AS generic
+FROM $REGISTRY/build:nextpnr-base AS generic
 COPY --from=build-generic /opt/nextpnr /
 
 #---
 
-FROM hdlc/build:nextpnr-base
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:nextpnr-ice40 AS pkg-nextpnr-ice40
+FROM $REGISTRY/pkg:nextpnr-ecp5 AS pkg-nextpnr-ecp5
+
+FROM $REGISTRY/build:nextpnr-base
 COPY --from=build-generic /opt/nextpnr /
-COPY --from=hdlc/pkg:nextpnr-ice40 /nextpnr-ice40 /
-COPY --from=hdlc/pkg:nextpnr-ecp5 /nextpnr-ecp5 /
+COPY --from=pkg-nextpnr-ice40 /nextpnr-ice40 /
+COPY --from=pkg-nextpnr-ecp5 /nextpnr-ecp5 /

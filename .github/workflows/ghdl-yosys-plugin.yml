@@ -35,6 +35,11 @@ jobs:
 
   ghdl-yosys-plugin:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - debian-buster
     steps:
 
     - uses: actions/checkout@v2
@@ -43,21 +48,22 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild pkg:ghdl-yosys-plugin ghdl-yosys-plugin pkg
-    - run: dockerBuild ghdl:yosys            ghdl-yosys-plugin
+    - run: dockerBuild ${{ matrix.os }} pkg:ghdl-yosys-plugin ghdl-yosys-plugin pkg
+    - run: dockerBuild ${{ matrix.os }} ghdl:yosys            ghdl-yosys-plugin
 
-    - run: dockerTestPkg ghdl-yosys-plugin ghdl
-    - run: dockerTest ghdl:yosys
+    - run: dockerTestPkg ${{ matrix.os }} ghdl-yosys-plugin ghdl
+    - run: dockerTest ${{ matrix.os }} ghdl:yosys
 
-    - name: Login to DockerHub
+    - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        registry: ghcr.io
+        username: gha
+        password: ${{ github.token }}
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush
+        dockerPush ${{ matrix.os }}
         pkg:ghdl-yosys-plugin
         ghdl:yosys

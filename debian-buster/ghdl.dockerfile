@@ -17,9 +17,13 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+ARG REGISTRY='ghcr.io/hdl/debian-buster'
+
+#---
+
 FROM ghdl/pkg:buster-mcode AS build
 
-# TODO Build GHDL on hdlc/build:build instead of picking ghdl/pkg:buster-mcode
+# TODO Build GHDL on $REGISTRY/build:build instead of picking ghdl/pkg:buster-mcode
 
 #---
 
@@ -29,7 +33,7 @@ COPY --from=build / /ghdl/usr/local/
 
 #--
 
-FROM hdlc/build:base
+FROM $REGISTRY/build:base
 
 COPY --from=build / /usr/local/
 

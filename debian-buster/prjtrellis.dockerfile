@@ -17,9 +17,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-#---
+ARG REGISTRY='ghcr.io/hdl/debian-buster'
 
-FROM hdlc/build:dev AS build
+#--
+
+FROM $REGISTRY/build:dev AS build
 
 ENV LDFLAGS "-Wl,--copy-dt-needed-entries"
 
@@ -36,7 +38,7 @@ COPY --from=build /opt/prjtrellis /prjtrellis
 
 #---
 
-FROM hdlc/build:base
+FROM $REGISTRY/build:base
 COPY --from=build /opt/prjtrellis /
 
 RUN apt-get update -qq \

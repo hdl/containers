@@ -35,27 +35,33 @@ jobs:
 
   arachne-pnr:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - debian-buster
     steps:
 
     - uses: actions/checkout@v2
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild pkg:arachne-pnr arachne-pnr pkg
-    - run: dockerBuild arachne-pnr     arachne-pnr
+    - run: dockerBuild ${{ matrix.os }} pkg:arachne-pnr arachne-pnr pkg
+    - run: dockerBuild ${{ matrix.os }} arachne-pnr     arachne-pnr
 
-    - run: dockerTestPkg arachne-pnr
-    - run: dockerTest arachne-pnr
+    - run: dockerTestPkg ${{ matrix.os }} arachne-pnr
+    - run: dockerTest ${{ matrix.os }} arachne-pnr
 
-    - name: Login to DockerHub
+    - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        registry: ghcr.io
+        username: gha
+        password: ${{ github.token }}
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush
+        dockerPush ${{ matrix.os }}
         pkg:arachne-pnr
         arachne-pnr

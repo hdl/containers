@@ -17,8 +17,15 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM hdlc/build:base
-COPY --from=hdlc/pkg:icestorm /iceprog /
+ARG REGISTRY='ghcr.io/hdl/debian-buster'
+
+#---
+
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:icestorm AS pkg-icestorm
+
+FROM $REGISTRY/build:base
+COPY --from=pkg-icestorm /iceprog /
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

@@ -21,19 +21,20 @@
 
 set -e
 
-_tag="$1"
+_baseos="$1"
+_tag="$2"
 
 _dir="${_tag}"
-if [ -n "$2" ]; then
-  _dir="$2"
+if [ -n "$3" ]; then
+  _dir="$3"
 fi
 
-echo "::group::Build hdlc/tespkg:${_tag}"
-docker build -t hdlc/testpkg:"${_tag}" - <<-EOF
+echo "::group::Build ghcr.io/hdl/${_baseos}/tespkg:${_tag}"
+docker build -t ghcr.io/hdl/"${_baseos}"/testpkg:"${_tag}" - <<-EOF
 FROM alpine
 RUN apk add -U --no-cache file tree
-COPY --from=hdlc/pkg:${_tag} /${_dir} /
+COPY --from=ghcr.io/hdl/${_baseos}/pkg:${_tag} /${_dir} /
 EOF
 echo '::endgroup::'
 
-docker run --rm -v /$(pwd)://wrk hdlc/testpkg:"${_tag}" //wrk/test/"${_tag}".pkg.sh
+docker run --rm -v /$(pwd)://wrk ghcr.io/hdl/"${_baseos}"/testpkg:"${_tag}" //wrk/test/"${_tag}".pkg.sh

@@ -36,6 +36,11 @@ jobs:
 
   formal:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - debian-buster
     steps:
 
     - uses: actions/checkout@v2
@@ -46,32 +51,33 @@ jobs:
 
     - run: >
         dockerPull
-        hdlc/ghdl:yosys
-        hdlc/pkg:z3
-        hdlc/pkg:symbiyosys
-        hdlc/pkg:yices2
-        hdlc/pkg:boolector
-        hdlc/pkg:cvc4
-        hdlc/pkg:superprove
+        ghcr.io/hdl/${{ matrix.os }}/ghdl:yosys
+        ghcr.io/hdl/${{ matrix.os }}/pkg:z3
+        ghcr.io/hdl/${{ matrix.os }}/pkg:symbiyosys
+        ghcr.io/hdl/${{ matrix.os }}/pkg:yices2
+        ghcr.io/hdl/${{ matrix.os }}/pkg:boolector
+        ghcr.io/hdl/${{ matrix.os }}/pkg:cvc4
+        ghcr.io/hdl/${{ matrix.os }}/pkg:superprove
 
-    - run: dockerBuild formal:min formal min
-    - run: dockerBuild formal     formal latest
-    - run: dockerBuild formal:all formal
+    - run: dockerBuild ${{ matrix.os }} formal:min formal min
+    - run: dockerBuild ${{ matrix.os }} formal     formal latest
+    - run: dockerBuild ${{ matrix.os }} formal:all formal
 
-    - run: dockerTest formal:min
-    - run: dockerTest formal
-    - run: dockerTest formal:all
+    - run: dockerTest ${{ matrix.os }} formal:min
+    - run: dockerTest ${{ matrix.os }} formal
+    - run: dockerTest ${{ matrix.os }} formal:all
 
-    - name: Login to DockerHub
+    - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        registry: ghcr.io
+        username: gha
+        password: ${{ github.token }}
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush
+        dockerPush ${{ matrix.os }}
         formal:min
         formal
         formal:all

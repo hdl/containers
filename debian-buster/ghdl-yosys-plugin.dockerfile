@@ -17,7 +17,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM hdlc/yosys AS base
+ARG REGISTRY='ghcr.io/hdl/debian-buster'
+
+#---
+
+FROM $REGISTRY/yosys AS base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -27,9 +31,12 @@ RUN apt-get update -qq \
 
 #---
 
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:ghdl AS pkg-ghdl
+
 FROM base AS plugin
 
-COPY --from=hdlc/pkg:ghdl /ghdl /opt/ghdl
+COPY --from=pkg-ghdl /ghdl /opt/ghdl
 
 RUN mkdir /tmp/ghdl-yosys-plugin && cd /tmp/ghdl-yosys-plugin \
  && curl -fsSL https://codeload.github.com/ghdl/ghdl-yosys-plugin/tar.gz/master | tar xzf - --strip-components=1
@@ -41,7 +48,7 @@ RUN cp -vr /opt/ghdl/* / \
 
 #---
 
-FROM hdlc/pkg:ghdl AS pkg
+FROM $REGISTRY/pkg:ghdl AS pkg
 
 COPY --from=plugin /opt/ghdl/usr/local/lib/ghdl_yosys.so /ghdl/usr/local/lib/ghdl_yosys.so
 

@@ -36,24 +36,30 @@ jobs:
 
   symbiyosys:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - debian-buster
     steps:
 
     - uses: actions/checkout@v2
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild pkg:symbiyosys symbiyosys
+    - run: dockerBuild ${{ matrix.os }} pkg:symbiyosys symbiyosys
 
-    - run: dockerTestPkg symbiyosys
+    - run: dockerTestPkg ${{ matrix.os }} symbiyosys
 
-    - name: Login to DockerHub
+    - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        registry: ghcr.io
+        username: gha
+        password: ${{ github.token }}
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush
+        dockerPush ${{ matrix.os }}
         pkg:symbiyosys

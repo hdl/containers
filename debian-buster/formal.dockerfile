@@ -18,10 +18,18 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM hdlc/ghdl:yosys AS min
+ARG REGISTRY='ghcr.io/hdl/debian-buster'
 
-COPY --from=hdlc/pkg:z3 /z3 /
-COPY --from=hdlc/pkg:symbiyosys /symbiyosys /
+#---
+
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:z3 AS pkg-z3
+FROM $REGISTRY/pkg:symbiyosys AS pkg-symbiyosys
+
+FROM $REGISTRY/ghdl:yosys AS min
+
+COPY --from=pkg-z3 /z3 /
+COPY --from=pkg-symbiyosys /symbiyosys /
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -31,17 +39,27 @@ RUN apt-get update -qq \
 
 #---
 
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:yices2 AS pkg-yices2
+FROM $REGISTRY/pkg:boolector AS pkg-boolector
+FROM $REGISTRY/pkg:cvc4 AS pkg-cvc4
+
 FROM min AS latest
 
-COPY --from=hdlc/pkg:yices2 /yices2 /
-COPY --from=hdlc/pkg:boolector /boolector /
-COPY --from=hdlc/pkg:cvc4 /cvc4 /
+COPY --from=pkg-yices2 /yices2 /
+COPY --from=pkg-boolector /boolector /
+COPY --from=pkg-cvc4 /cvc4 /
 
 #---
 
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:superprove AS pkg-superprove
+
 FROM latest
 
-COPY --from=hdlc/pkg:superprove /superprove /
+ARG REGISTRY
+
+COPY --from=pkg-superprove /superprove /
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

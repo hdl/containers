@@ -37,6 +37,11 @@ jobs:
 
   impl-build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - debian-buster
     steps:
 
     - uses: actions/checkout@v2
@@ -47,22 +52,23 @@ jobs:
 
     - run: >
         dockerPull
-        hdlc/ghdl:yosys
-        hdlc/pkg:ghdl-yosys-plugin
-        hdlc/pkg:yosys
+        ghcr.io/hdl/${{ matrix.os }}/ghdl:yosys
+        ghcr.io/hdl/${{ matrix.os }}/pkg:ghdl-yosys-plugin
+        ghcr.io/hdl/${{ matrix.os }}/pkg:yosys
 
-    - run: dockerBuild  build:impl  impl  base
+    - run: dockerBuild ${{ matrix.os }} build:impl impl base
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        registry: ghcr.io
+        username: gha
+        password: ${{ github.token }}
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush
+        dockerPush ${{ matrix.os }}
         build:impl
 
 
@@ -73,11 +79,12 @@ jobs:
       fail-fast: false
       max-parallel: 4
       matrix:
-        include: [
-          { arch: ice40, prj: icestorm   },
-          { arch: ecp5,  prj: prjtrellis },
-        ]
-    name: 'impl · ${{ matrix.arch }} ${{ matrix.prj }}'
+        os:
+          - debian-buster
+        task:
+          - { arch: ice40, prj: icestorm   }
+          - { arch: ecp5,  prj: prjtrellis }
+    name: '[${{ matrix.os }}] impl · ${{ matrix.task.arch }} ${{ matrix.task.prj }}'
     steps:
 
     - uses: actions/checkout@v2
@@ -88,33 +95,39 @@ jobs:
 
     - run: >
         dockerPull
-        hdlc/build:impl
-        hdlc/pkg:nextpnr-${{ matrix.arch }}
-        hdlc/pkg:${{ matrix.prj }}
+        ghcr.io/hdl/${{ matrix.os }}/build:impl
+        ghcr.io/hdl/${{ matrix.os }}/pkg:nextpnr-${{ matrix.task.arch }}
+        ghcr.io/hdl/${{ matrix.os }}/pkg:${{ matrix.task.prj }}
 
-    - run: dockerBuild  impl:${{ matrix.arch }}  impl ${{ matrix.arch }}
-    - run: dockerBuild  impl:${{ matrix.prj  }}  impl ${{ matrix.prj }}
+    - run: dockerBuild ${{ matrix.os }} impl:${{ matrix.task.arch }} impl ${{ matrix.task.task.arch }}
+    - run: dockerBuild ${{ matrix.os }} impl:${{ matrix.task.prj  }} impl ${{ matrix.task.prj }}
 
-    - run: dockerTest  impl:${{ matrix.arch }}
-    - run: dockerTest  impl:${{ matrix.prj  }}
+    - run: dockerTest ${{ matrix.os }} impl:${{ matrix.task.arch }}
+    - run: dockerTest ${{ matrix.os }} impl:${{ matrix.task.prj  }}
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        registry: ghcr.io
+        username: gha
+        password: ${{ github.token }}
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush
-        impl:${{ matrix.arch }}
-        impl:${{ matrix.prj }}
+        dockerPush ${{ matrix.os }}
+        impl:${{ matrix.task.arch }}
+        impl:${{ matrix.task.prj }}
 
 
   impl:
     needs: [ impl-build, impl-prjs ]
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - debian-buster
     steps:
 
     - uses: actions/checkout@v2
@@ -125,31 +138,32 @@ jobs:
 
     - run: >
         dockerPull
-        hdlc/build:impl
-        hdlc/pkg:nextpnr-ice40
-        hdlc/pkg:nextpnr-ecp5
-        hdlc/pkg:nextpnr-generic
-        hdlc/pkg:icestorm
-        hdlc/pkg:prjtrellis
+        ghcr.io/hdl/${{ matrix.os }}/build:impl
+        ghcr.io/hdl/${{ matrix.os }}/pkg:nextpnr-ice40
+        ghcr.io/hdl/${{ matrix.os }}/pkg:nextpnr-ecp5
+        ghcr.io/hdl/${{ matrix.os }}/pkg:nextpnr-generic
+        ghcr.io/hdl/${{ matrix.os }}/pkg:icestorm
+        ghcr.io/hdl/${{ matrix.os }}/pkg:prjtrellis
 
-    - run: dockerBuild  impl:generic  impl  generic
-    - run: dockerBuild  impl:pnr      impl  pnr
-    - run: dockerBuild  impl          impl
+    - run: dockerBuild ${{ matrix.os }} impl:generic impl generic
+    - run: dockerBuild ${{ matrix.os }} impl:pnr     impl pnr
+    - run: dockerBuild ${{ matrix.os }} impl         impl
 
-    - run: dockerTest  impl:generic
-    - run: dockerTest  impl:pnr
-    - run: dockerTest  impl
+    - run: dockerTest ${{ matrix.os }} impl:generic
+    - run: dockerTest ${{ matrix.os }} impl:pnr
+    - run: dockerTest ${{ matrix.os }} impl
 
-    - name: Login to DockerHub
+    - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        registry: ghcr.io
+        username: gha
+        password: ${{ github.token }}
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush
+        dockerPush ${{ matrix.os }}
         impl:generic
         impl:pnr
         impl

@@ -18,10 +18,18 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM hdlc/ghdl:yosys AS base
+ARG REGISTRY='ghcr.io/hdl/debian-buster'
 
-COPY --from=hdlc/pkg:ghdl-yosys-plugin /ghdl /
-COPY --from=hdlc/pkg:yosys /yosys /
+#---
+
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:ghdl-yosys-plugin AS pkg-ghdl-yosys-plugin
+FROM $REGISTRY/pkg:yosys AS pkg-yosys
+
+FROM $REGISTRY/ghdl:yosys AS base
+
+COPY --from=pkg-ghdl-yosys-plugin /ghdl /
+COPY --from=pkg-yosys /yosys /
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -33,38 +41,53 @@ RUN apt-get update -qq \
 
 #---
 
-FROM hdlc/build:impl AS ice40
-COPY --from=hdlc/pkg:nextpnr-ice40 /nextpnr-ice40 /
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:nextpnr-ice40 AS pkg-nextpnr-ice40
+
+FROM $REGISTRY/build:impl AS ice40
+COPY --from=pkg-nextpnr-ice40 /nextpnr-ice40 /
 
 #---
+
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:icestorm AS pkg-icestorm
 
 FROM ice40 AS icestorm
-COPY --from=hdlc/pkg:icestorm /icestorm /
+COPY --from=pkg-icestorm /icestorm /
 
 #---
 
-FROM hdlc/build:impl AS ecp5
-COPY --from=hdlc/pkg:nextpnr-ecp5 /nextpnr-ecp5 /
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:nextpnr-ecp5 AS pkg-nextpnr-ecp5
+
+FROM $REGISTRY/build:impl AS ecp5
+COPY --from=pkg-nextpnr-ecp5 /nextpnr-ecp5 /
 
 #---
+
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:prjtrellis AS pkg-prjtrellis
 
 FROM ecp5 AS prjtrellis
-COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
+COPY --from=pkg-prjtrellis /prjtrellis /
 
 #---
 
-FROM hdlc/build:impl AS generic
-COPY --from=hdlc/pkg:nextpnr-generic /nextpnr-generic /
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg:nextpnr-generic AS pkg-nextpnr-generic
+
+FROM $REGISTRY/build:impl AS generic
+COPY --from=pkg-nextpnr-generic /nextpnr-generic /
 
 #---
 
-FROM hdlc/build:impl AS pnr
-COPY --from=hdlc/pkg:nextpnr-ecp5 /nextpnr-ecp5 /
-COPY --from=hdlc/pkg:nextpnr-ice40 /nextpnr-ice40 /
-COPY --from=hdlc/pkg:nextpnr-generic /nextpnr-generic /
+FROM $REGISTRY/build:impl AS pnr
+COPY --from=pkg-nextpnr-ecp5 /nextpnr-ecp5 /
+COPY --from=pkg-nextpnr-ice40 /nextpnr-ice40 /
+COPY --from=pkg-nextpnr-generic /nextpnr-generic /
 
 #---
 
 FROM pnr
-COPY --from=hdlc/pkg:icestorm /icestorm /
-COPY --from=hdlc/pkg:prjtrellis /prjtrellis /
+COPY --from=pkg-icestorm /icestorm /
+COPY --from=pkg-prjtrellis /prjtrellis /

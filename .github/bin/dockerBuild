@@ -21,14 +21,15 @@
 
 set -e
 
-_image="$1"
-_dockerfile="$2".dockerfile
+_baseos="$1"
+_image="$2"
+_dockerfile="$3".dockerfile
 
 _target=''
-if [ -n "$3" ]; then
-  _target='--target='"$3"
+if [ -n "$4" ]; then
+  _target='--target='"$4"
 fi
 
 docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 \
-  -t hdlc/"${_image}" ${_target} \
-  - < "${_dockerfile}"
+  -t ghcr.io/hdl/"${_baseos}"/"${_image}" ${_target} \
+  - < "${_baseos}"/"${_dockerfile}"
