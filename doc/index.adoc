@@ -50,6 +50,7 @@ To Do:
 * https://github.com/SymbiFlow/prjuray[Project U-Ray (Xilinx Ultrascale Series tooling)]
 * https://github.com/SymbiFlow/symbiflow-arch-defs[SymbiFlow Architecture Definitions + Tooling (Xilinx 7 Series, QuickLogic)]
 * https://hdl.github.io/awesome/items/vtr[Verilog To Routing]
+* https://github.com/adamgreig/ecpdap[ecpdap]
 
 include::context.adoc[]
 
