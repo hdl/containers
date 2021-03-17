@@ -40,6 +40,7 @@ jobs:
       matrix:
         os:
           - debian-buster
+          - centos-7
     steps:
 
     - uses: actions/checkout@v2
