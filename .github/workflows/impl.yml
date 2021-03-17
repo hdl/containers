@@ -71,6 +71,20 @@ jobs:
         dockerPush ${{ matrix.os }}
         build:impl
 
+    # Mirror to docker.io/hdlc
+
+    - name: Login to docker.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      run: >-
+        dockerMirror ${{ matrix.os }}
+        build:impl
+
 
   impl-prjs:
     needs: [ impl-build ]
@@ -119,6 +133,21 @@ jobs:
         impl:${{ matrix.task.arch }}
         impl:${{ matrix.task.prj }}
 
+    # Mirror to docker.io/hdlc
+
+    - name: Login to docker.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      run: >-
+        dockerMirror ${{ matrix.os }}
+        impl:${{ matrix.task.arch }}
+        impl:${{ matrix.task.prj }}
+
 
   impl:
     needs: [ impl-build, impl-prjs ]
@@ -164,6 +193,22 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
+        impl:generic
+        impl:pnr
+        impl
+
+    # Mirror to docker.io/hdlc
+
+    - name: Login to docker.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      run: >-
+        dockerMirror ${{ matrix.os }}
         impl:generic
         impl:pnr
         impl

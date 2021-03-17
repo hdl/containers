@@ -67,6 +67,21 @@ jobs:
         build:nextpnr-base
         build:nextpnr-build
 
+    # Mirror to docker.io/hdlc
+
+    - name: Login to docker.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      run: >-
+        dockerMirror ${{ matrix.os }}
+        build:nextpnr-base
+        build:nextpnr-build
+
 
   nextpnr-prjs:
     needs: [ nextpnr-build ]
@@ -112,6 +127,22 @@ jobs:
         nextpnr:${{ matrix.task.arch }}
         nextpnr:${{ matrix.task.prj }}
 
+    # Mirror to docker.io/hdlc
+
+    - name: Login to docker.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      run: >-
+        dockerMirror ${{ matrix.os }}
+        pkg:nextpnr-${{ matrix.task.arch }}
+        nextpnr:${{ matrix.task.arch }}
+        nextpnr:${{ matrix.task.prj }}
+
 
   nextpnr:
     needs: [ nextpnr-prjs ]
@@ -148,6 +179,22 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
+        pkg:nextpnr-generic
+        nextpnr:generic
+        nextpnr
+
+    # Mirror to docker.io/hdlc
+
+    - name: Login to docker.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      run: >-
+        dockerMirror ${{ matrix.os }}
         pkg:nextpnr-generic
         nextpnr:generic
         nextpnr

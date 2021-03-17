@@ -63,3 +63,17 @@ jobs:
       run: >-
         dockerPush ${{ matrix.os }}
         pkg:yices2
+
+    # Mirror to docker.io/hdlc
+
+    - name: Login to docker.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      run: >-
+        dockerMirror ${{ matrix.os }}
+        pkg:yices2
