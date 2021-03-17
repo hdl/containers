@@ -8,12 +8,12 @@ This repository provides a set of base images for building and for runtime: link
 
 Then, for each project/tool there are a dockerfile, a GitHub Actions workflow, and one or more test scripts. Those are used for:
 
-* Tools are built using `hdlc/build` images.
+* Tools are built using `*/build` images.
 * Package images based on `scratch` (and/or other reusable packages) are produced.
-* Ready-to-use images based on the runtime base image (`hdlc/build:base`) are produced.
+* Ready-to-use images based on the runtime base image (`*/build:base`) are produced.
 * Ready-to-use images are tested before uploading.
 
-In some dockerfiles/workflows, <<Package images>> are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for common use cases (such as `hdlc/impl`, `hdlc/formal` or `hdlc/prog`).
+In some dockerfiles/workflows, <<Package images>> are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for common use cases (such as `*/impl`, `*/formal` or `*/prog`).
 
 IMPORTANT: Before working on adding or extending the support for a tool, please check the https://github.com/hdl/containers/issues[issues] and https://github.com/hdl/containers/pulls[pull requests]; https://github.com/hdl/containers/issues/new[open an issue] or https://gitter.im/hdl/community[let us know through the chat]. Due to its distributed nature, someone might be working on that already!
 
@@ -67,9 +67,9 @@ graphviz::../graph/legend.dot[format="svg", align="center"]
 
 === Package images
 
-Each tool/project is built once only in this image/container ecosystem. However, some (many) of the tools need to be included in multiple images for different purposes. Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each tool/project. Therefore, `hdlc/pkg:*` images are created/used (coloured [blue]#BLUE# in the <<Graph>>). These are all based on `scratch` and are not runnable. Instead, they contain pre-built artifacts, to be then added into other images through `COPY --from=`.
+Each tool/project is built once only in this image/container ecosystem. However, some (many) of the tools need to be included in multiple images for different purposes. Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each tool/project. Therefore, `*/pkg:*` images are created/used (coloured [blue]#BLUE# in the <<Graph>>). These are all based on `scratch` and are not runnable. Instead, they contain pre-built artifacts, to be then added into other images through `COPY --from=`.
 
-Since `hdlc/pkg:*` images are not runnable _per se_, but an intermediate utility, the usage of environment variables `PREFIX` and `DESTDIR` in the dockerfiles might be misleading. All the tools in the ecosystem are expected to be installed into `/usr/local`, the standard location for user built tools in most GNU/Linux distributions. Hence:
+Since `*/pkg:*` images are not runnable _per se_, but an intermediate utility, the usage of environment variables `PREFIX` and `DESTDIR` in the dockerfiles might be misleading. All the tools in the ecosystem are expected to be installed into `/usr/local`, the standard location for user built tools in most GNU/Linux distributions. Hence:
 
 * `PREFIX` should typically not need to be modified. Most of the tools will default to `PREFIX=/usr/local`, which is correct. Yet, some tools might default to `/` or `/usr`. In those cases, setting it explicitly is required.
 * `DESTDIR` must be set to an empty location when calling `make install` or when copying the artifacts otherhow. The content of the corresponding package images is taken from that empty location. Therefore, if `DESTDIR` was unset, the artifacts of the tool might potentially be mixed with other existing assets in `/usr/local`. In most of the dockerfiles, `/opt/TOOL_NAME` is used as the temporary empty location.
@@ -80,19 +80,20 @@ Despite the usage of these variables being documented in https://www.gnu.org/pre
 
 A helper script is provided in link:{repotree}.github/bin/[`.github/bin/`] to ease building images, by hiding all common options:
 
-* `dockerBuild IMAGE_NAME DOCKERFILE_NAME [TARGET_STAGE]`
-** IMAGE_NAME: image name without `hdlc/` prefix.
+* `dockerBuild BASE_OS IMAGE_NAME DOCKERFILE_NAME [TARGET_STAGE]`
+** BASE_OS: set of images (e.g. `debian-buster`).
+** IMAGE_NAME: image name without the prefix.
 ** DOCKERFILE_NAME: name of the dockerfile to be used.
 ** (optional) TARGET_STAGE: name of that target stage in the dockerfile.
 
 === Inspect
 
-All ready-to-use images (coloured [green]#GREEN# or [maroon]#BROWN# in the <<Graph>>) are runnable. Therefore, users/contributors can run containers and test the tools interactively or through scripting. However, since `hdlc/pkg` images are not runnable, creating another image is required in order to inspect their content from a container. For instance:
+All ready-to-use images (coloured [green]#GREEN# or [maroon]#BROWN# in the <<Graph>>) are runnable. Therefore, users/contributors can run containers and test the tools interactively or through scripting. However, since `*/pkg` images are not runnable, creating another image is required in order to inspect their content from a container. For instance:
 
 [source, dockerfile]
 ----
 FROM busybox
-COPY --from=hdlc/pkg:TOOL_NAME /TOOL_NAME /
+COPY --from=*/pkg:TOOL_NAME /TOOL_NAME /
 ----
 
 In fact, link:{repotree}.github/bin/dockerTestPkg[`.github/bin/dockerTestPkg`] uses a similar dockerfile for running `*.pkg.sh` scripts from link:{repotree}test/[`test/`]. See <<Test>>.
@@ -104,11 +105,11 @@ Alternatively, or as a complement, https://github.com/wagoodman/dive[wagoodman/d
 docker run --rm -it \
   -v //var/run/docker.sock://var/run/docker.sock \
   wagoodman/dive \
-  hdlc/IMAGE[:TAG]
+  */IMAGE[:TAG]
 ----
 
 [#img-dive]
-.Inspection of `hdlc/pkg:yosys` with https://github.com/wagoodman/dive[wagoodman/dive].
+.Inspection of `*/pkg:yosys` with https://github.com/wagoodman/dive[wagoodman/dive].
 [link=img/dive.png]
 image::img/dive.png[wagoodman/dive, align="center"]
 
@@ -116,30 +117,32 @@ image::img/dive.png[wagoodman/dive, align="center"]
 
 There is a test script in link:{repotree}test/[`test/`] for each image in this ecosystem, according to the following convention:
 
-* Scripts for package images, `hdlc/pkg:TOOL_NAME`, are named `TOOL_NAME.pkg.sh`.
-* Scripts for other images, `hdlc/NAME[:TAG]`, are named `NAME[--TAG].sh`.
+* Scripts for package images, `*/pkg:TOOL_NAME`, are named `TOOL_NAME.pkg.sh`.
+* Scripts for other images, `*/NAME[:TAG]`, are named `NAME[--TAG].sh`.
 * Other helper scripts are named `_*.sh`.
 
 Furthermore, https://github.com/hdl/smoke-tests[hdl/smoke-test] is a submodule of this repository (link:{repotree}test/[`test/smoke-test`]). Smoke-tests contains fine grained tests that cover the most important functionalities of the tools. Those are used in other packaging projects too. Therefore, container tests are expected to execute the smoke-tests corresponding to the tools available in the image, before executing more specific tests.
 
 There are a couple of helper scripts in link:{repotree}.github/bin/[`.github/bin/`], for testing the images. Those are used in CI but can be useful locally too:
 
-* `dockerTest IMAGE_NAME [SCRIPT_NAME]`
-** IMAGE_NAME: image name without `hdlc/` prefix.
+* `dockerTest BASE_OS IMAGE_NAME [SCRIPT_NAME]`
+** BASE_OS: set of images (e.g. `debian-buster`).
+** IMAGE_NAME: image name without the prefix.
 ** (optional) SCRIPT_NAME: name of the test script, only required if it does not match `echo IMAGE_NAME | sed 's#:#--#'`.
-* `dockerTestPkg TAG_NAME [DIR_NAME]`
-** TAG_NAME: tag name (i.e. image name without `hdlc/pkg:` prefix).
+* `dockerTestPkg BASE_OS TAG_NAME [DIR_NAME]`
+** BASE_OS: set of images (e.g. `debian-buster`).
+** TAG_NAME: tag name (i.e. image name without `*/pkg:` prefix).
 ** (optional) DIR_NAME: directory name inside the package image which needs to be copied to the temporary image for testing.
 
 === Step by step checklist
 
 1. Create or update dockerfile(s).
 ** For each tool, a https://docs.docker.com/engine/reference/builder/[Dockerfile] recipe exists. All dockerfiles must use, at least, two stages.
-*** One stage, named `build`, is to be based on `hdlc/build:base` or `hdlc/build:build` or `hdlc/build:dev`. In this first stage, you need to add the missing build dependencies. Then, build the tool/project using the standard `PREFIX`, but install to a custom location using `DESTDIR`. See <<Package images>>.
-*** If the tool/project is to be used standalone, create an stage based on `hdlc/build:base`. Install runtime dependencies only.
+*** One stage, named `build`, is to be based on `*/build:base` or `*/build:build` or `*/build:dev`. In this first stage, you need to add the missing build dependencies. Then, build the tool/project using the standard `PREFIX`, but install to a custom location using `DESTDIR`. See <<Package images>>.
+*** If the tool/project is to be used standalone, create an stage based on `*/build:base`. Install runtime dependencies only.
 *** If the tool/project is to be packaged, create an stage based on `scratch`.
 *** In any case, copy the tool artifacts from the build stage using `COPY --from=STAGE_NAME`. In practice, several dockerfiles produce at least one package image and one ready-to-use image. Therefore, dockerfiles will likely have more than two stages.
-** Some tools are to be added to existing images which include several tools (coloured [maroon]#BROWN# in the <<Graph>>). After creating the dockerfile where the corresponding package image is defined, add `COPY --from=hdlc/pkg:TOOL_NAME` statements to the dockerfiles of multi-tool images.
+** Some tools are to be added to existing images which include several tools (coloured [maroon]#BROWN# in the <<Graph>>). After creating the dockerfile where the corresponding package image is defined, add `COPY --from=*/pkg:TOOL_NAME` statements to the dockerfiles of multi-tool images.
 2. Build and test the dockerfile(s) locally. Use helper scripts from link:{repotree}.github/bin[`.github/bin`] as explained in <<Build>> and <<Test>>.
 ** If a new tool was added, or a new image is to be generated, a test script needs to be added to link:{repotree}test/[`test/`]. See <<Test>> for naming guidelines.
 ** Be careful with the order. If you add a new tool and include it in one of the multi-tool images, the package image needs to be built first.

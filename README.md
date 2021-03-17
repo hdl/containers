@@ -7,4 +7,4 @@
   -->
 </p>
 
-This repository contains scripts and GitHub Actions (GHA) YAML workflows for building, testing and deploying OCI images (aka [Docker](https://www.docker.com/) | [Podman](https://podman.io) images) including open source [electronic design automation (EDA)](https://en.wikipedia.org/wiki/Electronic_design_automation) tooling. All of them are pushed to [hub.docker.com/u/hdlc](https://hub.docker.com/u/hdlc). See [hdl.github.io/containers](https://hdl.github.io/containers) for further details and contributing guidelines.
+This repository contains scripts and GitHub Actions (GHA) YAML workflows for building, testing and deploying OCI images (aka [Docker](https://www.docker.com/) | [Podman](https://podman.io) images) including open source [electronic design automation (EDA)](https://en.wikipedia.org/wiki/Electronic_design_automation) tooling. All of them are pushed to [ghcr.io/hdl](https://github.com/orgs/hdl/packages) and mirrored to [hub.docker.com/u/hdlc](https://hub.docker.com/u/hdlc). See [hdl.github.io/containers](https://hdl.github.io/containers) for further details and contributing guidelines.

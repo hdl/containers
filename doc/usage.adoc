@@ -9,7 +9,7 @@ In this project, both paradigms are supported; fine-grained images are available
 
 === Fine-grained pulling
 
-Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named `hdlc/<TOOL_NAME>`. Since all of them are based on the same root image, pulling multiple images involves retrieving a few additional layers only. Therefore, this is the recommended approach for CI or other environments with limited resources.
+Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named `*/<TOOL_NAME>`. Since all of them are based on the same root image, pulling multiple images involves retrieving a few additional layers only. Therefore, this is the recommended approach for CI or other environments with limited resources.
 
 * There is an example at https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile[ghdl-yosys-blink: Makefile] showcasing how to use this fine-grained approach with a makefile.
 * At https://github.com/marph91/icestick-remote[marph91/icestick-remote] the CI workflow for synthesis uses this approach.
@@ -20,9 +20,9 @@ NOTE: These images are coloured [lime]#GREEN# in the <<Graph>>.
 
 === All-in-one images
 
-Multiple tools from fine-grained images are included in larger images for common use cases. These are named `hdlc/<MAIN_USAGE>`. This is the recommended approach for users who are less familiar with containers and want a quick replacement for full-featured virtual machines. Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one imags.
+Multiple tools from fine-grained images are included in larger images for common use cases. These are named `*/<MAIN_USAGE>`. This is the recommended approach for users who are less familiar with containers and want a quick replacement for full-featured virtual machines. Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one imags.
 
-* The CI workflow in https://github.com/tmeissner/formal_hw_verification[tmeissner/formal_hw_verification] uses image `hdlc/formal:all` along with GitHub's 'Docker Action' syntax (see https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub[docs.github.com: Learn GitHub Actions > Referencing a container on Docker Hub]).
+* The CI workflow in https://github.com/tmeissner/formal_hw_verification[tmeissner/formal_hw_verification] uses image `*/formal:all` along with GitHub's 'Docker Action' syntax (see https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub[docs.github.com: Learn GitHub Actions > Referencing a container on Docker Hub]).
 
 NOTE: These images are coloured [maroon]#BROWN# in the <<Graph>>.
 
@@ -90,7 +90,7 @@ sleep 4
 ./run.sh -e lsusb
 ----
 
-IMPORTANT: There is an issue/bug in _Docker Desktop_ (https://github.com/docker/for-win/issues/4548[docker/for-win#4548]) that prevents the container where the USB device is added from seeing it. The workaround is to execute the board programming tool in a sibling container. For example: `docker run --rm --privileged hdlc/prog iceprog -t`.
+IMPORTANT: There is an issue/bug in _Docker Desktop_ (https://github.com/docker/for-win/issues/4548[docker/for-win#4548]) that prevents the container where the USB device is added from seeing it. The workaround is to execute the board programming tool in a sibling container. For example: `docker run --rm --privileged */prog iceprog -t`.
 
 ==== Alternatives
 

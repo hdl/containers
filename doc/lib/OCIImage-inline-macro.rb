@@ -37,8 +37,8 @@ Extensions.register do
       if tag != 'latest'
         ctag = ":#{tag}"
       end
-      text = %(image:https://img.shields.io/docker/image-size/hdlc/#{target}/#{tag}?longCache=true&style=flat-square&label=hdlc%2F#{target}#{ctag}&logo=Docker&logoColor=fff[title='hdlc/#{target}#{ctag} Docker image size'])
-      (create_anchor parent, text, type: :link, target: %(https://hub.docker.com/r/hdlc/#{target}/tags)).render
+      text = %(image:https://img.shields.io/docker/image-size/hdlc/#{target}/#{tag}?longCache=true&style=flat-square&label=#{target}#{ctag}&logo=Docker&logoColor=fff[title='#{target}#{ctag} Docker image size'])
+      (create_anchor parent, text, type: :link, target: %(https://github.com/orgs/hdl/packages/container/package/debian-buster/#{target})).render
     end
   end
 end
