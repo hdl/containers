@@ -1,3 +1,5 @@
+# Copyright 2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -17,18 +19,30 @@ FROM hdlc/build:build AS build
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     g++ \
-    ruby-dev \
+    libqt5svg5-dev \
+    libqt5xmlpatterns5-dev \
     python3-dev \
-    qt5-default qt5-qmake qttools5-dev libqt5xmlpatterns5-dev qtmultimedia5-dev libqt5svg5-dev \
+    qt5-default \
+    qt5-qmake \
+    qtmultimedia5-dev \
+    qttools5-dev \
+    ruby-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://github.com/KLayout/klayout.git /tmp/klayout \
  && mkdir -p /opt/klayout/usr/local/bin \
  && cd /tmp/klayout \
- && ./build.sh -bin /opt/klayout/usr/local/bin -rpath /usr/local/lib -ruby /usr/bin/ruby -python /usr/bin/python3 -qt5 -option -j$(nproc) \
+ && ./build.sh \
+ -bin /opt/klayout/usr/local/bin \
+ -rpath /usr/local/lib \
+ -ruby /usr/bin/ruby \
+ -python /usr/bin/python3 \
+ -qt5 \
+ -option -j$(nproc) \
  && mkdir -p /opt/klayout/usr/local/lib \
- && cd /opt/klayout/usr/local/bin && mv libklayout* db_plugins lay_plugins ../lib/
+ && cd /opt/klayout/usr/local/bin \
+ && mv libklayout* db_plugins lay_plugins ../lib/
 
 #---
 
@@ -41,14 +55,22 @@ FROM hdlc/build:base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    libruby \
+    libpulse-mainloop-glib0 \
     libpython3.7 \
-    libqt5core5a libqt5gui5 libqt5xml5 libqt5xmlpatterns5 libqt5sql5 \
-      libqt5printsupport5 libqt5widgets5 libqt5multimedia5 libqt5multimediawidgets5 \
-      libqt5svg5 libqt5designer5 libpulse-mainloop-glib0 \
+    libqt5core5a \
+    libqt5designer5 \
+    libqt5gui5 \
+    libqt5multimedia5 \
+    libqt5multimediawidgets5 \
+    libqt5printsupport5 \
+    libqt5sql5 \
+    libqt5svg5 \
+    libqt5widgets5 \
+    libqt5xml5 \
+    libqt5xmlpatterns5 \
+    libruby \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /opt/klayout /
 CMD ["klayout"]
-
