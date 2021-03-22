@@ -30,6 +30,7 @@ digraph G {
     m_sim
     m_impl
     m_formal
+    m_asic
   }
 
   # Images
@@ -43,6 +44,7 @@ digraph G {
       "ghdl"
       "ghdl:yosys"
       "icestorm"
+      "klayout"
       "nextpnr:generic"
       "nextpnr:ice40"
       "nextpnr:icestorm"
@@ -61,6 +63,7 @@ digraph G {
       "pkg:ghdl-yosys-plugin"
       "pkg:gtkwave"
       "pkg:icestorm"
+      "pkg:klayout"
       "pkg:nextpnr-ice40"
       "pkg:nextpnr-ecp5"
       "pkg:nextpnr-generic"
@@ -95,13 +98,6 @@ digraph G {
 
   {
     "scratch"
-    "build:base"
-    "build:build"
-    "ghdl:yosys"
-   } -> m_formal;
-
-  {
-    "scratch"
     "ghdl/pkg:buster-mcode"
     "build:base"
     "build:build"
@@ -120,6 +116,19 @@ digraph G {
     "build:dev"
     "ghdl:yosys"
   } -> m_impl;
+
+  {
+    "scratch"
+    "build:base"
+    "build:build"
+    "ghdl:yosys"
+   } -> m_formal;
+
+  {
+    "scratch"
+    "build:build"
+    "build:base"
+  } -> m_asic;
 
   # Generated images
 
@@ -189,6 +198,14 @@ digraph G {
       "formal"
       "formal:all"
     }
+  }
+
+  subgraph cluster_asic {
+    label = "ASIC";
+    m_asic -> {
+      "klayout"
+      "pkg:klayout"
+    };
   }
 
 }

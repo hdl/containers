@@ -1,0 +1,94 @@
+# Authors:
+#   Unai Martinez-Corral
+#
+# Copyright 2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Dockerfiles
+
+  { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_klayout   [label="klayout"];
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    "build:build"
+    "build:base"
+    { node [color=limegreen, fontcolor=limegreen]
+      "klayout"
+    }
+    { node [color=mediumblue, fontcolor=mediumblue]
+      "pkg:klayout"
+    }
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange]
+    "scratch"
+  }
+
+  { rank=same
+    "build:build"
+    "build:base"
+    "scratch"
+  }
+
+  # Workflows
+
+  subgraph cluster_klayout {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_klayout_build:build" [label="build:build"]
+      "p_klayout_build:base" [label="build:base"]
+      "p_klayout_scratch" [label="scratch"]
+    }
+
+    d_klayout -> {
+      "klayout"
+      "pkg:klayout"
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      "t_klayout" [label="klayout"];
+      "t_pkg:klayout" [label="klayout.pkg"];
+    }
+
+    "klayout" -> "t_klayout";
+    "pkg:klayout" -> "t_pkg:klayout";
+  }
+
+  # Dockerfile dependencies
+
+  "build:build" -> "p_klayout_build:build" -> d_klayout;
+  "build:base" -> "p_klayout_build:base" -> d_klayout;
+  "scratch" -> "p_klayout_scratch" -> d_klayout;
+
+  # Image dependencies
+
+  { edge [style=dashed]
+    "p_klayout_build:base" -> "klayout";
+    "p_klayout_scratch" -> "pkg:klayout";
+  }
+
+}

@@ -23,7 +23,7 @@ NOTE: Currently, many projects don't use containers at all, hence, all images ar
 
 Understanding how all the pieces in this project fit together might be daunting for newcomers. Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem. Subdir link:{repotree}graph/[`graph/`] contains the sources of https://en.wikipedia.org/wiki/Directed_graph[directed graphs], where the relations between workflows, dockerfiles, images and tests are shown.
 
-(https://graphviz.org/[Graphviz])'s `digraph` format is used, hence, graphs can be rendered to multiple image formats. The SVG output is shown in xref:img-graph[xrefstyle=short] describes which images are created in each map. See the details in the figure corresponding to the name of the subgraph:  Base (xref:img-graph-base[xrefstyle=short]), Sim (xref:img-graph-sim[xrefstyle=short]), Synth (xref:img-graph-synth[xrefstyle=short]), Impl (xref:img-graph-impl[xrefstyle=short]), Formal (xref:img-graph-formal[xrefstyle=short]). Multiple colours and arrow types are used for describing different dependency types. All of those are explained in the legend: xref:img-graph-legend[xrefstyle=short].
+(https://graphviz.org/[Graphviz])'s `digraph` format is used, hence, graphs can be rendered to multiple image formats. The SVG output is shown in xref:img-graph[xrefstyle=short] describes which images are created in each map. See the details in the figure corresponding to the name of the subgraph: Base (xref:img-graph-base[xrefstyle=short]), Sim (xref:img-graph-sim[xrefstyle=short]), Synth (xref:img-graph-synth[xrefstyle=short]), Impl (xref:img-graph-impl[xrefstyle=short]), Formal (xref:img-graph-formal[xrefstyle=short]) and , ASIC (xref:img-graph-asic[xrefstyle=short]). Multiple colours and arrow types are used for describing different dependency types. All of those are explained in the legend: xref:img-graph-legend[xrefstyle=short].
 
 [#img-graph]
 .Workflows, dockerfiles, images and tests.
@@ -54,6 +54,11 @@ graphviz::../graph/impl.dot[format="svg", align="center"]
 .Formal: workflows, dockerfiles, images and tests.
 [link=formal.svg]
 graphviz::../graph/formal.dot[format="svg", align="center"]
+
+[#img-graph-asic]
+.ASIC: workflows, dockerfiles, images and tests.
+[link=asic.svg]
+graphviz::../graph/asic.dot[format="svg", align="center"]
 
 [#img-graph-legend]
 .Legend of the directed graph.
