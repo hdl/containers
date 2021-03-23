@@ -39,7 +39,7 @@ digraph G {
   # External images
 
   { node [shape=cylinder, color=orange, fontcolor=orange]
-    "debian:buster-slim"
+    "BASE IMAGE"
   }
 
   # Workflows
@@ -47,7 +47,7 @@ digraph G {
   subgraph cluster_base {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_base_debian" [label="debian:buster-slim"]
+      "p_base_debian" [label="BASE IMAGE"]
     }
 
     d_base -> {
@@ -70,7 +70,7 @@ digraph G {
 
   # Dockerfile dependencies
 
-  "debian:buster-slim" -> "p_base_debian" -> d_base;
+  "BASE IMAGE" -> "p_base_debian" -> d_base;
 
   # Image dependencies
 

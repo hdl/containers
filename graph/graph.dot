@@ -87,14 +87,14 @@ digraph G {
   # External images
 
   { node [shape=cylinder, color=orange, fontcolor=orange] rank=same
-    "debian:buster-slim"
+    "BASE IMAGE"
     "scratch"
     "ghdl/pkg:buster-mcode"
   }
 
   # Dependencies
 
-  "debian:buster-slim" -> m_base;
+  "BASE IMAGE" -> m_base;
 
   {
     "scratch"
