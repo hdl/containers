@@ -224,6 +224,7 @@ NOTE: At the moment, there is no triggering mechanism set up between different G
 * Graphs
 ** https://gephi.org/[Gephi]
 ** https://graphviz.org/[Graphviz]
+*** https://github.com/windler/dotgraph[windler/dotgraph]
 ** https://texample.net/tikz/[texample.net/tikz]
 ** https://draw.io[draw.io]
 *** https://github.com/jgraph/mxgraph[jgraph/mxgraph]
