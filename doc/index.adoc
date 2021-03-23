@@ -200,6 +200,9 @@ NOTE: At the moment, there is no triggering mechanism set up between different G
 * DBHI:
 ** https://github.com/dbhi/qus[dbhi/qus]
 ** https://github.com/dbhi/docker[dbhi/docker]
+* ASIC:
+** https://github.com/The-OpenROAD-Project[The-OpenROAD-Project]
+** https://github.com/efabless/openlane[efabless/openlane]
 * SymbiFlow:
 ** https://github.com/SymbiFlow/symbiflow-examples[SymbiFlow/symbiflow-examples]
 ** https://github.com/SymbiFlow/make-env[SymbiFlow/make-env]
