@@ -17,7 +17,7 @@ Ready-to-use images are provided for each tool, which contain the tool and the d
 * At https://github.com/marph91/icestick-remote[marph91/icestick-remote] the CI workflow for synthesis uses this approach.
 * Moreover, https://github.com/PyFPGA/[PyFPGA] is a set of Python classes for vendor-independent FPGA development. https://github.com/PyFPGA/openflow[PyFPGA/openflow] allows running GHDL, Yosys, etc. in containers.
 
-NOTE: These images are coloured [lime]#GREEN# in the <<Graph>>.
+NOTE: These images are coloured [lime]#GREEN# in the <<Graphs>>.
 
 
 === All-in-one images
@@ -26,7 +26,7 @@ Multiple tools from fine-grained images are included in larger images for common
 
 * The CI workflow in https://github.com/tmeissner/formal_hw_verification[tmeissner/formal_hw_verification] uses image `<REGISTRY_PREFIX>/formal:all` along with GitHub's 'Docker Action' syntax (see https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub[docs.github.com: Learn GitHub Actions > Referencing a container on Docker Hub]).
 
-NOTE: These images are coloured [maroon]#BROWN# in the <<Graph>>.
+NOTE: These images are coloured [maroon]#BROWN# in the <<Graphs>>.
 
 
 === Tools with GUI
