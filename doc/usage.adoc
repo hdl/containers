@@ -1,6 +1,8 @@
 == Usage
 
-Official guidelines and recommendations for using containers suggest keeping containers small and specific for each tool/purpose. That fits well with the field of web _microservices_, which communicate through TCP/IP and which need to be composed, scaled and balanced all around the globe.
+IMPORTANT: Image names and tags in this documentation are provided without the _registry prefix_. Hence, `ghcr.io/hdl/debian-buster/*`, `ghcr.io/hdl/centos-7/*` or `hdlc/*` needs to be prefixed to the image names shown in <<Tools and images>>.
+
+Official guidelines and recommendations for using containers suggest keeping containers small and specific for each tool/purpose (see https://docs.docker.com/develop/develop-images/dockerfile_best-practices/[docs.docker.com: Best practices for writing Dockerfiles]). That fits well with the field of web _microservices_, which communicate through TCP/IP and which need to be composed, scaled and balanced all around the globe.
 
 However, tooling in other camps is expected to communicate using a shared or local filesystem and/or pipes; therefore, many users treat containters as _lightweight virtual machines_. That is, they put all the tools in a single (heavy) container. Those containers are typically not moved around as frequently as _microservices_, but cached on developers' workstations.
 
@@ -9,30 +11,34 @@ In this project, both paradigms are supported; fine-grained images are available
 
 === Fine-grained pulling
 
-Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named `*/<TOOL_NAME>`. Since all of them are based on the same root image, pulling multiple images involves retrieving a few additional layers only. Therefore, this is the recommended approach for CI or other environments with limited resources.
+Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named `<REGISTRY_PREFIX>/<TOOL_NAME>`. Since all the images in each collection are based on the same root image, pulling multiple images involves retrieving a few additional layers only. Therefore, this is the recommended approach for CI or other environments with limited resources.
 
-* There is an example at https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile[ghdl-yosys-blink: Makefile] showcasing how to use this fine-grained approach with a makefile.
+* There is an example at https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile[ghdl-yosys-blink: Makefile] showcasing how to use this fine-grained approach with a makefile. The same make based strategy is used in https://github.com/antonblanchard/microwatt/blob/master/Makefile[antonblanchard/microwatt].
 * At https://github.com/marph91/icestick-remote[marph91/icestick-remote] the CI workflow for synthesis uses this approach.
-* Moreover, https://gitlab.com/rodrigomelo9/pyfpga[PyFPGA] is a Python Class for vendor-independent FPGA development, which runs GHDL, Yosys, etc. in containers.
+* Moreover, https://github.com/PyFPGA/[PyFPGA] is a set of Python classes for vendor-independent FPGA development. https://github.com/PyFPGA/openflow[PyFPGA/openflow] allows running GHDL, Yosys, etc. in containers.
 
 NOTE: These images are coloured [lime]#GREEN# in the <<Graph>>.
 
 
 === All-in-one images
 
-Multiple tools from fine-grained images are included in larger images for common use cases. These are named `*/<MAIN_USAGE>`. This is the recommended approach for users who are less familiar with containers and want a quick replacement for full-featured virtual machines. Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one imags.
+Multiple tools from fine-grained images are included in larger images for common use cases. These are named `<REGISTRY_PREFIX>/<MAIN_USAGE>`. This is the recommended approach for users who are less familiar with containers and want a quick replacement for full-featured virtual machines. Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one imags.
 
-* The CI workflow in https://github.com/tmeissner/formal_hw_verification[tmeissner/formal_hw_verification] uses image `*/formal:all` along with GitHub's 'Docker Action' syntax (see https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub[docs.github.com: Learn GitHub Actions > Referencing a container on Docker Hub]).
+* The CI workflow in https://github.com/tmeissner/formal_hw_verification[tmeissner/formal_hw_verification] uses image `<REGISTRY_PREFIX>/formal:all` along with GitHub's 'Docker Action' syntax (see https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub[docs.github.com: Learn GitHub Actions > Referencing a container on Docker Hub]).
 
 NOTE: These images are coloured [maroon]#BROWN# in the <<Graph>>.
 
 
 === Tools with GUI
 
-By default, tools with Graphical User Interface (GUI) cannot be used in containers, because there is no graphical server. However, there are multiple alternatives for making an https://en.wikipedia.org/wiki/X_Window_System[X11] or https://en.wikipedia.org/wiki/Wayland_(display_server_protocol)[Wayland] server visible to the container. https://github.com/mviereck/x11docker[mviereck/x11docker] and https://github.com/mviereck/runx[mviereck/runx] are full-featured helper scripts for setting up the environment and running GUI applications and desktop environments in OCI containers. GNU/Linux and Windows hosts are supported, and security related options are provided (such as cookie authentication). Users of GTKWave, nextpnr and other EDA tools will likely want to try x11docker (and runx).
+By default, tools with Graphical User Interface (GUI) cannot be used in containers, because there is no graphical server. However, there are multiple alternatives for making an https://en.wikipedia.org/wiki/X_Window_System[X11] or https://en.wikipedia.org/wiki/Wayland_(display_server_protocol)[Wayland] server visible to the container. https://github.com/mviereck/x11docker[mviereck/x11docker] and https://github.com/mviereck/runx[mviereck/runx] are full-featured helper scripts for setting up the environment and running GUI applications and desktop environments in OCI containers. GNU/Linux and Windows hosts are supported, and security related options are provided (such as cookie authentication). Users of GTKWave, KLayout, nextpnr and other tools will likely want to try x11docker (and runx).
 
 * https://joss.theoj.org/papers/10.21105/joss.01349[x11docker: Run GUI applications in Docker containers; Journal of Open Source Hardware].
 
+[#img-x11docker]
+.Execution of KLayout in a container on Windows 10 (MSYS2/MINGW64) with https://github.com/mviereck/x11docker[mviereck/x11docker], https://github.com/mviereck/runx[mviereck/runx] and https://sourceforge.net/projects/vcxsrv/[VcxSrv].
+[link=img/x11docker_klayout.gif]
+image::img/x11docker_klayout.gif[x11docker_klayout, align="center"]
 
 === USB/IP protocol support for Docker Desktop
 

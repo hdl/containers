@@ -20,6 +20,16 @@ TIP: Do you want to improve this page? Please https://github.com/hdl/containers/
 
 == Tools and images
 
+Multiple collections of images are provided. All the images in each collection do share the same base layer. Currently available collections are the following:
+
+* `debian-buster` based on https://hub.docker.com/_/debian[debian:buster-slim]
+** Available as `ghcr.io/hdl/debian-buster/*`-
+** Mirrored to `docker.io/hdlc/`.
+* `centos-7` based on https://hub.docker.com/_/centos[centos:8]
+** Available as `ghcr.io/hdl/centos-7/*`.
+
+IMPORTANT: Image names and tags in this documentation are provided without the _registry prefix_. Hence, one of the prefixes listed above needs to be used when actually pulling/using the images. See <<Usage>>.
+
 include::tools.adoc[]
 
 Images including multiple tools:
@@ -180,7 +190,7 @@ GHAStatus:prog[]
 --
 |===
 
-NOTE: At the moment, there is no triggering mechanism set up between different GitHub repositories. All the workflows in this repo are triggered by push event, CRON jobs, or manually.
+NOTE: At the moment, there is no triggering mechanism set up between different GitHub repositories. All the workflows in this repo are triggered by push events, CRON jobs, or manually.
 
 == References
 

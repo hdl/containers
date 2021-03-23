@@ -1,19 +1,19 @@
 == Contributing
 
-This repository provides a set of base images for building and for runtime: link:{repotree}base.dockerfile[`base.dockerfile`]. All the images in the ecosystem are based on these:
+As explained in <<Tools and images>> and in <<Usage>>, multiple collections of images are provided. For each collection, a set of base images is provided, which are to be used for building and for runtime. These are defined in `base.dockerfile`. See, for instance, link:{repotree}debian-buster/base.dockerfile[`debian-buster/base.dockerfile`]. All the images in the ecosystem are based on these:
 
-* OCIImage:build[base] Debian Buster with updated `ca-certificates`, `curl` and Python 3.
+* OCIImage:build[base] Debian Buster or CentOS 7, with updated `ca-certificates`, `curl` and Python 3.
 * OCIImage:build[build] based on `base`, includes `clang` and `make`.
 * OCIImage:build[dev] based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
 
-Then, for each project/tool there are a dockerfile, a GitHub Actions workflow, and one or more test scripts. Those are used for:
+Then, for each project/tool there are dockerfiles (one for each collection), a GitHub Actions workflow, and one or more test scripts. Those are used for:
 
-* Tools are built using `*/build` images.
+* Tools are built using `<REGISTRY_PREFIX>/build` images.
 * Package images based on `scratch` (and/or other reusable packages) are produced.
-* Ready-to-use images based on the runtime base image (`*/build:base`) are produced.
+* Ready-to-use images based on the runtime base image (`<REGISTRY_PREFIX>/build:base`) are produced.
 * Ready-to-use images are tested before uploading.
 
-In some dockerfiles/workflows, <<Package images>> are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for common use cases (such as `*/impl`, `*/formal` or `*/prog`).
+In some dockerfiles/workflows, <<Package images>> are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for common use cases (such as `<REGISTRY_PREFIX>/impl`, `<REGISTRY_PREFIX>/formal` or `<REGISTRY_PREFIX>/prog`).
 
 IMPORTANT: Before working on adding or extending the support for a tool, please check the https://github.com/hdl/containers/issues[issues] and https://github.com/hdl/containers/pulls[pull requests]; https://github.com/hdl/containers/issues/new[open an issue] or https://gitter.im/hdl/community[let us know through the chat]. Due to its distributed nature, someone might be working on that already!
 
@@ -24,6 +24,8 @@ NOTE: Currently, many projects don't use containers at all, hence, all images ar
 Understanding how all the pieces in this project fit together might be daunting for newcomers. Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem. Subdir link:{repotree}graph/[`graph/`] contains the sources of https://en.wikipedia.org/wiki/Directed_graph[directed graphs], where the relations between workflows, dockerfiles, images and tests are shown.
 
 (https://graphviz.org/[Graphviz])'s `digraph` format is used, hence, graphs can be rendered to multiple image formats. The SVG output is shown in xref:img-graph[xrefstyle=short] describes which images are created in each map. See the details in the figure corresponding to the name of the subgraph: Base (xref:img-graph-base[xrefstyle=short]), Sim (xref:img-graph-sim[xrefstyle=short]), Synth (xref:img-graph-synth[xrefstyle=short]), Impl (xref:img-graph-impl[xrefstyle=short]), Formal (xref:img-graph-formal[xrefstyle=short]) and , ASIC (xref:img-graph-asic[xrefstyle=short]). Multiple colours and arrow types are used for describing different dependency types. All of those are explained in the legend: xref:img-graph-legend[xrefstyle=short].
+
+IMPORTANT: These graphs represent a single collection of images (the _virtual_ aggregation of others). In practice, some tools might be missing in some collections. For instance, a tool might be available in Debian Buster based containers, but not in CentOS 7. That info is not tracked in the graphs yet. Please, see whether a dockerfile exists in the corresponding subdir.
 
 [#img-graph]
 .Workflows, dockerfiles, images and tests.
@@ -67,9 +69,9 @@ graphviz::../graph/legend.dot[format="svg", align="center"]
 
 === Package images
 
-Each tool/project is built once only in this image/container ecosystem. However, some (many) of the tools need to be included in multiple images for different purposes. Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each tool/project. Therefore, `*/pkg:*` images are created/used (coloured [blue]#BLUE# in the <<Graph>>). These are all based on `scratch` and are not runnable. Instead, they contain pre-built artifacts, to be then added into other images through `COPY --from=`.
+Each tool/project is built once only for each collection in this image/container ecosystem. However, some (many) of the tools need to be included in multiple images for different purposes. Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each tool/project. Therefore, `<REGISTRY_PREFIX>/pkg:*` images are created/used (coloured [blue]#BLUE# in the <<Graphs>>). These are all based on `scratch` and are not runnable. Instead, they contain pre-built artifacts, to be then added into other images through `COPY --from=`.
 
-Since `*/pkg:*` images are not runnable _per se_, but an intermediate utility, the usage of environment variables `PREFIX` and `DESTDIR` in the dockerfiles might be misleading. All the tools in the ecosystem are expected to be installed into `/usr/local`, the standard location for user built tools in most GNU/Linux distributions. Hence:
+Since `<REGISTRY_PREFIX>/pkg:*` images are not runnable _per se_, but an intermediate utility, the usage of environment variables `PREFIX` and `DESTDIR` in the dockerfiles might be misleading. All the tools in the ecosystem are expected to be installed into `/usr/local`, the standard location for user built tools on most GNU/Linux distributions. Hence:
 
 * `PREFIX` should typically not need to be modified. Most of the tools will default to `PREFIX=/usr/local`, which is correct. Yet, some tools might default to `/` or `/usr`. In those cases, setting it explicitly is required.
 * `DESTDIR` must be set to an empty location when calling `make install` or when copying the artifacts otherhow. The content of the corresponding package images is taken from that empty location. Therefore, if `DESTDIR` was unset, the artifacts of the tool might potentially be mixed with other existing assets in `/usr/local`. In most of the dockerfiles, `/opt/TOOL_NAME` is used as the temporary empty location.
@@ -81,22 +83,22 @@ Despite the usage of these variables being documented in https://www.gnu.org/pre
 A helper script is provided in link:{repotree}.github/bin/[`.github/bin/`] to ease building images, by hiding all common options:
 
 * `dockerBuild BASE_OS IMAGE_NAME DOCKERFILE_NAME [TARGET_STAGE]`
-** BASE_OS: set of images (e.g. `debian-buster`).
+** BASE_OS: set/collection of images (e.g. `debian-buster`).
 ** IMAGE_NAME: image name without the prefix.
 ** DOCKERFILE_NAME: name of the dockerfile to be used.
 ** (optional) TARGET_STAGE: name of that target stage in the dockerfile.
 
 === Inspect
 
-All ready-to-use images (coloured [green]#GREEN# or [maroon]#BROWN# in the <<Graph>>) are runnable. Therefore, users/contributors can run containers and test the tools interactively or through scripting. However, since `*/pkg` images are not runnable, creating another image is required in order to inspect their content from a container. For instance:
+All ready-to-use images (coloured [green]#GREEN# or [maroon]#BROWN# in the <<Graphs>>) are runnable. Therefore, users/contributors can run containers and test the tools interactively or through scripting. However, since `<REGISTRY_PREFIX>/pkg` images are not runnable, creating another image is required in order to inspect their content from a container. For instance:
 
 [source, dockerfile]
 ----
 FROM busybox
-COPY --from=*/pkg:TOOL_NAME /TOOL_NAME /
+COPY --from=<REGISTRY_PREFIX>/pkg:TOOL_NAME /TOOL_NAME /
 ----
 
-In fact, link:{repotree}.github/bin/dockerTestPkg[`.github/bin/dockerTestPkg`] uses a similar dockerfile for running `*.pkg.sh` scripts from link:{repotree}test/[`test/`]. See <<Test>>.
+In fact, link:{repotree}.github/bin/dockerTestPkg[`.github/bin/dockerTestPkg`] uses a similar dockerfile for running `.pkg.sh` scripts from link:{repotree}test/[`test/`]. See <<Test>>.
 
 Alternatively, or as a complement, https://github.com/wagoodman/dive[wagoodman/dive] is a lightweight tool with a nice terminal based GUI for exploring layers and contents of container images. It can be downloaded as a tarball/zipfile, or used as a container:
 
@@ -105,11 +107,11 @@ Alternatively, or as a complement, https://github.com/wagoodman/dive[wagoodman/d
 docker run --rm -it \
   -v //var/run/docker.sock://var/run/docker.sock \
   wagoodman/dive \
-  */IMAGE[:TAG]
+  <REGISTRY_PREFIX>/IMAGE[:TAG]
 ----
 
 [#img-dive]
-.Inspection of `*/pkg:yosys` with https://github.com/wagoodman/dive[wagoodman/dive].
+.Inspection of `<REGISTRY_PREFIX>/pkg:yosys` with https://github.com/wagoodman/dive[wagoodman/dive].
 [link=img/dive.png]
 image::img/dive.png[wagoodman/dive, align="center"]
 
@@ -117,8 +119,8 @@ image::img/dive.png[wagoodman/dive, align="center"]
 
 There is a test script in link:{repotree}test/[`test/`] for each image in this ecosystem, according to the following convention:
 
-* Scripts for package images, `*/pkg:TOOL_NAME`, are named `TOOL_NAME.pkg.sh`.
-* Scripts for other images, `*/NAME[:TAG]`, are named `NAME[--TAG].sh`.
+* Scripts for package images, `<REGISTRY_PREFIX>/pkg:TOOL_NAME`, are named `TOOL_NAME.pkg.sh`.
+* Scripts for other images, `<REGISTRY_PREFIX>/NAME[:TAG]`, are named `NAME[--TAG].sh`.
 * Other helper scripts are named `_*.sh`.
 
 Furthermore, https://github.com/hdl/smoke-tests[hdl/smoke-test] is a submodule of this repository (link:{repotree}test/[`test/smoke-test`]). Smoke-tests contains fine grained tests that cover the most important functionalities of the tools. Those are used in other packaging projects too. Therefore, container tests are expected to execute the smoke-tests corresponding to the tools available in the image, before executing more specific tests.
@@ -126,30 +128,34 @@ Furthermore, https://github.com/hdl/smoke-tests[hdl/smoke-test] is a submodule o
 There are a couple of helper scripts in link:{repotree}.github/bin/[`.github/bin/`], for testing the images. Those are used in CI but can be useful locally too:
 
 * `dockerTest BASE_OS IMAGE_NAME [SCRIPT_NAME]`
-** BASE_OS: set of images (e.g. `debian-buster`).
+** BASE_OS: set/collection of images (e.g. `debian-buster`).
 ** IMAGE_NAME: image name without the prefix.
 ** (optional) SCRIPT_NAME: name of the test script, only required if it does not match `echo IMAGE_NAME | sed 's#:#--#'`.
 * `dockerTestPkg BASE_OS TAG_NAME [DIR_NAME]`
-** BASE_OS: set of images (e.g. `debian-buster`).
-** TAG_NAME: tag name (i.e. image name without `*/pkg:` prefix).
+** BASE_OS: set/collection of images (e.g. `debian-buster`).
+** TAG_NAME: tag name (i.e. image name without `<REGISTRY_PREFIX>/pkg:` prefix).
 ** (optional) DIR_NAME: directory name inside the package image which needs to be copied to the temporary image for testing.
 
 === Step by step checklist
 
 1. Create or update dockerfile(s).
-** For each tool, a https://docs.docker.com/engine/reference/builder/[Dockerfile] recipe exists. All dockerfiles must use, at least, two stages.
-*** One stage, named `build`, is to be based on `*/build:base` or `*/build:build` or `*/build:dev`. In this first stage, you need to add the missing build dependencies. Then, build the tool/project using the standard `PREFIX`, but install to a custom location using `DESTDIR`. See <<Package images>>.
-*** If the tool/project is to be used standalone, create an stage based on `*/build:base`. Install runtime dependencies only.
-*** If the tool/project is to be packaged, create an stage based on `scratch`.
-*** In any case, copy the tool artifacts from the build stage using `COPY --from=STAGE_NAME`. In practice, several dockerfiles produce at least one package image and one ready-to-use image. Therefore, dockerfiles will likely have more than two stages.
-** Some tools are to be added to existing images which include several tools (coloured [maroon]#BROWN# in the <<Graph>>). After creating the dockerfile where the corresponding package image is defined, add `COPY --from=*/pkg:TOOL_NAME` statements to the dockerfiles of multi-tool images.
+** For each tool and collection, a https://docs.docker.com/engine/reference/builder/[Dockerfile] recipe exists.
+*** It is recommended, but not required, to add tools to multiple collections at the same time. That is, to create one dockerfile for each collection. Nevertheless, it is possible to add a tool to just one or to a limited set of collections.
+*** All dockerfiles must use, at least, two stages.
+**** One stage, named `build`, is to be based on `<REGISTRY_PREFIX>/build:base` or `<REGISTRY_PREFIX>/build:build` or `<REGISTRY_PREFIX>/build:dev`. In this first stage, you need to add the missing build dependencies. Then, build the tool/project using the standard `PREFIX`, but install to a custom location using `DESTDIR`. See <<Package images>>.
+**** If the tool/project is to be used standalone, create an stage based on `<REGISTRY_PREFIX>/build:base`. Install runtime dependencies only.
+**** If the tool/project is to be packaged, create an stage based on `scratch`.
+**** In any case, copy the tool artifacts from the build stage using `COPY --from=STAGE_NAME`.
+**** In practice, several dockerfiles produce at least one package image and one ready-to-use image. Therefore, dockerfiles will likely have more than two stages.
+** Some tools are to be added to existing images which include several tools (coloured [maroon]#BROWN# in the <<Graphs>>). After creating the dockerfile where the corresponding package image is defined, add `COPY --from=<REGISTRY_PREFIX>/pkg:TOOL_NAME` statements to the dockerfiles of multi-tool images.
 2. Build and test the dockerfile(s) locally. Use helper scripts from link:{repotree}.github/bin[`.github/bin`] as explained in <<Build>> and <<Test>>.
 ** If a new tool was added, or a new image is to be generated, a test script needs to be added to link:{repotree}test/[`test/`]. See <<Test>> for naming guidelines.
 ** Be careful with the order. If you add a new tool and include it in one of the multi-tool images, the package image needs to be built first.
 3. Create or update workflow(s).
-** For each dockerfile, a GitHub Actions workflow is added to link:{repotree}.github/workflows[`.github/workflows/`]. Find documentation at https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions[Workflow syntax for GitHub Actions]. Copying some of the existing workflows in this repo, and adapting it is suggested.
+** For each tool or multi-tool image, a GitHub Actions workflow is added to link:{repotree}.github/workflows[`.github/workflows/`]. Find documentation at https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions[Workflow syntax for GitHub Actions]. Copying some of the existing workflows in this repo and adapting it is suggested.
 ** In each workflow, all the images produced from stages of the corresponding dockerfile are built, tested and pushed. `dockerBuild`, `dockerTest`, `dockerTestPkg` and `dockerPush` scripts from link:{repotree}.github/bin[`.github/bin`] are used.
-4. Update documentation
+** The workflow matrix is used for deciding which collections is each tool to be built for.
+4. Update the documentation.
 ** If a new tool was added,
 *** Ensure that the tool is listed at https://github.com/hdl/awesome[hdl/awesome], since that's where all the tool/projects in the table point to.
 *** If a tool from the _To Do_ list was added, remove it from the list.
