@@ -221,3 +221,12 @@ NOTE: At the moment, there is no triggering mechanism set up between different G
 *** https://www.virtualhere.com/linux_console[Linux Console Client]
 *** https://www.virtualhere.com/client_api[Client API]
 *** https://hub.docker.com/r/virtualhere/virtualhere-client[hub.docker.com/r/virtualhere/virtualhere-client]
+* Graphs
+** https://gephi.org/[Gephi]
+** https://graphviz.org/[Graphviz]
+** https://texample.net/tikz/[texample.net/tikz]
+** https://draw.io[draw.io]
+*** https://github.com/jgraph/mxgraph[jgraph/mxgraph]
+** https://github.com/ajstarks/svgo[ajstarks/svgo]
+** https://aafigure.readthedocs.io/en/latest/shortintro.html[aafigure]
+** http://blockdiag.com/en/blockdiag/examples.html[blockdiag]
