@@ -61,6 +61,7 @@ To Do:
 * https://github.com/SymbiFlow/symbiflow-arch-defs[SymbiFlow Architecture Definitions + Tooling (Xilinx 7 Series, QuickLogic)]
 * https://hdl.github.io/awesome/items/vtr[Verilog To Routing]
 * https://github.com/adamgreig/ecpdap[ecpdap]
+* https://github.com/lnis-uofu/LSOracle[LSOracle]
 
 include::context.adoc[]
 
