@@ -22,7 +22,6 @@ FROM $REGISTRY/build:build AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    g++ \
     libqt5svg5-dev \
     libqt5xmlpatterns5-dev \
     python3-dev \
@@ -38,12 +37,13 @@ RUN git clone https://github.com/KLayout/klayout.git /tmp/klayout \
  && mkdir -p /opt/klayout/usr/local/bin \
  && cd /tmp/klayout \
  && ./build.sh \
- -bin /opt/klayout/usr/local/bin \
- -rpath /usr/local/lib \
- -ruby /usr/bin/ruby \
- -python /usr/bin/python3 \
- -qt5 \
- -option -j$(nproc) \
+   -qmake 'qmake -spec linux-clang' \
+   -bin /opt/klayout/usr/local/bin \
+   -rpath /usr/local/lib \
+   -ruby /usr/bin/ruby \
+   -python /usr/bin/python3 \
+   -qt5 \
+   -option -j$(nproc) \
  && mkdir -p /opt/klayout/usr/local/lib \
  && cd /opt/klayout/usr/local/bin \
  && mv libklayout* db_plugins lay_plugins ../lib/
