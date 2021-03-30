@@ -50,8 +50,10 @@ ghdl:
   url: 'https://hdl.github.io/awesome/items/ghdl'
   pkg:
     - 'ghdl'
+    - 'ghdl-llvm'
   use:
     - 'ghdl'
+    - 'ghdl:llvm'
   in:
     - 'impl'
     - 'formal:min'

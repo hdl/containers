@@ -37,11 +37,13 @@ digraph G {
     "build:build"
     { node [color=limegreen, fontcolor=limegreen]
       "ghdl"
+      "ghdl:llvm"
       "ghdl:yosys"
       "yosys"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
       "pkg:ghdl"
+      "pkg:ghdl-llvm"
       "pkg:ghdl-yosys-plugin"
       "pkg:yosys"
     }
@@ -51,7 +53,8 @@ digraph G {
 
   { node [shape=cylinder, color=orange, fontcolor=orange]
     "scratch"
-    "ghdl/pkg:buster-mcode";
+    "ghdl/pkg:buster-mcode"
+    "ghdl/pkg:buster-llvm-7";
   }
 
   { rank=same
@@ -59,6 +62,7 @@ digraph G {
     "build:build"
     "scratch"
     "ghdl/pkg:buster-mcode"
+    "ghdl/pkg:buster-llvm-7"
   }
 
   # Workflows
@@ -69,21 +73,28 @@ digraph G {
       "p_ghdl_build:base" [label="build:base"]
       "p_ghdl_scratch" [label="scratch"]
       "p_ghdl_buster" [label="ghdl/pkg:buster-mcode"]
+      "p_ghdl_buster-llvm" [label="ghdl/pkg:buster-llvm-7"]
     }
 
     d_ghdl -> { rank=same
       "ghdl",
-      "pkg:ghdl"
+      "ghdl:llvm",
+      "pkg:ghdl",
+      "pkg:ghdl-llvm"
     } [style=dotted];
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
       "t_ghdl" [label="ghdl"];
+      "t_ghdl:llvm" [label="ghdl:llvm"];
       "t_pkg:ghdl" [label="ghdl.pkg"];
+      "t_pkg:ghdl-llvm" [label="ghdl-llvm.pkg"];
     }
 
     "ghdl" -> "t_ghdl";
+    "ghdl:llvm" -> "t_ghdl:llvm";
     "pkg:ghdl" -> "t_pkg:ghdl";
+    "pkg:ghdl-llvm" -> "t_pkg:ghdl-llvm";
   }
 
   subgraph cluster_ghdlYosysPlugin {
@@ -139,6 +150,7 @@ digraph G {
 
   "scratch" -> "p_ghdl_scratch" -> d_ghdl;
   "ghdl/pkg:buster-mcode" -> "p_ghdl_buster" -> d_ghdl;
+  "ghdl/pkg:buster-llvm-7" -> "p_ghdl_buster-llvm" -> d_ghdl;
   "build:base" -> "p_ghdl_build:base" -> d_ghdl;
 
   "pkg:ghdl" -> "p_ghdl-yosys-plugin_pkg:ghdl" -> d_ghdlYosysPlugin;
@@ -150,8 +162,8 @@ digraph G {
   # Image dependencies
 
   { edge [style=dashed]
-    "p_ghdl_scratch" -> "pkg:ghdl";
-    "p_ghdl_build:base" -> "ghdl";
+    "p_ghdl_scratch" -> { "pkg:ghdl", "pkg:ghdl-llvm" };
+    "p_ghdl_build:base" -> { "ghdl", "ghdl:llvm" };
 
     "p_yosys_scratch" -> "pkg:yosys";
     "p_yosys_build:build" -> "yosys";
@@ -164,6 +176,10 @@ digraph G {
     "p_ghdl_buster" -> {
       "ghdl",
       "pkg:ghdl"
+    };
+    "p_ghdl_buster-llvm" -> {
+      "ghdl:llvm",
+      "pkg:ghdl-llvm"
     };
   }
 

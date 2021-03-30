@@ -42,6 +42,7 @@ digraph G {
     { node [color=limegreen, fontcolor=limegreen]
       "arachne-pnr"
       "ghdl"
+      "ghdl:llvm"
       "ghdl:yosys"
       "icestorm"
       "klayout"
@@ -60,6 +61,7 @@ digraph G {
       "pkg:boolector"
       "pkg:cvc4"
       "pkg:ghdl"
+      "pkg:ghdl-llvm"
       "pkg:ghdl-yosys-plugin"
       "pkg:gtkwave"
       "pkg:icestorm"
@@ -90,6 +92,7 @@ digraph G {
     "BASE IMAGE"
     "scratch"
     "ghdl/pkg:buster-mcode"
+    "ghdl/pkg:buster-llvm-7"
   }
 
   # Dependencies
@@ -99,6 +102,7 @@ digraph G {
   {
     "scratch"
     "ghdl/pkg:buster-mcode"
+    "ghdl/pkg:buster-llvm-7"
     "build:base"
     "build:build"
   } -> m_synth;
@@ -145,7 +149,9 @@ digraph G {
     label = "Synth";
     m_synth -> {
       "ghdl"
+      "ghdl:llvm"
       "pkg:ghdl"
+      "pkg:ghdl-llvm"
       "pkg:ghdl-yosys-plugin"
       "ghdl:yosys"
       "pkg:yosys"

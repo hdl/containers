@@ -21,21 +21,31 @@ ARG REGISTRY='ghcr.io/hdl/debian-buster'
 
 #---
 
-FROM ghdl/pkg:buster-mcode AS build
+FROM ghdl/pkg:buster-mcode AS build-mcode
 
 # TODO Build GHDL on $REGISTRY/build:build instead of picking ghdl/pkg:buster-mcode
 
 #---
 
-FROM scratch AS pkg
+FROM scratch AS pkg-mcode
 
-COPY --from=build / /ghdl/usr/local/
+COPY --from=build-mcode / /ghdl/usr/local/
+
+#---
+
+FROM ghdl/pkg:buster-llvm-7 AS build-llvm
+
+# TODO Build GHDL on $REGISTRY/build:build instead of picking ghdl/pkg:buster-mcode
+
+#---
+
+FROM scratch AS pkg-llvm
+
+COPY --from=build-llvm / /ghdl/usr/local/
 
 #--
 
-FROM $REGISTRY/build:base
-
-COPY --from=build / /usr/local/
+FROM $REGISTRY/build:base AS base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -43,4 +53,22 @@ RUN apt-get update -qq \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists
 
+#--
 
+FROM base AS mcode
+
+COPY --from=build-mcode / /usr/local/
+
+#--
+
+FROM base AS llvm
+
+COPY --from=build-llvm / /usr/local/
+
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    libgnat-8 \
+    libllvm7 \
+    zlib1g-dev \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists

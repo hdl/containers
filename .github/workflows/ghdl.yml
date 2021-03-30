@@ -48,11 +48,15 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:ghdl ghdl pkg
-    - run: dockerBuild ${{ matrix.os }} ghdl     ghdl
+    - run: dockerBuild ${{ matrix.os }} pkg:ghdl       ghdl pkg-mcode
+    - run: dockerBuild ${{ matrix.os }} pkg:ghdl-llvm  ghdl pkg-llvm
+    - run: dockerBuild ${{ matrix.os }} ghdl           ghdl mcode
+    - run: dockerBuild ${{ matrix.os }} ghdl:llvm      ghdl llvm
 
     - run: dockerTestPkg ${{ matrix.os }} ghdl
+    - run: dockerTestPkg ${{ matrix.os }} ghdl-llvm ghdl
     - run: dockerTest ${{ matrix.os }} ghdl
+    - run: dockerTest ${{ matrix.os }} ghdl:llvm
 
     - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -66,7 +70,9 @@ jobs:
       run: >-
         dockerPush ${{ matrix.os }}
         pkg:ghdl
+        pkg:ghdl-llvm
         ghdl
+        ghdl:llvm
 
     # Mirror to docker.io/hdlc
 
@@ -81,4 +87,6 @@ jobs:
       run: >-
         dockerMirror ${{ matrix.os }}
         pkg:ghdl
+        pkg:ghdl-llvm
         ghdl
+        ghdl:llvm
