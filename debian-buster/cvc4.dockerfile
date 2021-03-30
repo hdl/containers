@@ -37,7 +37,6 @@ RUN mkdir /usr/share/man/man1 \
 
 RUN mkdir /tmp/cvc4 && cd /tmp/cvc4 \
 && curl -fsSL https://codeload.github.com/CVC4/CVC4/tar.gz/master | tar xzf - --strip-components=1 \
-&& ./contrib/get-antlr-3.4 \
 && ./contrib/get-cadical \
 && ./configure.sh --cadical \
 && cd build \
