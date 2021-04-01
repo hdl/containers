@@ -224,6 +224,7 @@ NOTE: At the moment, there is no triggering mechanism set up between different G
 *** https://hub.docker.com/r/virtualhere/virtualhere-client[hub.docker.com/r/virtualhere/virtualhere-client]
 * Graphs
 ** https://gephi.org/[Gephi]
+*** https://github.com/gephi/gephi/issues/1594[gephi/gephi#1594]
 ** https://graphviz.org/[Graphviz]
 *** https://github.com/windler/dotgraph[windler/dotgraph]
 ** https://texample.net/tikz/[texample.net/tikz]
