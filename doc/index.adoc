@@ -34,6 +34,7 @@ include::tools.adoc[]
 
 Images including multiple tools:
 
+* **S**imulation: OCIImage:sim[] GHDL + Verilator
 * **I**mplementation: GHDL + Yosys + nextpnr
 ** OCIImage:impl[ice40] nextpnr-ice40 only, and OCIImage:impl[icestorm] including icestorm.
 ** OCIImage:impl[ecp5] nextpnr-ecp5 only, and OCIImage:impl[prjtrellis] including prjtrellis.

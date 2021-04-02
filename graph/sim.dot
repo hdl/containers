@@ -27,6 +27,7 @@ digraph G {
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
     d_gtkwave   [label="gtkwave"];
     d_verilator [label="verilator"];
+    d_sim       [label="sim"];
   }
 
   # Images
@@ -36,10 +37,14 @@ digraph G {
     "build:base"
     { node [color=limegreen, fontcolor=limegreen]
       "verilator"
+      "ghdl:llvm"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
       "pkg:gtkwave"
       "pkg:verilator"
+    }
+    { node [color=brown, fontcolor=brown]
+      "sim"
     }
   }
 
@@ -53,6 +58,7 @@ digraph G {
     "build:build"
     "build:base"
     "scratch"
+    "ghdl:llvm"
   }
 
   # Workflows
@@ -94,6 +100,20 @@ digraph G {
     "pkg:verilator" -> "t_pkg:verilator";
   }
 
+  subgraph cluster_sim {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_sim_ghdl:llvm" [label="ghdl:llvm"]
+      "p_sim_pkg:verilator" [label="pkg:verilator"]
+    }
+
+    d_sim -> "sim" [style=dotted];
+
+    "t_sim" [shape=folder, color=red, fontcolor=red, label="sim"];
+
+    "sim" -> "t_sim";
+  }
+
   # Dockerfile dependencies
 
   "build:build" -> "p_gtkwave_build:build" -> d_gtkwave;
@@ -103,15 +123,22 @@ digraph G {
   "build:base" -> "p_verilator_build:base" -> d_verilator;
   "scratch" -> "p_verilator_scratch" -> d_verilator;
 
+  "ghdl:llvm" -> "p_sim_ghdl:llvm" -> d_sim;
+  "pkg:verilator" -> "p_sim_pkg:verilator" -> d_sim;
+
   # Image dependencies
 
   { edge [style=dashed]
     "p_gtkwave_scratch" -> "pkg:gtkwave";
-  }
 
-  { edge [style=dashed]
     "p_verilator_build:base" -> "verilator";
     "p_verilator_scratch" -> "pkg:verilator";
+
+    "p_sim_ghdl:llvm" -> "sim";
+  }
+
+  { edge [style=dashed, color=grey]
+    "p_sim_pkg:verilator" -> "sim";
   }
 
 }

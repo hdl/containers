@@ -55,6 +55,7 @@ ghdl:
     - 'ghdl'
     - 'ghdl:llvm'
   in:
+    - 'sim'
     - 'impl'
     - 'formal:min'
     - 'formal'
@@ -186,6 +187,8 @@ verilator:
     - 'verilator'
   use:
     - 'verilator'
+  in:
+    - 'sim'
 
 #---
 

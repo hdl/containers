@@ -42,14 +42,15 @@ def _split_tag(item):
 
 with (ROOT/'tools.adoc').open('w') as fptr:
 
-    fptr.write('[cols="6, 6, 6, 1, 1, 1, 8", stripes=even]\n')
+    fptr.write('[cols="6, 6, 6, 1, 1, 1, 1, 8", stripes=even]\n')
 
     fptr.write('''|===
 .2+^.h|Tool
 2+^.h|Image
-4+^.h|Included in
+5+^.h|Included in
 ^.h|Package
 ^.h|Ready-to-use
+^.h| S
 ^.h| I
 ^.h| F
 ^.h| P
@@ -71,6 +72,7 @@ with (ROOT/'tools.adoc').open('w') as fptr:
 
         _in = var['in'] if 'in' in var else []
         #fptr.write('|%s\n' % ('Y' if 'synth' in var['in'] else '-'))
+        fptr.write('^.|%s\n' % ('S' if 'sim' in _in else '-'))
         fptr.write('^.|%s\n' % ('I' if 'impl' in _in else '-'))
         fptr.write('^.|%s\n' % ('F' if 'formal' in _in else '-'))
         fptr.write('^.|%s\n' % ('P' if 'prog' in _in else '-'))

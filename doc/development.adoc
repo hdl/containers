@@ -2,7 +2,7 @@
 
 === Continuous Integration (CI)
 
-[cols="5*.^", frame=none, grid=none]
+[cols="6*.^", frame=none, grid=none]
 |===
 a|* {blank}
 +
@@ -109,6 +109,11 @@ a|* {blank}
 +
 --
 GHAStatus:formal[]
+--
+* {blank}
++
+--
+GHAStatus:sim[]
 --
 * {blank}
 +

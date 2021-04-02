@@ -83,6 +83,7 @@ digraph G {
       "formal:all"
       "impl"
       "prog"
+      "sim"
     }
   }
 
@@ -111,6 +112,7 @@ digraph G {
     "build:build"
     "build:base"
     "scratch"
+    "ghdl:llvm"
   } -> m_sim;
 
   {
@@ -162,6 +164,7 @@ digraph G {
   subgraph cluster_sim {
     label = "Sim";
     m_sim -> {
+      "sim"
       "verilator"
       "pkg:verilator"
       "pkg:gtkwave"
