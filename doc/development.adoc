@@ -152,7 +152,7 @@ So far, the following options were analysed:
 * https://github.com/ajstarks/svgo[ajstarks/svgo]
 * https://github.com/kieler/elkjs[kieler/elkjs] (https://github.com/Nic30/d3-hwschematic[Nic30/d3-hwschematic], https://github.com/nturley/netlistsvg[nturley/netlistsvg])
 * https://github.com/dagrejs/dagre-d3/wiki[dagrejs/dagre-d3]
-* (https://graphdracula.net[graphdracula.net]
+* https://graphdracula.net[graphdracula.net]
 
 Graphviz and Gephi are probably the most known tools for generating all kinds of diagrams. Unfortunately, none of them supports hierarchical clusters as required in this use case. The same issue applies to aafigure and graphdracula.
 
