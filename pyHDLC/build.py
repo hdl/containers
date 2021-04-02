@@ -80,6 +80,8 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "pkg:symbiyosys": ["symbiyosys", None, None],
     "verilator": ["verilator", None, None],
     "pkg:verilator": ["verilator", "pkg", None],
+    "xyce": ["xyce", None, None],
+    "pkg:xyce": ["xyce", "pkg", None],
     "pkg:yices2": ["yices2", None, None],
     "yosys": ["yosys", None, None],
     "pkg:yosys": ["yosys", "pkg", None],
