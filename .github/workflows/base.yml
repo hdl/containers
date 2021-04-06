@@ -47,9 +47,9 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} build:base  base base
-    - run: dockerBuild ${{ matrix.os }} build:build base build
-    - run: dockerBuild ${{ matrix.os }} build:dev   base
+    - run: dockerBuild -b ${{ matrix.os }} -i build:base  -d base -t base
+    - run: dockerBuild -b ${{ matrix.os }} -i build:build -d base -t build
+    - run: dockerBuild -b ${{ matrix.os }} -i build:dev   -d base
 
     - run: dockerTest ${{ matrix.os }} build:base
     - run: dockerTest ${{ matrix.os }} build:build

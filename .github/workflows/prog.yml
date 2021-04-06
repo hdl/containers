@@ -48,7 +48,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} prog prog
+    - run: dockerBuild -b ${{ matrix.os }} -i prog -d prog
 
     - run: dockerTest ${{ matrix.os }} prog
 

@@ -46,8 +46,8 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:arachne-pnr arachne-pnr pkg
-    - run: dockerBuild ${{ matrix.os }} arachne-pnr     arachne-pnr
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:arachne-pnr -d arachne-pnr -t pkg
+    - run: dockerBuild -b ${{ matrix.os }} -i arachne-pnr     -d arachne-pnr
 
     - run: dockerTestPkg ${{ matrix.os }} arachne-pnr
     - run: dockerTest ${{ matrix.os }} arachne-pnr

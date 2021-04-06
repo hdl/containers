@@ -45,8 +45,8 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:klayout klayout pkg
-    - run: dockerBuild ${{ matrix.os }} klayout     klayout
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:klayout -d klayout -t pkg
+    - run: dockerBuild -b ${{ matrix.os }} -i klayout     -d klayout
 
     - run: dockerTestPkg ${{ matrix.os }} klayout
     - run: dockerTest ${{ matrix.os }} klayout

@@ -47,7 +47,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:cvc4 cvc4
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:cvc4 -d cvc4
 
     - run: dockerTestPkg ${{ matrix.os }} cvc4
 

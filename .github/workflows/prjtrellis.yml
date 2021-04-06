@@ -48,8 +48,8 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:prjtrellis prjtrellis pkg
-    - run: dockerBuild ${{ matrix.os }} prjtrellis     prjtrellis
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:prjtrellis -d prjtrellis -t pkg
+    - run: dockerBuild -b ${{ matrix.os }} -i prjtrellis     -d prjtrellis
 
     - run: dockerTestPkg ${{ matrix.os }} prjtrellis
     - run: dockerTest ${{ matrix.os }} prjtrellis

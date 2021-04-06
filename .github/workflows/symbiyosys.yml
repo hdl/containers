@@ -47,7 +47,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:symbiyosys symbiyosys
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:symbiyosys -d symbiyosys
 
     - run: dockerTestPkg ${{ matrix.os }} symbiyosys
 

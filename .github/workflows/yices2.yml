@@ -47,7 +47,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:yices2 yices2
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:yices2 -d yices2
 
     - run: dockerTestPkg ${{ matrix.os }} yices2
 

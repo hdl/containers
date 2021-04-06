@@ -48,8 +48,8 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:icestorm icestorm pkg
-    - run: dockerBuild ${{ matrix.os }} icestorm     icestorm
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:icestorm -d icestorm -t pkg
+    - run: dockerBuild -b ${{ matrix.os }} -i icestorm     -d icestorm
 
     - run: dockerTestPkg ${{ matrix.os }} icestorm
     - run: dockerTest ${{ matrix.os }} icestorm

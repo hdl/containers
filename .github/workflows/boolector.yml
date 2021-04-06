@@ -47,7 +47,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:boolector boolector
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:boolector -d boolector
 
     - run: dockerTestPkg ${{ matrix.os }} boolector
 

@@ -48,10 +48,10 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:ghdl       ghdl pkg-mcode
-    - run: dockerBuild ${{ matrix.os }} pkg:ghdl-llvm  ghdl pkg-llvm
-    - run: dockerBuild ${{ matrix.os }} ghdl           ghdl mcode
-    - run: dockerBuild ${{ matrix.os }} ghdl:llvm      ghdl llvm
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:ghdl      -d ghdl -t pkg-mcode
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:ghdl-llvm -d ghdl -t pkg-llvm
+    - run: dockerBuild -b ${{ matrix.os }} -i ghdl          -d ghdl -t mcode
+    - run: dockerBuild -b ${{ matrix.os }} -i ghdl:llvm     -d ghdl -t llvm
 
     - run: dockerTestPkg ${{ matrix.os }} ghdl
     - run: dockerTestPkg ${{ matrix.os }} ghdl-llvm ghdl

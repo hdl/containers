@@ -47,7 +47,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:superprove superprove
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:superprove -d superprove
 
     - run: dockerTestPkg ${{ matrix.os }} superprove
 

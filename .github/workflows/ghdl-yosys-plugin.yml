@@ -48,8 +48,8 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:ghdl-yosys-plugin ghdl-yosys-plugin pkg
-    - run: dockerBuild ${{ matrix.os }} ghdl:yosys            ghdl-yosys-plugin
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:ghdl-yosys-plugin -d ghdl-yosys-plugin -t pkg
+    - run: dockerBuild -b ${{ matrix.os }} -i ghdl:yosys            -d ghdl-yosys-plugin
 
     - run: dockerTestPkg ${{ matrix.os }} ghdl-yosys-plugin ghdl
     - run: dockerTest ${{ matrix.os }} ghdl:yosys

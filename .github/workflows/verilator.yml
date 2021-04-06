@@ -48,8 +48,8 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:verilator verilator pkg
-    - run: dockerBuild ${{ matrix.os }} verilator     verilator
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:verilator -d verilator -t pkg
+    - run: dockerBuild -b ${{ matrix.os }} -i verilator     -d verilator
 
     - run: dockerTestPkg ${{ matrix.os }} verilator
     - run: dockerTest ${{ matrix.os }} verilator

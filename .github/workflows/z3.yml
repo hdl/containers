@@ -46,7 +46,7 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild ${{ matrix.os }} pkg:z3 z3
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:z3 -d z3
 
     - run: dockerTestPkg ${{ matrix.os }} z3
 

@@ -21,14 +21,35 @@
 
 set -e
 
-_baseos="$1"
-_image="$2"
-_dockerfile="$3".dockerfile
+unset _target
+unset _argimg
 
-_target=''
-if [ -n "$4" ]; then
-  _target='--target='"$4"
-fi
+# Transform long options to short ones
+for arg in "$@"; do
+  shift
+  case "$arg" in
+      "--baseos"|"-b")     set -- "$@" "-b";;
+      "--image"|"-i")      set -- "$@" "-i";;
+      "--dockerfile"|"-d") set -- "$@" "-d";;
+      "--target"|"-t")     set -- "$@" "-t";;
+      "--argimg"|"-a")     set -- "$@" "-a";;
+    *) set -- "$@" "$arg"
+  esac
+done
+# Parse args
+while getopts ":b:i:d:t:" opt; do
+  case $opt in
+    b) _baseos="$OPTARG";;
+    i) _image="$OPTARG";;
+    d) _dockerfile="$OPTARG".dockerfile;;
+    t) _target='--target='"$OPTARG";;
+    \?) printf "[dockerBuild] Invalid option: -$OPTARG\n" >&2
+        exit 1 ;;
+    :)  printf "[dockerBuild] Option -$OPTARG requires an argument\n" >&2
+        exit 1 ;;
+  esac
+done
+shift $((OPTIND -1))
 
 docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 \
   -t ghcr.io/hdl/"${_baseos}"/"${_image}" ${_target} \
