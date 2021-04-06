@@ -71,11 +71,11 @@ with (ROOT/'tools.adoc').open('w') as fptr:
         fptr.write('^.|%s\n' % ('-' if len(use) == 0 else use))
 
         _in = var['in'] if 'in' in var else []
-        #fptr.write('|%s\n' % ('Y' if 'synth' in var['in'] else '-'))
-        fptr.write('^.|%s\n' % ('S' if 'sim' in _in else '-'))
-        fptr.write('^.|%s\n' % ('I' if 'impl' in _in else '-'))
-        fptr.write('^.|%s\n' % ('F' if 'formal' in _in else '-'))
-        fptr.write('^.|%s\n' % ('P' if 'prog' in _in else '-'))
+        #fptr.write('|%s\n' % ('Y' if any(_initem.startswith('synth') for _initem in _in) else '-'))
+        fptr.write('^.|%s\n' % ('S' if any(_initem.startswith('sim') for _initem in _in) else '-'))
+        fptr.write('^.|%s\n' % ('I' if any(_initem.startswith('impl') for _initem in _in) else '-'))
+        fptr.write('^.|%s\n' % ('F' if any(_initem.startswith('formal') for _initem in _in) else '-'))
+        fptr.write('^.|%s\n' % ('P' if any(_initem.startswith('prog') for _initem in _in) else '-'))
 
         otherin = ', '.join('`%s`' % item for item in (
             var['otherin'] if 'otherin' in var else []

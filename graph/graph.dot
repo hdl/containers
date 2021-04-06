@@ -69,6 +69,7 @@ digraph G {
       "pkg:nextpnr-ice40"
       "pkg:nextpnr-ecp5"
       "pkg:nextpnr-generic"
+      "pkg:osvb"
       "pkg:prjtrellis"
       "pkg:superprove"
       "pkg:symbiyosys"
@@ -84,6 +85,11 @@ digraph G {
       "impl"
       "prog"
       "sim"
+      "sim:osvb"
+      "sim:scypy-slim"
+      "sim:scypy"
+      "sim:octave-slim"
+      "sim:octave"
     }
   }
 
@@ -165,7 +171,13 @@ digraph G {
     label = "Sim";
     m_sim -> {
       "sim"
+      "sim:osvb"
+      "sim:scypy-slim"
+      "sim:scypy"
+      "sim:octave-slim"
+      "sim:octave"
       "verilator"
+      "pkg:osvb"
       "pkg:verilator"
       "pkg:gtkwave"
     };

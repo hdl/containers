@@ -36,6 +36,15 @@ boolector:
 
 #---
 
+cocotb:
+  url: 'https://hdl.github.io/awesome/items/cocotb'
+  in:
+    - 'sim:osvb'
+    - 'sim:scypy'
+    - 'sim:octave'
+
+#---
+
 cvc4:
   url: 'https://hdl.github.io/awesome/items/cvc4'
   pkg:
@@ -56,6 +65,11 @@ ghdl:
     - 'ghdl:llvm'
   in:
     - 'sim'
+    - 'sim:osvb'
+    - 'sim:scypy-slim'
+    - 'sim:scypy'
+    - 'sim:octave-slim'
+    - 'sim:octave'
     - 'impl'
     - 'formal:min'
     - 'formal'
@@ -189,6 +203,20 @@ verilator:
     - 'verilator'
   in:
     - 'sim'
+    - 'sim:osvb'
+    - 'sim:scypy-slim'
+    - 'sim:scypy'
+    - 'sim:octave-slim'
+    - 'sim:octave'
+
+#---
+
+vunit:
+  url: 'https://hdl.github.io/awesome/items/vunit'
+  in:
+    - 'sim:osvb'
+    - 'sim:scypy'
+    - 'sim:octave'
 
 #---
 

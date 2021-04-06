@@ -34,7 +34,13 @@ include::tools.adoc[]
 
 Images including multiple tools:
 
-* **S**imulation: OCIImage:sim[] GHDL + Verilator
+* **S**imulation:
+** OCIImage:sim[] GHDL + Verilator
+** OCIImage:sim[osvb] cocotb, OSVVM and VUnit; on top of `sim`.
+** OCIImage:sim[scypy-slim] `matplotlib` and `numpy`, on top of `sim`.
+** OCIImage:sim[scypy] `osvb` on top of `scypy-slim`.
+** OCIImage:sim[octave-slim] `octave`, on top of `sim`.
+** OCIImage:sim[octave] `osvb` on top of `octave-slim`.
 * **I**mplementation: GHDL + Yosys + nextpnr
 ** OCIImage:impl[ice40] nextpnr-ice40 only, and OCIImage:impl[icestorm] including icestorm.
 ** OCIImage:impl[ecp5] nextpnr-ecp5 only, and OCIImage:impl[prjtrellis] including prjtrellis.
@@ -50,13 +56,11 @@ Images including multiple tools:
 To Do:
 
 * https://github.com/khoapham/bitman[BitMan]
-* https://hdl.github.io/awesome/items/cocotb[cocotb]
 * https://hdl.github.io/awesome/items/ecpprog[ecpprog]
 * https://hdl.github.io/awesome/items/fujprog[fujprog]
 * https://hdl.github.io/awesome/items/iverilog[iverilog]
 * https://hdl.github.io/awesome/items/netlistsvg[netlistsvg]
 * https://hdl.github.io/awesome/items/openfpgaloader[openFPGALoader]
-* https://hdl.github.io/awesome/items/vunit[VUnit]
 * https://hdl.github.io/awesome/items/prjxray[Project X-Ray (Xilinx 7 Series tooling)]
 * https://github.com/SymbiFlow/prjuray[Project U-Ray (Xilinx Ultrascale Series tooling)]
 * https://github.com/SymbiFlow/symbiflow-arch-defs[SymbiFlow Architecture Definitions + Tooling (Xilinx 7 Series, QuickLogic)]

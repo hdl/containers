@@ -28,7 +28,7 @@ Understanding how all the pieces in this project fit together might be daunting 
 IMPORTANT: These graphs represent a single collection of images (the _virtual_ aggregation of others). In practice, some tools might be missing in some collections. For instance, a tool might be available in Debian Buster based containers, but not in CentOS 7. That info is not tracked in the graphs yet. Please, see whether a dockerfile exists in the corresponding subdir.
 
 [#img-graph]
-.Workflows, dockerfiles, images and tests.
+.Subgraphs and images.
 [link=graph.svg]
 graphviz::../graph/graph.dot[format="svg", align="center"]
 

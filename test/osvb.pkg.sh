@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # Authors:
 #   Unai Martinez-Corral
 #
@@ -17,20 +19,10 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian-buster'
+set -e
 
-#---
+cd $(dirname "$0")
 
-# WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:verilator AS pkg-verilator
+./_tree.sh
 
-FROM $REGISTRY/ghdl:llvm AS base
-
-COPY --from=pkg-verilator /verilator /
-
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    perl \
-    python3-pip \
- && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists/*
+./_todo.sh

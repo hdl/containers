@@ -1,7 +1,7 @@
 # Authors:
 #   Unai Martinez-Corral
 #
-# Copyright 2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2020-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,16 +21,10 @@ ARG REGISTRY='ghcr.io/hdl/debian-buster'
 
 #---
 
-# WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:verilator AS pkg-verilator
+FROM $REGISTRY/sim
 
-FROM $REGISTRY/ghdl:llvm AS base
-
-COPY --from=pkg-verilator /verilator /
-
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    perl \
-    python3-pip \
+RUN apt update -qq \
+ && apt install -y imagemagick libssl-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/* \
+ && python3 -m pip install matplotlib numpy --progress-bar off
