@@ -28,19 +28,20 @@ RUN mkdir /usr/share/man/man1 \
  && apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     cmake \
-    openjdk-11-jre-headless \
     libgmp-dev \
+    m4 \
     python3-toml \
+    openjdk-11-jre-headless \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && update-ca-certificates  \
  && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /tmp/cvc4 && cd /tmp/cvc4 \
-&& curl -fsSL https://codeload.github.com/CVC4/CVC4/tar.gz/master | tar xzf - --strip-components=1 \
-&& ./configure.sh --cadical \
-&& cd build \
-&& make -j$(nproc) \
-&& make DESTDIR=/opt/cvc4 install
+ && curl -fsSL https://codeload.github.com/CVC4/CVC4/tar.gz/master | tar xzf - --strip-components=1 \
+ && ./configure.sh --cadical \
+ && cd build \
+ && make -j$(nproc) \
+ && make DESTDIR=/opt/cvc4 install
 
 #---
 
