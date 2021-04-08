@@ -54,7 +54,7 @@ class CLI(ArgParseMixin):
                 """
             ),
             epilog=textwrap.fill("Happy hacking!"),
-            formatter_class=argparse.RawDescriptionHelpFormatter,
+            formatter_class=argparse.ArgumentDefaultsHelpFormatter,
             add_help=False,
         )
 
@@ -64,7 +64,7 @@ class CLI(ArgParseMixin):
         print("{line}".format(line="=" * 80))
 
     @CommonSwitchArgumentAttribute(
-        "-n", "--noexec", dest="noexec", help="Print commands but do not execute them."
+        "-n", "--noexec", dest="noexec", help="Print commands but do not execute them.", default=False
     )
     def Run(self):
         ArgParseMixin.Run(self)
