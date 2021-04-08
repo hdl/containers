@@ -30,10 +30,11 @@ RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     g++ \
     git \
-    python3-dev
+    python3-dev \
+    python3-setuptools \
+    python3-wheel
 
-RUN pip3 install -U pip setuptools wheel \
- && mkdir /tmp/osvb \
+RUN mkdir /tmp/osvb \
  && git clone -b stable/1.4 --recurse-submodules https://github.com/cocotb/cocotb /tmp/cocotb \
  && cd /tmp/cocotb \
  && python3 setup.py bdist_wheel \
