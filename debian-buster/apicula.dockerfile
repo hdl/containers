@@ -21,6 +21,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ARG REGISTRY='ghcr.io/hdl/debian-buster'
+ARG IMAGE="build:base"
 
 #---
 
@@ -45,7 +46,10 @@ COPY --from=build /tmp/apicula /apicula
 
 #---
 
-FROM $REGISTRY/build:base
+# WORKAROUND: this is required because '--mount=' does not support ARGs
+FROM $REGISTRY/pkg:apicula AS pkg-apicula
+
+FROM $REGISTRY/$IMAGE
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -53,5 +57,6 @@ RUN apt-get update -qq \
     python3-setuptools \
     python3-wheel
 
-RUN --mount=type=cache,from=build,src=/tmp/apicula,target=/tmp/apicula pip3 install -U /tmp/apicula/*.whl --progress-bar off \
+RUN --mount=type=cache,from=pkg-apicula,src=/apicula,target=/tmp/apicula/ \
+ pip3 install -U /tmp/apicula/*.whl --progress-bar off \
  && rm -rf ~/.cache
