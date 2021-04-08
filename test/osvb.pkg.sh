@@ -25,4 +25,6 @@ cd $(dirname "$0")
 
 ./_tree.sh
 
+ls -la /*.whl
+
 ./_todo.sh
