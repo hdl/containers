@@ -19,6 +19,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+from typing import List
 from pathlib import Path
 from os import listdir
 
@@ -32,7 +33,7 @@ from pyAttributes.ArgParseAttributes import (
     SwitchArgumentAttribute,
 )
 
-from build import BuildImage
+from build import DefaultOpts, BuildImage
 
 
 class CLI(ArgParseMixin):
@@ -105,14 +106,14 @@ class CLI(ArgParseMixin):
         dest="Image",
         nargs="*",
         type=str,
-        help="Image name to be built (without registry prefix).",
+        help="Image name(s) to be built (without registry prefix).",
     )
     @ArgumentAttribute(
         "-r",
         "--registry",
         dest="Registry",
         type=str,
-        help="Container image registry to tag the image for.",
+        help="Container image registry to tag the image(s) for.",
         default="ghcr.io/hdl",
     )
     @ArgumentAttribute(
@@ -120,7 +121,7 @@ class CLI(ArgParseMixin):
         "--collection",
         dest="Collection",
         type=str,
-        help="Collection to pick the dockerfile from.",
+        help="Collection to pick the dockerfile(s) from.",
         default="debian-buster",
     )
     @ArgumentAttribute(
@@ -151,6 +152,13 @@ class CLI(ArgParseMixin):
         help="Preprend 'pkg:' to Image and set Target to 'pkg' (if unset).",
         default=False,
     )
+    @CommonSwitchArgumentAttribute(
+        "-d",
+        "--default",
+        dest="Default",
+        help="Set default Dockerfile, Target and ArgImg options, given the image name(s).",
+        default=False,
+    )
     def HandleBuild(self, args):
         BuildImage(
             image=args.Image,
@@ -161,6 +169,7 @@ class CLI(ArgParseMixin):
             argimg=args.ArgImg,
             pkg=args.Pkg,
             dry=args.noexec,
+            default=args.Default,
         )
 
 

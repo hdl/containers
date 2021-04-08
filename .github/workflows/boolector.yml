@@ -47,7 +47,9 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -f boolector pkg:boolector
+    - run: >-
+        dockerBuild -c ${{ matrix.os }} -d
+        pkg:boolector
 
     - run: dockerTestPkg ${{ matrix.os }} boolector
 

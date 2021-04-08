@@ -47,7 +47,9 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -f superprove pkg:superprove
+    - run: >-
+        dockerBuild -c ${{ matrix.os }} -d
+        pkg:superprove
 
     - run: dockerTestPkg ${{ matrix.os }} superprove
 

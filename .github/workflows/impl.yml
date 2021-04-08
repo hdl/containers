@@ -50,13 +50,15 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: >
+    - run: >-
         dockerPull
         ghcr.io/hdl/${{ matrix.os }}/ghdl:yosys
         ghcr.io/hdl/${{ matrix.os }}/pkg:ghdl-yosys-plugin
         ghcr.io/hdl/${{ matrix.os }}/pkg:yosys
 
-    - run: dockerBuild -c ${{ matrix.os }} -f impl -t base build:impl
+    - run: >-
+        dockerBuild -c ${{ matrix.os }} -d
+        build:impl
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -107,14 +109,16 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: >
+    - run: >-
         dockerPull
         ghcr.io/hdl/${{ matrix.os }}/build:impl
         ghcr.io/hdl/${{ matrix.os }}/pkg:nextpnr-${{ matrix.task.arch }}
         ghcr.io/hdl/${{ matrix.os }}/pkg:${{ matrix.task.prj }}
 
-    - run: dockerBuild -c ${{ matrix.os }} -f impl -t ${{ matrix.task.arch }} impl:${{ matrix.task.arch }}
-    - run: dockerBuild -c ${{ matrix.os }} -f impl -t ${{ matrix.task.prj }} impl:${{ matrix.task.prj  }}
+    - run: >-
+        dockerBuild -c ${{ matrix.os }} -d
+        impl:${{ matrix.task.arch }}
+        impl:${{ matrix.task.prj }}
 
     - run: dockerTest ${{ matrix.os }} impl:${{ matrix.task.arch }}
     - run: dockerTest ${{ matrix.os }} impl:${{ matrix.task.prj  }}
@@ -165,7 +169,7 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: >
+    - run: >-
         dockerPull
         ghcr.io/hdl/${{ matrix.os }}/build:impl
         ghcr.io/hdl/${{ matrix.os }}/pkg:nextpnr-ice40
@@ -174,9 +178,11 @@ jobs:
         ghcr.io/hdl/${{ matrix.os }}/pkg:icestorm
         ghcr.io/hdl/${{ matrix.os }}/pkg:prjtrellis
 
-    - run: dockerBuild -c ${{ matrix.os }} -f impl -t generic impl:generic
-    - run: dockerBuild -c ${{ matrix.os }} -f impl -t pnr impl:pnr
-    - run: dockerBuild -c ${{ matrix.os }} -f impl impl
+    - run: >-
+        dockerBuild -c ${{ matrix.os }} -d
+        impl:generic
+        impl:pnr
+        impl
 
     - run: dockerTest ${{ matrix.os }} impl:generic
     - run: dockerTest ${{ matrix.os }} impl:pnr

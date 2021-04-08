@@ -48,10 +48,12 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -f ghdl -t pkg-mcode pkg:ghdl
-    - run: dockerBuild -c ${{ matrix.os }} -f ghdl -t pkg-llvm pkg:ghdl-llvm
-    - run: dockerBuild -c ${{ matrix.os }} -f ghdl -t mcode ghdl
-    - run: dockerBuild -c ${{ matrix.os }} -f ghdl -t llvm ghdl:llvm
+    - run: >-
+        dockerBuild -c ${{ matrix.os }} -d
+        pkg:ghdl
+        pkg:ghdl-llvm
+        ghdl
+        ghdl:llvm
 
     - run: dockerTestPkg ${{ matrix.os }} ghdl
     - run: dockerTestPkg ${{ matrix.os }} ghdl-llvm ghdl

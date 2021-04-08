@@ -47,7 +47,9 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -f cvc4 pkg:cvc4
+    - run: >-
+        dockerBuild -c ${{ matrix.os }} -d
+        pkg:cvc4
 
     - run: dockerTestPkg ${{ matrix.os }} cvc4
 

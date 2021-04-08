@@ -48,7 +48,9 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} prog
+    - run: >-
+        dockerBuild -c ${{ matrix.os }} -d
+        prog
 
     - run: dockerTest ${{ matrix.os }} prog
 

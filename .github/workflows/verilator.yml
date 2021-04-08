@@ -48,8 +48,10 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -p verilator
-    - run: dockerBuild -c ${{ matrix.os }} verilator
+    - run: >-
+        dockerBuild -c ${{ matrix.os }} -d
+        pkg:verilator
+        verilator
 
     - run: dockerTestPkg ${{ matrix.os }} verilator
     - run: dockerTest ${{ matrix.os }} verilator

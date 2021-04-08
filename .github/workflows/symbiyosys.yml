@@ -47,7 +47,9 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -f symbiyosys pkg:symbiyosys
+    - run: >-
+        dockerBuild -c ${{ matrix.os }} -d
+        pkg:symbiyosys
 
     - run: dockerTestPkg ${{ matrix.os }} symbiyosys
 

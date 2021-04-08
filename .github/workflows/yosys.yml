@@ -48,8 +48,10 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -p yosys
-    - run: dockerBuild -c ${{ matrix.os }} yosys
+    - run: >-
+        dockerBuild -c ${{ matrix.os }} -d
+        pkg:yosys
+        yosys
 
     - run: dockerTestPkg ${{ matrix.os }} yosys
     - run: dockerTest ${{ matrix.os }} yosys
