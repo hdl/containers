@@ -46,7 +46,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+    - run: ./.github/setup.sh
 
     - run: dockerBuild -b ${{ matrix.os }} -i pkg:ghdl      -d ghdl -t pkg-mcode
     - run: dockerBuild -b ${{ matrix.os }} -i pkg:ghdl-llvm -d ghdl -t pkg-llvm

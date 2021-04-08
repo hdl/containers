@@ -48,7 +48,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+    - run: ./.github/setup.sh
 
     - run: dockerBuild -b ${{ matrix.os }} -i build:nextpnr-base  -d nextpnr -t base
     - run: dockerBuild -b ${{ matrix.os }} -i build:nextpnr-build -d nextpnr -t build
@@ -102,7 +102,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+    - run: ./.github/setup.sh
 
     - run: dockerBuild -b ${{ matrix.os }} -i pkg:nextpnr-${{ matrix.task.arch }} -d nextpnr -t pkg-${{ matrix.task.arch }}
     - run: dockerBuild -b ${{ matrix.os }} -i nextpnr:${{ matrix.task.arch }}     -d nextpnr -t ${{ matrix.task.arch }}
@@ -158,7 +158,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+    - run: ./.github/setup.sh
 
     - run: dockerBuild -b ${{ matrix.os }} -i pkg:nextpnr-generic -d nextpnr -t pkg-generic
     - run: dockerBuild -b ${{ matrix.os }} -i nextpnr:generic     -d nextpnr -t generic

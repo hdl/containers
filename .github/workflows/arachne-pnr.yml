@@ -44,7 +44,7 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+    - run: ./.github/setup.sh
 
     - run: dockerBuild -b ${{ matrix.os }} -i pkg:arachne-pnr -d arachne-pnr -t pkg
     - run: dockerBuild -b ${{ matrix.os }} -i arachne-pnr     -d arachne-pnr

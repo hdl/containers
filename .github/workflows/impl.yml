@@ -48,7 +48,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+    - run: ./.github/setup.sh
 
     - run: >
         dockerPull
@@ -105,7 +105,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+    - run: ./.github/setup.sh
 
     - run: >
         dockerPull
@@ -163,7 +163,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+    - run: ./.github/setup.sh
 
     - run: >
         dockerPull

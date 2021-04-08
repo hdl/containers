@@ -47,7 +47,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+    - run: ./.github/setup.sh
 
     - run: dockerBuild -b ${{ matrix.os }} -i pkg:apicula -d apicula -t pkg
     - run: dockerBuild -b ${{ matrix.os }} -i apicula     -d apicula

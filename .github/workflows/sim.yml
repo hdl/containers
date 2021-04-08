@@ -47,7 +47,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+    - run: ./.github/setup.sh
 
     - run: dockerBuild -b ${{ matrix.os }} -i sim -d sim
 
@@ -95,7 +95,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+    - run: ./.github/setup.sh
 
     - run: dockerBuild -b ${{ matrix.os }} -i pkg:osvb -d osvb -t pkg
     - run: dockerBuild -b ${{ matrix.os }} -i sim:osvb -d osvb
@@ -150,7 +150,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
+    - run: ./.github/setup.sh
 
     - run: dockerBuild -b ${{ matrix.os }} -i sim:${{ matrix.img }}-slim -d ${{ matrix.img }}
     - run: dockerBuild -b ${{ matrix.os }} -i sim:${{ matrix.img }} -d osvb -a sim:${{ matrix.img }}-slim
