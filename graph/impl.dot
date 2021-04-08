@@ -25,6 +25,7 @@ digraph G {
   # Dockerfiles
 
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_apicula     [label="apicula"];
     d_arachnepnr  [label="arachne-pnr"];
     d_icestorm    [label="icestorm"];
     d_impl        [label="impl"];
@@ -40,6 +41,7 @@ digraph G {
     "build:build"
     "build:dev"
     { node [color=limegreen, fontcolor=limegreen]
+      "apicula"
       "arachne-pnr"
       "ghdl:yosys"
       "icestorm"
@@ -52,6 +54,7 @@ digraph G {
       "nextpnr"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
+      "pkg:apicula"
       "pkg:arachne-pnr"
       "pkg:icestorm"
       "pkg:prjtrellis"
@@ -86,6 +89,29 @@ digraph G {
   }
 
   # Workflows
+
+  subgraph cluster_apicula {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_apicula_build:build"  [label="build:build"]
+      "p_apicula_build:base"   [label="build:base"]
+      "p_apicula_scratch"      [label="scratch"]
+    }
+
+    d_apicula -> {
+      "apicula"
+      "pkg:apicula"
+     } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red]
+      "t_apicula"     [label="apicula"];
+      "t_pkg:apicula" [label="apicula.pkg"];
+    }
+
+    "apicula" -> "t_apicula";
+    "pkg:apicula" -> "t_pkg:apicula";
+  }
 
   subgraph cluster_arachenpnr {
     { rank=same
@@ -291,6 +317,10 @@ digraph G {
 
   # Dockerfile dependencies
 
+  "build:build" -> "p_apicula_build:build" -> d_apicula;
+  "build:base" -> "p_apicula_build:base" -> d_apicula;
+  "scratch" -> "p_apicula_scratch" -> d_apicula;
+
   "build:build" -> "p_arachnepnr_build:build" -> d_arachnepnr;
   "build:base" -> "p_arachnepnr_build:base" -> d_arachnepnr;
   "scratch" -> "p_arachnepnr_scratch" -> d_arachnepnr;
@@ -324,6 +354,9 @@ digraph G {
   # Image dependencies
 
   { edge [style=dashed]
+    "p_apicula_build:base" -> "apicula";
+    "p_apicula_scratch" -> "pkg:apicula";
+
     "p_arachnepnr_build:base" -> "arachne-pnr";
     "p_arachnepnr_scratch" -> "pkg:arachne-pnr";
 

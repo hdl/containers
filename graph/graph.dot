@@ -40,6 +40,7 @@ digraph G {
     "build:build"
     "build:dev"
     { node [color=limegreen, fontcolor=limegreen]
+      "apicula"
       "arachne-pnr"
       "ghdl"
       "ghdl:llvm"
@@ -57,6 +58,7 @@ digraph G {
       "yosys"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
+      "pkg:apicula"
       "pkg:arachne-pnr"
       "pkg:boolector"
       "pkg:cvc4"
@@ -186,6 +188,8 @@ digraph G {
   subgraph cluster_impl {
     label = "Impl";
     m_impl -> {
+      "apicula"
+      "pkg:apicula"
       "arachne-pnr"
       "pkg:arachne-pnr"
       "icestorm"

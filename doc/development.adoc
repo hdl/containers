@@ -37,6 +37,11 @@ GHAStatus:verilator[]
 a|* {blank}
 +
 --
+GHAStatus:apicula[]
+--
+* {blank}
++
+--
 GHAStatus:ghdl-yosys-plugin[]
 --
 * {blank}
