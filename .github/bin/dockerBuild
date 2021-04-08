@@ -21,38 +21,6 @@
 
 set -e
 
-unset _target
-unset _argimg
+cd $(dirname "$0")/../..
 
-# Transform long options to short ones
-for arg in "$@"; do
-  shift
-  case "$arg" in
-      "--baseos"|"-b")     set -- "$@" "-b";;
-      "--image"|"-i")      set -- "$@" "-i";;
-      "--dockerfile"|"-d") set -- "$@" "-d";;
-      "--target"|"-t")     set -- "$@" "-t";;
-      "--argimg"|"-a")     set -- "$@" "-a";;
-    *) set -- "$@" "$arg"
-  esac
-done
-# Parse args
-while getopts ":b:i:d:t:a:" opt; do
-  case $opt in
-    b) _baseos="$OPTARG";;
-    i) _image="$OPTARG";;
-    d) _dockerfile="$OPTARG";;
-    t) _target="-t $OPTARG";;
-    a) _argimg="-a $OPTARG";;
-    \?) printf "[dockerBuild] Invalid option: -$OPTARG\n" >&2
-        exit 1 ;;
-    :)  printf "[dockerBuild] Option -$OPTARG requires an argument\n" >&2
-        exit 1 ;;
-  esac
-done
-shift $((OPTIND -1))
-
-./pyHDLC/cli.py build \
-  -c "${_baseos}" \
-  -d "${_dockerfile}" \
-  ${_target} ${_argimg} ${_image}
+./pyHDLC/cli.py build $@

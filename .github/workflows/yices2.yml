@@ -47,7 +47,7 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -b ${{ matrix.os }} -i pkg:yices2 -d yices2
+    - run: dockerBuild -c ${{ matrix.os }} -d yices2 pkg:yices2
 
     - run: dockerTestPkg ${{ matrix.os }} yices2
 

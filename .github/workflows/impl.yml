@@ -56,7 +56,7 @@ jobs:
         ghcr.io/hdl/${{ matrix.os }}/pkg:ghdl-yosys-plugin
         ghcr.io/hdl/${{ matrix.os }}/pkg:yosys
 
-    - run: dockerBuild -b ${{ matrix.os }} -i build:impl -d impl -t base
+    - run: dockerBuild -c ${{ matrix.os }} -d impl -t base build:impl
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -113,8 +113,8 @@ jobs:
         ghcr.io/hdl/${{ matrix.os }}/pkg:nextpnr-${{ matrix.task.arch }}
         ghcr.io/hdl/${{ matrix.os }}/pkg:${{ matrix.task.prj }}
 
-    - run: dockerBuild -b ${{ matrix.os }} -i impl:${{ matrix.task.arch }} -d impl -t ${{ matrix.task.arch }}
-    - run: dockerBuild -b ${{ matrix.os }} -i impl:${{ matrix.task.prj  }} -d impl -t ${{ matrix.task.prj }}
+    - run: dockerBuild -c ${{ matrix.os }} -d impl -t ${{ matrix.task.arch }} impl:${{ matrix.task.arch }}
+    - run: dockerBuild -c ${{ matrix.os }} -d impl -t ${{ matrix.task.prj }} impl:${{ matrix.task.prj  }}
 
     - run: dockerTest ${{ matrix.os }} impl:${{ matrix.task.arch }}
     - run: dockerTest ${{ matrix.os }} impl:${{ matrix.task.prj  }}
@@ -174,9 +174,9 @@ jobs:
         ghcr.io/hdl/${{ matrix.os }}/pkg:icestorm
         ghcr.io/hdl/${{ matrix.os }}/pkg:prjtrellis
 
-    - run: dockerBuild -b ${{ matrix.os }} -i impl:generic -d impl -t generic
-    - run: dockerBuild -b ${{ matrix.os }} -i impl:pnr     -d impl -t pnr
-    - run: dockerBuild -b ${{ matrix.os }} -i impl         -d impl
+    - run: dockerBuild -c ${{ matrix.os }} -d impl -t generic impl:generic
+    - run: dockerBuild -c ${{ matrix.os }} -d impl -t pnr impl:pnr
+    - run: dockerBuild -c ${{ matrix.os }} -d impl impl
 
     - run: dockerTest ${{ matrix.os }} impl:generic
     - run: dockerTest ${{ matrix.os }} impl:pnr
