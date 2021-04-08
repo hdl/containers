@@ -63,7 +63,8 @@ RUN apt-get update -qq \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-RUN --mount=type=cache,from=pkg-osvb,src=/osvb/,target=/tmp/osvb/ pip3 install -U /tmp/osvb/*.whl pytest --progress-bar off \
+RUN --mount=type=cache,from=pkg-osvb,src=/osvb/,target=/tmp/osvb/ \
+ pip3 install -U /tmp/osvb/*.whl pytest --progress-bar off \
  && rm -rf ~/.cache \
  && mkdir /opt/osvb \
  && cp -vr /tmp/osvb/osvvmlibs/ /opt/osvb/osvvmlibs/
