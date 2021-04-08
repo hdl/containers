@@ -41,9 +41,9 @@ while getopts ":b:i:d:t:a:" opt; do
   case $opt in
     b) _baseos="$OPTARG";;
     i) _image="$OPTARG";;
-    d) _dockerfile="$OPTARG".dockerfile;;
-    t) _target='--target='"$OPTARG";;
-    a) _argimg='--build-arg IMAGE='"$OPTARG";;
+    d) _dockerfile="$OPTARG";;
+    t) _target="-t $OPTARG";;
+    a) _argimg="-a $OPTARG";;
     \?) printf "[dockerBuild] Invalid option: -$OPTARG\n" >&2
         exit 1 ;;
     :)  printf "[dockerBuild] Option -$OPTARG requires an argument\n" >&2
@@ -52,6 +52,7 @@ while getopts ":b:i:d:t:a:" opt; do
 done
 shift $((OPTIND -1))
 
-docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 \
-  -t ghcr.io/hdl/"${_baseos}"/"${_image}" ${_target} ${_argimg} \
-  - < "${_baseos}"/"${_dockerfile}"
+./pyHDLC/cli.py build \
+  -c "${_baseos}" \
+  -d "${_dockerfile}" \
+  ${_target} ${_argimg} ${_image}
