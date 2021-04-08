@@ -22,15 +22,15 @@
 from run import _exec
 
 
-def Build(
-    image,
-    registry="ghcr.io/hdl",
-    collection="debian-buster",
-    dockerfile=None,
-    target=None,
-    argimg=None,
-    pkg=None,
-    dry=False,
+def BuildImage(
+    image: str,
+    registry: str = "ghcr.io/hdl",
+    collection: str = "debian-buster",
+    dockerfile: str = None,
+    target: str = None,
+    argimg: str = None,
+    pkg: str = False,
+    dry: bool = False,
 ):
     if dockerfile is None:
         dockerfile = image

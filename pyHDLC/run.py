@@ -19,6 +19,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+from typing import List, Optional
 import sys
 from sys import executable, platform
 from os import environ
@@ -26,14 +27,14 @@ from subprocess import check_call, STDOUT
 from shutil import which
 
 
-isGHA = "GITHUB_ACTIONS" in environ
+isGHA: bool = "GITHUB_ACTIONS" in environ
 
-isWin = platform == "win32"
+isWin: bool = platform == "win32"
 
-shell = [which("bash")] if platform == "win32" else []
+shell: List[str] = [which("bash")] if platform == "win32" else []
 
 
-def _exec(args, dry=False, collapse=None):
+def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] = None):
     isGroup = isGHA and collapse is not None
 
     if isGroup:
@@ -51,9 +52,9 @@ def _exec(args, dry=False, collapse=None):
         sys.stdout.flush()
 
 
-def _sh(args, dry=False):
+def _sh(args: List[str], dry: Optional[bool] = False):
     _exec(shell + args, dry=dry)
 
 
-def _py(args, dry=False):
+def _py(args: List[str], dry: Optional[bool] = False):
     _exec([executable] + args, dry=dry)

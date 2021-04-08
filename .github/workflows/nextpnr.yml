@@ -50,8 +50,8 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d nextpnr -t base build:nextpnr-base
-    - run: dockerBuild -c ${{ matrix.os }} -d nextpnr -t build build:nextpnr-build
+    - run: dockerBuild -c ${{ matrix.os }} -f nextpnr -t base build:nextpnr-base
+    - run: dockerBuild -c ${{ matrix.os }} -f nextpnr -t build build:nextpnr-build
 
     - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -104,9 +104,9 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d nextpnr -t pkg-${{ matrix.task.arch }} pkg:nextpnr-${{ matrix.task.arch }}
-    - run: dockerBuild -c ${{ matrix.os }} -d nextpnr -t ${{ matrix.task.arch }} nextpnr:${{ matrix.task.arch }}
-    - run: dockerBuild -c ${{ matrix.os }} -d nextpnr -t ${{ matrix.task.prj }} nextpnr:${{ matrix.task.prj }}
+    - run: dockerBuild -c ${{ matrix.os }} -f nextpnr -t pkg-${{ matrix.task.arch }} pkg:nextpnr-${{ matrix.task.arch }}
+    - run: dockerBuild -c ${{ matrix.os }} -f nextpnr -t ${{ matrix.task.arch }} nextpnr:${{ matrix.task.arch }}
+    - run: dockerBuild -c ${{ matrix.os }} -f nextpnr -t ${{ matrix.task.prj }} nextpnr:${{ matrix.task.prj }}
 
     - run: dockerTestPkg ${{ matrix.os }} nextpnr-${{ matrix.task.arch }}
     - run: dockerTest    ${{ matrix.os }} nextpnr:${{ matrix.task.arch }}
@@ -160,9 +160,9 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d nextpnr -t pkg-generic pkg:nextpnr-generic
-    - run: dockerBuild -c ${{ matrix.os }} -d nextpnr -t generic nextpnr:generic
-    - run: dockerBuild -c ${{ matrix.os }} -d nextpnr nextpnr
+    - run: dockerBuild -c ${{ matrix.os }} -f nextpnr -t pkg-generic pkg:nextpnr-generic
+    - run: dockerBuild -c ${{ matrix.os }} -f nextpnr -t generic nextpnr:generic
+    - run: dockerBuild -c ${{ matrix.os }} -f nextpnr nextpnr
 
     - run: dockerTestPkg ${{ matrix.os }} nextpnr-generic
     - run: dockerTest    ${{ matrix.os }} nextpnr:generic

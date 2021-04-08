@@ -47,9 +47,9 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d base -t base build:base
-    - run: dockerBuild -c ${{ matrix.os }} -d base -t build build:build
-    - run: dockerBuild -c ${{ matrix.os }} -d base build:dev
+    - run: dockerBuild -c ${{ matrix.os }} -f base -t base build:base
+    - run: dockerBuild -c ${{ matrix.os }} -f base -t build build:build
+    - run: dockerBuild -c ${{ matrix.os }} -f base build:dev
 
     - run: dockerTest ${{ matrix.os }} build:base
     - run: dockerTest ${{ matrix.os }} build:build

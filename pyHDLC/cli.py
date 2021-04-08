@@ -32,7 +32,7 @@ from pyAttributes.ArgParseAttributes import (
     SwitchArgumentAttribute,
 )
 
-from build import Build
+from build import BuildImage
 
 
 class CLI(ArgParseMixin):
@@ -103,6 +103,7 @@ class CLI(ArgParseMixin):
     @CommandAttribute("build", help="Build a single image by name.")
     @ArgumentAttribute(
         dest="Image",
+        nargs="*",
         type=str,
         help="Image name to be built (without registry prefix).",
     )
@@ -123,7 +124,7 @@ class CLI(ArgParseMixin):
         default="debian-buster",
     )
     @ArgumentAttribute(
-        "-d",
+        "-f",
         "--dockerfile",
         dest="Dockerfile",
         type=str,
@@ -151,7 +152,7 @@ class CLI(ArgParseMixin):
         default=False,
     )
     def HandleBuild(self, args):
-        Build(
+        BuildImage(
             image=args.Image,
             registry=args.Registry,
             collection=args.Collection,

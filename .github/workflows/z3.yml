@@ -46,7 +46,7 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d z3 pkg:z3
+    - run: dockerBuild -c ${{ matrix.os }} -f z3 pkg:z3
 
     - run: dockerTestPkg ${{ matrix.os }} z3
 

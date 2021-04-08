@@ -46,7 +46,7 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d gtkwave pkg:gtkwave
+    - run: dockerBuild -c ${{ matrix.os }} -f gtkwave pkg:gtkwave
 
     - run: dockerTestPkg ${{ matrix.os }} gtkwave
 

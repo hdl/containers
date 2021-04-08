@@ -98,7 +98,7 @@ jobs:
     - run: ./.github/setup.sh
 
     - run: dockerBuild -c ${{ matrix.os }} -p osvb
-    - run: dockerBuild -c ${{ matrix.os }} -d osvb sim:osvb
+    - run: dockerBuild -c ${{ matrix.os }} -f osvb sim:osvb
 
     - run: dockerTestPkg ${{ matrix.os }} osvb
     - run: dockerTest ${{ matrix.os }} sim:osvb
@@ -152,8 +152,8 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d ${{ matrix.img }} sim:${{ matrix.img }}-slim
-    - run: dockerBuild -c ${{ matrix.os }} -d osvb -a sim:${{ matrix.img }}-slim sim:${{ matrix.img }}
+    - run: dockerBuild -c ${{ matrix.os }} -f ${{ matrix.img }} sim:${{ matrix.img }}-slim
+    - run: dockerBuild -c ${{ matrix.os }} -f osvb -a sim:${{ matrix.img }}-slim sim:${{ matrix.img }}
 
     - run: dockerTest ${{ matrix.os }} sim:${{ matrix.img }}-slim
     - run: dockerTest ${{ matrix.os }} sim:${{ matrix.img }}

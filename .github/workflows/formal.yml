@@ -59,9 +59,9 @@ jobs:
         ghcr.io/hdl/${{ matrix.os }}/pkg:cvc4
         ghcr.io/hdl/${{ matrix.os }}/pkg:superprove
 
-    - run: dockerBuild -c ${{ matrix.os }} -d formal -t min formal:min
-    - run: dockerBuild -c ${{ matrix.os }} -d formal -t latest formal
-    - run: dockerBuild -c ${{ matrix.os }} -d formal formal:all
+    - run: dockerBuild -c ${{ matrix.os }} -f formal -t min formal:min
+    - run: dockerBuild -c ${{ matrix.os }} -f formal -t latest formal
+    - run: dockerBuild -c ${{ matrix.os }} -f formal formal:all
 
     - run: dockerTest ${{ matrix.os }} formal:min
     - run: dockerTest ${{ matrix.os }} formal
