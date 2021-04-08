@@ -67,6 +67,7 @@ COPY --from=build-llvm / /usr/local/
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    gcc \
     libgnat-8 \
     libllvm7 \
     zlib1g-dev \
