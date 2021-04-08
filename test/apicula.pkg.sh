@@ -24,6 +24,8 @@ set -e
 
 cd $(dirname "$0")
 
-tree /
+./_tree.sh
+
+ls -la /*.whl
 
 ./_todo.sh
