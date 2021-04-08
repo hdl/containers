@@ -48,8 +48,8 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d icestorm -t pkg pkg:icestorm
-    - run: dockerBuild -c ${{ matrix.os }} -d icestorm icestorm
+    - run: dockerBuild -c ${{ matrix.os }} -p icestorm
+    - run: dockerBuild -c ${{ matrix.os }} icestorm
 
     - run: dockerTestPkg ${{ matrix.os }} icestorm
     - run: dockerTest ${{ matrix.os }} icestorm

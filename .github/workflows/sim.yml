@@ -49,7 +49,7 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d sim sim
+    - run: dockerBuild -c ${{ matrix.os }} sim
 
     - run: dockerTest ${{ matrix.os }} sim
 
@@ -97,7 +97,7 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d osvb -t pkg pkg:osvb
+    - run: dockerBuild -c ${{ matrix.os }} -p osvb
     - run: dockerBuild -c ${{ matrix.os }} -d osvb sim:osvb
 
     - run: dockerTestPkg ${{ matrix.os }} osvb

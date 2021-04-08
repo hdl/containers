@@ -64,7 +64,11 @@ class CLI(ArgParseMixin):
         print("{line}".format(line="=" * 80))
 
     @CommonSwitchArgumentAttribute(
-        "-n", "--noexec", dest="noexec", help="Print commands but do not execute them.", default=False
+        "-n",
+        "--noexec",
+        dest="noexec",
+        help="Print commands but do not execute them.",
+        default=False,
     )
     def Run(self):
         ArgParseMixin.Run(self)
@@ -139,6 +143,13 @@ class CLI(ArgParseMixin):
         type=str,
         help="Base image passed as an ARG to the dockerfile.",
     )
+    @CommonSwitchArgumentAttribute(
+        "-p",
+        "--pkg",
+        dest="Pkg",
+        help="Preprend 'pkg:' to Image and set Target to 'pkg' (if unset).",
+        default=False,
+    )
     def HandleBuild(self, args):
         Build(
             image=args.Image,
@@ -147,6 +158,7 @@ class CLI(ArgParseMixin):
             dockerfile=args.Dockerfile,
             target=args.Target,
             argimg=args.ArgImg,
+            pkg=args.Pkg,
             dry=args.noexec,
         )
 

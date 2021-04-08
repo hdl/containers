@@ -49,8 +49,8 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d apicula -t pkg pkg:apicula
-    - run: dockerBuild -c ${{ matrix.os }} -d apicula apicula
+    - run: dockerBuild -c ${{ matrix.os }} -p apicula
+    - run: dockerBuild -c ${{ matrix.os }} apicula
 
     - run: dockerTestPkg ${{ matrix.os }} apicula
     - run: dockerTest ${{ matrix.os }} apicula

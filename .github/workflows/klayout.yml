@@ -45,8 +45,8 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d klayout -t pkg pkg:klayout
-    - run: dockerBuild -c ${{ matrix.os }} -d klayout klayout
+    - run: dockerBuild -c ${{ matrix.os }} -p klayout
+    - run: dockerBuild -c ${{ matrix.os }} klayout
 
     - run: dockerTestPkg ${{ matrix.os }} klayout
     - run: dockerTest ${{ matrix.os }} klayout

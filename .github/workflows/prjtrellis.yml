@@ -48,8 +48,8 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d prjtrellis -t pkg pkg:prjtrellis
-    - run: dockerBuild -c ${{ matrix.os }} -d prjtrellis prjtrellis
+    - run: dockerBuild -c ${{ matrix.os }} -p prjtrellis
+    - run: dockerBuild -c ${{ matrix.os }} prjtrellis
 
     - run: dockerTestPkg ${{ matrix.os }} prjtrellis
     - run: dockerTest ${{ matrix.os }} prjtrellis

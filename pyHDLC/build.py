@@ -29,10 +29,16 @@ def Build(
     dockerfile=None,
     target=None,
     argimg=None,
+    pkg=None,
     dry=False,
 ):
     if dockerfile is None:
         dockerfile = image
+
+    if pkg is True:
+        image = f"pkg:{image}"
+        if target is None:
+            target = "pkg"
 
     cmd = ["docker", "build"]
     cmd += ["--progress=plain"]

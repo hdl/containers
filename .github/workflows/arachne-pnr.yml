@@ -46,8 +46,8 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d arachne-pnr -t pkg pkg:arachne-pnr
-    - run: dockerBuild -c ${{ matrix.os }} -d arachne-pnr arachne-pnr
+    - run: dockerBuild -c ${{ matrix.os }} -p arachne-pnr
+    - run: dockerBuild -c ${{ matrix.os }} arachne-pnr
 
     - run: dockerTestPkg ${{ matrix.os }} arachne-pnr
     - run: dockerTest ${{ matrix.os }} arachne-pnr

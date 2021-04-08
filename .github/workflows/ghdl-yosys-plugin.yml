@@ -48,7 +48,7 @@ jobs:
 
     - run: ./.github/setup.sh
 
-    - run: dockerBuild -c ${{ matrix.os }} -d ghdl-yosys-plugin -t pkg pkg:ghdl-yosys-plugin
+    - run: dockerBuild -c ${{ matrix.os }} -p ghdl-yosys-plugin
     - run: dockerBuild -c ${{ matrix.os }} -d ghdl-yosys-plugin ghdl:yosys
 
     - run: dockerTestPkg ${{ matrix.os }} ghdl-yosys-plugin ghdl
