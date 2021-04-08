@@ -40,11 +40,11 @@ def Build(
         if target is None:
             target = "pkg"
 
-    cmd = ["docker", "build"]
-    cmd += ["--progress=plain"]
-    cmd += ["--build-arg", "BUILDKIT_INLINE_CACHE=1"]
+    _imageName = f"{registry}/{collection}/{image}"
 
-    cmd += ["-t", f"{registry}/{collection}/{image}"]
+    cmd = ["docker", "build"]
+    cmd += ["--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1"]
+    cmd += ["-t", _imageName]
 
     if target is not None:
         cmd += [f"--target={target}"]
@@ -56,4 +56,4 @@ def Build(
 
     cmd += ["."]
 
-    _exec(args=cmd, dry=dry)
+    _exec(args=cmd, dry=dry, collapse=f"Build {_imageName}")

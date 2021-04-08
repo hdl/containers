@@ -33,17 +33,20 @@ isWin = platform == "win32"
 shell = [which("bash")] if platform == "win32" else []
 
 
-def _exec(args, dry=False):
-    if isGHA:
-        print("\n::group::Log")
+def _exec(args, dry=False, collapse=None):
+    isGroup = isGHA and collapse is not None
+
+    if isGroup:
+        print(f"\n::group::{collapse}")
         sys.stdout.flush()
 
-    if dry:
-        print(" ".join(args))
-    else:
+    print("·", " ".join(args))
+    sys.stdout.flush()
+
+    if not dry:
         check_call(args, stderr=STDOUT)
 
-    if isGHA:
+    if isGroup:
         print("\n::endgroup::")
         sys.stdout.flush()
 
