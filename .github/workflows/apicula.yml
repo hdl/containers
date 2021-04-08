@@ -36,6 +36,11 @@ jobs:
 
   apicula:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - debian-buster
     steps:
 
     - uses: actions/checkout@v2
@@ -44,11 +49,25 @@ jobs:
 
     - run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
-    - run: dockerBuild pkg:apicula  apicula pkg
-    - run: dockerBuild apicula      apicula
+    - run: dockerBuild -b ${{ matrix.os }} -i pkg:apicula -d apicula -t pkg
+    - run: dockerBuild -b ${{ matrix.os }} -i apicula     -d apicula
 
-    - run: dockerTestPkg apicula
-    - run: dockerTest apicula
+    - run: dockerTestPkg ${{ matrix.os }} apicula
+    - run: dockerTest ${{ matrix.os }} apicula
+
+    - name: Login to ghcr.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: gha
+        password: ${{ github.token }}
+
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      run: >-
+        dockerPush ${{ matrix.os }}
+        pkg:apicula
+        apicula
 
     - name: Login to DockerHub
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -57,9 +76,17 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - run: dockerPush pkg:apicula
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+    # Mirror to docker.io/hdlc
 
-    - run: dockerPush apicula
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+    - name: Login to docker.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
 
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      run: >-
+        dockerMirror ${{ matrix.os }}
+        pkg:apicula
+        apicula
