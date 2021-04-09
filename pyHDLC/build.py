@@ -114,6 +114,7 @@ def BuildImage(
 
         cmd = ["docker", "build"]
         cmd += ["--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1"]
+        cmd += ["--build-arg", f"REGISTRY={registry}/{collection}"]
         cmd += ["-t", _imageName]
 
         if tgt is not None:
