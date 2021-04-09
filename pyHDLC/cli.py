@@ -42,7 +42,7 @@ class WithRegistryAttributes(Attribute):
         for _item in [
             ArgumentAttribute(
                 dest="Image",
-                nargs="*",
+                nargs="+",
                 type=str,
                 help="Image name(s), without registry prefix.",
             ),
