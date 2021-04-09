@@ -15,7 +15,7 @@ Ready-to-use images are provided for each tool, which contain the tool and the d
 
 * There is an example at https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile[ghdl-yosys-blink: Makefile] showcasing how to use this fine-grained approach with a makefile. The same make based strategy is used in https://github.com/antonblanchard/microwatt/blob/master/Makefile[antonblanchard/microwatt].
 * At https://github.com/marph91/icestick-remote[marph91/icestick-remote] the CI workflow for synthesis uses this approach.
-* Moreover, https://github.com/PyFPGA/[PyFPGA] is a set of Python classes for vendor-independent FPGA development. https://github.com/PyFPGA/openflow[PyFPGA/openflow] allows running GHDL, Yosys, etc. in containers.
+* Moreover, https://github.com/PyFPGA/[PyFPGA] is a set of Python classes for vendor-independent FPGA development. https://github.com/PyFPGA/openflow[PyFPGA/openflow] allows running GHDL, Yosys, etc. in containers. In fact, openflow can be used along with https://github.com/olofk/edalize[Edalize]'s `EDALIZE_LAUNCHER` environment variable.
 
 NOTE: These images are coloured [lime]#GREEN# in the <<Graphs>>.
 

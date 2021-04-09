@@ -45,14 +45,14 @@ class WithRegistryAttributes(Attribute):
                 dest="Image",
                 nargs="+",
                 type=str,
-                help="Image name(s), without registry prefix.",
+                help="image name(s), without registry prefix.",
             ),
             ArgumentAttribute(
                 "-r",
                 "--registry",
                 dest="Registry",
                 type=str,
-                help="Container image registry prefix.",
+                help="container image registry prefix.",
                 default="ghcr.io/hdl",
             ),
             ArgumentAttribute(
@@ -60,7 +60,7 @@ class WithRegistryAttributes(Attribute):
                 "--collection",
                 dest="Collection",
                 type=str,
-                help="Name of the collection/subset of images.",
+                help="name of the collection/subset of images.",
                 default="debian-buster",
             ),
             # ... add more if needed
@@ -104,7 +104,7 @@ class CLI(ArgParseMixin):
         "-n",
         "--noexec",
         dest="noexec",
-        help="Print commands but do not execute them.",
+        help="print commands but do not execute them.",
         default=False,
     )
     def Run(self):
@@ -117,7 +117,6 @@ class CLI(ArgParseMixin):
 
     @CommandAttribute("help", help="Display help page(s) for the given command name.")
     @ArgumentAttribute(
-        metavar="<Command>",
         dest="Command",
         type=str,
         nargs="?",
@@ -135,7 +134,7 @@ class CLI(ArgParseMixin):
                 self.PrintHeadline()
                 self.SubParsers[args.Command].print_help()
             except KeyError:
-                print("Command {0} is unknown.".format(args.Command))
+                print("command {0} is unknown.".format(args.Command))
 
     @CommandAttribute("build", help="Build images by name.")
     @WithRegistryAttributes()
@@ -144,34 +143,34 @@ class CLI(ArgParseMixin):
         "--dockerfile",
         dest="Dockerfile",
         type=str,
-        help="Dockerfile to be built, from the collection.",
+        help="dockerfile to be built, from the collection.",
     )
     @ArgumentAttribute(
         "-t",
         "--target",
         dest="Target",
         type=str,
-        help="Target stage in the dockerfile.",
+        help="target stage in the dockerfile.",
     )
     @ArgumentAttribute(
         "-a",
         "--argimg",
         dest="ArgImg",
         type=str,
-        help="Base image passed as an ARG to the dockerfile.",
+        help="base image passed as an ARG to the dockerfile.",
     )
     @CommonSwitchArgumentAttribute(
         "-p",
         "--pkg",
         dest="Pkg",
-        help="Preprend 'pkg:' to Image and set Target to 'pkg' (if unset).",
+        help="preprend 'pkg:' to Image and set Target to 'pkg' (if unset).",
         default=False,
     )
     @CommonSwitchArgumentAttribute(
         "-d",
         "--default",
         dest="Default",
-        help="Set default Dockerfile, Target and ArgImg options, given the image name(s).",
+        help="set default Dockerfile, Target and ArgImg options, given the image name(s).",
         default=False,
     )
     def HandleBuild(self, args):
@@ -195,7 +194,7 @@ class CLI(ArgParseMixin):
         nargs="*",
         dest="Mirror",
         type=str,
-        help="Registry to mirror the image(s) to.",
+        help="registry to mirror the image(s) to.",
     )
     def HandlePush(self, args):
         PushImage(

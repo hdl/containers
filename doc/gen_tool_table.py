@@ -58,7 +58,7 @@ with (ROOT/'tools.adoc').open('w') as fptr:
 
     for tool, var in tools.items():
         fptr.write('\n')
-        fptr.write('^.|%s[%s]\n' % (var['url'], tool))
+        fptr.write('^.|%s[%s]%s\n' % (var['url'], tool, ' !' if ('src' in var and not var['src']) else ''))
 
         pkg = ' '.join('OCIImage:pkg[%s]' % item for item in (
             var['pkg'] if 'pkg' in var else [])

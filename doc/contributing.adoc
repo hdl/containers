@@ -69,7 +69,7 @@ graphviz::../graph/legend.dot[format="svg", align="center"]
 
 === Package images
 
-Each tool/project is built once only for each collection in this image/container ecosystem. However, some (many) of the tools need to be included in multiple images for different purposes. Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each tool/project. Therefore, `<REGISTRY_PREFIX>/pkg:*` images are created/used (coloured [blue]#BLUE# in the <<Graphs>>). These are all based on `scratch` and are not runnable. Instead, they contain pre-built artifacts, to be then added into other images through `COPY --from=`.
+Each EDA tool/project is built once only for each collection in this image/container ecosystem. However, some (many) of the tools need to be included in multiple images for different purposes. Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each tool/project. Therefore, `<REGISTRY_PREFIX>/pkg:*` images are created/used (coloured [blue]#BLUE# in the <<Graphs>>). These are all based on `scratch` and are not runnable. Instead, they contain pre-built artifacts, to be then added into other images through `COPY --from=`.
 
 Since `<REGISTRY_PREFIX>/pkg:*` images are not runnable _per se_, but an intermediate utility, the usage of environment variables `PREFIX` and `DESTDIR` in the dockerfiles might be misleading. All the tools in the ecosystem are expected to be installed into `/usr/local`, the standard location for user built tools on most GNU/Linux distributions. Hence:
 
@@ -80,13 +80,30 @@ Despite the usage of these variables being documented in https://www.gnu.org/pre
 
 === Build
 
-A helper script is provided in link:{repotree}.github/bin/[`.github/bin/`] to ease building images, by hiding all common options:
+A helper script is provided in link:{repotree}.github/bin/dockerBuild[`.github/bin/dockerBuild`] to ease building images, by hiding all common options. It's a wrapper around command `build` of link:{repotree}pyHDLC/cli.py[`pyHDLC.cli`]:
 
-* `dockerBuild BASE_OS IMAGE_NAME DOCKERFILE_NAME [TARGET_STAGE]`
-** BASE_OS: set/collection of images (e.g. `debian-buster`).
-** IMAGE_NAME: image name without the prefix.
-** DOCKERFILE_NAME: name of the dockerfile to be used.
-** (optional) TARGET_STAGE: name of that target stage in the dockerfile.
+[source, shell]
+----
+usage: cli.py build [-h] [-c COLLECTION] [-r REGISTRY] [-f DOCKERFILE] [-t TARGET] [-a ARGIMG] [-p] [-d] Image [Image ...]
+
+positional arguments:
+  Image                 image name(s), without registry prefix.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c COLLECTION, --collection COLLECTION
+                        name of the collection/subset of images.
+  -r REGISTRY, --registry REGISTRY
+                        container image registry prefix.
+  -f DOCKERFILE, --dockerfile DOCKERFILE
+                        dockerfile to be built, from the collection.
+  -t TARGET, --target TARGET
+                        target stage in the dockerfile.
+  -a ARGIMG, --argimg ARGIMG
+                        base image passed as an ARG to the dockerfile.
+  -p, --pkg             preprend 'pkg:' to Image and set Target to 'pkg' (if unset).
+  -d, --default         set default Dockerfile, Target and ArgImg options, given the image name(s).
+----
 
 === Inspect
 
@@ -114,6 +131,8 @@ docker run --rm -it \
 .Inspection of `<REGISTRY_PREFIX>/pkg:yosys` with https://github.com/wagoodman/dive[wagoodman/dive].
 [link=img/dive.png]
 image::img/dive.png[wagoodman/dive, align="center"]
+
+A helper script is provided in link:{repotree}.github/bin/dockerDive[`.github/bin/dockerDive`].
 
 === Test
 
@@ -153,7 +172,7 @@ There are a couple of helper scripts in link:{repotree}.github/bin/[`.github/bin
 ** Be careful with the order. If you add a new tool and include it in one of the multi-tool images, the package image needs to be built first.
 3. Create or update workflow(s).
 ** For each tool or multi-tool image, a GitHub Actions workflow is added to link:{repotree}.github/workflows[`.github/workflows/`]. Find documentation at https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions[Workflow syntax for GitHub Actions]. Copying some of the existing workflows in this repo and adapting it is suggested.
-** In each workflow, all the images produced from stages of the corresponding dockerfile are built, tested and pushed. `dockerBuild`, `dockerTest`, `dockerTestPkg` and `dockerPush` scripts from link:{repotree}.github/bin[`.github/bin`] are used.
+** In each workflow, all the images produced from stages of the corresponding dockerfile are built, tested and pushed. Scripts from link:{repotree}.github/bin[`.github/bin`] are used.
 ** The workflow matrix is used for deciding which collections is each tool to be built for.
 4. Update the documentation.
 ** If a new tool was added,

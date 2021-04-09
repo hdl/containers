@@ -30,6 +30,8 @@ Multiple collections of images are provided. All the images in each collection d
 
 IMPORTANT: Image names and tags in this documentation are provided without the _registry prefix_. Hence, one of the prefixes listed above needs to be used when actually pulling/using the images. See <<Usage>>.
 
+IMPORTANT: Tools marked with `!` are NOT built from sources, but installed through system package managers.
+
 include::tools.adoc[]
 
 Images including multiple tools:

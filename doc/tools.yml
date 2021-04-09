@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 arache-pnr:
+  src: true
   url: 'https://hdl.github.io/awesome/items/arachne-pnr'
   pkg:
     - 'arachne-pnr'
@@ -27,6 +28,7 @@ arache-pnr:
 #---
 
 boolector:
+  src: true
   url: 'https://hdl.github.io/awesome/items/boolector'
   pkg:
     - 'boolector'
@@ -37,6 +39,7 @@ boolector:
 #---
 
 cocotb:
+  src: true
   url: 'https://hdl.github.io/awesome/items/cocotb'
   in:
     - 'sim:osvb'
@@ -46,6 +49,7 @@ cocotb:
 #---
 
 cvc4:
+  src: true
   url: 'https://hdl.github.io/awesome/items/cvc4'
   pkg:
     - 'cvc4'
@@ -56,6 +60,7 @@ cvc4:
 #---
 
 ghdl:
+  src: true
   url: 'https://hdl.github.io/awesome/items/ghdl'
   pkg:
     - 'ghdl'
@@ -79,6 +84,7 @@ ghdl:
 #---
 
 ghdl-yosys-plugin:
+  src: true
   url: 'https://hdl.github.io/awesome/items/ghdl-yosys-plugin'
   pkg:
     - 'ghdl-yosys-plugin'
@@ -93,6 +99,7 @@ ghdl-yosys-plugin:
 #---
 
 graphviz:
+  src: false
   url: 'https://hdl.github.io/awesome/items/graphviz'
   in:
     - 'impl'
@@ -106,6 +113,7 @@ graphviz:
 #---
 
 gtkwave:
+  src: true
   url: 'https://hdl.github.io/awesome/items/gtkwave'
   pkg:
     - 'gtkwave'
@@ -113,6 +121,7 @@ gtkwave:
 #---
 
 icestorm:
+  src: true
   url: 'https://hdl.github.io/awesome/items/icestorm'
   pkg:
     - 'icestorm'
@@ -128,6 +137,7 @@ icestorm:
 #---
 
 klayout:
+  src: true
   url: 'https://hdl.github.io/awesome/items/klayout'
   pkg:
     - 'klayout'
@@ -137,6 +147,7 @@ klayout:
 #---
 
 nextpnr:
+  src: true
   url: 'https://hdl.github.io/awesome/items/nextpnr'
   pkg:
     - 'nextpnr-generic'
@@ -155,6 +166,7 @@ nextpnr:
 #---
 
 openocd:
+  src: false
   url: 'https://hdl.github.io/awesome/items/openocd'
   in:
     - 'prog'
@@ -162,6 +174,7 @@ openocd:
 #---
 
 prjtrellis:
+  src: true
   url: 'https://hdl.github.io/awesome/items/prjtrellis'
   pkg:
     - 'prjtrellis'
@@ -176,6 +189,7 @@ prjtrellis:
 #---
 
 superprove:
+  src: true
   url: 'https://hdl.github.io/awesome/items/superprove'
   pkg:
     - 'superprove'
@@ -185,6 +199,7 @@ superprove:
 #---
 
 symbiyosys:
+  src: true
   url: 'https://hdl.github.io/awesome/items/symbiyosys'
   pkg:
     - 'symbiyosys'
@@ -196,6 +211,7 @@ symbiyosys:
 #---
 
 verilator:
+  src: true
   url: 'https://hdl.github.io/awesome/items/verilator'
   pkg:
     - 'verilator'
@@ -212,6 +228,7 @@ verilator:
 #---
 
 vunit:
+  src: true
   url: 'https://hdl.github.io/awesome/items/vunit'
   in:
     - 'sim:osvb'
@@ -221,6 +238,7 @@ vunit:
 #---
 
 yices2:
+  src: true
   url: 'https://hdl.github.io/awesome/items/yices2'
   pkg:
     - 'yices2'
@@ -231,6 +249,7 @@ yices2:
 #---
 
 yosys:
+  src: true
   url: 'https://hdl.github.io/awesome/items/yosys'
   pkg:
     - 'yosys'
@@ -247,6 +266,7 @@ yosys:
 #---
 
 z3:
+  src: true
   url: 'https://hdl.github.io/awesome/items/z3'
   pkg:
     - 'z3'
@@ -258,6 +278,7 @@ z3:
 #---
 
 apicula:
+  src: true
   url: 'https://hdl.github.io/awesome/items/apicula'
   pkg:
     - 'apicula'
