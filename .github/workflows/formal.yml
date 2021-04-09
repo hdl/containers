@@ -50,14 +50,14 @@ jobs:
     - run: ./.github/setup.sh
 
     - run: >-
-        dockerPull
-        ghcr.io/hdl/${{ matrix.os }}/ghdl:yosys
-        ghcr.io/hdl/${{ matrix.os }}/pkg:z3
-        ghcr.io/hdl/${{ matrix.os }}/pkg:symbiyosys
-        ghcr.io/hdl/${{ matrix.os }}/pkg:yices2
-        ghcr.io/hdl/${{ matrix.os }}/pkg:boolector
-        ghcr.io/hdl/${{ matrix.os }}/pkg:cvc4
-        ghcr.io/hdl/${{ matrix.os }}/pkg:superprove
+        dockerPull -c ${{ matrix.os }}
+        ghdl:yosys
+        pkg:z3
+        pkg:symbiyosys
+        pkg:yices2
+        pkg:boolector
+        pkg:cvc4
+        pkg:superprove
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env python3
 
 # Authors:
 #   Unai Martinez-Corral
@@ -19,8 +19,21 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-set -e
+from typing import List, Optional, Union
+from run import _exec
 
-cd $(dirname "$0")/../..
 
-./pyHDLC/cli.py pull $@
+def PullImage(
+    image: Union[str, List[str]],
+    registry: Optional[str] = "ghcr.io/hdl",
+    collection: Optional[str] = "debian-buster",
+    dry: Optional[bool] = False,
+) -> None:
+    def _pull(img):
+        _imageName = f"{registry}/{collection}/{img}"
+        _exec(
+            args=["docker", "pull", _imageName], dry=dry, collapse=f"Pull {_imageName}"
+        )
+
+    for _image in [image] if isinstance(image, str) else image:
+        _pull(_image)

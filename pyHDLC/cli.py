@@ -35,6 +35,7 @@ from pyAttributes.ArgParseAttributes import (
 
 from build import DefaultOpts, BuildImage
 from push import PushImage
+from pull import PullImage
 
 
 class WithRegistryAttributes(Attribute):
@@ -203,6 +204,16 @@ class CLI(ArgParseMixin):
             collection=args.Collection,
             dry=args.noexec,
             mirror=args.Mirror,
+        )
+
+    @CommandAttribute("pull", help="Pull images by name.")
+    @WithRegistryAttributes()
+    def HandlePull(self, args):
+        PullImage(
+            image=args.Image,
+            registry=args.Registry,
+            collection=args.Collection,
+            dry=args.noexec,
         )
 
 

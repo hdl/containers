@@ -51,10 +51,10 @@ jobs:
     - run: ./.github/setup.sh
 
     - run: >-
-        dockerPull
-        ghcr.io/hdl/${{ matrix.os }}/ghdl:yosys
-        ghcr.io/hdl/${{ matrix.os }}/pkg:ghdl-yosys-plugin
-        ghcr.io/hdl/${{ matrix.os }}/pkg:yosys
+        dockerPull -c ${{ matrix.os }}
+        ghdl:yosys
+        pkg:ghdl-yosys-plugin
+        pkg:yosys
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
@@ -103,10 +103,10 @@ jobs:
     - run: ./.github/setup.sh
 
     - run: >-
-        dockerPull
-        ghcr.io/hdl/${{ matrix.os }}/build:impl
-        ghcr.io/hdl/${{ matrix.os }}/pkg:nextpnr-${{ matrix.task.arch }}
-        ghcr.io/hdl/${{ matrix.os }}/pkg:${{ matrix.task.prj }}
+        dockerPull -c ${{ matrix.os }}
+        build:impl
+        pkg:nextpnr-${{ matrix.task.arch }}
+        pkg:${{ matrix.task.prj }}
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
@@ -155,13 +155,13 @@ jobs:
     - run: ./.github/setup.sh
 
     - run: >-
-        dockerPull
-        ghcr.io/hdl/${{ matrix.os }}/build:impl
-        ghcr.io/hdl/${{ matrix.os }}/pkg:nextpnr-ice40
-        ghcr.io/hdl/${{ matrix.os }}/pkg:nextpnr-ecp5
-        ghcr.io/hdl/${{ matrix.os }}/pkg:nextpnr-generic
-        ghcr.io/hdl/${{ matrix.os }}/pkg:icestorm
-        ghcr.io/hdl/${{ matrix.os }}/pkg:prjtrellis
+        dockerPull -c ${{ matrix.os }}
+        build:impl
+        pkg:nextpnr-ice40
+        pkg:nextpnr-ecp5
+        pkg:nextpnr-generic
+        pkg:icestorm
+        pkg:prjtrellis
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
