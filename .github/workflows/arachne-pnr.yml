@@ -62,14 +62,6 @@ jobs:
         username: gha
         password: ${{ github.token }}
 
-    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      run: >-
-        dockerPush ${{ matrix.os }}
-        pkg:arachne-pnr
-        arachne-pnr
-
-    # Mirror to docker.io/hdlc
-
     - name: Login to docker.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
       uses: docker/login-action@v1
@@ -77,8 +69,8 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerMirror ${{ matrix.os }}
+        dockerPush ${{ matrix.os }}
         pkg:arachne-pnr
         arachne-pnr

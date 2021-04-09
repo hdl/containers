@@ -34,6 +34,41 @@ from pyAttributes.ArgParseAttributes import (
 )
 
 from build import DefaultOpts, BuildImage
+from push import PushImage
+
+
+class WithRegistryAttributes(Attribute):
+    def __call__(self, func):
+        for _item in [
+            ArgumentAttribute(
+                dest="Image",
+                nargs="*",
+                type=str,
+                help="Image name(s), without registry prefix.",
+            ),
+            ArgumentAttribute(
+                "-r",
+                "--registry",
+                dest="Registry",
+                type=str,
+                help="Container image registry prefix.",
+                default="ghcr.io/hdl",
+            ),
+            ArgumentAttribute(
+                "-c",
+                "--collection",
+                dest="Collection",
+                type=str,
+                help="Name of the collection/subset of images.",
+                default="debian-buster",
+            ),
+            # ... add more if needed
+        ]:
+            self._AppendAttribute(
+                func,
+                _item,
+            )
+        return func
 
 
 class CLI(ArgParseMixin):
@@ -101,29 +136,8 @@ class CLI(ArgParseMixin):
             except KeyError:
                 print("Command {0} is unknown.".format(args.Command))
 
-    @CommandAttribute("build", help="Build a single image by name.")
-    @ArgumentAttribute(
-        dest="Image",
-        nargs="*",
-        type=str,
-        help="Image name(s) to be built (without registry prefix).",
-    )
-    @ArgumentAttribute(
-        "-r",
-        "--registry",
-        dest="Registry",
-        type=str,
-        help="Container image registry to tag the image(s) for.",
-        default="ghcr.io/hdl",
-    )
-    @ArgumentAttribute(
-        "-c",
-        "--collection",
-        dest="Collection",
-        type=str,
-        help="Collection to pick the dockerfile(s) from.",
-        default="debian-buster",
-    )
+    @CommandAttribute("build", help="Build images by name.")
+    @WithRegistryAttributes()
     @ArgumentAttribute(
         "-f",
         "--dockerfile",
@@ -170,6 +184,25 @@ class CLI(ArgParseMixin):
             pkg=args.Pkg,
             dry=args.noexec,
             default=args.Default,
+        )
+
+    @CommandAttribute("push", help="Push images by name.")
+    @WithRegistryAttributes()
+    @ArgumentAttribute(
+        "-m",
+        "--mirror",
+        nargs="*",
+        dest="Mirror",
+        type=str,
+        help="Registry to mirror the image(s) to.",
+    )
+    def HandlePush(self, args):
+        PushImage(
+            image=args.Image,
+            registry=args.Registry,
+            collection=args.Collection,
+            dry=args.noexec,
+            mirror=args.Mirror,
         )
 
 

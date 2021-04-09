@@ -63,13 +63,6 @@ jobs:
         username: gha
         password: ${{ github.token }}
 
-    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      run: >-
-        dockerPush ${{ matrix.os }}
-        sim
-
-    # Mirror to docker.io/hdlc
-
     - name: Login to docker.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
       uses: docker/login-action@v1
@@ -77,9 +70,9 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerMirror ${{ matrix.os }}
+        dockerPush ${{ matrix.os }}
         sim
 
 
@@ -115,14 +108,6 @@ jobs:
         username: gha
         password: ${{ github.token }}
 
-    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      run: >-
-        dockerPush ${{ matrix.os }}
-        pkg:osvb
-        sim:osvb
-
-    # Mirror to docker.io/hdlc
-
     - name: Login to docker.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
       uses: docker/login-action@v1
@@ -130,9 +115,9 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerMirror ${{ matrix.os }}
+        dockerPush ${{ matrix.os }}
         pkg:osvb
         sim:osvb
 
@@ -172,14 +157,6 @@ jobs:
         username: gha
         password: ${{ github.token }}
 
-    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      run: >-
-        dockerPush ${{ matrix.os }}
-        sim:${{ matrix.img }}-slim
-        sim:${{ matrix.img }}
-
-    # Mirror to docker.io/hdlc
-
     - name: Login to docker.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
       uses: docker/login-action@v1
@@ -187,8 +164,8 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
-    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerMirror ${{ matrix.os }}
+        dockerPush ${{ matrix.os }}
         sim:${{ matrix.img }}-slim
         sim:${{ matrix.img }}
