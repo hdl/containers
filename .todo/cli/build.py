@@ -3,12 +3,8 @@ from os import environ
 from pathlib import Path
 from subprocess import check_call
 
-from utils import gstart, gend
-
 
 def build_image(repo, tag, dfile, args=None, dry_run=False):
-    gstart("[DOCKER build] %s : %s" % (repo, tag))
-
     ctx = args["context"] if args and "context" in args else None
     tgt = args["target"] if args and "target" in args else None
     bargs = args["args"] if args and "args" in args else None
@@ -43,5 +39,3 @@ def build_image(repo, tag, dfile, args=None, dry_run=False):
     with pfile.open('r') as fptr:
         cmd += ["-"]
         do_build(cmd, fptr)
-
-    gend()
