@@ -47,7 +47,9 @@ jobs:
       run: make -C doc asciidoctor-py pyHDLC
 
     - name: Build site
-      run: make -C doc
+      run: |
+        make -C doc
+        make -C doc map
 
     - name: Publish site to gh-pages (doc)
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -58,9 +60,13 @@ jobs:
         cp ../.git/config ./.git/config
         touch .nojekyll
         mv ../doc/index.html ./
+
+        # FIXME make asciidoctor generate the SVGs in subdir 'img'
         mv ../doc/*.svg ./
+
         mkdir img
         cp ../doc/img/* ./img/
+        mv ../pyHDLC/map.svg ./img/
         git add .
         git config --local user.email "push@gha"
         git config --local user.name "GHA"

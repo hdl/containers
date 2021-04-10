@@ -21,5 +21,11 @@
 
 FROM python:slim-buster
 
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    graphviz \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
+
 RUN --mount=type=bind,src=.,target=/tmp/containers/ \
  pip3 install -r /tmp/containers/pyHDLC/requirements.txt
