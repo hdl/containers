@@ -23,6 +23,9 @@ build: force
 asciidoctor-py: force
 	docker build -t hdlc/doc:asciidoctor-py -f- ../ < doc--asciidoctor-py.dockerfile
 
+pyHDLC: force
+	docker build -t hdlc/doc:pyHDLC -f- ../ < doc--pyHDLC.dockerfile
+
 run: force
 	./gen_tool_table.py
 	asciidoctor \

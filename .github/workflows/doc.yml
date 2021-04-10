@@ -43,8 +43,8 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - name: Build hdlc/doc:asciidoctor-py
-      run: make -C doc asciidoctor-py
+    - name: Build hdlc/doc images
+      run: make -C doc asciidoctor-py pyHDLC
 
     - name: Build site
       run: make -C doc
@@ -75,4 +75,6 @@ jobs:
         password: ${{ secrets.DOCKER_PASS }}
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      run: docker push hdlc/doc:asciidoctor-py
+      run: |
+        docker push hdlc/doc:asciidoctor-py
+        docker push hdlc/doc:pyHDLC

@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:experimental
+# syntax=docker/dockerfile:1.2
 
 # Authors:
 #   Unai Martinez-Corral
@@ -19,10 +19,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM asciidoctor/docker-asciidoctor
-
-RUN apk add -U --no-cache graphviz py3-pip \
- && ln -s /usr/bin/python3 /usr/bin/python
+FROM python:slim-buster
 
 RUN --mount=type=bind,src=.,target=/tmp/containers/ \
- pip3 install -r /tmp/containers/doc/requirements.txt
+ pip3 install -r /tmp/containers/pyHDLC/requirements.txt
