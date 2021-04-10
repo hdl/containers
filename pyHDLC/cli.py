@@ -159,14 +159,14 @@ class CLI(ArgParseMixin):
         type=str,
         help="base image passed as an ARG to the dockerfile.",
     )
-    @CommonSwitchArgumentAttribute(
+    @SwitchArgumentAttribute(
         "-p",
         "--pkg",
         dest="Pkg",
         help="preprend 'pkg:' to Image and set Target to 'pkg' (if unset).",
         default=False,
     )
-    @CommonSwitchArgumentAttribute(
+    @SwitchArgumentAttribute(
         "-d",
         "--default",
         dest="Default",
