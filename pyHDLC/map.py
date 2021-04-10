@@ -199,6 +199,48 @@ class CollectionMap:
 
         dot.render()
 
+    def elkjsgraph(self):
+        """
+        Generate a elkjs JSON diagram
+        """
+
+        graph = {
+            "id": "root",
+            "layoutOptions": {
+                "elk.algorithm": "layered"
+            },
+            "children": [
+                    {"id": "n1", "width": 30, "height": 30},
+             ],
+            "edges": [
+              #{"id": "e1", "sources": ["n1"], "targets": ["n2"]},
+              #{"id": "e2", "sources": ["n1"], "targets": ["n3"]}
+            ]
+        }
+
+        for key, dfile in self.data.items():
+            print(key)
+#            graph.dfiles.append(key)
+
+#            for art in dfile.artifacts:
+#                _val = art[0]
+#                _val = graph.addItem(art[0])
+#                if _val is None:
+#                    raise Exception(f"Artifact <{_val}> should be a known image!")
+
+        # JS script for generating an SVG output from a JSON/object. Requires 'elkjs-svg'.
+        nodeRun = """
+        const ELK = require('elkjs')
+        const elksvg = require('elkjs-svg');
+        var graph = {}
+        const elk = new ELK()
+        elk.layout(graph)
+          .then(data => {
+            var renderer = new elksvg.Renderer();
+            var svg = renderer.toSvg(data);
+            console.log(svg);
+          })
+        """
 
 def GenerateMap(debug: bool = False):
     """
