@@ -17,6 +17,18 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+#---
+
+apicula:
+  src: true
+  url: 'https://hdl.github.io/awesome/items/apicula'
+  pkg:
+    - 'apicula'
+  use:
+    - 'apicula'
+
+#---
+
 arache-pnr:
   src: true
   url: 'https://hdl.github.io/awesome/items/arachne-pnr'
@@ -248,6 +260,16 @@ yices2:
 
 #---
 
+xyce:
+  src: true
+  url: 'https://hdl.github.io/awesome/items/xyce'
+  pkg:
+    - 'xyce'
+  use:
+    - 'xyce'
+
+#---
+
 yosys:
   src: true
   url: 'https://hdl.github.io/awesome/items/yosys'
@@ -274,13 +296,3 @@ z3:
     - 'formal:min'
     - 'formal'
     - 'formal:all'
-
-#---
-
-apicula:
-  src: true
-  url: 'https://hdl.github.io/awesome/items/apicula'
-  pkg:
-    - 'apicula'
-  use:
-    - 'apicula'

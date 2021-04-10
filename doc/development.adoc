@@ -32,6 +32,11 @@ GHAStatus:gtkwave[]
 --
 GHAStatus:verilator[]
 --
+* {blank}
++
+--
+GHAStatus:xyce[]
+--
 
 
 a|* {blank}
