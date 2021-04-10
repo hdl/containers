@@ -57,8 +57,6 @@ FROM $REGISTRY/pkg:superprove AS pkg-superprove
 
 FROM latest
 
-ARG REGISTRY
-
 COPY --from=pkg-superprove /superprove /
 
 RUN apt-get update -qq \
