@@ -43,10 +43,11 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - run: docker build -t hdlc/doc:asciidoctor-py -f- . < doc--asciidoctor-py.dockerfile
+    - name: Build hdlc/doc:asciidoctor-py
+      run: make -C doc asciidoctor-py
 
     - name: Build site
-      run: docker run --rm -v /$(pwd)://documents/ hdlc/doc:asciidoctor-py ./doc/make.sh
+      run: make -C doc
 
     - name: Publish site to gh-pages (doc)
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
