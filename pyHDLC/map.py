@@ -32,31 +32,31 @@ CDIR = ROOT.parent / "debian-buster"
 
 
 class Stage:
-    value: str = None
-    tag: str = None
-    depends: List[str] = None
+    value: str
+    tag: str
+    depends: List[str]
 
     def __init__(self):
         self.depends = []
 
     def addDep(self, val: str):
-        self.depends += [val]
+        self.depends.append(val)
 
 
 class Dockerfile:
-    argimg: str = None
-    stages: List[Stage] = None
-    artifacts: List[Tuple[str, str, str]] = None
+    argimg: str
+    stages: List[Stage]
+    artifacts: List[Tuple[str, str, str]]
 
     def __init__(self):
         self.stages = []
         self.artifacts = []
 
     def addStage(self, stg: Stage):
-        self.stages += [stg]
+        self.stages.append(stg)
 
     def addArtifact(self, art: Tuple[str, str, str]):
-        self.artifacts += [art]
+        self.artifacts.append(art)
 
     def markOrigin(self, val: str):
         """
@@ -75,10 +75,10 @@ class Dockerfile:
 
 
 class CollectionGraph:
-    dfiles: List[str] = None
-    imgs: List[str] = None
-    pkgs: List[str] = None
-    exts: List[str] = None
+    dfiles: List[str]
+    imgs: List[str]
+    pkgs: List[str]
+    exts: List[str]
 
     def __init__(self):
         self.dfiles = []
@@ -90,20 +90,20 @@ class CollectionGraph:
         if item.startswith("!R|"):
             _label = item[3:]
             if _label.startswith("pkg:"):
-                self.pkgs += [_label]
+                self.pkgs.append(_label)
             else:
-                self.imgs += [_label]
+                self.imgs.append(_label)
         elif item.startswith("!I|"):
             print("TODO: internal stage deps")
             return None
         else:
             _label = item
-            self.exts += [_label]
+            self.exts.append(_label)
         return _label
 
 
 class CollectionMap:
-    data: Dict[str, Dockerfile] = None
+    data: Dict[str, Dockerfile]
 
     def __init__(self):
         self.data = {}
@@ -146,7 +146,7 @@ class CollectionMap:
         graph = CollectionGraph()
 
         for key, dfile in self.data.items():
-            graph.dfiles += [key]
+            graph.dfiles.append(key)
 
             for art in dfile.artifacts:
                 _val = art[0]
