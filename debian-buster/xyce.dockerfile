@@ -51,7 +51,7 @@ RUN mkdir -p Trilinos/trilinos-source \
  && curl -fsSL https://github.com/trilinos/Trilinos/archive/trilinos-release-12-12-1.tar.gz | \
     tar xz -C Trilinos/trilinos-source --strip-components=1 \
  && mkdir -p Xyce \
- && curl -fsSL https://xyce.sandia.gov/downloads/_assets/documents/Xyce-6.12.tar.gz | \
+ && curl -fsSL https://xyce.sandia.gov/downloads/_assets/documents/Xyce-7.2.tar.gz | \
     tar xz -C Xyce --strip-components=1
 
 ENV ARCHDIR=$XYCE_OUTDIR
