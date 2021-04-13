@@ -32,8 +32,8 @@ CDIR = ROOT.parent / "debian-buster"
 
 
 class Stage:
-    value: str
-    tag: str
+    value: str = None
+    tag: str = None
     depends: List[str]
 
     def __init__(self):
@@ -44,7 +44,7 @@ class Stage:
 
 
 class Dockerfile:
-    argimg: str
+    argimg: str = None
     stages: List[Stage]
     artifacts: List[Tuple[str, str, str]]
 
