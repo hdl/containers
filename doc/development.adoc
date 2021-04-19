@@ -226,7 +226,7 @@ Do you want to give it a try? https://github.com/hdl/containers/issues/new[Let u
 
 ==== Reading dockerfiles
 
-One of the two sources of information for the graph are dockerfiles. As far as we are aware, there is no tool for generating a DAG from the stages of a dockerfile. However, https://github.com/asottile/dockerfile[asottile/dockerfile] is an interesting Python module which wraps docker/moby's golang parser. Hence, it can be used for getting the stages and `COPY --from` or `--mount` statements for generating the hierarchy. See link:{repotree}.todo/cli/dfile.py[`.todo/cli/dfile.py`].
+One of the two sources of information for the graph are dockerfiles. As far as we are aware, there is no tool for generating a DAG from the stages of a dockerfile. However, https://github.com/asottile/dockerfile[asottile/dockerfile] is an interesting Python module which wraps docker/moby's golang parser. Hence, it can be used for getting the stages and `COPY --from` or `--mount` statements for generating the hierarchy. See link:{repotree}pyHDLC/map.py[`pyHDLC/map.py`].
 
 ==== Reading GitHub Actions workflow files
 
