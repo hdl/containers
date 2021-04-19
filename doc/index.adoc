@@ -89,6 +89,12 @@ include::development.adoc[]
 * ASIC:
 ** https://github.com/The-OpenROAD-Project[The-OpenROAD-Project]
 ** https://github.com/efabless/openlane[efabless/openlane]
+* LibreCores:
+** https://github.com/librecores/ci-docker-image[librecores/ci-docker-image]
+** https://github.com/librecores/docker-images[librecores/docker-images]
+** LibreCores CI Infrastructure (LCCI):
+*** https://github.com/lccitools[lccitools]
+*** https://github.com/lccidocker[lccidocker]
 * SymbiFlow:
 ** https://github.com/SymbiFlow/symbiflow-examples[SymbiFlow/symbiflow-examples]
 ** https://github.com/SymbiFlow/make-env[SymbiFlow/make-env]
