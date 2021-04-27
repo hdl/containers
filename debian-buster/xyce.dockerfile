@@ -26,6 +26,7 @@ FROM $REGISTRY/build:build AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    bison \
     ca-certificates \
     curl \
     cmake \
