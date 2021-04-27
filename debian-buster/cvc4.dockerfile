@@ -38,7 +38,7 @@ RUN mkdir /usr/share/man/man1 \
 
 RUN mkdir /tmp/cvc4 && cd /tmp/cvc4 \
  && curl -fsSL https://codeload.github.com/CVC4/CVC4/tar.gz/master | tar xzf - --strip-components=1 \
- && ./configure.sh --cadical \
+ && ./configure.sh --cadical --auto-download \
  && cd build \
  && make -j$(nproc) \
  && make DESTDIR=/opt/cvc4 install
