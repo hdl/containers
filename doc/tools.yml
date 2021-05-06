@@ -185,6 +185,17 @@ openocd:
 
 #---
 
+pono:
+  src: true
+  url: 'https://hdl.github.io/awesome/items/pono'
+  pkg:
+    - 'pono'
+  in:
+    - 'formal'
+    - 'formal:all'
+
+#---
+
 prjtrellis:
   src: true
   url: 'https://hdl.github.io/awesome/items/prjtrellis'

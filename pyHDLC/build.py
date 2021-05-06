@@ -70,6 +70,7 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "sim": ["sim", None, None],
     "pkg:osvb": ["osvb", "pkg", None],
     "sim:osvb": ["osvb", None, None],
+    "pkg:pono": ["pono", None, None],
     "sim:scypy-slim": ["scypy", None, None],
     "sim:scypy": ["osvb", None, "sim:scypy-slim"],
     "sim:octave-slim": ["octave", None, None],

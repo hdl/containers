@@ -43,12 +43,14 @@ RUN apt-get update -qq \
 FROM $REGISTRY/pkg:yices2 AS pkg-yices2
 FROM $REGISTRY/pkg:boolector AS pkg-boolector
 FROM $REGISTRY/pkg:cvc4 AS pkg-cvc4
+FROM $REGISTRY/pkg:pono AS pkg-pono
 
 FROM min AS latest
 
 COPY --from=pkg-yices2 /yices2 /
 COPY --from=pkg-boolector /boolector /
 COPY --from=pkg-cvc4 /cvc4 /
+COPY --from=pkg-pono /pono /
 
 #---
 

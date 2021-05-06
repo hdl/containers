@@ -89,6 +89,11 @@ GHAStatus:cvc4[]
 * {blank}
 +
 --
+GHAStatus:pono[]
+--
+* {blank}
++
+--
 GHAStatus:superprove[]
 --
 * {blank}
