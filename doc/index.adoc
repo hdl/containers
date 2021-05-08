@@ -104,6 +104,7 @@ include::development.adoc[]
 * https://github.com/limerainne/Dockerize-EDA[limerainne/Dockerize-EDA]
 * https://github.com/im-tomu/fomu-toolchain[im-tomu/fomu-toolchain]
 * https://github.com/alpin3/ulx3s[alpin3/ulx3s]
+* https://github.com/vmunoz82/eda_tools[vmunoz82/eda_tools]
 * https://github.com/eine/elide/tree/master/elide/docker[eine/elide]
 * https://github.com/hackfin/ghdl-cross.mk[hackfin/ghdl-cross.mk]
 * USB/IP
