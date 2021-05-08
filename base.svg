@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg height='492pt' preserveAspectRatio='xMidYMid meet' viewBox='0.00 0.00 358.00 492.00' width='358pt' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'>
+<g class='graph' id='graph0' transform='scale(1 1) rotate(0) translate(4 488)'>
+<title>G</title>
+<polygon fill='white' points='-4,4 -4,-488 354,-488 354,4 -4,4' stroke='transparent'/>
+<g class='cluster' id='clust4'>
+<title>cluster_base</title>
+<polygon fill='none' points='8,-8 8,-420 342,-420 342,-8 8,-8' stroke='black'/>
+</g>
+
+<g class='node' id='node1'>
+<title>d_base</title>
+<polygon fill='none' points='173,-340 125,-340 125,-304 179,-304 179,-334 173,-340' stroke='dodgerblue'/>
+<polyline fill='none' points='173,-340 173,-334 ' stroke='dodgerblue'/>
+<polyline fill='none' points='179,-334 173,-334 ' stroke='dodgerblue'/>
+<text fill='dodgerblue' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='152' y='-318.3'>base</text>
+</g>
+
+<g class='node' id='node2'>
+<title>build:base</title>
+<path d='M257,-264.73C257,-266.53 236.83,-268 212,-268 187.17,-268 167,-266.53 167,-264.73 167,-264.73 167,-235.27 167,-235.27 167,-233.47 187.17,-232 212,-232 236.83,-232 257,-233.47 257,-235.27 257,-235.27 257,-264.73 257,-264.73' fill='none' stroke='black'/>
+<path d='M257,-264.73C257,-262.92 236.83,-261.45 212,-261.45 187.17,-261.45 167,-262.92 167,-264.73' fill='none' stroke='black'/>
+<text font-family='Times,serif' font-size='14.00' text-anchor='middle' x='212' y='-246.3'>build:base</text>
+</g>
+
+<g class='edge' id='edge1'>
+<title>d_base&#45;&gt;build:base</title>
+<path d='M166.83,-303.7C174.02,-295.3 182.8,-285.07 190.69,-275.86' fill='none' stroke='black' stroke-dasharray='1,5'/>
+<polygon fill='black' points='193.49,-277.97 197.34,-268.1 188.17,-273.42 193.49,-277.97' stroke='black'/>
+</g>
+
+<g class='node' id='node3'>
+<title>build:build</title>
+<path d='M217.5,-192.73C217.5,-194.53 196.66,-196 171,-196 145.34,-196 124.5,-194.53 124.5,-192.73 124.5,-192.73 124.5,-163.27 124.5,-163.27 124.5,-161.47 145.34,-160 171,-160 196.66,-160 217.5,-161.47 217.5,-163.27 217.5,-163.27 217.5,-192.73 217.5,-192.73' fill='none' stroke='black'/>
+<path d='M217.5,-192.73C217.5,-190.92 196.66,-189.45 171,-189.45 145.34,-189.45 124.5,-190.92 124.5,-192.73' fill='none' stroke='black'/>
+<text font-family='Times,serif' font-size='14.00' text-anchor='middle' x='171' y='-174.3'>build:build</text>
+</g>
+
+<g class='edge' id='edge2'>
+<title>d_base&#45;&gt;build:build</title>
+<path d='M152.28,-303.84C152.77,-285.85 154.15,-256.79 158,-232 159.33,-223.44 161.36,-214.24 163.44,-205.94' fill='none' stroke='black' stroke-dasharray='1,5'/>
+<polygon fill='black' points='166.88,-206.59 166.02,-196.03 160.11,-204.82 166.88,-206.59' stroke='black'/>
+</g>
+
+<g class='node' id='node4'>
+<title>build:dev</title>
+<path d='M146.5,-120.73C146.5,-122.53 127.9,-124 105,-124 82.1,-124 63.5,-122.53 63.5,-120.73 63.5,-120.73 63.5,-91.27 63.5,-91.27 63.5,-89.47 82.1,-88 105,-88 127.9,-88 146.5,-89.47 146.5,-91.27 146.5,-91.27 146.5,-120.73 146.5,-120.73' fill='none' stroke='black'/>
+<path d='M146.5,-120.73C146.5,-118.92 127.9,-117.45 105,-117.45 82.1,-117.45 63.5,-118.92 63.5,-120.73' fill='none' stroke='black'/>
+<text font-family='Times,serif' font-size='14.00' text-anchor='middle' x='105' y='-102.3'>build:dev</text>
+</g>
+
+<g class='edge' id='edge3'>
+<title>d_base&#45;&gt;build:dev</title>
+<path d='M146.12,-303.82C138.15,-279.93 124.01,-235.16 116,-196 111.82,-175.54 109,-152.08 107.26,-134.39' fill='none' stroke='black' stroke-dasharray='1,5'/>
+<polygon fill='black' points='110.72,-133.83 106.32,-124.19 103.75,-134.47 110.72,-133.83' stroke='black'/>
+</g>
+
+<g class='edge' id='edge10'>
+<title>build:base&#45;&gt;build:build</title>
+<path d='M201.87,-231.7C197.15,-223.64 191.44,-213.89 186.22,-204.98' fill='none' stroke='black' stroke-dasharray='5,2'/>
+<polygon fill='black' points='189.09,-202.96 181.02,-196.1 183.05,-206.5 189.09,-202.96' stroke='black'/>
+</g>
+
+<g class='node' id='node7'>
+<title>t_build:base</title>
+<polygon fill='none' points='333.5,-52 330.5,-56 309.5,-56 306.5,-52 238.5,-52 238.5,-16 333.5,-16 333.5,-52' stroke='red'/>
+<text fill='red' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='286' y='-30.3'>build&#45;&#45;base</text>
+</g>
+
+<g class='edge' id='edge4'>
+<title>build:base&#45;&gt;t_build:base</title>
+<path d='M217.93,-231.85C230.79,-194.68 261.3,-106.44 276.73,-61.82' fill='none' stroke='black'/>
+<polygon fill='black' points='280.08,-62.83 280.04,-52.23 273.47,-60.54 280.08,-62.83' stroke='black'/>
+</g>
+
+<g class='edge' id='edge11'>
+<title>build:build&#45;&gt;build:dev</title>
+<path d='M154.69,-159.7C146.69,-151.22 136.93,-140.86 128.18,-131.58' fill='none' stroke='black' stroke-dasharray='5,2'/>
+<polygon fill='black' points='130.53,-128.98 121.13,-124.1 125.44,-133.78 130.53,-128.98' stroke='black'/>
+</g>
+
+<g class='node' id='node8'>
+<title>t_build:build</title>
+<polygon fill='none' points='220,-52 217,-56 196,-56 193,-52 122,-52 122,-16 220,-16 220,-52' stroke='red'/>
+<text fill='red' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='171' y='-30.3'>build&#45;&#45;build</text>
+</g>
+
+<g class='edge' id='edge5'>
+<title>build:build&#45;&gt;t_build:build</title>
+<path d='M171,-159.87C171,-135.67 171,-91.21 171,-62.39' fill='none' stroke='black'/>
+<polygon fill='black' points='174.5,-62.19 171,-52.19 167.5,-62.19 174.5,-62.19' stroke='black'/>
+</g>
+
+<g class='node' id='node9'>
+<title>t_build:dev</title>
+<polygon fill='none' points='103.5,-52 100.5,-56 79.5,-56 76.5,-52 16.5,-52 16.5,-16 103.5,-16 103.5,-52' stroke='red'/>
+<text fill='red' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='60' y='-30.3'>build&#45;&#45;dev</text>
+</g>
+
+<g class='edge' id='edge6'>
+<title>build:dev&#45;&gt;t_build:dev</title>
+<path d='M93.88,-87.7C88.64,-79.56 82.3,-69.69 76.52,-60.7' fill='none' stroke='black'/>
+<polygon fill='black' points='79.35,-58.62 71,-52.1 73.46,-62.41 79.35,-58.62' stroke='black'/>
+</g>
+
+<g class='node' id='node5'>
+<title>BASE IMAGE</title>
+<path d='M231.5,-480.73C231.5,-482.53 206.18,-484 175,-484 143.82,-484 118.5,-482.53 118.5,-480.73 118.5,-480.73 118.5,-451.27 118.5,-451.27 118.5,-449.47 143.82,-448 175,-448 206.18,-448 231.5,-449.47 231.5,-451.27 231.5,-451.27 231.5,-480.73 231.5,-480.73' fill='none' stroke='orange'/>
+<path d='M231.5,-480.73C231.5,-478.92 206.18,-477.45 175,-477.45 143.82,-477.45 118.5,-478.92 118.5,-480.73' fill='none' stroke='orange'/>
+<text fill='orange' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='175' y='-462.3'>BASE IMAGE</text>
+</g>
+
+<g class='node' id='node6'>
+<title>p_base_debian</title>
+<path d='M231.5,-408.73C231.5,-410.53 206.18,-412 175,-412 143.82,-412 118.5,-410.53 118.5,-408.73 118.5,-408.73 118.5,-379.27 118.5,-379.27 118.5,-377.47 143.82,-376 175,-376 206.18,-376 231.5,-377.47 231.5,-379.27 231.5,-379.27 231.5,-408.73 231.5,-408.73' fill='none' stroke='grey'/>
+<path d='M231.5,-408.73C231.5,-406.92 206.18,-405.45 175,-405.45 143.82,-405.45 118.5,-406.92 118.5,-408.73' fill='none' stroke='grey'/>
+<text fill='grey' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='175' y='-390.3'>BASE IMAGE</text>
+</g>
+
+<g class='edge' id='edge7'>
+<title>BASE IMAGE&#45;&gt;p_base_debian</title>
+<path d='M175,-447.7C175,-439.98 175,-430.71 175,-422.11' fill='none' stroke='black'/>
+<polygon fill='black' points='178.5,-422.1 175,-412.1 171.5,-422.1 178.5,-422.1' stroke='black'/>
+</g>
+
+<g class='edge' id='edge8'>
+<title>p_base_debian&#45;&gt;d_base</title>
+<path d='M169.31,-375.7C166.75,-367.9 163.67,-358.51 160.82,-349.83' fill='none' stroke='black'/>
+<polygon fill='black' points='164.07,-348.51 157.62,-340.1 157.42,-350.7 164.07,-348.51' stroke='black'/>
+</g>
+
+<g class='edge' id='edge9'>
+<title>p_base_debian&#45;&gt;build:base</title>
+<path d='M179.46,-375.87C185.8,-351.56 197.46,-306.82 204.96,-278.01' fill='none' stroke='black' stroke-dasharray='5,2'/>
+<polygon fill='black' points='208.39,-278.75 207.52,-268.19 201.61,-276.98 208.39,-278.75' stroke='black'/>
+</g>
+</g>
+</svg>

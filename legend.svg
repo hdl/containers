@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg height='404pt' preserveAspectRatio='xMidYMid meet' viewBox='0.00 0.00 528.00 404.00' width='528pt' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'>
+<g class='graph' id='graph0' transform='scale(1 1) rotate(0) translate(4 400)'>
+<title>G</title>
+<polygon fill='white' points='-4,4 -4,-400 524,-400 524,4 -4,4' stroke='transparent'/>
+<g class='cluster' id='clust2'>
+<title>cluster_legend</title>
+<polygon fill='none' points='8,-8 8,-331 222,-331 222,-8 8,-8' stroke='black'/>
+</g>
+
+<g class='node' id='node1'>
+<title>image_ext</title>
+<path d='M142,-392.73C142,-394.53 129.9,-396 115,-396 100.1,-396 88,-394.53 88,-392.73 88,-392.73 88,-363.27 88,-363.27 88,-361.47 100.1,-360 115,-360 129.9,-360 142,-361.47 142,-363.27 142,-363.27 142,-392.73 142,-392.73' fill='none' stroke='orange'/>
+<path d='M142,-392.73C142,-390.92 129.9,-389.45 115,-389.45 100.1,-389.45 88,-390.92 88,-392.73' fill='none' stroke='orange'/>
+</g>
+
+<g class='node' id='node8'>
+<title>image_dep</title>
+<path d='M142,-319.73C142,-321.53 129.9,-323 115,-323 100.1,-323 88,-321.53 88,-319.73 88,-319.73 88,-290.27 88,-290.27 88,-288.47 100.1,-287 115,-287 129.9,-287 142,-288.47 142,-290.27 142,-290.27 142,-319.73 142,-319.73' fill='none' stroke='grey'/>
+<path d='M142,-319.73C142,-317.92 129.9,-316.45 115,-316.45 100.1,-316.45 88,-317.92 88,-319.73' fill='none' stroke='grey'/>
+</g>
+
+<g class='edge' id='edge8'>
+<title>image_ext&#45;&gt;image_dep</title>
+<path d='M115,-359.81C115,-351.79 115,-342.05 115,-333.07' fill='none' stroke='black'/>
+<polygon fill='black' points='118.5,-333.03 115,-323.03 111.5,-333.03 118.5,-333.03' stroke='black'/>
+</g>
+
+<g class='node' id='node2'>
+<title>image_hdl</title>
+<path d='M70,-392.73C70,-394.53 57.9,-396 43,-396 28.1,-396 16,-394.53 16,-392.73 16,-392.73 16,-363.27 16,-363.27 16,-361.47 28.1,-360 43,-360 57.9,-360 70,-361.47 70,-363.27 70,-363.27 70,-392.73 70,-392.73' fill='none' stroke='black'/>
+<path d='M70,-392.73C70,-390.92 57.9,-389.45 43,-389.45 28.1,-389.45 16,-390.92 16,-392.73' fill='none' stroke='black'/>
+</g>
+
+<g class='node' id='node7'>
+<title>image_base</title>
+<path d='M70,-319.73C70,-321.53 57.9,-323 43,-323 28.1,-323 16,-321.53 16,-319.73 16,-319.73 16,-290.27 16,-290.27 16,-288.47 28.1,-287 43,-287 57.9,-287 70,-288.47 70,-290.27 70,-290.27 70,-319.73 70,-319.73' fill='none' stroke='grey'/>
+<path d='M70,-319.73C70,-317.92 57.9,-316.45 43,-316.45 28.1,-316.45 16,-317.92 16,-319.73' fill='none' stroke='grey'/>
+</g>
+
+<g class='edge' id='edge9'>
+<title>image_hdl&#45;&gt;image_base</title>
+<path d='M43,-359.81C43,-351.79 43,-342.05 43,-333.07' fill='none' stroke='black'/>
+<polygon fill='black' points='46.5,-333.03 43,-323.03 39.5,-333.03 46.5,-333.03' stroke='black'/>
+</g>
+
+<g class='node' id='node3'>
+<title>image_hdlpkg</title>
+<path d='M214,-392.73C214,-394.53 201.9,-396 187,-396 172.1,-396 160,-394.53 160,-392.73 160,-392.73 160,-363.27 160,-363.27 160,-361.47 172.1,-360 187,-360 201.9,-360 214,-361.47 214,-363.27 214,-363.27 214,-392.73 214,-392.73' fill='none' stroke='black'/>
+<path d='M214,-392.73C214,-390.92 201.9,-389.45 187,-389.45 172.1,-389.45 160,-390.92 160,-392.73' fill='none' stroke='black'/>
+</g>
+
+<g class='node' id='node9'>
+<title>image_pkg</title>
+<path d='M214,-319.73C214,-321.53 201.9,-323 187,-323 172.1,-323 160,-321.53 160,-319.73 160,-319.73 160,-290.27 160,-290.27 160,-288.47 172.1,-287 187,-287 201.9,-287 214,-288.47 214,-290.27 214,-290.27 214,-319.73 214,-319.73' fill='none' stroke='grey'/>
+<path d='M214,-319.73C214,-317.92 201.9,-316.45 187,-316.45 172.1,-316.45 160,-317.92 160,-319.73' fill='none' stroke='grey'/>
+</g>
+
+<g class='edge' id='edge10'>
+<title>image_hdlpkg&#45;&gt;image_pkg</title>
+<path d='M187,-359.81C187,-351.79 187,-342.05 187,-333.07' fill='none' stroke='black'/>
+<polygon fill='black' points='190.5,-333.03 187,-323.03 183.5,-333.03 190.5,-333.03' stroke='black'/>
+</g>
+
+<g class='node' id='node4'>
+<title>deps</title>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='240.5' y='-385.1'>Publicly available images which the workflow depends on:</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='240.5' y='-376.1'>&#45; Black: own, generated in other workflows of this project</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='240.5' y='-367.1'>&#45; Orange: external, generated somewhere else</text>
+</g>
+
+<g class='node' id='node5'>
+<title>test</title>
+<polygon fill='none' points='142,-52 139,-56 118,-56 115,-52 88,-52 88,-16 142,-16 142,-52' stroke='magenta'/>
+<text fill='magenta' font-family='Times,serif' font-size='8.00' text-anchor='middle' x='115' y='-32.1'>Test</text>
+</g>
+
+<g class='node' id='node6'>
+<title>image</title>
+<path d='M142,-134.73C142,-136.53 129.9,-138 115,-138 100.1,-138 88,-136.53 88,-134.73 88,-134.73 88,-105.27 88,-105.27 88,-103.47 100.1,-102 115,-102 129.9,-102 142,-103.47 142,-105.27 142,-105.27 142,-134.73 142,-134.73' fill='none' stroke='black'/>
+<path d='M142,-134.73C142,-132.92 129.9,-131.45 115,-131.45 100.1,-131.45 88,-132.92 88,-134.73' fill='none' stroke='black'/>
+<text font-family='Times,serif' font-size='8.00' text-anchor='middle' x='115' y='-118.1'>Image</text>
+</g>
+
+<g class='edge' id='edge7'>
+<title>image&#45;&gt;test</title>
+<path d='M115,-101.6C115,-90.26 115,-75.23 115,-62.32' fill='none' stroke='black'/>
+<polygon fill='black' points='118.5,-62.1 115,-52.1 111.5,-62.1 118.5,-62.1' stroke='black'/>
+</g>
+
+<g class='edge' id='edge5'>
+<title>image_base&#45;&gt;image</title>
+<path d='M42.25,-286.87C42,-268.34 43.23,-238.21 52,-214 61.13,-188.79 78.63,-163.83 92.87,-146.13' fill='none' stroke='black' stroke-dasharray='5,2'/>
+<polygon fill='black' points='95.87,-147.99 99.55,-138.05 90.48,-143.53 95.87,-147.99' stroke='black'/>
+<text font-family='Times,serif' font-size='8.00' text-anchor='middle' x='64.5' y='-239.1'>Image</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='middle' x='64.5' y='-230.1'>based</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='middle' x='64.5' y='-221.1'>on</text>
+</g>
+
+<g class='node' id='node10'>
+<title>dockerfile</title>
+<polygon fill='none' points='137.5,-250 86.5,-250 86.5,-214 143.5,-214 143.5,-244 137.5,-250' stroke='dodgerblue'/>
+<polyline fill='none' points='137.5,-250 137.5,-244 ' stroke='dodgerblue'/>
+<polyline fill='none' points='143.5,-244 137.5,-244 ' stroke='dodgerblue'/>
+<text fill='dodgerblue' font-family='Times,serif' font-size='8.00' text-anchor='middle' x='115' y='-230.1'>Dockerfile</text>
+</g>
+
+<g class='edge' id='edge1'>
+<title>image_base&#45;&gt;dockerfile</title>
+<path d='M60.06,-287.17C69.08,-278.29 80.3,-267.21 90.26,-257.4' fill='none' stroke='black'/>
+<polygon fill='black' points='92.9,-259.71 97.56,-250.2 87.98,-254.73 92.9,-259.71' stroke='black'/>
+</g>
+
+<g class='edge' id='edge2'>
+<title>image_dep&#45;&gt;dockerfile</title>
+<path d='M115,-286.81C115,-278.79 115,-269.05 115,-260.07' fill='none' stroke='black'/>
+<polygon fill='black' points='118.5,-260.03 115,-250.03 111.5,-260.03 118.5,-260.03' stroke='black'/>
+</g>
+
+<g class='edge' id='edge6'>
+<title>image_pkg&#45;&gt;image</title>
+<path d='M186.55,-286.82C185.21,-260.17 180.01,-207.89 160,-169 155.55,-160.35 149.08,-152.14 142.42,-145.04' fill='none' stroke='gray' stroke-dasharray='5,2'/>
+<polygon fill='gray' points='144.75,-142.41 135.21,-137.79 139.79,-147.35 144.75,-142.41' stroke='gray'/>
+<text font-family='Times,serif' font-size='8.00' text-anchor='middle' x='198.5' y='-239.1'>Image</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='middle' x='198.5' y='-230.1'>imports</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='middle' x='198.5' y='-221.1'>from</text>
+</g>
+
+<g class='edge' id='edge3'>
+<title>image_pkg&#45;&gt;dockerfile</title>
+<path d='M169.94,-287.17C160.92,-278.29 149.7,-267.21 139.74,-257.4' fill='none' stroke='black'/>
+<polygon fill='black' points='142.02,-254.73 132.44,-250.2 137.1,-259.71 142.02,-254.73' stroke='black'/>
+</g>
+
+<g class='edge' id='edge4'>
+<title>dockerfile&#45;&gt;image</title>
+<path d='M115,-213.81C115,-196.21 115,-168.61 115,-148.07' fill='none' stroke='black' stroke-dasharray='1,5'/>
+<polygon fill='black' points='118.5,-148.07 115,-138.07 111.5,-148.07 118.5,-148.07' stroke='black'/>
+<text font-family='Times,serif' font-size='8.00' text-anchor='middle' x='135.5' y='-189.6'>Image</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='middle' x='135.5' y='-180.6'>generated</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='middle' x='135.5' y='-171.6'>by</text>
+</g>
+
+<g class='node' id='node11'>
+<title>shadow</title>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='240' y='-307.6'>Shadows of the images the workflow depends on.</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='240' y='-298.6'>Shown for ease of visualisation only.</text>
+</g>
+
+<g class='node' id='node12'>
+<title>workflow</title>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='238' y='-239.1'>A cluster represents a GitHub Actions workflow, which</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='238' y='-230.1'>typically uses a single dockerfile.</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='238' y='-221.1'> The workflow and the dockerfile are named after the tools.</text>
+</g>
+
+<g class='node' id='node13'>
+<title>desc</title>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='238' y='-140.6'>Image(s) generated in the workflow:</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='238' y='-131.6'>&#45; Green: fine&#45;grained ready&#45;to&#45;use image.</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='238' y='-122.6'>&#45; Brown: ready&#45;to&#45;use image including several tools.</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='238' y='-113.6'>&#45; Blue: package image, not executable.</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='238' y='-104.6'>Each image has, at least and at most, two black input edges, one</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='238' y='-95.6'>dotted and one dashed. It can optionally have other gray input edges.</text>
+</g>
+
+<g class='node' id='node14'>
+<title>test_desc</title>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='238' y='-41.1'>Each image has a test script, which is executed in a temporary</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='238' y='-32.1'>container before pushing the image to DockerHub.</text>
+<text font-family='Times,serif' font-size='8.00' text-anchor='start' x='238' y='-23.1'>Tests which are not complete yet are shown in Red.</text>
+</g>
+</g>
+</svg>

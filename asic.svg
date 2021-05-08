@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg height='348pt' preserveAspectRatio='xMidYMid meet' viewBox='0.00 0.00 329.00 348.00' width='329pt' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg'>
+<g class='graph' id='graph0' transform='scale(1 1) rotate(0) translate(4 344)'>
+<title>G</title>
+<polygon fill='white' points='-4,4 -4,-344 325,-344 325,4 -4,4' stroke='transparent'/>
+<g class='cluster' id='clust7'>
+<title>cluster_klayout</title>
+<polygon fill='none' points='8,-8 8,-276 313,-276 313,-8 8,-8' stroke='black'/>
+</g>
+
+<g class='node' id='node1'>
+<title>d_klayout</title>
+<polygon fill='none' points='199.5,-196 136.5,-196 136.5,-160 205.5,-160 205.5,-190 199.5,-196' stroke='dodgerblue'/>
+<polyline fill='none' points='199.5,-196 199.5,-190 ' stroke='dodgerblue'/>
+<polyline fill='none' points='205.5,-190 199.5,-190 ' stroke='dodgerblue'/>
+<text fill='dodgerblue' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='171' y='-174.3'>klayout</text>
+</g>
+
+<g class='node' id='node4'>
+<title>klayout</title>
+<path d='M152.5,-120.73C152.5,-122.53 137.04,-124 118,-124 98.96,-124 83.5,-122.53 83.5,-120.73 83.5,-120.73 83.5,-91.27 83.5,-91.27 83.5,-89.47 98.96,-88 118,-88 137.04,-88 152.5,-89.47 152.5,-91.27 152.5,-91.27 152.5,-120.73 152.5,-120.73' fill='none' stroke='limegreen'/>
+<path d='M152.5,-120.73C152.5,-118.92 137.04,-117.45 118,-117.45 98.96,-117.45 83.5,-118.92 83.5,-120.73' fill='none' stroke='limegreen'/>
+<text fill='limegreen' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='118' y='-102.3'>klayout</text>
+</g>
+
+<g class='edge' id='edge1'>
+<title>d_klayout&#45;&gt;klayout</title>
+<path d='M157.9,-159.7C151.61,-151.39 143.95,-141.28 137.04,-132.14' fill='none' stroke='black' stroke-dasharray='1,5'/>
+<polygon fill='black' points='139.78,-129.96 130.95,-124.1 134.2,-134.19 139.78,-129.96' stroke='black'/>
+</g>
+
+<g class='node' id='node5'>
+<title>pkg:klayout</title>
+<path d='M281,-120.73C281,-122.53 258.59,-124 231,-124 203.41,-124 181,-122.53 181,-120.73 181,-120.73 181,-91.27 181,-91.27 181,-89.47 203.41,-88 231,-88 258.59,-88 281,-89.47 281,-91.27 281,-91.27 281,-120.73 281,-120.73' fill='none' stroke='mediumblue'/>
+<path d='M281,-120.73C281,-118.92 258.59,-117.45 231,-117.45 203.41,-117.45 181,-118.92 181,-120.73' fill='none' stroke='mediumblue'/>
+<text fill='mediumblue' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='231' y='-102.3'>pkg:klayout</text>
+</g>
+
+<g class='edge' id='edge2'>
+<title>d_klayout&#45;&gt;pkg:klayout</title>
+<path d='M185.83,-159.7C193.02,-151.3 201.8,-141.07 209.69,-131.86' fill='none' stroke='black' stroke-dasharray='1,5'/>
+<polygon fill='black' points='212.49,-133.97 216.34,-124.1 207.17,-129.42 212.49,-133.97' stroke='black'/>
+</g>
+
+<g class='node' id='node2'>
+<title>build:build</title>
+<path d='M217.5,-336.73C217.5,-338.53 196.66,-340 171,-340 145.34,-340 124.5,-338.53 124.5,-336.73 124.5,-336.73 124.5,-307.27 124.5,-307.27 124.5,-305.47 145.34,-304 171,-304 196.66,-304 217.5,-305.47 217.5,-307.27 217.5,-307.27 217.5,-336.73 217.5,-336.73' fill='none' stroke='black'/>
+<path d='M217.5,-336.73C217.5,-334.92 196.66,-333.45 171,-333.45 145.34,-333.45 124.5,-334.92 124.5,-336.73' fill='none' stroke='black'/>
+<text font-family='Times,serif' font-size='14.00' text-anchor='middle' x='171' y='-318.3'>build:build</text>
+</g>
+
+<g class='node' id='node7'>
+<title>p_klayout_build:build</title>
+<path d='M217.5,-264.73C217.5,-266.53 196.66,-268 171,-268 145.34,-268 124.5,-266.53 124.5,-264.73 124.5,-264.73 124.5,-235.27 124.5,-235.27 124.5,-233.47 145.34,-232 171,-232 196.66,-232 217.5,-233.47 217.5,-235.27 217.5,-235.27 217.5,-264.73 217.5,-264.73' fill='none' stroke='grey'/>
+<path d='M217.5,-264.73C217.5,-262.92 196.66,-261.45 171,-261.45 145.34,-261.45 124.5,-262.92 124.5,-264.73' fill='none' stroke='grey'/>
+<text fill='grey' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='171' y='-246.3'>build:build</text>
+</g>
+
+<g class='edge' id='edge5'>
+<title>build:build&#45;&gt;p_klayout_build:build</title>
+<path d='M171,-303.7C171,-295.98 171,-286.71 171,-278.11' fill='none' stroke='black'/>
+<polygon fill='black' points='174.5,-278.1 171,-268.1 167.5,-278.1 174.5,-278.1' stroke='black'/>
+</g>
+
+<g class='node' id='node3'>
+<title>build:base</title>
+<path d='M106,-336.73C106,-338.53 85.83,-340 61,-340 36.17,-340 16,-338.53 16,-336.73 16,-336.73 16,-307.27 16,-307.27 16,-305.47 36.17,-304 61,-304 85.83,-304 106,-305.47 106,-307.27 106,-307.27 106,-336.73 106,-336.73' fill='none' stroke='black'/>
+<path d='M106,-336.73C106,-334.92 85.83,-333.45 61,-333.45 36.17,-333.45 16,-334.92 16,-336.73' fill='none' stroke='black'/>
+<text font-family='Times,serif' font-size='14.00' text-anchor='middle' x='61' y='-318.3'>build:base</text>
+</g>
+
+<g class='node' id='node8'>
+<title>p_klayout_build:base</title>
+<path d='M106,-264.73C106,-266.53 85.83,-268 61,-268 36.17,-268 16,-266.53 16,-264.73 16,-264.73 16,-235.27 16,-235.27 16,-233.47 36.17,-232 61,-232 85.83,-232 106,-233.47 106,-235.27 106,-235.27 106,-264.73 106,-264.73' fill='none' stroke='grey'/>
+<path d='M106,-264.73C106,-262.92 85.83,-261.45 61,-261.45 36.17,-261.45 16,-262.92 16,-264.73' fill='none' stroke='grey'/>
+<text fill='grey' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='61' y='-246.3'>build:base</text>
+</g>
+
+<g class='edge' id='edge7'>
+<title>build:base&#45;&gt;p_klayout_build:base</title>
+<path d='M61,-303.7C61,-295.98 61,-286.71 61,-278.11' fill='none' stroke='black'/>
+<polygon fill='black' points='64.5,-278.1 61,-268.1 57.5,-278.1 64.5,-278.1' stroke='black'/>
+</g>
+
+<g class='node' id='node10'>
+<title>t_klayout</title>
+<polygon fill='none' points='152.5,-52 149.5,-56 128.5,-56 125.5,-52 83.5,-52 83.5,-16 152.5,-16 152.5,-52' stroke='red'/>
+<text fill='red' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='118' y='-30.3'>klayout</text>
+</g>
+
+<g class='edge' id='edge3'>
+<title>klayout&#45;&gt;t_klayout</title>
+<path d='M118,-87.7C118,-79.98 118,-70.71 118,-62.11' fill='none' stroke='black'/>
+<polygon fill='black' points='121.5,-62.1 118,-52.1 114.5,-62.1 121.5,-62.1' stroke='black'/>
+</g>
+
+<g class='node' id='node11'>
+<title>t_pkg:klayout</title>
+<polygon fill='none' points='281,-52 278,-56 257,-56 254,-52 181,-52 181,-16 281,-16 281,-52' stroke='red'/>
+<text fill='red' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='231' y='-30.3'>klayout.pkg</text>
+</g>
+
+<g class='edge' id='edge4'>
+<title>pkg:klayout&#45;&gt;t_pkg:klayout</title>
+<path d='M231,-87.7C231,-79.98 231,-70.71 231,-62.11' fill='none' stroke='black'/>
+<polygon fill='black' points='234.5,-62.1 231,-52.1 227.5,-62.1 234.5,-62.1' stroke='black'/>
+</g>
+
+<g class='node' id='node6'>
+<title>scratch</title>
+<path d='M304.5,-336.73C304.5,-338.53 289.04,-340 270,-340 250.96,-340 235.5,-338.53 235.5,-336.73 235.5,-336.73 235.5,-307.27 235.5,-307.27 235.5,-305.47 250.96,-304 270,-304 289.04,-304 304.5,-305.47 304.5,-307.27 304.5,-307.27 304.5,-336.73 304.5,-336.73' fill='none' stroke='orange'/>
+<path d='M304.5,-336.73C304.5,-334.92 289.04,-333.45 270,-333.45 250.96,-333.45 235.5,-334.92 235.5,-336.73' fill='none' stroke='orange'/>
+<text fill='orange' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='270' y='-318.3'>scratch</text>
+</g>
+
+<g class='node' id='node9'>
+<title>p_klayout_scratch</title>
+<path d='M304.5,-264.73C304.5,-266.53 289.04,-268 270,-268 250.96,-268 235.5,-266.53 235.5,-264.73 235.5,-264.73 235.5,-235.27 235.5,-235.27 235.5,-233.47 250.96,-232 270,-232 289.04,-232 304.5,-233.47 304.5,-235.27 304.5,-235.27 304.5,-264.73 304.5,-264.73' fill='none' stroke='grey'/>
+<path d='M304.5,-264.73C304.5,-262.92 289.04,-261.45 270,-261.45 250.96,-261.45 235.5,-262.92 235.5,-264.73' fill='none' stroke='grey'/>
+<text fill='grey' font-family='Times,serif' font-size='14.00' text-anchor='middle' x='270' y='-246.3'>scratch</text>
+</g>
+
+<g class='edge' id='edge9'>
+<title>scratch&#45;&gt;p_klayout_scratch</title>
+<path d='M270,-303.7C270,-295.98 270,-286.71 270,-278.11' fill='none' stroke='black'/>
+<polygon fill='black' points='273.5,-278.1 270,-268.1 266.5,-278.1 273.5,-278.1' stroke='black'/>
+</g>
+
+<g class='edge' id='edge6'>
+<title>p_klayout_build:build&#45;&gt;d_klayout</title>
+<path d='M171,-231.7C171,-223.98 171,-214.71 171,-206.11' fill='none' stroke='black'/>
+<polygon fill='black' points='174.5,-206.1 171,-196.1 167.5,-206.1 174.5,-206.1' stroke='black'/>
+</g>
+
+<g class='edge' id='edge8'>
+<title>p_klayout_build:base&#45;&gt;d_klayout</title>
+<path d='M87.63,-232.05C101.98,-222.92 119.88,-211.53 135.41,-201.65' fill='none' stroke='black'/>
+<polygon fill='black' points='137.68,-204.35 144.24,-196.03 133.92,-198.45 137.68,-204.35' stroke='black'/>
+</g>
+
+<g class='edge' id='edge11'>
+<title>p_klayout_build:base&#45;&gt;klayout</title>
+<path d='M67.88,-231.87C77.68,-207.46 95.75,-162.43 107.31,-133.64' fill='none' stroke='black' stroke-dasharray='5,2'/>
+<polygon fill='black' points='110.62,-134.77 111.1,-124.19 104.13,-132.17 110.62,-134.77' stroke='black'/>
+</g>
+
+<g class='edge' id='edge10'>
+<title>p_klayout_scratch&#45;&gt;d_klayout</title>
+<path d='M246.54,-232.41C233.75,-223.37 217.73,-212.04 203.73,-202.14' fill='none' stroke='black'/>
+<polygon fill='black' points='205.51,-199.12 195.33,-196.2 201.47,-204.83 205.51,-199.12' stroke='black'/>
+</g>
+
+<g class='edge' id='edge12'>
+<title>p_klayout_scratch&#45;&gt;pkg:klayout</title>
+<path d='M265.3,-231.87C258.62,-207.56 246.33,-162.82 238.42,-134.01' fill='none' stroke='black' stroke-dasharray='5,2'/>
+<polygon fill='black' points='241.74,-132.91 235.72,-124.19 234.99,-134.76 241.74,-132.91' stroke='black'/>
+</g>
+</g>
+</svg>
