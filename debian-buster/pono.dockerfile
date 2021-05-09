@@ -24,7 +24,8 @@ ARG REGISTRY='ghcr.io/hdl/debian-buster'
 
 FROM $REGISTRY/build:build AS build
 
-RUN apt-get update -qq \
+RUN mkdir -p /usr/share/man/man1/ \
+ && apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     binutils \
     cmake \
