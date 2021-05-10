@@ -52,6 +52,12 @@ COPY --from=pkg-boolector /boolector /
 COPY --from=pkg-cvc4 /cvc4 /
 COPY --from=pkg-pono /pono /
 
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    libgmpxx4ldbl \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
+
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
