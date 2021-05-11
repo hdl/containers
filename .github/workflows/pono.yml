@@ -18,7 +18,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: 'formal'
+name: 'pono'
 
 on:
   pull_request:
@@ -27,14 +27,14 @@ on:
     - cron: '0 0 * * 5'
   workflow_dispatch:
   repository_dispatch:
-    types: [ formal ]
+    types: [ pono ]
 
 env:
   DOCKER_BUILDKIT: 1
 
 jobs:
 
-  formal:
+  pono:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -44,31 +44,14 @@ jobs:
     steps:
 
     - uses: actions/checkout@v2
-      with:
-        submodules: recursive
 
     - run: ./.github/setup.sh
 
     - run: >-
-        dockerPull -c ${{ matrix.os }}
-        ghdl:yosys
-        pkg:z3
-        pkg:symbiyosys
-        pkg:yices2
-        pkg:boolector
-        pkg:cvc4
-        pkg:superprove
+        dockerBuild -c ${{ matrix.os }} -d
         pkg:pono
 
-    - run: >-
-        dockerBuild -c ${{ matrix.os }} -d
-        formal:min
-        formal
-        formal:all
-
-    - run: dockerTest ${{ matrix.os }} formal:min
-    - run: dockerTest ${{ matrix.os }} formal
-    - run: dockerTest ${{ matrix.os }} formal:all
+    - run: dockerTestPkg ${{ matrix.os }} pono
 
     - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -88,6 +71,4 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        formal:min
-        formal
-        formal:all
+        pkg:pono
