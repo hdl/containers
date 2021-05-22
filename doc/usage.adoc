@@ -13,9 +13,14 @@ In this project, both paradigms are supported; fine-grained images are available
 
 Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named `<REGISTRY_PREFIX>/<TOOL_NAME>`. Since all the images in each collection are based on the same root image, pulling multiple images involves retrieving a few additional layers only. Therefore, this is the recommended approach for CI or other environments with limited resources.
 
-* There is an example at https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile[ghdl-yosys-blink: Makefile] showcasing how to use this fine-grained approach with a makefile. The same make based strategy is used in https://github.com/antonblanchard/microwatt/blob/master/Makefile[antonblanchard/microwatt].
+* There is an example at https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile[ghdl-yosys-blink: Makefile] showcasing how to use this fine-grained approach with a makefile.
+  The same make based strategy is used in https://github.com/antonblanchard/microwatt/blob/master/Makefile[antonblanchard/microwatt].
 * At https://github.com/marph91/icestick-remote[marph91/icestick-remote] the CI workflow for synthesis uses this approach.
-* Moreover, https://github.com/PyFPGA/[PyFPGA] is a set of Python classes for vendor-independent FPGA development. https://github.com/PyFPGA/openflow[PyFPGA/openflow] allows running GHDL, Yosys, etc. in containers. In fact, openflow can be used along with https://github.com/olofk/edalize[Edalize]'s `EDALIZE_LAUNCHER` environment variable.
+* Moreover, https://github.com/PyFPGA/[PyFPGA] is a set of Python classes for vendor-independent FPGA development.
+  https://github.com/PyFPGA/openflow[PyFPGA/openflow] allows running GHDL, Yosys, etc. in containers.
+  In fact, openflow can be used along with https://github.com/olofk/edalize[Edalize]'s `EDALIZE_LAUNCHER` environment
+  variable.
+  See also https://github.com/librecores/eda-container-wrapper[librecores/eda-container-wrapper].
 
 NOTE: These images are coloured [lime]#GREEN# in the <<Graphs>>.
 
