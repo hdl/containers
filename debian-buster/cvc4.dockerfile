@@ -30,6 +30,7 @@ RUN mkdir /usr/share/man/man1 \
     cmake \
     libgmp-dev \
     m4 \
+    patch \
     python3-toml \
     openjdk-11-jre-headless \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
