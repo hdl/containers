@@ -69,7 +69,7 @@ jobs:
         password: ${{ github.token }}
 
     - name: Login to docker.io
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && matrix.os == 'debian-buster'
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_USER }}
@@ -125,7 +125,7 @@ jobs:
         password: ${{ github.token }}
 
     - name: Login to docker.io
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && matrix.os == 'debian-buster'
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_USER }}
@@ -182,7 +182,7 @@ jobs:
         password: ${{ github.token }}
 
     - name: Login to docker.io
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && ${{ matrix.os }} == 'debian-buster'
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && matrix.os == 'debian-buster'
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_USER }}
