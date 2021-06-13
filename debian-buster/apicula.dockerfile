@@ -21,11 +21,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
-ARG IMAGE="build:base"
+ARG IMAGE="build/base"
 
 #---
 
-FROM $REGISTRY/build:build AS build
+FROM $REGISTRY/build/build AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -47,7 +47,7 @@ COPY --from=build /tmp/apicula /apicula
 #---
 
 # WORKAROUND: this is required because '--mount=' does not support ARGs
-FROM $REGISTRY/pkg:apicula AS pkg-apicula
+FROM $REGISTRY/pkg/apicula AS pkg-apicula
 
 FROM $REGISTRY/$IMAGE
 

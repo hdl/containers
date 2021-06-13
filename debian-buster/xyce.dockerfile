@@ -18,11 +18,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
-ARG IMAGE="build:base"
+ARG IMAGE="build/base"
 
 #---
 
-FROM $REGISTRY/build:build AS build
+FROM $REGISTRY/build/build AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -125,7 +125,7 @@ COPY --from=build /tmp/xyce/ /xyce/
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:xyce AS pkg-xyce
+FROM $REGISTRY/pkg/xyce AS pkg-xyce
 
 FROM $REGISTRY/$IMAGE
 

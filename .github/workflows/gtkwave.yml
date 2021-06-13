@@ -48,7 +48,7 @@ jobs:
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        pkg:gtkwave
+        pkg/gtkwave
 
     - run: dockerTestPkg ${{ matrix.os }} gtkwave
 
@@ -78,4 +78,4 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        pkg:gtkwave
+        pkg/gtkwave

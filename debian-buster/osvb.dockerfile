@@ -53,7 +53,7 @@ COPY --from=build /tmp/osvb/ /osvb/
 #---
 
 # WORKAROUND: this is required because '--mount=' does not support ARGs
-FROM $REGISTRY/pkg:osvb AS pkg-osvb
+FROM $REGISTRY/pkg/osvb AS pkg-osvb
 
 FROM $REGISTRY/$IMAGE
 

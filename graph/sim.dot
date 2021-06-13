@@ -37,26 +37,26 @@ digraph G {
   # Images
 
   { node [shape=cylinder]
-    "build:build"
-    "build:base"
+    "build/build"
+    "build/base"
     { node [color=limegreen, fontcolor=limegreen]
       "verilator"
-      "ghdl:llvm"
+      "ghdl/llvm"
       "xyce"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
-      "pkg:gtkwave"
-      "pkg:verilator"
-      "pkg:osvb"
-      "pkg:xyce"
+      "pkg/gtkwave"
+      "pkg/verilator"
+      "pkg/osvb"
+      "pkg/xyce"
     }
     { node [color=brown, fontcolor=brown]
       "sim"
-      "sim:scypy-slim"
-      "sim:scypy"
-      "sim:octave-slim"
-      "sim:octave"
-      "sim:osvb"
+      "sim/scypy-slim"
+      "sim/scypy"
+      "sim/octave-slim"
+      "sim/octave"
+      "sim/osvb"
     }
   }
 
@@ -67,10 +67,10 @@ digraph G {
   }
 
   { rank=same
-    "build:build"
-    "build:base"
+    "build/build"
+    "build/base"
     "scratch"
-    "ghdl:llvm"
+    "ghdl/llvm"
   }
 
   # Workflows
@@ -78,45 +78,45 @@ digraph G {
   subgraph cluster_gtkwave {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_gtkwave_build:build" [label="build:build"]
+      "p_gtkwave_build/build" [label="build/build"]
       "p_gtkwave_scratch" [label="scratch"]
     }
 
-    d_gtkwave -> "pkg:gtkwave" [style=dotted];
+    d_gtkwave -> "pkg/gtkwave" [style=dotted];
 
-    "t_pkg:gtkwave" [shape=folder, color=red, fontcolor=red, label="gtkwave.pkg"];
+    "t_pkg/gtkwave" [shape=folder, color=red, fontcolor=red, label="gtkwave.pkg"];
 
-    "pkg:gtkwave" -> "t_pkg:gtkwave";
+    "pkg/gtkwave" -> "t_pkg/gtkwave";
   }
 
   subgraph cluster_verilator {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_verilator_build:build" [label="build:build"]
-      "p_verilator_build:base" [label="build:base"]
+      "p_verilator_build/build" [label="build/build"]
+      "p_verilator_build/base" [label="build/base"]
       "p_verilator_scratch" [label="scratch"]
     }
 
     d_verilator -> {
       "verilator"
-      "pkg:verilator"
+      "pkg/verilator"
     } [style=dotted];
 
     {
       node [shape=folder, color=red, fontcolor=red]
       "t_verilator" [label="verilator"];
-      "t_pkg:verilator" [label="verilator.pkg"];
+      "t_pkg/verilator" [label="verilator.pkg"];
     }
 
     "verilator" -> "t_verilator";
-    "pkg:verilator" -> "t_pkg:verilator";
+    "pkg/verilator" -> "t_pkg/verilator";
   }
 
   subgraph cluster_sim {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_sim_ghdl:llvm" [label="ghdl:llvm"]
-      "p_sim_pkg:verilator" [label="pkg:verilator"]
+      "p_sim_ghdl/llvm" [label="ghdl/llvm"]
+      "p_sim_pkg/verilator" [label="pkg/verilator"]
     }
 
     d_sim -> "sim" [style=dotted];
@@ -128,102 +128,102 @@ digraph G {
     };
 
     d_osvb -> {
-      "pkg:osvb"
-      "sim:osvb"
-      "sim:scypy"
-      "sim:octave"
+      "pkg/osvb"
+      "sim/osvb"
+      "sim/scypy"
+      "sim/octave"
     } [style=dotted];
 
     {
-      "sim:scypy-slim"
-      "sim:octave-slim"
+      "sim/scypy-slim"
+      "sim/octave-slim"
     } -> d_osvb;
 
-    d_scypy -> "sim:scypy-slim" [style=dotted];
-    d_octave -> "sim:octave-slim" [style=dotted];
+    d_scypy -> "sim/scypy-slim" [style=dotted];
+    d_octave -> "sim/octave-slim" [style=dotted];
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red]
       "t_sim"             [label="sim"];
-      "t_pkg:osvb"        [label="osvb.pkg"];
-      "t_sim:osvb"        [label="sim--osvb"];
-      "t_sim:scypy-slim"  [label="sim--scypy-slim"];
-      "t_sim:scypy"       [label="sim--scypy"];
-      "t_sim:octave-slim" [label="sim--octave-slim"];
-      "t_sim:octave"      [label="sim--octave"];
+      "t_pkg/osvb"        [label="osvb.pkg"];
+      "t_sim/osvb"        [label="sim--osvb"];
+      "t_sim/scypy-slim"  [label="sim--scypy-slim"];
+      "t_sim/scypy"       [label="sim--scypy"];
+      "t_sim/octave-slim" [label="sim--octave-slim"];
+      "t_sim/octave"      [label="sim--octave"];
     }
 
     "sim" -> "t_sim";
-    "pkg:osvb" -> "t_pkg:osvb";
-    "sim:osvb" -> "t_sim:osvb";
-    "sim:scypy-slim" -> "t_sim:scypy-slim";
-    "sim:scypy" -> "t_sim:scypy";
-    "sim:octave-slim" -> "t_sim:octave-slim";
-    "sim:octave" -> "t_sim:octave";
+    "pkg/osvb" -> "t_pkg/osvb";
+    "sim/osvb" -> "t_sim/osvb";
+    "sim/scypy-slim" -> "t_sim/scypy-slim";
+    "sim/scypy" -> "t_sim/scypy";
+    "sim/octave-slim" -> "t_sim/octave-slim";
+    "sim/octave" -> "t_sim/octave";
   }
 
   subgraph cluster_xyce {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_xyce_build:build" [label="build:build"]
-      "p_xyce_build:base" [label="build:base"]
+      "p_xyce_build/build" [label="build/build"]
+      "p_xyce_build/base" [label="build/base"]
       "p_xyce_scratch" [label="scratch"]
     }
 
     d_xyce -> {
       "xyce"
-      "pkg:xyce"
+      "pkg/xyce"
     } [style=dotted];
 
     {
       node [shape=folder, color=red, fontcolor=red]
       "t_xyce" [label="xyce"];
-      "t_pkg:xyce" [label="xyce.pkg"];
+      "t_pkg/xyce" [label="xyce.pkg"];
     }
 
     "xyce" -> "t_xyce";
-    "pkg:xyce" -> "t_pkg:xyce";
+    "pkg/xyce" -> "t_pkg/xyce";
   }
 
   # Dockerfile dependencies
 
-  "build:build" -> "p_gtkwave_build:build" -> d_gtkwave;
+  "build/build" -> "p_gtkwave_build/build" -> d_gtkwave;
   "scratch" -> "p_gtkwave_scratch" -> d_gtkwave;
 
-  "build:build" -> "p_verilator_build:build" -> d_verilator;
-  "build:base" -> "p_verilator_build:base" -> d_verilator;
+  "build/build" -> "p_verilator_build/build" -> d_verilator;
+  "build/base" -> "p_verilator_build/base" -> d_verilator;
   "scratch" -> "p_verilator_scratch" -> d_verilator;
 
-  "build:build" -> "p_xyce_build:build" -> d_xyce;
-  "build:base" -> "p_xyce_build:base" -> d_xyce;
+  "build/build" -> "p_xyce_build/build" -> d_xyce;
+  "build/base" -> "p_xyce_build/base" -> d_xyce;
   "scratch" -> "p_xyce_scratch" -> d_xyce;
 
-  "ghdl:llvm" -> "p_sim_ghdl:llvm" -> d_sim;
-  "pkg:verilator" -> "p_sim_pkg:verilator" -> d_sim;
+  "ghdl/llvm" -> "p_sim_ghdl/llvm" -> d_sim;
+  "pkg/verilator" -> "p_sim_pkg/verilator" -> d_sim;
 
   # Image dependencies
 
   { edge [style=dashed]
-    "p_gtkwave_scratch" -> "pkg:gtkwave";
+    "p_gtkwave_scratch" -> "pkg/gtkwave";
 
-    "p_verilator_build:base" -> "verilator";
-    "p_verilator_scratch" -> "pkg:verilator";
+    "p_verilator_build/base" -> "verilator";
+    "p_verilator_scratch" -> "pkg/verilator";
 
-    "p_xyce_build:base" -> "xyce";
-    "p_xyce_scratch" -> "pkg:xyce";
+    "p_xyce_build/base" -> "xyce";
+    "p_xyce_scratch" -> "pkg/xyce";
 
-    "p_sim_ghdl:llvm" -> "sim" -> {
-      "sim:osvb"
-      "sim:scypy-slim"
-      "sim:octave-slim"
+    "p_sim_ghdl/llvm" -> "sim" -> {
+      "sim/osvb"
+      "sim/scypy-slim"
+      "sim/octave-slim"
     };
 
-    "sim:scypy-slim" -> "sim:scypy";
-    "sim:octave-slim" -> "sim:octave";
+    "sim/scypy-slim" -> "sim/scypy";
+    "sim/octave-slim" -> "sim/octave";
   }
 
   { edge [style=dashed, color=grey]
-    "p_sim_pkg:verilator" -> "sim";
+    "p_sim_pkg/verilator" -> "sim";
   }
 
 }

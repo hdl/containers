@@ -26,9 +26,9 @@ cd $(dirname "$0")/../..
 HDL_REGISTRY=${HDL_REGISTRY:-gcr.io/hdl-containers}
 
 _collection="$1"
-_tag="$2"
-
-_dir="${_tag}"
+_img="$2"
+_tag="`echo $2 | sed 's#/#--#'`"
+_dir="`echo $2 | sed 's#/#-#'`"
 if [ -n "$3" ]; then
   _dir="$3"
 fi
@@ -37,7 +37,7 @@ echo "::group::Build ${HDL_REGISTRY}/${_collection}/tespkg:${_tag}"
 docker build -t "${HDL_REGISTRY}/${_collection}"/testpkg:"${_tag}" - <<-EOF
 FROM alpine
 RUN apk add -U --no-cache file tree
-COPY --from=${HDL_REGISTRY}/${_collection}/pkg:${_tag} /${_dir} /
+COPY --from=${HDL_REGISTRY}/${_collection}/pkg/${_img} /${_dir} /
 EOF
 echo '::endgroup::'
 

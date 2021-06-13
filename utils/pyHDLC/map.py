@@ -89,7 +89,7 @@ class CollectionGraph:
     def addItem(self, item: str):
         if item.startswith("!R|"):
             _label = item[3:]
-            if _label.startswith("pkg:"):
+            if _label.startswith("pkg/"):
                 self.pkgs.append(_label)
             else:
                 self.imgs.append(_label)

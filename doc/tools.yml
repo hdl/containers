@@ -46,7 +46,7 @@ boolector:
     - 'boolector'
   in:
     - 'formal'
-    - 'formal:all'
+    - 'formal/all'
 
 #---
 
@@ -54,9 +54,9 @@ cocotb:
   src: true
   url: 'https://hdl.github.io/awesome/items/cocotb'
   in:
-    - 'sim:osvb'
-    - 'sim:scypy'
-    - 'sim:octave'
+    - 'sim/osvb'
+    - 'sim/scypy'
+    - 'sim/octave'
 
 #---
 
@@ -67,7 +67,7 @@ cvc4:
     - 'cvc4'
   in:
     - 'formal'
-    - 'formal:all'
+    - 'formal/all'
 
 #---
 
@@ -76,22 +76,22 @@ ghdl:
   url: 'https://hdl.github.io/awesome/items/ghdl'
   pkg:
     - 'ghdl'
-    - 'ghdl-llvm'
+    - 'ghdl/llvm'
   use:
     - 'ghdl'
-    - 'ghdl:llvm'
+    - 'ghdl/llvm'
   in:
     - 'sim'
-    - 'sim:osvb'
-    - 'sim:scypy-slim'
-    - 'sim:scypy'
-    - 'sim:octave-slim'
-    - 'sim:octave'
+    - 'sim/osvb'
+    - 'sim/scypy-slim'
+    - 'sim/scypy'
+    - 'sim/octave-slim'
+    - 'sim/octave'
     - 'impl'
-    - 'formal:min'
+    - 'formal/min'
     - 'formal'
-    - 'formal:all'
-  otherin: ['ghdl:yosys']
+    - 'formal/all'
+  otherin: ['ghdl/yosys']
 
 #---
 
@@ -101,12 +101,12 @@ ghdl-yosys-plugin:
   pkg:
     - 'ghdl-yosys-plugin'
   use:
-    - 'ghdl:yosys'
+    - 'ghdl/yosys'
   in:
     - 'impl'
-    - 'formal:min'
+    - 'formal/min'
     - 'formal'
-    - 'formal:all'
+    - 'formal/all'
 
 #---
 
@@ -115,12 +115,12 @@ graphviz:
   url: 'https://hdl.github.io/awesome/items/graphviz'
   in:
     - 'impl'
-    - 'formal:min'
+    - 'formal/min'
     - 'formal'
-    - 'formal:all'
+    - 'formal/all'
   otherin:
     - 'yosys'
-    - 'ghdl:yosys'
+    - 'ghdl/yosys'
 
 #---
 
@@ -140,11 +140,11 @@ icestorm:
   use:
     - 'icestorm'
   in:
-    - 'impl:icestorm'
+    - 'impl/icestorm'
     - 'impl'
     - 'prog'
   otherin:
-    - 'nextpnr:icestorm'
+    - 'nextpnr/icestorm'
 
 #---
 
@@ -171,15 +171,15 @@ nextpnr:
   src: true
   url: 'https://hdl.github.io/awesome/items/nextpnr'
   pkg:
-    - 'nextpnr-generic'
-    - 'nextpnr-ice40'
-    - 'nextpnr-ecp5'
+    - 'nextpnr/generic'
+    - 'nextpnr/ice40'
+    - 'nextpnr/ecp5'
   use:
-    - 'nextpnr:generic'
-    - 'nextpnr:ice40'
-    - 'nextpnr:ecp5'
-    - 'nextpnr:icestorm'
-    - 'nextpnr:prjtrellis'
+    - 'nextpnr/generic'
+    - 'nextpnr/ice40'
+    - 'nextpnr/ecp5'
+    - 'nextpnr/icestorm'
+    - 'nextpnr/prjtrellis'
     - 'nextpnr'
   in:
     - 'impl'
@@ -201,7 +201,7 @@ openocd:
 #    - 'pono'
 #  in:
 #    - 'formal'
-#    - 'formal:all'
+#    - 'formal/all'
 
 #---
 
@@ -213,10 +213,10 @@ prjtrellis:
   use:
     - 'prjtrellis'
   in:
-    - 'impl:prjtrellis'
+    - 'impl/prjtrellis'
     - 'impl'
   otherin:
-    - 'nextpnr:prjtrellis'
+    - 'nextpnr/prjtrellis'
 
 #---
 
@@ -226,7 +226,7 @@ superprove:
   pkg:
     - 'superprove'
   in:
-    - 'formal:all'
+    - 'formal/all'
 
 #---
 
@@ -236,9 +236,9 @@ symbiyosys:
   pkg:
     - 'symbiyosys'
   in:
-    - 'formal:min'
+    - 'formal/min'
     - 'formal'
-    - 'formal:all'
+    - 'formal/all'
 
 #---
 
@@ -251,11 +251,11 @@ verilator:
     - 'verilator'
   in:
     - 'sim'
-    - 'sim:osvb'
-    - 'sim:scypy-slim'
-    - 'sim:scypy'
-    - 'sim:octave-slim'
-    - 'sim:octave'
+    - 'sim/osvb'
+    - 'sim/scypy-slim'
+    - 'sim/scypy'
+    - 'sim/octave-slim'
+    - 'sim/octave'
 
 #---
 
@@ -263,9 +263,9 @@ vunit:
   src: true
   url: 'https://hdl.github.io/awesome/items/vunit'
   in:
-    - 'sim:osvb'
-    - 'sim:scypy'
-    - 'sim:octave'
+    - 'sim/osvb'
+    - 'sim/scypy'
+    - 'sim/octave'
 
 #---
 
@@ -276,7 +276,7 @@ yices2:
     - 'yices2'
   in:
     - 'formal'
-    - 'formal:all'
+    - 'formal/all'
 
 #---
 
@@ -299,11 +299,11 @@ yosys:
     - 'yosys'
   in:
     - 'impl'
-    - 'formal:min'
+    - 'formal/min'
     - 'formal'
-    - 'formal:all'
+    - 'formal/all'
   otherin:
-    - 'ghdl:yosys'
+    - 'ghdl/yosys'
 
 #---
 
@@ -313,6 +313,6 @@ z3:
   pkg:
     - 'z3'
   in:
-    - 'formal:min'
+    - 'formal/min'
     - 'formal'
-    - 'formal:all'
+    - 'formal/all'

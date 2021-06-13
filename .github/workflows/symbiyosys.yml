@@ -49,7 +49,7 @@ jobs:
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        pkg:symbiyosys
+        pkg/symbiyosys
 
     - run: dockerTestPkg ${{ matrix.os }} symbiyosys
 
@@ -79,4 +79,4 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        pkg:symbiyosys
+        pkg/symbiyosys

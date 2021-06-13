@@ -23,7 +23,7 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 
 #---
 
-FROM $REGISTRY/build:base AS base
+FROM $REGISTRY/build/base AS base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -34,7 +34,7 @@ RUN apt-get update -qq \
 
 #---
 
-FROM $REGISTRY/build:dev AS build
+FROM $REGISTRY/build/dev AS build
 
 ENV LDFLAGS "-Wl,--copy-dt-needed-entries"
 
@@ -48,9 +48,9 @@ RUN apt-get update -qq \
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:icestorm AS pkg-icestorm
+FROM $REGISTRY/pkg/icestorm AS pkg-icestorm
 
-FROM $REGISTRY/build:nextpnr-build AS build-ice40
+FROM $REGISTRY/build/nextpnr/build AS build-ice40
 COPY --from=pkg-icestorm /icestorm/usr/local/share/icebox /usr/local/share/icebox
 
 RUN cd /tmp/nextpnr/build \
@@ -69,7 +69,7 @@ COPY --from=build-ice40 /opt/nextpnr /nextpnr-ice40
 
 #---
 
-FROM $REGISTRY/build:nextpnr-base AS ice40
+FROM $REGISTRY/build/nextpnr/base AS ice40
 COPY --from=build-ice40 /opt/nextpnr /
 
 #---
@@ -80,9 +80,9 @@ COPY --from=pkg-icestorm /icestorm /
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:prjtrellis AS pkg-prjtrellis
+FROM $REGISTRY/pkg/prjtrellis AS pkg-prjtrellis
 
-FROM $REGISTRY/build:nextpnr-build AS build-ecp5
+FROM $REGISTRY/build/nextpnr/build AS build-ecp5
 COPY --from=pkg-prjtrellis /prjtrellis /
 
 RUN cd /tmp/nextpnr/build \
@@ -101,7 +101,7 @@ COPY --from=build-ecp5 /opt/nextpnr /nextpnr-ecp5
 
 #---
 
-FROM $REGISTRY/build:nextpnr-base AS ecp5
+FROM $REGISTRY/build/nextpnr/base AS ecp5
 COPY --from=build-ecp5 /opt/nextpnr /
 
 #---
@@ -111,7 +111,7 @@ COPY --from=pkg-prjtrellis /prjtrellis /
 
 #---
 
-FROM $REGISTRY/build:nextpnr-build AS build-generic
+FROM $REGISTRY/build/nextpnr/build AS build-generic
 
 RUN cd /tmp/nextpnr/build \
  && cmake .. \
@@ -129,16 +129,16 @@ COPY --from=build-generic /opt/nextpnr /nextpnr-generic
 
 #---
 
-FROM $REGISTRY/build:nextpnr-base AS generic
+FROM $REGISTRY/build/nextpnr/base AS generic
 COPY --from=build-generic /opt/nextpnr /
 
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:nextpnr-ice40 AS pkg-nextpnr-ice40
-FROM $REGISTRY/pkg:nextpnr-ecp5 AS pkg-nextpnr-ecp5
+FROM $REGISTRY/pkg/nextpnr/ice40 AS pkg-nextpnr-ice40
+FROM $REGISTRY/pkg/nextpnr/ecp5 AS pkg-nextpnr-ecp5
 
-FROM $REGISTRY/build:nextpnr-base
+FROM $REGISTRY/build/nextpnr/base
 COPY --from=build-generic /opt/nextpnr /
 COPY --from=pkg-nextpnr-ice40 /nextpnr-ice40 /
 COPY --from=pkg-nextpnr-ecp5 /nextpnr-ecp5 /

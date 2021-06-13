@@ -31,9 +31,9 @@ digraph G {
   # Images
 
   { node [shape=cylinder]
-    "build:base"
-    "build:build"
-    "build:dev"
+    "build/base"
+    "build/build"
+    "build/dev"
   }
 
   # External images
@@ -51,21 +51,21 @@ digraph G {
     }
 
     d_base -> {
-      "build:base",
-      "build:build",
-      "build:dev"
+      "build/base",
+      "build/build",
+      "build/dev"
     } [style=dotted];
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
-      "t_build:base" [label="build--base"];
-      "t_build:build" [label="build--build"];
-      "t_build:dev" [label="build--dev"];
+      "t_build/base" [label="build--base"];
+      "t_build/build" [label="build--build"];
+      "t_build/dev" [label="build--dev"];
     }
 
-    "build:base" -> "t_build:base";
-    "build:build" -> "t_build:build";
-    "build:dev" -> "t_build:dev";
+    "build/base" -> "t_build/base";
+    "build/build" -> "t_build/build";
+    "build/dev" -> "t_build/dev";
   }
 
   # Dockerfile dependencies
@@ -75,7 +75,7 @@ digraph G {
   # Image dependencies
 
   { edge [style=dashed]
-    "p_base_debian" -> "build:base" -> "build:build" -> "build:dev";
+    "p_base_debian" -> "build/base" -> "build/build" -> "build/dev";
   }
 
 }

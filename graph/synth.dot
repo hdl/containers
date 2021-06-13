@@ -33,19 +33,19 @@ digraph G {
   # Images
 
   { node [shape=cylinder]
-    "build:base"
-    "build:build"
+    "build/base"
+    "build/build"
     { node [color=limegreen, fontcolor=limegreen]
       "ghdl"
-      "ghdl:llvm"
-      "ghdl:yosys"
+      "ghdl/llvm"
+      "ghdl/yosys"
       "yosys"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
-      "pkg:ghdl"
-      "pkg:ghdl-llvm"
-      "pkg:ghdl-yosys-plugin"
-      "pkg:yosys"
+      "pkg/ghdl"
+      "pkg/ghdl/llvm"
+      "pkg/ghdl-yosys-plugin"
+      "pkg/yosys"
     }
   }
 
@@ -58,8 +58,8 @@ digraph G {
   }
 
   { rank=same
-    "build:base"
-    "build:build"
+    "build/base"
+    "build/build"
     "scratch"
     "ghdl/pkg:buster-mcode"
     "ghdl/pkg:buster-llvm-7"
@@ -70,7 +70,7 @@ digraph G {
   subgraph cluster_ghdl {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_ghdl_build:base" [label="build:base"]
+      "p_ghdl_build/base" [label="build/base"]
       "p_ghdl_scratch" [label="scratch"]
       "p_ghdl_buster" [label="ghdl/pkg:buster-mcode"]
       "p_ghdl_buster-llvm" [label="ghdl/pkg:buster-llvm-7"]
@@ -78,67 +78,67 @@ digraph G {
 
     d_ghdl -> { rank=same
       "ghdl",
-      "ghdl:llvm",
-      "pkg:ghdl",
-      "pkg:ghdl-llvm"
+      "ghdl/llvm",
+      "pkg/ghdl",
+      "pkg/ghdl/llvm"
     } [style=dotted];
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
       "t_ghdl" [label="ghdl"];
-      "t_ghdl:llvm" [label="ghdl:llvm"];
-      "t_pkg:ghdl" [label="ghdl.pkg"];
-      "t_pkg:ghdl-llvm" [label="ghdl-llvm.pkg"];
+      "t_ghdl/llvm" [label="ghdl--llvm"];
+      "t_pkg/ghdl" [label="ghdl.pkg"];
+      "t_pkg/ghdl/llvm" [label="ghdl--llvm.pkg"];
     }
 
     "ghdl" -> "t_ghdl";
-    "ghdl:llvm" -> "t_ghdl:llvm";
-    "pkg:ghdl" -> "t_pkg:ghdl";
-    "pkg:ghdl-llvm" -> "t_pkg:ghdl-llvm";
+    "ghdl/llvm" -> "t_ghdl/llvm";
+    "pkg/ghdl" -> "t_pkg/ghdl";
+    "pkg/ghdl/llvm" -> "t_pkg/ghdl/llvm";
   }
 
   subgraph cluster_ghdlYosysPlugin {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_ghdl-yosys-plugin_yosys" [label="yosys"]
-      "p_ghdl-yosys-plugin_pkg:ghdl" [label="pkg:ghdl"]
+      "p_ghdl-yosys-plugin_pkg/ghdl" [label="pkg/ghdl"]
     }
 
     d_ghdlYosysPlugin -> { rank=same
-      "pkg:ghdl-yosys-plugin",
-      "ghdl:yosys"
+      "pkg/ghdl-yosys-plugin",
+      "ghdl/yosys"
     } [style=dotted];
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
-      "t_pkg:ghdl-yosys-plugin" [label="ghdl-yosys-plugin.pkg"];
-      "t_ghdl:yosys" [label="ghdl--yosys"];
+      "t_pkg/ghdl-yosys-plugin" [label="ghdl-yosys-plugin.pkg"];
+      "t_ghdl/yosys" [label="ghdl--yosys"];
     }
 
-    "pkg:ghdl-yosys-plugin" -> "t_pkg:ghdl-yosys-plugin";
-    "ghdl:yosys" -> "t_ghdl:yosys";
+    "pkg/ghdl-yosys-plugin" -> "t_pkg/ghdl-yosys-plugin";
+    "ghdl/yosys" -> "t_ghdl/yosys";
   }
 
   subgraph cluster_yosys {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_yosys_build:build" [label="build:build"]
+      "p_yosys_build/build" [label="build/build"]
       "p_yosys_scratch" [label="scratch"]
     }
 
     d_yosys -> { rank=same
-      "pkg:yosys",
+      "pkg/yosys",
       "yosys"
     } [style=dotted];
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
       "t_yosys" [label="yosys"];
-      "t_pkg:yosys" [label="yosys.pkg"];
+      "t_pkg/yosys" [label="yosys.pkg"];
     }
 
     "yosys" -> "t_yosys";
-    "pkg:yosys" -> "t_pkg:yosys";
+    "pkg/yosys" -> "t_pkg/yosys";
   }
 
   { rank=same
@@ -151,35 +151,35 @@ digraph G {
   "scratch" -> "p_ghdl_scratch" -> d_ghdl;
   "ghdl/pkg:buster-mcode" -> "p_ghdl_buster" -> d_ghdl;
   "ghdl/pkg:buster-llvm-7" -> "p_ghdl_buster-llvm" -> d_ghdl;
-  "build:base" -> "p_ghdl_build:base" -> d_ghdl;
+  "build/base" -> "p_ghdl_build/base" -> d_ghdl;
 
-  "pkg:ghdl" -> "p_ghdl-yosys-plugin_pkg:ghdl" -> d_ghdlYosysPlugin;
+  "pkg/ghdl" -> "p_ghdl-yosys-plugin_pkg/ghdl" -> d_ghdlYosysPlugin;
   "yosys" -> "p_ghdl-yosys-plugin_yosys" -> d_ghdlYosysPlugin;
 
-  "build:build" -> "p_yosys_build:build" -> d_yosys;
+  "build/build" -> "p_yosys_build/build" -> d_yosys;
   "scratch" -> "p_yosys_scratch" -> d_yosys;
 
   # Image dependencies
 
   { edge [style=dashed]
-    "p_ghdl_scratch" -> { "pkg:ghdl", "pkg:ghdl-llvm" };
-    "p_ghdl_build:base" -> { "ghdl", "ghdl:llvm" };
+    "p_ghdl_scratch" -> { "pkg/ghdl", "pkg/ghdl/llvm" };
+    "p_ghdl_build/base" -> { "ghdl", "ghdl/llvm" };
 
-    "p_yosys_scratch" -> "pkg:yosys";
-    "p_yosys_build:build" -> "yosys";
+    "p_yosys_scratch" -> "pkg/yosys";
+    "p_yosys_build/build" -> "yosys";
 
-    "p_ghdl-yosys-plugin_yosys" -> "ghdl:yosys";
-    "p_ghdl-yosys-plugin_pkg:ghdl" -> "pkg:ghdl-yosys-plugin";
+    "p_ghdl-yosys-plugin_yosys" -> "ghdl/yosys";
+    "p_ghdl-yosys-plugin_pkg/ghdl" -> "pkg/ghdl-yosys-plugin";
   }
 
   { edge [style=dashed, color=grey]
     "p_ghdl_buster" -> {
       "ghdl",
-      "pkg:ghdl"
+      "pkg/ghdl"
     };
     "p_ghdl_buster-llvm" -> {
-      "ghdl:llvm",
-      "pkg:ghdl-llvm"
+      "ghdl/llvm",
+      "pkg/ghdl/llvm"
     };
   }
 

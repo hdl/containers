@@ -46,21 +46,21 @@ Images including multiple tools:
 
 * **S**imulation:
 ** OCIImage:sim[] GHDL + Verilator
-** OCIImage:sim[osvb] cocotb, OSVVM and VUnit; on top of `sim`.
-** OCIImage:sim[scypy-slim] `matplotlib` and `numpy`, on top of `sim`.
-** OCIImage:sim[scypy] `osvb` on top of `scypy-slim`.
-** OCIImage:sim[octave-slim] `octave`, on top of `sim`.
-** OCIImage:sim[octave] `osvb` on top of `octave-slim`.
+** OCIImage:sim/osvb[] cocotb, OSVVM and VUnit; on top of `sim`.
+** OCIImage:sim/scypy-slim[] `matplotlib` and `numpy`, on top of `sim`.
+** OCIImage:sim/scypy[] `osvb` on top of `scypy-slim`.
+** OCIImage:sim/octave-slim[] `octave`, on top of `sim`.
+** OCIImage:sim/octave[] `osvb` on top of `octave-slim`.
 * **I**mplementation: GHDL + Yosys + nextpnr
-** OCIImage:impl[ice40] nextpnr-ice40 only, and OCIImage:impl[icestorm] including icestorm.
-** OCIImage:impl[ecp5] nextpnr-ecp5 only, and OCIImage:impl[prjtrellis] including prjtrellis.
-** OCIImage:impl[generic] nextpnr-generic only.
-** OCIImage:impl[pnr] all nextpnr targets (ecp5, ice40, and generic).
+** OCIImage:impl/ice40[] nextpnr-ice40 only, and OCIImage:impl/icestorm[] including icestorm.
+** OCIImage:impl/ecp5[] nextpnr-ecp5 only, and OCIImage:impl/prjtrellis[] including prjtrellis.
+** OCIImage:impl/generic[] nextpnr-generic only.
+** OCIImage:impl/pnr[] all nextpnr targets (ecp5, ice40, and generic).
 ** OCIImage:impl[] impl:pnr, including icestorm and prjtrellis.
 * **F**ormal:
 ** OCIImage:formal[] all solvers depending on Python 3.
-** OCIImage:formal[min] Z3 only.
-** OCIImage:formal[all] all solvers, depending on either Python 2 or Python 3.
+** OCIImage:formal/min[] Z3 only.
+** OCIImage:formal/all[] all solvers, depending on either Python 2 or Python 3.
 * **P**rogramming: OCIImage:prog[]
 
 To Do:

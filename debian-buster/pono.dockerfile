@@ -22,7 +22,7 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 
 #---
 
-FROM $REGISTRY/build:build AS build
+FROM $REGISTRY/build/build AS build
 
 RUN mkdir -p /usr/share/man/man1/ \
  && apt-get update -qq \

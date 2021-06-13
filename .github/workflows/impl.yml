@@ -52,13 +52,13 @@ jobs:
 
     - run: >-
         dockerPull -c ${{ matrix.os }}
-        ghdl:yosys
-        pkg:ghdl-yosys-plugin
-        pkg:yosys
+        ghdl/yosys
+        pkg/ghdl-yosys-plugin
+        pkg/yosys
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        build:impl
+        build/impl
 
     - name: Login to gcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -86,7 +86,7 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        build:impl
+        build/impl
 
 
   impl-prjs:
@@ -112,17 +112,17 @@ jobs:
 
     - run: >-
         dockerPull -c ${{ matrix.os }}
-        build:impl
-        pkg:nextpnr-${{ matrix.task.arch }}
-        pkg:${{ matrix.task.prj }}
+        build/impl
+        pkg/nextpnr/${{ matrix.task.arch }}
+        pkg/${{ matrix.task.prj }}
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        impl:${{ matrix.task.arch }}
-        impl:${{ matrix.task.prj }}
+        impl/${{ matrix.task.arch }}
+        impl/${{ matrix.task.prj }}
 
-    - run: dockerTest ${{ matrix.os }} impl:${{ matrix.task.arch }}
-    - run: dockerTest ${{ matrix.os }} impl:${{ matrix.task.prj  }}
+    - run: dockerTest ${{ matrix.os }} impl/${{ matrix.task.arch }}
+    - run: dockerTest ${{ matrix.os }} impl/${{ matrix.task.prj  }}
 
     - name: Login to gcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -150,8 +150,8 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        impl:${{ matrix.task.arch }}
-        impl:${{ matrix.task.prj }}
+        impl/${{ matrix.task.arch }}
+        impl/${{ matrix.task.prj }}
 
 
   impl:
@@ -172,21 +172,21 @@ jobs:
 
     - run: >-
         dockerPull -c ${{ matrix.os }}
-        build:impl
-        pkg:nextpnr-ice40
-        pkg:nextpnr-ecp5
-        pkg:nextpnr-generic
-        pkg:icestorm
-        pkg:prjtrellis
+        build/impl
+        pkg/nextpnr/ice40
+        pkg/nextpnr/ecp5
+        pkg/nextpnr/generic
+        pkg/icestorm
+        pkg/prjtrellis
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        impl:generic
-        impl:pnr
+        impl/generic
+        impl/pnr
         impl
 
-    - run: dockerTest ${{ matrix.os }} impl:generic
-    - run: dockerTest ${{ matrix.os }} impl:pnr
+    - run: dockerTest ${{ matrix.os }} impl/generic
+    - run: dockerTest ${{ matrix.os }} impl/pnr
     - run: dockerTest ${{ matrix.os }} impl
 
     - name: Login to gcr.io
@@ -215,6 +215,6 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        impl:generic
-        impl:pnr
+        impl/generic
+        impl/pnr
         impl

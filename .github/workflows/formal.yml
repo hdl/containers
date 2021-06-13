@@ -51,24 +51,24 @@ jobs:
 
     - run: >-
         dockerPull -c ${{ matrix.os }}
-        ghdl:yosys
-        pkg:z3
-        pkg:symbiyosys
-        pkg:yices2
-        pkg:boolector
-        pkg:cvc4
-        pkg:superprove
-#        pkg:pono
+        ghdl/yosys
+        pkg/z3
+        pkg/symbiyosys
+        pkg/yices2
+        pkg/boolector
+        pkg/cvc4
+        pkg/superprove
+#        pkg/pono
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        formal:min
+        formal/min
         formal
-        formal:all
+        formal/all
 
-    - run: dockerTest ${{ matrix.os }} formal:min
+    - run: dockerTest ${{ matrix.os }} formal/min
     - run: dockerTest ${{ matrix.os }} formal
-    - run: dockerTest ${{ matrix.os }} formal:all
+    - run: dockerTest ${{ matrix.os }} formal/all
 
     - name: Login to gcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -96,6 +96,6 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        formal:min
+        formal/min
         formal
-        formal:all
+        formal/all

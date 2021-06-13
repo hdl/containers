@@ -102,11 +102,11 @@ jobs:
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        pkg:osvb
-        sim:osvb
+        pkg/osvb
+        sim/osvb
 
     - run: dockerTestPkg ${{ matrix.os }} osvb
-    - run: dockerTest ${{ matrix.os }} sim:osvb
+    - run: dockerTest ${{ matrix.os }} sim/osvb
 
     - name: Login to gcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -134,8 +134,8 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        pkg:osvb
-        sim:osvb
+        pkg/osvb
+        sim/osvb
 
 
   cosim:
@@ -159,11 +159,11 @@ jobs:
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        sim:${{ matrix.img }}-slim
-        sim:${{ matrix.img }}
+        sim/${{ matrix.img }}-slim
+        sim/${{ matrix.img }}
 
-    - run: dockerTest ${{ matrix.os }} sim:${{ matrix.img }}-slim
-    - run: dockerTest ${{ matrix.os }} sim:${{ matrix.img }}
+    - run: dockerTest ${{ matrix.os }} sim/${{ matrix.img }}-slim
+    - run: dockerTest ${{ matrix.os }} sim/${{ matrix.img }}
 
     - name: Login to gcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -191,5 +191,5 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        sim:${{ matrix.img }}-slim
-        sim:${{ matrix.img }}
+        sim/${{ matrix.img }}-slim
+        sim/${{ matrix.img }}

@@ -21,7 +21,7 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 
 #--
 
-FROM $REGISTRY/build:dev AS build
+FROM $REGISTRY/build/dev AS build
 
 ENV LDFLAGS "-Wl,--copy-dt-needed-entries"
 
@@ -38,7 +38,7 @@ COPY --from=build /opt/prjtrellis /prjtrellis
 
 #---
 
-FROM $REGISTRY/build:base
+FROM $REGISTRY/build/base
 COPY --from=build /opt/prjtrellis /
 
 RUN apt-get update -qq \

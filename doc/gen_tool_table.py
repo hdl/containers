@@ -60,7 +60,7 @@ with (ROOT/'tools.adoc').open('w') as fptr:
         fptr.write('\n')
         fptr.write('^.|%s[%s]%s\n' % (var['url'], tool, ' !' if ('src' in var and not var['src']) else ''))
 
-        pkg = ' '.join('OCIImage:pkg[%s]' % item for item in (
+        pkg = ' '.join(f"OCIImage:pkg/{item}[]" for item in (
             var['pkg'] if 'pkg' in var else [])
         )
         fptr.write('^.|%s\n' % ('-' if len(pkg) == 0 else pkg))
@@ -77,9 +77,9 @@ with (ROOT/'tools.adoc').open('w') as fptr:
         fptr.write('^.|%s\n' % ('F' if any(_initem.startswith('formal') for _initem in _in) else '-'))
         fptr.write('^.|%s\n' % ('P' if any(_initem.startswith('prog') for _initem in _in) else '-'))
 
-        otherin = ', '.join('`%s`' % item for item in (
+        otherin = ', '.join(f'`{item}`' for item in (
             var['otherin'] if 'otherin' in var else []
         ))
-        fptr.write('|%s\n' % ('-' if len(otherin) == 0 else otherin))
+        fptr.write(f"|{'-' if len(otherin) == 0 else otherin}\n")
 
     fptr.write('\n|===')

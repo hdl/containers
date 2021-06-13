@@ -40,7 +40,7 @@ unset _nonRootOnly
 
 for item; do
   case "$item" in
-    build:*|pkg:*)
+    build/*|pkg/*)
       _nonRootOnly="$_nonRootOnly $item"
     ;;
     *)
@@ -50,7 +50,7 @@ for item; do
 done
 
 _hpush() {
-  _mirror="${_mirror} hdlc" _push $@
+  _mirror="${_mirror} docker.io/hdlc" _push $@
 }
 
 if [ -n "$_nonRootOnly" ]; then

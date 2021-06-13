@@ -50,15 +50,15 @@ jobs:
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        pkg:ghdl
-        pkg:ghdl-llvm
+        pkg/ghdl
+        pkg/ghdl/llvm
         ghdl
-        ghdl:llvm
+        ghdl/llvm
 
     - run: dockerTestPkg ${{ matrix.os }} ghdl
-    - run: dockerTestPkg ${{ matrix.os }} ghdl-llvm ghdl
+    - run: dockerTestPkg ${{ matrix.os }} ghdl/llvm ghdl
     - run: dockerTest ${{ matrix.os }} ghdl
-    - run: dockerTest ${{ matrix.os }} ghdl:llvm
+    - run: dockerTest ${{ matrix.os }} ghdl/llvm
 
     - name: Login to gcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -86,7 +86,7 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        pkg:ghdl
-        pkg:ghdl-llvm
+        pkg/ghdl
+        pkg/ghdl/llvm
         ghdl
-        ghdl:llvm
+        ghdl/llvm

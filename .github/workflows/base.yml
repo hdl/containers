@@ -49,13 +49,13 @@ jobs:
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        build:base
-        build:build
-        build:dev
+        build/base
+        build/build
+        build/dev
 
-    - run: dockerTest ${{ matrix.os }} build:base
-    - run: dockerTest ${{ matrix.os }} build:build
-    - run: dockerTest ${{ matrix.os }} build:dev
+    - run: dockerTest ${{ matrix.os }} build/base
+    - run: dockerTest ${{ matrix.os }} build/build
+    - run: dockerTest ${{ matrix.os }} build/dev
 
     - name: Login to gcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -83,6 +83,6 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        build:base
-        build:build
-        build:dev
+        build/base
+        build/build
+        build/dev

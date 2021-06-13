@@ -22,9 +22,9 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:verilator AS pkg-verilator
+FROM $REGISTRY/pkg/verilator AS pkg-verilator
 
-FROM $REGISTRY/ghdl:llvm AS base
+FROM $REGISTRY/ghdl/llvm AS base
 
 COPY --from=pkg-verilator /verilator /
 

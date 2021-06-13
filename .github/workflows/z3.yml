@@ -48,7 +48,7 @@ jobs:
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        pkg:z3
+        pkg/z3
 
     - run: dockerTestPkg ${{ matrix.os }} z3
 
@@ -78,4 +78,4 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        pkg:z3
+        pkg/z3

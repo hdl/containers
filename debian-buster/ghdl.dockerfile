@@ -23,7 +23,7 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 
 FROM ghdl/pkg:buster-mcode AS build-mcode
 
-# TODO Build GHDL on $REGISTRY/build:build instead of picking ghdl/pkg:buster-mcode
+# TODO Build GHDL on $REGISTRY/build/build instead of picking ghdl/pkg:buster-mcode
 
 #---
 
@@ -35,7 +35,7 @@ COPY --from=build-mcode / /ghdl/usr/local/
 
 FROM ghdl/pkg:buster-llvm-7 AS build-llvm
 
-# TODO Build GHDL on $REGISTRY/build:build instead of picking ghdl/pkg:buster-mcode
+# TODO Build GHDL on $REGISTRY/build/build instead of picking ghdl/pkg:buster-mcode
 
 #---
 
@@ -45,7 +45,7 @@ COPY --from=build-llvm / /ghdl/usr/local/
 
 #--
 
-FROM $REGISTRY/build:base AS base
+FROM $REGISTRY/build/base AS base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

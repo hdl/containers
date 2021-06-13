@@ -36,7 +36,10 @@ def PushImage(
         _dpush(_imageName)
         if mirror is not None:
             for _mirror in mirror:
-                _mirrorName = f"{_mirror.replace('#C',collection)}/{img}"
+                _img = (
+                    img.replace("/", ":", 1).replace("/", "--") if _mirror.startswith("docker.io") else img
+                )
+                _mirrorName = f"{_mirror.replace('#C',collection)}/{_img}"
                 _exec(
                     args=["docker", "tag", _imageName, _mirrorName],
                     dry=dry,

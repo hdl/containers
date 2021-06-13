@@ -52,8 +52,8 @@ jobs:
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        build:nextpnr-base
-        build:nextpnr-build
+        build/nextpnr/base
+        build/nextpnr/build
 
     - name: Login to gcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -81,8 +81,8 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        build:nextpnr-base
-        build:nextpnr-build
+        build/nextpnr/base
+        build/nextpnr/build
 
 
   nextpnr-prjs:
@@ -108,13 +108,13 @@ jobs:
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        pkg:nextpnr-${{ matrix.task.arch }}
-        nextpnr:${{ matrix.task.arch }}
-        nextpnr:${{ matrix.task.prj }}
+        pkg/nextpnr/${{ matrix.task.arch }}
+        nextpnr/${{ matrix.task.arch }}
+        nextpnr/${{ matrix.task.prj }}
 
-    - run: dockerTestPkg ${{ matrix.os }} nextpnr-${{ matrix.task.arch }}
-    - run: dockerTest    ${{ matrix.os }} nextpnr:${{ matrix.task.arch }}
-    - run: dockerTest    ${{ matrix.os }} nextpnr:${{ matrix.task.prj }}
+    - run: dockerTestPkg ${{ matrix.os }} nextpnr/${{ matrix.task.arch }}
+    - run: dockerTest    ${{ matrix.os }} nextpnr/${{ matrix.task.arch }}
+    - run: dockerTest    ${{ matrix.os }} nextpnr/${{ matrix.task.prj }}
 
     - name: Login to gcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -142,9 +142,9 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        pkg:nextpnr-${{ matrix.task.arch }}
-        nextpnr:${{ matrix.task.arch }}
-        nextpnr:${{ matrix.task.prj }}
+        pkg/nextpnr/${{ matrix.task.arch }}
+        nextpnr/${{ matrix.task.arch }}
+        nextpnr/${{ matrix.task.prj }}
 
 
   nextpnr:
@@ -165,12 +165,12 @@ jobs:
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        pkg:nextpnr-generic
-        nextpnr:generic
+        pkg/nextpnr/generic
+        nextpnr/generic
         nextpnr
 
-    - run: dockerTestPkg ${{ matrix.os }} nextpnr-generic
-    - run: dockerTest    ${{ matrix.os }} nextpnr:generic
+    - run: dockerTestPkg ${{ matrix.os }} nextpnr/generic
+    - run: dockerTest    ${{ matrix.os }} nextpnr/generic
     - run: dockerTest    ${{ matrix.os }} nextpnr
 
     - name: Login to gcr.io
@@ -199,6 +199,6 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        pkg:nextpnr-generic
-        nextpnr:generic
+        pkg/nextpnr/generic
+        nextpnr/generic
         nextpnr

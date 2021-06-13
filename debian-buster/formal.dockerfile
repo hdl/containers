@@ -23,10 +23,10 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:z3 AS pkg-z3
-FROM $REGISTRY/pkg:symbiyosys AS pkg-symbiyosys
+FROM $REGISTRY/pkg/z3 AS pkg-z3
+FROM $REGISTRY/pkg/symbiyosys AS pkg-symbiyosys
 
-FROM $REGISTRY/ghdl:yosys AS min
+FROM $REGISTRY/ghdl/yosys AS min
 
 COPY --from=pkg-z3 /z3 /
 COPY --from=pkg-symbiyosys /symbiyosys /
@@ -40,10 +40,10 @@ RUN apt-get update -qq \
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:yices2 AS pkg-yices2
-FROM $REGISTRY/pkg:boolector AS pkg-boolector
-FROM $REGISTRY/pkg:cvc4 AS pkg-cvc4
-#FROM $REGISTRY/pkg:pono AS pkg-pono
+FROM $REGISTRY/pkg/yices2 AS pkg-yices2
+FROM $REGISTRY/pkg/boolector AS pkg-boolector
+FROM $REGISTRY/pkg/cvc4 AS pkg-cvc4
+#FROM $REGISTRY/pkg/pono AS pkg-pono
 
 FROM min AS latest
 
@@ -61,7 +61,7 @@ RUN apt-get update -qq \
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/pkg:superprove AS pkg-superprove
+FROM $REGISTRY/pkg/superprove AS pkg-superprove
 
 FROM latest
 

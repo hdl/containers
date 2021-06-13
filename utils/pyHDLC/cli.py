@@ -163,7 +163,7 @@ class CLI(ArgParseMixin):
         "-p",
         "--pkg",
         dest="Pkg",
-        help="preprend 'pkg:' to Image and set Target to 'pkg' (if unset).",
+        help="preprend 'pkg/' to Image and set Target to 'pkg' (if unset).",
         default=False,
     )
     @SwitchArgumentAttribute(

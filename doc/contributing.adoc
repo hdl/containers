@@ -2,15 +2,15 @@
 
 As explained in <<Tools and images>> and in <<Usage>>, multiple collections of images are provided. For each collection, a set of base images is provided, which are to be used for building and for runtime. These are defined in `base.dockerfile`. See, for instance, link:{repotree}debian-buster/base.dockerfile[`debian-buster/base.dockerfile`]. All the images in the ecosystem are based on these:
 
-* OCIImage:build[base] Debian Buster or CentOS 7, with updated `ca-certificates`, `curl` and Python 3.
-* OCIImage:build[build] based on `base`, includes `clang` and `make`.
-* OCIImage:build[dev] based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
+* OCIImage:build/base[] Debian Buster or CentOS 7, with updated `ca-certificates`, `curl` and Python 3.
+* OCIImage:build/build[] based on `base`, includes `clang` and `make`.
+* OCIImage:build/dev[] based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
 
 Then, for each project/tool there are dockerfiles (one for each collection), a GitHub Actions workflow, and one or more test scripts. Those are used for:
 
 * Tools are built using `<REGISTRY_PREFIX>/build` images.
 * Package images based on `scratch` (and/or other reusable packages) are produced.
-* Ready-to-use images based on the runtime base image (`<REGISTRY_PREFIX>/build:base`) are produced.
+* Ready-to-use images based on the runtime base image (`<REGISTRY_PREFIX>/build/base`) are produced.
 * Ready-to-use images are tested before uploading.
 
 In some dockerfiles/workflows, <<Package images>> are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for common use cases (such as `<REGISTRY_PREFIX>/impl`, `<REGISTRY_PREFIX>/formal` or `<REGISTRY_PREFIX>/prog`).
@@ -69,9 +69,9 @@ graphviz::../graph/legend.dot[format="svg", align="center"]
 
 === Package images
 
-Each EDA tool/project is built once only for each collection in this image/container ecosystem. However, some (many) of the tools need to be included in multiple images for different purposes. Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each tool/project. Therefore, `<REGISTRY_PREFIX>/pkg:*` images are created/used (coloured [blue]#BLUE# in the <<Graphs>>). These are all based on `scratch` and are not runnable. Instead, they contain pre-built artifacts, to be then added into other images through `COPY --from=`.
+Each EDA tool/project is built once only for each collection in this image/container ecosystem. However, some (many) of the tools need to be included in multiple images for different purposes. Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each tool/project. Therefore, `<REGISTRY_PREFIX>/pkg/` images are created/used (coloured [blue]#BLUE# in the <<Graphs>>). These are all based on `scratch` and are not runnable. Instead, they contain pre-built artifacts, to be then added into other images through `COPY --from=`.
 
-Since `<REGISTRY_PREFIX>/pkg:*` images are not runnable _per se_, but an intermediate utility, the usage of environment variables `PREFIX` and `DESTDIR` in the dockerfiles might be misleading. All the tools in the ecosystem are expected to be installed into `/usr/local`, the standard location for user built tools on most GNU/Linux distributions. Hence:
+Since `<REGISTRY_PREFIX>/pkg/` images are not runnable _per se_, but an intermediate utility, the usage of environment variables `PREFIX` and `DESTDIR` in the dockerfiles might be misleading. All the tools in the ecosystem are expected to be installed into `/usr/local`, the standard location for user built tools on most GNU/Linux distributions. Hence:
 
 * `PREFIX` should typically not need to be modified. Most of the tools will default to `PREFIX=/usr/local`, which is correct. Yet, some tools might default to `/` or `/usr`. In those cases, setting it explicitly is required.
 * `DESTDIR` must be set to an empty location when calling `make install` or when copying the artifacts otherhow. The content of the corresponding package images is taken from that empty location. Therefore, if `DESTDIR` was unset, the artifacts of the tool might potentially be mixed with other existing assets in `/usr/local`. In most of the dockerfiles, `/opt/TOOL_NAME` is used as the temporary empty location.
@@ -127,7 +127,7 @@ optional arguments:
   -a ARGIMG, --argimg ARGIMG
                         base image passed as an ARG to the dockerfile.
                         (default: None)
-  -p, --pkg             preprend 'pkg:' to Image and set Target to 'pkg' (if unset).
+  -p, --pkg             preprend 'pkg/' to Image and set Target to 'pkg' (if unset).
                         (default: False)
   -d, --default         set default Dockerfile, Target and ArgImg options, given the image name(s).
                         (default: False)
@@ -145,7 +145,7 @@ their content from a container. For instance:
 [source, dockerfile]
 ----
 FROM busybox
-COPY --from=<REGISTRY_PREFIX>/pkg:TOOL_NAME /TOOL_NAME /
+COPY --from=<REGISTRY_PREFIX>/pkg/TOOL_NAME /TOOL_NAME /
 ----
 
 In fact, link:{repotree}utils/bin/dockerTestPkg[`dockerTestPkg`] uses a similar dockerfile for running `.pkg.sh` scripts from link:{repotree}test/[`test/`]. See <<Test>>.
@@ -163,7 +163,7 @@ docker run --rm -it \
 ----
 
 [#img-dive]
-.Inspection of `<REGISTRY_PREFIX>/pkg:yosys` with https://github.com/wagoodman/dive[wagoodman/dive].
+.Inspection of `<REGISTRY_PREFIX>/pkg/yosys` with https://github.com/wagoodman/dive[wagoodman/dive].
 [link=img/dive.png]
 image::dive.png[wagoodman/dive, align="center"]
 
@@ -189,7 +189,7 @@ HDL_REGISTRY=docker.io dockerDive python:slim-buster
 
 There is a test script in link:{repotree}test/[`test/`] for each image in this ecosystem, according to the following convention:
 
-* Scripts for package images, `<REGISTRY_PREFIX>/pkg:TOOL_NAME`, are named `TOOL_NAME.pkg.sh`.
+* Scripts for package images, `<REGISTRY_PREFIX>/pkg/TOOL_NAME`, are named `TOOL_NAME.pkg.sh`.
 * Scripts for other images, `<REGISTRY_PREFIX>/NAME[:TAG]`, are named `NAME[--TAG].sh`.
 * Other helper scripts are named `_*.sh`.
 
@@ -203,7 +203,7 @@ There are a couple of helper scripts in link:{repotree}utils/bin/[`utils/bin/`],
 ** (optional) SCRIPT_NAME: name of the test script, only required if it does not match `echo IMAGE_NAME | sed 's#:#--#'`.
 * `dockerTestPkg BASE_OS TAG_NAME [DIR_NAME]`
 ** BASE_OS: set/collection of images (e.g. `debian/buster`).
-** TAG_NAME: tag name (i.e. image name without `<REGISTRY_PREFIX>/pkg:` prefix).
+** TAG_NAME: tag name (i.e. image name without `<REGISTRY_PREFIX>/pkg/` prefix).
 ** (optional) DIR_NAME: directory name inside the package image which needs to be copied to the temporary image for testing.
 
 === Step by step checklist
@@ -212,12 +212,12 @@ There are a couple of helper scripts in link:{repotree}utils/bin/[`utils/bin/`],
 ** For each tool and collection, a https://docs.docker.com/engine/reference/builder/[Dockerfile] recipe exists.
 *** It is recommended, but not required, to add tools to multiple collections at the same time. That is, to create one dockerfile for each collection. Nevertheless, it is possible to add a tool to just one or to a limited set of collections.
 *** All dockerfiles must use, at least, two stages.
-**** One stage, named `build`, is to be based on `<REGISTRY_PREFIX>/build:base` or `<REGISTRY_PREFIX>/build:build` or `<REGISTRY_PREFIX>/build:dev`. In this first stage, you need to add the missing build dependencies. Then, build the tool/project using the standard `PREFIX`, but install to a custom location using `DESTDIR`. See <<Package images>>.
-**** If the tool/project is to be used standalone, create an stage based on `<REGISTRY_PREFIX>/build:base`. Install runtime dependencies only.
+**** One stage, named `build`, is to be based on `<REGISTRY_PREFIX>/build/base` or `<REGISTRY_PREFIX>/build/build` or `<REGISTRY_PREFIX>/build/dev`. In this first stage, you need to add the missing build dependencies. Then, build the tool/project using the standard `PREFIX`, but install to a custom location using `DESTDIR`. See <<Package images>>.
+**** If the tool/project is to be used standalone, create an stage based on `<REGISTRY_PREFIX>/build/base`. Install runtime dependencies only.
 **** If the tool/project is to be packaged, create an stage based on `scratch`.
 **** In any case, copy the tool artifacts from the build stage using `COPY --from=STAGE_NAME`.
 **** In practice, several dockerfiles produce at least one package image and one ready-to-use image. Therefore, dockerfiles will likely have more than two stages.
-** Some tools are to be added to existing images which include several tools (coloured [maroon]#BROWN# in the <<Graphs>>). After creating the dockerfile where the corresponding package image is defined, add `COPY --from=<REGISTRY_PREFIX>/pkg:TOOL_NAME` statements to the dockerfiles of multi-tool images.
+** Some tools are to be added to existing images which include several tools (coloured [maroon]#BROWN# in the <<Graphs>>). After creating the dockerfile where the corresponding package image is defined, add `COPY --from=<REGISTRY_PREFIX>/pkg/TOOL_NAME` statements to the dockerfiles of multi-tool images.
 2. Build and test the dockerfile(s) locally. Use helper scripts from link:{repotree}.github/bin[`.github/bin`] as explained in <<Build>> and <<Test>>.
 ** If a new tool was added, or a new image is to be generated, a test script needs to be added to link:{repotree}test/[`test/`]. See <<Test>> for naming guidelines.
 ** Be careful with the order. If you add a new tool and include it in one of the multi-tool images, the package image needs to be built first.

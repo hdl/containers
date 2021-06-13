@@ -18,7 +18,7 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 
 #--
 
-FROM $REGISTRY/build:build AS build
+FROM $REGISTRY/build/build AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -55,7 +55,7 @@ COPY --from=build /opt/klayout /klayout
 
 #---
 
-FROM $REGISTRY/build:base
+FROM $REGISTRY/build/base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

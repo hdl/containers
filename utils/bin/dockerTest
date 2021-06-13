@@ -28,7 +28,7 @@ HDL_REGISTRY=${HDL_REGISTRY:-gcr.io/hdl-containers}
 _collection="$1"
 _image="$2"
 
-_script="`echo ${_image} | sed 's#:#--#'`"
+_script="`echo ${_image} | sed -e 's#:#--#' -e 's#/#--#'`"
 if [ -n "$3" ]; then
   _script="$3"
 fi

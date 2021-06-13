@@ -51,7 +51,7 @@ jobs:
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        pkg:apicula
+        pkg/apicula
         apicula
 
     - run: dockerTestPkg ${{ matrix.os }} apicula
@@ -83,5 +83,5 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        pkg:apicula
+        pkg/apicula
         apicula

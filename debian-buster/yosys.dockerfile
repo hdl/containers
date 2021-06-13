@@ -21,7 +21,7 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 
 #---
 
-FROM $REGISTRY/build:build AS base
+FROM $REGISTRY/build/build AS base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

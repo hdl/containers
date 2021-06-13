@@ -34,11 +34,13 @@ Extensions.register do
     name_positional_attributes 'tag'
     process do |parent, target, attrs|
       tag = attrs['tag'] || 'latest'
-      if tag != 'latest'
-        ctag = ":#{tag}"
-      end
-      text = %(image:https://img.shields.io/docker/image-size/hdlc/#{target}/#{tag}?longCache=true&style=flat-square&label=#{target}#{ctag}&logo=Docker&logoColor=fff[title='#{target}#{ctag} Docker image size'])
-      (create_anchor parent, text, type: :link, target: %(https://gcr.io/hdl-containers/debian/buster/#{target})).render
+      _arr = target.sub('/',':').gsub('/','--').split(':')
+      dtarget = _arr[0]
+      dtag = _arr[1] || 'latest'
+      ctag = (tag != 'latest') ? ":#{tag}" : ''
+      rcollection = (['pkg', 'build'].include? dtarget) ? 'debian/buster/' : ''
+      text = %(image:https://img.shields.io/docker/image-size/hdlc/#{dtarget}/#{dtag}?longCache=true&style=flat-square&label=#{target}#{ctag}&logo=Docker&logoColor=fff[title='#{target}#{ctag} container image size'])
+      (create_anchor parent, text, type: :link, target: %(https://gcr.io/hdl-containers/#{rcollection}#{target})).render
     end
   end
 end
