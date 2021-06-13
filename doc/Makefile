@@ -17,16 +17,16 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-build: force
+build:
 	docker run --rm -v /$(shell pwd)/..://documents/ hdlc/doc:asciidoctor-py make -C doc run
 
-asciidoctor-py: force
+asciidoctor-py:
 	docker build -t hdlc/doc:asciidoctor-py -f- ../ < doc--asciidoctor-py.dockerfile
 
-pyHDLC: force
+pyHDLC:
 	docker build -t hdlc/doc:pyHDLC -f- ../ < doc--pyHDLC.dockerfile
 
-run: force
+run:
 	./gen_tool_table.py
 	asciidoctor \
 	  -r ./lib/OCIImage-inline-macro.rb \
@@ -36,5 +36,3 @@ run: force
 
 map:
 	docker run --rm -v /$(shell pwd)/..://wrk/ -w //wrk/pyHDLC hdlc/doc:pyHDLC python3 map.py
-
-force:
