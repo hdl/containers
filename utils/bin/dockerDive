@@ -21,7 +21,24 @@
 
 HDL_REGISTRY=${HDL_REGISTRY:-ghcr.io/hdl}
 
+case "$#" in
+  1)
+    unset _collection
+    _image="$1"
+  ;;
+  2)
+    _collection="$1/"
+    _image="$2"
+  ;;
+  *)
+    echo "Must provide one or two arguments! For instance:"
+    echo "- dockerDive debian-buster ghdl"
+    echo "- HDL_REGISTRY=docker.io dockerDive python:slim-buster"
+    exit 1
+  ;;
+esac
+
 $(command -v winpty) docker run --rm -it \
   -v //var/run/docker.sock://var/run/docker.sock \
   wagoodman/dive \
-  "${HDL_REGISTRY}/$1"
+  "${HDL_REGISTRY}/${_collection}${_image}"

@@ -107,7 +107,10 @@ optional arguments:
 
 === Inspect
 
-All ready-to-use images (coloured [green]#GREEN# or [maroon]#BROWN# in the <<Graphs>>) are runnable. Therefore, users/contributors can run containers and test the tools interactively or through scripting. However, since `<REGISTRY_PREFIX>/pkg` images are not runnable, creating another image is required in order to inspect their content from a container. For instance:
+All ready-to-use images (coloured [green]#GREEN# or [maroon]#BROWN# in the <<Graphs>>) are runnable.
+Therefore, users/contributors can run containers and test the tools interactively or through scripting.
+However, since `<REGISTRY_PREFIX>/pkg` images are not runnable, creating another image is required in order to inspect
+their content from a container. For instance:
 
 [source, dockerfile]
 ----
@@ -117,7 +120,9 @@ COPY --from=<REGISTRY_PREFIX>/pkg:TOOL_NAME /TOOL_NAME /
 
 In fact, link:{repotree}utils/bin/dockerTestPkg[`utils/bin/dockerTestPkg`] uses a similar dockerfile for running `.pkg.sh` scripts from link:{repotree}test/[`test/`]. See <<Test>>.
 
-Alternatively, or as a complement, https://github.com/wagoodman/dive[wagoodman/dive] is a lightweight tool with a nice terminal based GUI for exploring layers and contents of container images. It can be downloaded as a tarball/zipfile, or used as a container:
+Alternatively, or as a complement, https://github.com/wagoodman/dive[wagoodman/dive] is a lightweight tool with a nice
+terminal based GUI for exploring layers and contents of container images.
+It can be downloaded as a tarball/zipfile, or used as a container:
 
 [source, bash]
 ----
@@ -132,7 +137,23 @@ docker run --rm -it \
 [link=img/dive.png]
 image::dive.png[wagoodman/dive, align="center"]
 
-A helper script is provided in link:{repotree}utils/bin/dockerDive[`utils/bin/dockerDive`].
+A helper script is provided in link:{repotree}utils/bin/dockerDive[`utils/bin/dockerDive`], which supports one or two
+arguments for specifying the image to be inspected.
+The default registry prefix is `ghcr.io/hdl`, however, it can be overriden through envvar `HDL_REGISTRY`.
+
+For instance, inspect image `ghcr.io/debian-buster/ghdl`:
+
+[source, bash]
+----
+dockerDive debian-buster ghdl
+----
+
+or, inspect any image from any registry:
+
+[source, bash]
+----
+HDL_REGISTRY=docker.io dockerDive python:slim-buster
+----
 
 === Test
 
