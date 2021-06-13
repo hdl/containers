@@ -113,7 +113,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -c COLLECTION, --collection COLLECTION
                         name of the collection/subset of images.
-                        (default: debian-buster)
+                        (default: debian/buster)
   -r REGISTRY, --registry REGISTRY
                         container image registry prefix.
                         (default: gcr.io/hdl-containers)
@@ -170,11 +170,11 @@ link:{repotree}utils/bin/dockerDive[`dockerDive`] is a wrapper around the wagood
 or two arguments for specifying the image to be inspected.
 The default registry prefix is `gcr.io/hdl-containers`, however, it can be overriden through envvar `HDL_REGISTRY`.
 
-For instance, inspect image `ghcr.io/debian-buster/ghdl`:
+For instance, inspect image `gcr.io/hdl-containers/debian/buster/ghdl`:
 
 [source, bash]
 ----
-dockerDive debian-buster ghdl
+dockerDive debian/buster ghdl
 ----
 
 or, inspect any image from any registry:
@@ -197,11 +197,11 @@ Furthermore, https://github.com/hdl/smoke-tests[hdl/smoke-test] is a submodule o
 There are a couple of helper scripts in link:{repotree}utils/bin/[`utils/bin/`], for testing the images. Those are used in CI but can be useful locally too:
 
 * `dockerTest BASE_OS IMAGE_NAME [SCRIPT_NAME]`
-** BASE_OS: set/collection of images (e.g. `debian-buster`).
+** BASE_OS: set/collection of images (e.g. `debian/buster`).
 ** IMAGE_NAME: image name without the prefix.
 ** (optional) SCRIPT_NAME: name of the test script, only required if it does not match `echo IMAGE_NAME | sed 's#:#--#'`.
 * `dockerTestPkg BASE_OS TAG_NAME [DIR_NAME]`
-** BASE_OS: set/collection of images (e.g. `debian-buster`).
+** BASE_OS: set/collection of images (e.g. `debian/buster`).
 ** TAG_NAME: tag name (i.e. image name without `<REGISTRY_PREFIX>/pkg:` prefix).
 ** (optional) DIR_NAME: directory name inside the package image which needs to be copied to the temporary image for testing.
 

@@ -28,7 +28,7 @@ shift
 
 unset _mirror
 
-if [ "$_collection" = "debian-buster" ]; then
+if [ "$_collection" = "debian/buster" ]; then
   _mirror="-m hdlc --"
 fi
 

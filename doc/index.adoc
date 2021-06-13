@@ -29,12 +29,12 @@ TIP: Do you want to improve this page? Please https://github.com/hdl/containers/
 
 Multiple collections of images are provided. All the images in each collection do share the same base layer. Currently available collections are the following:
 
-* `debian-buster` based on https://hub.docker.com/_/debian[debian:buster-slim]
-** Available as `gcr.io/hdl-containers/debian-buster/*`.
-** Mirrored to `docker.io/hdlc/*` and `ghcr.io/hdl/debian-buster/*`.
-* `centos-7` based on https://hub.docker.com/_/centos[centos:7]
-** Available as `gcr.io/hdl-containers/centos-7/*`.
-** Mirrored to `ghcr.io/hdl/centos-7/*`.
+* `debian/buster` based on https://hub.docker.com/_/debian[debian:buster-slim]
+** Available as `gcr.io/hdl-containers/debian/buster/*`.
+** Mirrored to `docker.io/hdlc/*` and `ghcr.io/hdl/debian/buster/*`.
+* `centos/7` based on https://hub.docker.com/_/centos[centos:7]
+** Available as `gcr.io/hdl-containers/centos/7/*`.
+** Mirrored to `ghcr.io/hdl/centos/7/*`.
 
 IMPORTANT: Image names and tags in this documentation are provided without the _registry prefix_. Hence, one of the prefixes listed above needs to be used when actually pulling/using the images. See <<Usage>>.
 

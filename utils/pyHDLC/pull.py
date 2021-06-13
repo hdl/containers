@@ -24,7 +24,7 @@ from run import _exec
 def PullImage(
     image: Union[str, List[str]],
     registry: Optional[str] = "gcr.io/hdl-containers",
-    collection: Optional[str] = "debian-buster",
+    collection: Optional[str] = "debian/buster",
     dry: Optional[bool] = False,
 ) -> None:
     def _pull(img):

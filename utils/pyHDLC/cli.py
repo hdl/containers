@@ -61,7 +61,7 @@ class WithRegistryAttributes(Attribute):
                 dest="Collection",
                 type=str,
                 help="name of the collection/subset of images.",
-                default="debian-buster",
+                default="debian/buster",
             ),
             # ... add more if needed
         ]:

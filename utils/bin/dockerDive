@@ -32,7 +32,7 @@ case "$#" in
   ;;
   *)
     echo "Must provide one or two arguments! For instance:"
-    echo "- dockerDive debian-buster ghdl"
+    echo "- dockerDive debian/buster ghdl"
     echo "- HDL_REGISTRY=docker.io dockerDive python:slim-buster"
     exit 1
   ;;

@@ -93,7 +93,7 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
 def BuildImage(
     image: Union[str, List[str]],
     registry: Optional[str] = "gcr.io/hdl-containers",
-    collection: Optional[str] = "debian-buster",
+    collection: Optional[str] = "debian/buster",
     dockerfile: Optional[str] = None,
     target: Optional[str] = None,
     argimg: Optional[str] = None,
@@ -126,7 +126,7 @@ def BuildImage(
         if argimg is not None:
             cmd += ["--build-arg", f"IMAGE={argimg}"]
 
-        _dfile = Path(collection) / f"{dfile}.dockerfile"
+        _dfile = Path(collection.replace('/','-')) / f"{dfile}.dockerfile"
         if not _dfile.exists():
             raise Exception(f"Dockerfile <{_dfile}> does not exist!")
 

@@ -41,7 +41,7 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - debian-buster
+          - debian/buster
     steps:
 
     - uses: actions/checkout@v2
@@ -72,7 +72,7 @@ jobs:
         password: ${{ github.token }}
 
     - name: Login to docker.io
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && matrix.os == 'debian-buster'
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && matrix.os == 'debian/buster'
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_USER }}
@@ -93,7 +93,7 @@ jobs:
       max-parallel: 4
       matrix:
         os:
-          - debian-buster
+          - debian/buster
         task:
           - { arch: ice40, prj: icestorm   }
           - { arch: ecp5,  prj: prjtrellis }
@@ -133,7 +133,7 @@ jobs:
         password: ${{ github.token }}
 
     - name: Login to docker.io
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && matrix.os == 'debian-buster'
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && matrix.os == 'debian/buster'
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_USER }}
@@ -154,7 +154,7 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - debian-buster
+          - debian/buster
     steps:
 
     - uses: actions/checkout@v2
@@ -190,7 +190,7 @@ jobs:
         password: ${{ github.token }}
 
     - name: Login to docker.io
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && matrix.os == 'debian-buster'
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && matrix.os == 'debian/buster'
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_USER }}

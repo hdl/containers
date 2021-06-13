@@ -38,7 +38,7 @@ Extensions.register do
         ctag = ":#{tag}"
       end
       text = %(image:https://img.shields.io/docker/image-size/hdlc/#{target}/#{tag}?longCache=true&style=flat-square&label=#{target}#{ctag}&logo=Docker&logoColor=fff[title='#{target}#{ctag} Docker image size'])
-      (create_anchor parent, text, type: :link, target: %(https://github.com/orgs/hdl/packages/container/package/debian-buster/#{target})).render
+      (create_anchor parent, text, type: :link, target: %(https://gcr.io/hdl-containers/debian/buster/#{target})).render
     end
   end
 end

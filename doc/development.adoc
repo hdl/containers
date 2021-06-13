@@ -154,14 +154,14 @@ All the workflows in this repo are triggered by push events, CRON jobs, or manua
 
 The strategical priorities are the following:
 
-* Add the missing ASIC tools to collection debian-buster.
+* Add the missing ASIC tools to collection `debian/buster`.
 Following the order in https://github.com/efabless/openlane#openlane-design-stages[efabless/openlane: OpenLANE Design Stages]
 is suggested.
 
-* Add the missing tools to collection centos-7.
+* Add the missing tools to collection `centos/7`.
 This collection is currently empty (it contains the base dockerfile only).
-It was added because OpenLane containers are based on centos-7, but may be updated to centos-8.
-Moreover, some DARPA users might be constrained to centos-6.
+It was added because OpenLane containers are based on `centos:7``, but may be updated to `centos:8`.
+Moreover, some DARPA users might be constrained to `centos:6`.
 We should confirm that.
 
 * Setup cross-triggering between CI workflows.
