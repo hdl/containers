@@ -36,11 +36,7 @@ def PushImage(
         _dpush(_imageName)
         if mirror is not None:
             for _mirror in mirror:
-                _mirrorName = (
-                    f"{_mirror}/{collection}/{img}"
-                    if _mirror != "hdlc"
-                    else f"hdlc/{img}"
-                )
+                _mirrorName = f"{_mirror.replace('#C',collection)}/{img}"
                 _exec(
                     args=["docker", "tag", _imageName, _mirrorName],
                     dry=dry,

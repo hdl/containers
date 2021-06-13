@@ -26,10 +26,37 @@ cd $(dirname "$0")/../..
 _collection="$1"
 shift
 
-unset _mirror
+_push() {
+  ./utils/pyHDLC/cli.py push -c "${_collection}" -m ${_mirror} 'ghcr.io/hdl/#C' -- $@
+}
 
-if [ "$_collection" = "debian/buster" ]; then
-  _mirror="-m hdlc --"
+if [ "$_collection" != "debian/buster" ]; then
+  _push $@
+  exit $?
 fi
 
-./utils/pyHDLC/cli.py push -c "${_collection}" ${_mirror} $@
+unset _toRoot
+unset _nonRootOnly
+
+for item; do
+  case "$item" in
+    build:*|pkg:*)
+      _nonRootOnly="$_nonRootOnly $item"
+    ;;
+    *)
+      _toRoot="$_toRoot $item"
+    ;;
+  esac
+done
+
+_hpush() {
+  _mirror="${_mirror} hdlc" _push $@
+}
+
+if [ -n "$_nonRootOnly" ]; then
+    _hpush $_nonRootOnly
+fi
+
+if [ -n "$_toRoot" ]; then
+  _mirror='gcr.io/hdl-containers ghcr.io/hdl' _hpush $_toRoot
+fi
