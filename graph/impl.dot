@@ -47,9 +47,7 @@ digraph G {
       "icestorm"
       "prjtrellis"
       "nextpnr:ice40"
-      "nextpnr:icestorm"
       "nextpnr:ecp5"
-      "nextpnr:prjtrellis"
       "nextpnr:generic"
       "nextpnr"
     }
@@ -63,6 +61,8 @@ digraph G {
       "pkg:nextpnr-ecp5"
     }
     { node [color=brown, fontcolor=brown]
+      "nextpnr:icestorm"
+      "nextpnr:prjtrellis"
       "impl:generic"
       "impl:ice40"
       "impl:ecp5"
