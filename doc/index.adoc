@@ -15,9 +15,11 @@ https://github.com/hdl/awesome[image:https://img.shields.io/badge/hdl-awesome-f2
 https://github.com/hdl/constraints[image:https://img.shields.io/badge/hdl-constraints-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/constraints GitHub repository']]
 https://github.com/hdl/smoke-tests[image:https://img.shields.io/badge/hdl-smoke--tests-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/smoke-tests GitHub repository']]
 
-This repository contains scripts and GitHub Actions (GHA) YAML workflows for building, testing and deploying https://opencontainers.org/[OCI] images (aka https://www.docker.com/[Docker] | https://podman.io[Podman] images) including open source https://en.wikipedia.org/wiki/Electronic_design_automation[electronic design automation (EDA)] tooling. All of them are pushed to https://github.com/orgs/hdl/packages[ghcr.io/hdl] and mirrored to https://hub.docker.com/u/hdlc[hub.docker.com/u/hdlc]:
+This repository contains scripts and GitHub Actions (GHA) YAML workflows for building, testing and deploying https://opencontainers.org/[OCI] images (aka https://www.docker.com/[Docker] | https://podman.io[Podman] images) including open source https://en.wikipedia.org/wiki/Electronic_design_automation[electronic design automation (EDA)] tooling.
+All of them are pushed to http://gcr.io/hdl-containers/[gcr.io/hdl-containers], and mirrored to https://github.com/orgs/hdl/packages[ghcr.io/hdl] and https://hub.docker.com/u/hdlc[hub.docker.com/u/hdlc]:
 
 [.text-center]
+https://gcr.io/hdl-containers[image:https://img.shields.io/badge/-gcr.io/hdl--containers-555555.svg?longCache=true&style=flat-square&logo=OpenContainersInitiative&logoColor=f2f1ef[title='Google Container Registry']]
 https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl-555555.svg?longCache=true&style=flat-square&logo=OpenContainersInitiative&logoColor=f2f1ef[title='GitHub Container Registry']]
 https://hub.docker.com/u/hdlc[image:https://img.shields.io/badge/-docker.io/hdlc-555555.svg?longCache=true&style=flat-square&logo=OpenContainersInitiative&logoColor=f2f1ef[title='Docker Hub']]
 
@@ -28,10 +30,11 @@ TIP: Do you want to improve this page? Please https://github.com/hdl/containers/
 Multiple collections of images are provided. All the images in each collection do share the same base layer. Currently available collections are the following:
 
 * `debian-buster` based on https://hub.docker.com/_/debian[debian:buster-slim]
-** Available as `ghcr.io/hdl/debian-buster/*`-
-** Mirrored to `docker.io/hdlc/`.
-* `centos-7` based on https://hub.docker.com/_/centos[centos:8]
-** Available as `ghcr.io/hdl/centos-7/*`.
+** Available as `gcr.io/hdl-containers/debian-buster/*`.
+** Mirrored to `docker.io/hdlc/*` and `ghcr.io/hdl/debian-buster/*`.
+* `centos-7` based on https://hub.docker.com/_/centos[centos:7]
+** Available as `gcr.io/hdl-containers/centos-7/*`.
+** Mirrored to `ghcr.io/hdl/centos-7/*`.
 
 IMPORTANT: Image names and tags in this documentation are provided without the _registry prefix_. Hence, one of the prefixes listed above needs to be used when actually pulling/using the images. See <<Usage>>.
 

@@ -20,7 +20,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian-buster'
+ARG REGISTRY='gcr.io/hdl-containers/debian-buster'
 ARG IMAGE="build:base"
 
 #---

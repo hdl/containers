@@ -23,7 +23,7 @@ set -e
 
 cd $(dirname "$0")/../..
 
-HDL_REGISTRY=${HDL_REGISTRY:-ghcr.io/hdl}
+HDL_REGISTRY=${HDL_REGISTRY:-gcr.io/hdl-containers}
 
 _collection="$1"
 _tag="$2"

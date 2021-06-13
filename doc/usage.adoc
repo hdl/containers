@@ -1,6 +1,10 @@
 == Usage
 
-IMPORTANT: Image names and tags in this documentation are provided without the _registry prefix_. Hence, `ghcr.io/hdl/debian-buster/*`, `ghcr.io/hdl/centos-7/*` or `hdlc/*` needs to be prefixed to the image names shown in <<Tools and images>>.
+[IMPORTANT]
+====
+Image names and tags in this documentation are provided without the _registry prefix_.
+Hence, `REGISTRY/[COLLECTION/]*` needs to be prefixed to the image names shown in <<Tools and images>>.
+====
 
 Official guidelines and recommendations for using containers suggest keeping containers small and specific for each tool/purpose (see https://docs.docker.com/develop/develop-images/dockerfile_best-practices/[docs.docker.com: Best practices for writing Dockerfiles]). That fits well with the field of web _microservices_, which communicate through TCP/IP and which need to be composed, scaled and balanced all around the globe.
 

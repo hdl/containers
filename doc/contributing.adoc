@@ -116,7 +116,7 @@ optional arguments:
                         (default: debian-buster)
   -r REGISTRY, --registry REGISTRY
                         container image registry prefix.
-                        (default: ghcr.io/hdl)
+                        (default: gcr.io/hdl-containers)
   -f DOCKERFILE, --dockerfile DOCKERFILE
                         dockerfile to be built, from the collection.
                         (default: None)
@@ -168,7 +168,7 @@ image::dive.png[wagoodman/dive, align="center"]
 
 link:{repotree}utils/bin/dockerDive[`dockerDive`] is a wrapper around the wagoodman/dive container, which supports one
 or two arguments for specifying the image to be inspected.
-The default registry prefix is `ghcr.io/hdl`, however, it can be overriden through envvar `HDL_REGISTRY`.
+The default registry prefix is `gcr.io/hdl-containers`, however, it can be overriden through envvar `HDL_REGISTRY`.
 
 For instance, inspect image `ghcr.io/debian-buster/ghdl`:
 

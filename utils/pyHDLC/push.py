@@ -23,7 +23,7 @@ from run import _exec
 
 def PushImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = "ghcr.io/hdl",
+    registry: Optional[str] = "gcr.io/hdl-containers",
     collection: Optional[str] = "debian-buster",
     dry: Optional[bool] = False,
     mirror: Optional[Union[str, List[str]]] = None,

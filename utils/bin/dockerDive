@@ -19,7 +19,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-HDL_REGISTRY=${HDL_REGISTRY:-ghcr.io/hdl}
+HDL_REGISTRY=${HDL_REGISTRY:-gcr.io/hdl-containers}
 
 case "$#" in
   1)

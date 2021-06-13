@@ -92,7 +92,7 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
 
 def BuildImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = "ghcr.io/hdl",
+    registry: Optional[str] = "gcr.io/hdl-containers",
     collection: Optional[str] = "debian-buster",
     dockerfile: Optional[str] = None,
     target: Optional[str] = None,
