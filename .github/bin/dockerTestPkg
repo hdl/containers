@@ -21,6 +21,8 @@
 
 set -e
 
+cd $(dirname "$0")/../..
+
 _baseos="$1"
 _tag="$2"
 
