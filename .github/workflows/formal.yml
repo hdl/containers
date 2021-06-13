@@ -58,7 +58,7 @@ jobs:
         pkg:boolector
         pkg:cvc4
         pkg:superprove
-        pkg:pono
+#        pkg:pono
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
