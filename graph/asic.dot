@@ -25,7 +25,8 @@ digraph G {
   # Dockerfiles
 
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
-    d_klayout   [label="klayout"];
+    d_klayout [label="klayout"];
+    d_magic [label="magic"];
   }
 
   # Images
@@ -35,9 +36,11 @@ digraph G {
     "build:base"
     { node [color=limegreen, fontcolor=limegreen]
       "klayout"
+      "magic"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
       "pkg:klayout"
+      "pkg:magic"
     }
   }
 
@@ -78,17 +81,46 @@ digraph G {
     "pkg:klayout" -> "t_pkg:klayout";
   }
 
+  subgraph cluster_magic {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_magic_build:build" [label="build:build"]
+      "p_magic_build:base" [label="build:base"]
+      "p_magic_scratch" [label="scratch"]
+    }
+
+    d_magic -> {
+      "magic"
+      "pkg:magic"
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      "t_magic" [label="magic"];
+      "t_pkg:magic" [label="magic.pkg"];
+    }
+
+    "magic" -> "t_magic";
+    "pkg:magic" -> "t_pkg:magic";
+  }
+
   # Dockerfile dependencies
 
   "build:build" -> "p_klayout_build:build" -> d_klayout;
   "build:base" -> "p_klayout_build:base" -> d_klayout;
   "scratch" -> "p_klayout_scratch" -> d_klayout;
 
+  "build:build" -> "p_magic_build:build" -> d_magic;
+  "build:base" -> "p_magic_build:base" -> d_magic;
+  "scratch" -> "p_magic_scratch" -> d_magic;
+
   # Image dependencies
 
   { edge [style=dashed]
     "p_klayout_build:base" -> "klayout";
     "p_klayout_scratch" -> "pkg:klayout";
+    "p_magic_build:base" -> "magic";
+    "p_magic_scratch" -> "pkg:magic";
   }
 
 }

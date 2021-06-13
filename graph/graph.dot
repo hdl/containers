@@ -47,6 +47,7 @@ digraph G {
       "ghdl:yosys"
       "icestorm"
       "klayout"
+      "magic"
       "nextpnr:generic"
       "nextpnr:ice40"
       "nextpnr:icestorm"
@@ -68,6 +69,7 @@ digraph G {
       "pkg:gtkwave"
       "pkg:icestorm"
       "pkg:klayout"
+      "pkg:magic"
       "pkg:nextpnr-ice40"
       "pkg:nextpnr-ecp5"
       "pkg:nextpnr-generic"
@@ -231,7 +233,9 @@ digraph G {
     label = "ASIC";
     m_asic -> {
       "klayout"
+      "magic"
       "pkg:klayout"
+      "pkg:magic"
     };
   }
 
