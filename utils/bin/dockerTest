@@ -23,7 +23,9 @@ set -e
 
 cd $(dirname "$0")/../..
 
-_baseos="$1"
+HDL_REGISTRY=${HDL_REGISTRY:-ghcr.io/hdl}
+
+_collection="$1"
 _image="$2"
 
 _script="`echo ${_image} | sed 's#:#--#'`"
@@ -31,4 +33,4 @@ if [ -n "$3" ]; then
   _script="$3"
 fi
 
-docker run --rm -v /$(pwd)://wrk ghcr.io/hdl/"${_baseos}"/"${_image}" //wrk/test/"${_script}".sh
+docker run --rm -v /$(pwd)://wrk "${HDL_REGISTRY}/${_collection}/${_image}" //wrk/test/"${_script}".sh

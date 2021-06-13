@@ -23,7 +23,9 @@ set -e
 
 cd $(dirname "$0")/../..
 
-_baseos="$1"
+HDL_REGISTRY=${HDL_REGISTRY:-ghcr.io/hdl}
+
+_collection="$1"
 _tag="$2"
 
 _dir="${_tag}"
@@ -31,12 +33,12 @@ if [ -n "$3" ]; then
   _dir="$3"
 fi
 
-echo "::group::Build ghcr.io/hdl/${_baseos}/tespkg:${_tag}"
-docker build -t ghcr.io/hdl/"${_baseos}"/testpkg:"${_tag}" - <<-EOF
+echo "::group::Build ${HDL_REGISTRY}/${_collection}/tespkg:${_tag}"
+docker build -t "${HDL_REGISTRY}/${_collection}"/testpkg:"${_tag}" - <<-EOF
 FROM alpine
 RUN apk add -U --no-cache file tree
-COPY --from=ghcr.io/hdl/${_baseos}/pkg:${_tag} /${_dir} /
+COPY --from=${HDL_REGISTRY}/${_collection}/pkg:${_tag} /${_dir} /
 EOF
 echo '::endgroup::'
 
-docker run --rm -v /$(pwd)://wrk ghcr.io/hdl/"${_baseos}"/testpkg:"${_tag}" //wrk/test/"${_tag}".pkg.sh
+docker run --rm -v /$(pwd)://wrk "${HDL_REGISTRY}/${_collection}"/testpkg:"${_tag}" //wrk/test/"${_tag}".pkg.sh

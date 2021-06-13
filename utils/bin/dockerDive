@@ -19,7 +19,9 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+HDL_REGISTRY=${HDL_REGISTRY:-ghcr.io/hdl}
+
 $(command -v winpty) docker run --rm -it \
   -v //var/run/docker.sock://var/run/docker.sock \
   wagoodman/dive \
-  ghcr.io/hdl/"$1"
+  "${HDL_REGISTRY}/$1"
