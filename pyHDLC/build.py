@@ -53,6 +53,8 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "impl": ["impl", None, None],
     "klayout": ["klayout", None, None],
     "pkg:klayout": ["klayout", "pkg", None],
+    "magic": ["magic", None, None],
+    "pkg:magic": ["magic", "pkg", None],
     "build:nextpnr-base": ["nextpnr", "base", None],
     "build:nextpnr-build": ["nextpnr", "build", None],
     "pkg:nextpnr-ice40": ["nextpnr", "pkg-ice40", None],
