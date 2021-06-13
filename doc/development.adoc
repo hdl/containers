@@ -189,9 +189,6 @@ Users which cannot afford breaking changes can use the image by digest, instead 
 However, we should probably leverage manifests for publishing some _versioned ecosystems_, impliying that we run a full
 test suite on an specific group of images and we then tag them all together as a _nicely behaving family/release_.
 
-* Ideally, add a CLI tool for allowing users to build groups of images locally without manually using the helpers in
-link:{repotree}.github/bin[`.github/bin`] (i.e. copying commands from the workflows).
-
 NOTE: These are all in no particular order, although most of them are closely related to each other.
 It you want to tackle any of them, https://github.com/hdl/containers/issues/new[let us know] or
 https://gitter.im/hdl/community[join the chat]!
