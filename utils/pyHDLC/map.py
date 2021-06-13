@@ -27,7 +27,7 @@ from graphviz import Digraph
 from build import DefaultOpts
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 CDIR = ROOT.parent / "debian-buster"
 
 

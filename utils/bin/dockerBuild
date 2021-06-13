@@ -23,4 +23,4 @@ set -e
 
 cd $(dirname "$0")/../..
 
-./pyHDLC/cli.py build $@
+./utils/pyHDLC/cli.py build $@

@@ -48,7 +48,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: ./.github/setup.sh
+    - run: ./utils/setup.sh
 
     - run: >-
         dockerPull -c ${{ matrix.os }}
@@ -100,7 +100,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: ./.github/setup.sh
+    - run: ./utils/setup.sh
 
     - run: >-
         dockerPull -c ${{ matrix.os }}
@@ -152,7 +152,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: ./.github/setup.sh
+    - run: ./utils/setup.sh
 
     - run: >-
         dockerPull -c ${{ matrix.os }}

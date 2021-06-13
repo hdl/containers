@@ -28,4 +28,4 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/*
 
 RUN --mount=type=bind,src=.,target=/tmp/containers/ \
- pip3 install -r /tmp/containers/pyHDLC/requirements.txt
+ pip3 install -r /tmp/containers/utils/pyHDLC/requirements.txt

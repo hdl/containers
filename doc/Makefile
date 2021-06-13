@@ -35,4 +35,4 @@ run:
 	  index.adoc
 
 map:
-	docker run --rm -v /$(shell pwd)/..://wrk/ -w //wrk/pyHDLC hdlc/doc:pyHDLC python3 map.py
+	docker run --rm -v /$(shell pwd)/..://wrk/ -w //wrk/utils/pyHDLC hdlc/doc:pyHDLC python3 map.py

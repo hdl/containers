@@ -63,7 +63,7 @@ jobs:
 
         mkdir img
         cp ../doc/img/* ./img/
-        mv ../pyHDLC/map.svg ./img/
+        mv ../utils/pyHDLC/map.svg ./img/
         git add .
         git config --local user.email "push@gha"
         git config --local user.name "GHA"

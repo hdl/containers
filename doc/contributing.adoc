@@ -80,7 +80,9 @@ Despite the usage of these variables being documented in https://www.gnu.org/pre
 
 === Build
 
-A helper script is provided in link:{repotree}utils/bin/dockerBuild[`utils/bin/dockerBuild`] to ease building images, by hiding all common options. It's a wrapper around command `build` of link:{repotree}pyHDLC/cli.py[`pyHDLC.cli`]:
+A helper script is provided in link:{repotree}utils/bin/dockerBuild[`utils/bin/dockerBuild`] to ease building images, by
+hiding all common options.
+It's a wrapper around command `build` of link:{repotree}utils/pyHDLC/cli.py[`pyHDLC.cli`]:
 
 [source, shell]
 ----

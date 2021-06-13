@@ -276,14 +276,14 @@ Therefore, the complexity of generating the JSON given a set of nodes, edges and
 
 [NOTE]
 ====
-Branch https://github.com/hdl/containers/tree/pymap/pyHDLC/map.py[pyHDLC/map.py@pymap] contains work in progress.
+Branch https://github.com/hdl/containers/tree/pymap/utils/pyHDLC/map.py[utils/pyHDLC/map.py@pymap] contains work in progress.
 First, `GenerateMap` builds a DAG by parsing the dockerfiles.
 Then, `report` prints the content in the terminal, for debugging purposes.
 Last, `dotgraph` generates a Graphviz dot diagram.
 The dot diagram does not have clusters.
 We want to add those by parsing the GitHub Actions workflows (see below).
 However, we want to first reproduce the dot output using elkjs.
-See function `elkjsgraph` in https://github.com/hdl/containers/tree/pymap/pyHDLC/map.py[pyHDLC/map.py@pymap].
+See function `elkjsgraph` in https://github.com/hdl/containers/tree/pymap/utils/pyHDLC/map.py[utils/pyHDLC/map.py@pymap].
 Do you want to give it a try? https://github.com/hdl/containers/issues/new[Let us know] or https://gitter.im/hdl/community[join the chat]!
 ====
 
@@ -294,7 +294,7 @@ As far as we are aware, there is no tool for generating a DAG from the stages of
 However, https://github.com/asottile/dockerfile[asottile/dockerfile] is an interesting Python module which wraps
 docker/moby's golang parser.
 Hence, it can be used for getting the stages and `COPY --from` or `--mount` statements for generating the hierarchy.
-See link:{repotree}pyHDLC/map.py[`pyHDLC/map.py`].
+See link:{repotree}utils/pyHDLC/map.py[`utils/pyHDLC/map.py`].
 
 ==== Reading GitHub Actions workflow files
 

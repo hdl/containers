@@ -21,8 +21,8 @@
 
 set -e
 
-cd $(dirname "$0")/..
+cd $(dirname "$0")
 
 pip3 install -r pyHDLC/requirements.txt
 
-echo "$(pwd)/utils/bin" >> $GITHUB_PATH
+echo "$(pwd)/bin" >> $GITHUB_PATH
