@@ -61,9 +61,6 @@ jobs:
         touch .nojekyll
         mv ../doc/index.html ./
 
-        # FIXME make asciidoctor generate the SVGs in subdir 'img'
-        mv ../doc/*.svg ./
-
         mkdir img
         cp ../doc/img/* ./img/
         mv ../pyHDLC/map.svg ./img/

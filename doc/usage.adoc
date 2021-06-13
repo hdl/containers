@@ -51,7 +51,7 @@ Users of GTKWave, KLayout, nextpnr and other tools will likely want to try x11do
 [#img-x11docker]
 .Execution of KLayout in a container on Windows 10 (MSYS2/MINGW64) with https://github.com/mviereck/x11docker[mviereck/x11docker], https://github.com/mviereck/runx[mviereck/runx] and https://sourceforge.net/projects/vcxsrv/[VcxSrv].
 [link=img/x11docker_klayout.gif]
-image::img/x11docker_klayout.gif[x11docker_klayout, align="center"]
+image::x11docker_klayout.gif[x11docker_klayout, align="center"]
 
 === USB/IP protocol support for Docker Desktop
 
