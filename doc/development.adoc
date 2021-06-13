@@ -119,6 +119,12 @@ a|* {blank}
 GHAStatus:klayout[]
 --
 
+a|* {blank}
++
+--
+GHAStatus:magic[]
+--
+
 
 a|* {blank}
 +
