@@ -15,7 +15,11 @@ https://github.com/hdl/awesome[image:https://img.shields.io/badge/hdl-awesome-f2
 https://github.com/hdl/constraints[image:https://img.shields.io/badge/hdl-constraints-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/constraints GitHub repository']]
 https://github.com/hdl/smoke-tests[image:https://img.shields.io/badge/hdl-smoke--tests-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/smoke-tests GitHub repository']]
 
-This repository contains scripts and GitHub Actions (GHA) YAML workflows for building, testing and deploying https://opencontainers.org/[OCI] images (aka https://www.docker.com/[Docker] | https://podman.io[Podman] images) including open source https://en.wikipedia.org/wiki/Electronic_design_automation[electronic design automation (EDA)] tooling. All of them are pushed to https://github.com/orgs/hdl/packages[ghcr.io/hdl] and mirrored to https://hub.docker.com/u/hdlc[hub.docker.com/u/hdlc].
+This repository contains scripts and GitHub Actions (GHA) YAML workflows for building, testing and deploying https://opencontainers.org/[OCI] images (aka https://www.docker.com/[Docker] | https://podman.io[Podman] images) including open source https://en.wikipedia.org/wiki/Electronic_design_automation[electronic design automation (EDA)] tooling. All of them are pushed to https://github.com/orgs/hdl/packages[ghcr.io/hdl] and mirrored to https://hub.docker.com/u/hdlc[hub.docker.com/u/hdlc]:
+
+[.text-center]
+https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl-555555.svg?longCache=true&style=flat-square&logo=OpenContainersInitiative&logoColor=f2f1ef[title='GitHub Container Registry']]
+https://hub.docker.com/u/hdlc[image:https://img.shields.io/badge/-docker.io/hdlc-555555.svg?longCache=true&style=flat-square&logo=OpenContainersInitiative&logoColor=f2f1ef[title='Docker Hub']]
 
 TIP: Do you want to improve this page? Please https://github.com/hdl/containers/edit/main/doc/index.adoc[edit it on GitHub].
 
