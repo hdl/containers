@@ -54,6 +54,14 @@ jobs:
 
     - run: dockerTest ${{ matrix.os }} prog
 
+    - name: Login to gcr.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: docker/login-action@v1
+      with:
+        registry: gcr.io
+        username: _json_key
+        password: ${{ secrets.GCR_JSON_KEY }}
+
     - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       uses: docker/login-action@v1

@@ -55,6 +55,14 @@ jobs:
 
     - run: dockerTest ${{ matrix.os }} sim
 
+    - name: Login to gcr.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: docker/login-action@v1
+      with:
+        registry: gcr.io
+        username: _json_key
+        password: ${{ secrets.GCR_JSON_KEY }}
+
     - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       uses: docker/login-action@v1
@@ -99,6 +107,14 @@ jobs:
 
     - run: dockerTestPkg ${{ matrix.os }} osvb
     - run: dockerTest ${{ matrix.os }} sim:osvb
+
+    - name: Login to gcr.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: docker/login-action@v1
+      with:
+        registry: gcr.io
+        username: _json_key
+        password: ${{ secrets.GCR_JSON_KEY }}
 
     - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -148,6 +164,14 @@ jobs:
 
     - run: dockerTest ${{ matrix.os }} sim:${{ matrix.img }}-slim
     - run: dockerTest ${{ matrix.os }} sim:${{ matrix.img }}
+
+    - name: Login to gcr.io
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: docker/login-action@v1
+      with:
+        registry: gcr.io
+        username: _json_key
+        password: ${{ secrets.GCR_JSON_KEY }}
 
     - name: Login to ghcr.io
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
