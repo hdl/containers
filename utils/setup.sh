@@ -25,4 +25,8 @@ cd $(dirname "$0")
 
 pip3 install -r pyHDLC/requirements.txt
 
-echo "$(pwd)/bin" >> $GITHUB_PATH
+if [ -n "$CI" ]; then
+  echo "$(pwd)/bin" >> $GITHUB_PATH
+else
+  export PATH="$PATH:$(pwd)/bin"
+fi
