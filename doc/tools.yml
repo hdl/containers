@@ -155,6 +155,15 @@ klayout:
     - 'klayout'
   use:
     - 'klayout'
+#---
+
+magic:
+  src: true
+  url: 'https://hdl.github.io/awesome/items/magic'
+  pkg:
+    - 'magic'
+  use:
+    - 'magic'
 
 #---
 
