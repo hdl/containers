@@ -113,17 +113,26 @@ optional arguments:
   -h, --help            show this help message and exit
   -c COLLECTION, --collection COLLECTION
                         name of the collection/subset of images.
+                        (default: debian-buster)
   -r REGISTRY, --registry REGISTRY
                         container image registry prefix.
+                        (default: ghcr.io/hdl)
   -f DOCKERFILE, --dockerfile DOCKERFILE
                         dockerfile to be built, from the collection.
+                        (default: None)
   -t TARGET, --target TARGET
                         target stage in the dockerfile.
+                        (default: None)
   -a ARGIMG, --argimg ARGIMG
                         base image passed as an ARG to the dockerfile.
+                        (default: None)
   -p, --pkg             preprend 'pkg:' to Image and set Target to 'pkg' (if unset).
+                        (default: False)
   -d, --default         set default Dockerfile, Target and ArgImg options, given the image name(s).
+                        (default: False)
 ----
+
+IMPORTANT: `DOCKERFILE` defaults to `Image` if `None`.
 
 ==== Inspect
 
