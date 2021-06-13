@@ -80,7 +80,7 @@ Despite the usage of these variables being documented in https://www.gnu.org/pre
 
 === Build
 
-A helper script is provided in link:{repotree}.github/bin/dockerBuild[`.github/bin/dockerBuild`] to ease building images, by hiding all common options. It's a wrapper around command `build` of link:{repotree}pyHDLC/cli.py[`pyHDLC.cli`]:
+A helper script is provided in link:{repotree}utils/bin/dockerBuild[`utils/bin/dockerBuild`] to ease building images, by hiding all common options. It's a wrapper around command `build` of link:{repotree}pyHDLC/cli.py[`pyHDLC.cli`]:
 
 [source, shell]
 ----
@@ -115,7 +115,7 @@ FROM busybox
 COPY --from=<REGISTRY_PREFIX>/pkg:TOOL_NAME /TOOL_NAME /
 ----
 
-In fact, link:{repotree}.github/bin/dockerTestPkg[`.github/bin/dockerTestPkg`] uses a similar dockerfile for running `.pkg.sh` scripts from link:{repotree}test/[`test/`]. See <<Test>>.
+In fact, link:{repotree}utils/bin/dockerTestPkg[`utils/bin/dockerTestPkg`] uses a similar dockerfile for running `.pkg.sh` scripts from link:{repotree}test/[`test/`]. See <<Test>>.
 
 Alternatively, or as a complement, https://github.com/wagoodman/dive[wagoodman/dive] is a lightweight tool with a nice terminal based GUI for exploring layers and contents of container images. It can be downloaded as a tarball/zipfile, or used as a container:
 
@@ -132,7 +132,7 @@ docker run --rm -it \
 [link=img/dive.png]
 image::dive.png[wagoodman/dive, align="center"]
 
-A helper script is provided in link:{repotree}.github/bin/dockerDive[`.github/bin/dockerDive`].
+A helper script is provided in link:{repotree}utils/bin/dockerDive[`utils/bin/dockerDive`].
 
 === Test
 
@@ -144,7 +144,7 @@ There is a test script in link:{repotree}test/[`test/`] for each image in this e
 
 Furthermore, https://github.com/hdl/smoke-tests[hdl/smoke-test] is a submodule of this repository (link:{repotree}test/[`test/smoke-test`]). Smoke-tests contains fine grained tests that cover the most important functionalities of the tools. Those are used in other packaging projects too. Therefore, container tests are expected to execute the smoke-tests corresponding to the tools available in the image, before executing more specific tests.
 
-There are a couple of helper scripts in link:{repotree}.github/bin/[`.github/bin/`], for testing the images. Those are used in CI but can be useful locally too:
+There are a couple of helper scripts in link:{repotree}utils/bin/[`utils/bin/`], for testing the images. Those are used in CI but can be useful locally too:
 
 * `dockerTest BASE_OS IMAGE_NAME [SCRIPT_NAME]`
 ** BASE_OS: set/collection of images (e.g. `debian-buster`).
