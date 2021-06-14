@@ -87,7 +87,8 @@ link:{repotree}utils/pyHDLC[`utils/pyHDLC`], respectively.
 A link:{repotree}utils/setup.sh[`utils/setup.sh`] script is provided for installing Python dependencies and adding the
 `bin` subdir to the `PATH`.
 Since `pip` is used for installing link:{repotree}utils/pyHDLC/requirements.txt[`utils/pyHDLC/requirements.txt`],
-it is desirable to create a virtual environment before running `setup.sh`:
+it is desirable to create a virtual environment (https://docs.python.org/3/library/venv.html[docs.python.org/3/library/venv])
+before running `setup.sh`:
 [source, shell]
 ----
 virtualenv venv
