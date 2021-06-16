@@ -75,6 +75,9 @@ To Do:
 * https://github.com/SymbiFlow/prjuray[Project U-Ray (Xilinx Ultrascale Series tooling)]
 * https://github.com/SymbiFlow/symbiflow-arch-defs[SymbiFlow Architecture Definitions + Tooling (Xilinx 7 Series, QuickLogic)]
 * https://hdl.github.io/awesome/items/vtr[Verilog To Routing]
+* https://github.com/StefanSchippers/xschem[xschem] (https://github.com/hdl/containers/issues/28[#28])
+* https://github.com/RTimothyEdwards/netgen[NETGEN] (https://github.com/hdl/containers/issues/29[#29])
+* http://opencircuitdesign.com/irsim/[IRSIM] (https://github.com/hdl/containers/issues/30[#30])
 * https://github.com/adamgreig/ecpdap[ecpdap]
 * https://github.com/lnis-uofu/LSOracle[LSOracle]
 
