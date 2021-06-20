@@ -1,0 +1,17 @@
+= HDL Containers: Development
+include::../attrs.adoc[]
+include::../attrs.index.adoc[]
+include::../attrs.index.sec.adoc[]
+:toc-title: HDLC: Development
+
+[.text-center]
+include::../shields.containers.adoc[]
+link:../index.html[image:https://img.shields.io/badge/documentation-HTML-f2f1ef?longCache=true&style=flat-square&logo=asciidoctor[title='Documentation (html)']]
+link:../ug/index.html[image:https://img.shields.io/badge/user%20guide-HTML-f2f1ef?longCache=true&style=flat-square&logo=asciidoctor[title='User Guide (html)']]
+
+[.text-center]
+include::../shields.org.adoc[]
+
+include::../tip.edit.adoc[]
+
+include::content.adoc[]

@@ -1,12 +1,10 @@
-== Usage
-
 [IMPORTANT]
 ====
 Image names and tags in this documentation are provided without the _registry prefix_.
-Hence, `REGISTRY/[COLLECTION/]*` needs to be prefixed to the image names shown in <<Tools and images>>.
+Hence, `REGISTRY/[COLLECTION/]*` needs to be prefixed to the image names shown in link:../index.html#_tools_and_images[Tools and images].
 ====
 
-Official guidelines and recommendations for using containers suggest keeping containers small and specific for each tool/purpose (see https://docs.docker.com/develop/develop-images/dockerfile_best-practices/[docs.docker.com: Best practices for writing Dockerfiles]). That fits well with the field of web _microservices_, which communicate through TCP/IP and which need to be composed, scaled and balanced all around the globe.
+Official guidelines and recommendations for using containers suggest keeping them small and specific for each tool/purpose (see https://docs.docker.com/develop/develop-images/dockerfile_best-practices/[docs.docker.com: Best practices for writing Dockerfiles]). That fits well with the field of web _microservices_, which communicate through TCP/IP and which need to be composed, scaled and balanced all around the globe.
 
 However, tooling in other camps is expected to communicate using a shared or local filesystem and/or pipes; therefore, many users treat containters as _lightweight virtual machines_. That is, they put all the tools in a single (heavy) container. Those containers are typically not moved around as frequently as _microservices_, but cached on developers' workstations.
 
@@ -21,7 +19,10 @@ For didactic purposes, both of them are used in Continuous Integration (CI).
 See https://github.com/im-tomu/fomu-workshop/blob/master/.github/workflows/test.yml[im-tomu/fomu-workshop: .github/workflows/test.yml].
 ====
 
-=== Fine-grained pulling
+
+== Fine-grained pulling
+
+NOTE: These images are coloured [lime]#GREEN# in the link:../dev/index.html#_graphs[Graphs].
 
 Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named `<REGISTRY_PREFIX>/<TOOL_NAME>`.
 
@@ -30,26 +31,40 @@ NOTE: Since all the images in each collection are based on the same root image, 
 * https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile[ghdl-yosys-blink: Makefile]: an example showcasing how to use this fine-grained approach with a makefile.
   The same make based strategy is used in https://github.com/antonblanchard/microwatt/blob/master/Makefile[antonblanchard/microwatt].
 * https://github.com/marph91/icestick-remote[marph91/icestick-remote]: the CI workflow for synthesis uses this approach.
-* Moreover, https://github.com/PyFPGA/[PyFPGA] is a set of Python classes for vendor-independent FPGA development.
-  https://github.com/PyFPGA/openflow[PyFPGA/openflow] allows running GHDL, Yosys, etc. in containers.
-  In fact, openflow can be used along with https://github.com/olofk/edalize[Edalize]'s `EDALIZE_LAUNCHER` environment
-  variable.
-  See also https://github.com/librecores/eda-container-wrapper[librecores/eda-container-wrapper].
 
-NOTE: These images are coloured [lime]#GREEN# in the <<Graphs>>.
+Those projects use a partial Makefile such as the following, for optionally wrapping regular tool calls:
+
+[bash]
+----
+CONTAINER_ENGINE ?= docker
+
+PWD = $(shell pwd)
+CONTAINER_ARGS = run --rm -v $(PWD):/wrk -w /wrk
+
+GHDL    = $(CONTAINER_ENGINE) $(CONTAINER_ARGS) gcr.io/hdl-containers/ghdl/yosys ghdl
+YOSYS   = $(CONTAINER_ENGINE) $(CONTAINER_ARGS) gcr.io/hdl-containers/ghdl/yosys yosys
+NEXTPNR = $(CONTAINER_ENGINE) $(CONTAINER_ARGS) gcr.io/hdl-containers/nextpnr/ice40 nextpnr-ice40
+ICEPACK = $(CONTAINER_ENGINE) $(CONTAINER_ARGS) gcr.io/hdl-containers/icestorm icepack
+----
+
+Moreover, https://github.com/PyFPGA/[PyFPGA] is a set of Python classes for vendor-independent FPGA development.
+https://github.com/PyFPGA/openflow[PyFPGA/openflow] allows running GHDL, Yosys, etc. in containers.
+In fact, openflow can be used along with https://github.com/olofk/edalize[Edalize]'s `EDALIZE_LAUNCHER` environment
+variable.
+See also https://github.com/librecores/eda-container-wrapper[librecores/eda-container-wrapper].
 
 
-=== All-in-one images
+== All-in-one images
+
+NOTE: These images are coloured [maroon]#BROWN# in the link:../dev/index.html#_graphs[Graphs].
 
 Multiple tools from fine-grained images are included in larger images for common use cases. These are named `<REGISTRY_PREFIX>/<MAIN_USAGE>`. This is the recommended approach for users who are less familiar with containers and want a quick replacement for full-featured virtual machines. Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one imags.
 
 * https://github.com/tmeissner/formal_hw_verification[tmeissner/formal_hw_verification]: the CI workflow uses image `<REGISTRY_PREFIX>/formal/all` along with GitHub's 'Docker Action' syntax (see https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub[docs.github.com: Learn GitHub Actions > Referencing a container on Docker Hub]).
 * https://github.com/stnolting/neorv32[stnolting/neorv32]: the implementation workflow (for generating bitstreams from VHDL sources) uses image `<REGISTRY_PREFIX>/impl` along with GitHub's 'Docker Action' syntax (see https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub[docs.github.com: Learn GitHub Actions > Referencing a container on Docker Hub]).
 
-NOTE: These images are coloured [maroon]#BROWN# in the <<Graphs>>.
 
-
-=== Tools with GUI
+== Tools with GUI
 
 By default, tools with Graphical User Interface (GUI) cannot be used in containers, because there is no graphical
 server.
@@ -68,7 +83,7 @@ Users of GTKWave, KLayout, nextpnr and other tools will likely want to try x11do
 [link=img/x11docker_klayout.gif]
 image::x11docker_klayout.gif[x11docker_klayout, align="center"]
 
-=== USB/IP protocol support for Docker Desktop
+== USB/IP protocol support for Docker Desktop
 
 Virtual Machines used on Windows for running either Windows Subsystem for Linux (WSL) or Docker Desktop by default do
 not support sharing USB devices with the containers.
@@ -110,7 +125,7 @@ NOTE: Modules will be removed when the Hyper-V VM is restarted (i.e. when the ho
 
 NOTE: USB/IP is supported in Renode too. See https://renode.readthedocs.io/en/latest/tutorials/usbip.html[renode.rtfd.io/en/latest/tutorials/usbip].
 
-==== Example session
+=== Example session
 
 How to connect a _Docker Desktop_ container to _VirtualHere USB Server for Windows_.
 
@@ -142,7 +157,7 @@ sleep 4
 
 IMPORTANT: There is an issue/bug in _Docker Desktop_ (https://github.com/docker/for-win/issues/4548[docker/for-win#4548]) that prevents the container where the USB device is added from seeing it. The workaround is to execute the board programming tool in a sibling container. For example: `docker run --rm --privileged */prog iceprog -t`.
 
-==== Alternatives
+=== Alternatives
 
 [IMPORTANT]
 ====

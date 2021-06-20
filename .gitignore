@@ -1,8 +1,8 @@
 __pycache__/
 .vscode
 /doc/.asciidoctor
-/doc/index.html
-/doc/tools.adoc
+/doc/public/
+/doc/main/tools.adoc
 /doc/img/asic.svg
 /doc/img/base.svg
 /doc/img/formal.svg

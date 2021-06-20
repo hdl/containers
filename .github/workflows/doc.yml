@@ -54,15 +54,12 @@ jobs:
     - name: Publish site to gh-pages (doc)
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: |
-        mkdir pages
-        cd pages
+        sudo chown -R $USER:$USER doc/public
+        mv doc/public ./
+        cd public
         git init
         cp ../.git/config ./.git/config
         touch .nojekyll
-        mv ../doc/index.html ./
-
-        mkdir img
-        cp ../doc/img/* ./img/
         mv ../utils/pyHDLC/map.svg ./img/
         git add .
         git config --local user.email "push@gha"

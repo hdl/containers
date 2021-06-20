@@ -18,21 +18,52 @@
 # SPDX-License-Identifier: Apache-2.0
 
 build:
-	docker run --rm -v /$(shell pwd)/..://documents/ hdlc/doc:asciidoctor-py make -C doc run
+	docker run --rm \
+	  -v /$(shell pwd)/..://documents/ \
+	  hdlc/doc:asciidoctor-py \
+	  make -C doc all
 
 asciidoctor-py:
-	docker build -t hdlc/doc:asciidoctor-py -f- ../ < doc--asciidoctor-py.dockerfile
+	docker build \
+	  -t hdlc/doc:asciidoctor-py \
+	  -f- ../ < doc--asciidoctor-py.dockerfile
 
 pyHDLC:
-	docker build -t hdlc/doc:pyHDLC -f- ../ < doc--pyHDLC.dockerfile
+	docker build \
+	  -t hdlc/doc:pyHDLC \
+	  -f- ../ < doc--pyHDLC.dockerfile
 
-run:
-	./gen_tool_table.py
+all: main-html ug-html dev-html
+	mkdir -p public/img/
+	cp -vr img/* public/img/
+
+main-html:
+	cd main && \
+	./gen_tool_table.py && \
 	asciidoctor \
-	  -r ./lib/OCIImage-inline-macro.rb \
-	  -r ./lib/GHAStatus-inline-macro.rb \
+	  -r ../lib/OCIImage-inline-macro.rb \
+	  -r ../lib/GHAStatus-inline-macro.rb \
 	  -r asciidoctor-diagram \
-	  index.adoc
+	  index.adoc \
+	  --out-file ../public/index.html
+
+ug-html:
+	cd ug && \
+	asciidoctor \
+	  -r ../lib/OCIImage-inline-macro.rb \
+	  -r ../lib/GHAStatus-inline-macro.rb \
+	  -r asciidoctor-diagram \
+	  index.adoc \
+	  --out-file ../public/ug/index.html
+
+dev-html:
+	cd dev && \
+	asciidoctor \
+	  -r ../lib/OCIImage-inline-macro.rb \
+	  -r ../lib/GHAStatus-inline-macro.rb \
+	  -r asciidoctor-diagram \
+	  index.adoc \
+	  --out-file ../public/dev/index.html
 
 map:
 	docker run --rm -v /$(shell pwd)/..://wrk/ -w //wrk/utils/pyHDLC hdlc/doc:pyHDLC python3 map.py

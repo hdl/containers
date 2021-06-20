@@ -1,23 +1,46 @@
 == Contributing
 
-As explained in <<Tools and images>> and in <<Usage>>, multiple collections of images are provided. For each collection, a set of base images is provided, which are to be used for building and for runtime. These are defined in `base.dockerfile`. See, for instance, link:{repotree}debian-buster/base.dockerfile[`debian-buster/base.dockerfile`]. All the images in the ecosystem are based on these:
+=== Introduction
+
+As explained in link:../index.html#_tools_and_images[Tools and images] and in the link:../ug/index.html[User Guide],
+multiple collections of images are provided.
+For each collection, a set of base images is provided, which are to be used for building and for runtime.
+These are defined in `base.dockerfile`.
+See, for instance, link:{repotree}debian-buster/base.dockerfile[`debian-buster/base.dockerfile`].
+All the images in the ecosystem are based on these:
 
 * OCIImage:build/base[] Debian Buster or CentOS 7, with updated `ca-certificates`, `curl` and Python 3.
 * OCIImage:build/build[] based on `base`, includes `clang` and `make`.
 * OCIImage:build/dev[] based on `build`, includes `cmake`, `libboost-all-dev` and `python3-dev`.
 
-Then, for each project/tool there are dockerfiles (one for each collection), a GitHub Actions workflow, and one or more test scripts. Those are used for:
+Then, for each project/tool there are dockerfiles (one for each collection), a GitHub Actions workflow, and one or more
+test scripts.
+Those are used for:
 
 * Tools are built using `<REGISTRY_PREFIX>/build` images.
 * Package images based on `scratch` (and/or other reusable packages) are produced.
 * Ready-to-use images based on the runtime base image (`<REGISTRY_PREFIX>/build/base`) are produced.
 * Ready-to-use images are tested before uploading.
 
-In some dockerfiles/workflows, <<Package images>> are created too. Those are based on `scratch` and contain pre-built assets. Therefore, they are not really useful _per se_, but meant to be used for building other. In fact, multiple tools are merged into ready-to-use images for common use cases (such as `<REGISTRY_PREFIX>/impl`, `<REGISTRY_PREFIX>/formal` or `<REGISTRY_PREFIX>/prog`).
+In some dockerfiles/workflows, <<Package images>> are created too.
+Those are based on `scratch` and contain pre-built assets.
+Therefore, they are not really useful _per se_, but meant to be used for building other.
+In fact, multiple tools are merged into ready-to-use images for common use cases (such as `<REGISTRY_PREFIX>/impl`,
+`<REGISTRY_PREFIX>/formal` or `<REGISTRY_PREFIX>/prog`).
 
-IMPORTANT: Before working on adding or extending the support for a tool, please check the https://github.com/hdl/containers/issues[issues] and https://github.com/hdl/containers/pulls[pull requests]; https://github.com/hdl/containers/issues/new[open an issue] or https://gitter.im/hdl/community[let us know through the chat]. Due to its distributed nature, someone might be working on that already!
+[IMPORTANT]
+====
+Before working on adding or extending the support for a tool, please check the https://github.com/hdl/containers/issues[issues]
+and https://github.com/hdl/containers/pulls[pull requests]; https://github.com/hdl/containers/issues/new[open an issue]
+or https://gitter.im/hdl/community[let us know through the chat].
+Due to its distributed nature, someone might be working on that already!
+====
 
-NOTE: Currently, many projects don't use containers at all, hence, all images are generated in this repository. However, the workload is expected to be distributed between multiple projects in the ecosystem.
+[NOTE]
+====
+Currently, many projects don't use containers at all, hence, all images are generated in this repository.
+However, the workload is expected to be distributed between multiple projects in the ecosystem.
+====
 
 === Graphs
 
@@ -30,42 +53,42 @@ IMPORTANT: These graphs represent a single collection of images (the _virtual_ a
 [#img-graph]
 .Subgraphs and images.
 [link=img/graph.svg]
-graphviz::../graph/graph.dot[format="svg", align="center"]
+graphviz::../../graph/graph.dot[format="svg", align="center"]
 
 [#img-graph-base]
 .Base: workflows, dockerfiles, images and tests.
 [link=img/base.svg]
-graphviz::../graph/base.dot[format="svg", align="center"]
+graphviz::../../graph/base.dot[format="svg", align="center"]
 
 [#img-graph-sim]
 .Sim: workflows, dockerfiles, images and tests.
 [link=img/sim.svg]
-graphviz::../graph/sim.dot[format="svg", align="center"]
+graphviz::../../graph/sim.dot[format="svg", align="center"]
 
 [#img-graph-synth]
 .Synth: workflows, dockerfiles, images and tests.
 [link=img/synth.svg]
-graphviz::../graph/synth.dot[format="svg", align="center"]
+graphviz::../../graph/synth.dot[format="svg", align="center"]
 
 [#img-graph-impl]
 .Impl: workflows, dockerfiles, images and tests.
 [link=img/impl.svg]
-graphviz::../graph/impl.dot[format="svg", align="center"]
+graphviz::../../graph/impl.dot[format="svg", align="center"]
 
 [#img-graph-formal]
 .Formal: workflows, dockerfiles, images and tests.
 [link=img/formal.svg]
-graphviz::../graph/formal.dot[format="svg", align="center"]
+graphviz::../../graph/formal.dot[format="svg", align="center"]
 
 [#img-graph-asic]
 .ASIC: workflows, dockerfiles, images and tests.
 [link=img/asic.svg]
-graphviz::../graph/asic.dot[format="svg", align="center"]
+graphviz::../../graph/asic.dot[format="svg", align="center"]
 
 [#img-graph-legend]
 .Legend of the directed graph.
 [link=img/legend.svg]
-graphviz::../graph/legend.dot[format="svg", align="center"]
+graphviz::../../graph/legend.dot[format="svg", align="center"]
 
 === Package images
 

@@ -1,0 +1,17 @@
+= HDL Containers: User Guide
+include::../attrs.adoc[]
+include::../attrs.index.adoc[]
+include::../attrs.index.sec.adoc[]
+:toc-title: HDLC: User Guide
+
+[.text-center]
+include::../shields.containers.adoc[]
+link:../index.html[image:https://img.shields.io/badge/documentation-HTML-f2f1ef?longCache=true&style=flat-square&logo=asciidoctor[title='Documentation (html)']]
+link:../dev/index.html[image:https://img.shields.io/badge/development-HTML-f2f1ef?longCache=true&style=flat-square&logo=asciidoctor[title='Development (html)']]
+
+[.text-center]
+include::../shields.org.adoc[]
+
+include::../tip.edit.adoc[]
+
+include::content.adoc[]

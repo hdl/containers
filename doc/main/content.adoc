@@ -1,48 +1,53 @@
-= HDL containers
-:toc: left
-:toclevels: 4
-:repotree: https://github.com/hdl/containers/tree/main/
-:toc-title: HDL containers
-:icons: font
-:imagesdir: img
-:favicon: img/icon.png
+== Collections
 
-[.text-center]
-https://github.com/hdl/containers[image:https://img.shields.io/badge/hdl-containers-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/containers GitHub repository']]
-https://github.com/hdl/packages[image:https://img.shields.io/badge/hdl-packages-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/packages GitHub repository']] |
-https://gitter.im/hdl/community[image:https://img.shields.io/gitter/room/hdl/community.svg?longCache=true&style=flat-square&logo=gitter&logoColor=fff&color=4db797[title='hdl/community on gitter.im']] |
-https://github.com/hdl/awesome[image:https://img.shields.io/badge/hdl-awesome-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/awesome GitHub repository']]
-https://github.com/hdl/constraints[image:https://img.shields.io/badge/hdl-constraints-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/constraints GitHub repository']]
-https://github.com/hdl/smoke-tests[image:https://img.shields.io/badge/hdl-smoke--tests-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='hdl/smoke-tests GitHub repository']]
+In order to reduce bandwidth and disk usage when pulling multiple of the images provided in this project, containers are
+organised in _collections_.
+A _collection_ is a set of images which share a common ancestor; a base layer.
+See https://docs.docker.com/storage/storagedriver/#images-and-layers[docs.docker.com: About storage drivers | Images and layers].
 
-This repository contains scripts and GitHub Actions (GHA) YAML workflows for building, testing and deploying https://opencontainers.org/[OCI] images (aka https://www.docker.com/[Docker] | https://podman.io[Podman] images) including open source https://en.wikipedia.org/wiki/Electronic_design_automation[electronic design automation (EDA)] tooling.
-All of them are pushed to http://gcr.io/hdl-containers/[gcr.io/hdl-containers], and mirrored to https://github.com/orgs/hdl/packages[ghcr.io/hdl] and https://hub.docker.com/u/hdlc[hub.docker.com/u/hdlc]:
+Currently available collections are the following:
 
-[.text-center]
-https://gcr.io/hdl-containers[image:https://img.shields.io/badge/-gcr.io/hdl--containers-555555.svg?longCache=true&style=flat-square&logo=OpenContainersInitiative&logoColor=f2f1ef[title='Google Container Registry']]
-https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl-555555.svg?longCache=true&style=flat-square&logo=OpenContainersInitiative&logoColor=f2f1ef[title='GitHub Container Registry']]
-https://hub.docker.com/u/hdlc[image:https://img.shields.io/badge/-docker.io/hdlc-555555.svg?longCache=true&style=flat-square&logo=OpenContainersInitiative&logoColor=f2f1ef[title='Docker Hub']]
+* `debian/buster` based on https://hub.docker.com/_/debian[debian:buster-slim]
+** Available as https://gcr.io/hdl-containers/debian/buster[image:https://img.shields.io/badge/-gcr.io/hdl--containers/debian/buster-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[title='Google Container Registry']]
+** Mirrored to
+  https://gcr.io/hdl-containers[image:https://img.shields.io/badge/-gcr.io/hdl--containers-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[title='Google Container Registry']]
+  https://hub.docker.com/u/hdlc[image:https://img.shields.io/badge/-docker.io/hdlc-555555.svg?longCache=true&style=flat-square&logo=Docker&logoColor=f2f1ef[title='Docker Hub']]
+  https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='GitHub Container Registry']]
+  and https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl/debian/buster-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='GitHub Container Registry']]
+* `centos/7` based on https://hub.docker.com/_/centos[centos:7]
+** Available as https://gcr.io/hdl-containers/centos/7[image:https://img.shields.io/badge/-gcr.io/hdl--containers/centos/7-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[title='Google Container Registry']]
+** Mirrored to https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl/centos/7-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='GitHub Container Registry']]
 
-TIP: Do you want to improve this page? Please https://github.com/hdl/containers/edit/main/doc/index.adoc[edit it on GitHub].
+[IMPORTANT]
+====
+Image names and tags in this documentation are provided without the _registry prefix_.
+Hence, one of the prefixes listed above needs to be used when actually pulling/using the images.
+See link:ug/index.html[User Guide] for further details.
+====
+
+[IMPORTANT]
+====
+Some tools are available in multiple collections, while others are built in a subset only.
+Browse the registries and/or the Continuous Integration workflows for finding images available in collections other than
+Debian Buster.
+====
 
 == Tools and images
 
-Multiple collections of images are provided. All the images in each collection do share the same base layer. Currently available collections are the following:
+By default, latest development versions (branches `master`|`main`) of tools are built.
+Then, smoke tests are executed and, if successful, the corresponding images are updated in the registries.
+However, some specific tools are _not_ built from sources, but installed through system package managers.
+Those are marked with `!` in the table below.
 
-* `debian/buster` based on https://hub.docker.com/_/debian[debian:buster-slim]
-** Available as `gcr.io/hdl-containers/debian/buster/`.
-** Mirrored to `gcr.io/hdl-containers/`, `docker.io/hdlc/`, `ghcr.io/hdl/`, and `ghcr.io/hdl/debian/buster/`.
-* `centos/7` based on https://hub.docker.com/_/centos[centos:7]
-** Available as `gcr.io/hdl-containers/centos/7/`.
-** Mirrored to `ghcr.io/hdl/centos/7/`.
-
-IMPORTANT: Image names and tags in this documentation are provided without the _registry prefix_. Hence, one of the prefixes listed above needs to be used when actually pulling/using the images. See <<Usage>>.
-
-IMPORTANT: Tools marked with `!` are NOT built from sources, but installed through system package managers.
+[NOTE]
+====
+Package images are not to be used for executing the tools, but for composing images including multiple resources.
+See link:dev/index.html#_package_images[Development: Package images] for further details.
+====
 
 include::tools.adoc[]
 
-Images including multiple tools:
+=== Images including multiple tools
 
 * **S**imulation:
 ** OCIImage:sim[] GHDL + Verilator
@@ -63,7 +68,7 @@ Images including multiple tools:
 ** OCIImage:formal/all[] all solvers, depending on either Python 2 or Python 3.
 * **P**rogramming: OCIImage:prog[]
 
-To Do:
+== To Do
 
 * https://github.com/khoapham/bitman[BitMan]
 * https://hdl.github.io/awesome/items/ecpprog[ecpprog]
@@ -82,12 +87,6 @@ To Do:
 * https://github.com/lnis-uofu/LSOracle[LSOracle]
 
 include::context.adoc[]
-
-include::usage.adoc[]
-
-include::contributing.adoc[]
-
-include::development.adoc[]
 
 == References
 
