@@ -90,39 +90,54 @@ include::context.adoc[]
 
 == References
 
-* GHDL:
-** https://github.com/ghdl/docker[ghdl/docker]
-** https://github.com/ghdl/setup-ghdl-ci[ghdl/setup-ghdl-ci]
-* DBHI:
-** https://github.com/dbhi/qus[dbhi/qus]
-** https://github.com/dbhi/docker[dbhi/docker]
-* ASIC:
-** https://github.com/The-OpenROAD-Project[The-OpenROAD-Project]
-** https://github.com/efabless/openlane[efabless/openlane]
-* https://github.com/carlosedp/riscv-bringup[RISC-V bring-up tracker]
+* SymbiFlow:
+** https://console.cloud.google.com/storage/browser/symbiflow-arch-defs-gha;tab=objects[symbiflow-arch-defs-gha]
+** https://github.com/SymbiFlow/symbiflow-examples[SymbiFlow/symbiflow-examples]
+** https://github.com/SymbiFlow/make-env[SymbiFlow/make-env]
+*** http://bit.ly/edda-conda-eda-spec[bit.ly/edda-conda-eda-spec]: Conda based system for FPGA and ASIC Dev
+*** https://github.com/SymbiFlow/make-env/issues/15[Support providing the environment using docker rather than conda #15]
+* https://github.com/im-tomu/fomu-toolchain[im-tomu/fomu-toolchain]
+* https://github.com/antmicro/runner[antmicro/runner]
+* NixOS
+** https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-dockerTools[nixos.org/manual: pkgs.dockerTools]
+** https://nix.dev/tutorials/building-and-running-docker-images[nix.dev/tutorials: Building and running Docker images]
 * LibreCores:
 ** https://github.com/librecores/ci-docker-image[librecores/ci-docker-image]
 ** https://github.com/librecores/docker-images[librecores/docker-images]
 ** LibreCores CI Infrastructure (LCCI):
 *** https://github.com/lccitools[lccitools]
 *** https://github.com/lccidocker[lccidocker]
-* SymbiFlow:
-** https://github.com/SymbiFlow/symbiflow-examples[SymbiFlow/symbiflow-examples]
-** https://github.com/SymbiFlow/make-env[SymbiFlow/make-env]
-*** http://bit.ly/edda-conda-eda-spec[bit.ly/edda-conda-eda-spec]: Conda based system for FPGA and ASIC Dev
-*** https://github.com/SymbiFlow/make-env/issues/15[Support providing the environment using docker rather than conda #15]
 * https://github.com/0x01be/rudder[0x01be/rudder]
 * https://github.com/limerainne/Dockerize-EDA[limerainne/Dockerize-EDA]
-* https://github.com/im-tomu/fomu-toolchain[im-tomu/fomu-toolchain]
 * https://github.com/alpin3/ulx3s[alpin3/ulx3s]
 * https://github.com/vmunoz82/eda_tools[vmunoz82/eda_tools]
 * https://github.com/eine/elide/tree/master/elide/docker[eine/elide]
+
+=== ASIC
+
+* https://github.com/The-OpenROAD-Project[The-OpenROAD-Project]
+* https://github.com/efabless/openlane[efabless/openlane]
+* https://github.com/carlosedp/riscv-bringup[RISC-V bring-up tracker]
+
+=== GHDL
+
+* https://github.com/ghdl/docker[ghdl/docker]
+* https://github.com/ghdl/setup-ghdl-ci[ghdl/setup-ghdl-ci]
+* https://github.com/dbhi/qus[dbhi/qus]
+* https://github.com/dbhi/docker[dbhi/docker]
 * https://github.com/hackfin/ghdl-cross.mk[hackfin/ghdl-cross.mk]
-* USB/IP
-** https://github.com/gw0/docker-alpine-kernel-modules[gw0/docker-alpine-kernel-modules]
-** https://github.com/virtualhere/docker[virtualhere/docker]
-*** https://www.virtualhere.com/windows_server_software[Windows USB Server]
-*** https://www.virtualhere.com/usb_client_software[USB Client]
-*** https://www.virtualhere.com/linux_console[Linux Console Client]
-*** https://www.virtualhere.com/client_api[Client API]
-*** https://hub.docker.com/r/virtualhere/virtualhere-client[hub.docker.com/r/virtualhere/virtualhere-client]
+
+=== Google Container Regisry (GCR)
+
+* https://github.com/salrashid123/gcr_stats[salrashid123/gcr_stats]
+* https://github.com/gregsramblings/google-cloud-4-words[gregsramblings/google-cloud-4-words]: The Google Cloud Developer's Cheat Sheet
+
+=== USB/IP
+
+* https://github.com/gw0/docker-alpine-kernel-modules[gw0/docker-alpine-kernel-modules]
+* https://github.com/virtualhere/docker[virtualhere/docker]
+** https://www.virtualhere.com/windows_server_software[Windows USB Server]
+** https://www.virtualhere.com/usb_client_software[USB Client]
+** https://www.virtualhere.com/linux_console[Linux Console Client]
+** https://www.virtualhere.com/client_api[Client API]
+** https://hub.docker.com/r/virtualhere/virtualhere-client[hub.docker.com/r/virtualhere/virtualhere-client]
