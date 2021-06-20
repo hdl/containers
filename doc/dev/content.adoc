@@ -172,11 +172,6 @@ We didn't implement it yet because we'd like it to be automatically sychronised 
 
 * Coordinate with Antmicro/SymbiFlow for using self-hosted runners provided by Google and their orchestration plumbing.
 
-* Mirror all the images to `gcr.io`.
-We need to read how does billing work in `gcr.io`.
-If it's free, as `docker.io` and `ghcr.io`, we can register directly.
-Otherwise, we need to coordinate with mithro@Google.
-
 * Enhance the (atomic) https://github.com/hdl/smoke-tests[smoke-tests], which are currently placeholders mostly.
 
 * Provide multiarch images (at least, add arm32v7 and arm64v8 variants).
