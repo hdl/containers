@@ -66,6 +66,8 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "pkg/nextpnr/generic": ["nextpnr", "pkg-generic", None],
     "nextpnr/generic": ["nextpnr", "generic", None],
     "nextpnr": ["nextpnr", None, None],
+    "openfpgaloader": ["openfpgaloader", None, None],
+    "pkg/openfpgaloader": ["openfpgaloader", "pkg", None],
     "prjtrellis": ["prjtrellis", None, None],
     "pkg/prjtrellis": ["prjtrellis", "pkg", None],
     "prog": ["prog", None, None],
