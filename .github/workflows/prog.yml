@@ -54,28 +54,14 @@ jobs:
 
     - run: dockerTest ${{ matrix.os }} prog
 
-    - name: Login to gcr.io
+    - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      uses: docker/login-action@v1
+      uses: ./utils/registry-login
       with:
-        registry: gcr.io
-        username: _json_key
-        password: ${{ secrets.GCR_JSON_KEY }}
-
-    - name: Login to ghcr.io
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: gha
-        password: ${{ github.token }}
-
-    - name: Login to docker.io
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers' && matrix.os == 'debian/buster'
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        cmd: |
+          echo '${{ secrets.GCR_JSON_KEY }}' | docker login gcr.io -u _json_key --password-stdin
+          echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
+          echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
