@@ -90,6 +90,7 @@ include::context.adoc[]
 
 == References
 
+* https://github.com/hadolint/hadolint[hadolint/hadolint]: Haskell Dockerfile Linter
 * SymbiFlow:
 ** https://console.cloud.google.com/storage/browser/symbiflow-arch-defs-gha;tab=objects[symbiflow-arch-defs-gha]
 ** https://github.com/SymbiFlow/symbiflow-examples[SymbiFlow/symbiflow-examples]
