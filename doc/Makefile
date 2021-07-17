@@ -33,7 +33,10 @@ pyHDLC:
 	  -t hdlc/doc:pyHDLC \
 	  -f- ../ < doc--pyHDLC.dockerfile
 
-all: main-html ug-html dev-html
+clean-img:
+	if [ -d public/img ]; then rm -rf public/img; fi
+
+all: clean-img main-html ug-html dev-html
 	mkdir -p public/img/
 	cp -vr img/* public/img/
 
