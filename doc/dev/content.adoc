@@ -74,6 +74,11 @@ GHAStatus:nextpnr[]
 --
 GHAStatus:arachne-pnr[]
 --
+* {blank}
++
+--
+GHAStatus:openfpgaloader[]
+--
 
 
 a|* {blank}

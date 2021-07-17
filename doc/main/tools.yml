@@ -186,6 +186,16 @@ nextpnr:
 
 #---
 
+openfpgaloader:
+  src: true
+  url: 'https://hdl.github.io/awesome/items/openfpgaloader'
+  pkg:
+    - 'openfpgaloader'
+  use:
+    - 'openfpgaloader'
+
+#---
+
 openocd:
   src: false
   url: 'https://hdl.github.io/awesome/items/openocd'

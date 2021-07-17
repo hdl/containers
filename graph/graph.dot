@@ -52,6 +52,7 @@ digraph G {
       "nextpnr/ice40"
       "nextpnr/ecp5"
       "nextpnr"
+      "openfpgaloader"
       "prjtrellis"
       "verilator"
       "yosys"
@@ -71,6 +72,7 @@ digraph G {
       "pkg/nextpnr/ice40"
       "pkg/nextpnr/ecp5"
       "pkg/nextpnr/generic"
+      "pkg/openfpgaloader"
       "pkg/osvb"
       "pkg/pono"
       "pkg/prjtrellis"
@@ -197,8 +199,6 @@ digraph G {
       "pkg/arachne-pnr"
       "icestorm"
       "pkg/icestorm"
-      "prjtrellis"
-      "pkg/prjtrellis"
       "prog"
       "impl"
       "nextpnr/generic"
@@ -210,6 +210,10 @@ digraph G {
       "pkg/nextpnr/generic"
       "pkg/nextpnr/ice40"
       "pkg/nextpnr/ecp5"
+      "openfpgaloader"
+      "pkg/openfpgaloader"
+      "prjtrellis"
+      "pkg/prjtrellis"
     }
   }
 

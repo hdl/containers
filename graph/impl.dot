@@ -25,13 +25,14 @@ digraph G {
   # Dockerfiles
 
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
-    d_apicula     [label="apicula"];
-    d_arachnepnr  [label="arachne-pnr"];
-    d_icestorm    [label="icestorm"];
-    d_impl        [label="impl"];
-    d_nextpnr     [label="nextpnr"];
-    d_prjtrellis  [label="prjtrellis"];
-    d_prog        [label="prog"];
+    d_apicula        [label="apicula"];
+    d_arachnepnr     [label="arachne-pnr"];
+    d_icestorm       [label="icestorm"];
+    d_impl           [label="impl"];
+    d_nextpnr        [label="nextpnr"];
+    d_openfpgaloader [label="openfpgaloader"];
+    d_prjtrellis     [label="prjtrellis"];
+    d_prog           [label="prog"];
   }
 
   # Images
@@ -45,20 +46,22 @@ digraph G {
       "arachne-pnr"
       "ghdl/yosys"
       "icestorm"
-      "prjtrellis"
       "nextpnr/ice40"
       "nextpnr/ecp5"
       "nextpnr/generic"
       "nextpnr"
+      "openfpgaloader"
+      "prjtrellis"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
       "pkg/apicula"
       "pkg/arachne-pnr"
       "pkg/icestorm"
-      "pkg/prjtrellis"
       "pkg/nextpnr/generic"
       "pkg/nextpnr/ice40"
       "pkg/nextpnr/ecp5"
+      "pkg/openfpgaloader"
+      "pkg/prjtrellis"
     }
     { node [color=brown, fontcolor=brown]
       "nextpnr/icestorm"
@@ -268,6 +271,29 @@ digraph G {
     "pkg/nextpnr/ecp5" -> "t_pkg/nextpnr/ecp5";
   }
 
+  subgraph cluster_openfpgaloader {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_openfpgaloader_build/build" [label="build/build"]
+      "p_openfpgaloader_build/base" [label="build/base"]
+      "p_openfpgaloader_scratch" [label="scratch"]
+    }
+
+    d_openfpgaloader -> {
+      "openfpgaloader"
+      "pkg/openfpgaloader"
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      "t_openfpgaloader" [label="openfpgaloader"];
+      "t_pkg/openfpgaloader" [label="openfpgaloader.pkg"];
+    }
+
+    "openfpgaloader" -> "t_openfpgaloader";
+    "pkg/openfpgaloader" -> "t_pkg/openfpgaloader";
+  }
+
   subgraph cluster_prjtrellis {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
@@ -343,6 +369,10 @@ digraph G {
   "pkg/icestorm" -> "p_nextpnr_icestorm" -> d_nextpnr;
   "pkg/prjtrellis" -> "p_nextpnr_prjtrellis" -> d_nextpnr;
 
+  "build/build" -> "p_openfpgaloader_build/build" -> d_openfpgaloader;
+  "build/base" -> "p_openfpgaloader_build/base" -> d_openfpgaloader;
+  "scratch" -> "p_openfpgaloader_scratch" -> d_openfpgaloader;
+
   "build/dev" -> "p_prjtrellis_build/dev" -> d_prjtrellis;
 
   "build/base" -> "p_prjtrellis_build/base" -> d_prjtrellis;
@@ -361,6 +391,9 @@ digraph G {
     "p_arachnepnr_scratch" -> "pkg/arachne-pnr";
 
     "p_prog_build/base" -> "prog";
+
+    "p_openfpgaloader_build/base" -> "openfpgaloader";
+    "p_openfpgaloader_scratch" -> "pkg/openfpgaloader";
 
     "p_nextpnr_build/base" -> "build/nextpnr/base" -> {
       "nextpnr",
