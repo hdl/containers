@@ -235,6 +235,16 @@ pono:
 
 #---
 
+prjoxide:
+  src: true
+  url: 'https://hdl.github.io/awesome/items/prjoxide'
+  pkg:
+    - 'prjoxide'
+  use:
+    - 'prjoxide'
+
+#---
+
 prjtrellis:
   src: true
   url: 'https://hdl.github.io/awesome/items/prjtrellis'

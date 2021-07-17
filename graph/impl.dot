@@ -31,6 +31,7 @@ digraph G {
     d_impl           [label="impl"];
     d_nextpnr        [label="nextpnr"];
     d_openfpgaloader [label="openfpgaloader"];
+    d_prjoxide       [label="prjoxide"];
     d_prjtrellis     [label="prjtrellis"];
     d_prog           [label="prog"];
     d_vtr            [label="vtr"];
@@ -52,6 +53,7 @@ digraph G {
       "nextpnr/generic"
       "nextpnr"
       "openfpgaloader"
+      "prjoxide"
       "prjtrellis"
       "vtr"
     }
@@ -63,6 +65,7 @@ digraph G {
       "pkg/nextpnr/ice40"
       "pkg/nextpnr/ecp5"
       "pkg/openfpgaloader"
+      "pkg/prjoxide"
       "pkg/prjtrellis"
       "pkg/vtr"
     }
@@ -297,6 +300,29 @@ digraph G {
     "pkg/openfpgaloader" -> "t_pkg/openfpgaloader";
   }
 
+  subgraph cluster_prjoxide {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_prjoxide_scratch" [label="scratch"]
+      "p_prjoxide_build/base" [label="build/base"]
+      "p_prjoxide_build/build" [label="build/build"]
+    }
+
+    d_prjoxide -> { rank=same
+      "pkg/prjoxide",
+      "prjoxide"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_prjoxide" [label="prjoxide"];
+      "t_pkg/prjoxide" [label="prjoxide.pkg"];
+    }
+
+    "prjoxide" -> "t_prjoxide";
+    "pkg/prjoxide" -> "t_pkg/prjoxide";
+  }
+
   subgraph cluster_prjtrellis {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
@@ -399,8 +425,11 @@ digraph G {
   "build/base" -> "p_openfpgaloader_build/base" -> d_openfpgaloader;
   "scratch" -> "p_openfpgaloader_scratch" -> d_openfpgaloader;
 
-  "build/dev" -> "p_prjtrellis_build/dev" -> d_prjtrellis;
+  "build/build" -> "p_prjoxide_build/build" -> d_prjoxide;
+  "build/base" -> "p_prjoxide_build/base" -> d_prjoxide;
+  "scratch" -> "p_prjoxide_scratch" -> d_prjoxide;
 
+  "build/dev" -> "p_prjtrellis_build/dev" -> d_prjtrellis;
   "build/base" -> "p_prjtrellis_build/base" -> d_prjtrellis;
   "scratch" -> "p_prjtrellis_scratch" -> d_prjtrellis;
 
@@ -454,6 +483,9 @@ digraph G {
     "impl/ice40" -> "impl/icestorm";
     "impl/ecp5" -> "impl/prjtrellis";
     "impl/pnr" -> "impl";
+
+    "p_prjoxide_scratch" -> "pkg/prjoxide";
+    "p_prjoxide_build/base" -> "prjoxide";
 
     "p_prjtrellis_scratch" -> "pkg/prjtrellis";
     "p_prjtrellis_build/base" -> "prjtrellis";

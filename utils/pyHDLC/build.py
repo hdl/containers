@@ -72,6 +72,8 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "nextpnr": ["nextpnr", None, None],
     "openfpgaloader": ["openfpgaloader", None, None],
     "pkg/openfpgaloader": ["openfpgaloader", "pkg", None],
+    "prjoxide": ["prjoxide", None, None],
+    "pkg/prjoxide": ["prjoxide", "pkg", None],
     "prjtrellis": ["prjtrellis", None, None],
     "pkg/prjtrellis": ["prjtrellis", "pkg", None],
     "prog": ["prog", None, None],
