@@ -27,7 +27,7 @@ digraph G {
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
     d_boolector   [label="boolector"];
     d_pono        [label="pono"];
-    d_cvc4        [label="cvc4"];
+    d_cvc        [label="cvc"];
     d_formal      [label="formal"];
     d_superprove  [label="superprove"];
     d_symbiyosys  [label="symbiyosys"];
@@ -45,7 +45,7 @@ digraph G {
     }
     { node [color=mediumblue, fontcolor=mediumblue]
       "pkg/boolector"
-      "pkg/cvc4"
+      "pkg/cvc"
       "pkg/pono"
       "pkg/superprove"
       "pkg/symbiyosys"
@@ -88,18 +88,18 @@ digraph G {
     "pkg/boolector" -> "t_pkg/boolector";
   }
 
-  subgraph cluster_cvc4 {
+  subgraph cluster_cvc {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_cvc4_scratch" [label="scratch"]
-      "p_cvc4_build/build" [label="build/build"]
+      "p_cvc_scratch" [label="scratch"]
+      "p_cvc_build/build" [label="build/build"]
     }
 
-    d_cvc4 -> "pkg/cvc4" [style=dotted];
+    d_cvc -> "pkg/cvc" [style=dotted];
 
-    "t_pkg/cvc4" [shape=folder, color=red, fontcolor=red, label="cvc4.pkg"];
+    "t_pkg/cvc" [shape=folder, color=red, fontcolor=red, label="cvc.pkg"];
 
-    "pkg/cvc4" -> "t_pkg/cvc4";
+    "pkg/cvc" -> "t_pkg/cvc";
   }
 
   subgraph cluster_pono {
@@ -176,7 +176,7 @@ digraph G {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_formal_boolector" [label="pkg/boolector"]
-      "p_formal_cvc4" [label="pkg/cvc4"]
+      "p_formal_cvc" [label="pkg/cvc"]
       "p_formal_ghdl" [label="ghdl/yosys"]
       "p_formal_pono" [label="pkg/pono"]
       "p_formal_symbiyosys" [label="pkg/symbiyosys"]
@@ -205,7 +205,7 @@ digraph G {
 
   { rank=same
     d_boolector
-    d_cvc4
+    d_cvc
     d_pono
     d_superprove
     d_symbiyosys
@@ -218,13 +218,13 @@ digraph G {
   "build/build" -> "p_boolector_build/build" -> d_boolector;
   "scratch" -> "p_boolector_scratch" -> d_boolector;
 
-  "build/build" -> "p_cvc4_build/build" -> d_cvc4;
-  "scratch" -> "p_cvc4_scratch" -> d_cvc4;
+  "build/build" -> "p_cvc_build/build" -> d_cvc;
+  "scratch" -> "p_cvc_scratch" -> d_cvc;
 
   "ghdl/yosys" -> "p_formal_ghdl" -> d_formal;
   "pkg/symbiyosys" -> "p_formal_symbiyosys" -> d_formal;
   "pkg/boolector" -> "p_formal_boolector" -> d_formal;
-  "pkg/cvc4" -> "p_formal_cvc4" -> d_formal;
+  "pkg/cvc" -> "p_formal_cvc" -> d_formal;
   "pkg/pono" -> "p_formal_pono" -> d_formal;
   "pkg/yices2" -> "p_formal_yices2" -> d_formal;
   "pkg/superprove" -> "p_formal_superprove" -> d_formal;
@@ -249,7 +249,7 @@ digraph G {
 
   { edge [style=dashed]
     "p_boolector_scratch" -> "pkg/boolector";
-    "p_cvc4_scratch" -> "pkg/cvc4";
+    "p_cvc_scratch" -> "pkg/cvc";
     "p_formal_ghdl" -> "formal/min" -> "formal" -> "formal/all";
     "p_pono_scratch" -> "pkg/pono";
     "p_superprove_scratch" -> "pkg/superprove";
@@ -266,7 +266,7 @@ digraph G {
 
     {
       "p_formal_boolector",
-      "p_formal_cvc4",
+      "p_formal_cvc",
       "p_formal_pono",
       "p_formal_yices2"
     } -> "formal";

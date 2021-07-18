@@ -30,7 +30,7 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "build/build": ["base", "build", None],
     "build/dev": ["base", None, None],
     "pkg/boolector": ["boolector", None, None],
-    "pkg/cvc4": ["cvc4", None, None],
+    "pkg/cvc": ["cvc", None, None],
     "formal/min": ["formal", "min", None],
     "formal": ["formal", "latest", None],
     "formal/all": ["formal", None, None],

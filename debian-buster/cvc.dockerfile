@@ -37,14 +37,14 @@ RUN mkdir /usr/share/man/man1 \
  && update-ca-certificates  \
  && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /tmp/cvc4 && cd /tmp/cvc4 \
- && curl -fsSL https://codeload.github.com/CVC4/CVC4/tar.gz/master | tar xzf - --strip-components=1 \
- && ./configure.sh --cadical --auto-download \
+RUN mkdir /tmp/cvc5 && cd /tmp/cvc5 \
+ && curl -fsSL https://codeload.github.com/cvc5/cvc5/tar.gz/master | tar xzf - --strip-components=1 \
+ && ./configure.sh --auto-download \
  && cd build \
  && make -j$(nproc) \
- && make DESTDIR=/opt/cvc4 install
+ && make DESTDIR=/opt/cvc install
 
 #---
 
 FROM scratch
-COPY --from=build /opt/cvc4 /cvc4
+COPY --from=build /opt/cvc /cvc

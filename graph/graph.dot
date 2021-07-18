@@ -61,7 +61,7 @@ digraph G {
       "pkg/apicula"
       "pkg/arachne-pnr"
       "pkg/boolector"
-      "pkg/cvc4"
+      "pkg/cvc"
       "pkg/ghdl"
       "pkg/ghdl/llvm"
       "pkg/ghdl-yosys-plugin"
@@ -222,7 +222,7 @@ digraph G {
     m_formal -> {
       "pkg/symbiyosys"
       "pkg/boolector"
-      "pkg/cvc4"
+      "pkg/cvc"
       "pkg/pono"
       "pkg/superprove"
       "pkg/yices2"

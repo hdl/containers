@@ -60,11 +60,11 @@ cocotb:
 
 #---
 
-cvc4:
+cvc:
   src: true
-  url: 'https://hdl.github.io/awesome/items/cvc4'
+  url: 'https://hdl.github.io/awesome/items/cvc'
   pkg:
-    - 'cvc4'
+    - 'cvc'
   in:
     - 'formal'
     - 'formal/all'

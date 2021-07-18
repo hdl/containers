@@ -89,7 +89,7 @@ GHAStatus:boolector[]
 * {blank}
 +
 --
-GHAStatus:cvc4[]
+GHAStatus:cvc[]
 --
 * {blank}
 +

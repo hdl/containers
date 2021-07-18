@@ -18,7 +18,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: 'cvc4'
+name: 'cvc'
 
 on:
   pull_request:
@@ -27,14 +27,14 @@ on:
     - cron: '0 0 * * 5'
   workflow_dispatch:
   repository_dispatch:
-    types: [ cvc4 ]
+    types: [ cvc ]
 
 env:
   DOCKER_BUILDKIT: 1
 
 jobs:
 
-  cvc4:
+  cvc:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -49,9 +49,9 @@ jobs:
 
     - run: >-
         dockerBuild -c ${{ matrix.os }} -d
-        pkg/cvc4
+        pkg/cvc
 
-    - run: dockerTestPkg ${{ matrix.os }} cvc4
+    - run: dockerTestPkg ${{ matrix.os }} cvc
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -65,4 +65,4 @@ jobs:
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
-        pkg/cvc4
+        pkg/cvc

@@ -56,7 +56,7 @@ jobs:
         pkg/symbiyosys
         pkg/yices2
         pkg/boolector
-        pkg/cvc4
+        pkg/cvc
         pkg/superprove
 #        pkg/pono
 
