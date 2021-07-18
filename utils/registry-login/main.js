@@ -17,6 +17,8 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
+// Context: https://github.com/docker/login-action/issues/72
+
 const { exec } = require('child_process');
 
 function run(cmd) {
