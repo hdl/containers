@@ -43,14 +43,14 @@ RUN apt-get update -qq \
 FROM $REGISTRY/pkg/yices2 AS pkg-yices2
 FROM $REGISTRY/pkg/boolector AS pkg-boolector
 FROM $REGISTRY/pkg/cvc AS pkg-cvc
-#FROM $REGISTRY/pkg/pono AS pkg-pono
+FROM $REGISTRY/pkg/pono AS pkg-pono
 
 FROM min AS latest
 
 COPY --from=pkg-yices2 /yices2 /
 COPY --from=pkg-boolector /boolector /
 COPY --from=pkg-cvc /cvc /
-#COPY --from=pkg-pono /pono /
+COPY --from=pkg-pono /pono /
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
