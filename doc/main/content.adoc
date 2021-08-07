@@ -112,6 +112,7 @@ include::context.adoc[]
 * https://github.com/alpin3/ulx3s[alpin3/ulx3s]
 * https://github.com/vmunoz82/eda_tools[vmunoz82/eda_tools]
 * https://github.com/eine/elide/tree/master/elide/docker[eine/elide]
+* https://github.com/cdsteinkuehler/QuartusBuildVMs[cdsteinkuehler/QuartusBuildVMs]
 
 === ASIC
 
