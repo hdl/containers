@@ -66,5 +66,5 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /opt/netgen /
-RUN DISPLAY=:0
+ENV DISPLAY=:0
 CMD ["netgen"]
