@@ -1,4 +1,8 @@
-# Copyright 2021 Sai Charan Lanka <lankasaicharan123@gmail.com>
+# Authors:
+#   Unai Martinez-Corral
+#   Sai Charan Lanka
+#
+# Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -66,5 +70,5 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /opt/netgen /
-ENV DISPLAY=:0
+
 CMD ["netgen"]
