@@ -1,4 +1,12 @@
-# Copyright 2019-2021 Sai Charan Lanka <lankasaicharan123@gmail.com>
+# syntax=docker/dockerfile:1.2
+
+# Authors:
+#   Unai Martinez-Corral
+#   Sai Charan Lanka
+#
+# Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>e
+#
+# Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +35,6 @@ on:
 
 env:
   DOCKER_BUILDKIT: 1
-  DISPLAY: 0
 
 jobs:
 
@@ -50,6 +57,7 @@ jobs:
         dockerBuild -c ${{ matrix.os }} -d
         pkg/netgen
         netgen
+ 
     - run: dockerTestPkg ${{ matrix.os }} netgen
     - run: dockerTest ${{ matrix.os }} netgen
 
@@ -61,6 +69,7 @@ jobs:
           echo '${{ secrets.GCR_JSON_KEY }}' | docker login gcr.io -u _json_key --password-stdin
           echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
           echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
+
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
         dockerPush ${{ matrix.os }}
