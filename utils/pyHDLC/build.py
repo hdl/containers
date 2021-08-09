@@ -55,6 +55,8 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "pkg/klayout": ["klayout", "pkg", None],
     "magic": ["magic", None, None],
     "pkg/magic": ["magic", "pkg", None],
+    "netgen": ["netgen", None, None],
+    "pkg/netgen": ["netgen", "pkg", None],
     "build/nextpnr/base": ["nextpnr", "base", None],
     "build/nextpnr/build": ["nextpnr", "build", None],
     "pkg/nextpnr/ice40": ["nextpnr", "pkg-ice40", None],
