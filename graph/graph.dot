@@ -48,6 +48,7 @@ digraph G {
       "icestorm"
       "klayout"
       "magic"
+      "netgen"
       "nextpnr/generic"
       "nextpnr/ice40"
       "nextpnr/ecp5"
@@ -69,6 +70,7 @@ digraph G {
       "pkg/icestorm"
       "pkg/klayout"
       "pkg/magic"
+      "pkg/netgen"
       "pkg/nextpnr/ice40"
       "pkg/nextpnr/ecp5"
       "pkg/nextpnr/generic"
@@ -238,8 +240,10 @@ digraph G {
     m_asic -> {
       "klayout"
       "magic"
+      "netgen"
       "pkg/klayout"
       "pkg/magic"
+      "pkg/netgen"
     };
   }
 

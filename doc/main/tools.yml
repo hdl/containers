@@ -167,6 +167,16 @@ magic:
 
 #---
 
+netgen:
+  src: true
+  url: 'https://hdl.github.io/awesome/items/netgen'
+  pkg:
+    - 'netgen'
+  use:
+    - 'netgen'
+
+#---
+
 nextpnr:
   src: true
   url: 'https://hdl.github.io/awesome/items/nextpnr'

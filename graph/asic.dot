@@ -27,6 +27,7 @@ digraph G {
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
     d_klayout [label="klayout"];
     d_magic [label="magic"];
+    d_netgen [label="netgen"];
   }
 
   # Images
@@ -37,10 +38,12 @@ digraph G {
     { node [color=limegreen, fontcolor=limegreen]
       "klayout"
       "magic"
+      "netgen"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
       "pkg/klayout"
       "pkg/magic"
+      "pkg/netgen"
     }
   }
 
@@ -104,6 +107,29 @@ digraph G {
     "pkg/magic" -> "t_pkg/magic";
   }
 
+  subgraph cluster_netgen {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_netgen_build/build" [label="build/build"]
+      "p_netgen_build/base" [label="build/base"]
+      "p_netgen_scratch" [label="scratch"]
+    }
+
+    d_netgen -> {
+      "netgen"
+      "pkg/netgen"
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      "t_netgen" [label="netgen"];
+      "t_pkg/netgen" [label="netgen.pkg"];
+    }
+
+    "netgen" -> "t_netgen";
+    "pkg/netgen" -> "t_pkg/netgen";
+  }
+
   # Dockerfile dependencies
 
   "build/build" -> "p_klayout_build/build" -> d_klayout;
@@ -114,6 +140,10 @@ digraph G {
   "build/base" -> "p_magic_build/base" -> d_magic;
   "scratch" -> "p_magic_scratch" -> d_magic;
 
+  "build/build" -> "p_netgen_build/build" -> d_netgen;
+  "build/base" -> "p_netgen_build/base" -> d_netgen;
+  "scratch" -> "p_netgen_scratch" -> d_netgen;
+
   # Image dependencies
 
   { edge [style=dashed]
@@ -121,6 +151,8 @@ digraph G {
     "p_klayout_scratch" -> "pkg/klayout";
     "p_magic_build/base" -> "magic";
     "p_magic_scratch" -> "pkg/magic";
+    "p_netgen_build/base" -> "netgen";
+    "p_netgen_scratch" -> "pkg/netgen";
   }
 
 }
