@@ -23,6 +23,6 @@ cd $(dirname "$0")
 ./_env.sh
 
 which netgen
-netgen --version
+netgen -batch
 
 ./_todo.sh
