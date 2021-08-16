@@ -41,6 +41,7 @@ jobs:
       matrix:
         os:
           - debian/buster
+          - debian/bullseye
     steps:
 
     - uses: actions/checkout@v2
@@ -78,6 +79,7 @@ jobs:
       matrix:
         os:
           - debian/buster
+          - debian/bullseye
     steps:
 
     - uses: actions/checkout@v2
@@ -118,6 +120,7 @@ jobs:
       matrix:
         os:
           - debian/buster
+          - debian/bullseye
         img:
           - scypy
           - octave
