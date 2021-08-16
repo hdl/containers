@@ -37,6 +37,7 @@ jobs:
       matrix:
         os:
           - debian/buster
+          - debian/bullseye
     steps:
 
     - uses: actions/checkout@v2
