@@ -163,7 +163,7 @@ All the workflows in this repo are triggered by push events, CRON jobs, or manua
 
 The strategical priorities are the following:
 
-* Add the missing ASIC tools to collection `debian/buster`.
+* Add the missing ASIC tools to collection `debian/bullseye`.
 Following the order in https://github.com/efabless/openlane#openlane-design-stages[efabless/openlane: OpenLANE Design Stages]
 is suggested.
 

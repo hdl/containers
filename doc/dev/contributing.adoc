@@ -6,7 +6,7 @@ As explained in link:../index.html#_tools_and_images[Tools and images] and in th
 multiple collections of images are provided.
 For each collection, a set of base images is provided, which are to be used for building and for runtime.
 These are defined in `base.dockerfile`.
-See, for instance, link:{repotree}debian-buster/base.dockerfile[`debian-buster/base.dockerfile`].
+See, for instance, link:{repotree}debian-bullseye/base.dockerfile[`debian-bullseye/base.dockerfile`].
 All the images in the ecosystem are based on these:
 
 * OCIImage:build/base[] Debian Buster or CentOS 7, with updated `ca-certificates`, `curl` and Python 3.
@@ -221,11 +221,11 @@ Furthermore, https://github.com/hdl/smoke-tests[hdl/smoke-test] is a submodule o
 There are a couple of helper scripts in link:{repotree}utils/bin/[`utils/bin/`], for testing the images. Those are used in CI but can be useful locally too:
 
 * `dockerTest BASE_OS IMAGE_NAME [SCRIPT_NAME]`
-** BASE_OS: set/collection of images (e.g. `debian/buster`).
+** BASE_OS: set/collection of images (e.g. `debian/bullseye`).
 ** IMAGE_NAME: image name without the prefix.
 ** (optional) SCRIPT_NAME: name of the test script, only required if it does not match `echo IMAGE_NAME | sed 's#:#--#'`.
 * `dockerTestPkg BASE_OS TAG_NAME [DIR_NAME]`
-** BASE_OS: set/collection of images (e.g. `debian/buster`).
+** BASE_OS: set/collection of images (e.g. `debian/bullseye`).
 ** TAG_NAME: tag name (i.e. image name without `<REGISTRY_PREFIX>/pkg/` prefix).
 ** (optional) DIR_NAME: directory name inside the package image which needs to be copied to the temporary image for testing.
 

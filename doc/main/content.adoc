@@ -14,6 +14,10 @@ Currently available collections are the following:
   https://hub.docker.com/u/hdlc[image:https://img.shields.io/badge/-docker.io/hdlc-555555.svg?longCache=true&style=flat-square&logo=Docker&logoColor=f2f1ef[title='Docker Hub']]
   https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='GitHub Container Registry']]
   and https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl/debian/buster-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='GitHub Container Registry']]
+* `debian/bullseye` based on https://hub.docker.com/_/debian[debian:bullseye-slim]
+** Available as https://gcr.io/hdl-containers/debian/bullseye[image:https://img.shields.io/badge/-gcr.io/hdl--containers/debian/bullseye-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[title='Google Container Registry']]
+** Mirrored to
+  https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl/debian/bullseye-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='GitHub Container Registry']]
 * `centos/7` based on https://hub.docker.com/_/centos[centos:7]
 ** Available as https://gcr.io/hdl-containers/centos/7[image:https://img.shields.io/badge/-gcr.io/hdl--containers/centos/7-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[title='Google Container Registry']]
 ** Mirrored to https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl/centos/7-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='GitHub Container Registry']]
