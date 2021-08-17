@@ -42,6 +42,7 @@ jobs:
       matrix:
         os:
           - debian/buster
+          - debian/bullseye
     steps:
 
     - uses: actions/checkout@v2
@@ -80,6 +81,7 @@ jobs:
       matrix:
         os:
           - debian/buster
+          - debian/bullseye
         task:
           - { arch: ice40, prj: icestorm   }
           - { arch: ecp5,  prj: prjtrellis }
@@ -127,6 +129,7 @@ jobs:
       matrix:
         os:
           - debian/buster
+          - debian/bullseye
     steps:
 
     - uses: actions/checkout@v2
