@@ -59,7 +59,7 @@ RUN cd /tmp/nextpnr/build \
    -DBUILD_GUI=OFF \
    -DBUILD_PYTHON=ON \
    -DUSE_OPENMP=ON \
- && make -j $(nproc) \
+ && make \
  && make DESTDIR=/opt/nextpnr install
 
 #---
