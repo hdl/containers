@@ -228,6 +228,8 @@ def GenerateMap(debug: bool = False):
                             )
                         # Extract image name from IMAGE="name"
                         dfile.argimg = _val[7:-1]
+                    elif _val.startswith("ARCHITECTURE="):
+                        print("Field ARCHITECTURE not handled yet!")
                     else:
                         raise Exception(f"Unknown ARG <{_val}>!")
 
