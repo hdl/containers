@@ -40,9 +40,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - debian/buster
-          - debian/bullseye
+        include:
+
+          # Debian Buster
+          - { os: debian/buster, arch: amd64 }
+
+          # Debian Bullseye
+          - { os: debian/bullseye, arch: amd64 }
+
+    env:
+      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
@@ -82,13 +89,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - debian/buster
-          - debian/bullseye
+        sys:
+
+          # Debian Buster
+          - { os: debian/buster, arch: amd64 }
+
+          # Debian Bullseye
+          - { os: debian/bullseye, arch: amd64 }
+
         task:
           - { arch: ice40, prj: icestorm   }
           - { arch: ecp5,  prj: prjtrellis }
-    name: '[${{ matrix.os }}] impl · ${{ matrix.task.arch }} ${{ matrix.task.prj }}'
+    name: '[${{ matrix.sys.os }}|${{ matrix.sys.arch }}] impl · ${{ matrix.task.arch }} ${{ matrix.task.prj }}'
+    env:
+      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
@@ -98,18 +112,18 @@ jobs:
     - run: ./utils/setup.sh
 
     - run: >-
-        dockerPull -c ${{ matrix.os }}
+        dockerPull -c ${{ matrix.sys.os }}
         build/impl
         pkg/nextpnr/${{ matrix.task.arch }}
         pkg/${{ matrix.task.prj }}
 
     - run: >-
-        dockerBuild -c ${{ matrix.os }} -d
+        dockerBuild -c ${{ matrix.sys.os }} -d
         impl/${{ matrix.task.arch }}
         impl/${{ matrix.task.prj }}
 
-    - run: dockerTest ${{ matrix.os }} impl/${{ matrix.task.arch }}
-    - run: dockerTest ${{ matrix.os }} impl/${{ matrix.task.prj  }}
+    - run: dockerTest ${{ matrix.sys.os }} impl/${{ matrix.task.arch }}
+    - run: dockerTest ${{ matrix.sys.os }} impl/${{ matrix.task.prj  }}
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -122,7 +136,7 @@ jobs:
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush ${{ matrix.os }}
+        dockerPush ${{ matrix.sys.os }}
         impl/${{ matrix.task.arch }}
         impl/${{ matrix.task.prj }}
 
@@ -133,9 +147,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - debian/buster
-          - debian/bullseye
+        include:
+
+          # Debian Buster
+          - { os: debian/buster, arch: amd64 }
+
+          # Debian Bullseye
+          - { os: debian/bullseye, arch: amd64 }
+
+    env:
+      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2

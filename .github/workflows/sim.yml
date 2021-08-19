@@ -39,9 +39,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - debian/buster
-          - debian/bullseye
+        include:
+
+          # Debian Buster
+          - { os: debian/buster, arch: amd64 }
+
+          # Debian Bullseye
+          - { os: debian/bullseye, arch: amd64 }
+
+    env:
+      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
@@ -77,9 +84,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - debian/buster
-          - debian/bullseye
+        include:
+
+          # Debian Buster
+          - { os: debian/buster, arch: amd64 }
+
+          # Debian Bullseye
+          - { os: debian/bullseye, arch: amd64 }
+
+    env:
+      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
@@ -118,12 +132,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - debian/buster
-          - debian/bullseye
+        sys:
+
+          # Debian Buster
+          - { os: debian/buster, arch: amd64 }
+
+          # Debian Bullseye
+          - { os: debian/bullseye, arch: amd64 }
+
         img:
           - scypy
           - octave
+    env:
+      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
@@ -133,12 +154,12 @@ jobs:
     - run: ./utils/setup.sh
 
     - run: >-
-        dockerBuild -c ${{ matrix.os }} -d
+        dockerBuild -c ${{ matrix.sys.os }} -d
         sim/${{ matrix.img }}-slim
         sim/${{ matrix.img }}
 
-    - run: dockerTest ${{ matrix.os }} sim/${{ matrix.img }}-slim
-    - run: dockerTest ${{ matrix.os }} sim/${{ matrix.img }}
+    - run: dockerTest ${{ matrix.sys.os }} sim/${{ matrix.img }}-slim
+    - run: dockerTest ${{ matrix.sys.os }} sim/${{ matrix.img }}
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -151,6 +172,6 @@ jobs:
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush ${{ matrix.os }}
+        dockerPush ${{ matrix.sys.os }}
         sim/${{ matrix.img }}-slim
         sim/${{ matrix.img }}

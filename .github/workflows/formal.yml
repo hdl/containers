@@ -39,9 +39,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - debian/buster
-          - debian/bullseye
+        include:
+
+          # Debian Buster
+          - { os: debian/buster, arch: amd64 }
+
+          # Debian Bullseye
+          - { os: debian/bullseye, arch: amd64 }
+
+    env:
+      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
