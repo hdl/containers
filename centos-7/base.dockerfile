@@ -17,7 +17,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM centos:7 AS base
+ARG ARCHITECTURE='amd64'
+
+#---
+
+FROM $ARCHITECTURE/centos:7 AS base
 
 RUN yum install -y https://repo.ius.io/ius-release-el$(rpm -E '%{rhel}').rpm && yum install -y \
     curl \
