@@ -17,7 +17,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM debian:bullseye-slim AS base
+ARG ARCHITECTURE='amd64'
+
+#---
+
+FROM $ARCHITECTURE/debian:bullseye-slim AS base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
