@@ -1,26 +1,35 @@
-== Collections
+== Collections and architectures
 
-In order to reduce bandwidth and disk usage when pulling multiple of the images provided in this project, containers are
-organised in _collections_.
+Images are organised in _collections_ and built for multiple architectures.
 A _collection_ is a set of images which share a common ancestor; a base layer.
+Having images with a common ancestor allows reducing bandwidth and disk usage when pulling several of them.
 See https://docs.docker.com/storage/storagedriver/#images-and-layers[docs.docker.com: About storage drivers | Images and layers].
 
-Currently available collections are the following:
 
-* `debian/buster` based on https://hub.docker.com/_/debian[debian:buster-slim]
-** Available as https://gcr.io/hdl-containers/debian/buster[image:https://img.shields.io/badge/-gcr.io/hdl--containers/debian/buster-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[title='Google Container Registry']]
-** Mirrored to
-  https://gcr.io/hdl-containers[image:https://img.shields.io/badge/-gcr.io/hdl--containers-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[title='Google Container Registry']]
-  https://hub.docker.com/u/hdlc[image:https://img.shields.io/badge/-docker.io/hdlc-555555.svg?longCache=true&style=flat-square&logo=Docker&logoColor=f2f1ef[title='Docker Hub']]
-  https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='GitHub Container Registry']]
-  and https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl/debian/buster-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='GitHub Container Registry']]
-* `debian/bullseye` based on https://hub.docker.com/_/debian[debian:bullseye-slim]
-** Available as https://gcr.io/hdl-containers/debian/bullseye[image:https://img.shields.io/badge/-gcr.io/hdl--containers/debian/bullseye-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[title='Google Container Registry']]
-** Mirrored to
-  https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl/debian/bullseye-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='GitHub Container Registry']]
-* `centos/7` based on https://hub.docker.com/_/centos[centos:7]
-** Available as https://gcr.io/hdl-containers/centos/7[image:https://img.shields.io/badge/-gcr.io/hdl--containers/centos/7-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[title='Google Container Registry']]
-** Mirrored to https://github.com/hdl/containers/packages[image:https://img.shields.io/badge/-ghcr.io/hdl/centos/7-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[title='GitHub Container Registry']]
+Collections:
+
+* `debian/buster` based on `ARCHITECTURE/debian:buster-slim` (default)
+* `debian/bullseye` based on `ARCHITECTURE/debian:bullseye-slim`
+* `centos/7` based on `ARCHITECTURE/centos:7`
+
+Architectures:
+
+* https://hub.docker.com/u/amd64[amd64] (default)
+* https://hub.docker.com/u/arm32v7[arm32v7]
+* https://hub.docker.com/u/arm64v8[arm64v8]
+* https://hub.docker.com/u/ppc64le[ppc64le]
+* https://hub.docker.com/u/s390x[s390x]
+* https://hub.docker.com/u/mips64le[mips64le]
+* https://hub.docker.com/u/riscv64[riscv64]
+
+Each image is published to image:https://img.shields.io/badge/-gcr.io/hdl--containers/&#91;ARCHITECTURE/&#93;&#91;COLLECTION/&#93;IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[] and image:https://img.shields.io/badge/-ghcr.io/hdl/&#91;ARCHITECTURE/&#93;&#91;COLLECTION/&#93;IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[].
+
+However, the `ARCHITECURE` and `COLLECTION` are optional because:
+
+* Images for the default architecture are mirrored to image:https://img.shields.io/badge/-gcr.io/hdl--containers/COLLECTION/IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[] and image:https://img.shields.io/badge/-ghcr.io/hdl/COLLECTION/IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[].
+* Images of the default collection are mirrored to image:https://img.shields.io/badge/-gcr.io/hdl--containers/ARCHITECTURE/IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[] and image:https://img.shields.io/badge/-ghcr.io/hdl/ARCHITECTURE/IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[].
+* Images of the default collection for the default architecture are mirrored to https://hub.docker.com/u/hdlc[image:https://img.shields.io/badge/-docker.io/hdlc-555555.svg?longCache=true&style=flat-square&logo=Docker&logoColor=f2f1ef[title='Docker Hub']].
+* Images of the default collection for the default architecture which are not `build` or `pkg` are mirrored to image:https://img.shields.io/badge/-gcr.io/hdl--containers/IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[] and image:https://img.shields.io/badge/-ghcr.io/hdl/IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[].
 
 [IMPORTANT]
 ====
@@ -31,9 +40,10 @@ See link:ug/index.html[User Guide] for further details.
 
 [IMPORTANT]
 ====
-Some tools are available in multiple collections, while others are built in a subset only.
+The table below shows the tools available in the default collection for the default architecture.
+Some tools are available in a subset of collections or for a subset of architectures only.
 Browse the registries and/or the Continuous Integration workflows for finding images available in collections other than
-Debian Buster.
+the default.
 ====
 
 == Tools and images

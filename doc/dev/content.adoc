@@ -169,7 +169,7 @@ is suggested.
 
 * Add the missing tools to collection `centos/7`.
 This collection is currently empty (it contains the base dockerfile only).
-It was added because OpenLane containers are based on `centos:7``, but may be updated to `centos:8`.
+It was added because OpenLane containers are based on `centos:7`, but may be updated to `centos:8`.
 Moreover, some DARPA users might be constrained to `centos:6`.
 We should confirm that.
 
@@ -183,7 +183,7 @@ We didn't implement it yet because we'd like it to be automatically sychronised 
 
 * Enhance the (atomic) https://github.com/hdl/smoke-tests[smoke-tests], which are currently placeholders mostly.
 
-* Provide multiarch images (at least, add arm32v7 and arm64v8 variants).
+* Provide multiarch manifests.
 See https://github.com/dbhi/qus[dbhi/qus] and https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/[Multi-arch build and images, the simple way].
 
 * Versioning.
