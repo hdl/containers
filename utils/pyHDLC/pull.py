@@ -25,10 +25,11 @@ def PullImage(
     image: Union[str, List[str]],
     registry: Optional[str] = "gcr.io/hdl-containers",
     collection: Optional[str] = "debian/buster",
+    architecture: Optional[str] = "amd64",
     dry: Optional[bool] = False,
 ) -> None:
     def _pull(img):
-        _imageName = f"{registry}/{collection}/{img}"
+        _imageName = "{0}/{1}/{2}/{3}".format(registry, architecture, collection, img)
         _exec(
             args=["docker", "pull", _imageName], dry=dry, collapse=f"Pull {_imageName}"
         )

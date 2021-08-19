@@ -27,6 +27,21 @@ pip3 install -r pyHDLC/requirements.txt
 
 if [ -n "$CI" ]; then
   echo "$(pwd)/bin" >> $GITHUB_PATH
+
+  if [ -n "$HDL_ARCH" ]; then
+    unset _arch
+    case $HDL_ARCH in
+      arm32v7) _arch="arm";;
+      arm64v8) _arch="aarch64";;
+      ppc64le|s390x|riscv64) _arch="$HDL_ARCH";;
+    esac
+    if [ -n "$_arch" ]; then
+      docker run --rm --privileged aptman/qus -s -- -p $_arch
+    fi
+  fi
+
 else
+
   export PATH="$PATH:$(pwd)/bin"
+
 fi

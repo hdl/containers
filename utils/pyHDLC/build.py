@@ -98,6 +98,7 @@ def BuildImage(
     image: Union[str, List[str]],
     registry: Optional[str] = "gcr.io/hdl-containers",
     collection: Optional[str] = "debian/buster",
+    architecture: Optional[str] = "amd64",
     dockerfile: Optional[str] = None,
     target: Optional[str] = None,
     argimg: Optional[str] = None,
@@ -117,22 +118,27 @@ def BuildImage(
             if tgt is None:
                 tgt = "pkg"
 
-        _imageName = f"{reg}/{collection}/{img}"
+        _imageName = "{0}/{1}/{2}/{3}".format(reg, architecture, collection, img)
 
         cmd = ["docker", "build"]
         cmd += ["--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1"]
-        cmd += ["--build-arg", f"REGISTRY={registry}/{collection}"]
+        cmd += [
+            "--build-arg",
+            "ARCHITECTURE={0}".format(architecture)
+            if dfile == "base"
+            else "REGISTRY={0}/{1}/{2}".format(registry, architecture, collection),
+        ]
         cmd += ["-t", _imageName]
 
         if tgt is not None:
-            cmd += [f"--target={tgt}"]
+            cmd += ["--target={0}".format(tgt)]
 
         if argimg is not None:
-            cmd += ["--build-arg", f"IMAGE={argimg}"]
+            cmd += ["--build-arg", "IMAGE={0}".format(argimg)]
 
-        _dfile = Path(collection.replace('/','-')) / f"{dfile}.dockerfile"
+        _dfile = Path(collection.replace("/", "-")) / "{0}.dockerfile".format(dfile)
         if not _dfile.exists():
-            raise Exception(f"Dockerfile <{_dfile}> does not exist!")
+            raise Exception("Dockerfile <{0}> does not exist!".format(_dfile))
 
         cmd += ["-f", str(_dfile), "."]
 

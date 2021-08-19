@@ -19,8 +19,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-HDL_REGISTRY=${HDL_REGISTRY:-gcr.io/hdl-containers}
-
 case "$#" in
   1)
     unset _collection
@@ -41,4 +39,4 @@ esac
 $(command -v winpty) docker run --rm -it \
   -v //var/run/docker.sock://var/run/docker.sock \
   wagoodman/dive \
-  "${HDL_REGISTRY}/${_collection}${_image}"
+  "${HDL_REGISTRY:-gcr.io/hdl-containers/amd64}/${_collection}${_image}"

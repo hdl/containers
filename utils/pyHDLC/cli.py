@@ -63,6 +63,14 @@ class WithRegistryAttributes(Attribute):
                 help="name of the collection/subset of images.",
                 default="debian/buster",
             ),
+            ArgumentAttribute(
+                "-a",
+                "--arch",
+                dest="Architecture",
+                type=str,
+                help="name of the architecture.",
+                default="amd64",
+            ),
             # ... add more if needed
         ]:
             self._AppendAttribute(
@@ -153,7 +161,7 @@ class CLI(ArgParseMixin):
         help="target stage in the dockerfile.",
     )
     @ArgumentAttribute(
-        "-a",
+        "-i",
         "--argimg",
         dest="ArgImg",
         type=str,
@@ -178,6 +186,7 @@ class CLI(ArgParseMixin):
             image=args.Image,
             registry=args.Registry,
             collection=args.Collection,
+            architecture=args.Architecture,
             dockerfile=args.Dockerfile,
             target=args.Target,
             argimg=args.ArgImg,
@@ -201,6 +210,7 @@ class CLI(ArgParseMixin):
             image=args.Image,
             registry=args.Registry,
             collection=args.Collection,
+            architecture=args.Architecture,
             dry=args.noexec,
             mirror=args.Mirror,
         )
@@ -212,6 +222,7 @@ class CLI(ArgParseMixin):
             image=args.Image,
             registry=args.Registry,
             collection=args.Collection,
+            architecture=args.Architecture,
             dry=args.noexec,
         )
 

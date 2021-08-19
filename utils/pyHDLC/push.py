@@ -25,6 +25,7 @@ def PushImage(
     image: Union[str, List[str]],
     registry: Optional[str] = "gcr.io/hdl-containers",
     collection: Optional[str] = "debian/buster",
+    architecture: Optional[str] = "amd64",
     dry: Optional[bool] = False,
     mirror: Optional[Union[str, List[str]]] = None,
 ) -> None:
@@ -32,14 +33,18 @@ def PushImage(
         _exec(args=["docker", "push", imgName], dry=dry, collapse=f"Push {imgName}")
 
     def _push(img):
-        _imageName = f"{registry}/{collection}/{img}"
+        _imageName = "{0}/{1}/{2}/{3}".format(registry, architecture, collection, img)
         _dpush(_imageName)
         if mirror is not None:
             for _mirror in mirror:
                 _img = (
-                    img.replace("/", ":", 1).replace("/", "--") if _mirror.startswith("docker.io") else img
+                    img.replace("/", ":", 1).replace("/", "--")
+                    if _mirror.startswith("docker.io")
+                    else img
                 )
-                _mirrorName = f"{_mirror.replace('#C',collection)}/{_img}"
+                _mirrorName = "{0}/{1}".format(
+                    _mirror.replace("#A", architecture).replace("#C", collection), _img
+                )
                 _exec(
                     args=["docker", "tag", _imageName, _mirrorName],
                     dry=dry,

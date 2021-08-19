@@ -23,22 +23,21 @@ set -e
 
 cd $(dirname "$0")/../..
 
-HDL_REGISTRY=${HDL_REGISTRY:-gcr.io/hdl-containers}
-
-_collection="$1"
+_prefix="${HDL_REGISTRY:-gcr.io/hdl-containers}/${HDL_ARCH:-amd64}/${1}"
 _img="$2"
 _tag="`echo $2 | sed 's#/#--#'`"
 _dir="`echo $2 | sed 's#/#-#'`"
 if [ -n "$3" ]; then
   _dir="$3"
 fi
+_testimg="${_prefix}/tespkg:${_tag}"
 
-echo "::group::Build ${HDL_REGISTRY}/${_collection}/tespkg:${_tag}"
-docker build -t "${HDL_REGISTRY}/${_collection}"/testpkg:"${_tag}" - <<-EOF
+echo "::group::Build ${_testimg}"
+docker build -t "${_testimg}" - <<-EOF
 FROM alpine
 RUN apk add -U --no-cache file tree
-COPY --from=${HDL_REGISTRY}/${_collection}/pkg/${_img} /${_dir} /
+COPY --from=${_prefix}/pkg/${_img} /${_dir} /
 EOF
 echo '::endgroup::'
 
-docker run --rm -v /$(pwd)://wrk "${HDL_REGISTRY}/${_collection}"/testpkg:"${_tag}" //wrk/test/"${_tag}".pkg.sh
+docker run --rm -v /$(pwd)://wrk "${_testimg}" //wrk/test/"${_tag}".pkg.sh

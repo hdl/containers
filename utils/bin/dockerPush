@@ -23,16 +23,41 @@ set -e
 
 cd $(dirname "$0")/../..
 
+HDL_DEFAULT_COLLECTION="${HDL_DEFAULT_COLLECTION:-debian/buster}"
+HDL_DEFAULT_ARCH="${HDL_DEFAULT_ARCH:-amd64}"
+HDL_ARCH="${HDL_ARCH:-amd64}"
+
 _collection="$1"
 shift
 
-_push() {
-  ./utils/pyHDLC/cli.py push -c "${_collection}" -m ${_mirror} 'ghcr.io/hdl/#C' -- $@
+_print() {
+  printf "\e[34m$@\e[0m\n"
 }
 
-if [ "$_collection" != "debian/buster" ]; then
-  _push $@
-  exit $?
+_push() {
+  _mirrors="${_mirror} ghcr.io/hdl/#A/#C"
+  _print "[dockerPush] mirrors: ${_mirrors}"
+  ./utils/pyHDLC/cli.py push -a "${HDL_ARCH}" -c "${_collection}" -m ${_mirrors} -- $@
+}
+
+_AnyCollection_DefaultArch_mirrors='gcr.io/hdl-containers/#C ghcr.io/hdl/#C'
+_DefaultCollection_AnyArch_mirrors='gcr.io/hdl-containers/#A ghcr.io/hdl/#A'
+
+if [ "$_collection" != "$HDL_DEFAULT_COLLECTION" ]; then
+  if [ "$HDL_ARCH" != "$HDL_DEFAULT_ARCH" ]; then
+    _print "[dockerPush] non-default collection, non-default arch"
+    _push $@
+  else
+    _print "[dockerPush] non-default collection, default arch (future manifest?)"
+    _mirror="$_AnyCollection_DefaultArch_mirrors" _push $@
+  fi
+  exit
+fi
+
+if [ "$HDL_ARCH" != "$HDL_DEFAULT_ARCH" ]; then
+  _print "[dockerPush] default collection, non-default arch"
+  _mirror="$_DefaultCollection_AnyArch_mirrors" _push $@
+  exit
 fi
 
 unset _toRoot
@@ -49,14 +74,14 @@ for item; do
   esac
 done
 
-_hpush() {
-  _mirror="${_mirror} docker.io/hdlc" _push $@
-}
+_DefaultCollection_DefaultArch_mirrors="${_DefaultCollection_AnyArch_mirrors} ${_AnyCollection_DefaultArch_mirrors} docker.io/hdlc"
 
 if [ -n "$_nonRootOnly" ]; then
-    _hpush $_nonRootOnly
+  _print "[dockerPush] default collection, default arch, non-root (future manifest?)"
+  _mirror="${_DefaultCollection_DefaultArch_mirrors}" _push $_nonRootOnly
 fi
 
 if [ -n "$_toRoot" ]; then
-  _mirror='gcr.io/hdl-containers ghcr.io/hdl' _hpush $_toRoot
+  _print "[dockerPush] default collection, default arch, root (future manifest?)"
+  _mirror="${_DefaultCollection_DefaultArch_mirrors} gcr.io/hdl-containers ghcr.io/hdl" _push $_toRoot
 fi

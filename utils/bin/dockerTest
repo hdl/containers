@@ -23,14 +23,14 @@ set -e
 
 cd $(dirname "$0")/../..
 
-HDL_REGISTRY=${HDL_REGISTRY:-gcr.io/hdl-containers}
+_img="${2}"
+_image="${HDL_REGISTRY:-gcr.io/hdl-containers}/${HDL_ARCH:-amd64}/${1}/${_img}"
 
-_collection="$1"
-_image="$2"
+docker inspect --format='{{ println "Architecture:" .Architecture .Variant }}{{ println "Size:" .Size }}VirtualSize: {{ .VirtualSize }}' "${_image}"
 
-_script="`echo ${_image} | sed -e 's#:#--#' -e 's#/#--#'`"
+_script="`echo ${_img} | sed -e 's#:#--#' -e 's#/#--#'`"
 if [ -n "$3" ]; then
   _script="$3"
 fi
 
-docker run --rm -v /$(pwd)://wrk "${HDL_REGISTRY}/${_collection}/${_image}" //wrk/test/"${_script}".sh
+docker run --rm -v /$(pwd)://wrk "${_image}" //wrk/test/"${_script}".sh

@@ -46,7 +46,7 @@ def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] 
         check_call(args, stderr=STDOUT)
 
     if isGroup:
-        print("\n::endgroup::")
+        print("\n::endgroup::\n")
         sys.stdout.flush()
 
 
