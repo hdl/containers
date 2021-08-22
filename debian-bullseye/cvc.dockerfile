@@ -24,8 +24,7 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 FROM $REGISTRY/build/build AS build
 
-RUN mkdir /usr/share/man/man1 \
- && apt-get update -qq \
+RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     cmake \
     libgmp-dev \
