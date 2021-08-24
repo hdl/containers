@@ -132,6 +132,7 @@ include::context.adoc[]
 * https://github.com/The-OpenROAD-Project[The-OpenROAD-Project]
 * https://github.com/efabless/openlane[efabless/openlane]
 * https://github.com/carlosedp/riscv-bringup[RISC-V bring-up tracker]
+* https://docs.google.com/document/d/1hSLKsz9xcEJgAMmYYer5cDwvPqas9_JGRUAgEORx1Yw[A Step-by-Step Example: Layout of a CMOS Inverter Using SkyWater Technology (SKW) 130nm Process]
 
 === GHDL
 
