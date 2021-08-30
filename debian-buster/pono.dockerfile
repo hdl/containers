@@ -27,9 +27,9 @@ FROM $REGISTRY/build/build AS build
 RUN mkdir -p /usr/share/man/man1/ \
  && apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    autoconf \
     binutils \
     cmake \
-    autoconf \
     libgmp-dev \
     m4 \
     python3-toml \
@@ -39,10 +39,10 @@ RUN mkdir -p /usr/share/man/man1/ \
  && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /tmp/pono && cd /tmp/pono \
- &&  curl -fsSL https://codeload.github.com/upscale-project/pono/tar.gz/master | tar xzf - --strip-components=1 \
- && ./contrib/setup-smt-switch.sh \
+ && curl -fsSL https://codeload.github.com/upscale-project/pono/tar.gz/master | tar xzf - --strip-components=1 \
  && ./contrib/setup-bison.sh \
  && ./contrib/setup-flex.sh \
+ && ./contrib/setup-smt-switch.sh \
  && ./contrib/setup-btor2tools.sh \
  && ./configure.sh \
  && make -C build -j$(nproc) PREFIX=/usr/local/ \
