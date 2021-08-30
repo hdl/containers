@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
+ARG IMAGE="build/base"
 
 #---
 
@@ -49,7 +50,7 @@ COPY --from=build /opt/verilator /verilator
 
 #---
 
-FROM $REGISTRY/build/base
+FROM $REGISTRY/$IMAGE
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
