@@ -35,7 +35,7 @@ RUN apt-get update -qq \
     python3-wheel
 
 RUN mkdir /tmp/osvb \
- && git clone -b stable/1.4 --recurse-submodules https://github.com/cocotb/cocotb /tmp/cocotb \
+ && git clone -b master --recurse-submodules https://github.com/cocotb/cocotb /tmp/cocotb \
  && cd /tmp/cocotb \
  && python3 setup.py bdist_wheel \
  && mv dist/*.whl /tmp/osvb/ \
