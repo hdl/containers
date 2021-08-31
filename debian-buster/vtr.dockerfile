@@ -42,15 +42,11 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://github.com/verilog-to-routing/vtr-verilog-to-routing.git /tmp/vtr \
- && cd /tmp/vtr \
- && make PREFIX=/usr/local -j $(nproc) \
- && make DESTDIR=/opt/vtr PREFIX=/usr/local install
-
-# FIXME: This should not be required, but the PREFIX in the previous step seems not to be honored.
-RUN cd /opt/vtr \
- && mkdir usr \
- && mv tmp/vtr/build usr/local \
- && rm -rf tmp
+ && mkdir -p /tmp/vtr/build \
+ && cd /tmp/vtr/build \
+ && cmake -G "Ninja" -DCMAKE_INSTALL_PREFIX="/usr/local" .. \
+ && cmake --build ./ \
+ && DESTDIR=/opt/vtr cmake --build ./ --target install
 
 #---
 
