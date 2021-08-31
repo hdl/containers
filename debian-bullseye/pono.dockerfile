@@ -29,7 +29,11 @@ RUN mkdir -p /usr/share/man/man1/ \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     autoconf \
     binutils \
+    bison \
     cmake \
+    flex \
+    libbison-dev \
+    libfl-dev \
     libgmp-dev \
     m4 \
     python3-toml \
@@ -40,8 +44,6 @@ RUN mkdir -p /usr/share/man/man1/ \
 
 RUN mkdir /tmp/pono && cd /tmp/pono \
  && curl -fsSL https://codeload.github.com/upscale-project/pono/tar.gz/master | tar xzf - --strip-components=1 \
- && ./contrib/setup-bison.sh \
- && ./contrib/setup-flex.sh \
  && ./contrib/setup-smt-switch.sh \
  && ./contrib/setup-btor2tools.sh \
  && ./configure.sh \
