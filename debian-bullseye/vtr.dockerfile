@@ -25,27 +25,19 @@ FROM $REGISTRY/build/dev as build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    ninja-build \
-    libssl-dev \
-    autoconf \
-    automake \
     bison \
-    binutils \
-    binutils-gold \
     build-essential \
+    cmake \
     flex \
     fontconfig \
     gperf \
     libcairo2-dev \
     libgtk-3-dev \
-    libevent-dev \
     libfontconfig1-dev \
     liblist-moreutils-perl \
-    libncurses5-dev \
     libx11-dev \
     libxft-dev \
-    libxml++2.6-dev \
-    python3-lxml \
+    ninja-build \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
