@@ -56,6 +56,7 @@ digraph G {
       "openfpgaloader"
       "prjtrellis"
       "verilator"
+      "vtr"
       "yosys"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
@@ -83,6 +84,7 @@ digraph G {
       "pkg/yices2"
       "pkg/yosys"
       "pkg/verilator"
+      "pkg/vtr"
       "pkg/z3"
     }
     { node [color=brown, fontcolor=brown]
@@ -216,6 +218,8 @@ digraph G {
       "pkg/openfpgaloader"
       "prjtrellis"
       "pkg/prjtrellis"
+      "vtr"
+      "pkg/vtr"
     }
   }
 

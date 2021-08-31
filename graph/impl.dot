@@ -33,6 +33,7 @@ digraph G {
     d_openfpgaloader [label="openfpgaloader"];
     d_prjtrellis     [label="prjtrellis"];
     d_prog           [label="prog"];
+    d_vtr            [label="vtr"];
   }
 
   # Images
@@ -52,6 +53,7 @@ digraph G {
       "nextpnr"
       "openfpgaloader"
       "prjtrellis"
+      "vtr"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
       "pkg/apicula"
@@ -62,6 +64,7 @@ digraph G {
       "pkg/nextpnr/ecp5"
       "pkg/openfpgaloader"
       "pkg/prjtrellis"
+      "pkg/vtr"
     }
     { node [color=brown, fontcolor=brown]
       "nextpnr/icestorm"
@@ -331,6 +334,29 @@ digraph G {
     "prog" -> "t_prog";
   }
 
+  subgraph cluster_vtr {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_vtr_build/dev"    [label="build/dev"]
+      "p_vtr_build/base"   [label="build/base"]
+      "p_vtr_scratch"      [label="scratch"]
+    }
+
+    d_vtr -> {
+      "vtr"
+      "pkg/vtr"
+     } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red]
+      "t_vtr"     [label="vtr"];
+      "t_pkg/vtr" [label="vtr.pkg"];
+    }
+
+    "vtr" -> "t_vtr";
+    "pkg/vtr" -> "t_pkg/vtr";
+  }
+
   { rank=same
     d_icestorm
     d_prjtrellis
@@ -381,6 +407,10 @@ digraph G {
   "build/base" -> "p_prog_build/base" -> d_prog;
   "pkg/icestorm" -> "p_prog_icestorm" -> d_prog;
 
+  "build/dev" -> "p_vtr_build/dev" -> d_vtr;
+  "build/base" -> "p_vtr_build/base" -> d_vtr;
+  "scratch" -> "p_vtr_scratch" -> d_vtr;
+
   # Image dependencies
 
   { edge [style=dashed]
@@ -427,6 +457,9 @@ digraph G {
 
     "p_prjtrellis_scratch" -> "pkg/prjtrellis";
     "p_prjtrellis_build/base" -> "prjtrellis";
+
+    "p_vtr_build/base" -> "vtr";
+    "p_vtr_scratch" -> "pkg/vtr";
   }
 
   { edge [style=dashed, color=grey]

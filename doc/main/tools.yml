@@ -279,6 +279,16 @@ verilator:
 
 #---
 
+vtr:
+  src: true
+  url: 'https://hdl.github.io/awesome/items/vtr'
+  pkg:
+    - 'vtr'
+  use:
+    - 'vtr'
+
+#---
+
 vunit:
   src: true
   url: 'https://hdl.github.io/awesome/items/vunit'

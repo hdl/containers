@@ -133,6 +133,11 @@ GHAStatus:magic[]
 --
 GHAStatus:netgen[]
 --
+* {blank}
++
+--
+GHAStatus:vtr[]
+--
 
 a|* {blank}
 +
