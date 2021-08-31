@@ -116,7 +116,7 @@ digraph G {
     "pkg/apicula" -> "t_pkg/apicula";
   }
 
-  subgraph cluster_arachenpnr {
+  subgraph cluster_arachepnr {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_arachnepnr_pkg/icestorm" [label="pkg/icestorm"]
