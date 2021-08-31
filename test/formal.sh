@@ -24,3 +24,4 @@ set -e
 cd $(dirname "$0")
 
 ./formal--min.sh
+./smoke-tests/boolector.sh
