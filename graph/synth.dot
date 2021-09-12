@@ -53,16 +53,16 @@ digraph G {
 
   { node [shape=cylinder, color=orange, fontcolor=orange]
     "scratch"
-    "ghdl/pkg:buster-mcode"
-    "ghdl/pkg:buster-llvm-7";
+    "ghdl/pkg:bullseye-mcode"
+    "ghdl/pkg:bullseye-llvm-9";
   }
 
   { rank=same
     "build/base"
     "build/build"
     "scratch"
-    "ghdl/pkg:buster-mcode"
-    "ghdl/pkg:buster-llvm-7"
+    "ghdl/pkg:bullseye-mcode"
+    "ghdl/pkg:bullseye-llvm-9"
   }
 
   # Workflows
@@ -72,8 +72,8 @@ digraph G {
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_ghdl_build/base" [label="build/base"]
       "p_ghdl_scratch" [label="scratch"]
-      "p_ghdl_buster" [label="ghdl/pkg:buster-mcode"]
-      "p_ghdl_buster-llvm" [label="ghdl/pkg:buster-llvm-7"]
+      "p_ghdl_bullseye" [label="ghdl/pkg:bullseye-mcode"]
+      "p_ghdl_bullseye-llvm" [label="ghdl/pkg:bullseye-llvm-9"]
     }
 
     d_ghdl -> { rank=same
@@ -149,8 +149,8 @@ digraph G {
   # Dockerfile dependencies
 
   "scratch" -> "p_ghdl_scratch" -> d_ghdl;
-  "ghdl/pkg:buster-mcode" -> "p_ghdl_buster" -> d_ghdl;
-  "ghdl/pkg:buster-llvm-7" -> "p_ghdl_buster-llvm" -> d_ghdl;
+  "ghdl/pkg:bullseye-mcode" -> "p_ghdl_bullseye" -> d_ghdl;
+  "ghdl/pkg:bullseye-llvm-9" -> "p_ghdl_bullseye-llvm" -> d_ghdl;
   "build/base" -> "p_ghdl_build/base" -> d_ghdl;
 
   "pkg/ghdl" -> "p_ghdl-yosys-plugin_pkg/ghdl" -> d_ghdlYosysPlugin;
@@ -173,11 +173,11 @@ digraph G {
   }
 
   { edge [style=dashed, color=grey]
-    "p_ghdl_buster" -> {
+    "p_ghdl_bullseye" -> {
       "ghdl",
       "pkg/ghdl"
     };
-    "p_ghdl_buster-llvm" -> {
+    "p_ghdl_bullseye-llvm" -> {
       "ghdl/llvm",
       "pkg/ghdl/llvm"
     };

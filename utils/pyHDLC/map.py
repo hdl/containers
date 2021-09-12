@@ -28,7 +28,7 @@ from build import DefaultOpts
 
 
 ROOT = Path(__file__).resolve().parent.parent
-CDIR = ROOT.parent / "debian-buster"
+CDIR = ROOT.parent / "debian-bullseye"
 
 
 class Stage:

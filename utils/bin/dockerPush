@@ -23,7 +23,7 @@ set -e
 
 cd $(dirname "$0")/../..
 
-HDL_DEFAULT_COLLECTION="${HDL_DEFAULT_COLLECTION:-debian/buster}"
+HDL_DEFAULT_COLLECTION="${HDL_DEFAULT_COLLECTION:-debian/bullseye}"
 HDL_DEFAULT_ARCH="${HDL_DEFAULT_ARCH:-amd64}"
 HDL_ARCH="${HDL_ARCH:-amd64}"
 

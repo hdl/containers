@@ -8,8 +8,8 @@ See https://docs.docker.com/storage/storagedriver/#images-and-layers[docs.docker
 
 Collections:
 
-* `debian/buster` based on `ARCHITECTURE/debian:buster-slim` (default)
-* `debian/bullseye` based on `ARCHITECTURE/debian:bullseye-slim`
+* `debian/bullseye` based on `ARCHITECTURE/debian:bullseye-slim` (default)
+* `debian/buster` based on `ARCHITECTURE/debian:buster-slim`
 * `centos/7` based on `ARCHITECTURE/centos:7`
 
 Architectures:

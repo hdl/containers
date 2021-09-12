@@ -111,8 +111,8 @@ digraph G {
   { node [shape=cylinder, color=orange, fontcolor=orange] rank=same
     "BASE IMAGE"
     "scratch"
-    "ghdl/pkg:buster-mcode"
-    "ghdl/pkg:buster-llvm-7"
+    "ghdl/pkg:bullseye-mcode"
+    "ghdl/pkg:bullseye-llvm-9"
   }
 
   # Dependencies
@@ -121,8 +121,8 @@ digraph G {
 
   {
     "scratch"
-    "ghdl/pkg:buster-mcode"
-    "ghdl/pkg:buster-llvm-7"
+    "ghdl/pkg:bullseye-mcode"
+    "ghdl/pkg:bullseye-llvm-9"
     "build/base"
     "build/build"
   } -> m_synth;

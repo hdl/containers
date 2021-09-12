@@ -38,7 +38,7 @@ Extensions.register do
       dtarget = _arr[0]
       dtag = _arr[1] || 'latest'
       ctag = (tag != 'latest') ? ":#{tag}" : ''
-      rcollection = (['pkg', 'build'].include? dtarget) ? 'debian/buster/' : ''
+      rcollection = (['pkg', 'build'].include? dtarget) ? 'debian/bullseye/' : ''
       text = %(image:https://img.shields.io/docker/image-size/hdlc/#{dtarget}/#{dtag}?longCache=true&style=flat-square&label=#{target}#{ctag}&logo=Docker&logoColor=fff[title='#{target}#{ctag} container image size'])
       (create_anchor parent, text, type: :link, target: %(https://gcr.io/hdl-containers/#{rcollection}#{target})).render
     end

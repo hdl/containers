@@ -140,7 +140,7 @@ optional arguments:
                         (default: amd64)
   -c COLLECTION, --collection COLLECTION
                         name of the collection/subset of images.
-                        (default: debian/buster)
+                        (default: debian/bullseye)
   -r REGISTRY, --registry REGISTRY
                         container image registry prefix.
                         (default: gcr.io/hdl-containers)
@@ -197,18 +197,18 @@ link:{repotree}utils/bin/dockerDive[`dockerDive`] is a wrapper around the wagood
 or two arguments for specifying the image to be inspected.
 The default registry prefix is `gcr.io/hdl-containers`, however, it can be overriden through envvar `HDL_REGISTRY`.
 
-For instance, inspect image `gcr.io/hdl-containers/debian/buster/ghdl`:
+For instance, inspect image `gcr.io/hdl-containers/debian/bullseye/ghdl`:
 
 [source, bash]
 ----
-dockerDive debian/buster ghdl
+dockerDive debian/bullseye ghdl
 ----
 
 or, inspect any image from any registry:
 
 [source, bash]
 ----
-HDL_REGISTRY=docker.io dockerDive python:slim-buster
+HDL_REGISTRY=docker.io dockerDive python:slim-bullseye
 ----
 
 ==== Test

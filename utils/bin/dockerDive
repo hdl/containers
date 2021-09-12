@@ -30,8 +30,8 @@ case "$#" in
   ;;
   *)
     echo "Must provide one or two arguments! For instance:"
-    echo "- dockerDive debian/buster ghdl"
-    echo "- HDL_REGISTRY=docker.io dockerDive python:slim-buster"
+    echo "- dockerDive debian/bullseye ghdl"
+    echo "- HDL_REGISTRY=docker.io dockerDive python:slim-bullseye"
     exit 1
   ;;
 esac
