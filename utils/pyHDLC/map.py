@@ -218,7 +218,7 @@ def GenerateMap(debug: bool = False):
 
         for item in dockerfile.parse_file(str(CDIR / f"{dfilename}.dockerfile")):
 
-            if item.cmd == "arg":
+            if item.cmd.upper() == "ARG":
                 _val = item.value[0]
                 if not _val.startswith("REGISTRY="):
                     if _val.startswith("IMAGE="):
@@ -235,7 +235,7 @@ def GenerateMap(debug: bool = False):
 
                 continue
 
-            if item.cmd == "from":
+            if item.cmd.upper() == "FROM":
                 if stg is not None:
                     # This was not the first stage in this dockerfile, save the previous one
                     dfile.addStage(stg)
@@ -252,7 +252,7 @@ def GenerateMap(debug: bool = False):
 
                 continue
 
-            if item.cmd == "copy":
+            if item.cmd.upper() == "COPY":
                 if "--from=" not in item.flags[0].lower():
                     raise Exception(
                         f"Second item of <{item.flags}> should be '--from=*'!"
@@ -261,7 +261,7 @@ def GenerateMap(debug: bool = False):
 
                 continue
 
-            if item.cmd == "run" and len(item.flags) > 0:
+            if item.cmd.upper() == "RUN" and len(item.flags) > 0:
                 _val = item.flags[0]
                 if _val.startswith("--mount=type="):
                     stg.addDep(dfile.markOrigin(_val.split(",from=")[1].split(",")[0]))
