@@ -111,6 +111,38 @@ COPY --from=pkg-prjtrellis /prjtrellis /
 
 #---
 
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg/prjoxide AS pkg-prjoxide
+
+FROM $REGISTRY/build/nextpnr/build AS build-nexus
+COPY --from=pkg-prjoxide /prjoxide /
+
+RUN cd /tmp/nextpnr/build \
+ && cmake .. \
+   -DARCH=nexus \
+   -DBUILD_GUI=OFF \
+   -DBUILD_PYTHON=ON \
+   -DUSE_OPENMP=ON \
+ && make -j $(nproc) \
+ && make DESTDIR=/opt/nextpnr install
+
+#---
+
+FROM scratch AS pkg-nexus
+COPY --from=build-nexus /opt/nextpnr /nextpnr-nexus
+
+#---
+
+FROM $REGISTRY/build/nextpnr/base AS nexus
+COPY --from=build-nexus /opt/nextpnr /
+
+#---
+
+FROM nexus AS prjoxide
+COPY --from=pkg-prjoxide /prjoxide /
+
+#---
+
 FROM $REGISTRY/build/nextpnr/build AS build-generic
 
 RUN cd /tmp/nextpnr/build \
@@ -137,8 +169,10 @@ COPY --from=build-generic /opt/nextpnr /
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
 FROM $REGISTRY/pkg/nextpnr/ice40 AS pkg-nextpnr-ice40
 FROM $REGISTRY/pkg/nextpnr/ecp5 AS pkg-nextpnr-ecp5
+FROM $REGISTRY/pkg/nextpnr/nexus AS pkg-nextpnr-nexus
 
 FROM $REGISTRY/build/nextpnr/base
 COPY --from=build-generic /opt/nextpnr /
 COPY --from=pkg-nextpnr-ice40 /nextpnr-ice40 /
 COPY --from=pkg-nextpnr-ecp5 /nextpnr-ecp5 /
+COPY --from=pkg-nextpnr-nexus /nextpnr-nexus /

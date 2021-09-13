@@ -193,12 +193,14 @@ nextpnr:
   pkg:
     - 'nextpnr/generic'
     - 'nextpnr/ice40'
+    - 'nextpnr/nexus'
     - 'nextpnr/ecp5'
   use:
     - 'nextpnr/generic'
     - 'nextpnr/ice40'
     - 'nextpnr/ecp5'
     - 'nextpnr/icestorm'
+    - 'nextpnr/prjoxide'
     - 'nextpnr/prjtrellis'
     - 'nextpnr'
   in:
@@ -242,6 +244,8 @@ prjoxide:
     - 'prjoxide'
   use:
     - 'prjoxide'
+  otherin:
+    - 'nextpnr/prjoxide'
 
 #---
 

@@ -92,9 +92,16 @@ jobs:
 
           # Debian Bullseye
           - { os: debian/bullseye, arch: amd64 }
+
         task:
           - { arch: ice40, prj: icestorm   }
           - { arch: ecp5,  prj: prjtrellis }
+          - { arch: nexus, prj: prjoxide   }
+
+        exclude:
+          - sys: { os: debian/buster, arch: amd64 }
+            task: { arch: nexus, prj: prjoxide }
+
     name: '[${{ matrix.sys.os }}|${{ matrix.sys.arch }}] nextpnr · ${{ matrix.task.arch }} ${{ matrix.task.prj }}'
     env:
       HDL_ARCH: ${{ matrix.arch }}
