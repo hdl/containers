@@ -1,0 +1,29 @@
+name: 'test-arg'
+
+on:
+  push:
+
+env:
+  DOCKER_BUILDKIT: 1
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dfile:
+          - workaround
+          - uppercase
+          - lowercase
+          - mount-uppercase
+          - mount-lowercase
+
+    env:
+      HDL_ARCH: ${{ matrix.arch }}
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - run: docker build -t test/img - < .github/test-arg/${{ matrix.dfile }}.dockerfile
