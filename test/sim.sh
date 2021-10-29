@@ -26,6 +26,12 @@ cd $(dirname "$0")
 ./_env.sh
 
 ./ghdl.sh
+cat ghdl.log
+
 ./verilator.sh
+cat verilator.log
+
+./iverilog.sh
+cat iverilog.log
 
 ./_todo.sh

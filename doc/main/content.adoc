@@ -64,7 +64,7 @@ include::tools.adoc[]
 === Images including multiple tools
 
 * **S**imulation:
-** OCIImage:sim[] GHDL + Verilator
+** OCIImage:sim[] GHDL + Verilator + Icarus Verilog
 ** OCIImage:sim/osvb[] cocotb, OSVVM and VUnit; on top of `sim`.
 ** OCIImage:sim/scipy-slim[] `matplotlib` and `numpy`, on top of `sim`.
 ** OCIImage:sim/scipy[] `osvb` on top of `scipy-slim`.

@@ -143,6 +143,7 @@ digraph G {
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_sim_ghdl/llvm" [label="ghdl/llvm"]
       "p_sim_pkg/verilator" [label="pkg/verilator"]
+      "p_sim_pkg/iverilog" [label="pkg/iverilog"]
     }
 
     d_sim -> "sim" [style=dotted];
@@ -224,13 +225,13 @@ digraph G {
   "build/base" -> "p_verilator_build/base" -> d_verilator;
   "scratch" -> "p_verilator_scratch" -> d_verilator;
 
-
   "build/build" -> "p_xyce_build/build" -> d_xyce;
   "build/base" -> "p_xyce_build/base" -> d_xyce;
   "scratch" -> "p_xyce_scratch" -> d_xyce;
 
   "ghdl/llvm" -> "p_sim_ghdl/llvm" -> d_sim;
   "pkg/verilator" -> "p_sim_pkg/verilator" -> d_sim;
+  "pkg/iverilog" -> "p_sim_pkg/iverilog" -> d_sim;
 
   # Image dependencies
 
@@ -258,6 +259,7 @@ digraph G {
 
   { edge [style=dashed, color=grey]
     "p_sim_pkg/verilator" -> "sim";
+    "p_sim_pkg/iverilog" -> "sim";
   }
 
 }

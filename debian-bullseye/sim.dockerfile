@@ -23,10 +23,12 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
 FROM $REGISTRY/pkg/verilator AS pkg-verilator
+FROM $REGISTRY/pkg/iverilog AS pkg-iverilog
 
 FROM $REGISTRY/ghdl/llvm AS base
 
 COPY --from=pkg-verilator /verilator /
+COPY --from=pkg-iverilog /iverilog /
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
