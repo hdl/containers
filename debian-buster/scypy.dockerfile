@@ -24,7 +24,13 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/buster'
 FROM $REGISTRY/sim
 
 RUN apt update -qq \
- && apt install -y imagemagick libssl-dev \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+   imagemagick \
+   libjpeg-dev \
+   libssl-dev \
+   python3-dev \
+   python3-setuptools \
+   python3-wheel \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/* \
  && python3 -m pip install matplotlib numpy --progress-bar off
