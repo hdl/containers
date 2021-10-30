@@ -58,6 +58,7 @@ COPY --from=build /opt/openFPGALoader /
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     libftdi1-2 \
+    libhidapi-hidraw0 \
     libhidapi-libusb0 \
     udev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
