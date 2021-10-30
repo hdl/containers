@@ -104,8 +104,8 @@ digraph G {
       "prog"
       "sim"
       "sim/osvb"
-      "sim/scypy-slim"
-      "sim/scypy"
+      "sim/scipy-slim"
+      "sim/scipy"
       "sim/octave-slim"
       "sim/octave"
     }
@@ -190,8 +190,8 @@ digraph G {
     m_sim -> {
       "sim"
       "sim/osvb"
-      "sim/scypy-slim"
-      "sim/scypy"
+      "sim/scipy-slim"
+      "sim/scipy"
       "sim/octave-slim"
       "sim/octave"
       "iverilog"

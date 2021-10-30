@@ -141,7 +141,7 @@ jobs:
           - { os: debian/bullseye, arch: amd64 }
 
         img:
-          - scypy
+          - scipy
           - octave
     env:
       HDL_ARCH: ${{ matrix.arch }}

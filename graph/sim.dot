@@ -30,7 +30,7 @@ digraph G {
     d_verilator [label="verilator"];
     d_sim       [label="sim"];
     d_octave    [label="octave"];
-    d_scypy     [label="scypy"];
+    d_scipy     [label="scipy"];
     d_osvb      [label="osvb"];
     d_xyce      [label="xyce"];
   }
@@ -55,8 +55,8 @@ digraph G {
     }
     { node [color=brown, fontcolor=brown]
       "sim"
-      "sim/scypy-slim"
-      "sim/scypy"
+      "sim/scipy-slim"
+      "sim/scipy"
       "sim/octave-slim"
       "sim/octave"
       "sim/osvb"
@@ -149,23 +149,23 @@ digraph G {
 
     "sim" -> {
       d_osvb;
-      d_scypy;
+      d_scipy;
       d_octave
     };
 
     d_osvb -> {
       "pkg/osvb"
       "sim/osvb"
-      "sim/scypy"
+      "sim/scipy"
       "sim/octave"
     } [style=dotted];
 
     {
-      "sim/scypy-slim"
+      "sim/scipy-slim"
       "sim/octave-slim"
     } -> d_osvb;
 
-    d_scypy -> "sim/scypy-slim" [style=dotted];
+    d_scipy -> "sim/scipy-slim" [style=dotted];
     d_octave -> "sim/octave-slim" [style=dotted];
 
     { rank=same
@@ -173,8 +173,8 @@ digraph G {
       "t_sim"             [label="sim"];
       "t_pkg/osvb"        [label="osvb.pkg"];
       "t_sim/osvb"        [label="sim--osvb"];
-      "t_sim/scypy-slim"  [label="sim--scypy-slim"];
-      "t_sim/scypy"       [label="sim--scypy"];
+      "t_sim/scipy-slim"  [label="sim--scipy-slim"];
+      "t_sim/scipy"       [label="sim--scipy"];
       "t_sim/octave-slim" [label="sim--octave-slim"];
       "t_sim/octave"      [label="sim--octave"];
     }
@@ -182,8 +182,8 @@ digraph G {
     "sim" -> "t_sim";
     "pkg/osvb" -> "t_pkg/osvb";
     "sim/osvb" -> "t_sim/osvb";
-    "sim/scypy-slim" -> "t_sim/scypy-slim";
-    "sim/scypy" -> "t_sim/scypy";
+    "sim/scipy-slim" -> "t_sim/scipy-slim";
+    "sim/scipy" -> "t_sim/scipy";
     "sim/octave-slim" -> "t_sim/octave-slim";
     "sim/octave" -> "t_sim/octave";
   }
@@ -248,11 +248,11 @@ digraph G {
 
     "p_sim_ghdl/llvm" -> "sim" -> {
       "sim/osvb"
-      "sim/scypy-slim"
+      "sim/scipy-slim"
       "sim/octave-slim"
     };
 
-    "sim/scypy-slim" -> "sim/scypy";
+    "sim/scipy-slim" -> "sim/scipy";
     "sim/octave-slim" -> "sim/octave";
   }
 

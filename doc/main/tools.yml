@@ -55,7 +55,7 @@ cocotb:
   url: 'https://hdl.github.io/awesome/items/cocotb'
   in:
     - 'sim/osvb'
-    - 'sim/scypy'
+    - 'sim/scipy'
     - 'sim/octave'
 
 #---
@@ -83,8 +83,8 @@ ghdl:
   in:
     - 'sim'
     - 'sim/osvb'
-    - 'sim/scypy-slim'
-    - 'sim/scypy'
+    - 'sim/scipy-slim'
+    - 'sim/scipy'
     - 'sim/octave-slim'
     - 'sim/octave'
     - 'impl'
@@ -296,8 +296,8 @@ verilator:
   in:
     - 'sim'
     - 'sim/osvb'
-    - 'sim/scypy-slim'
-    - 'sim/scypy'
+    - 'sim/scipy-slim'
+    - 'sim/scipy'
     - 'sim/octave-slim'
     - 'sim/octave'
 
@@ -318,7 +318,7 @@ vunit:
   url: 'https://hdl.github.io/awesome/items/vunit'
   in:
     - 'sim/osvb'
-    - 'sim/scypy'
+    - 'sim/scipy'
     - 'sim/octave'
 
 #---
