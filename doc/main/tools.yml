@@ -129,6 +129,8 @@ gtkwave:
   url: 'https://hdl.github.io/awesome/items/gtkwave'
   pkg:
     - 'gtkwave'
+  use:
+    - 'gtkwave'
 
 #---
 

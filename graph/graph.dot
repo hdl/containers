@@ -45,6 +45,7 @@ digraph G {
       "ghdl"
       "ghdl/llvm"
       "ghdl/yosys"
+      "gtkwave"
       "icestorm"
       "iverilog"
       "klayout"
@@ -188,14 +189,15 @@ digraph G {
   subgraph cluster_sim {
     label = "Sim";
     m_sim -> {
+      "gtkwave"
+      "iverilog"
+      "verilator"
       "sim"
       "sim/osvb"
       "sim/scipy-slim"
       "sim/scipy"
       "sim/octave-slim"
       "sim/octave"
-      "iverilog"
-      "verilator"
       "pkg/osvb"
       "pkg/iverilog"
       "pkg/verilator"

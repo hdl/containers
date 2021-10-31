@@ -3,7 +3,7 @@
 # Authors:
 #   Unai Martinez-Corral
 #
-# Copyright 2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2020-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,8 +25,6 @@ cd $(dirname "$0")
 
 ./_env.sh
 
-./ghdl.sh
-./verilator.sh
-./iverilog.sh
+./smoke-tests/gtkwave.sh
 
 ./_todo.sh

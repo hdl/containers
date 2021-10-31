@@ -46,5 +46,22 @@ RUN apt-get update -qq \
 
 #---
 
-FROM scratch
+FROM scratch AS pkg
 COPY --from=build /opt/gtkwave /gtkwave
+
+#---
+
+FROM $REGISTRY/build/base
+
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    graphviz \
+    libgtk-3-bin \
+    libtcl8.6 \
+    libtk8.6 \
+    xdot \
+ && apt-get autoclean -y && apt-get clean -y && apt-get autoremove -y \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build /opt/gtkwave /
+CMD ["gtkwave"]

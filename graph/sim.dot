@@ -44,6 +44,7 @@ digraph G {
       "iverilog"
       "verilator"
       "ghdl/llvm"
+      "gtkwave"
       "xyce"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
@@ -82,13 +83,19 @@ digraph G {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_gtkwave_build/build" [label="build/build"]
+      "p_gtkwave_build/base" [label="build/base"]
       "p_gtkwave_scratch" [label="scratch"]
     }
 
-    d_gtkwave -> "pkg/gtkwave" [style=dotted];
+    d_gtkwave -> {
+      "gtkwave"
+      "pkg/gtkwave"
+     } [style=dotted];
 
+    "t_gtkwave" [shape=folder, color=red, fontcolor=red, label="gtkwave"];
     "t_pkg/gtkwave" [shape=folder, color=red, fontcolor=red, label="gtkwave.pkg"];
 
+    "gtkwave" -> "t_gtkwave";
     "pkg/gtkwave" -> "t_pkg/gtkwave";
   }
 
@@ -215,6 +222,7 @@ digraph G {
   # Dockerfile dependencies
 
   "build/build" -> "p_gtkwave_build/build" -> d_gtkwave;
+  "build/base" -> "p_gtkwave_build/base" -> d_gtkwave;
   "scratch" -> "p_gtkwave_scratch" -> d_gtkwave;
 
   "build/build" -> "p_iverilog_build/build" -> d_iverilog;
@@ -236,6 +244,7 @@ digraph G {
   # Image dependencies
 
   { edge [style=dashed]
+    "p_gtkwave_build/base" -> "gtkwave";
     "p_gtkwave_scratch" -> "pkg/gtkwave";
 
     "p_iverilog_build/base" -> "iverilog";
