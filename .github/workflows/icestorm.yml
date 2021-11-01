@@ -65,8 +65,10 @@ jobs:
         pkg/icestorm
         icestorm
 
-    - run: dockerTestPkg ${{ matrix.os }} icestorm
-    - run: dockerTest ${{ matrix.os }} icestorm
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/icestorm
+        icestorm
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

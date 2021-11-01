@@ -59,7 +59,9 @@ jobs:
         dockerBuild -c ${{ matrix.os }} -d
         pkg/pono
 
-    - run: dockerTestPkg ${{ matrix.os }} pono
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/pono
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

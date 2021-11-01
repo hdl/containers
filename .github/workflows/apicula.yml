@@ -62,8 +62,10 @@ jobs:
         pkg/apicula
         apicula
 
-    - run: dockerTestPkg ${{ matrix.os }} apicula
-    - run: dockerTest ${{ matrix.os }} apicula
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/apicula
+        apicula
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

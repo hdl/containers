@@ -61,8 +61,10 @@ jobs:
         pkg/prjtrellis
         prjtrellis
 
-    - run: dockerTestPkg ${{ matrix.os }} prjtrellis
-    - run: dockerTest ${{ matrix.os }} prjtrellis
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/prjtrellis
+        prjtrellis
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

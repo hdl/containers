@@ -63,8 +63,10 @@ jobs:
         pkg/arachne-pnr
         arachne-pnr
 
-    - run: dockerTestPkg ${{ matrix.os }} arachne-pnr
-    - run: dockerTest ${{ matrix.os }} arachne-pnr
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/arachne-pnr
+        arachne-pnr
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

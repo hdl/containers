@@ -58,8 +58,10 @@ jobs:
         pkg/prjoxide
         prjoxide
 
-    - run: dockerTestPkg ${{ matrix.os }} prjoxide
-    - run: dockerTest ${{ matrix.os }} prjoxide
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/prjoxide
+        prjoxide
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

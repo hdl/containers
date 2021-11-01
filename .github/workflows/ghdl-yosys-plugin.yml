@@ -61,8 +61,10 @@ jobs:
         pkg/ghdl-yosys-plugin
         ghdl/yosys
 
-    - run: dockerTestPkg ${{ matrix.os }} ghdl-yosys-plugin#ghdl
-    - run: dockerTest ${{ matrix.os }} ghdl/yosys
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/ghdl-yosys-plugin#ghdl
+        ghdl/yosys
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

@@ -62,8 +62,10 @@ jobs:
         pkg/magic
         magic
 
-    - run: dockerTestPkg ${{ matrix.os }} magic
-    - run: dockerTest ${{ matrix.os }} magic
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/magic
+        magic
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

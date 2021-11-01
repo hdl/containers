@@ -59,7 +59,9 @@ jobs:
         dockerBuild -c ${{ matrix.os }} -d
         pkg/yices2
 
-    - run: dockerTestPkg ${{ matrix.os }} yices2
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/yices2
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

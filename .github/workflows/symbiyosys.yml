@@ -59,7 +59,9 @@ jobs:
         dockerBuild -c ${{ matrix.os }} -d
         pkg/symbiyosys
 
-    - run: dockerTestPkg ${{ matrix.os }} symbiyosys
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/symbiyosys
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

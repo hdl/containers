@@ -27,12 +27,46 @@ imgprefix="${HDL_REGISTRY:-gcr.io/hdl-containers}/${HDL_ARCH:-amd64}/${1}"
 shift
 
 for img; do
-  image="${imgprefix}/${img}"
+  case "$img" in
 
-  echo "[dockerTest] docker inspect"
-  docker inspect --format='{{ println "Architecture:" .Architecture .Variant }}{{ println   "Size:" .Size }}VirtualSize: {{ .VirtualSize }}' "${image}"
+    pkg/*)
+      img="`echo $img | cut -c5-`"
+      case "$img" in
+        *"#"*)
+          dir="`echo $img | cut -d# -f2`"
+          img="`echo $img | cut -d# -f1`"
+          ;;
+        *)
+          dir="$img"
+        ;;
+      esac
+      tag="`echo $img | sed 's#/#--#'`"
+      dir="`echo $dir | sed 's#/#-#'`"
 
-  cmd="docker run --rm -v /$(pwd)://wrk ${image} //wrk/test/`echo ${img} | sed -e 's#:#--#'   -e 's#/#--#'`.sh"
+      testimg="${imgprefix}/tespkg:${tag}"
+
+      echo "::group::[dockerTest] Build ${testimg}"
+      docker build -t "${testimg}" - <<-EOF
+FROM alpine
+RUN apk add -U --no-cache file tree
+COPY --from=${imgprefix}/pkg/${img} /${dir} /
+EOF
+      echo '::endgroup::'
+
+      cmd="docker run --rm -v /$(pwd)://wrk ${testimg} //wrk/test/${tag}.pkg.sh"
+      ;;
+
+    *)
+      image="${imgprefix}/${img}"
+
+      echo "[dockerTest] Inspect"
+      docker inspect --format='{{ println "Architecture:" .Architecture .Variant }}{{ println   "Size:" .Size }}VirtualSize: {{ .VirtualSize }}' "${image}"
+
+      cmd="docker run --rm -v /$(pwd)://wrk ${image} //wrk/test/`echo ${img} | sed -e 's#:#--#'   -e 's#/#--#'`.sh"
+      ;;
+
+  esac
+
   echo "[dockerTest] $cmd"
   $cmd
 done

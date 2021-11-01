@@ -59,8 +59,10 @@ jobs:
         pkg/xyce
         xyce
 
-    - run: dockerTestPkg ${{ matrix.os }} xyce
-    - run: dockerTest ${{ matrix.os }} xyce
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/xyce
+        xyce
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

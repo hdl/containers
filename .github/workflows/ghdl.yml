@@ -64,11 +64,9 @@ jobs:
         ghdl/llvm
 
     - run: >-
-        dockerTestPkg ${{ matrix.os }}
-        ghdl
-        ghdl/llvm#ghdl
-    - run: >-
         dockerTest ${{ matrix.os }}
+        pkg/ghdl
+        pkg/ghdl/llvm#ghdl
         ghdl
         ghdl/llvm
 

@@ -65,8 +65,10 @@ jobs:
         pkg/verilator
         verilator
 
-    - run: dockerTestPkg ${{ matrix.os }} verilator
-    - run: dockerTest ${{ matrix.os }} verilator
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/verilator
+        verilator
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

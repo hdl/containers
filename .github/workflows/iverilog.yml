@@ -61,8 +61,10 @@ jobs:
         pkg/iverilog
         iverilog
 
-    - run: dockerTestPkg ${{ matrix.os }} iverilog
-    - run: dockerTest ${{ matrix.os }} iverilog
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/iverilog
+        iverilog
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

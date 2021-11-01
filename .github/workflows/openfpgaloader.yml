@@ -65,8 +65,10 @@ jobs:
         pkg/openfpgaloader
         openfpgaloader
 
-    - run: dockerTestPkg ${{ matrix.os }} openfpgaloader
-    - run: dockerTest ${{ matrix.os }} openfpgaloader
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/openfpgaloader
+        openfpgaloader
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

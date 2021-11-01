@@ -107,8 +107,10 @@ jobs:
         pkg/osvb
         sim/osvb
 
-    - run: dockerTestPkg ${{ matrix.os }} osvb
-    - run: dockerTest ${{ matrix.os }} sim/osvb
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/osvb
+        sim/osvb
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

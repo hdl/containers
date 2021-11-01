@@ -66,8 +66,10 @@ jobs:
         pkg/netgen
         netgen
 
-    - run: dockerTestPkg ${{ matrix.os }} netgen
-    - run: dockerTest ${{ matrix.os }} netgen
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/netgen
+        netgen
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

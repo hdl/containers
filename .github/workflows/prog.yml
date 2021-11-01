@@ -60,7 +60,9 @@ jobs:
         dockerBuild -c ${{ matrix.os }} -d
         prog
 
-    - run: dockerTest ${{ matrix.os }} prog
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        prog
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

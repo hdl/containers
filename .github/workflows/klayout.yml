@@ -58,8 +58,10 @@ jobs:
         pkg/klayout
         klayout
 
-    - run: dockerTestPkg ${{ matrix.os }} klayout
-    - run: dockerTest ${{ matrix.os }} klayout
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/klayout
+        klayout
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

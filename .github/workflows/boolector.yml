@@ -59,7 +59,9 @@ jobs:
         dockerBuild -c ${{ matrix.os }} -d
         pkg/boolector
 
-    - run: dockerTestPkg ${{ matrix.os }} boolector
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        pkg/boolector
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
