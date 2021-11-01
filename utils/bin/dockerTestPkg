@@ -23,21 +23,34 @@ set -e
 
 cd $(dirname "$0")/../..
 
-_prefix="${HDL_REGISTRY:-gcr.io/hdl-containers}/${HDL_ARCH:-amd64}/${1}"
-_img="$2"
-_tag="`echo $2 | sed 's#/#--#'`"
-_dir="`echo $2 | sed 's#/#-#'`"
-if [ -n "$3" ]; then
-  _dir="$3"
-fi
-_testimg="${_prefix}/tespkg:${_tag}"
+imgprefix="${HDL_REGISTRY:-gcr.io/hdl-containers}/${HDL_ARCH:-amd64}/${1}"
+shift
 
-echo "::group::Build ${_testimg}"
-docker build -t "${_testimg}" - <<-EOF
+for img; do
+  case "$img" in
+    *"#"*)
+      dir="`echo $img | cut -d# -f2`"
+      img="`echo $img | cut -d# -f1`"
+      ;;
+    *)
+      dir="$img"
+    ;;
+  esac
+  tag="`echo $img | sed 's#/#--#'`"
+  dir="`echo $dir | sed 's#/#-#'`"
+
+  testimg="${imgprefix}/tespkg:${tag}"
+
+  echo "::group::Build ${testimg}"
+  docker build -t "${testimg}" - <<-EOF
 FROM alpine
 RUN apk add -U --no-cache file tree
-COPY --from=${_prefix}/pkg/${_img} /${_dir} /
+COPY --from=${imgprefix}/pkg/${img} /${dir} /
 EOF
-echo '::endgroup::'
+  echo '::endgroup::'
 
-docker run --rm -v /$(pwd)://wrk "${_testimg}" //wrk/test/"${_tag}".pkg.sh
+  cmd="docker run --rm -v /$(pwd)://wrk ${testimg} //wrk/test/${tag}.pkg.sh"
+
+  echo "[dockerTestPkg] $cmd"
+  $cmd
+done
