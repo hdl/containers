@@ -122,8 +122,10 @@ jobs:
         impl/${{ matrix.task.arch }}
         impl/${{ matrix.task.prj }}
 
-    - run: dockerTest ${{ matrix.sys.os }} impl/${{ matrix.task.arch }}
-    - run: dockerTest ${{ matrix.sys.os }} impl/${{ matrix.task.prj  }}
+    - run: >-
+        dockerTest ${{ matrix.sys.os }}
+        impl/${{ matrix.task.arch }}
+        impl/${{ matrix.task.prj }}
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -180,9 +182,11 @@ jobs:
         impl/pnr
         impl
 
-    - run: dockerTest ${{ matrix.os }} impl/generic
-    - run: dockerTest ${{ matrix.os }} impl/pnr
-    - run: dockerTest ${{ matrix.os }} impl
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        impl/generic
+        impl/pnr
+        impl
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

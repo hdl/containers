@@ -67,9 +67,11 @@ jobs:
         build/build
         build/dev
 
-    - run: dockerTest ${{ matrix.os }} build/base
-    - run: dockerTest ${{ matrix.os }} build/build
-    - run: dockerTest ${{ matrix.os }} build/dev
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        build/base
+        build/build
+        build/dev
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

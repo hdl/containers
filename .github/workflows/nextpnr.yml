@@ -120,8 +120,10 @@ jobs:
         nextpnr/${{ matrix.task.prj }}
 
     - run: dockerTestPkg ${{ matrix.sys.os }} nextpnr/${{ matrix.task.arch }}
-    - run: dockerTest    ${{ matrix.sys.os }} nextpnr/${{ matrix.task.arch }}
-    - run: dockerTest    ${{ matrix.sys.os }} nextpnr/${{ matrix.task.prj }}
+    - run: >-
+        dockerTest ${{ matrix.sys.os }}
+        nextpnr/${{ matrix.task.arch }}
+        nextpnr/${{ matrix.task.prj }}
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -171,8 +173,10 @@ jobs:
         nextpnr
 
     - run: dockerTestPkg ${{ matrix.os }} nextpnr/generic
-    - run: dockerTest    ${{ matrix.os }} nextpnr/generic
-    - run: dockerTest    ${{ matrix.os }} nextpnr
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        nextpnr/generic
+        nextpnr
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

@@ -74,9 +74,11 @@ jobs:
         formal
         formal/all
 
-    - run: dockerTest ${{ matrix.os }} formal/min
-    - run: dockerTest ${{ matrix.os }} formal
-    - run: dockerTest ${{ matrix.os }} formal/all
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        formal/min
+        formal
+        formal/all
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

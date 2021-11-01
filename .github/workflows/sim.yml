@@ -158,8 +158,10 @@ jobs:
         sim/${{ matrix.img }}-slim
         sim/${{ matrix.img }}
 
-    - run: dockerTest ${{ matrix.sys.os }} sim/${{ matrix.img }}-slim
-    - run: dockerTest ${{ matrix.sys.os }} sim/${{ matrix.img }}
+    - run: >-
+        dockerTest ${{ matrix.sys.os }}
+        sim/${{ matrix.img }}-slim
+        sim/${{ matrix.img }}
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'

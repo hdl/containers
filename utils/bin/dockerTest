@@ -23,14 +23,16 @@ set -e
 
 cd $(dirname "$0")/../..
 
-_img="${2}"
-_image="${HDL_REGISTRY:-gcr.io/hdl-containers}/${HDL_ARCH:-amd64}/${1}/${_img}"
+imgprefix="${HDL_REGISTRY:-gcr.io/hdl-containers}/${HDL_ARCH:-amd64}/${1}"
+shift
 
-docker inspect --format='{{ println "Architecture:" .Architecture .Variant }}{{ println "Size:" .Size }}VirtualSize: {{ .VirtualSize }}' "${_image}"
+for img; do
+  image="${imgprefix}/${img}"
 
-_script="`echo ${_img} | sed -e 's#:#--#' -e 's#/#--#'`"
-if [ -n "$3" ]; then
-  _script="$3"
-fi
+  echo "[dockerTest] docker inspect"
+  docker inspect --format='{{ println "Architecture:" .Architecture .Variant }}{{ println   "Size:" .Size }}VirtualSize: {{ .VirtualSize }}' "${image}"
 
-docker run --rm -v /$(pwd)://wrk "${_image}" //wrk/test/"${_script}".sh
+  cmd="docker run --rm -v /$(pwd)://wrk ${image} //wrk/test/`echo ${img} | sed -e 's#:#--#'   -e 's#/#--#'`.sh"
+  echo "[dockerTest] $cmd"
+  $cmd
+done

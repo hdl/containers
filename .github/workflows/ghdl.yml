@@ -65,8 +65,10 @@ jobs:
 
     - run: dockerTestPkg ${{ matrix.os }} ghdl
     - run: dockerTestPkg ${{ matrix.os }} ghdl/llvm ghdl
-    - run: dockerTest ${{ matrix.os }} ghdl
-    - run: dockerTest ${{ matrix.os }} ghdl/llvm
+    - run: >-
+        dockerTest ${{ matrix.os }}
+        ghdl
+        ghdl/llvm
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
