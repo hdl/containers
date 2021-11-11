@@ -48,8 +48,6 @@ jobs:
           # Debian Bullseye
           - { os: debian/bullseye, arch: amd64 }
 
-    env:
-      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
@@ -103,8 +101,6 @@ jobs:
             task: { arch: nexus, prj: prjoxide }
 
     name: '[${{ matrix.sys.os }}|${{ matrix.sys.arch }}] nextpnr · ${{ matrix.task.arch }} ${{ matrix.task.prj }}'
-    env:
-      HDL_ARCH: ${{ matrix.sys.arch }}
     steps:
 
     - uses: actions/checkout@v2
@@ -156,8 +152,6 @@ jobs:
           # Debian Bullseye
           - { os: debian/bullseye, arch: amd64 }
 
-    env:
-      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2

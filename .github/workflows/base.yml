@@ -53,8 +53,6 @@ jobs:
           # CentOS 7
           - { os: centos/7, arch: amd64 }
 
-    env:
-      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2

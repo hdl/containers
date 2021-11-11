@@ -47,8 +47,6 @@ jobs:
           - { os: debian/bullseye, arch: s390x }
           #- { os: debian/bullseye, arch: riscv64 } ! for now, only 'sid-slim' is available in https://hub.docker.com/r/riscv64/debian
 
-    env:
-      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2

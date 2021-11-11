@@ -43,8 +43,6 @@ jobs:
           # Debian Bullseye
           - { os: debian/bullseye, arch: amd64 }
 
-    env:
-      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2

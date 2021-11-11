@@ -48,8 +48,6 @@ jobs:
           # Debian Bullseye
           - { os: debian/bullseye, arch: amd64 }
 
-    env:
-      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
@@ -100,9 +98,8 @@ jobs:
         task:
           - { arch: ice40, prj: icestorm   }
           - { arch: ecp5,  prj: prjtrellis }
+
     name: '[${{ matrix.sys.os }}|${{ matrix.sys.arch }}] impl · ${{ matrix.task.arch }} ${{ matrix.task.prj }}'
-    env:
-      HDL_ARCH: ${{ matrix.sys.arch }}
     steps:
 
     - uses: actions/checkout@v2
@@ -157,8 +154,6 @@ jobs:
           # Debian Bullseye
           - { os: debian/bullseye, arch: amd64 }
 
-    env:
-      HDL_ARCH: ${{ matrix.arch }}
     steps:
 
     - uses: actions/checkout@v2
