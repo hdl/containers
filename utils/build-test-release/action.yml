@@ -66,10 +66,13 @@ runs:
       -c ${{ inputs.collection }} \
       -d ${{ inputs.images }}
 
-      if [ "x${{ inputs.skip-test }}" = "xtrue" ]; then
+      # NOTE: the content of the if statement is executed if the command returns 0, thus,
+      # the evaluation in Python needs to be negated.
+      if python3 -c 'exit("${{ inputs.skip-test }}".lower() not in ["true","skip","yes"])'; then
         echo "Skipping test..."
         exit 0
       fi
+
       dockerTest \
       ${{ inputs.architecture }} \
       ${{ inputs.collection }} \
@@ -79,17 +82,18 @@ runs:
     uses: ./utils/registry-login
     with:
       cmd: |
-        if [ "x${{ inputs.skip-release }}" = "xtrue" ]; then
+        if python3 -c 'exit("${{ inputs.skip-release }}".lower() not in ["true","skip","yes"])'; then
           echo "Skipping login..."
           exit 0
         fi
+
         echo '${{ inputs.gcr_token }}' | docker login gcr.io -u _json_key --password-stdin
         echo '${{ inputs.gh_token }}' | docker login ghcr.io -u gha --password-stdin
         echo '${{ inputs.docker_pass }}' | docker login docker.io -u '${{ inputs.docker_user }}' --password-stdin
 
   - shell: bash
     run: |
-      if [ "x${{ inputs.skip-release }}" = "xtrue" ]; then
+      if python3 -c 'exit("${{ inputs.skip-release }}".lower() not in ["true","skip","yes"])'; then
         echo "Skipping release..."
         exit 0
       fi
