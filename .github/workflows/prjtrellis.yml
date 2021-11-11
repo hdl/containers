@@ -62,7 +62,7 @@ jobs:
         prjtrellis
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/prjtrellis
         prjtrellis
 

@@ -59,7 +59,7 @@ jobs:
         klayout
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/klayout
         klayout
 

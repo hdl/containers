@@ -61,7 +61,7 @@ jobs:
         dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
         sim
 
-    - run: dockerTest ${{ matrix.os }} sim
+    - run: dockerTest ${{ matrix.arch }} ${{ matrix.os }} sim
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -108,7 +108,7 @@ jobs:
         sim/osvb
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/osvb
         sim/osvb
 
@@ -161,7 +161,7 @@ jobs:
         sim/${{ matrix.img }}
 
     - run: >-
-        dockerTest ${{ matrix.sys.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.sys.os }}
         sim/${{ matrix.img }}-slim
         sim/${{ matrix.img }}
 

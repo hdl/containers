@@ -60,7 +60,7 @@ jobs:
         xyce
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/xyce
         xyce
 

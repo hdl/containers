@@ -59,7 +59,7 @@ jobs:
         prjoxide
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/prjoxide
         prjoxide
 

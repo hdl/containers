@@ -123,7 +123,7 @@ jobs:
         impl/${{ matrix.task.prj }}
 
     - run: >-
-        dockerTest ${{ matrix.sys.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.sys.os }}
         impl/${{ matrix.task.arch }}
         impl/${{ matrix.task.prj }}
 
@@ -183,7 +183,7 @@ jobs:
         impl
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         impl/generic
         impl/pnr
         impl

@@ -60,7 +60,7 @@ jobs:
         pkg/symbiyosys
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/symbiyosys
 
     - name: Login to container registries

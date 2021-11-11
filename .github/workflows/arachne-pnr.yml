@@ -64,7 +64,7 @@ jobs:
         arachne-pnr
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/arachne-pnr
         arachne-pnr
 

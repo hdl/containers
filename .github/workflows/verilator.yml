@@ -66,7 +66,7 @@ jobs:
         verilator
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/verilator
         verilator
 

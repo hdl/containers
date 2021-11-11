@@ -120,7 +120,7 @@ jobs:
         nextpnr/${{ matrix.task.prj }}
 
     - run: >-
-        dockerTest ${{ matrix.sys.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.sys.os }}
         pkg/nextpnr/${{ matrix.task.arch }}
         nextpnr/${{ matrix.task.arch }}
         nextpnr/${{ matrix.task.prj }}
@@ -173,7 +173,7 @@ jobs:
         nextpnr
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/nextpnr/generic
         nextpnr/generic
         nextpnr

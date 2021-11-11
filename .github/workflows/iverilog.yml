@@ -62,7 +62,7 @@ jobs:
         iverilog
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/iverilog
         iverilog
 

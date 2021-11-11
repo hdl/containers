@@ -68,7 +68,7 @@ jobs:
         build/dev
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         build/base
         build/build
         build/dev

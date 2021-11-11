@@ -75,7 +75,7 @@ jobs:
         formal/all
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         formal/min
         formal
         formal/all

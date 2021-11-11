@@ -59,7 +59,7 @@ jobs:
         pkg/z3
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/z3
 
     - name: Login to container registries

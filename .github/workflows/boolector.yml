@@ -60,7 +60,7 @@ jobs:
         pkg/boolector
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/boolector
 
     - name: Login to container registries

@@ -60,7 +60,7 @@ jobs:
         pkg/superprove
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/superprove
 
     - name: Login to container registries

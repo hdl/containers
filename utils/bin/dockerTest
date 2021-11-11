@@ -23,7 +23,8 @@ set -e
 
 cd $(dirname "$0")/../..
 
-imgprefix="${HDL_REGISTRY:-gcr.io/hdl-containers}/${HDL_ARCH:-amd64}/${1}"
+imgprefix="${HDL_REGISTRY:-gcr.io/hdl-containers}/${HDL_ARCH:-$1}/${2}"
+shift
 shift
 
 for img; do

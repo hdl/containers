@@ -60,7 +60,7 @@ jobs:
         pkg/yices2
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/yices2
 
     - name: Login to container registries

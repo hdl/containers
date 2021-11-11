@@ -60,7 +60,7 @@ jobs:
         pkg/cvc
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/cvc
 
     - name: Login to container registries

@@ -61,7 +61,7 @@ jobs:
         prog
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         prog
 
     - name: Login to container registries

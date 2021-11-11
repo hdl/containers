@@ -62,7 +62,7 @@ jobs:
         ghdl/yosys
 
     - run: >-
-        dockerTest ${{ matrix.os }}
+        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
         pkg/ghdl-yosys-plugin#ghdl
         ghdl/yosys
 
