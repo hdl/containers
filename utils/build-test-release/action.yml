@@ -31,6 +31,10 @@ inputs:
   images:
     description: 'List of default names of images to be built and tested.'
     required: true
+  skip-test:
+    description: 'Skip testing the built images.'
+    required: false
+    default: false
   skip-release:
     description: 'Skip pushing and mirroring to container registries.'
     required: false
@@ -62,6 +66,10 @@ runs:
       -c ${{ inputs.collection }} \
       -d ${{ inputs.images }}
 
+      if [ "x${{ inputs.skip-test }}" = "xtrue" ]; then
+        echo "Skipping test..."
+        exit 0
+      fi
       dockerTest \
       ${{ inputs.architecture }} \
       ${{ inputs.collection }} \
@@ -72,7 +80,7 @@ runs:
     with:
       cmd: |
         if [ "x${{ inputs.skip-release }}" = "xtrue" ]; then
-          echo "Skipping..."
+          echo "Skipping login..."
           exit 0
         fi
         echo '${{ inputs.gcr_token }}' | docker login gcr.io -u _json_key --password-stdin
@@ -82,7 +90,7 @@ runs:
   - shell: bash
     run: |
       if [ "x${{ inputs.skip-release }}" = "xtrue" ]; then
-        echo "Skipping..."
+        echo "Skipping release..."
         exit 0
       fi
 
