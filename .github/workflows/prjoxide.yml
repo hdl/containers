@@ -38,40 +38,31 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
+
+        imgs:
+          - >-
+            pkg/prjoxide
+            prjoxide
+
+        sys:
 
           # Debian Bullseye
           - { os: debian/bullseye, arch: amd64 }
 
+    name: ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
     steps:
 
     - uses: actions/checkout@v2
       with:
         submodules: recursive
 
-    - run: ./utils/setup.sh ${{ matrix.arch }}
-
-    - run: >-
-        dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
-        pkg/prjoxide
-        prjoxide
-
-    - run: >-
-        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
-        pkg/prjoxide
-        prjoxide
-
-    - name: Login to container registries
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      uses: ./utils/registry-login
+    - uses: ./utils/build-test-push-mirror
       with:
-        cmd: |
-          echo '${{ secrets.GCR_JSON_KEY }}' | docker login gcr.io -u _json_key --password-stdin
-          echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
-          echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
-
-    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      run: >-
-        dockerPush ${{ matrix.arch }} ${{ matrix.os }}
-        pkg/prjoxide
-        prjoxide
+        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
+        gh_token: '${{ github.token }}'
+        docker_user: '${{ secrets.DOCKER_USER }}'
+        docker_pass: '${{ secrets.DOCKER_PASS }}'
+        skip-push: ${{ github.event_name == 'pull_request' }}
+        architecture: ${{ matrix.sys.arch }}
+        collection: ${{ matrix.sys.os }}
+        images: ${{ matrix.imgs }}
