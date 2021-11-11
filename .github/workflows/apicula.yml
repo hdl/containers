@@ -41,9 +41,6 @@ jobs:
       matrix:
         include:
 
-          # Debian Buster
-          - { os: debian/buster, arch: amd64 }
-
           # Debian Bullseye
           - { os: debian/bullseye, arch: amd64 }
 
