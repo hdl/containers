@@ -40,7 +40,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
+
+        imgs:
+          - >-
+            build/nextpnr/base
+            build/nextpnr/build
+
+        sys:
 
           # Debian Buster
           - { os: debian/buster, arch: amd64 }
@@ -48,6 +54,7 @@ jobs:
           # Debian Bullseye
           - { os: debian/bullseye, arch: amd64 }
 
+    name: nextpnr-build ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
     steps:
 
     - uses: actions/checkout@v2
@@ -56,10 +63,9 @@ jobs:
 
     - run: ./utils/setup.sh ${{ matrix.arch }}
 
-    - run: >-
-        dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
-        build/nextpnr/base
-        build/nextpnr/build
+    # TODO: Add option 'skip-test' to Action 'build-test-push-mirror'.
+    # Then, replace the remaining steps with the Action.
+    - run: dockerBuild -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d ${{ matrix.imgs }}
 
     - name: Login to container registries
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
@@ -71,10 +77,7 @@ jobs:
           echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      run: >-
-        dockerPush ${{ matrix.arch }} ${{ matrix.os }}
-        build/nextpnr/base
-        build/nextpnr/build
+      run: dockerPush ${{ matrix.sys.arch }} ${{ matrix.sys.os }} ${{ matrix.imgs }}
 
 
   nextpnr-prjs:
@@ -144,7 +147,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
+
+        imgs:
+          - >-
+            pkg/nextpnr/generic
+            nextpnr/generic
+            nextpnr
+
+        sys:
 
           # Debian Buster
           - { os: debian/buster, arch: amd64 }
@@ -152,38 +162,20 @@ jobs:
           # Debian Bullseye
           - { os: debian/bullseye, arch: amd64 }
 
+    name: nextpnr ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
     steps:
 
     - uses: actions/checkout@v2
       with:
         submodules: recursive
 
-    - run: ./utils/setup.sh ${{ matrix.arch }}
-
-    - run: >-
-        dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
-        pkg/nextpnr/generic
-        nextpnr/generic
-        nextpnr
-
-    - run: >-
-        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
-        pkg/nextpnr/generic
-        nextpnr/generic
-        nextpnr
-
-    - name: Login to container registries
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      uses: ./utils/registry-login
+    - uses: ./utils/build-test-push-mirror
       with:
-        cmd: |
-          echo '${{ secrets.GCR_JSON_KEY }}' | docker login gcr.io -u _json_key --password-stdin
-          echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
-          echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
-
-    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      run: >-
-        dockerPush ${{ matrix.arch }} ${{ matrix.os }}
-        pkg/nextpnr/generic
-        nextpnr/generic
-        nextpnr
+        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
+        gh_token: '${{ github.token }}'
+        docker_user: '${{ secrets.DOCKER_USER }}'
+        docker_pass: '${{ secrets.DOCKER_PASS }}'
+        skip-push: ${{ github.event_name == 'pull_request' }}
+        architecture: ${{ matrix.sys.arch }}
+        collection: ${{ matrix.sys.os }}
+        images: ${{ matrix.imgs }}
