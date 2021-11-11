@@ -69,7 +69,7 @@ jobs:
         pkg/pono
 
     - run: >-
-        dockerBuild -c ${{ matrix.os }} -d
+        dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
         formal/min
         formal
         formal/all

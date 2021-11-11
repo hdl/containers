@@ -58,7 +58,7 @@ jobs:
     - run: ./utils/setup.sh
 
     - run: >-
-        dockerBuild -c ${{ matrix.os }} -d
+        dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
         sim
 
     - run: dockerTest ${{ matrix.os }} sim
@@ -103,7 +103,7 @@ jobs:
     - run: ./utils/setup.sh
 
     - run: >-
-        dockerBuild -c ${{ matrix.os }} -d
+        dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
         pkg/osvb
         sim/osvb
 
@@ -156,7 +156,7 @@ jobs:
     - run: ./utils/setup.sh
 
     - run: >-
-        dockerBuild -c ${{ matrix.sys.os }} -d
+        dockerBuild -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
         sim/${{ matrix.img }}-slim
         sim/${{ matrix.img }}
 

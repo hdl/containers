@@ -61,7 +61,7 @@ jobs:
     - run: ./utils/setup.sh
 
     - run: >-
-        dockerBuild -c ${{ matrix.os }} -d
+        dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
         pkg/verilator
         verilator
 

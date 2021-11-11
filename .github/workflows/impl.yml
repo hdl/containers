@@ -65,7 +65,7 @@ jobs:
         pkg/yosys
 
     - run: >-
-        dockerBuild -c ${{ matrix.os }} -d
+        dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
         build/impl
 
     - name: Login to container registries
@@ -118,7 +118,7 @@ jobs:
         pkg/${{ matrix.task.prj }}
 
     - run: >-
-        dockerBuild -c ${{ matrix.sys.os }} -d
+        dockerBuild -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
         impl/${{ matrix.task.arch }}
         impl/${{ matrix.task.prj }}
 
@@ -177,7 +177,7 @@ jobs:
         pkg/prjtrellis
 
     - run: >-
-        dockerBuild -c ${{ matrix.os }} -d
+        dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
         impl/generic
         impl/pnr
         impl

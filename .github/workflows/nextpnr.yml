@@ -59,7 +59,7 @@ jobs:
     - run: ./utils/setup.sh
 
     - run: >-
-        dockerBuild -c ${{ matrix.os }} -d
+        dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
         build/nextpnr/base
         build/nextpnr/build
 
@@ -114,7 +114,7 @@ jobs:
     - run: ./utils/setup.sh
 
     - run: >-
-        dockerBuild -c ${{ matrix.sys.os }} -d
+        dockerBuild -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
         pkg/nextpnr/${{ matrix.task.arch }}
         nextpnr/${{ matrix.task.arch }}
         nextpnr/${{ matrix.task.prj }}
@@ -167,7 +167,7 @@ jobs:
     - run: ./utils/setup.sh
 
     - run: >-
-        dockerBuild -c ${{ matrix.os }} -d
+        dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
         pkg/nextpnr/generic
         nextpnr/generic
         nextpnr
