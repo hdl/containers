@@ -17,8 +17,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: '[HDLC] Build, Test, Push and Mirror'
-description: 'Build, Test, Push and Mirror HDL Containers'
+name: '[HDLC] Build, Test and Release'
+description: 'Build, Test and Release HDL Containers'
 
 inputs:
   architecture:
@@ -31,7 +31,7 @@ inputs:
   images:
     description: 'List of default names of images to be built and tested.'
     required: true
-  skip-push:
+  skip-release:
     description: 'Skip pushing and mirroring to container registries.'
     required: false
     default: false
@@ -71,7 +71,7 @@ runs:
     uses: ./utils/registry-login
     with:
       cmd: |
-        if [ "x${{ inputs.skip-push }}" = "xtrue" ]; then
+        if [ "x${{ inputs.skip-release }}" = "xtrue" ]; then
           echo "Skipping..."
           exit 0
         fi
@@ -81,7 +81,7 @@ runs:
 
   - shell: bash
     run: |
-      if [ "x${{ inputs.skip-push }}" = "xtrue" ]; then
+      if [ "x${{ inputs.skip-release }}" = "xtrue" ]; then
         echo "Skipping..."
         exit 0
       fi

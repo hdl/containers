@@ -61,7 +61,7 @@ jobs:
 
     - run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
-    # TODO: Add option 'pull' to Action 'build-test-push-mirror'.
+    # TODO: Add option 'pull' to Action 'build-test-release'.
     # Setup is required outside of the Action, because dockerPull needs it.
     - run: >-
         dockerPull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
@@ -69,7 +69,7 @@ jobs:
         pkg/ghdl-yosys-plugin
         pkg/yosys
 
-    # TODO: Add option 'skip-test' to Action 'build-test-push-mirror'.
+    # TODO: Add option 'skip-test' to Action 'build-test-release'.
     # Then, replace the remaining steps with the Action.
     - run: dockerBuild -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d ${{ matrix.imgs }}
 
@@ -173,7 +173,7 @@ jobs:
       with:
         submodules: recursive
 
-    # TODO: Add option 'pull' to Action 'build-test-push-mirror'.
+    # TODO: Add option 'pull' to Action 'build-test-release'.
     # Setup is required outside of the Action, because dockerPull needs it.
     - run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
@@ -186,13 +186,13 @@ jobs:
         pkg/icestorm
         pkg/prjtrellis
 
-    - uses: ./utils/build-test-push-mirror
+    - uses: ./utils/build-test-release
       with:
         gcr_token: '${{ secrets.GCR_JSON_KEY }}'
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.DOCKER_USER }}'
         docker_pass: '${{ secrets.DOCKER_PASS }}'
-        skip-push: ${{ github.event_name == 'pull_request' }}
+        skip-release: ${{ github.event_name == 'pull_request' }}
         architecture: ${{ matrix.sys.arch }}
         collection: ${{ matrix.sys.os }}
         images: ${{ matrix.imgs }}

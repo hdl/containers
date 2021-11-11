@@ -58,13 +58,13 @@ jobs:
       with:
         submodules: recursive
 
-    - uses: ./utils/build-test-push-mirror
+    - uses: ./utils/build-test-release
       with:
         gcr_token: '${{ secrets.GCR_JSON_KEY }}'
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.DOCKER_USER }}'
         docker_pass: '${{ secrets.DOCKER_PASS }}'
-        skip-push: ${{ github.event_name == 'pull_request' }}
+        skip-release: ${{ github.event_name == 'pull_request' }}
         architecture: ${{ matrix.sys.arch }}
         collection: ${{ matrix.sys.os }}
         images: ${{ matrix.imgs }}
@@ -97,13 +97,13 @@ jobs:
       with:
         submodules: recursive
 
-    - uses: ./utils/build-test-push-mirror
+    - uses: ./utils/build-test-release
       with:
         gcr_token: '${{ secrets.GCR_JSON_KEY }}'
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.DOCKER_USER }}'
         docker_pass: '${{ secrets.DOCKER_PASS }}'
-        skip-push: ${{ github.event_name == 'pull_request' }}
+        skip-release: ${{ github.event_name == 'pull_request' }}
         architecture: ${{ matrix.sys.arch }}
         collection: ${{ matrix.sys.os }}
         images: ${{ matrix.imgs }}
