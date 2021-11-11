@@ -79,7 +79,7 @@ jobs:
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush ${{ matrix.os }}
+        dockerPush ${{ matrix.arch }} ${{ matrix.os }}
         build/impl
 
 
@@ -123,7 +123,7 @@ jobs:
         impl/${{ matrix.task.prj }}
 
     - run: >-
-        dockerTest ${{ matrix.arch }} ${{ matrix.sys.os }}
+        dockerTest ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
         impl/${{ matrix.task.arch }}
         impl/${{ matrix.task.prj }}
 
@@ -138,7 +138,7 @@ jobs:
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush ${{ matrix.sys.os }}
+        dockerPush ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
         impl/${{ matrix.task.arch }}
         impl/${{ matrix.task.prj }}
 
@@ -199,7 +199,7 @@ jobs:
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush ${{ matrix.os }}
+        dockerPush ${{ matrix.arch }} ${{ matrix.os }}
         impl/generic
         impl/pnr
         impl

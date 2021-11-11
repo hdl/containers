@@ -25,9 +25,9 @@ cd $(dirname "$0")/../..
 
 HDL_DEFAULT_COLLECTION="${HDL_DEFAULT_COLLECTION:-debian/bullseye}"
 HDL_DEFAULT_ARCH="${HDL_DEFAULT_ARCH:-amd64}"
-HDL_ARCH="${HDL_ARCH:-amd64}"
-
-_collection="$1"
+HDL_ARCH="$1"
+_collection="$2"
+shift
 shift
 
 _print() {

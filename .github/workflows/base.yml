@@ -84,7 +84,7 @@ jobs:
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush ${{ matrix.os }}
+        dockerPush ${{ matrix.arch }} ${{ matrix.os }}
         build/base
         build/build
         build/dev

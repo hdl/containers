@@ -74,7 +74,7 @@ jobs:
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush ${{ matrix.os }}
+        dockerPush ${{ matrix.arch }} ${{ matrix.os }}
         sim
 
 
@@ -123,7 +123,7 @@ jobs:
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush ${{ matrix.os }}
+        dockerPush ${{ matrix.arch }} ${{ matrix.os }}
         pkg/osvb
         sim/osvb
 
@@ -161,7 +161,7 @@ jobs:
         sim/${{ matrix.img }}
 
     - run: >-
-        dockerTest ${{ matrix.arch }} ${{ matrix.sys.os }}
+        dockerTest ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
         sim/${{ matrix.img }}-slim
         sim/${{ matrix.img }}
 
@@ -176,6 +176,6 @@ jobs:
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush ${{ matrix.sys.os }}
+        dockerPush ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
         sim/${{ matrix.img }}-slim
         sim/${{ matrix.img }}
