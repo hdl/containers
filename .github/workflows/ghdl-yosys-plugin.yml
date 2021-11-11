@@ -38,7 +38,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
+
+        imgs:
+          - >-
+            pkg/ghdl-yosys-plugin
+            ghdl/yosys
+
+        sys:
 
           # Debian Buster
           - { os: debian/buster, arch: amd64 }
@@ -46,21 +52,21 @@ jobs:
           # Debian Bullseye
           - { os: debian/bullseye, arch: amd64 }
 
+    name: ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
     steps:
 
     - uses: actions/checkout@v2
       with:
         submodules: recursive
 
-    - run: ./utils/setup.sh ${{ matrix.arch }}
+    - run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
-    - run: >-
-        dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d
-        pkg/ghdl-yosys-plugin
-        ghdl/yosys
+    - run: dockerBuild -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d ${{ matrix.imgs }}
 
+    # TODO: Enhance dockerBuild and dockerPush to ignore '#*' at the end of image names.
+    # Then, use Action 'build-test-push-mirror'.
     - run: >-
-        dockerTest ${{ matrix.arch }} ${{ matrix.os }}
+        dockerTest ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
         pkg/ghdl-yosys-plugin#ghdl
         ghdl/yosys
 
@@ -74,7 +80,4 @@ jobs:
           echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      run: >-
-        dockerPush ${{ matrix.arch }} ${{ matrix.os }}
-        pkg/ghdl-yosys-plugin
-        ghdl/yosys
+      run: dockerPush ${{ matrix.sys.arch }} ${{ matrix.sys.os }} ${{ matrix.imgs }}
