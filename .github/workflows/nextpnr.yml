@@ -104,7 +104,7 @@ jobs:
 
     name: '[${{ matrix.sys.os }}|${{ matrix.sys.arch }}] nextpnr · ${{ matrix.task.arch }} ${{ matrix.task.prj }}'
     env:
-      HDL_ARCH: ${{ matrix.arch }}
+      HDL_ARCH: ${{ matrix.sys.arch }}
     steps:
 
     - uses: actions/checkout@v2

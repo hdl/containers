@@ -146,7 +146,7 @@ jobs:
           - scipy
           - octave
     env:
-      HDL_ARCH: ${{ matrix.arch }}
+      HDL_ARCH: ${{ matrix.sys.arch }}
     steps:
 
     - uses: actions/checkout@v2
