@@ -63,7 +63,7 @@ jobs:
 
     - run: dockerBuild -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d ${{ matrix.imgs }}
 
-    # TODO: Enhance dockerBuild and dockerPush to ignore '#*' at the end of image names.
+    # TODO: Enhance dockerBuild and dockerRelease to ignore '#*' at the end of image names.
     # Then, use Action 'build-test-push-mirror'.
     - run: >-
         dockerTest ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
@@ -80,4 +80,4 @@ jobs:
           echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      run: dockerPush ${{ matrix.sys.arch }} ${{ matrix.sys.os }} ${{ matrix.imgs }}
+      run: dockerRelease ${{ matrix.sys.arch }} ${{ matrix.sys.os }} ${{ matrix.imgs }}

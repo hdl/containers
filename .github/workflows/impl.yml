@@ -83,7 +83,7 @@ jobs:
           echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      run: dockerPush ${{ matrix.sys.arch }} ${{ matrix.sys.os }} ${{ matrix.imgs }}
+      run: dockerRelease ${{ matrix.sys.arch }} ${{ matrix.sys.os }} ${{ matrix.imgs }}
 
 
   impl-prjs:
@@ -140,7 +140,7 @@ jobs:
 
     - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       run: >-
-        dockerPush ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
+        dockerRelease ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
         impl/${{ matrix.task.arch }}
         impl/${{ matrix.task.prj }}
 

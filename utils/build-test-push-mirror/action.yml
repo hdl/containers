@@ -86,7 +86,7 @@ runs:
         exit 0
       fi
 
-      ./utils/bin/dockerPush \
+      ./utils/bin/dockerRelease \
       ${{ inputs.architecture }} \
       ${{ inputs.collection }} \
       ${{ inputs.images }}

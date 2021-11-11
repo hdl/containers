@@ -36,7 +36,7 @@ _print() {
 
 _push() {
   _mirrors="${_mirror} ghcr.io/hdl/#A/#C"
-  _print "[dockerPush] mirrors: ${_mirrors}"
+  _print "[dockerRelease] mirrors: ${_mirrors}"
   ./utils/pyHDLC/cli.py push -a "${HDL_ARCH}" -c "${_collection}" -m ${_mirrors} -- $@
 }
 
@@ -45,17 +45,17 @@ _DefaultCollection_AnyArch_mirrors='gcr.io/hdl-containers/#A ghcr.io/hdl/#A'
 
 if [ "$_collection" != "$HDL_DEFAULT_COLLECTION" ]; then
   if [ "$HDL_ARCH" != "$HDL_DEFAULT_ARCH" ]; then
-    _print "[dockerPush] non-default collection, non-default arch"
+    _print "[dockerRelease] non-default collection, non-default arch"
     _push $@
   else
-    _print "[dockerPush] non-default collection, default arch (future manifest?)"
+    _print "[dockerRelease] non-default collection, default arch (future manifest?)"
     _mirror="$_AnyCollection_DefaultArch_mirrors" _push $@
   fi
   exit
 fi
 
 if [ "$HDL_ARCH" != "$HDL_DEFAULT_ARCH" ]; then
-  _print "[dockerPush] default collection, non-default arch"
+  _print "[dockerRelease] default collection, non-default arch"
   _mirror="$_DefaultCollection_AnyArch_mirrors" _push $@
   exit
 fi
@@ -77,11 +77,11 @@ done
 _DefaultCollection_DefaultArch_mirrors="${_DefaultCollection_AnyArch_mirrors} ${_AnyCollection_DefaultArch_mirrors} docker.io/hdlc"
 
 if [ -n "$_nonRootOnly" ]; then
-  _print "[dockerPush] default collection, default arch, non-root (future manifest?)"
+  _print "[dockerRelease] default collection, default arch, non-root (future manifest?)"
   _mirror="${_DefaultCollection_DefaultArch_mirrors}" _push $_nonRootOnly
 fi
 
 if [ -n "$_toRoot" ]; then
-  _print "[dockerPush] default collection, default arch, root (future manifest?)"
+  _print "[dockerRelease] default collection, default arch, root (future manifest?)"
   _mirror="${_DefaultCollection_DefaultArch_mirrors} gcr.io/hdl-containers ghcr.io/hdl" _push $_toRoot
 fi
