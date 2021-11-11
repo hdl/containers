@@ -58,7 +58,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: ./utils/setup.sh
+    - run: ./utils/setup.sh ${{ matrix.arch }}
 
     - run: >-
         dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d

@@ -25,6 +25,8 @@ cd $(dirname "$0")
 
 pip3 install -r pyHDLC/requirements.txt
 
+HDL_ARCH="${HDL_ARCH:-$1}"
+
 if [ -n "$CI" ]; then
   echo "$(pwd)/bin" >> $GITHUB_PATH
 

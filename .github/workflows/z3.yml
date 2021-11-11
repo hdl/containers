@@ -52,7 +52,7 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - run: ./utils/setup.sh
+    - run: ./utils/setup.sh ${{ matrix.arch }}
 
     - run: >-
         dockerBuild -a ${{ matrix.arch }} -c ${{ matrix.os }} -d

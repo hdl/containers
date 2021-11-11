@@ -55,7 +55,7 @@ jobs:
       with:
         submodules: recursive
 
-    - run: ./utils/setup.sh
+    - run: ./utils/setup.sh ${{ matrix.arch }}
 
     - run: >-
         dockerPull -c ${{ matrix.os }}
