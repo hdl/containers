@@ -1,0 +1,151 @@
+# Reproducer for https://github.com/actions/runner/issues/1560
+
+name: MWE 1560
+
+on:
+  push:
+
+jobs:
+
+
+  Image:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: ghcr.io/hdl/containers/mwe/1560
+    steps:
+
+    - run: |
+        docker build -t "$IMAGE" - <<EOF
+        FROM debian:bullseye-slim
+        RUN mkdir -p /etc/profile.d/ \
+         && echo 'export DEMO_VAR=somevalue' > /etc/profile.d/demo.sh
+        EOF
+
+    - name: Push container image
+      uses: pyTooling/Actions/with-post-step@r0
+      with:
+        main: |
+          echo '${{ github.token }}' | docker login ghcr.io -u GitHub-Actions --password-stdin
+          docker push "$IMAGE"
+        post: docker logout ghcr.io
+
+
+  String:
+    needs: Image
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: ghcr.io/hdl/containers/mwe/1560
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: docker pull "$IMAGE"
+
+    - run: >-
+        docker run --rm "$IMAGE" bash -lec
+        'if [ "$DEMO_VAR" != "somevalue" ]; then echo "Error!"; exit 1; fi && echo "Bye!"'
+
+
+  HereFile:
+    needs: Image
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: ghcr.io/hdl/containers/mwe/1560
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: docker pull "$IMAGE"
+
+    - run: |
+        docker run --rm -i "$IMAGE" bash -le <<'EOF'
+          if [ "$DEMO_VAR" != "somevalue" ]; then echo "Error!"; exit 1; fi
+          echo "Bye!"
+        EOF
+
+
+  File:
+    needs: Image
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: ghcr.io/hdl/containers/mwe/1560
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: docker pull "$IMAGE"
+
+    - run: |
+        cat > f4pga-examples-tests.sh <<'EOF'
+        cd $(dirname "$0")
+        if [ "$DEMO_VAR" != "somevalue" ]; then echo "Error!"; exit 1; fi
+        echo "Bye!"
+        EOF
+
+    - run: docker run --rm -v $(pwd):/wrk "$IMAGE" bash -le /wrk/f4pga-examples-tests.sh
+
+
+  Shebang:
+    needs: Image
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: ghcr.io/hdl/containers/mwe/1560
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: docker pull "$IMAGE"
+
+    - run: |
+        cat > f4pga-examples-tests.sh <<'EOF'
+        #!/usr/bin/env -S bash -le
+        cd $(dirname "$0")
+        if [ "$DEMO_VAR" != "somevalue" ]; then echo "Error!"; exit 1; fi
+        echo "Bye!"
+        EOF
+        chmod +x f4pga-examples-tests.sh
+
+    - run: docker run --rm -v $(pwd):/wrk "$IMAGE" /wrk/f4pga-examples-tests.sh
+
+
+  Action_String:
+    needs: Image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: docker://ghcr.io/hdl/containers/mwe/1560
+      with:
+        args: bash -lec 'if [ "$DEMO_VAR" != "somevalue" ]; then echo "Error!"; exit 1; fi && echo "Bye!"'
+
+
+  Action_File:
+    needs: Image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: |
+        cat > f4pga-examples-tests.sh <<'EOF'
+        if [ "$DEMO_VAR" != "somevalue" ]; then echo "Error!"; exit 1; fi
+        echo "Bye!"
+        EOF
+
+    - uses: docker://ghcr.io/hdl/containers/mwe/1560
+      with:
+        args: bash -le ./f4pga-examples-tests.sh
+
+
+  Action_Shebang:
+    needs: Image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: |
+        cat > f4pga-examples-tests.sh <<'EOF'
+        #!/usr/bin/env -S bash -le
+        if [ "$DEMO_VAR" != "somevalue" ]; then echo "Error!"; exit 1; fi
+        echo "Bye!"
+        EOF
+        chmod +x f4pga-examples-tests.sh
+
+    - uses: docker://ghcr.io/hdl/containers/mwe/1560
+      with:
+        args: ./f4pga-examples-tests.sh

@@ -1,0 +1,22 @@
+# Reproducer for https://github.com/actions/runner/issues/1479
+
+name: '[HDLC] MWE Input variable in uses'
+description: 'Minimal Working Example to reproduce a bug when using an input in a uses step of a Composite Action.'
+
+inputs:
+  version:
+    description: 'Version of actions/checkout to use.'
+    default: 'v2'
+    required: false
+  image:
+    description: 'Name of the container image.'
+    default: 'asciidoctor/docker-asciidoctor'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@${{ inputs.version }}
+    - uses: docker://${{ inputs.image }}
+      with:
+        args: doc/make.sh

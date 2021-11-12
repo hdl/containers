@@ -1,0 +1,171 @@
+# Reproducer for https://github.com/actions/runner/issues/1560
+
+name: MWE 1560 F4PGA
+
+on:
+  push:
+
+jobs:
+
+
+  Image:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: ghcr.io/hdl/containers/mwe/1560-f4pga
+    steps:
+
+    - run: |
+        docker build -t "$IMAGE" - <<EOF
+        FROM gcr.io/hdl-containers/conda
+        RUN mkdir f4pga-examples \
+         && curl -fsSL https://codeload.github.com/chipsalliance/f4pga-examples/tar.gz/main | tar xzf - -C f4pga-examples --strip-components=1 \
+         && conda env create -f ./f4pga-examples/eos-s3/environment.yml \
+         && rm -rf f4pga-examples \
+         && curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs-install/quicklogic-arch-defs-63c3d8f9.tar.gz | tar -xzC /usr/local \
+         && echo 'export PATH=/usr/local/quicklogic-arch-defs/bin:$PATH' > conda.sh \
+         && cat /usr/local/etc/profile.d/conda.sh >> conda.sh \
+         && mv conda.sh /usr/local/etc/profile.d/conda.sh
+        EOF
+
+    - name: Push container image
+      uses: pyTooling/Actions/with-post-step@r0
+      with:
+        main: |
+          echo '${{ github.token }}' | docker login ghcr.io -u GitHub-Actions --password-stdin
+          docker push "$IMAGE"
+        post: docker logout ghcr.io
+
+
+  String:
+    needs: Image
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: ghcr.io/hdl/containers/mwe/1560-f4pga
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: chipsalliance/f4pga-examples
+
+    - run: docker pull "$IMAGE"
+
+    - run: >-
+        docker run --rm -v $(pwd):/wrk -w /wrk "$IMAGE" bash -lec
+        'conda activate eos-s3 && TARGET="arty_100" make -C xc7/picosoc_demo/'
+
+
+  HereFile:
+    needs: Image
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: ghcr.io/hdl/containers/mwe/1560-f4pga
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: chipsalliance/f4pga-examples
+
+    - run: docker pull "$IMAGE"
+
+    - run: |
+        docker run --rm -i -v /$(pwd):/wrk -w //wrk "$IMAGE" bash -le <<'EOF'
+          conda activate eos-s3
+          make -C eos-s3/btn_counter
+        EOF
+
+
+  File:
+    needs: Image
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: ghcr.io/hdl/containers/mwe/1560-f4pga
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: chipsalliance/f4pga-examples
+
+    - run: docker pull "$IMAGE"
+
+    - run: |
+        cat > f4pga-examples-tests.sh <<'EOF'
+        cd $(dirname "$0")
+        conda activate eos-s3
+        make -C eos-s3/btn_counter
+        EOF
+
+    - run: docker run --rm -v $(pwd):/wrk "$IMAGE" bash -le /wrk/f4pga-examples-tests.sh
+
+
+  Shebang:
+    needs: Image
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: ghcr.io/hdl/containers/mwe/1560-f4pga
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: chipsalliance/f4pga-examples
+
+    - run: docker pull "$IMAGE"
+
+    - run: |
+        cat > f4pga-examples-tests.sh <<'EOF'
+        #!/usr/bin/env -S bash -le
+        cd $(dirname "$0")
+        conda activate eos-s3
+        make -C eos-s3/btn_counter
+        EOF
+        chmod +x f4pga-examples-tests.sh
+
+    - run: docker run --rm -v $(pwd):/wrk "$IMAGE" /wrk/f4pga-examples-tests.sh
+
+
+  Action_String:
+    needs: Image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: chipsalliance/f4pga-examples
+
+    - uses: docker://ghcr.io/hdl/containers/mwe/1560-f4pga
+      with:
+        args: bash -ilec 'conda activate eos-s3 && make -C eos-s3/btn_counter'
+
+
+  Action_File:
+    needs: Image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: chipsalliance/f4pga-examples
+
+    - run: |
+        cat > f4pga-examples-tests.sh <<'EOF'
+        conda activate eos-s3
+        make -C eos-s3/btn_counter
+        EOF
+
+    - uses: docker://ghcr.io/hdl/containers/mwe/1560-f4pga
+      with:
+        args: bash -le ./f4pga-examples-tests.sh
+
+
+  Action_Shebang:
+    needs: Image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: chipsalliance/f4pga-examples
+
+    - run: |
+        cat > f4pga-examples-tests.sh <<'EOF'
+        #!/usr/bin/env -S bash -le
+        conda activate eos-s3
+        make -C eos-s3/btn_counter
+        EOF
+        chmod +x f4pga-examples-tests.sh
+
+    - uses: docker://ghcr.io/hdl/containers/mwe/1560-f4pga
+      with:
+        args: ./f4pga-examples-tests.sh

@@ -1,0 +1,62 @@
+# Reproducer for https://github.com/actions/runner/issues/1479
+
+name: MWE 1479
+
+on:
+  push:
+
+jobs:
+
+
+  matrix-var-in-uses-name:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        action:
+          - actions/checkout
+    steps:
+      - uses: ${{ matrix.action }}@v2
+
+
+  matrix-var-in-uses-version:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - v1
+          - v2
+    steps:
+      - uses: actions/checkout@${{ matrix.version }}
+
+
+  matrix-var-in-uses-docker:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        img:
+          - debian:bullseye-slim
+          - debian:buster-slim
+    steps:
+     - uses: docker://${{ matrix.img }}
+
+
+  matrix-var-in-uses-docker-tag:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        img:
+          - bullseye-slim
+          - buster-slim
+    steps:
+     - uses: docker://debian:${{ matrix.img }}
+
+
+  matrix-var-in-uses-action:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./utils/mwe-input-var-in-uses

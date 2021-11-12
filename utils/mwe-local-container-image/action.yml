@@ -1,0 +1,31 @@
+# Reproducer for https://github.com/actions/runner/issues/814
+
+name: '[HDLC] MWE Local container image'
+description: 'Minimal Working Example to reproduce a bug when using a local container image in a Composite Action.'
+
+inputs:
+  image:
+    description: 'Name of the base container image.'
+    default: 'asciidoctor/docker-asciidoctor'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+
+    # BUG: GitHub's runner tries to build the last action before starting the first step.
+    # It fails, because container image image_name does not exist yet.
+
+    - name: Build hdlc/doc
+      shell: bash
+      run: |
+        docker build -t image_name - <<-EOF
+        FROM ${{ inputs.image }}
+        RUN apk add -U --no-cache graphviz
+        EOF
+
+    - uses: actions/checkout@v2
+
+    - uses: docker://image_name
+      with:
+        args: doc/make.sh

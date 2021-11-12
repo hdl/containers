@@ -1,0 +1,59 @@
+# Reproducer for https://github.com/actions/runner/issues/814
+
+name: MWE 814
+
+on:
+  push:
+
+env:
+  DOCKER_BUILDKIT: 1
+
+jobs:
+
+
+  local-container-image:
+    runs-on: ubuntu-latest
+    steps:
+
+    # BUG: GitHub's runner tries to build the last action before starting the first step.
+    # It fails, because container image image_name does not exist yet.
+
+    - name: Build hdlc/doc
+      shell: bash
+      run: |
+        docker build -t image_name - <<-EOF
+        FROM asciidoctor/docker-asciidoctor
+        RUN apk add -U --no-cache graphviz
+        EOF
+
+    - uses: actions/checkout@v2
+
+    - uses: docker://image_name
+      with:
+        args: doc/make.sh
+
+
+  local-container-image-action:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - uses: ./utils/mwe-local-container-image
+
+
+  local-container-workaround:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Build hdlc/doc
+      run: |
+        docker build -t image_name - <<-EOF
+        FROM asciidoctor/docker-asciidoctor
+        RUN apk add -U --no-cache graphviz
+        EOF
+
+    - uses: actions/checkout@v2
+
+    - name: Build site
+      run: docker run -v /$(pwd)://documents/ image_name ./doc/make.sh
