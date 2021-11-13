@@ -61,21 +61,6 @@ jobs:
       with:
         submodules: recursive
 
-    # TODO: Add option 'pull' to Action 'build-test-release'.
-    # Setup is required outside of the Action, because 'pyHDLC pull' needs it.
-    - run: ./utils/setup.sh ${{ matrix.sys.arch }}
-
-    - run: >-
-        pyHDLC pull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
-        ghdl/yosys
-        pkg/z3
-        pkg/symbiyosys
-        pkg/yices2
-        pkg/boolector
-        pkg/cvc
-        pkg/superprove
-        pkg/pono
-
     - uses: ./utils/build-test-release
       with:
         gcr_token: '${{ secrets.GCR_JSON_KEY }}'
@@ -86,3 +71,12 @@ jobs:
         architecture: ${{ matrix.sys.arch }}
         collection: ${{ matrix.sys.os }}
         images: ${{ matrix.imgs }}
+        pull: >-
+          ghdl/yosys
+          pkg/z3
+          pkg/symbiyosys
+          pkg/yices2
+          pkg/boolector
+          pkg/cvc
+          pkg/superprove
+          pkg/pono
