@@ -168,6 +168,79 @@ def BuildImage(
         _exec(args=cmd, dry=dry, collapse=f"Build {imageName}")
 
 
+def TestImage(
+    image: Union[str, List[str]],
+    registry: Optional[str] = "gcr.io/hdl-containers",
+    collection: Optional[str] = "debian/bullseye",
+    architecture: Optional[str] = "amd64",
+    dry: Optional[bool] = False,
+) -> None:
+    imagePrefix = f"{registry}/{architecture}/{collection}"
+    for img in [image] if isinstance(image, str) else image:
+        if img.startswith("pkg/"):
+            pimg = img[4:]
+            if '#' in pimg:
+                # If a custom package location is specified, split it.
+                [pimg, pdir] = pimg.split('#')
+            else:
+                # Otherwise, use the "escaped" image name as the location of the package.
+                pdir = pimg.replace('/', '-')
+
+            testScript = pimg.replace('/', '--')
+
+            # The testScript is used as a tag for the temporary image.
+            # Nevertheless, any other image name and/or tag might be used.
+            testImage = f"{imagePrefix}/testpkg:{testScript}"
+
+            _exec(args=[
+                "docker",
+                "build",
+                "-t",
+                f"{testImage!s}",
+                "--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1",
+                "--build-arg",
+                f"IMAGE={imagePrefix!s}/pkg/{pimg!s}",
+                "--build-arg",
+                f"PACKAGE={pdir!s}",
+                "-f",
+                str(Path(__file__).resolve().parent / "testpkg.dockerfile"),
+                "."
+            ], dry=dry, collapse=f"[Test] Build {testImage!s}")
+
+            _exec(args=[
+                "docker",
+                "run",
+                "--rm",
+                "-v",
+                f"{Path.cwd() / 'test'}://wrk",
+                f"{testImage!s}",
+                f"//wrk/{testScript}.pkg.sh"
+            ], dry=dry, collapse=f"[Test] Test {testImage}")
+
+            continue
+
+        # If not a package image...
+
+        imageName=f"{imagePrefix}/{img}"
+
+        _exec(args=[
+            'docker',
+            'inspect',
+            """--format={{ println "Architecture:" .Architecture .Variant }}{{ println "Size:" .Size }}VirtualSize: {{ .VirtualSize }}""",
+            f"{imageName}"
+        ], dry=dry, collapse=f"[Test] Inspect {imageName}")
+
+        _exec(args=[
+            'docker',
+            'run',
+            '--rm',
+            '-v',
+            f"{Path.cwd() / 'test'}://wrk",
+            f"{imageName!s}",
+            f"//wrk/{img.replace(':', '--').replace('/', '--')!s}.sh"
+        ], dry=dry, collapse=f"[Test] Test {imageName!s}")
+
+
 def PushImage(
     image: Union[str, List[str]],
     registry: Optional[str] = "gcr.io/hdl-containers",

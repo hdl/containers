@@ -74,8 +74,8 @@ runs:
       fi
 
       dockerTest \
-      ${{ inputs.architecture }} \
-      ${{ inputs.collection }} \
+      -a ${{ inputs.architecture }} \
+      -c ${{ inputs.collection }} \
       ${{ inputs.images }}
 
   - name: Login to container registries

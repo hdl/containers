@@ -1,5 +1,3 @@
-#!/usr/bin/env sh
-
 # Authors:
 #   Unai Martinez-Corral
 #
@@ -19,8 +17,15 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-set -e
+ARG IMAGE
 
-cd $(dirname "$0")/../..
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $IMAGE AS pkg
 
-./utils/pyHDLC/cli.py test $@
+FROM alpine
+
+ARG PACKAGE
+
+COPY --from=pkg /$PACKAGE /
+
+RUN apk add -U --no-cache file tree

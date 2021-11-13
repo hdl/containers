@@ -66,7 +66,7 @@ jobs:
     # TODO: Enhance dockerBuild and dockerRelease to ignore '#*' at the end of image names.
     # Then, use Action 'build-test-release'.
     - run: >-
-        dockerTest ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
+        dockerTest -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
         pkg/ghdl-yosys-plugin#ghdl
         ghdl/yosys
 

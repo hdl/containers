@@ -121,7 +121,7 @@ jobs:
         impl/${{ matrix.task.prj }}
 
     - run: >-
-        dockerTest ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
+        dockerTest -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
         impl/${{ matrix.task.arch }}
         impl/${{ matrix.task.prj }}
 

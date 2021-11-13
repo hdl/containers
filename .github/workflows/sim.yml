@@ -141,7 +141,7 @@ jobs:
         sim/${{ matrix.img }}
 
     - run: >-
-        dockerTest ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
+        dockerTest -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
         sim/${{ matrix.img }}-slim
         sim/${{ matrix.img }}
 

@@ -35,9 +35,10 @@ from pyAttributes.ArgParseAttributes import (
 
 from pyHDLC import (
     DefaultOpts,
+    PullImage,
     BuildImage,
+    TestImage,
     PushImage,
-    PullImage
 )
 
 
@@ -147,6 +148,17 @@ class CLI(ArgParseMixin):
             except KeyError:
                 print("command {0} is unknown.".format(args.Command))
 
+    @CommandAttribute("pull", help="Pull images by name.")
+    @WithRegistryAttributes()
+    def HandlePull(self, args):
+        PullImage(
+            image=args.Image,
+            registry=args.Registry,
+            collection=args.Collection,
+            architecture=args.Architecture,
+            dry=args.noexec,
+        )
+
     @CommandAttribute("build", help="Build images by name.")
     @WithRegistryAttributes()
     @ArgumentAttribute(
@@ -198,6 +210,17 @@ class CLI(ArgParseMixin):
             default=args.Default,
         )
 
+    @CommandAttribute("test", help="Test images by name.")
+    @WithRegistryAttributes()
+    def HandleTest(self, args):
+        TestImage(
+            image=args.Image,
+            registry=args.Registry,
+            collection=args.Collection,
+            architecture=args.Architecture,
+            dry=args.noexec,
+        )
+
     @CommandAttribute("push", help="Push images by name.")
     @WithRegistryAttributes()
     @ArgumentAttribute(
@@ -216,17 +239,6 @@ class CLI(ArgParseMixin):
             architecture=args.Architecture,
             dry=args.noexec,
             mirror=args.Mirror,
-        )
-
-    @CommandAttribute("pull", help="Pull images by name.")
-    @WithRegistryAttributes()
-    def HandlePull(self, args):
-        PullImage(
-            image=args.Image,
-            registry=args.Registry,
-            collection=args.Collection,
-            architecture=args.Architecture,
-            dry=args.noexec,
         )
 
 
