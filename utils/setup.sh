@@ -29,6 +29,7 @@ HDL_ARCH="${HDL_ARCH:-$1}"
 
 if [ -n "$CI" ]; then
   echo "$(pwd)/bin" >> $GITHUB_PATH
+  echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
 
   if [ -n "$HDL_ARCH" ]; then
     unset _arch
@@ -45,5 +46,6 @@ if [ -n "$CI" ]; then
 else
 
   export PATH="$PATH:$(pwd)/bin"
+  export PYTHONPATH="$(pwd)"
 
 fi

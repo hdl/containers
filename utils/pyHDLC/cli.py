@@ -33,9 +33,12 @@ from pyAttributes.ArgParseAttributes import (
     SwitchArgumentAttribute,
 )
 
-from build import DefaultOpts, BuildImage
-from push import PushImage
-from pull import PullImage
+from pyHDLC import (
+    DefaultOpts,
+    BuildImage,
+    PushImage,
+    PullImage
+)
 
 
 class WithRegistryAttributes(Attribute):

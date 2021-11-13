@@ -19,7 +19,7 @@
 
 from typing import Dict, List, Optional, Tuple, Union
 from pathlib import Path
-from run import _exec
+from pyHDLC.run import _exec
 
 DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "apicula": ["apicula", None, None],
@@ -104,6 +104,20 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
 }
 
 
+def PullImage(
+    image: Union[str, List[str]],
+    registry: Optional[str] = "gcr.io/hdl-containers",
+    collection: Optional[str] = "debian/bullseye",
+    architecture: Optional[str] = "amd64",
+    dry: Optional[bool] = False,
+) -> None:
+    for img in [image] if isinstance(image, str) else image:
+        imageName = f"{registry}/{architecture}/{collection}/{img}"
+        _exec(
+            args=["docker", "pull", imageName], dry=dry, collapse=f"Pull {imageName}"
+        )
+
+
 def BuildImage(
     image: Union[str, List[str]],
     registry: Optional[str] = "gcr.io/hdl-containers",
@@ -152,3 +166,34 @@ def BuildImage(
         cmd += ["-f", str(dpath), "."]
 
         _exec(args=cmd, dry=dry, collapse=f"Build {imageName}")
+
+
+def PushImage(
+    image: Union[str, List[str]],
+    registry: Optional[str] = "gcr.io/hdl-containers",
+    collection: Optional[str] = "debian/bullseye",
+    architecture: Optional[str] = "amd64",
+    dry: Optional[bool] = False,
+    mirror: Optional[Union[str, List[str]]] = None,
+) -> None:
+    def dpush(imgName):
+        _exec(args=["docker", "push", imgName], dry=dry, collapse=f"Push {imgName}")
+
+    mirrors = [] if mirror is None else [mirror] if isinstance(mirror, str) else mirror
+
+    for img in [image] if isinstance(image, str) else image:
+        imageName = f"{registry}/{architecture}/{collection}/{img}"
+        dpush(imageName)
+        for mirror in mirrors:
+            mimg = (
+                img.replace("/", ":", 1).replace("/", "--")
+                if mirror.startswith("docker.io")
+                else img
+            )
+            mirrorName = f"{mirror.replace('#A', architecture).replace('#C', collection)}/{mimg}"
+            _exec(
+                args=["docker", "tag", imageName, mirrorName],
+                dry=dry,
+                collapse=f"Tag {imageName} {mirrorName}",
+            )
+            dpush(mirrorName)
