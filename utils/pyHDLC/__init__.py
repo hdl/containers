@@ -117,7 +117,7 @@ def PullImage(
     dry: Optional[bool] = False,
 ) -> None:
     for img in [image] if isinstance(image, str) else image:
-        imageName = f"{registry}/{architecture}/{collection}/{img}"
+        imageName = f"{registry}/{architecture}/{collection}/{img.split('#')[0]}"
         _exec(
             args=["docker", "pull", imageName], dry=dry, collapse=f"[Pull] Pull {imageName}"
         )
@@ -136,20 +136,38 @@ def BuildImage(
     default: Optional[bool] = False,
     test: Optional[bool] = False,
 ) -> None:
-    for img in [image] if isinstance(image, str) else image:
+    for rimg in [image] if isinstance(image, str) else image:
+
+        items = rimg.split('#')
+        pimg = items[0]
+        withDir = None
+        if len(items) > 1:
+            withDir = items[1]
+
+        if pimg.startswith('pkg/'):
+            isPkg = True
+            img = pimg[4:]
+        else:
+            isPkg = pkg
+            img = pimg
+            if pkg is True:
+                pimg = f"pkg/{pimg}"
 
         if default:
-            [dockerfile, target, argimg] = DefaultOpts[img]
+            key = pimg
+            if (isPkg is True) and (pimg not in DefaultOpts):
+                key = img
+            if key not in DefaultOpts:
+                raise Exception(f"Key '{key}' is an unknown default image name!")
+            [dockerfile, target, argimg] = DefaultOpts[key]
 
         if dockerfile is None:
             dockerfile = img
 
-        if pkg is True:
-            img = f"pkg/{img}"
-            if target is None:
-                target = "pkg"
+        if (pkg is True) and (target is None):
+            target = "pkg"
 
-        imageName = f"{registry}/{architecture}/{collection}/{img}"
+        imageName = f"{registry}/{architecture}/{collection}/{pimg}"
 
         cmd = ["docker", "build", "-t", imageName, "--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1"]
         cmd += [
@@ -175,7 +193,7 @@ def BuildImage(
 
         if test:
             TestImage(
-                img,
+                f"{pimg}{(f'#{withDir}' if withDir is not None else '')}",
                 registry,
                 collection,
                 architecture,
@@ -269,7 +287,11 @@ def PushImage(
 
     mirrors = [] if mirror is None else [mirror] if isinstance(mirror, str) else mirror
 
-    for img in [image] if isinstance(image, str) else image:
+    for rimg in [image] if isinstance(image, str) else image:
+        # Note that '#' might be used in the image names as a package location, to be used in TestImage.
+        # This usage of '#' is different from the one in the mirror names below.
+        # There, it denotes keywords for replacement.
+        img = rimg.split('#')[0]
         imageName = f"{registry}/{architecture}/{collection}/{img}"
         dpush(imageName)
         for mirror in mirrors:
