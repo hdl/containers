@@ -104,11 +104,16 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
 }
 
 
+defaultRegistry = "gcr.io/hdl-containers"
+defaultCollection = "debian/bullseye"
+defaultArchitecture = "amd64"
+
+
 def PullImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = "gcr.io/hdl-containers",
-    collection: Optional[str] = "debian/bullseye",
-    architecture: Optional[str] = "amd64",
+    registry: Optional[str] = defaultRegistry,
+    collection: Optional[str] = defaultCollection,
+    architecture: Optional[str] = defaultArchitecture,
     dry: Optional[bool] = False,
 ) -> None:
     for img in [image] if isinstance(image, str) else image:
@@ -120,9 +125,9 @@ def PullImage(
 
 def BuildImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = "gcr.io/hdl-containers",
-    collection: Optional[str] = "debian/bullseye",
-    architecture: Optional[str] = "amd64",
+    registry: Optional[str] = defaultRegistry,
+    collection: Optional[str] = defaultCollection,
+    architecture: Optional[str] = defaultArchitecture,
     dockerfile: Optional[str] = None,
     target: Optional[str] = None,
     argimg: Optional[str] = None,
@@ -170,9 +175,9 @@ def BuildImage(
 
 def TestImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = "gcr.io/hdl-containers",
-    collection: Optional[str] = "debian/bullseye",
-    architecture: Optional[str] = "amd64",
+    registry: Optional[str] = defaultRegistry,
+    collection: Optional[str] = defaultCollection,
+    architecture: Optional[str] = defaultArchitecture,
     dry: Optional[bool] = False,
 ) -> None:
     imagePrefix = f"{registry}/{architecture}/{collection}"
@@ -243,9 +248,9 @@ def TestImage(
 
 def PushImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = "gcr.io/hdl-containers",
-    collection: Optional[str] = "debian/bullseye",
-    architecture: Optional[str] = "amd64",
+    registry: Optional[str] = defaultRegistry,
+    collection: Optional[str] = defaultCollection,
+    architecture: Optional[str] = defaultArchitecture,
     dry: Optional[bool] = False,
     mirror: Optional[Union[str, List[str]]] = None,
 ) -> None:
