@@ -28,11 +28,8 @@ def PullImage(
     architecture: Optional[str] = "amd64",
     dry: Optional[bool] = False,
 ) -> None:
-    def _pull(img):
-        _imageName = "{0}/{1}/{2}/{3}".format(registry, architecture, collection, img)
+    for img in [image] if isinstance(image, str) else image:
+        imageName = f"{registry}/{architecture}/{collection}/{img}"
         _exec(
-            args=["docker", "pull", _imageName], dry=dry, collapse=f"Pull {_imageName}"
+            args=["docker", "pull", imageName], dry=dry, collapse=f"Pull {imageName}"
         )
-
-    for _image in [image] if isinstance(image, str) else image:
-        _pull(_image)

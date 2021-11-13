@@ -29,34 +29,24 @@ def PushImage(
     dry: Optional[bool] = False,
     mirror: Optional[Union[str, List[str]]] = None,
 ) -> None:
-    def _dpush(imgName):
+    def dpush(imgName):
         _exec(args=["docker", "push", imgName], dry=dry, collapse=f"Push {imgName}")
 
-    def _push(img):
-        _imageName = "{0}/{1}/{2}/{3}".format(registry, architecture, collection, img)
-        _dpush(_imageName)
-        if mirror is not None:
-            for _mirror in mirror:
-                _img = (
-                    img.replace("/", ":", 1).replace("/", "--")
-                    if _mirror.startswith("docker.io")
-                    else img
-                )
-                _mirrorName = "{0}/{1}".format(
-                    _mirror.replace("#A", architecture).replace("#C", collection), _img
-                )
-                _exec(
-                    args=["docker", "tag", _imageName, _mirrorName],
-                    dry=dry,
-                    collapse=f"Tag {_imageName} {_mirrorName}",
-                )
-                _dpush(_mirrorName)
+    mirrors = [] if mirror is None else [mirror] if isinstance(mirror, str) else mirror
 
-    if isinstance(image, str):
-        image = [image]
-
-    if mirror is not None and isinstance(mirror, str):
-        mirror = [mirror]
-
-    for _image in image:
-        _push(_image)
+    for img in [image] if isinstance(image, str) else image:
+        imageName = f"{registry}/{architecture}/{collection}/{img}"
+        dpush(imageName)
+        for mirror in mirrors:
+            mimg = (
+                img.replace("/", ":", 1).replace("/", "--")
+                if mirror.startswith("docker.io")
+                else img
+            )
+            mirrorName = f"{mirror.replace('#A', architecture).replace('#C', collection)}/{mimg}"
+            _exec(
+                args=["docker", "tag", imageName, mirrorName],
+                dry=dry,
+                collapse=f"Tag {imageName} {mirrorName}",
+            )
+            dpush(mirrorName)

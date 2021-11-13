@@ -116,43 +116,39 @@ def BuildImage(
     dry: Optional[bool] = False,
     default: Optional[bool] = False,
 ) -> None:
-    def _build(img, reg, collection, dfile, tgt, argimg, pkg):
-        if default:
-            [dfile, tgt, argimg] = DefaultOpts[img]
+    for img in [image] if isinstance(image, str) else image:
 
-        if dfile is None:
-            dfile = img
+        if default:
+            [dockerfile, target, argimg] = DefaultOpts[img]
+
+        if dockerfile is None:
+            dockerfile = img
 
         if pkg is True:
             img = f"pkg/{img}"
-            if tgt is None:
-                tgt = "pkg"
+            if target is None:
+                target = "pkg"
 
-        _imageName = "{0}/{1}/{2}/{3}".format(reg, architecture, collection, img)
+        imageName = f"{registry}/{architecture}/{collection}/{img}"
 
-        cmd = ["docker", "build"]
-        cmd += ["--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1"]
+        cmd = ["docker", "build", "-t", imageName, "--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1"]
         cmd += [
             "--build-arg",
-            "ARCHITECTURE={0}".format(architecture)
-            if dfile == "base"
-            else "REGISTRY={0}/{1}/{2}".format(registry, architecture, collection),
+            f"ARCHITECTURE={architecture}"
+            if dockerfile == "base"
+            else f"REGISTRY={registry}/{architecture}/{collection}",
         ]
-        cmd += ["-t", _imageName]
-
-        if tgt is not None:
-            cmd += ["--target={0}".format(tgt)]
 
         if argimg is not None:
-            cmd += ["--build-arg", "IMAGE={0}".format(argimg)]
+            cmd += ["--build-arg", f"IMAGE={argimg}"]
 
-        _dfile = Path(collection.replace("/", "-")) / "{0}.dockerfile".format(dfile)
-        if not _dfile.exists():
-            raise Exception("Dockerfile <{0}> does not exist!".format(_dfile))
+        if target is not None:
+            cmd += [f"--target={target}"]
 
-        cmd += ["-f", str(_dfile), "."]
+        dpath = Path(collection.replace("/", "-")) / f"{dockerfile}.dockerfile"
+        if not dpath.exists():
+            raise Exception(f"Dockerfile <{dpath}> does not exist!")
 
-        _exec(args=cmd, dry=dry, collapse=f"Build {_imageName}")
+        cmd += ["-f", str(dpath), "."]
 
-    for _image in [image] if isinstance(image, str) else image:
-        _build(_image, registry, collection, dockerfile, target, argimg, pkg)
+        _exec(args=cmd, dry=dry, collapse=f"Build {imageName}")
