@@ -61,14 +61,6 @@ jobs:
 
     - run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
-    # TODO: Add option 'pull' to Action 'build-test-release'.
-    # Setup is required outside of the Action, because 'pyHDLC pull' needs it.
-    - run: >-
-        pyHDLC pull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
-        ghdl/yosys
-        pkg/ghdl-yosys-plugin
-        pkg/yosys
-
     - uses: ./utils/build-test-release
       with:
         gcr_token: '${{ secrets.GCR_JSON_KEY }}'
@@ -80,6 +72,10 @@ jobs:
         architecture: ${{ matrix.sys.arch }}
         collection: ${{ matrix.sys.os }}
         images: ${{ matrix.imgs }}
+        pull: >-
+          ghdl/yosys
+          pkg/ghdl-yosys-plugin
+          pkg/yosys
 
 
   impl-prjs:
@@ -164,19 +160,6 @@ jobs:
       with:
         submodules: recursive
 
-    # TODO: Add option 'pull' to Action 'build-test-release'.
-    # Setup is required outside of the Action, because 'pyHDLC pull' needs it.
-    - run: ./utils/setup.sh ${{ matrix.sys.arch }}
-
-    - run: >-
-        pyHDLC pull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
-        build/impl
-        pkg/nextpnr/ice40
-        pkg/nextpnr/ecp5
-        pkg/nextpnr/generic
-        pkg/icestorm
-        pkg/prjtrellis
-
     - uses: ./utils/build-test-release
       with:
         gcr_token: '${{ secrets.GCR_JSON_KEY }}'
@@ -187,3 +170,10 @@ jobs:
         architecture: ${{ matrix.sys.arch }}
         collection: ${{ matrix.sys.os }}
         images: ${{ matrix.imgs }}
+        pull: >-
+          build/impl
+          pkg/nextpnr/ice40
+          pkg/nextpnr/ecp5
+          pkg/nextpnr/generic
+          pkg/icestorm
+          pkg/prjtrellis
