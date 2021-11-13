@@ -31,6 +31,10 @@ inputs:
   images:
     description: 'List of default names of images to be built and tested.'
     required: true
+  pull:
+    description: 'List of images from the same collection and architecture to be pulled before the build.'
+    required: false
+    default: None
   skip-test:
     description: 'Skip testing the built images.'
     required: false
@@ -61,12 +65,19 @@ runs:
 
   - shell: bash
     run: |
-      # Build and Test
+      # [Pull,] Build [and Test]
 
-      # NOTE: the content of the if statement is executed if the command returns 0, thus,
-      # the logic of the evaluation in Python is negated.
+      # NOTE: the content of the shell if statement is executed if the command returns 0, thus,
+      # the logic of the evaluations in Python is negated.
+
+      if python3 -c 'exit("${{ inputs.pull }}".lower() in ["none","false","no"])'; then
+        pyHDLC pull \
+        -a ${{ inputs.architecture }} \
+        -c ${{ inputs.collection }} \
+        ${{ inputs.pull }}
+      fi
+
       python3 -c 'exit("${{ inputs.skip-test }}".lower() in ["true","skip","yes"])' && RunTest='-q' || RunTest=''
-
       pyHDLC build $RunTest \
       -a ${{ inputs.architecture }} \
       -c ${{ inputs.collection }} \
@@ -88,13 +99,11 @@ runs:
   - shell: bash
     run: |
       # Release
-
       if python3 -c 'exit("${{ inputs.skip-release }}".lower() not in ["true","skip","yes"])'; then
         echo "Skipping release..."
         exit 0
       fi
-
-      ./utils/bin/dockerRelease \
+      dockerRelease \
       ${{ inputs.architecture }} \
       ${{ inputs.collection }} \
       ${{ inputs.images }}
