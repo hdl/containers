@@ -116,12 +116,7 @@ jobs:
         pkg/${{ matrix.task.prj }}
 
     - run: >-
-        dockerBuild -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
-        impl/${{ matrix.task.arch }}
-        impl/${{ matrix.task.prj }}
-
-    - run: >-
-        dockerTest -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
+        dockerBuild -q -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
         impl/${{ matrix.task.arch }}
         impl/${{ matrix.task.prj }}
 

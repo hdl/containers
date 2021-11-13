@@ -109,13 +109,7 @@ jobs:
     - run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
     - run: >-
-        dockerBuild -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
-        pkg/nextpnr/${{ matrix.task.arch }}
-        nextpnr/${{ matrix.task.arch }}
-        nextpnr/${{ matrix.task.prj }}
-
-    - run: >-
-        dockerTest -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
+        dockerBuild -q -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
         pkg/nextpnr/${{ matrix.task.arch }}
         nextpnr/${{ matrix.task.arch }}
         nextpnr/${{ matrix.task.prj }}

@@ -196,6 +196,13 @@ class CLI(ArgParseMixin):
         help="set default Dockerfile, Target and ArgImg options, given the image name(s).",
         default=False,
     )
+    @SwitchArgumentAttribute(
+        "-q",
+        "--test",
+        dest="Test",
+        help="test each image right after building it.",
+        default=False,
+    )
     def HandleBuild(self, args):
         BuildImage(
             image=args.Image,
@@ -208,6 +215,7 @@ class CLI(ArgParseMixin):
             pkg=args.Pkg,
             dry=args.noexec,
             default=args.Default,
+            test=args.Test,
         )
 
     @CommandAttribute("test", help="Test images by name.")

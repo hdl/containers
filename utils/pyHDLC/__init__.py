@@ -119,7 +119,7 @@ def PullImage(
     for img in [image] if isinstance(image, str) else image:
         imageName = f"{registry}/{architecture}/{collection}/{img}"
         _exec(
-            args=["docker", "pull", imageName], dry=dry, collapse=f"Pull {imageName}"
+            args=["docker", "pull", imageName], dry=dry, collapse=f"[Pull] Pull {imageName}"
         )
 
 
@@ -134,6 +134,7 @@ def BuildImage(
     pkg: Optional[bool] = False,
     dry: Optional[bool] = False,
     default: Optional[bool] = False,
+    test: Optional[bool] = False,
 ) -> None:
     for img in [image] if isinstance(image, str) else image:
 
@@ -170,7 +171,16 @@ def BuildImage(
 
         cmd += ["-f", str(dpath), "."]
 
-        _exec(args=cmd, dry=dry, collapse=f"Build {imageName}")
+        _exec(args=cmd, dry=dry, collapse=f"[Build] Build {imageName}")
+
+        if test:
+            TestImage(
+                img,
+                registry,
+                collection,
+                architecture,
+                dry,
+            )
 
 
 def TestImage(

@@ -61,22 +61,16 @@ runs:
 
   - shell: bash
     run: |
-      dockerBuild \
+      # Build and Test
+
+      # NOTE: the content of the if statement is executed if the command returns 0, thus,
+      # the logic of the evaluation in Python is negated.
+      python3 -c 'exit("${{ inputs.skip-test }}".lower() in ["true","skip","yes"])' && RunTest='-q' || RunTest=''
+
+      dockerBuild $RunTest \
       -a ${{ inputs.architecture }} \
       -c ${{ inputs.collection }} \
       -d ${{ inputs.images }}
-
-      # NOTE: the content of the if statement is executed if the command returns 0, thus,
-      # the evaluation in Python needs to be negated.
-      if python3 -c 'exit("${{ inputs.skip-test }}".lower() not in ["true","skip","yes"])'; then
-        echo "Skipping test..."
-        exit 0
-      fi
-
-      dockerTest \
-      -a ${{ inputs.architecture }} \
-      -c ${{ inputs.collection }} \
-      ${{ inputs.images }}
 
   - name: Login to container registries
     uses: ./utils/registry-login
@@ -93,6 +87,8 @@ runs:
 
   - shell: bash
     run: |
+      # Release
+
       if python3 -c 'exit("${{ inputs.skip-release }}".lower() not in ["true","skip","yes"])'; then
         echo "Skipping release..."
         exit 0
