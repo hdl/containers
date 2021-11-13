@@ -67,7 +67,7 @@ runs:
       # the logic of the evaluation in Python is negated.
       python3 -c 'exit("${{ inputs.skip-test }}".lower() in ["true","skip","yes"])' && RunTest='-q' || RunTest=''
 
-      dockerBuild $RunTest \
+      pyHDLC build $RunTest \
       -a ${{ inputs.architecture }} \
       -c ${{ inputs.collection }} \
       -d ${{ inputs.images }}

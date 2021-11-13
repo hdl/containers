@@ -62,9 +62,9 @@ jobs:
     - run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
     # TODO: Add option 'pull' to Action 'build-test-release'.
-    # Setup is required outside of the Action, because dockerPull needs it.
+    # Setup is required outside of the Action, because 'pyHDLC pull' needs it.
     - run: >-
-        dockerPull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
+        pyHDLC pull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
         ghdl/yosys
         pkg/ghdl-yosys-plugin
         pkg/yosys
@@ -110,13 +110,13 @@ jobs:
     - run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
     - run: >-
-        dockerPull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
+        pyHDLC pull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
         build/impl
         pkg/nextpnr/${{ matrix.task.arch }}
         pkg/${{ matrix.task.prj }}
 
     - run: >-
-        dockerBuild -q -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
+        pyHDLC build -q -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
         impl/${{ matrix.task.arch }}
         impl/${{ matrix.task.prj }}
 
@@ -165,11 +165,11 @@ jobs:
         submodules: recursive
 
     # TODO: Add option 'pull' to Action 'build-test-release'.
-    # Setup is required outside of the Action, because dockerPull needs it.
+    # Setup is required outside of the Action, because 'pyHDLC pull' needs it.
     - run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
     - run: >-
-        dockerPull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
+        pyHDLC pull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
         build/impl
         pkg/nextpnr/ice40
         pkg/nextpnr/ecp5

@@ -62,11 +62,11 @@ jobs:
         submodules: recursive
 
     # TODO: Add option 'pull' to Action 'build-test-release'.
-    # Setup is required outside of the Action, because dockerPull needs it.
+    # Setup is required outside of the Action, because 'pyHDLC pull' needs it.
     - run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
     - run: >-
-        dockerPull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
+        pyHDLC pull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
         ghdl/yosys
         pkg/z3
         pkg/symbiyosys

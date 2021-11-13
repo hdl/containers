@@ -136,7 +136,7 @@ jobs:
     - run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
     - run: >-
-        dockerBuild -q -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
+        pyHDLC build -q -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
         sim/${{ matrix.img }}-slim
         sim/${{ matrix.img }}
 

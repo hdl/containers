@@ -63,12 +63,12 @@ jobs:
 
     - run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
-    - run: dockerBuild -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d ${{ matrix.imgs }}
+    - run: pyHDLC build -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d ${{ matrix.imgs }}
 
-    # TODO: Enhance dockerBuild and dockerRelease to ignore '#*' at the end of image names.
+    # TODO: Enhance 'pyHDLC build' and 'dockerRelease' to ignore '#*' at the end of image names.
     # Then, use Action 'build-test-release'.
     - run: >-
-        dockerTest -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
+        pyHDLC test -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
         pkg/ghdl
         pkg/ghdl/llvm#ghdl
         ghdl
