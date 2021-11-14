@@ -19,6 +19,7 @@
 
 from typing import Any, Dict, List, Optional, Tuple, Union
 from pathlib import Path
+from string import Template
 
 from dataclasses import dataclass
 from yamldataclassconfig.config import YamlDataClassConfig
@@ -34,16 +35,38 @@ class ConfigDefaultImageItem(YamlDataClassConfig):
 
 @dataclass
 class ConfigDefaults(YamlDataClassConfig):
-    registry: Optional[str] = "gcr.io/hdl-containers"
-    collection: Optional[str] = "debian/bullseye"
-    architecture: Optional[str] = "amd64"
+    registry: str = "gcr.io/hdl-containers"
+    collection: str = "debian/bullseye"
+    architecture: str = "amd64"
     images: Optional[Dict[str, ConfigDefaultImageItem]] = None
+
+ConfigJobsSysDict = Dict[str, List[str]]
+ConfigJobsDict = Dict[str, ConfigJobsSysDict]
+
+@dataclass
+class ConfigJobsCustomExcludeItem(YamlDataClassConfig):
+    sys: ConfigJobsSysDict
+    params: Dict[str, str]
+
+@dataclass
+class ConfigJobsCustomItem(YamlDataClassConfig):
+    images: List[Any]
+    sys: ConfigJobsSysDict
+    exclude: Optional[List[ConfigJobsCustomExcludeItem]] = None #= {}
+
+@dataclass
+class ConfigJobs(YamlDataClassConfig):
+    default: ConfigJobsDict #= {}
+    pkgonly: ConfigJobsDict #= {}
+    runonly: ConfigJobsDict #= {}
+    custom: Dict[str, ConfigJobsCustomItem] #= {}
 
 @dataclass
 class Config(YamlDataClassConfig):
-    HDLC: int = None
-    anchors: Optional[Any] = None
+    HDLC: Optional[int] = None
+    anchors: Optional[Any] = None #= {}
     defaults: ConfigDefaults = ConfigDefaults()
+    jobs: Optional[ConfigJobs] = None #= ConfigJobs()
 
 
 CONFIG = Config()
@@ -53,12 +76,144 @@ if cpath.exists():
     print(f"Read configuration file {cpath!s} (HDLC v{CONFIG.HDLC})")
 
 
+def GenerateJobList(
+    name: str,
+    fmt: str = 'gha',
+    dry: bool = False,
+) -> None:
+    def _generateJobList(name):
+
+        cjobs = CONFIG.jobs
+
+        def _combine(
+            systems: ConfigJobsDict,
+            images: List[str]
+        ) -> List[Dict[str, str]]:
+            return [
+                {
+                    "os": collection,
+                    "arch": architecture,
+                    "imgs": " ".join(imgs)
+                }
+                for imgs in images
+                for collection, architectures in systems.items()
+                for architecture in architectures
+            ]
+
+        if name in cjobs.default:
+            print(f"[Jobs] '{name}' is Default")
+            return _combine(cjobs.default[name], [[f"pkg/{name}", name]])
+
+        if name in cjobs.pkgonly:
+            print(f"[Jobs] '{name}' is PkgOnly")
+            return _combine(cjobs.pkgonly[name], [[f"pkg/{name}"]])
+            return
+
+        if name in cjobs.runonly:
+            print(f"[Jobs] '{name}' is RunOnly")
+            return _combine(cjobs.runonly[name], [[name]])
+            return
+
+        if name in cjobs.custom:
+            print(f"[Jobs] '{name}' is Custom")
+
+            def _customItem(custom):
+
+                paramSets = [probe for probe in custom.images if isinstance(probe, dict)]
+
+                if len(paramSets) > 0:
+                    print(f"[Jobs] Images of '{name}' has Params")
+
+                    patterns = [probe for probe in custom.images if not isinstance(probe, dict)]
+
+                    if custom.exclude is None:
+                        return _combine(
+                            custom.sys,
+                            [
+                                [
+                                    Template(pattern).substitute(params)
+                                    for pattern in patterns
+                                ]
+                                # TODO Handle individual params being a list of strings, instead of a single string.
+                                for params in paramSets
+                            ]
+                        )
+
+                    excludes = [
+                        (collection, architectures, exclude.params)
+                        for exclude in custom.exclude
+                        for collection, architectures in exclude.sys.items()
+                    ]
+
+                    # TODO Merge this list generation into the for loops beloew.
+                    # I.e., filter during generation, instead of generating all the cases and then filtering.
+                    systems = [
+                        (collection, architectures.copy(), params)
+                        for collection, architectures in custom.sys.items()
+                        for params in paramSets
+                    ]
+
+                    for item in systems:
+                        for excl in excludes:
+                            # TODO Handle individual params being a list of strings, instead of a single string.
+                            if (item[0] == excl[0]) and (item[2] == excl[2]):
+                                # TODO Handle excl[1]==None (that is, remove all archs for a collection)
+                                for arch in excl[1]:
+                                    if arch in item[1]:
+                                        item[1].remove(arch)
+
+                    return [
+                        {
+                            "os": item[0],
+                            "arch": architecture,
+                            "imgs": " ".join([
+                                Template(pattern).substitute(item[2])
+                                for pattern in patterns
+                            ])
+                        }
+                        for item in systems if len(item[1]) != 0
+                        for architecture in item[1]
+                    ]
+
+                if isinstance(custom.images[0], str):
+                    print(f"[Jobs] Images of '{name}' is List of strings")
+                    return _combine(custom.sys, [custom.images])
+
+                if isinstance(custom.images[0], list):
+                    print(f"[Jobs] Images of '{name}' is List of lists")
+                    print(custom.images)
+                    return _combine(custom.sys, custom.images)
+
+                raise Exception("Not implemented yet!")
+
+            return _customItem(cjobs.custom[name])
+
+        raise Exception(f"Unknown job {name}")
+
+    jobs = _generateJobList(name)
+
+    for job in jobs:
+        print(f"- {job['arch']} | {job['os']}")
+        imgs = job['imgs']
+        if ' ' in imgs:
+            for img in imgs.split(' '):
+                print(f"  - {img}")
+        else:
+            print(f"  - {imgs}")
+
+    if dry:
+        return
+
+    if fmt.lower() in ["gha"]:
+        print(f'::set-output name=matrix::{jobs!s}')
+
+
 def PullImage(
     image: Union[str, List[str]],
     registry: Optional[str] = CONFIG.defaults.registry,
     collection: Optional[str] = CONFIG.defaults.collection,
     architecture: Optional[str] = CONFIG.defaults.architecture,
-    dry: Optional[bool] = False,
+    dry: bool = False,
 ) -> None:
     for img in [image] if isinstance(image, str) else image:
         imageName = f"{registry}/{architecture}/{collection}/{img.split('#')[0]}"
@@ -76,7 +231,7 @@ def BuildImage(
     target: Optional[str] = None,
     argimg: Optional[str] = None,
     pkg: Optional[bool] = False,
-    dry: Optional[bool] = False,
+    dry: bool = False,
     default: Optional[bool] = False,
     test: Optional[bool] = False,
 ) -> None:
@@ -153,7 +308,7 @@ def TestImage(
     registry: Optional[str] = CONFIG.defaults.registry,
     collection: Optional[str] = CONFIG.defaults.collection,
     architecture: Optional[str] = CONFIG.defaults.architecture,
-    dry: Optional[bool] = False,
+    dry: bool = False,
 ) -> None:
     imagePrefix = f"{registry}/{architecture}/{collection}"
     for img in [image] if isinstance(image, str) else image:
@@ -226,7 +381,7 @@ def PushImage(
     registry: Optional[str] = CONFIG.defaults.registry,
     collection: Optional[str] = CONFIG.defaults.collection,
     architecture: Optional[str] = CONFIG.defaults.architecture,
-    dry: Optional[bool] = False,
+    dry: bool = False,
     mirror: Optional[Union[str, List[str]]] = None,
 ) -> None:
     def dpush(imgName):

@@ -34,6 +34,7 @@ from pyAttributes.ArgParseAttributes import (
 )
 
 from pyHDLC import (
+    GenerateJobList,
     PullImage,
     BuildImage,
     TestImage,
@@ -146,6 +147,28 @@ class CLI(ArgParseMixin):
                 self.SubParsers[args.Command].print_help()
             except KeyError:
                 print("command {0} is unknown.".format(args.Command))
+
+    @CommandAttribute("jobs", help="Generate list of jobs by name.")
+    @ArgumentAttribute(
+        "-f",
+        "--format",
+        dest="Format",
+        type=str,
+        choices=["gha","GHA"],
+        help="output format.",
+        default="GHA",
+    )
+    @ArgumentAttribute(
+        dest="Name",
+        type=str,
+        help="Name (keyword) of the job list.",
+    )
+    def HandleJobs(self, args):
+        GenerateJobList(
+            name=args.Name,
+            fmt=args.Format,
+            dry=args.noexec,
+        )
 
     @CommandAttribute("pull", help="Pull images by name.")
     @WithRegistryAttributes()

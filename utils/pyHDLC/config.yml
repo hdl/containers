@@ -99,3 +99,253 @@ defaults:
     pkg/yices2: *EmptyPkgTarget
     # Z3
     pkg/z3: *EmptyPkgTarget
+
+
+jobs:
+
+  default:
+    apicula:
+      debian/bullseye:
+        - amd64
+    arachne-pnr:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+        - arm64v8
+        - ppc64le
+        - s390x
+    icestorm:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+        - arm64v8
+        - ppc64le
+        - s390x
+    iverilog:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+    klayout:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+    magic:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+        - arm64v8
+        - ppc64le
+        - s390x
+    netgen:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+        - arm64v8
+        - ppc64le
+        - s390x
+    openfpgaloader:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+        - arm64v8
+        - ppc64le
+        - s390x
+    prjoxide:
+      debian/bullseye:
+        - amd64
+    prjtrellis:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+    verilator:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+        - arm64v8
+        - ppc64le
+        - s390x
+    vtr:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+    xyce:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+    yosys:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+
+  pkgonly:
+    cvc:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+    pono:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+    superprove:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+    symbiyosys:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+    yices2:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+    z3:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+
+  runonly:
+    prog:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+    sim:
+      debian/buster:
+        - amd64
+      debian/bullseye:
+        - amd64
+
+  custom:
+    base:
+      images:
+        - build/base
+        - build/build
+        - build/dev
+      sys:
+        debian/buster:
+          - amd64
+        debian/bullseye:
+          - amd64
+          - arm64v8
+          - ppc64le
+          - s390x
+    ghdl-yosys-plugin:
+      images:
+        - pkg/ghdl-yosys-plugin#ghdl
+        - ghdl/yosys
+      sys:
+        debian/buster:
+          - amd64
+        debian/bullseye:
+          - amd64
+    ghdl:
+      images:
+        - pkg/ghdl
+        - pkg/ghdl/llvm#ghdl
+        - ghdl
+        - ghdl/llvm
+      sys:
+        debian/buster:
+          - amd64
+        debian/bullseye:
+          - amd64
+    impl-build:
+      images:
+        - build/impl
+      sys:
+        debian/buster:
+          - amd64
+        debian/bullseye:
+          - amd64
+    impl-prjs:
+      images:
+        - impl/${arch}
+        - impl/${prj}
+        - { arch: ice40, prj: icestorm   }
+        - { arch: ecp5,  prj: prjtrellis }
+      sys:
+        debian/buster:
+          - amd64
+        debian/bullseye:
+          - amd64
+    impl:
+      images:
+        - impl/generic
+        - impl/pnr
+        - impl
+      sys:
+        debian/buster:
+          - amd64
+        debian/bullseye:
+          - amd64
+    nextpnr-build:
+      images:
+        - build/nextpnr/base
+        - build/nextpnr/build
+      sys:
+        debian/buster:
+          - amd64
+        debian/bullseye:
+          - amd64
+    nextpnr-prjs:
+      images:
+        - pkg/nextpnr/${arch}
+        - nextpnr/${arch}
+        - nextpnr/${prj}
+        - { arch: ice40, prj: icestorm   }
+        - { arch: ecp5,  prj: prjtrellis }
+        - { arch: nexus, prj: prjoxide   }
+      sys:
+        debian/buster:
+          - amd64
+        debian/bullseye:
+          - amd64
+      exclude:
+        - sys: { debian/buster: [amd64] }
+          params: { arch: nexus, prj: prjoxide }
+    nextpnr:
+      images:
+        - pkg/nextpnr/generic
+        - nextpnr/generic
+        - nextpnr
+      sys:
+        debian/buster:
+          - amd64
+        debian/bullseye:
+          - amd64
+    osvb:
+      images:
+        - pkg/osvb
+        - sim/osvb
+      sys:
+        debian/buster:
+          - amd64
+        debian/bullseye:
+          - amd64
+    cosim:
+      images:
+        - [scipy]
+        - [octave]
+      sys:
+        debian/buster:
+          - amd64
+        debian/bullseye:
+          - amd64
