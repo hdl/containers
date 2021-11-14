@@ -29,8 +29,8 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "build/base": ["base", "base", None],
     "build/build": ["base", "build", None],
     "build/dev": ["base", None, None],
-    "pkg/boolector": [None, None, None],
-    "pkg/cvc": [None, None, None],
+    "pkg/boolector": [None, '', None],
+    "pkg/cvc": [None, '', None],
     "formal/min": ["formal", "min", None],
     "formal": [None, "latest", None],
     "formal/all": ["formal", None, None],
@@ -84,23 +84,23 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "sim": [None, None, None],
     "pkg/osvb": [None, "pkg", None],
     "sim/osvb": ["osvb", None, None],
-    "pkg/pono": [None, None, None],
+    "pkg/pono": [None, '', None],
     "sim/scipy-slim": ["scipy", None, None],
     "sim/scipy": ["osvb", None, "sim/scipy-slim"],
     "sim/octave-slim": ["octave", None, None],
     "sim/octave": ["osvb", None, "sim/octave-slim"],
-    "pkg/superprove": [None, None, None],
-    "pkg/symbiyosys": [None, None, None],
+    "pkg/superprove": [None, '', None],
+    "pkg/symbiyosys": [None, '', None],
     "verilator": [None, None, None],
     "pkg/verilator": [None, "pkg", None],
     "vtr": [None, None, None],
     "pkg/vtr": [None, "pkg", None],
     "xyce": [None, None, None],
     "pkg/xyce": [None, "pkg", None],
-    "pkg/yices2": [None, None, None],
+    "pkg/yices2": [None, '', None],
     "yosys": [None, None, None],
     "pkg/yosys": [None, "pkg", None],
-    "pkg/z3": [None, None, None],
+    "pkg/z3": [None, '', None],
 }
 
 
@@ -164,7 +164,7 @@ def BuildImage(
         if dockerfile is None:
             dockerfile = img
 
-        if (pkg is True) and (target is None):
+        if (isPkg is True) and (target is None):
             target = "pkg"
 
         imageName = f"{registry}/{architecture}/{collection}/{pimg}"
@@ -180,7 +180,7 @@ def BuildImage(
         if argimg is not None:
             cmd += ["--build-arg", f"IMAGE={argimg}"]
 
-        if target is not None:
+        if target not in [None, '']:
             cmd += [f"--target={target}"]
 
         dpath = Path(collection.replace("/", "-")) / f"{dockerfile}.dockerfile"
