@@ -21,9 +21,8 @@ from typing import Dict, List, Optional, Tuple, Union
 from pathlib import Path
 from pyHDLC.run import _exec
 
+
 DefaultOpts: Dict[str, Tuple[str, str, str]] = {
-    "apicula": [None, None, None],
-    "arachne-pnr": [None, None, None],
     "build/base": ["base", "base", None],
     "build/build": ["base", "build", None],
     "build/dev": ["base", None, None],
@@ -37,8 +36,6 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "pkg/ghdl/llvm": ["ghdl", "pkg-llvm", None],
     "ghdl": [None, "mcode", None],
     "ghdl/llvm": ["ghdl", "llvm", None],
-    "gtkwave": [None, None, None],
-    "icestorm": [None, None, None],
     "build/impl": ["impl", "base", None],
     "impl/ice40": ["impl", "ice40", None],
     "impl/icestorm": ["impl", "icestorm", None],
@@ -46,11 +43,6 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "impl/prjtrellis": ["impl", "prjtrellis", None],
     "impl/generic": ["impl", "generic", None],
     "impl/pnr": ["impl", "pnr", None],
-    "impl": [None, None, None],
-    "iverilog": [None, None, None],
-    "klayout": [None, None, None],
-    "magic": [None, None, None],
-    "netgen": [None, None, None],
     "build/nextpnr/base": ["nextpnr", "base", None],
     "build/nextpnr/build": ["nextpnr", "build", None],
     "pkg/nextpnr/ice40": ["nextpnr", "pkg-ice40", None],
@@ -64,12 +56,6 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "nextpnr/prjtrellis": ["nextpnr", "prjtrellis", None],
     "pkg/nextpnr/generic": ["nextpnr", "pkg-generic", None],
     "nextpnr/generic": ["nextpnr", "generic", None],
-    "nextpnr": [None, None, None],
-    "openfpgaloader": [None, None, None],
-    "prjoxide": [None, None, None],
-    "prjtrellis": [None, None, None],
-    "prog": [None, None, None],
-    "sim": [None, None, None],
     "sim/osvb": ["osvb", None, None],
     "pkg/pono": [None, '', None],
     "sim/scipy-slim": ["scipy", None, None],
@@ -78,11 +64,7 @@ DefaultOpts: Dict[str, Tuple[str, str, str]] = {
     "sim/octave": ["osvb", None, "sim/octave-slim"],
     "pkg/superprove": [None, '', None],
     "pkg/symbiyosys": [None, '', None],
-    "verilator": [None, None, None],
-    "vtr": [None, None, None],
-    "xyce": [None, None, None],
     "pkg/yices2": [None, '', None],
-    "yosys": [None, None, None],
     "pkg/z3": [None, '', None],
 }
 
@@ -140,9 +122,7 @@ def BuildImage(
             key = pimg
             if (isPkg is True) and (pimg not in DefaultOpts):
                 key = img
-            if key not in DefaultOpts:
-                raise Exception(f"Key '{key}' is an unknown default image name!")
-            [dockerfile, target, argimg] = DefaultOpts[key]
+            [dockerfile, target, argimg] = DefaultOpts[key] if key in DefaultOpts else [None, None, None]
 
         if dockerfile is None:
             dockerfile = img
