@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 from pathlib import Path
 
 from dataclasses import dataclass
@@ -42,6 +42,7 @@ class ConfigDefaults(YamlDataClassConfig):
 @dataclass
 class Config(YamlDataClassConfig):
     HDLC: int = None
+    anchors: Optional[Any] = None
     defaults: ConfigDefaults = ConfigDefaults()
 
 
