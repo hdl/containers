@@ -19,66 +19,44 @@
 
 from typing import Dict, List, Optional, Tuple, Union
 from pathlib import Path
+
+from dataclasses import dataclass
+from yamldataclassconfig.config import YamlDataClassConfig
+
 from pyHDLC.run import _exec
 
 
-DefaultOpts: Dict[str, Tuple[str, str, str]] = {
-    "build/base": ["base", "base", None],
-    "build/build": ["base", "build", None],
-    "build/dev": ["base", None, None],
-    "pkg/boolector": [None, '', None],
-    "pkg/cvc": [None, '', None],
-    "formal/min": ["formal", "min", None],
-    "formal": [None, "latest", None],
-    "formal/all": ["formal", None, None],
-    "ghdl/yosys": ["ghdl-yosys-plugin", None, None],
-    "pkg/ghdl": [None, "pkg-mcode", None],
-    "pkg/ghdl/llvm": ["ghdl", "pkg-llvm", None],
-    "ghdl": [None, "mcode", None],
-    "ghdl/llvm": ["ghdl", "llvm", None],
-    "build/impl": ["impl", "base", None],
-    "impl/ice40": ["impl", "ice40", None],
-    "impl/icestorm": ["impl", "icestorm", None],
-    "impl/ecp5": ["impl", "ecp5", None],
-    "impl/prjtrellis": ["impl", "prjtrellis", None],
-    "impl/generic": ["impl", "generic", None],
-    "impl/pnr": ["impl", "pnr", None],
-    "build/nextpnr/base": ["nextpnr", "base", None],
-    "build/nextpnr/build": ["nextpnr", "build", None],
-    "pkg/nextpnr/ice40": ["nextpnr", "pkg-ice40", None],
-    "nextpnr/ice40": ["nextpnr", "ice40", None],
-    "nextpnr/icestorm": ["nextpnr", "icestorm", None],
-    "pkg/nextpnr/nexus": ["nextpnr", "pkg-nexus", None],
-    "nextpnr/nexus": ["nextpnr", "nexus", None],
-    "nextpnr/prjoxide": ["nextpnr", "prjoxide", None],
-    "pkg/nextpnr/ecp5": ["nextpnr", "pkg-ecp5", None],
-    "nextpnr/ecp5": ["nextpnr", "ecp5", None],
-    "nextpnr/prjtrellis": ["nextpnr", "prjtrellis", None],
-    "pkg/nextpnr/generic": ["nextpnr", "pkg-generic", None],
-    "nextpnr/generic": ["nextpnr", "generic", None],
-    "sim/osvb": ["osvb", None, None],
-    "pkg/pono": [None, '', None],
-    "sim/scipy-slim": ["scipy", None, None],
-    "sim/scipy": ["osvb", None, "sim/scipy-slim"],
-    "sim/octave-slim": ["octave", None, None],
-    "sim/octave": ["osvb", None, "sim/octave-slim"],
-    "pkg/superprove": [None, '', None],
-    "pkg/symbiyosys": [None, '', None],
-    "pkg/yices2": [None, '', None],
-    "pkg/z3": [None, '', None],
-}
+@dataclass
+class ConfigDefaultImageItem(YamlDataClassConfig):
+    dockerfile: Optional[str] = None
+    target: Optional[str] = None
+    argimg: Optional[str] = None
+
+@dataclass
+class ConfigDefaults(YamlDataClassConfig):
+    registry: Optional[str] = "gcr.io/hdl-containers"
+    collection: Optional[str] = "debian/bullseye"
+    architecture: Optional[str] = "amd64"
+    images: Optional[Dict[str, ConfigDefaultImageItem]] = None
+
+@dataclass
+class Config(YamlDataClassConfig):
+    HDLC: int = None
+    defaults: ConfigDefaults = ConfigDefaults()
 
 
-defaultRegistry = "gcr.io/hdl-containers"
-defaultCollection = "debian/bullseye"
-defaultArchitecture = "amd64"
+CONFIG = Config()
+cpath = Path(__file__).resolve().parent / 'config.yml'
+if cpath.exists():
+    CONFIG.load(cpath)
+    print(f"Read configuration file {cpath!s} (HDLC v{CONFIG.HDLC})")
 
 
 def PullImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = defaultRegistry,
-    collection: Optional[str] = defaultCollection,
-    architecture: Optional[str] = defaultArchitecture,
+    registry: Optional[str] = CONFIG.defaults.registry,
+    collection: Optional[str] = CONFIG.defaults.collection,
+    architecture: Optional[str] = CONFIG.defaults.architecture,
     dry: Optional[bool] = False,
 ) -> None:
     for img in [image] if isinstance(image, str) else image:
@@ -90,9 +68,9 @@ def PullImage(
 
 def BuildImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = defaultRegistry,
-    collection: Optional[str] = defaultCollection,
-    architecture: Optional[str] = defaultArchitecture,
+    registry: Optional[str] = CONFIG.defaults.registry,
+    collection: Optional[str] = CONFIG.defaults.collection,
+    architecture: Optional[str] = CONFIG.defaults.architecture,
     dockerfile: Optional[str] = None,
     target: Optional[str] = None,
     argimg: Optional[str] = None,
@@ -115,19 +93,24 @@ def BuildImage(
         else:
             isPkg = pkg
             img = pimg
-            if pkg is True:
+            if pkg:
                 pimg = f"pkg/{pimg}"
 
         if default:
-            key = pimg
-            if (isPkg is True) and (pimg not in DefaultOpts):
-                key = img
-            [dockerfile, target, argimg] = DefaultOpts[key] if key in DefaultOpts else [None, None, None]
+            def get_default_params():
+                cfgi = CONFIG.defaults.images
+                if cfgi is not None:
+                    key = img if isPkg and (pimg not in cfgi) else pimg
+                    if key in cfgi:
+                        cfg = cfgi[key]
+                        return [cfg.dockerfile, cfg.target, cfg.argimg]
+                return [None, None, None]
+            [dockerfile, target, argimg] = get_default_params()
 
         if dockerfile is None:
             dockerfile = img
 
-        if (isPkg is True) and (target is None):
+        if isPkg and (target is None):
             target = "pkg"
 
         imageName = f"{registry}/{architecture}/{collection}/{pimg}"
@@ -166,9 +149,9 @@ def BuildImage(
 
 def TestImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = defaultRegistry,
-    collection: Optional[str] = defaultCollection,
-    architecture: Optional[str] = defaultArchitecture,
+    registry: Optional[str] = CONFIG.defaults.registry,
+    collection: Optional[str] = CONFIG.defaults.collection,
+    architecture: Optional[str] = CONFIG.defaults.architecture,
     dry: Optional[bool] = False,
 ) -> None:
     imagePrefix = f"{registry}/{architecture}/{collection}"
@@ -239,9 +222,9 @@ def TestImage(
 
 def PushImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = defaultRegistry,
-    collection: Optional[str] = defaultCollection,
-    architecture: Optional[str] = defaultArchitecture,
+    registry: Optional[str] = CONFIG.defaults.registry,
+    collection: Optional[str] = CONFIG.defaults.collection,
+    architecture: Optional[str] = CONFIG.defaults.architecture,
     dry: Optional[bool] = False,
     mirror: Optional[Union[str, List[str]]] = None,
 ) -> None:

@@ -34,7 +34,6 @@ from pyAttributes.ArgParseAttributes import (
 )
 
 from pyHDLC import (
-    DefaultOpts,
     PullImage,
     BuildImage,
     TestImage,
