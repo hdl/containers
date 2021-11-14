@@ -33,7 +33,20 @@ anchors:
     dockerfile: nextpnr
   <<: &OSVBDockerfile
     dockerfile: osvb
-
+  <<: &SysDebianAmd64
+    debian/buster:
+      - amd64
+    debian/bullseye:
+      - amd64
+  <<: &SysDebianDefaultArchSet
+    debian/buster:
+      - amd64
+    debian/bullseye:
+      - amd64
+      - arm64v8
+      - ppc64le
+      - s390x
+      #- riscv64 ! for now, only 'sid-slim' is available in https://hub.docker.com/r/riscv64/debian
 
 defaults:
   images:
@@ -104,134 +117,34 @@ defaults:
 jobs:
 
   default:
-    apicula:
-      debian/bullseye:
-        - amd64
-    arachne-pnr:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-        - arm64v8
-        - ppc64le
-        - s390x
-    icestorm:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-        - arm64v8
-        - ppc64le
-        - s390x
-    iverilog:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-    klayout:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-    magic:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-        - arm64v8
-        - ppc64le
-        - s390x
-    netgen:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-        - arm64v8
-        - ppc64le
-        - s390x
-    openfpgaloader:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-        - arm64v8
-        - ppc64le
-        - s390x
-    prjoxide:
-      debian/bullseye:
-        - amd64
-    prjtrellis:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-    verilator:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-        - arm64v8
-        - ppc64le
-        - s390x
-    vtr:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-    xyce:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-    yosys:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
+    apicula:        { debian/bullseye: [amd64] }
+    arachne-pnr:    *SysDebianDefaultArchSet
+    icestorm:       *SysDebianDefaultArchSet
+    iverilog:       *SysDebianAmd64
+    gtkwave:        *SysDebianDefaultArchSet
+    klayout:        *SysDebianAmd64
+    magic:          *SysDebianDefaultArchSet
+    netgen:         *SysDebianDefaultArchSet
+    openfpgaloader: *SysDebianDefaultArchSet
+    prjoxide:       { debian/bullseye: [amd64] }
+    prjtrellis:     *SysDebianAmd64
+    verilator:      *SysDebianDefaultArchSet
+    vtr:            *SysDebianAmd64
+    xyce:           *SysDebianAmd64
+    yosys:          *SysDebianAmd64
 
   pkgonly:
-    cvc:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-    pono:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-    superprove:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-    symbiyosys:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-    yices2:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-    z3:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
+    boolector:      *SysDebianAmd64
+    cvc:            *SysDebianAmd64
+    pono:           *SysDebianAmd64
+    superprove:     *SysDebianAmd64
+    symbiyosys:     *SysDebianAmd64
+    yices2:         *SysDebianAmd64
+    z3:             *SysDebianAmd64
 
   runonly:
-    prog:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
-    sim:
-      debian/buster:
-        - amd64
-      debian/bullseye:
-        - amd64
+    prog:           *SysDebianAmd64
+    sim:            *SysDebianAmd64
 
   custom:
     base:
@@ -240,71 +153,49 @@ jobs:
         - build/build
         - build/dev
       sys:
-        debian/buster:
+        <<: *SysDebianDefaultArchSet
+        centos/7:
           - amd64
-        debian/bullseye:
-          - amd64
-          - arm64v8
-          - ppc64le
-          - s390x
+    formal:
+      images:
+        - formal/min
+        - formal
+        - formal/all
+      sys: *SysDebianAmd64
     ghdl-yosys-plugin:
       images:
         - pkg/ghdl-yosys-plugin#ghdl
         - ghdl/yosys
-      sys:
-        debian/buster:
-          - amd64
-        debian/bullseye:
-          - amd64
+      sys: *SysDebianAmd64
     ghdl:
       images:
         - pkg/ghdl
         - pkg/ghdl/llvm#ghdl
         - ghdl
         - ghdl/llvm
-      sys:
-        debian/buster:
-          - amd64
-        debian/bullseye:
-          - amd64
+      sys: *SysDebianAmd64
     impl-build:
       images:
         - build/impl
-      sys:
-        debian/buster:
-          - amd64
-        debian/bullseye:
-          - amd64
+      sys: *SysDebianAmd64
     impl-prjs:
       images:
         - impl/${arch}
         - impl/${prj}
         - { arch: ice40, prj: icestorm   }
         - { arch: ecp5,  prj: prjtrellis }
-      sys:
-        debian/buster:
-          - amd64
-        debian/bullseye:
-          - amd64
+      sys: *SysDebianAmd64
     impl:
       images:
         - impl/generic
         - impl/pnr
         - impl
-      sys:
-        debian/buster:
-          - amd64
-        debian/bullseye:
-          - amd64
+      sys: *SysDebianAmd64
     nextpnr-build:
       images:
         - build/nextpnr/base
         - build/nextpnr/build
-      sys:
-        debian/buster:
-          - amd64
-        debian/bullseye:
-          - amd64
+      sys: *SysDebianAmd64
     nextpnr-prjs:
       images:
         - pkg/nextpnr/${arch}
@@ -313,11 +204,7 @@ jobs:
         - { arch: ice40, prj: icestorm   }
         - { arch: ecp5,  prj: prjtrellis }
         - { arch: nexus, prj: prjoxide   }
-      sys:
-        debian/buster:
-          - amd64
-        debian/bullseye:
-          - amd64
+      sys: *SysDebianAmd64
       exclude:
         - sys: { debian/buster: [amd64] }
           params: { arch: nexus, prj: prjoxide }
@@ -326,26 +213,16 @@ jobs:
         - pkg/nextpnr/generic
         - nextpnr/generic
         - nextpnr
-      sys:
-        debian/buster:
-          - amd64
-        debian/bullseye:
-          - amd64
+      sys: *SysDebianAmd64
     osvb:
       images:
         - pkg/osvb
         - sim/osvb
-      sys:
-        debian/buster:
-          - amd64
-        debian/bullseye:
-          - amd64
+      sys: *SysDebianAmd64
     cosim:
       images:
-        - [scipy]
-        - [octave]
-      sys:
-        debian/buster:
-          - amd64
-        debian/bullseye:
-          - amd64
+        - sim/${prj}-slim
+        - sim/${prj}
+        - prj: scipy
+        - prj: octave
+      sys: *SysDebianAmd64
