@@ -20,25 +20,32 @@
 HDLC: 0
 defaults:
   images:
+    # Base
     build/base:
-      dockerfile: base
+      <<: &BaseDockerfile
+        dockerfile: base
       target: base
     build/build:
-      dockerfile: base
+      <<: *BaseDockerfile
       target: build
     build/dev:
-      dockerfile: base
-    pkg/boolector:
+      <<: *BaseDockerfile
+    # Boolector
+    pkg/boolector: &EmptyPkgTarget
       target: ''
-    pkg/cvc:
-      target: ''
+    # CVC
+    pkg/cvc: *EmptyPkgTarget
+    # Formal
     formal/min:
-      dockerfile: formal
+      <<: &FormalDockerfile
+        dockerfile: formal
       target: min
     formal:
+      <<: *FormalDockerfile
       target: latest
     formal/all:
-      dockerfile: formal
+      <<: *FormalDockerfile
+    # GHDL
     ghdl/yosys:
       dockerfile: ghdl-yosys-plugin
     pkg/ghdl:
@@ -51,85 +58,89 @@ defaults:
     ghdl/llvm:
       dockerfile: ghdl
       target: llvm
+    # Impl
     build/impl:
-      dockerfile: impl
+      <<: &ImplDockerfile
+        dockerfile: impl
       target: base
     impl/ice40:
-      dockerfile: impl
+      <<: *ImplDockerfile
       target: ice40
     impl/icestorm:
-      dockerfile: impl
+      <<: *ImplDockerfile
       target: icestorm
     impl/ecp5:
-      dockerfile: impl
+      <<: *ImplDockerfile
       target: ecp5
     impl/prjtrellis:
-      dockerfile: impl
+      <<: *ImplDockerfile
       target: prjtrellis
     impl/generic:
-      dockerfile: impl
+      <<: *ImplDockerfile
       target: generic
     impl/pnr:
-      dockerfile: impl
+      <<: *ImplDockerfile
       target: pnr
+    # NextPnR
     build/nextpnr/base:
-      dockerfile: nextpnr
+      <<: &NextpnrDockerfile
+        dockerfile: nextpnr
       target: base
     build/nextpnr/build:
-      dockerfile: nextpnr
+      <<: *NextpnrDockerfile
       target: build
     pkg/nextpnr/ice40:
-      dockerfile: nextpnr
+      <<: *NextpnrDockerfile
       target: pkg-ice40
     nextpnr/ice40:
-      dockerfile: nextpnr
+      <<: *NextpnrDockerfile
       target: ice40
     nextpnr/icestorm:
-      dockerfile: nextpnr
+      <<: *NextpnrDockerfile
       target: icestorm
     pkg/nextpnr/nexus:
-      dockerfile: nextpnr
+      <<: *NextpnrDockerfile
       target: pkg-nexus
     nextpnr/nexus:
-      dockerfile: nextpnr
+      <<: *NextpnrDockerfile
       target: nexus
     nextpnr/prjoxide:
-      dockerfile: nextpnr
+      <<: *NextpnrDockerfile
       target: prjoxide
     pkg/nextpnr/ecp5:
-      dockerfile: nextpnr
+      <<: *NextpnrDockerfile
       target: pkg-ecp5
     nextpnr/ecp5:
-      dockerfile: nextpnr
+      <<: *NextpnrDockerfile
       target: ecp5
     nextpnr/prjtrellis:
-      dockerfile: nextpnr
+      <<: *NextpnrDockerfile
       target: prjtrellis
     pkg/nextpnr/generic:
-      dockerfile: nextpnr
+      <<: *NextpnrDockerfile
       target: pkg-generic
     nextpnr/generic:
-      dockerfile: nextpnr
+      <<: *NextpnrDockerfile
       target: generic
-    sim/osvb:
+    # Sim
+    sim/osvb: &OSVBDockerfile
       dockerfile: osvb
-    pkg/pono:
-      target: ''
+    pkg/pono: *EmptyPkgTarget
     sim/scipy-slim:
       dockerfile: scipy
     sim/scipy:
-      dockerfile: osvb
+      <<: *OSVBDockerfile
       argimg: sim/scipy-slim
     sim/octave-slim:
       dockerfile: octave
     sim/octave:
-      dockerfile: osvb
+      <<: *OSVBDockerfile
       argimg: sim/octave-slim
-    pkg/superprove:
-      target: ''
-    pkg/symbiyosys:
-      target: ''
-    pkg/yices2:
-      target: ''
-    pkg/z3:
-      target: ''
+    # SuperProve
+    pkg/superprove: *EmptyPkgTarget
+    # SymbiYosys
+    pkg/symbiyosys: *EmptyPkgTarget
+    # Yices2
+    pkg/yices2: *EmptyPkgTarget
+    # Z3
+    pkg/z3: *EmptyPkgTarget
