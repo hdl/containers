@@ -210,9 +210,9 @@ def GenerateJobList(
 
 def PullImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = CONFIG.defaults.registry,
-    collection: Optional[str] = CONFIG.defaults.collection,
-    architecture: Optional[str] = CONFIG.defaults.architecture,
+    registry: str = CONFIG.defaults.registry,
+    collection: str = CONFIG.defaults.collection,
+    architecture: str = CONFIG.defaults.architecture,
     dry: bool = False,
 ) -> None:
     for img in [image] if isinstance(image, str) else image:
@@ -224,16 +224,16 @@ def PullImage(
 
 def BuildImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = CONFIG.defaults.registry,
-    collection: Optional[str] = CONFIG.defaults.collection,
-    architecture: Optional[str] = CONFIG.defaults.architecture,
+    registry: str = CONFIG.defaults.registry,
+    collection: str = CONFIG.defaults.collection,
+    architecture: str = CONFIG.defaults.architecture,
     dockerfile: Optional[str] = None,
     target: Optional[str] = None,
     argimg: Optional[str] = None,
-    pkg: Optional[bool] = False,
+    pkg: bool = False,
     dry: bool = False,
-    default: Optional[bool] = False,
-    test: Optional[bool] = False,
+    default: bool = False,
+    test: bool = False,
 ) -> None:
     for rimg in [image] if isinstance(image, str) else image:
 
@@ -305,9 +305,9 @@ def BuildImage(
 
 def TestImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = CONFIG.defaults.registry,
-    collection: Optional[str] = CONFIG.defaults.collection,
-    architecture: Optional[str] = CONFIG.defaults.architecture,
+    registry: str = CONFIG.defaults.registry,
+    collection: str = CONFIG.defaults.collection,
+    architecture: str = CONFIG.defaults.architecture,
     dry: bool = False,
 ) -> None:
     imagePrefix = f"{registry}/{architecture}/{collection}"
@@ -378,9 +378,9 @@ def TestImage(
 
 def PushImage(
     image: Union[str, List[str]],
-    registry: Optional[str] = CONFIG.defaults.registry,
-    collection: Optional[str] = CONFIG.defaults.collection,
-    architecture: Optional[str] = CONFIG.defaults.architecture,
+    registry: str = CONFIG.defaults.registry,
+    collection: str = CONFIG.defaults.collection,
+    architecture: str = CONFIG.defaults.architecture,
     dry: bool = False,
     mirror: Optional[Union[str, List[str]]] = None,
 ) -> None:
