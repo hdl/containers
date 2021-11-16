@@ -23,16 +23,14 @@ set -e
 
 cd $(dirname "$0")
 
-pip3 install -r pyHDLC/requirements.txt
+[ -z "$MSYSTEM" ] && pip3 install -e . || export PYTHONPATH="$(pwd)"
 
 if [ -z "$CI" ]; then
   export PATH="$PATH:$(pwd)/bin"
-  export PYTHONPATH="$(pwd)"
   exit 0
 fi
 
 echo "$(pwd)/bin" >> $GITHUB_PATH
-echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
 
 unset _arch
 case $1 in
