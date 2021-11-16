@@ -1,4 +1,4 @@
 exclude setup.sh
 recursive-exclude bin *
 recursive-exclude build-test-release *
-recursive-exclude registry-login *
+recursive-exclude with-post-step *

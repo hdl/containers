@@ -32,13 +32,9 @@ function run(cmd) {
   });
 }
 
-// Are we in the 'post' step?
-const registries = process.env.STATE_REGISTRIES;
-if ( registries != undefined ) {
-  for ( const item of registries.split(',') ) { run(`docker logout ${item.trim()}`); };
-  return;
+if ( process.env.STATE_POST != undefined ) { // Are we in the 'post' step?
+  run(process.env.INPUT_POST);
+} else { // Otherwise, this is the main step
+  run(process.env.INPUT_MAIN);
+  console.log(`::save-state name=POST::true`);
 }
-
-// Otherwise, this is the main step
-run(process.env.INPUT_CMD);
-console.log(`::save-state name=REGISTRIES::gcr.io,ghcr.io,docker.io`);

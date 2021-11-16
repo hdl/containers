@@ -71,39 +71,22 @@ runs:
       # the logic of the evaluations in Python is negated.
 
       if python3 -c 'exit("${{ inputs.pull }}".lower() in ["none","false","no"])'; then
-        pyHDLC pull \
-        -a ${{ inputs.architecture }} \
-        -c ${{ inputs.collection }} \
-        ${{ inputs.pull }}
+        pyHDLC pull -a ${{ inputs.architecture }} -c ${{ inputs.collection }} ${{ inputs.pull }}
       fi
 
       python3 -c 'exit("${{ inputs.skip-test }}".lower() in ["true","skip","yes"])' && RunTest='-q' || RunTest=''
-      pyHDLC build $RunTest \
-      -a ${{ inputs.architecture }} \
-      -c ${{ inputs.collection }} \
-      -d ${{ inputs.images }}
+      pyHDLC build $RunTest -a ${{ inputs.architecture }} -c ${{ inputs.collection }} -d ${{ inputs.images }}
 
-  - name: Login to container registries
-    uses: ./utils/registry-login
+  - name: Release
+    uses: ./utils/with-post-step
     with:
-      cmd: |
+      main: |
         if python3 -c 'exit("${{ inputs.skip-release }}".lower() not in ["true","skip","yes"])'; then
-          echo "Skipping login..."
+          echo "Skipping release..."
           exit 0
         fi
-
         echo '${{ inputs.gcr_token }}' | docker login gcr.io -u _json_key --password-stdin
         echo '${{ inputs.gh_token }}' | docker login ghcr.io -u gha --password-stdin
         echo '${{ inputs.docker_pass }}' | docker login docker.io -u '${{ inputs.docker_user }}' --password-stdin
-
-  - shell: bash
-    run: |
-      # Release
-      if python3 -c 'exit("${{ inputs.skip-release }}".lower() not in ["true","skip","yes"])'; then
-        echo "Skipping release..."
-        exit 0
-      fi
-      dockerRelease \
-      ${{ inputs.architecture }} \
-      ${{ inputs.collection }} \
-      ${{ inputs.images }}
+        dockerRelease ${{ inputs.architecture }} ${{ inputs.collection }} ${{ inputs.images }}
+      post: for registry in gcr.io ghcr.io docker.io; do docker logout "$registry"; done
