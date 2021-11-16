@@ -1,4 +1,5 @@
 __pycache__/
+*.egg-info/
 .vscode
 /doc/.asciidoctor
 /doc/public/
@@ -11,3 +12,4 @@ __pycache__/
 /doc/img/legend.svg
 /doc/img/sim.svg
 /doc/img/synth.svg
+/utils/pyHDLC/dist/
