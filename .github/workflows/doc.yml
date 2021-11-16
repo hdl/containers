@@ -60,7 +60,7 @@ jobs:
         git init
         cp ../.git/config ./.git/config
         touch .nojekyll
-        mv ../utils/pyHDLC/map.svg ./img/
+        mv ../utils/map.svg ./img/
         git add .
         git config --local user.email "push@gha"
         git config --local user.name "GHA"

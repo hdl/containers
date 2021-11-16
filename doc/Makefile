@@ -69,4 +69,8 @@ dev-html:
 	  --out-file ../public/dev/index.html
 
 map:
-	docker run --rm -v /$(shell pwd)/..://wrk/ -w //wrk/utils/pyHDLC hdlc/doc:pyHDLC python3 map.py
+	docker run --rm \
+	  -v /$(shell pwd)/..://wrk/ \
+	  -w //wrk/utils \
+	  hdlc/doc:pyHDLC \
+	  sh -c 'pip3 install -e .; python3 pyHDLC/map.py'

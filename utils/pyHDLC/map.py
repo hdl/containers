@@ -24,11 +24,13 @@ from pathlib import Path
 import dockerfile
 from graphviz import Digraph
 
-from build import DefaultOpts
+from pyHDLC import CONFIG, _generateJobList, _NormaliseBuildParams
 
 
 ROOT = Path(__file__).resolve().parent.parent
-CDIR = ROOT.parent / "debian-bullseye"
+ARCH = "amd64"
+COLLECTION = "debian/bullseye"
+CDIR = ROOT.parent / COLLECTION.replace('/','-')
 
 
 class Stage:
@@ -94,7 +96,7 @@ class CollectionGraph:
             else:
                 self.imgs.append(_label)
         elif item.startswith("!I|"):
-            print("TODO: internal stage deps")
+            print("  TODO: internal stage deps")
             return None
         else:
             _label = item
@@ -108,32 +110,35 @@ class CollectionMap:
     def __init__(self):
         self.data = {}
 
-    def addDockerfile(self, name: str, dfile: Dockerfile):
+    def AddDockerfile(self, name: str, dfile: Dockerfile):
         if name in self.data:
             raise Exception(f"Dockerfile <{name}> exists already!")
         self.data[name] = dfile
 
-    def report(self):
+    def Report(self):
         """
         Print report of the map data
         """
+
+        print("[Map] Print report:")
+
         for key, dfile in self.data.items():
-            print(f"· {key} [{len(dfile.stages)}]")
+            print(f"  · {key} [{len(dfile.stages)}]")
             for art in dfile.artifacts:
                 print(
-                    f"  > {art[0]}"
+                    f"    > {art[0]}"
                     + (f" [{art[1]}]" if art[1] is not None else "")
                     + (f" <{art[2]}>" if art[2] is not None else "")
                 )
             for stg in dfile.stages:
                 print(
-                    f"  - {stg.value}"
+                    f"    - {stg.value}"
                     + (f" [{stg.tag}]" if stg.tag is not None else "")
                 )
                 for dep in stg.depends:
-                    print("    +", dep)
+                    print("      +", dep)
 
-    def dotgraph(self):
+    def DotGraph(self):
         """
         Generate a graphviz dot diagram and render it to a SVG file
         """
@@ -142,6 +147,8 @@ class CollectionMap:
             filename="map",
             format="svg",
         )
+
+        print("[Map] Generate graphviz dot diagram")
 
         graph = CollectionGraph()
 
@@ -199,24 +206,21 @@ class CollectionMap:
 
         dot.render()
 
+    def ParseDockerfile(
+        self,
+        dfilepath: Path,
+        debug: bool = False
+    ):
+        dfilename = Path(dfilepath.name).stem
 
-def GenerateMap(debug: bool = False):
-    """
-    Parse all the dockerfiles in a collection and extract the stages and the dependencies (images) of each stage;
-    cross-relate them with the declarations of default images; and build a map of all the images in the collection.
-    """
-
-    cmap = CollectionMap()
-
-    for dfilename in [Path(x.name).stem for x in CDIR.glob("*.dockerfile")]:
         if debug:
-            print("·", dfilename)
+            print(f"  · {dfilename!s}")
 
         dfile = Dockerfile()
 
         stg = None
 
-        for item in dockerfile.parse_file(str(CDIR / f"{dfilename}.dockerfile")):
+        for item in dockerfile.parse_file(str(dfilepath)):
 
             if item.cmd.upper() == "ARG":
                 _val = item.value[0]
@@ -229,7 +233,7 @@ def GenerateMap(debug: bool = False):
                         # Extract image name from IMAGE="name"
                         dfile.argimg = _val[7:-1]
                     elif _val.startswith("ARCHITECTURE="):
-                        print("Field ARCHITECTURE not handled yet!")
+                        print("    ! Field ARCHITECTURE not handled yet")
                     else:
                         raise Exception(f"Unknown ARG <{_val}>!")
 
@@ -273,19 +277,72 @@ def GenerateMap(debug: bool = False):
 
         dfile.addStage(stg)
 
-        cmap.addDockerfile(dfilename, dfile)
+        self.AddDockerfile(dfilename, dfile)
 
-    for key, args in DefaultOpts.items():
-        if args[0] not in cmap.data:
-            raise Exception(f"Dockerfile <{args[0]}> not found in data!")
-        cmap.data[args[0]].addArtifact((f"!R|{key}", args[1], args[2]))
+
+def GenerateMap(debug: bool = False):
+    """
+    Parse all the dockerfiles in a collection and extract the stages and the dependencies (images) of each stage;
+    cross-relate them with the declarations of default images; and build a map of all the images in the collection.
+    """
+
+    cmap = CollectionMap()
+
+    print("[Map] Parse dockerfiles:")
+
+    for dfilepath in [x for x in CDIR.glob("*.dockerfile")]:
+        cmap.ParseDockerfile(dfilepath, debug)
+
+    print("[Map] Extract list of images from 'jobs':")
+
+    images = GetImagesFromJobs(COLLECTION, ARCH)
+
+    print("[Map] Get the dockerfiles and params for each image:")
+
+    for image in images:
+        [_, _, _, dockerfile, target, argimg] = _NormaliseBuildParams(image, default=True)
+        if dockerfile not in cmap.data:
+            raise Exception(f"Dockerfile <{dockerfile}> not found in data!")
+        if debug:
+            argimgstr = f" with ARG IMAGE={argimg}" if argimg is not None else ""
+            targetstr = f" (target <{target}>)" if target not in [None, ''] else ""
+            print(f"  · Add artifact <{image}> built from dockerfile <{dockerfile}>{argimgstr}{targetstr}")
+
+        cmap.data[dockerfile].addArtifact((f"!R|{image}", target, argimg))
 
     return cmap
+
+
+def GetImagesFromJobs(
+    collection: str = COLLECTION,
+    architecture: str = ARCH
+) -> List[str]:
+    """
+    Return a list of all the image names in all the jobs defined in the configuration.
+    First, extract the keys/names of all jobs types.
+    Then, get the images generate in each job, for the selected Collection and Architecture.
+    Last, flatten the lists of images into a single list.
+    A check searches for duplicates, to ensure that each image is generated in a single job.
+    """
+    cjobs = CONFIG.jobs
+
+    images = [image.split('#')[0] for sublist in [
+        job['imgs'].split(' ')
+        for name in [item for items in [cjobs.default, cjobs.pkgonly, cjobs.runonly, cjobs.custom] for item in items]
+        for job in _generateJobList(name)
+        if (job['os'] == collection) and (job['arch'] == architecture)
+    ] for image in sublist]
+
+    dups = [item for num, item in enumerate(images) if item in images[:num]]
+    if dups != []:
+        raise Exception(f'Found duplicates in the list of all images extracted from jobs: {dups}')
+
+    return images
 
 
 if __name__ == "__main__":
     # print(dockerfile.all_cmds())
 
     cmap = GenerateMap(True)
-    cmap.report()
-    cmap.dotgraph()
+    cmap.Report()
+    cmap.DotGraph()
