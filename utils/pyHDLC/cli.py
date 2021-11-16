@@ -272,5 +272,9 @@ class CLI(ArgParseMixin):
         )
 
 
-if __name__ == "__main__":
+def main():
     CLI().Run()
+
+
+if __name__ == "__main__":
+    main()
