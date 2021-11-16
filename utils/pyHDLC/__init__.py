@@ -70,128 +70,128 @@ class Config(YamlDataClassConfig):
 
 
 CONFIG = Config()
-cpath = Path(__file__).resolve().parent / 'config.yml'
-if cpath.exists():
-    CONFIG.load(cpath)
-    print(f"Read configuration file {cpath!s} (HDLC v{CONFIG.HDLC})")
+CPATH = Path(__file__).resolve().parent / 'config.yml'
+print("CPATH", CPATH)
+if CPATH.exists():
+    CONFIG.load(CPATH)
+    print(f"Read configuration file {CPATH!s} (HDLC v{CONFIG.HDLC})")
 
 
-def GenerateJobList(
-    name: str,
-    fmt: str = 'gha',
-    dry: bool = False,
-) -> None:
-    def _generateJobList(name):
+def _generateJobList(
+    name: str
+) -> List[Dict[str, str]]:
 
-        cjobs = CONFIG.jobs
+    cjobs = CONFIG.jobs
 
-        def _combine(
-            systems: ConfigJobsDict,
-            images: List[str]
-        ) -> List[Dict[str, str]]:
-            return [
-                {
-                    "os": collection,
-                    "arch": architecture,
-                    "imgs": " ".join(imgs)
-                }
-                for imgs in images
-                for collection, architectures in systems.items()
-                for architecture in architectures
-            ]
+    def _combine(
+        systems: ConfigJobsDict,
+        images: List[str]
+    ) -> List[Dict[str, str]]:
+        return [
+            {
+                "os": collection,
+                "arch": architecture,
+                "imgs": " ".join(imgs)
+            }
+            for imgs in images
+            for collection, architectures in systems.items()
+            for architecture in architectures
+        ]
 
-        if name in cjobs.default:
-            print(f"[Jobs] '{name}' is Default")
-            return _combine(cjobs.default[name], [[f"pkg/{name}", name]])
+    if name in cjobs.default:
+        print(f"[Jobs] '{name}' is Default")
+        return _combine(cjobs.default[name], [[f"pkg/{name}", name]])
 
-        if name in cjobs.pkgonly:
-            print(f"[Jobs] '{name}' is PkgOnly")
-            return _combine(cjobs.pkgonly[name], [[f"pkg/{name}"]])
-            return
+    if name in cjobs.pkgonly:
+        print(f"[Jobs] '{name}' is PkgOnly")
+        return _combine(cjobs.pkgonly[name], [[f"pkg/{name}"]])
+        return
 
-        if name in cjobs.runonly:
-            print(f"[Jobs] '{name}' is RunOnly")
-            return _combine(cjobs.runonly[name], [[name]])
-            return
+    if name in cjobs.runonly:
+        print(f"[Jobs] '{name}' is RunOnly")
+        return _combine(cjobs.runonly[name], [[name]])
+        return
 
-        if name in cjobs.custom:
-            print(f"[Jobs] '{name}' is Custom")
+    if name in cjobs.custom:
+        print(f"[Jobs] '{name}' is Custom")
 
-            def _customItem(custom):
+        def _customItem(custom):
 
-                paramSets = [probe for probe in custom.images if isinstance(probe, dict)]
+            paramSets = [probe for probe in custom.images if isinstance(probe, dict)]
 
-                if len(paramSets) > 0:
-                    print(f"[Jobs] Images of '{name}' has Params")
+            if len(paramSets) > 0:
+                print(f"[Jobs] Images of '{name}' has Params")
 
-                    patterns = [probe for probe in custom.images if not isinstance(probe, dict)]
+                patterns = [probe for probe in custom.images if not isinstance(probe, dict)]
 
-                    if custom.exclude is None:
-                        return _combine(
-                            custom.sys,
+                if custom.exclude is None:
+                    return _combine(
+                        custom.sys,
+                        [
                             [
-                                [
-                                    Template(pattern).substitute(params)
-                                    for pattern in patterns
-                                ]
-                                # TODO Handle individual params being a list of strings, instead of a single string.
-                                for params in paramSets
-                            ]
-                        )
-
-                    excludes = [
-                        (collection, architectures, exclude.params)
-                        for exclude in custom.exclude
-                        for collection, architectures in exclude.sys.items()
-                    ]
-
-                    # TODO Merge this list generation into the for loops beloew.
-                    # I.e., filter during generation, instead of generating all the cases and then filtering.
-                    systems = [
-                        (collection, architectures.copy(), params)
-                        for collection, architectures in custom.sys.items()
-                        for params in paramSets
-                    ]
-
-                    for item in systems:
-                        for excl in excludes:
-                            # TODO Handle individual params being a list of strings, instead of a single string.
-                            if (item[0] == excl[0]) and (item[2] == excl[2]):
-                                # TODO Handle excl[1]==None (that is, remove all archs for a collection)
-                                for arch in excl[1]:
-                                    if arch in item[1]:
-                                        item[1].remove(arch)
-
-                    return [
-                        {
-                            "os": item[0],
-                            "arch": architecture,
-                            "imgs": " ".join([
-                                Template(pattern).substitute(item[2])
+                                Template(pattern).substitute(params)
                                 for pattern in patterns
-                            ])
-                        }
-                        for item in systems if len(item[1]) != 0
-                        for architecture in item[1]
-                    ]
+                            ]
+                            # TODO Handle individual params being a list of strings, instead of a single string.
+                            for params in paramSets
+                        ]
+                    )
 
-                if isinstance(custom.images[0], str):
-                    print(f"[Jobs] Images of '{name}' is List of strings")
-                    return _combine(custom.sys, [custom.images])
+                excludes = [
+                    (collection, architectures, exclude.params)
+                    for exclude in custom.exclude
+                    for collection, architectures in exclude.sys.items()
+                ]
 
-                if isinstance(custom.images[0], list):
-                    print(f"[Jobs] Images of '{name}' is List of lists")
-                    print(custom.images)
-                    return _combine(custom.sys, custom.images)
+                # TODO Merge this list generation into the for loops beloew.
+                # I.e., filter during generation, instead of generating all the cases and then filtering.
+                systems = [
+                    (collection, architectures.copy(), params)
+                    for collection, architectures in custom.sys.items()
+                    for params in paramSets
+                ]
 
-                raise Exception("Not implemented yet!")
+                for item in systems:
+                    for excl in excludes:
+                        # TODO Handle individual params being a list of strings, instead of a single string.
+                        if (item[0] == excl[0]) and (item[2] == excl[2]):
+                            # TODO Handle excl[1]==None (that is, remove all archs for a collection)
+                            for arch in excl[1]:
+                                if arch in item[1]:
+                                    item[1].remove(arch)
 
-            return _customItem(cjobs.custom[name])
+                return [
+                    {
+                        "os": item[0],
+                        "arch": architecture,
+                        "imgs": " ".join([
+                            Template(pattern).substitute(item[2])
+                            for pattern in patterns
+                        ])
+                    }
+                    for item in systems if len(item[1]) != 0
+                    for architecture in item[1]
+                ]
 
-        raise Exception(f"Unknown job {name}")
+            if isinstance(custom.images[0], str):
+                print(f"[Jobs] Images of '{name}' is List of strings")
+                return _combine(custom.sys, [custom.images])
 
-    jobs = _generateJobList(name)
+            if isinstance(custom.images[0], list):
+                print(f"[Jobs] Images of '{name}' is List of lists")
+                print(custom.images)
+                return _combine(custom.sys, custom.images)
 
+            raise Exception("Not implemented yet!")
+
+        return _customItem(cjobs.custom[name])
+
+    raise Exception(f"Unknown job {name}")
+
+
+def _printJobList(
+    jobs: List[Dict[str, str]]
+) -> None:
     for job in jobs:
         print(f"- {job['arch']} | {job['os']}")
         imgs = job['imgs']
@@ -201,9 +201,16 @@ def GenerateJobList(
         else:
             print(f"  - {imgs}")
 
+
+def GenerateJobList(
+    name: str,
+    fmt: str = 'gha',
+    dry: bool = False,
+) -> None:
+    jobs = _generateJobList(name)
+    _printJobList(jobs)
     if dry:
         return
-
     if fmt.lower() in ["gha"]:
         print(f'::set-output name=matrix::{jobs!s}')
 
@@ -222,6 +229,50 @@ def PullImage(
         )
 
 
+def _NormaliseBuildParams(
+    image: str,
+    dockerfile: Optional[str] = None,
+    target: Optional[str] = None,
+    argimg: Optional[str] = None,
+    pkg: bool = False,
+    default: bool = False,
+) -> Tuple[str, bool, Optional[str], str, Optional[str], Optional[str]]:
+    items = image.split('#')
+    imageNameWithoutDirSuffix = items[0]
+    withDir = None
+    if len(items) > 1:
+        withDir = items[1]
+
+    if imageNameWithoutDirSuffix.startswith('pkg/'):
+        isPkg = True
+        imageNameWithoutPrefixOrSuffix = imageNameWithoutDirSuffix[4:]
+    else:
+        isPkg = pkg
+        imageNameWithoutPrefixOrSuffix = imageNameWithoutDirSuffix
+        if pkg:
+            imageNameWithoutDirSuffix = f"pkg/{imageNameWithoutDirSuffix}"
+
+    if default:
+        def get_default_params():
+            cfgi = CONFIG.defaults.images
+            if cfgi is not None:
+                key = imageNameWithoutPrefixOrSuffix if isPkg and (imageNameWithoutDirSuffix not in cfgi) else imageNameWithoutDirSuffix
+                if key in cfgi:
+                    cfg = cfgi[key]
+                    return [cfg.dockerfile, cfg.target, cfg.argimg]
+            return [None, None, None]
+        [dockerfile, target, argimg] = get_default_params()
+
+    return (
+        imageNameWithoutDirSuffix,
+        isPkg,
+        withDir,
+        imageNameWithoutPrefixOrSuffix if dockerfile is None else dockerfile,
+        "pkg" if isPkg and (target is None) else target,
+        argimg,
+    )
+
+
 def BuildImage(
     image: Union[str, List[str]],
     registry: str = CONFIG.defaults.registry,
@@ -237,39 +288,16 @@ def BuildImage(
 ) -> None:
     for rimg in [image] if isinstance(image, str) else image:
 
-        items = rimg.split('#')
-        pimg = items[0]
-        withDir = None
-        if len(items) > 1:
-            withDir = items[1]
+        [img, isPkg, withDir, dockerfile, target, argimg] = _NormaliseBuildParams(
+            image=rimg,
+            dockerfile=dockerfile,
+            target=target,
+            argimg=argimg,
+            pkg=pkg,
+            default=default
+        )
 
-        if pimg.startswith('pkg/'):
-            isPkg = True
-            img = pimg[4:]
-        else:
-            isPkg = pkg
-            img = pimg
-            if pkg:
-                pimg = f"pkg/{pimg}"
-
-        if default:
-            def get_default_params():
-                cfgi = CONFIG.defaults.images
-                if cfgi is not None:
-                    key = img if isPkg and (pimg not in cfgi) else pimg
-                    if key in cfgi:
-                        cfg = cfgi[key]
-                        return [cfg.dockerfile, cfg.target, cfg.argimg]
-                return [None, None, None]
-            [dockerfile, target, argimg] = get_default_params()
-
-        if dockerfile is None:
-            dockerfile = img
-
-        if isPkg and (target is None):
-            target = "pkg"
-
-        imageName = f"{registry}/{architecture}/{collection}/{pimg}"
+        imageName = f"{registry}/{architecture}/{collection}/{img}"
 
         cmd = ["docker", "build", "-t", imageName, "--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1"]
         cmd += [
@@ -295,7 +323,7 @@ def BuildImage(
 
         if test:
             TestImage(
-                f"{pimg}{(f'#{withDir}' if withDir is not None else '')}",
+                f"{img}{(f'#{withDir}' if withDir is not None else '')}",
                 registry,
                 collection,
                 architecture,
