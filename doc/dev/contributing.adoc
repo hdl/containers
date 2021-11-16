@@ -122,13 +122,11 @@ source venv/bin/activate
 
 ==== Build
 
-link:{repotree}utils/bin/dockerBuild[`dockerBuild`] helps building one or multiple images at once, by hiding
-all common options.
-It's a wrapper around command `build` of link:{repotree}utils/pyHDLC/cli.py[`pyHDLC.cli`]:
+`pyHDLC build` helps building one or multiple images at once, by hiding all common options:
 
 [source, shell]
 ----
-usage: cli.py build [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY] [-f DOCKERFILE] [-t TARGET] [-a ARGIMG] [-p] [-d] Image [Image ...]
+usage: pyHDLC build [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY] [-f DOCKERFILE] [-t TARGET] [-a ARGIMG] [-p] [-d] [-q] Image [Image ...]
 
 positional arguments:
   Image                 image name(s), without registry prefix.
@@ -157,6 +155,8 @@ optional arguments:
                         (default: False)
   -d, --default         set default Dockerfile, Target and ArgImg options, given the image name(s).
                         (default: False)
+  -q, --test            test each image right after building it.
+                        (default: False)
 ----
 
 IMPORTANT: `DOCKERFILE` defaults to `Image` if `None`.
@@ -174,7 +174,8 @@ FROM busybox
 COPY --from=REGISTRY/pkg/TOOL_NAME /TOOL_NAME /
 ----
 
-In fact, link:{repotree}utils/bin/dockerTest[`dockerTest`] uses a similar dockerfile for running `.pkg.sh` scripts from link:{repotree}test/[`test/`]. See <<Test>>.
+In fact, `pyHDLC test`] uses a similar dockerfile for running `.pkg.sh` scripts from link:{repotree}test/[`test/`].
+See <<Test>>.
 
 Alternatively, or as a complement, https://github.com/wagoodman/dive[wagoodman/dive] is a lightweight tool with a nice
 terminal based GUI for exploring layers and contents of container images.
@@ -215,20 +216,42 @@ HDL_REGISTRY=docker.io dockerDive python:slim-bullseye
 
 There is a test script in link:{repotree}test/[`test/`] for each image in this ecosystem, according to the following convention:
 
-* Scripts for package images, `/[ARCHITECTURE/][COLLECTION/]pkg/TOOL_NAME`, are named `TOOL_NAME.pkg.sh`.
+* Scripts for package images, `/[ARCHITECTURE/][COLLECTION/]pkg/TOOL_NAME[/SUBNAME]`, are named `TOOL_NAME[--SUBNAME].pkg.sh`.
 * Scripts for other images, `/[ARCHITECTURE/][COLLECTION/]NAME[/SUBNAME]`, are named `NAME[--SUBNAME].sh`.
 * Other helper scripts are named `_*.sh`.
 
 Furthermore, https://github.com/hdl/smoke-tests[hdl/smoke-test] is a submodule of this repository (link:{repotree}test/[`test/smoke-test`]). Smoke-tests contains fine grained tests that cover the most important functionalities of the tools. Those are used in other packaging projects too. Therefore, container tests are expected to execute the smoke-tests corresponding to the tools available in the image, before executing more specific tests.
 
-There is a helper script in link:{repotree}utils/bin/dockerTest[`utils/bin/dockerTest`] for testing the images.
+`pyHDLC test` allows testing the runnable and package images.
 It is used in CI but can be useful locally too:
 
-* `dockerTest -a <ARCHITECTURE> -c <BASE_OS> <IMAGE_NAME>[#<DIR_NAME>]`
-** ARCHITECTURE: target architecture to build the images for.
-** BASE_OS: set/collection of images (e.g. `debian/bullseye`).
-** IMAGE_NAME: image name without the `REGISTRY/[ARCHITECTURE/][COLLECTION/]` prefix.
-** (optional) DIR_NAME: directory name inside the package image which needs to be copied to the temporary image for testing.
+[source, shell]
+----
+usage: pyHDLC test [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY] Image[#<DirName>] [Image[#<DirName>] ...]
+
+positional arguments:
+  Image                 image name(s), without registry prefix.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a ARCHITECTURE, --arch ARCHITECTURE
+                        name of the architecture.
+                        (default: amd64)
+  -c COLLECTION, --collection COLLECTION
+                        name of the collection/subset of images.
+                        (default: debian/bullseye)
+  -r REGISTRY, --registry REGISTRY
+                        container image registry prefix.
+                        (default: gcr.io/hdl-containers)
+----
+
+[IMPORTANT]
+====
+`DirName` allows to optionally specify the name of the directory inside the package image which needs to be copied to
+the temporary image for testing.
+By default, the escaped name of the image is used as the location.
+Therefore, `DirName` is used exceptionally.
+====
 
 === Step by step checklist
 
@@ -242,17 +265,27 @@ It is used in CI but can be useful locally too:
 **** In any case, copy the tool artifacts from the build stage using `COPY --from=STAGE_NAME`.
 **** In practice, several dockerfiles produce at least one package image and one ready-to-use image. Therefore, dockerfiles will likely have more than two stages.
 ** Some tools are to be added to existing images which include several tools (coloured [maroon]#BROWN# in the <<Graphs>>). After creating the dockerfile where the corresponding package image is defined, add `COPY --from=$REGISTRY/pkg/TOOL_NAME` statements to the dockerfiles of multi-tool images.
-2. Build and test the dockerfile(s) locally. Use helper scripts from link:{repotree}.github/bin[`.github/bin`] as explained in <<Build>> and <<Test>>.
-** If a new tool was added, or a new image is to be generated, a test script needs to be added to link:{repotree}test/[`test/`]. See <<Test>> for naming guidelines.
-** Be careful with the order. If you add a new tool and include it in one of the multi-tool images, the package image needs to be built first.
+2. Build and test the dockerfile(s) locally. Use helper scripts from link:{repotree}utils[`utils`], as explained in
+  <<Build>> and <<Test>>.
+** If a new tool was added, or a new image is to be generated, a test script needs to be added to
+  link:{repotree}test/[`test/`].
+  See <<Test>> for naming guidelines.
+** Be careful with the order.
+  If you add a new tool and include it in one of the multi-tool images, the package image needs to be built first.
 3. Create or update workflow(s).
-** For each tool or multi-tool image, a GitHub Actions workflow is added to link:{repotree}.github/workflows[`.github/workflows/`]. Find documentation at https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions[Workflow syntax for GitHub Actions]. Copying some of the existing workflows in this repo and adapting it is suggested.
-** In each workflow, all the images produced from stages of the corresponding dockerfile are built, tested and pushed. Scripts from link:{repotree}.github/bin[`.github/bin`] are used.
+** For each tool or multi-tool image, a GitHub Actions workflow is added to
+  link:{repotree}.github/workflows[`.github/workflows/`].
+  Find documentation at https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions[Workflow syntax for GitHub Actions].
+  Copying some of the existing workflows in this repo and adapting it is suggested.
+** In each workflow, all the images produced from stages of the corresponding dockerfile are built, tested and pushed.
+  Scripts from link:{repotree}utils[`utils`] are used.
 ** The workflow matrix is used for deciding which collections is each tool to be built for.
 4. Update the documentation.
 ** If a new tool was added,
-*** Ensure that the tool is listed at https://github.com/hdl/awesome[hdl/awesome], since that's where all the tool/projects in the table point to.
+*** Ensure that the tool is listed at https://github.com/hdl/awesome[hdl/awesome], since that's where all the
+  tool/projects in the table point to.
 *** If a tool from the _To Do_ list was added, remove it from the list.
 *** Add a shield/badge to the table in <<Continuous Integration (CI)>>.
-** Edit link:{repotree}doc/main/tools.yml[`doc/main/tools.yml`]. The table in link:../index.html#_tools_and_images[Tools and images] is autogenerated from that YAML file, using link:{repotree}doc/gen_tool_table.py[`doc/gen_tool_table.py`]
+** Edit link:{repotree}doc/main/tools.yml[`doc/main/tools.yml`].
+  The table in link:../index.html#_tools_and_images[Tools and images] is autogenerated from that YAML file, using link:{repotree}doc/gen_tool_table.py[`doc/gen_tool_table.py`]
 ** Update the <<Graphs>>.
