@@ -34,23 +34,26 @@ env:
 
 jobs:
 
-  apicula:
+
+  matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.generate.outputs.matrix }}
+    steps:
+    - uses: actions/checkout@v2
+    - run: ./utils/setup.sh
+    - id: generate
+      run: pyHDLC jobs apicula
+
+
+  jobs:
+    needs: matrix
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-
-        imgs:
-          - >-
-            pkg/apicula
-            apicula
-
-        sys:
-
-          # Debian Bullseye
-          - { os: debian/bullseye, arch: amd64 }
-
-    name: ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
+        include: ${{ fromJson(needs.matrix.outputs.matrix) }}
+    name: ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
 
     - uses: actions/checkout@v2
@@ -64,6 +67,6 @@ jobs:
         docker_user: '${{ secrets.DOCKER_USER }}'
         docker_pass: '${{ secrets.DOCKER_PASS }}'
         skip-release: ${{ github.event_name == 'pull_request' }}
-        architecture: ${{ matrix.sys.arch }}
-        collection: ${{ matrix.sys.os }}
+        architecture: ${{ matrix.arch }}
+        collection: ${{ matrix.os }}
         images: ${{ matrix.imgs }}
