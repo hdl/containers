@@ -35,24 +35,32 @@ env:
 jobs:
 
 
+  matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      impl-build: ${{ steps.impl-build.outputs.matrix }}
+      # TODO: Handle 'pull' in 'config.yml' (and command 'jobs').
+      #impl-prjs: ${{ steps.impl-prjs.outputs.matrix }}
+      impl: ${{ steps.impl.outputs.matrix }}
+    steps:
+    - uses: actions/checkout@v2
+    - run: ./utils/setup.sh
+    - id: impl-build
+      run: pyHDLC jobs impl-build
+    #- id: impl-prjs
+    #  run: pyHDLC jobs impl-prjs
+    - id: impl
+      run: pyHDLC jobs impl
+
+
   impl-build:
+    needs: matrix
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-
-        imgs:
-          - build/impl
-
-        sys:
-
-          # Debian Buster
-          - { os: debian/buster, arch: amd64 }
-
-          # Debian Bullseye
-          - { os: debian/bullseye, arch: amd64 }
-
-    name: impl-build ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
+        include: ${{ fromJson(needs.matrix.outputs.impl-build) }}
+    name: impl-build ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
 
     - uses: actions/checkout@v2
@@ -69,8 +77,8 @@ jobs:
         docker_pass: '${{ secrets.DOCKER_PASS }}'
         skip-release: ${{ github.event_name == 'pull_request' }}
         skip-test: True
-        architecture: ${{ matrix.sys.arch }}
-        collection: ${{ matrix.sys.os }}
+        architecture: ${{ matrix.arch }}
+        collection: ${{ matrix.os }}
         images: ${{ matrix.imgs }}
         pull: >-
           ghdl/yosys
@@ -105,6 +113,8 @@ jobs:
 
     - run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
+    # TODO: Action 'build-test-release' cannot be used here yet, because 'task.arch' and 'task.prj' are not provided by
+    # 'pyHDLC jobs'. Hence, 'config.yml' needs to be extended in order to handle generation of 'pull' image lists.
     - run: >-
         pyHDLC pull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
         build/impl
@@ -133,27 +143,13 @@ jobs:
 
 
   impl:
-    needs: [ impl-build, impl-prjs ]
+    needs: [ matrix, impl-build, impl-prjs ]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-
-        imgs:
-          - >-
-            impl/generic
-            impl/pnr
-            impl
-
-        sys:
-
-          # Debian Buster
-          - { os: debian/buster, arch: amd64 }
-
-          # Debian Bullseye
-          - { os: debian/bullseye, arch: amd64 }
-
-    name: impl ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
+        include: ${{ fromJson(needs.matrix.outputs.impl) }}
+    name: impl ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
 
     - uses: actions/checkout@v2
@@ -167,8 +163,8 @@ jobs:
         docker_user: '${{ secrets.DOCKER_USER }}'
         docker_pass: '${{ secrets.DOCKER_PASS }}'
         skip-release: ${{ github.event_name == 'pull_request' }}
-        architecture: ${{ matrix.sys.arch }}
-        collection: ${{ matrix.sys.os }}
+        architecture: ${{ matrix.arch }}
+        collection: ${{ matrix.os }}
         images: ${{ matrix.imgs }}
         pull: >-
           build/impl
