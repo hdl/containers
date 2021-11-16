@@ -34,24 +34,31 @@ env:
 jobs:
 
 
+  matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      sim: ${{ steps.sim.outputs.matrix }}
+      osvb: ${{ steps.osvb.outputs.matrix }}
+      cosim: ${{ steps.cosim.outputs.matrix }}
+    steps:
+    - uses: actions/checkout@v2
+    - run: ./utils/setup.sh
+    - id: sim
+      run: pyHDLC jobs sim
+    - id: osvb
+      run: pyHDLC jobs osvb
+    - id: cosim
+      run: pyHDLC jobs cosim
+
+
   sim:
+    needs: matrix
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-
-        imgs:
-          - sim
-
-        sys:
-
-          # Debian Buster
-          - { os: debian/buster, arch: amd64 }
-
-          # Debian Bullseye
-          - { os: debian/bullseye, arch: amd64 }
-
-    name: sim ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
+        include: ${{ fromJson(needs.matrix.outputs.sim) }}
+    name: sim ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
 
     - uses: actions/checkout@v2
@@ -65,32 +72,19 @@ jobs:
         docker_user: '${{ secrets.DOCKER_USER }}'
         docker_pass: '${{ secrets.DOCKER_PASS }}'
         skip-release: ${{ github.event_name == 'pull_request' }}
-        architecture: ${{ matrix.sys.arch }}
-        collection: ${{ matrix.sys.os }}
+        architecture: ${{ matrix.arch }}
+        collection: ${{ matrix.os }}
         images: ${{ matrix.imgs }}
 
 
   osvb:
-    needs: [sim]
+    needs: [matrix, sim]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-
-        imgs:
-          - >-
-            pkg/osvb
-            sim/osvb
-
-        sys:
-
-          # Debian Buster
-          - { os: debian/buster, arch: amd64 }
-
-          # Debian Bullseye
-          - { os: debian/bullseye, arch: amd64 }
-
-    name: osvb ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
+        include: ${{ fromJson(needs.matrix.outputs.osvb) }}
+    name: osvb ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
 
     - uses: actions/checkout@v2
@@ -104,53 +98,32 @@ jobs:
         docker_user: '${{ secrets.DOCKER_USER }}'
         docker_pass: '${{ secrets.DOCKER_PASS }}'
         skip-release: ${{ github.event_name == 'pull_request' }}
-        architecture: ${{ matrix.sys.arch }}
-        collection: ${{ matrix.sys.os }}
+        architecture: ${{ matrix.arch }}
+        collection: ${{ matrix.os }}
         images: ${{ matrix.imgs }}
 
 
   cosim:
-    needs: [osvb]
+    needs: [matrix, osvb]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        sys:
-
-          # Debian Buster
-          - { os: debian/buster, arch: amd64 }
-
-          # Debian Bullseye
-          - { os: debian/bullseye, arch: amd64 }
-
-        img:
-          - scipy
-          - octave
-
+        include: ${{ fromJson(needs.matrix.outputs.cosim) }}
+    name: cosim ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
 
     - uses: actions/checkout@v2
       with:
         submodules: recursive
 
-    - run: ./utils/setup.sh ${{ matrix.sys.arch }}
-
-    - run: >-
-        pyHDLC build -q -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
-        sim/${{ matrix.img }}-slim
-        sim/${{ matrix.img }}
-
-    - name: Login to container registries
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      uses: ./utils/registry-login
+    - uses: ./utils/build-test-release
       with:
-        cmd: |
-          echo '${{ secrets.GCR_JSON_KEY }}' | docker login gcr.io -u _json_key --password-stdin
-          echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
-          echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
-
-    - if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      run: >-
-        dockerRelease ${{ matrix.sys.arch }} ${{ matrix.sys.os }}
-        sim/${{ matrix.img }}-slim
-        sim/${{ matrix.img }}
+        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
+        gh_token: '${{ github.token }}'
+        docker_user: '${{ secrets.DOCKER_USER }}'
+        docker_pass: '${{ secrets.DOCKER_PASS }}'
+        skip-release: ${{ github.event_name == 'pull_request' }}
+        architecture: ${{ matrix.arch }}
+        collection: ${{ matrix.os }}
+        images: ${{ matrix.imgs }}
