@@ -29,40 +29,14 @@ env:
   DOCKER_BUILDKIT: 1
 
 jobs:
-
-
-  matrix:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.generate.outputs.matrix }}
-    steps:
-    - uses: actions/checkout@v2
-    - run: ./utils/setup.sh
-    - id: generate
-      run: pyHDLC jobs klayout
-
-
-  jobs:
-    needs: matrix
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJson(needs.matrix.outputs.matrix) }}
-    name: ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
-    steps:
-
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
-
-    - uses: ./utils/build-test-release
-      with:
-        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
-        gh_token: '${{ github.token }}'
-        docker_user: '${{ secrets.DOCKER_USER }}'
-        docker_pass: '${{ secrets.DOCKER_PASS }}'
-        skip-release: ${{ github.event_name == 'pull_request' }}
-        architecture: ${{ matrix.arch }}
-        collection: ${{ matrix.os }}
-        images: ${{ matrix.imgs }}
+  klayout:
+    uses: hdl/containers/.github/workflows/common.yml@main
+    with:
+      key: klayout
+      submodules: recursive
+      skip-release: ${{ github.event_name == 'pull_request' }}
+    secrets:
+      gcr_token: '${{ secrets.GCR_JSON_KEY }}'
+      gh_token: '${{ github.token }}'
+      docker_user: '${{ secrets.DOCKER_USER }}'
+      docker_pass: '${{ secrets.DOCKER_PASS }}'
