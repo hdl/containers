@@ -49,19 +49,6 @@ on:
       docker_pass:
         description: 'Docker Container Registry password.'
         required: false
-  workflow_dispatch:
-    inputs:
-      key:
-        description: 'Name of the job in the configuration.'
-        required: true
-      submodules:
-        description: 'Whether to checkout submodules (false, true or recursive).'
-        required: false
-        default: false
-      skip-release:
-        description: 'Skip pushing and mirroring to container registries.'
-        required: false
-        default: false
 
 env:
   DOCKER_BUILDKIT: 1
