@@ -32,9 +32,11 @@ function run(cmd) {
   });
 }
 
-if ( process.env.STATE_POST != undefined ) { // Are we in the 'post' step?
+const key = process.env.INPUT_KEY.toUpperCase();
+
+if ( process.env[`STATE_${key}`] != undefined ) { // Are we in the 'post' step?
   run(process.env.INPUT_POST);
 } else { // Otherwise, this is the main step
   run(process.env.INPUT_MAIN);
-  console.log(`::save-state name=POST::true`);
+  console.log(`::save-state name=${key}::true`);
 }
