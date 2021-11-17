@@ -33,24 +33,18 @@ env:
   DOCKER_BUILDKIT: 1
 
 jobs:
-
+# TODO: Support 'skip-test' in the reusable workflow 'common.yml'.
+# Then, use the reusable workflow 'common.py' here.
 
   matrix:
     runs-on: ubuntu-latest
     outputs:
       nextpnr-build: ${{ steps.nextpnr-build.outputs.matrix }}
-      nextpnr-prjs: ${{ steps.nextpnr-prjs.outputs.matrix }}
-      nextpnr: ${{ steps.nextpnr.outputs.matrix }}
     steps:
     - uses: actions/checkout@v2
     - run: ./utils/setup.sh
     - id: nextpnr-build
       run: pyHDLC jobs nextpnr-build
-    - id: nextpnr-prjs
-      run: pyHDLC jobs nextpnr-prjs
-    - id: nextpnr
-      run: pyHDLC jobs nextpnr
-
 
   nextpnr-build:
     needs: matrix
@@ -80,52 +74,28 @@ jobs:
 
 
   nextpnr-prjs:
-    needs: [ matrix, nextpnr-build ]
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJson(needs.matrix.outputs.nextpnr-prjs) }}
-    name: nextpnr-prjs ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
-    steps:
-
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
-
-    - uses: ./utils/build-test-release
-      with:
-        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
-        gh_token: '${{ github.token }}'
-        docker_user: '${{ secrets.DOCKER_USER }}'
-        docker_pass: '${{ secrets.DOCKER_PASS }}'
-        skip-release: ${{ github.event_name == 'pull_request' }}
-        architecture: ${{ matrix.arch }}
-        collection: ${{ matrix.os }}
-        images: ${{ matrix.imgs }}
+    needs: [ nextpnr-build ]
+    uses: hdl/containers/.github/workflows/common.yml@main
+    with:
+      key: nextpnr-prjs
+      submodules: recursive
+      skip-release: ${{ github.event_name == 'pull_request' }}
+    secrets:
+      gcr_token: '${{ secrets.GCR_JSON_KEY }}'
+      gh_token: '${{ github.token }}'
+      docker_user: '${{ secrets.DOCKER_USER }}'
+      docker_pass: '${{ secrets.DOCKER_PASS }}'
 
 
   nextpnr:
-    needs: [ matrix, nextpnr-build, nextpnr-prjs ]
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJson(needs.matrix.outputs.nextpnr) }}
-    name: nextpnr ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
-    steps:
-
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
-
-    - uses: ./utils/build-test-release
-      with:
-        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
-        gh_token: '${{ github.token }}'
-        docker_user: '${{ secrets.DOCKER_USER }}'
-        docker_pass: '${{ secrets.DOCKER_PASS }}'
-        skip-release: ${{ github.event_name == 'pull_request' }}
-        architecture: ${{ matrix.arch }}
-        collection: ${{ matrix.os }}
-        images: ${{ matrix.imgs }}
+    needs: [ nextpnr-build, nextpnr-prjs ]
+    uses: hdl/containers/.github/workflows/common.yml@main
+    with:
+      key: nextpnr
+      submodules: recursive
+      skip-release: ${{ github.event_name == 'pull_request' }}
+    secrets:
+      gcr_token: '${{ secrets.GCR_JSON_KEY }}'
+      gh_token: '${{ github.token }}'
+      docker_user: '${{ secrets.DOCKER_USER }}'
+      docker_pass: '${{ secrets.DOCKER_PASS }}'
