@@ -71,7 +71,6 @@ class Config(YamlDataClassConfig):
 
 CONFIG = Config()
 CPATH = Path(__file__).resolve().parent / 'config.yml'
-print("CPATH", CPATH)
 if CPATH.exists():
     CONFIG.load(CPATH)
     print(f"Read configuration file {CPATH!s} (HDLC v{CONFIG.HDLC})")
