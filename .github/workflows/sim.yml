@@ -33,97 +33,40 @@ env:
 
 jobs:
 
-
-  matrix:
-    runs-on: ubuntu-latest
-    outputs:
-      sim: ${{ steps.sim.outputs.matrix }}
-      osvb: ${{ steps.osvb.outputs.matrix }}
-      cosim: ${{ steps.cosim.outputs.matrix }}
-    steps:
-    - uses: actions/checkout@v2
-    - run: ./utils/setup.sh
-    - id: sim
-      run: pyHDLC jobs sim
-    - id: osvb
-      run: pyHDLC jobs osvb
-    - id: cosim
-      run: pyHDLC jobs cosim
-
-
   sim:
-    needs: matrix
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJson(needs.matrix.outputs.sim) }}
-    name: sim ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
-    steps:
-
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
-
-    - uses: ./utils/build-test-release
-      with:
-        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
-        gh_token: '${{ github.token }}'
-        docker_user: '${{ secrets.DOCKER_USER }}'
-        docker_pass: '${{ secrets.DOCKER_PASS }}'
-        skip-release: ${{ github.event_name == 'pull_request' }}
-        architecture: ${{ matrix.arch }}
-        collection: ${{ matrix.os }}
-        images: ${{ matrix.imgs }}
-
+    uses: hdl/containers/.github/workflows/common.yml@main
+    with:
+      key: sim
+      submodules: recursive
+      skip-release: ${{ github.event_name == 'pull_request' }}
+    secrets:
+      gcr_token: '${{ secrets.GCR_JSON_KEY }}'
+      gh_token: '${{ github.token }}'
+      docker_user: '${{ secrets.DOCKER_USER }}'
+      docker_pass: '${{ secrets.DOCKER_PASS }}'
 
   osvb:
-    needs: [matrix, sim]
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJson(needs.matrix.outputs.osvb) }}
-    name: osvb ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
-    steps:
-
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
-
-    - uses: ./utils/build-test-release
-      with:
-        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
-        gh_token: '${{ github.token }}'
-        docker_user: '${{ secrets.DOCKER_USER }}'
-        docker_pass: '${{ secrets.DOCKER_PASS }}'
-        skip-release: ${{ github.event_name == 'pull_request' }}
-        architecture: ${{ matrix.arch }}
-        collection: ${{ matrix.os }}
-        images: ${{ matrix.imgs }}
-
+    needs: sim
+    uses: hdl/containers/.github/workflows/common.yml@main
+    with:
+      key: osvb
+      submodules: recursive
+      skip-release: ${{ github.event_name == 'pull_request' }}
+    secrets:
+      gcr_token: '${{ secrets.GCR_JSON_KEY }}'
+      gh_token: '${{ github.token }}'
+      docker_user: '${{ secrets.DOCKER_USER }}'
+      docker_pass: '${{ secrets.DOCKER_PASS }}'
 
   cosim:
-    needs: [matrix, osvb]
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJson(needs.matrix.outputs.cosim) }}
-    name: cosim ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
-    steps:
-
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
-
-    - uses: ./utils/build-test-release
-      with:
-        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
-        gh_token: '${{ github.token }}'
-        docker_user: '${{ secrets.DOCKER_USER }}'
-        docker_pass: '${{ secrets.DOCKER_PASS }}'
-        skip-release: ${{ github.event_name == 'pull_request' }}
-        architecture: ${{ matrix.arch }}
-        collection: ${{ matrix.os }}
-        images: ${{ matrix.imgs }}
+    needs: osvb
+    uses: hdl/containers/.github/workflows/common.yml@main
+    with:
+      key: cosim
+      submodules: recursive
+      skip-release: ${{ github.event_name == 'pull_request' }}
+    secrets:
+      gcr_token: '${{ secrets.GCR_JSON_KEY }}'
+      gh_token: '${{ github.token }}'
+      docker_user: '${{ secrets.DOCKER_USER }}'
+      docker_pass: '${{ secrets.DOCKER_PASS }}'
