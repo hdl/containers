@@ -33,7 +33,8 @@ env:
   DOCKER_BUILDKIT: 1
 
 jobs:
-
+# TODO: Handle 'pull' in 'config.yml' (and command 'jobs').
+# Then, use the reusable workflow 'common.py' here.
 
   matrix:
     runs-on: ubuntu-latest
