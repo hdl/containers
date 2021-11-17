@@ -63,27 +63,25 @@ runs:
   - shell: bash
     run: ./utils/setup.sh ${{ inputs.architecture }}
 
-  - shell: bash
+  - shell: python
     run: |
       # [Pull,] Build [and Test]
-
-      # NOTE: the content of the shell if statement is executed if the command returns 0, thus,
-      # the logic of the evaluations in Python is negated.
-
-      if python3 -c 'exit("${{ inputs.pull }}".lower() in ["none","false","no"])'; then
-        pyHDLC pull -a ${{ inputs.architecture }} -c ${{ inputs.collection }} ${{ inputs.pull }}
-      fi
-
-      python3 -c 'exit("${{ inputs.skip-test }}".lower() in ["true","skip","yes"])' && RunTest='-q' || RunTest=''
-      pyHDLC build $RunTest -a ${{ inputs.architecture }} -c ${{ inputs.collection }} -d ${{ inputs.images }}
+      from subprocess import check_call
+      cargs = ['-a', '${{ inputs.architecture }}', '-c', '${{ inputs.collection }}']
+      if "${{ inputs.pull }}".lower() not in ["none","false","no"]:
+          check_call(['pyHDLC', 'pull'] + cargs + '${{ inputs.pull }}'.split(' '))
+      runtest = [] if "${{ inputs.skip-test }}".lower() in ["true","skip","yes"] else ['-q']
+      check_call(['pyHDLC', 'build'] + runtest + cargs + ['-d'] + '${{ inputs.images }}'.split(' '))
 
   - name: Release
     uses: ./utils/with-post-step
     with:
       main: |
+        # NOTE: the content of the shell if statement is executed if the command returns 0, thus,
+        # the logic of the evaluations in Python is negated.
         if python3 -c 'exit("${{ inputs.skip-release }}".lower() not in ["true","skip","yes"])'; then
-          echo "Skipping release..."
-          exit 0
+            echo "Skipping release..."
+            exit 0
         fi
         echo '${{ inputs.gcr_token }}' | docker login gcr.io -u _json_key --password-stdin
         echo '${{ inputs.gh_token }}' | docker login ghcr.io -u gha --password-stdin
