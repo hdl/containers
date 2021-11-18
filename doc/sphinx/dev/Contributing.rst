@@ -221,7 +221,7 @@ Furthermore, `hdl/smoke-test <https://github.com/hdl/smoke-tests>`__ is a submod
 There is a helper script in link:{repotree}utils/bin/dockerTest[`utils/bin/dockerTest`] for testing the images.
 It is used in CI but can be useful locally too:
 
-*  ``dockerTest <ARCHITECTURE> <BASE_OS> <IMAGE_NAME>[#<DIR_NAME>]``
+*  ``dockerTest -a <ARCHITECTURE> -c <BASE_OS> <IMAGE_NAME>[#<DIR_NAME>]``
    
    *  ARCHITECTURE: target architecture to build the images for.
    *  BASE_OS: set/collection of images (e.g. ``debian/bullseye``).
