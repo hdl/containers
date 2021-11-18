@@ -40,7 +40,7 @@ All the images are pushed to `gcr.io/hdl-containers <http://gcr.io/hdl-container
 
 Find usage guidelines and how to contribute in the following sections:
 
-- `User Guide <ug/index.html>`__
+- `User Guide <ug/index.html>`
 - `Development and contributing <dev/index.html>`__
 
 .. toctree::
@@ -51,3 +51,26 @@ Find usage guidelines and how to contribute in the following sections:
   ToDo
   Context
   References
+  
+.. toctree:: 
+  :caption: User Guide
+  :hidden:
+
+  ug/index
+  Fine-grained pulling <ug/FineGrained>
+  All-in-one images <ug/AllInOne>
+  Tools with GUI <ug/GUI>
+  USB/IP protocol support for Docker Desktop <ug/USBIP>
+  Desktop <ug/Desktop>
+
+.. toctree:: 
+  :caption: Development
+  :hidden:
+
+  dev/index
+
+.. toctree:: 
+  :hidden:
+
+
+  
