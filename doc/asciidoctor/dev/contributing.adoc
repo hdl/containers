@@ -187,7 +187,7 @@ FROM busybox
 COPY --from=REGISTRY/pkg/TOOL_NAME /TOOL_NAME /
 ----
 
-In fact, `pyHDLC test`] uses a similar dockerfile for running `.pkg.sh` scripts from link:{repotree}test/[`test/`].
+In fact, `pyHDLC test` uses a similar dockerfile for running `.pkg.sh` scripts from link:{repotree}test/[`test/`].
 See <<Test>>.
 
 Alternatively, or as a complement, https://github.com/wagoodman/dive[wagoodman/dive] is a lightweight tool with a nice
