@@ -121,13 +121,11 @@ Utils
 Build
 -----
 
-link:{repotree}utils/bin/dockerBuild[`dockerBuild`] helps building one or multiple images at once, by hiding
-all common options.
-It's a wrapper around command `build` of link:{repotree}utils/pyHDLC/cli.py[`pyHDLC.cli`]:
+``pyHDLC build`` helps building one or multiple images at once, by hiding all common options:
 
 .. code-block:: shell
 
-   usage: cli.py build [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY] [-f DOCKERFILE] [-t TARGET] [-a ARGIMG] [-p] [-d] Image [Image ...]
+   usage: pyHDLC build [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY] [-f DOCKERFILE] [-t TARGET] [-a ARGIMG] [-p] [-d] [-q] Image [Image ...]
 
    positional arguments:
      Image                 image name(s), without registry prefix.
@@ -156,6 +154,8 @@ It's a wrapper around command `build` of link:{repotree}utils/pyHDLC/cli.py[`pyH
                            (default: False)
      -d, --default         set default Dockerfile, Target and ArgImg options, given the image name(s).
                            (default: False)
+     -q, --test            test each image right after building it.
+                           (default: False)
 
 .. important::
 
@@ -174,7 +174,8 @@ their content from a container. For instance:
    FROM busybox
    COPY --from=REGISTRY/pkg/TOOL_NAME /TOOL_NAME /
 
-In fact, link:{repotree}utils/bin/dockerTest[`dockerTest`] uses a similar dockerfile for running ``.pkg.sh`` scripts from link:{repotree}test/[`test/`]. See <<Test>>.
+In fact, ``pyHDLC test`` uses a similar dockerfile for running ``.pkg.sh`` scripts from link:{repotree}test/[`test/`].
+See <<Test>>.
 
 Alternatively, or as a complement, `wagoodman/dive <https://github.com/wagoodman/dive>`__ is a lightweight tool with a nice terminal based GUI for exploring layers and contents of container images.
 It can be downloaded as a tarball/zipfile, or used as a container:
@@ -212,21 +213,41 @@ Test
 
 There is a test script in link:{repotree}test/[`test/`] for each image in this ecosystem, according to the following convention:
 
-*  Scripts for package images, ``/[ARCHITECTURE/][COLLECTION/]pkg/TOOL_NAME``, are named ``TOOL_NAME.pkg.sh``.
+*  Scripts for package images, ``/[ARCHITECTURE/][COLLECTION/]pkg/TOOL_NAME[/SUBNAME]``, are named ``TOOL_NAME[--SUBNAME].pkg.sh``.
 *  Scripts for other images, ``/[ARCHITECTURE/][COLLECTION/]NAME[/SUBNAME]``, are named ``NAME[--SUBNAME].sh``.
 *  Other helper scripts are named ``_*.sh``.
 
 Furthermore, `hdl/smoke-test <https://github.com/hdl/smoke-tests>`__ is a submodule of this repository (link:{repotree}test/[`test/smoke-test`]). Smoke-tests contains fine grained tests that cover the most important functionalities of the tools. Those are used in other packaging projects too. Therefore, container tests are expected to execute the smoke-tests corresponding to the tools available in the image, before executing more specific tests.
 
-There is a helper script in link:{repotree}utils/bin/dockerTest[`utils/bin/dockerTest`] for testing the images.
+``pyHDLC test`` allows testing the runnable and package images.
+
 It is used in CI but can be useful locally too:
 
-*  ``dockerTest -a <ARCHITECTURE> -c <BASE_OS> <IMAGE_NAME>[#<DIR_NAME>]``
+.. code-block:: shell
+
+   usage: pyHDLC test [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY] Image[#<DirName>] [Image[#<DirName>] ...]
    
-   *  ARCHITECTURE: target architecture to build the images for.
-   *  BASE_OS: set/collection of images (e.g. ``debian/bullseye``).
-   *  IMAGE_NAME: image name without the ``REGISTRY/[ARCHITECTURE/][COLLECTION/]`` prefix.
-   *  (optional) DIR_NAME: directory name inside the package image which needs to be copied to the temporary image for testing.
+   positional arguments:
+     Image                 image name(s), without registry prefix.
+   
+   optional arguments:
+     -h, --help            show this help message and exit
+     -a ARCHITECTURE, --arch ARCHITECTURE
+                           name of the architecture.
+                           (default: amd64)
+     -c COLLECTION, --collection COLLECTION
+                           name of the collection/subset of images.
+                           (default: debian/bullseye)
+     -r REGISTRY, --registry REGISTRY
+                           container image registry prefix.
+                           (default: gcr.io/hdl-containers)
+
+.. important::
+
+   ``DirName`` allows to optionally specify the name of the directory inside the package image which needs to be copied 
+   to the temporary image for testing.
+   By default, the escaped name of the image is used as the location.
+   Therefore, ``DirName`` is used exceptionally.
 
 Step by step checklist
 ======================
@@ -246,7 +267,7 @@ Step by step checklist
 
 *  Some tools are to be added to existing images which include several tools (coloured [maroon]#BROWN# in the <<Graphs>>). After creating the dockerfile where the corresponding package image is defined, add `COPY --from=$REGISTRY/pkg/TOOL_NAME` statements to the dockerfiles of multi-tool images.
 
-#. Build and test the dockerfile(s) locally. Use helper scripts from link:{repotree}.github/bin[`.github/bin`] as explained in <<Build>> and <<Test>>.
+#. Build and test the dockerfile(s) locally. Use helper scripts from link:{repotree}utils[`utils`], as explained in <<Build>> and <<Test>>.
 
 *  If a new tool was added, or a new image is to be generated, a test script needs to be added to link:{repotree}test/[`test/`]. See <<Test>> for naming guidelines.
 *  Be careful with the order. If you add a new tool and include it in one of the multi-tool images, the package image needs to be built first.
@@ -254,7 +275,7 @@ Step by step checklist
 #. Create or update workflow(s).
 
 *  For each tool or multi-tool image, a GitHub Actions workflow is added to link:{repotree}.github/workflows[`.github/workflows/`]. Find documentation at https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions[Workflow syntax for GitHub Actions]. Copying some of the existing workflows in this repo and adapting it is suggested.
-*  In each workflow, all the images produced from stages of the corresponding dockerfile are built, tested and pushed. Scripts from link:{repotree}.github/bin[`.github/bin`] are used.
+*  In each workflow, all the images produced from stages of the corresponding dockerfile are built, tested and pushed. Scripts from link:{repotree}utils[`utils`] are used.
 *  The workflow matrix is used for deciding which collections is each tool to be built for.
 
 #. Update the documentation.
