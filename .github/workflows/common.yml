@@ -82,7 +82,7 @@ jobs:
 
     - uses: ./utils/build-test-release
       with:
-        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
+        gcr_token: '${{ secrets.gcr_token }}'
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.docker_user }}'
         docker_pass: '${{ secrets.docker_pass }}'
