@@ -26,9 +26,9 @@ function run(cmd) {
     if ( stdout.length != 0 ) { console.log(`${stdout}`); }
     if ( stderr.length != 0 ) { console.error(`${stderr}`); }
     if (error) {
-      console.error(`exec error: ${error}`);
+      process.exitCode = error.code;
+      console.error(`${error}`);
     }
-    return error;
   });
 }
 
@@ -37,6 +37,6 @@ const key = process.env.INPUT_KEY.toUpperCase();
 if ( process.env[`STATE_${key}`] != undefined ) { // Are we in the 'post' step?
   run(process.env.INPUT_POST);
 } else { // Otherwise, this is the main step
-  run(process.env.INPUT_MAIN);
   console.log(`::save-state name=${key}::true`);
+  run(process.env.INPUT_MAIN);
 }
