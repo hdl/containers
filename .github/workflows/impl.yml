@@ -137,7 +137,7 @@ jobs:
           echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
           echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
           dockerRelease ${{ matrix.sys.arch }} ${{ matrix.sys.os }} \
-            impl/${{ matrix.task.arch }}
+            impl/${{ matrix.task.arch }} \
             impl/${{ matrix.task.prj }}
         post: for registry in gcr.io ghcr.io docker.io; do docker logout "$registry"; done
 
