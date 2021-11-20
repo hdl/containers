@@ -38,6 +38,7 @@ RUN apt-get update -qq \
     libx11-dev \
     libxft-dev \
     ninja-build \
+    wget \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
