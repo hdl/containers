@@ -24,3 +24,5 @@ set -e
 cd $(dirname "$0")
 
 ./formal.sh
+
+suprove
