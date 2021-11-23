@@ -312,11 +312,12 @@ def BuildImage(
         if target not in [None, '']:
             cmd += [f"--target={target}"]
 
-        dpath = Path(collection.replace("/", "-")) / f"{dockerfile}.dockerfile"
+        cpath = Path(collection.replace("/", "-"))
+        dpath = cpath / f"{dockerfile}.dockerfile"
         if not dpath.exists():
             raise Exception(f"Dockerfile <{dpath}> does not exist!")
 
-        cmd += ["-f", str(dpath), "."]
+        cmd += ["-f", str(dpath), str(cpath)]
 
         _exec(args=cmd, dry=dry, collapse=f"[Build] Build {imageName}")
 
