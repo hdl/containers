@@ -35,7 +35,8 @@ RUN apt-get update -qq \
     zlib1g-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && update-ca-certificates  \
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/* \
+ && curl https://bootstrap.pypa.io/pip/2.7/get-pip.py | python
 
 RUN mkdir /tmp/superprove && cd /tmp/superprove \
  && git clone --recursive https://github.com/sterin/super-prove-build . \
