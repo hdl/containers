@@ -29,6 +29,7 @@ RUN apt-get update -qq \
     binutils \
     cmake \
     ninja-build \
+    patch \
     python-setuptools \
     python-wheel-common \
     python-dev-is-python2 \
@@ -38,8 +39,11 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/* \
  && curl https://bootstrap.pypa.io/pip/2.7/get-pip.py | python
 
+COPY rm-system.patch /tmp/rm-system.patch
+
 RUN mkdir /tmp/superprove && cd /tmp/superprove \
  && git clone --recursive https://github.com/sterin/super-prove-build . \
+ && patch -p1 < /tmp/rm-system.patch \
  && mkdir build && cd build \
  && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -G Ninja .. \
  && ninja \
