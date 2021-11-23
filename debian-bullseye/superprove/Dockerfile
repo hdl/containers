@@ -45,11 +45,9 @@ RUN mkdir /tmp/superprove && cd /tmp/superprove \
  && ninja \
  && ninja package \
  && mkdir -p /opt/superprove/usr/local \
- && tar -C /opt/superprove/usr/local -xzf super_prove*.tar.gz --strip 1 \
- && echo '#!/usr/bin/env bash' > /opt/superprove/usr/local/bin/suprove \
- && echo 'tool=super_prove; if [ "$1" != "${1#+}" ]; then tool="${1#+}"; shift; fi' >> /opt/superprove/usr/local/bin/suprove \
- && echo 'exec ${tool}.sh "$@"' >> /opt/superprove/usr/local/bin/suprove \
- && chmod +x /opt/superprove/usr/local/bin/suprove
+ && tar -C /opt/superprove/usr/local -xzf super_prove*.tar.gz --strip 1
+
+COPY suprove /opt/superprove/usr/local/bin/suprove
 
 #---
 
