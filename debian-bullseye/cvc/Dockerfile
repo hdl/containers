@@ -24,24 +24,14 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 FROM $REGISTRY/build/build AS build
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    cmake \
-    libgmp-dev \
-    m4 \
-    patch \
-    python3-toml \
-    openjdk-11-jre-headless \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && update-ca-certificates  \
+ && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /tmp/cvc5 && cd /tmp/cvc5 \
- && curl -fsSL https://codeload.github.com/cvc5/cvc5/tar.gz/master | tar xzf - --strip-components=1 \
- && ./configure.sh --auto-download \
- && cd build \
- && make -j$(nproc) \
- && make DESTDIR=/opt/cvc install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
