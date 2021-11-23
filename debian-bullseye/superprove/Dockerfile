@@ -24,34 +24,15 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 FROM $REGISTRY/build/build AS build
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    binutils \
-    cmake \
-    ninja-build \
-    patch \
-    python-setuptools \
-    python-wheel-common \
-    python-dev-is-python2 \
-    zlib1g-dev \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && update-ca-certificates  \
+ && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/* \
- && curl https://bootstrap.pypa.io/pip/2.7/get-pip.py | python
+ && prepare
 
-COPY rm-system.patch /tmp/rm-system.patch
-
-RUN mkdir /tmp/superprove && cd /tmp/superprove \
- && git clone --recursive https://github.com/sterin/super-prove-build . \
- && patch -p1 < /tmp/rm-system.patch \
- && mkdir build && cd build \
- && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -G Ninja .. \
- && ninja \
- && ninja package \
- && mkdir -p /opt/superprove/usr/local \
- && tar -C /opt/superprove/usr/local -xzf super_prove*.tar.gz --strip 1
-
-COPY suprove /opt/superprove/usr/local/bin/suprove
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
