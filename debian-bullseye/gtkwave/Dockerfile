@@ -23,26 +23,15 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 FROM $REGISTRY/build/build AS build
 
-RUN apt-get update -qq \
- && apt-get -y install \
-   build-essential \
-   flex \
-   gawk \
-   gperf \
-   libbz2-dev \
-   libreadline-dev \
-   libffi-dev \
-   libgtk-3-dev \
-   liblzma-dev \
-   pkg-config \
-   subversion \
-   tcl-dev \
-   tk-dev \
- && mkdir /tmp/gtkwave && cd /tmp/gtkwave \
- && svn checkout svn://svn.code.sf.net/p/gtkwave/code/gtkwave3-gtk3 ./ \
- && ./configure --with-tk=/usr/lib --enable-gtk3 \
- && make -j$(nproc) \
- && make DESTDIR=/opt/gtkwave check install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && mkdir -p /usr/share/man/man1/ \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
@@ -53,14 +42,11 @@ COPY --from=build /opt/gtkwave /gtkwave
 
 FROM $REGISTRY/build/base
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    graphviz \
-    libgtk-3-bin \
-    libtcl8.6 \
-    libtk8.6 \
-    xdot \
- && apt-get autoclean -y && apt-get clean -y && apt-get autoremove -y \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && mkdir -p /usr/share/man/man1/ \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /opt/gtkwave /
