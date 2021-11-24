@@ -24,33 +24,15 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 FROM $REGISTRY/build/build AS build
 
-RUN mkdir -p /usr/share/man/man1/ \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && mkdir -p /usr/share/man/man1/ \
  && apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    autoconf \
-    binutils \
-    bison \
-    cmake \
-    flex \
-    libbison-dev \
-    libfl-dev \
-    libgmp-dev \
-    m4 \
-    python3-toml \
-    openjdk-11-jre-headless \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && update-ca-certificates  \
+ && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /tmp/pono && cd /tmp/pono \
- && curl -fsSL https://codeload.github.com/upscale-project/pono/tar.gz/master | tar xzf - --strip-components=1 \
- && ./contrib/setup-smt-switch.sh \
- && ./contrib/setup-btor2tools.sh \
- && ./configure.sh \
- && make -C build -j$(nproc) PREFIX=/usr/local/ \
- && mkdir -p /opt/pono/usr/local/bin /opt/pono/usr/local/lib \
- && cp build/pono /opt/pono/usr/local/bin/ \
- && cp build/libpono.so /opt/pono/usr/local/lib/
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
