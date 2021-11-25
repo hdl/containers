@@ -268,10 +268,10 @@ class CollectionMap:
 
             if item.cmd.upper() == "RUN" and len(item.flags) > 0:
                 _val = item.flags[0]
-                if _val.startswith("--mount=type="):
+                if _val.startswith("--mount=type=cache"):
                     stg.addDep(dfile.markOrigin(_val.split(",from=")[1].split(",")[0]))
-                else:
-                    raise Exception(f"Unknown RUN flag <{_val}>!")
+
+                continue
 
         if stg is None:
             raise Exception(f"No stages found in dockerfile <{dfilename}>!")
