@@ -212,6 +212,10 @@ class CollectionMap:
         debug: bool = False
     ):
         dfilename = Path(dfilepath.name).stem
+        dkey = dfilename
+        if dfilename == 'Dockerfile':
+            dkey = dfilepath.parent.name
+            dfilename = f"{dkey}/{dfilename}"
 
         if debug:
             print(f"  · {dfilename!s}")
@@ -256,12 +260,9 @@ class CollectionMap:
 
                 continue
 
-            if item.cmd.upper() == "COPY":
-                if "--from=" not in item.flags[0].lower():
-                    raise Exception(
-                        f"Second item of <{item.flags}> should be '--from=*'!"
-                    )
-                stg.addDep(dfile.markOrigin(item.flags[0][7:]))
+            if item.cmd.upper() == "COPY" and len(item.flags)>0:
+                if "--from=" in item.flags[0].lower():
+                    stg.addDep(dfile.markOrigin(item.flags[0][7:]))
 
                 continue
 
@@ -277,7 +278,7 @@ class CollectionMap:
 
         dfile.addStage(stg)
 
-        self.AddDockerfile(dfilename, dfile)
+        self.AddDockerfile(dkey, dfile)
 
 
 def GenerateMap(debug: bool = False):
@@ -290,8 +291,9 @@ def GenerateMap(debug: bool = False):
 
     print("[Map] Parse dockerfiles:")
 
-    for dfilepath in [x for x in CDIR.glob("*.dockerfile")]:
-        cmap.ParseDockerfile(dfilepath, debug)
+    for pattern in ["**/Dockerfile", "*.dockerfile"]:
+        for dfilepath in [x for x in CDIR.glob(pattern)]:
+            cmap.ParseDockerfile(dfilepath, debug)
 
     print("[Map] Extract list of images from 'jobs':")
 
