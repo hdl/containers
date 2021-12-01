@@ -1,3 +1,5 @@
+.. _colections:
+
 Collections and architectures
 #############################
 
@@ -38,14 +40,14 @@ However, the ``ARCHITECURE`` and ``COLLECTION`` are optional because:
 * Images for the default architecture are mirrored to image:https://img.shields.io/badge/-gcr.io/hdl--containers/COLLECTION/IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[] and image:https://img.shields.io/badge/-ghcr.io/hdl/COLLECTION/IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[].
 * Images of the default collection are mirrored to image:https://img.shields.io/badge/-gcr.io/hdl--containers/ARCHITECTURE/IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[] and image:https://img.shields.io/badge/-ghcr.io/hdl/ARCHITECTURE/IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[].
 * Images of the default collection for the default architecture are mirrored to https://hub.docker.com/u/hdlc[image:https://img.shields.io/badge/-docker.io/hdlc-555555.svg?longCache=true&style=flat-square&logo=Docker&logoColor=f2f1ef[title='Docker Hub']].
-* Images of the default collection for the default architecture which are not `build` or `pkg` are mirrored to image:https://img.shields.io/badge/-gcr.io/hdl--containers/IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[] and image:https://img.shields.io/badge/-ghcr.io/hdl/IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[].
+* Images of the default collection for the default architecture which are not ``build`` or ``pkg`` are mirrored to image:https://img.shields.io/badge/-gcr.io/hdl--containers/IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[] and image:https://img.shields.io/badge/-ghcr.io/hdl/IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[].
 
 .. important::
-  Image names and tags in this documentation are provided without the _registry prefix_.
-  Hence, one of the prefixes listed above needs to be used when actually pulling/using the images.
-  See `User Guide <link:ug/index.html>`__ for further details.
+   Image names and tags in this documentation are provided without the *registry prefix*.
+   Hence, one of the prefixes listed above needs to be used when actually pulling/using the images.
+   See `User Guide <ug/index.html>`__ for further details.
 
 .. important::
-  The table below shows the tools available in the default collection for the default architecture.
-  Some tools are available in a subset of collections or for a subset of architectures only.
-  Browse the registries and/or the Continuous Integration workflows for finding images available in collections other than the default.
+   The table below shows the tools available in the default collection for the default architecture.
+   Some tools are available in a subset of collections or for a subset of architectures only.
+   Browse the registries and/or the Continuous Integration workflows for finding images available in collections other than the default.

@@ -1,4 +1,4 @@
-.. CI:
+.. _continous-integration:
 
 Continuous Integration (CI)
 ###########################

@@ -8,7 +8,7 @@ As explained in link:../index.html#_tools_and_images[Tools and images] and in th
 multiple collections of images are provided.
 For each collection, a set of base images is provided, which are to be used for building and for runtime.
 These are defined in ``base.dockerfile``.
-See, for instance, link:{repotree}debian-bullseye/base.dockerfile[`debian-bullseye/base.dockerfile`].
+See, for instance, :ghsrc:`debian-bullseye/base.dockerfile <debian-bullseye/base.dockerfile>`.
 All the images in the ecosystem are based on these:
 
 *  OCIImage:build/base[] Debian Buster, Debian Bullseye or CentOS 7, with updated ``ca-certificates``, ``curl`` and Python 3.

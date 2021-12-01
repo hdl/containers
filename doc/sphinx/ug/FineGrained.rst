@@ -1,16 +1,16 @@
-.. FineGrained:
+.. _fine-grained:
 
 Fine-grained pulling
 ####################
 
-.. role:: lime
-
 .. note::
-   These images are coloured :lime:`#GREEN#`` in the link:../dev/index.html#_graphs[Graphs].
+
+   These images are coloured [lime]#GREEN# in the `Graph generation/parsing <dev:graph-generation>`].
 
 Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named ``REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]TOOL_NAME``.
 
 .. note:: 
+
    Since all the images in each collection are based on the same root image, pulling multiple images involves retrieving a few additional layers only. Therefore, this is the recommended approach for CI or other environments with limited resources.
 
 * `ghdl-yosys-blink: Makefile <https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile>`__: an example showcasing how to use this fine-grained approach with a makefile.

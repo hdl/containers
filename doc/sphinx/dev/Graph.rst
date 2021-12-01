@@ -1,4 +1,4 @@
-.. Graph:
+.. _graph-generation:
 
 Graph generation/parsing
 ########################
@@ -100,10 +100,10 @@ Reading dockerfiles
 
 One of the two sources of information for the graph are dockerfiles.
 As far as we are aware, there is no tool for generating a DAG from the stages of a dockerfile.
-However, https://github.com/asottile/dockerfile[asottile/dockerfile] is an interesting Python module which wraps
+However, `asottile/dockerfile <https://github.com/asottile/dockerfile>`__ is an interesting Python module which wraps
 docker/moby's golang parser.
 Hence, it can be used for getting the stages and ``COPY --from`` or ``--mount`` statements for generating the hierarchy.
-See link:{repotree}utils/pyHDLC/map.py[`utils/pyHDLC/map.py`].
+See :ghsrc:`utils/pyHDLC/map.py <utils/pyHDLC/map.py>`].
 
 Reading GitHub Actions workflow files
 =====================================

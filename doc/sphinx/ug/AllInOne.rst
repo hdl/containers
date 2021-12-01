@@ -1,10 +1,10 @@
-.. AllInOne:
+.. _all-in-one:
 
 All-in-one images
 #################
 
 .. note::
-   These images are coloured [maroon]#BROWN# in the link:../dev/index.html#_graphs[Graphs].
+   These images are coloured [maroon]#BROWN# in the `Graph generation/parsing <dev:graph-generation>`.
 
 Multiple tools from fine-grained images are included in larger images for common use cases. These are named ``REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]MAIN_USAGE``. This is the recommended approach for users who are less familiar with containers and want a quick replacement for full-featured virtual machines. Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one imags.
 

@@ -1,4 +1,4 @@
-.. Tasks:
+.. _tasks:
 
 Tasks
 #####
@@ -18,8 +18,8 @@ We should confirm that.
 *  Setup cross-triggering between CI workflows.
 Currently, all workflows are triggered at the same time.
 That produces some races and some tools are built twice in the same run (`moby/buildkit#1930 <https://github.com/moby/buildkit/issues/1930>`__).
-That is not critical because we do know how to solve it (link:{repotree}.github/trigger.sh[`.github/trigger.sh`]).
-We didn't implement it yet because we'd like it to be automatically sychronised with the graphs (see <<Graph generation/parsing>>).
+That is not critical because we do know how to solve it (:ghsrc:`github/trigger.sh <github/trigger.sh>`).
+We didn't implement it yet because we'd like it to be automatically sychronised with the graphs (see `Graph generation/parsing <graph-generation>`).
 
 *  Coordinate with Antmicro/SymbiFlow for using self-hosted runners provided by Google and their orchestration plumbing.
 

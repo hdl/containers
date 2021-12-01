@@ -1,4 +1,4 @@
-.. USBIP:
+.. _USBIP:
 
 USB/IP protocol support for Docker Desktop
 ##########################################
@@ -11,7 +11,7 @@ That prevents using arbitrary drivers inside the containers.
 As a result, most container users on Windows do install board programming tools through MSYS2 (see `hdl/MINGW-packages <https://github.com/hdl/MINGW-packages>`__).
 
 Nevertheless, USB/IP protocol allows passing USB device(s) from server(s) to client(s) over the network.
-As explained at https://www.kernel.org/doc/readme/tools-usb-usbip-README[kernel.org/doc/readme/tools-usb-usbip-README],
+As explained at `kernel.org/doc/readme/tools-usb-usbip-README <https://www.kernel.org/doc/readme/tools-usb-usbip-README>`__,
 on GNU/Linux, USB/IP is implemented as a few kernel modules with companion userspace tools.
 However, the default underlying Hyper-V VM machine (based on `Alpine Linux <https://alpinelinux.org/>`__) shipped with
 *Docker Desktop* (aka *docker-for-win*/*docker-for-mac*) does not include the required kernel modules.
@@ -37,10 +37,13 @@ USB over IP support.
    ./run.sh -v
 
 .. note::
+  
    For manually selecting configuration options, building and inserting modules, see detailed procedure in `gw0/docker-alpine-kernel-modules#usage <https://github.com/gw0/docker-alpine-kernel-modules#usage>`__.
 
 .. note::
+   
    Modules will be removed when the Hyper-V VM is restarted (i.e. when the host or *Docker Desktop* are restarted). For a *permanent* install, modules need to be copied to ``/lib/modules`` in the underlying VM, and ``/stc/modules`` needs to be configured accordingly. Use ``$(command -v winpty) docker run --rm -it --privileged --pid=host alpine nsenter -t 1 -m -u -n -i sh`` to access a shell with full permissions on the VM.
 
 .. note::
+   
    USB/IP is supported in Renode too. See `renode.rtfd.io/en/latest/tutorials/usbip <https://renode.readthedocs.io/en/latest/tutorials/usbip.html>`__.

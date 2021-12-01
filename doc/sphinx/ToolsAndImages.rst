@@ -1,3 +1,5 @@
+.. _tools-and-images:
+
 Tools and images
 ################
 
@@ -7,6 +9,7 @@ However, some specific tools are *_not_* built from sources, but installed throu
 Those are marked with ``!`` in the table below.
 
 .. note::
+  
   Package images are not to be used for executing the tools, but for composing images including multiple resources.
   See `Development: Package images <dev/index.html#_package_images>`__ for further details.
 

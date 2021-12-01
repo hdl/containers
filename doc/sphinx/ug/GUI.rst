@@ -1,4 +1,4 @@
-.. GUI:
+.. _GUI:
 
 Tools with GUI
 ##############
@@ -24,3 +24,4 @@ image::x11docker_klayout.gif[x11docker_klayout, align="center"]
    :alt: '#img-x11docker'
    :height: 22
    :target: https://hub.docker.com/u/hdlc 
+   
