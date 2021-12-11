@@ -67,7 +67,11 @@ Find usage guidelines and how to contribute in the following sections:
   :caption: Development
   :hidden:
 
-  dev/index
+  dev/Contributing
+  Continuous Integration <dev/CI>
+  Tasks <dev/Tasks>
+  Credentials <dev/Credentials>
+  Graph Generation <dev/Graph>
 
 .. toctree:: 
   :hidden:

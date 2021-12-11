@@ -1,4 +1,4 @@
-.. _desktop:
+.. _UserGuide:desktop:
 
 Desktop
 #######
@@ -69,5 +69,5 @@ Serial (COM) devices can be shared with open source tools. On the one hand, `hub
 
 It might be possible to replace ``hub4com`` with `pyserial/pyserial <https://github.com/pyserial/pyserial>`__. However, we did not test it.
 
-* `pyserial.readthedocs.io/en/latest/examples <https://pyserial.readthedocs.io/en/latest/examples.html#single-port-tcp-ip-serial-bridge-rfc-2217>`__
+* `pyserial.rtfd.io: Single-port TCP/IP - serial bridge (RFC 2217) <https://pyserial.readthedocs.io/en/latest/examples.html#single-port-tcp-ip-serial-bridge-rfc-2217>`__
 * `espressif/esp-idf#204 <https://github.com/espressif/esp-idf/issues/204>`__

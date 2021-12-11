@@ -1,3 +1,5 @@
+.. _Development:contributing:
+
 Contributing
 ############
 

@@ -1,4 +1,4 @@
-.. _all-in-one:
+.. _UserGuide:all-in-one:
 
 All-in-one images
 #################

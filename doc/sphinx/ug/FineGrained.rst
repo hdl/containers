@@ -1,11 +1,11 @@
-.. _fine-grained:
+.. _UserGuide:fine-grained:
 
 Fine-grained pulling
 ####################
 
 .. note::
 
-   These images are coloured [lime]#GREEN# in the `Graph generation/parsing <dev:graph-generation>`].
+   These images are coloured [lime]#GREEN# in the :ref:`Graph generation/parsing <Development:graph-generation>`].
 
 Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named ``REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]TOOL_NAME``.
 

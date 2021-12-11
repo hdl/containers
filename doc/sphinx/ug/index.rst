@@ -1,4 +1,4 @@
-.. ug/index:
+.. _UserGuide:
 
 HDLC: User Guide
 ################

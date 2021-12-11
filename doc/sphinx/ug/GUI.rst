@@ -1,4 +1,4 @@
-.. _GUI:
+.. _UserGuide:GUI:
 
 Tools with GUI
 ##############
@@ -20,7 +20,7 @@ Users of GTKWave, KLayout, nextpnr and other tools will likely want to try x11do
 [link=img/x11docker_klayout.gif]
 image::x11docker_klayout.gif[x11docker_klayout, align="center"]
 
-.. |SHIELD:WorkflowTest| image:: https://img.shields.i
+.. |SHIELD:WorkflowTest| image:: 
    :alt: '#img-x11docker'
    :height: 22
    :target: https://hub.docker.com/u/hdlc 

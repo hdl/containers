@@ -45,7 +45,7 @@ However, the ``ARCHITECURE`` and ``COLLECTION`` are optional because:
 .. important::
    Image names and tags in this documentation are provided without the *registry prefix*.
    Hence, one of the prefixes listed above needs to be used when actually pulling/using the images.
-   See `User Guide <ug/index.html>`__ for further details.
+   See :ref:`User Guide <UserGuide>` for further details.
 
 .. important::
    The table below shows the tools available in the default collection for the default architecture.
