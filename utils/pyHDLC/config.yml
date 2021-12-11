@@ -33,6 +33,8 @@ anchors:
     dockerfile: nextpnr
   <<: &OSVBDockerfile
     dockerfile: osvb
+  <<: &SymbiFlowDockerfile
+    dockerfile: symbiflow
   <<: &SysDebianBullseyeAmd64
     debian/bullseye:
       - amd64
@@ -108,6 +110,14 @@ defaults:
       argimg: sim/octave-slim
     # SuperProve
     pkg/superprove: *EmptyPkgTarget
+    # SymbiFlow:
+    symbiflow/xc7/base:  { <<: *SymbiFlowDockerfile, target: xc7-base }
+    symbiflow/xc7/a50t:  { <<: *SymbiFlowDockerfile, target: a50t     }
+    symbiflow/xc7/a100t: { <<: *SymbiFlowDockerfile, target: a100t    }
+    symbiflow/xc7/a200t: { <<: *SymbiFlowDockerfile, target: a200t    }
+    symbiflow/xc7/z010:  { <<: *SymbiFlowDockerfile, target: z010     }
+    symbiflow/xc7:       { <<: *SymbiFlowDockerfile, target: xc7      }
+    symbiflow/eos-s3:    { <<: *SymbiFlowDockerfile, target: eos-s3   }
     # SymbiYosys
     pkg/symbiyosys: *EmptyPkgTarget
     # Yices2
@@ -136,17 +146,19 @@ jobs:
     yosys:          *SysDebianAmd64
 
   pkgonly:
-    boolector:      *SysDebianAmd64
-    cvc:            *SysDebianAmd64
-    pono:           *SysDebianAmd64
-    superprove:     *SysDebianAmd64
-    symbiyosys:     *SysDebianAmd64
-    yices2:         *SysDebianAmd64
-    z3:             *SysDebianAmd64
+    boolector:  *SysDebianAmd64
+    cvc:        *SysDebianAmd64
+    pono:       *SysDebianAmd64
+    superprove: *SysDebianAmd64
+    symbiyosys: *SysDebianAmd64
+    yices2:     *SysDebianAmd64
+    z3:         *SysDebianAmd64
 
   runonly:
-    prog:           *SysDebianAmd64
-    sim:            *SysDebianAmd64
+    conda:              *SysDebianBullseyeAmd64
+    prog:               *SysDebianAmd64
+    sim:                *SysDebianAmd64
+    symbiflow/xc7/base: *SysDebianBullseyeAmd64
 
   custom:
     base:
@@ -228,3 +240,15 @@ jobs:
         - prj: scipy
         - prj: octave
       sys: *SysDebianAmd64
+    symbiflow-xc7:
+      images:
+        - symbiflow/xc7
+        - symbiflow/xc7/a50t
+        - symbiflow/xc7/a100t
+        - symbiflow/xc7/a200t
+        - symbiflow/xc7/z010
+      sys: *SysDebianBullseyeAmd64
+    symbiflow-eos-s3:
+      images:
+        - symbiflow/eos-s3
+      sys: *SysDebianBullseyeAmd64

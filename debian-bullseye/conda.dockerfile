@@ -18,38 +18,25 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian-buster'
+ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 #---
 
-FROM $REGISTRY/miniconda3
-
-ENV INSTALL_DIR="/opt/symbiflow"
-ENV FPGA_FAM="eos-s3"
+FROM $REGISTRY/build/base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    build-essential \
-    cmake \
     xz-utils \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /
+ENV PREFIX=/usr/local
 
-RUN git clone https://github.com/SymbiFlow/symbiflow-examples
-
-RUN cd symbiflow-examples \
- && conda env create -f ./${FPGA_FAM}/environment.yml
-
-RUN mkdir -p ${INSTALL_DIR}/${FPGA_FAM}/install \
- && wget -qO- https://quicklogic-my.sharepoint.com/:u:/p/kkumar/EWuqtXJmalROpI2L5XeewMIBRYVCY8H4yc10nlli-Xq79g?download=1 | tar -xJ -C ${INSTALL_DIR}/${FPGA_FAM}/
-
-ENV PATH="$INSTALL_DIR/$FPGA_FAM/install/bin:/opt/conda/envs/${FPGA_FAM}/bin/:${PATH}"
-
-COPY ./docker-entrypoint.sh-symbiflow /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
-CMD ["bash"]
+RUN curl -fsSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh > conda_installer.sh \
+ && chmod +x conda_installer.sh \
+ && ./conda_installer.sh -u -b -p "$PREFIX" \
+ && rm conda_installer.sh \
+ && find "$PREFIX" -follow -type f -name '*.a' -delete \
+ && find "$PREFIX" -follow -type f -name '*.js.map' -delete \
+ && conda clean -afy \
+ && echo 'source /usr/local/etc/profile.d/conda.sh' >> ~/.bashrc
