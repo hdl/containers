@@ -33,20 +33,22 @@ anchors:
     dockerfile: nextpnr
   <<: &OSVBDockerfile
     dockerfile: osvb
-  <<: &SysDebianAmd64
-    debian/buster:
-      - amd64
+  <<: &SysDebianBullseyeAmd64
     debian/bullseye:
       - amd64
-  <<: &SysDebianDefaultArchSet
+  <<: &SysDebianAmd64
+    <<: *SysDebianBullseyeAmd64
     debian/buster:
       - amd64
+  <<: &SysDebianDefaultArchSet
+    <<: *SysDebianAmd64
     debian/bullseye:
       - amd64
       - arm64v8
       - ppc64le
       - s390x
       #- riscv64 ! for now, only 'sid-slim' is available in https://hub.docker.com/r/riscv64/debian
+
 
 defaults:
   images:
@@ -117,7 +119,7 @@ defaults:
 jobs:
 
   default:
-    apicula:        { debian/bullseye: [amd64] }
+    apicula:        *SysDebianBullseyeAmd64
     arachne-pnr:    *SysDebianDefaultArchSet
     icestorm:       *SysDebianDefaultArchSet
     iverilog:       *SysDebianAmd64
@@ -126,7 +128,7 @@ jobs:
     magic:          *SysDebianDefaultArchSet
     netgen:         *SysDebianDefaultArchSet
     openfpgaloader: *SysDebianDefaultArchSet
-    prjoxide:       { debian/bullseye: [amd64] }
+    prjoxide:       *SysDebianBullseyeAmd64
     prjtrellis:     *SysDebianAmd64
     verilator:      *SysDebianDefaultArchSet
     vtr:            *SysDebianAmd64
