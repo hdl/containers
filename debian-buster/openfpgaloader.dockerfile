@@ -28,10 +28,11 @@ RUN apt-get update -qq \
     cmake \
     libftdi1-2 \
     libftdi1-dev \
-    libhidapi-libusb0 \
+    libhidapi-hidraw0 \
     libhidapi-dev \
     libudev-dev \
     pkg-config \
+    zlib1g-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
@@ -59,8 +60,8 @@ RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     libftdi1-2 \
     libhidapi-hidraw0 \
-    libhidapi-libusb0 \
     udev \
+    zlib1g \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
