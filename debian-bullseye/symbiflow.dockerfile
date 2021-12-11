@@ -29,31 +29,31 @@ RUN mkdir symbiflow-examples \
  && conda env create -f ./symbiflow-examples/xc7/environment.yml \
  && rm -rf symbiflow-examples
 
-RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/459/20211116-000105/symbiflow-arch-defs-install-ef6fff3c.tar.xz | tar -xJC /usr/local
+RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs-gha/symbiflow-toolchain-latest | xargs curl -fsSL | tar -xJC /usr/local
 
 #---
 
 FROM $REGISTRY/symbiflow/xc7/toolchain AS a50t
 
-RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/459/20211116-000105/symbiflow-arch-defs-xc7a50t_test-ef6fff3c.tar.xz | tar -xJC /usr/local
+RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs-gha/symbiflow-xc7a50t_test-latest | xargs curl -fsSL | tar -xJC /usr/local
 
 #---
 
 FROM $REGISTRY/symbiflow/xc7/toolchain AS a100t
 
-RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/459/20211116-000105/symbiflow-arch-defs-xc7a100t_test-ef6fff3c.tar.xz | tar -xJC /usr/local
+RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs-gha/symbiflow-xc7a100t_test-latest | xargs curl -fsSL | tar -xJC /usr/local
 
 #---
 
 FROM $REGISTRY/symbiflow/xc7/toolchain AS a200t
 
-RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/459/20211116-000105/symbiflow-arch-defs-xc7a200t_test-ef6fff3c.tar.xz | tar -xJC /usr/local
+RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs-gha/symbiflow-xc7a200t_test-latest | xargs curl -fsSL | tar -xJC /usr/local
 
 #---
 
 FROM $REGISTRY/symbiflow/xc7/toolchain AS z010
 
-RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/459/20211116-000105/symbiflow-arch-defs-xc7z010_test-ef6fff3c.tar.xz | tar -xJC /usr/local
+RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs-gha/symbiflow-xc7z010_test-latest | xargs curl -fsSL | tar -xJC /usr/local
 
 #---
 
