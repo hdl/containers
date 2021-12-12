@@ -33,12 +33,6 @@ RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod
 
 #---
 
-FROM $REGISTRY/symbiflow/xc7/base AS xc7
-
-RUN for PKG in xc7a50t_test xc7a100t_test xc7a200t_test xc7z010_test; do curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/459/20211116-000105/symbiflow-arch-defs-${PKG}-ef6fff3c.tar.xz | tar -xJC /usr/local; done
-
-#---
-
 FROM $REGISTRY/symbiflow/xc7/base AS a50t
 
 RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/459/20211116-000105/symbiflow-arch-defs-xc7a50t_test-ef6fff3c.tar.xz | tar -xJC /usr/local
@@ -60,6 +54,21 @@ RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod
 FROM $REGISTRY/symbiflow/xc7/base AS z010
 
 RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/459/20211116-000105/symbiflow-arch-defs-xc7z010_test-ef6fff3c.tar.xz | tar -xJC /usr/local
+
+#---
+
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/symbiflow/xc7/a50t AS xc7-a50t
+FROM $REGISTRY/symbiflow/xc7/a100t AS xc7-a100t
+FROM $REGISTRY/symbiflow/xc7/a200t AS xc7-a200t
+FROM $REGISTRY/symbiflow/xc7/z010 AS xc7-z010
+
+FROM $REGISTRY/symbiflow/xc7/base AS xc7
+
+COPY --from=xc7-a50t /usr/local/share/symbiflow/arch/xc7a50t_test /usr/local/share/symbiflow/arch/xc7a50t_test
+COPY --from=xc7-a100t /usr/local/share/symbiflow/arch/xc7a100t_test /usr/local/share/symbiflow/arch/xc7a100t_test
+COPY --from=xc7-a200t /usr/local/share/symbiflow/arch/xc7a200t_test /usr/local/share/symbiflow/arch/xc7a200t_test
+COPY --from=xc7-z010 /usr/local/share/symbiflow/arch/xc7z010_test /usr/local/share/symbiflow/arch/xc7z010_test
 
 #---
 

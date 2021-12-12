@@ -159,6 +159,7 @@ jobs:
     prog:               *SysDebianAmd64
     sim:                *SysDebianAmd64
     symbiflow/xc7/base: *SysDebianBullseyeAmd64
+    symbiflow/xc7:      *SysDebianBullseyeAmd64
 
   custom:
     base:
@@ -240,13 +241,12 @@ jobs:
         - prj: scipy
         - prj: octave
       sys: *SysDebianAmd64
-    symbiflow-xc7:
+    symbiflow-xc7-devices:
       images:
-        - symbiflow/xc7
-        - symbiflow/xc7/a50t
-        - symbiflow/xc7/a100t
-        - symbiflow/xc7/a200t
-        - symbiflow/xc7/z010
+        - [ symbiflow/xc7/a50t  ]
+        - [ symbiflow/xc7/a100t ]
+        - [ symbiflow/xc7/a200t ]
+        - [ symbiflow/xc7/z010  ]
       sys: *SysDebianBullseyeAmd64
     symbiflow-eos-s3:
       images:
