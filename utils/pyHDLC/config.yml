@@ -116,6 +116,7 @@ defaults:
     symbiflow/xc7/a100t:     { <<: *SymbiFlowDockerfile, target: a100t         }
     symbiflow/xc7/a200t:     { <<: *SymbiFlowDockerfile, target: a200t         }
     symbiflow/xc7/z010:      { <<: *SymbiFlowDockerfile, target: z010          }
+    symbiflow/xc7/z020:      { <<: *SymbiFlowDockerfile, target: z020          }
     symbiflow/xc7:           { <<: *SymbiFlowDockerfile, target: xc7           }
     symbiflow/eos-s3:        { <<: *SymbiFlowDockerfile, target: eos-s3        }
     # SymbiYosys
@@ -247,6 +248,7 @@ jobs:
         - [ symbiflow/xc7/a100t ]
         - [ symbiflow/xc7/a200t ]
         - [ symbiflow/xc7/z010  ]
+        - [ symbiflow/xc7/z020  ]
       sys: *SysDebianBullseyeAmd64
     symbiflow-eos-s3:
       images:
