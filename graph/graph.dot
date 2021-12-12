@@ -31,6 +31,7 @@ digraph G {
     m_impl
     m_formal
     m_asic
+    m_symbiflow
   }
 
   # Images
@@ -109,6 +110,15 @@ digraph G {
       "sim/scipy"
       "sim/octave-slim"
       "sim/octave"
+      "conda"
+      "symbiflow/xc7/toolchain"
+      "symbiflow/xc7/a50t"
+      "symbiflow/xc7/a100t"
+      "symbiflow/xc7/a200t"
+      "symbiflow/xc7/z010"
+      "symbiflow/xc7/z020"
+      "symbiflow/xc7"
+      "symbiflow/eos-s3"
     }
   }
 
@@ -160,6 +170,10 @@ digraph G {
     "build/build"
     "build/base"
   } -> m_asic;
+
+  {
+    "build/base"
+  } -> m_symbiflow;
 
   # Generated images
 
@@ -265,6 +279,21 @@ digraph G {
       "pkg/magic"
       "pkg/netgen"
     };
+  }
+
+  subgraph cluster_symbiflow {
+    label = "SymbiFlow";
+    m_symbiflow -> {
+      "conda"
+      "symbiflow/xc7/toolchain"
+      "symbiflow/xc7/a50t"
+      "symbiflow/xc7/a100t"
+      "symbiflow/xc7/a200t"
+      "symbiflow/xc7/z010"
+      "symbiflow/xc7/z020"
+      "symbiflow/xc7"
+      "symbiflow/eos-s3"
+    }
   }
 
 }
