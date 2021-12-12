@@ -22,7 +22,7 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 #---
 
-FROM $REGISTRY/conda AS xc7-base
+FROM $REGISTRY/conda AS xc7-toolchain
 
 RUN mkdir symbiflow-examples \
  && curl -fsSL https://codeload.github.com/SymbiFlow/symbiflow-examples/tar.gz/master | tar xzf - -C symbiflow-examples --strip-components=1 \
@@ -33,25 +33,25 @@ RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod
 
 #---
 
-FROM $REGISTRY/symbiflow/xc7/base AS a50t
+FROM $REGISTRY/symbiflow/xc7/toolchain AS a50t
 
 RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/459/20211116-000105/symbiflow-arch-defs-xc7a50t_test-ef6fff3c.tar.xz | tar -xJC /usr/local
 
 #---
 
-FROM $REGISTRY/symbiflow/xc7/base AS a100t
+FROM $REGISTRY/symbiflow/xc7/toolchain AS a100t
 
 RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/459/20211116-000105/symbiflow-arch-defs-xc7a100t_test-ef6fff3c.tar.xz | tar -xJC /usr/local
 
 #---
 
-FROM $REGISTRY/symbiflow/xc7/base AS a200t
+FROM $REGISTRY/symbiflow/xc7/toolchain AS a200t
 
 RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/459/20211116-000105/symbiflow-arch-defs-xc7a200t_test-ef6fff3c.tar.xz | tar -xJC /usr/local
 
 #---
 
-FROM $REGISTRY/symbiflow/xc7/base AS z010
+FROM $REGISTRY/symbiflow/xc7/toolchain AS z010
 
 RUN curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/459/20211116-000105/symbiflow-arch-defs-xc7z010_test-ef6fff3c.tar.xz | tar -xJC /usr/local
 
@@ -63,7 +63,7 @@ FROM $REGISTRY/symbiflow/xc7/a100t AS xc7-a100t
 FROM $REGISTRY/symbiflow/xc7/a200t AS xc7-a200t
 FROM $REGISTRY/symbiflow/xc7/z010 AS xc7-z010
 
-FROM $REGISTRY/symbiflow/xc7/base AS xc7
+FROM $REGISTRY/symbiflow/xc7/toolchain AS xc7
 
 COPY --from=xc7-a50t /usr/local/share/symbiflow/arch/xc7a50t_test /usr/local/share/symbiflow/arch/xc7a50t_test
 COPY --from=xc7-a100t /usr/local/share/symbiflow/arch/xc7a100t_test /usr/local/share/symbiflow/arch/xc7a100t_test

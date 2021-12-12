@@ -22,4 +22,22 @@ cd $(dirname "$0")
 
 ./_env.sh
 
+ls -lah /usr/local/bin/python
+
+which ql_symbiflow
+which symbiflow_analysis
+which symbiflow_generate_constraints
+which symbiflow_generate_fasm2bels
+which symbiflow_pack
+which symbiflow_place
+which symbiflow_route
+which symbiflow_synth
+which symbiflow_write_bitheader
+which symbiflow_write_bitstream
+which symbiflow_write_fasm
+which symbiflow_write_fasm2bels
+which symbiflow_write_jlink
+which symbiflow_write_openocd
+which vpr_common
+
 ./_todo.sh

@@ -22,4 +22,6 @@ cd $(dirname "$0")
 
 ./_env.sh
 
+which conda
+
 ./_todo.sh

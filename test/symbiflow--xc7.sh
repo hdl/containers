@@ -22,4 +22,10 @@ cd $(dirname "$0")
 
 ./_env.sh
 
+./symbiflow--xc7--toolchain.sh
+./symbiflow--xc7--a50t.sh
+./symbiflow--xc7--a100t.sh
+./symbiflow--xc7--a200t.sh
+./symbiflow--xc7--z010.sh
+
 ./_todo.sh

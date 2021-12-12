@@ -30,10 +30,10 @@ on:
 
 jobs:
 
-  xc7-base:
+  xc7-toolchain:
     uses: hdl/containers/.github/workflows/common.yml@main
     with:
-      key: symbiflow/xc7/base
+      key: symbiflow/xc7/toolchain
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
       gcr_token: '${{ secrets.GCR_JSON_KEY }}'
@@ -42,7 +42,7 @@ jobs:
       docker_pass: '${{ secrets.DOCKER_PASS }}'
 
   xc7-devices:
-    needs: [ xc7-base ]
+    needs: [ xc7-toolchain ]
     uses: hdl/containers/.github/workflows/common.yml@main
     with:
       key: symbiflow-xc7-devices
