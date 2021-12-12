@@ -52,12 +52,27 @@ GHAStatus:apicula[]
 * {blank}
 +
 --
+GHAStatus:arachne-pnr[]
+--
+* {blank}
++
+--
 GHAStatus:ghdl-yosys-plugin[]
 --
 * {blank}
 +
 --
 GHAStatus:icestorm[]
+--
+* {blank}
++
+--
+GHAStatus:nextpnr[]
+--
+* {blank}
++
+--
+GHAStatus:openfpgaloader[]
 --
 * {blank}
 +
@@ -72,22 +87,12 @@ GHAStatus:prjtrellis[]
 * {blank}
 +
 --
+GHAStatus:symbiflow[]
+--
+* {blank}
++
+--
 GHAStatus:yosys[]
---
-* {blank}
-+
---
-GHAStatus:nextpnr[]
---
-* {blank}
-+
---
-GHAStatus:arachne-pnr[]
---
-* {blank}
-+
---
-GHAStatus:openfpgaloader[]
 --
 
 
