@@ -88,7 +88,7 @@ GHAStatus:prjtrellis[]
 * {blank}
 +
 --
-GHAStatus:symbiflow[]
+GHAStatus:SymbiFlow[]
 --
 * {blank}
 +
