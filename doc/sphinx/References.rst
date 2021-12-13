@@ -3,10 +3,9 @@
 References
 ##########
 
-* `Haskell Dockerfile Linter <https://github.com/hadolint/hadolint[hadolint/hadolint>`__ 
+* `hadolint/hadolint <https://github.com/hadolint/hadolint>`__: Haskell Dockerfile Linter
 * SymbiFlow:
 
-  * `symbiflow-arch-defs-gha <https://console.cloud.google.com/storage/browser/symbiflow-arch-defs-gha;tab=objects>`__
   * `SymbiFlow/symbiflow-examples <https://github.com/SymbiFlow/symbiflow-examples>`__
   * `SymbiFlow/make-env <https://github.com/SymbiFlow/make-env>`__
 
@@ -35,6 +34,8 @@ References
 * `vmunoz82/eda_tools <https://github.com/vmunoz82/eda_tools>`__
 * `eine/elide <https://github.com/eine/elide/tree/master/elide/docker>`__
 * `cdsteinkuehler/QuartusBuildVMs <https://github.com/cdsteinkuehler/QuartusBuildVMs>`__
+* `ghdl/setup-ghdl-ci <https://github.com/ghdl/setup-ghdl-ci>`__
+* `hackfin/ghdl-cross.mk <https://github.com/hackfin/ghdl-cross.mk>`__
 
 ASIC
 ====
@@ -44,15 +45,6 @@ ASIC
 * `RISC-V bring-up tracker <https://github.com/carlosedp/riscv-bringup>`__
 * `A Step-by-Step Example: Layout of a CMOS Inverter Using SkyWater Technology (SKW) 130nm Process 
 <https://docs.google.com/document/d/1hSLKsz9xcEJgAMmYYer5cDwvPqas9_JGRUAgEORx1Yw>`__
-
-GHDL
-====
-
-* `ghdl/docker <https://github.com/ghdl/docker>`__
-* `ghdl/setup-ghdl-ci <https://github.com/ghdl/setup-ghdl-ci>`__
-* `dbhi/qus <https://github.com/dbhi/qus>`__
-* `dbhi/docker <https://github.com/dbhi/docker>`__
-* `hackfin/ghdl-cross.mk <https://github.com/hackfin/ghdl-cross.mk>`__
 
 Google Container Regisry (GCR)
 ==============================
