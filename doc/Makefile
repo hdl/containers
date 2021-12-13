@@ -74,3 +74,15 @@ map:
 	  -w //wrk/utils \
 	  hdlc/doc:pyHDLC \
 	  sh -c 'pip3 install -e .; python3 pyHDLC/map.py'
+
+SPHINXOPTS    =
+SPHINXBUILD   = sphinx-build
+PAPER         =
+BUILDDIR      = _build
+
+PAPEROPT_a4     = -D latex_paper_size=a4
+PAPEROPT_letter = -D latex_paper_size=letter
+ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees -T -D language=en $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
+
+%:
+	cd sphinx && $(SPHINXBUILD) -b $@ $(ALLSPHINXOPTS) $(BUILDDIR)/$@
