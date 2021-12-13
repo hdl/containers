@@ -37,7 +37,9 @@ env:
 
 jobs:
 
-  asciidoc:
+
+  images:
+    if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
     runs-on: ubuntu-latest
     steps:
 
@@ -45,6 +47,23 @@ jobs:
 
     - name: Build hdlc/doc images
       run: make -C doc asciidoctor-py pyHDLC
+
+    - name: Push container images
+      uses: ./utils/with-post-step
+      with:
+        main: |
+          echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
+          docker push hdlc/doc:asciidoctor-py
+          docker push hdlc/doc:pyHDLC
+        post: docker logout docker.io
+
+
+  asciidoc:
+    needs: images
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
 
     - name: Build site
       run: |
@@ -66,13 +85,3 @@ jobs:
         git config --local user.name "GHA"
         git commit -am "update ${{ github.sha }}"
         git push -u origin +HEAD:gh-pages
-
-    - name: Push container images
-      if: github.event_name != 'pull_request'
-      uses: ./utils/with-post-step
-      with:
-        main: |
-          echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
-          docker push hdlc/doc:asciidoctor-py
-          docker push hdlc/doc:pyHDLC
-        post: docker logout docker.io
