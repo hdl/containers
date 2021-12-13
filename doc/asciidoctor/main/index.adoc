@@ -3,7 +3,7 @@ include::../attrs.adoc[]
 include::../attrs.index.adoc[]
 :toc-title: HDL Containers
 :imagesdir: img
-:favicon: img/icon.png
+:favicon: ../logo/icon.png
 
 [.text-center]
 include::../shields.containers.adoc[]

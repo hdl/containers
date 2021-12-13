@@ -1,2 +1,2 @@
 :imagesdir: ../img
-:favicon: ../img/icon.png
+:favicon: ../../logo/icon.png
