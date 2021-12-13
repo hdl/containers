@@ -6,7 +6,7 @@ Contributing
 Introduction
 ============
 
-As explained in link:../index.html#_tools_and_images[Tools and images] and in the link:../ug/index.html[User Guide],
+As explained in :ref:`Tools and images <tools-and-images>` and in the :ref:`User Guide <UserGuide>`,
 multiple collections of images are provided.
 For each collection, a set of base images is provided, which are to be used for building and for runtime.
 These are defined in ``base.dockerfile``.
@@ -48,7 +48,15 @@ Graphs
 
 Understanding how all the pieces in this project fit together might be daunting for newcomers. Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem. Subdir link:{repotree}graph/[`graph/`] contains the sources of `directed graphs <https://en.wikipedia.org/wiki/Directed_graph>`__, where the relations between workflows, dockerfiles, images and tests are shown.
 
-(`Graphviz <https://graphviz.org/>`__)'s ``digraph`` format is used, hence, graphs can be rendered to multiple image formats. The SVG output is shown in xref:img-graph[xrefstyle=short] describes which images are created in each map. See the details in the figure corresponding to the name of the subgraph: Base (xref:img-graph-base[xrefstyle=short]), Sim (xref:img-graph-sim[xrefstyle=short]), Synth (xref:img-graph-synth[xrefstyle=short]), Impl (xref:img-graph-impl[xrefstyle=short]), Formal (xref:img-graph-formal[xrefstyle=short]) and , ASIC (xref:img-graph-asic[xrefstyle=short]). Multiple colours and arrow types are used for describing different dependency types. All of those are explained in the legend: xref:img-graph-legend[xrefstyle=short].
+(`Graphviz <https://graphviz.org/>`__)'s ``digraph`` format is used, hence, graphs can be rendered to multiple image formats. The SVG output is shown in xref:img-graph[xrefstyle=short] describes which images are created in each map. See the details in the figure corresponding to the name of the subgraph:
+Base (xref:img-graph-base[xrefstyle=short]),
+Sim (xref:img-graph-sim[xrefstyle=short]),
+Synth (xref:img-graph-synth[xrefstyle=short]),
+Impl (xref:img-graph-impl[xrefstyle=short]),
+Formal (xref:img-graph-formal[xrefstyle=short]),
+ASIC (xref:img-graph-asic[xrefstyle=short]), and
+SymbiFlow (xref:img-graph-symbiflow[xrefstyle=short]).
+Multiple colours and arrow types are used for describing different dependency types. All of those are explained in the legend: xref:img-graph-legend[xrefstyle=short].
 
 .. important::
    These graphs represent a single collection of images (the *virtual* aggregation of others). In practice, some tools might be missing in some collections. For instance, a tool might be available in Debian Buster based containers, but not in CentOS 7. That info is not tracked in the graphs yet. Please, see whether a dockerfile exists in the corresponding subdir.
