@@ -43,14 +43,13 @@ ASIC
 * `The-OpenROAD-Project <https://github.com/The-OpenROAD-Project>`__
 * `efabless/openlane <https://github.com/efabless/openlane>`__
 * `RISC-V bring-up tracker <https://github.com/carlosedp/riscv-bringup>`__
-* `A Step-by-Step Example: Layout of a CMOS Inverter Using SkyWater Technology (SKW) 130nm Process 
-<https://docs.google.com/document/d/1hSLKsz9xcEJgAMmYYer5cDwvPqas9_JGRUAgEORx1Yw>`__
+* `A Step-by-Step Example: Layout of a CMOS Inverter Using SkyWater Technology (SKW) 130nm Process <https://docs.google.com/document/d/1hSLKsz9xcEJgAMmYYer5cDwvPqas9_JGRUAgEORx1Yw>`__
 
 Google Container Regisry (GCR)
 ==============================
 
 * `salrashid123/gcr_stats <https://github.com/salrashid123/gcr_stats>`__
-* `<https://github.com/gregsramblings/google-cloud-4-words[gregsramblings/google-cloud-4-words]: The Google Cloud Developer's Cheat Sheet
+* `gregsramblings/google-cloud-4-words <https://github.com/gregsramblings/google-cloud-4-words>`__: The Google Cloud Developer's Cheat Sheet
 
 USB/IP
 ======

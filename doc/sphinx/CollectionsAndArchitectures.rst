@@ -3,8 +3,8 @@
 Collections and architectures
 #############################
 
-Images are organised in *_collections_* and built for multiple architectures.
-A *_collection_* is a set of images which share a common ancestor; a base layer.
+Images are organised in *collections* and built for multiple architectures.
+A *collection* is a set of images which share a common ancestor; a base layer.
 Having images with a common ancestor allows reducing bandwidth and disk usage when pulling several of them.
 See `docs.docker.com: About storage drivers | Images and layers <https://docs.docker.com/storage/storagedriver/#images-and-layers>`__
 

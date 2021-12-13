@@ -3,9 +3,9 @@
 Tools and images
 ################
 
-By default, latest development versions (branches ``master``|``main``) of tools are built.
+By default, latest development versions (branches ``master`` | ``main``) of tools are built.
 Then, smoke tests are executed and, if successful, the corresponding images are updated in the registries.
-However, some specific tools are *_not_* built from sources, but installed through system package managers.
+However, some specific tools are *not* built from sources, but installed through system package managers.
 Those are marked with ``!`` in the table below.
 
 .. note::
@@ -18,7 +18,7 @@ include::ToolsTable.py[]
 Images including multiple tools
 ===============================
 
-* **S**imulation:
+* **S**\ imulation:
 
   * OCIImage:sim[] GHDL + Verilator + Icarus Verilog
   * OCIImage:sim/osvb[] cocotb, OSVVM and VUnit; on top of ``sim``.
@@ -27,7 +27,7 @@ Images including multiple tools
   * OCIImage:sim/octave-slim[] ``octave``, on top of ``sim``.
   * OCIImage:sim/octave[] ``osvb`` on top of ``octave-slim``.
 
-* **I**mplementation: GHDL + Yosys + nextpnr
+* **I**\ mplementation: GHDL + Yosys + nextpnr
 
   * OCIImage:impl/ice40[] nextpnr-ice40 only, and OCIImage:impl/icestorm[] including icestorm.
   * OCIImage:impl/ecp5[] nextpnr-ecp5 only, and OCIImage:impl/prjtrellis[] including prjtrellis.
@@ -35,13 +35,13 @@ Images including multiple tools
   * OCIImage:impl/pnr[] all nextpnr targets (ecp5, ice40, and generic).
   * OCIImage:impl[] impl:pnr, including icestorm and prjtrellis.
 
-* **F**ormal:
+* **F**\ ormal:
 
   * OCIImage:formal[] all solvers depending on Python 3.
   * OCIImage:formal/min[] Z3 only.
   * OCIImage:formal/all[] all solvers, depending on either Python 2 or Python 3.
 
-* **P**rogramming: OCIImage:prog[]
+* **P**\ rogramming: OCIImage:prog[]
 
 .. _tools-and-images:symbiflow:
 
@@ -85,18 +85,18 @@ On top of that, the following ready-to-use images allow following the guidelines
   That is because these include a significant amount of data in text format, which is much better compressed than binaries.
   As a result, the size of the images when pulled is approximately as follows:
 
-* xc7/toolchain: 3 GB
+  * xc7/toolchain: 3 GB
 
-* xc7/a50t: 6 GB
+  * xc7/a50t: 6 GB
 
-* xc7/a100t: 8.5 GB
+  * xc7/a100t: 8.5 GB
 
-* xc7/a200t: 15 GB
+  * xc7/a200t: 15 GB
 
-* xc7/z010: 5 GB
+  * xc7/z010: 5 GB
 
-* xc7/z020: 7.5 GB
+  * xc7/z020: 7.5 GB
 
-* xc7: 18 GB (would be 30 GB if a200t was included)
+  * xc7: 18 GB (would be 30 GB if a200t was included)
 
-* eos-s3: 2 GB
+  * eos-s3: 2 GB
