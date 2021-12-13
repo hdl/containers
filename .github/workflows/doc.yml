@@ -85,3 +85,23 @@ jobs:
         git config --local user.name "GHA"
         git commit -am "update ${{ github.sha }}"
         git push -u origin +HEAD:gh-pages
+  
+  
+  doc:
+    runs-on: ubuntu-latest
+    name: '📓 Docs'
+    steps:
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
+
+    - name: '📓 BuildTheDocs (BTD)'
+      uses: buildthedocs/btd@v0
+      with:
+        token: ${{ github.token }}
+        skip-deploy: true
+
+    - name: '📤 Upload artifact: Sphinx HTML'
+      uses: actions/upload-artifact@v2
+      with:
+        path: doc/_build/html
