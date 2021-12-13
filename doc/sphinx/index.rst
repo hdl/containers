@@ -61,7 +61,6 @@ Find usage guidelines and how to contribute in the following sections:
   All-in-one images <ug/AllInOne>
   Tools with GUI <ug/GUI>
   USB/IP protocol support for Docker Desktop <ug/USBIP>
-  Desktop <ug/Desktop>
 
 .. toctree:: 
   :caption: Development
