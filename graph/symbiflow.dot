@@ -1,0 +1,125 @@
+# Authors:
+#   Unai Martinez-Corral
+#
+# Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Dockerfiles
+
+  { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_conda     [label="conda"];
+    d_symbiflow [label="symbiflow"];
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    "build/base"
+    { node [color=brown, fontcolor=brown]
+      "conda"
+      "symbiflow/xc7/toolchain"
+      "symbiflow/xc7/a50t"
+      "symbiflow/xc7/a100t"
+      "symbiflow/xc7/a200t"
+      "symbiflow/xc7/z010"
+      "symbiflow/xc7/z020"
+      "symbiflow/xc7"
+      "symbiflow/eos-s3"
+    }
+  }
+
+  # Workflows
+
+  subgraph cluster_conda {
+    "p_conda_build/base" [shape=cylinder, color=grey, fontcolor=grey, label="build/base"];
+    d_conda -> "conda" [style=dotted];
+    "t_conda" [shape=folder, color=red, fontcolor=red, label="conda"];
+    "conda" -> "t_conda";
+  }
+
+  subgraph cluster_SymbiFlow {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_SymbiFlow_conda"  [label="conda"]
+    }
+
+    d_symbiflow -> {
+      "symbiflow/xc7/toolchain"
+      { rank=same
+        "symbiflow/xc7/a50t"
+        "symbiflow/xc7/a100t"
+        "symbiflow/xc7/a200t"
+        "symbiflow/xc7/z010"
+        "symbiflow/xc7/z020"
+      }
+      "symbiflow/xc7"
+      "symbiflow/eos-s3"
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      "t_SymbiFlow_xc7_toolchain" [label="symbiflow/xc7/toolchain"];
+      "t_SymbiFlow_xc7_a50t" [label="symbiflow/xc7/a50t"];
+      "t_SymbiFlow_xc7_a100t" [label="symbiflow/xc7/a100t"];
+      "t_SymbiFlow_xc7_a200t" [label="symbiflow/xc7/a200t"];
+      "t_SymbiFlow_xc7_z010" [label="symbiflow/xc7/z010"];
+      "t_SymbiFlow_xc7_z020" [label="symbiflow/xc7/z020"];
+      "t_SymbiFlow_xc7" [label="symbiflow/xc7"];
+      "t_SymbiFlow_eos-s3" [label="symbiflow/eos-s3"];
+    }
+
+    "symbiflow/xc7/toolchain"  -> "t_SymbiFlow_xc7_toolchain";
+    "symbiflow/xc7/a50t"  -> "t_SymbiFlow_xc7_a50t";
+    "symbiflow/xc7/a100t" -> "t_SymbiFlow_xc7_a100t";
+    "symbiflow/xc7/a200t" -> "t_SymbiFlow_xc7_a200t";
+    "symbiflow/xc7/z010"  -> "t_SymbiFlow_xc7_z010";
+    "symbiflow/xc7/z020"  -> "t_SymbiFlow_xc7_z020";
+    "symbiflow/xc7"       -> "t_SymbiFlow_xc7";
+    "symbiflow/eos-s3"    -> "t_SymbiFlow_eos-s3";
+  }
+
+  # Dockerfile dependencies
+
+  "build/base" -> "p_conda_build/base" -> d_conda;
+
+  "conda" -> "p_SymbiFlow_conda" -> d_symbiflow;
+
+  # Image dependencies
+
+  { edge [style=dashed]
+    "symbiflow/xc7/toolchain" -> "symbiflow/xc7/a50t";
+    "symbiflow/xc7/toolchain" -> "symbiflow/xc7/a100t";
+    "symbiflow/xc7/toolchain" -> "symbiflow/xc7/a200t";
+    "symbiflow/xc7/toolchain" -> "symbiflow/xc7/z010";
+    "symbiflow/xc7/toolchain" -> "symbiflow/xc7/z020";
+    "symbiflow/xc7/toolchain" -> "symbiflow/xc7";
+  }
+
+  { edge [style=dashed, color=grey]
+    "symbiflow/xc7/a50t"  -> "symbiflow/xc7";
+    "symbiflow/xc7/a100t" -> "symbiflow/xc7";
+    # TODO: This is temporarily disabled because of space limits on GitHub Actions default runners
+    #"symbiflow/xc7/a200t" -> "symbiflow/xc7";
+    "symbiflow/xc7/z010"  -> "symbiflow/xc7";
+    "symbiflow/xc7/z020"  -> "symbiflow/xc7";
+  }
+
+}

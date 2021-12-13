@@ -26,9 +26,12 @@ NOTE: These images are coloured [lime]#GREEN# in the link:../dev/index.html#_gra
 
 Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named `REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]TOOL_NAME`.
 
-NOTE: Since all the images in each collection are based on the same root image, pulling multiple images involves retrieving a few additional layers only. Therefore, this is the recommended approach for CI or other environments with limited resources.
+NOTE: Since all the images in each collection are based on the same root image, pulling multiple images involves
+  retrieving a few additional layers only. Therefore, this is the recommended approach for CI or other environments with
+  limited resources.
 
-* https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile[ghdl-yosys-blink: Makefile]: an example showcasing how to use this fine-grained approach with a makefile.
+* https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile[ghdl-yosys-blink: Makefile]: an example
+  showcasing how to use this fine-grained approach with a makefile.
   The same make based strategy is used in https://github.com/antonblanchard/microwatt/blob/master/Makefile[antonblanchard/microwatt].
 * https://github.com/marph91/icestick-remote[marph91/icestick-remote]: the CI workflow for synthesis uses this approach.
 
@@ -58,11 +61,70 @@ See also https://github.com/librecores/eda-container-wrapper[librecores/eda-cont
 
 NOTE: These images are coloured [maroon]#BROWN# in the link:../dev/index.html#_graphs[Graphs].
 
-Multiple tools from fine-grained images are included in larger images for common use cases. These are named `REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]MAIN_USAGE`. This is the recommended approach for users who are less familiar with containers and want a quick replacement for full-featured virtual machines. Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one imags.
+Multiple tools from fine-grained images are included in larger images for common use cases.
+These are named `REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]MAIN_USAGE`.
+This is the recommended approach for users who are less familiar with containers and want a quick replacement for
+full-featured virtual machines.
+Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one images.
 
 * https://github.com/tmeissner/formal_hw_verification[tmeissner/formal_hw_verification]: the CI workflow uses image `REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]formal/all` along with GitHub's 'Docker Action' syntax (see https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub[docs.github.com: Learn GitHub Actions > Referencing a container on Docker Hub]).
 * https://github.com/stnolting/neorv32[stnolting/neorv32]: the implementation workflow (for generating bitstreams from VHDL sources) uses image `REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]impl` along with GitHub's 'Docker Action' syntax (see https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub[docs.github.com: Learn GitHub Actions > Referencing a container on Docker Hub]).
 
+=== SymbiFlow
+
+As explained in link:../dev/index.html#_symbiflow_conda[SymbiFlow (Conda)], multiple ready-to-use images are provided
+including Miniconda, SymbiFlow toolchains and architecture definitions for Xilinx's __xc7__ or QuickLogic's __eos-s3__
+devices.
+These container images are expected to be used as explained in https://symbiflow-examples.rtfd.io/en/latest/building-examples.html[image:https://img.shields.io/website.svg?label=symbiflow-examples.rtfd.io&longCache=true&style=flat-square&url=http%3A%2F%2Fsymbiflow-examples.rtfd.io%2Fen%2Flatest%2Findex.html&logo=ReadTheDocs&logoColor=fff[title='symbiflow-examples.rtfd.io']], assuming that the environment is prepared already and available in the PATH.
+Hence, the Conda environment can be activated straightaway.
+See, for instance:
+
+[source, bash]
+----
+:~# git clone https://github.com/SymbiFlow/symbiflow-examples
+...
+:~# cd symbiflow-examples
+
+:~/symbiflow-examples# docker run --rm -it \
+  -v /$(pwd)://wrk \
+  -w //wrk \
+  gcr.io/hdl-containers/symbiflow/xc7/a100t
+...
+root@c3d4dd1d97cc:/wrk# conda activate xc7
+...
+(xc7) root@c3d4dd1d97cc:/wrk# TARGET="arty_100" make -C xc7/picosoc_demo/
+...
+(xc7) root@c3d4dd1d97cc:/wrk# ls -1 xc7/picosoc_demo/build/arty_100/
+constraints.place
+fasm.log
+pack.log
+packing_pin_util.rpt
+place.log
+pre_pack.report_timing.setup.rpt
+report_timing.hold.rpt
+report_timing.setup.rpt
+report_unconstrained_timing.hold.rpt
+report_unconstrained_timing.setup.rpt
+route.log
+top.bit
+top.eblif
+top.fasm
+top.ioplace
+top.json
+top.json.carry_fixup.json
+top.json.carry_fixup_out.json
+top.json.post_abc9.ilang
+top.json.pre_abc9.ilang
+top.net
+top.net.post_routing
+top.place
+top.route
+top.sdc
+top_io.json
+top_synth.log
+top_synth.v
+top_synth.v.premap.v
+----
 
 == Tools with GUI
 
