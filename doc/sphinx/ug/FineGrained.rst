@@ -5,16 +5,17 @@ Fine-grained pulling
 
 .. note::
 
-   These images are coloured [lime]#GREEN# in the :ref:`Graph generation/parsing <Development:graph-generation>`].
+  These images are coloured [lime]#GREEN# in the :ref:`Graph generation/parsing <Development:graph-generation>`].
 
 Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully. These are typically named ``REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]TOOL_NAME``.
 
-.. note:: 
+.. note:: Since all the images in each collection are based on the same root image, pulling multiple images involves
+  retrieving a few additional layers only. Therefore, this is the recommended approach for CI or other environments with
+  limited resources.
 
-   Since all the images in each collection are based on the same root image, pulling multiple images involves retrieving a few additional layers only. Therefore, this is the recommended approach for CI or other environments with limited resources.
-
-* `ghdl-yosys-blink: Makefile <https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile>`__: an example showcasing how to use this fine-grained approach with a makefile.
-The same make based strategy is used in `antonblanchard/microwatt <https://github.com/antonblanchard/microwatt/blob/master/Makefile>`__.
+* `ghdl-yosys-blink: Makefile <https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile>`__: an example
+  showcasing how to use this fine-grained approach with a makefile.
+  The same make based strategy is used in `antonblanchard/microwatt <https://github.com/antonblanchard/microwatt/blob/master/Makefile>`__.
 * `marph91/icestick-remote <https://github.com/marph91/icestick-remote>`__: the CI workflow for synthesis uses this approach.
 
 Those projects use a partial Makefile such as the following, for optionally wrapping regular tool calls:
