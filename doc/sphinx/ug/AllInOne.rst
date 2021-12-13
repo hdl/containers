@@ -18,7 +18,7 @@ Coherently, some common Unix tools (such as make or cmake) are also included in 
 SymbiFlow
 =========
 
-As explained in :ref:`SymbiFlow (Conda) <Development:symbiflow_conda>`, multiple ready-to-use images are provided
+As explained in :ref:`SymbiFlow (Conda) <tools-and-images:symbiflow>`, multiple ready-to-use images are provided
 including Miniconda, SymbiFlow toolchains and architecture definitions for Xilinx's **xc7** or QuickLogic's **eos-s3**
 devices.
 These container images are expected to be used as explained in https://symbiflow-examples.rtfd.io/en/latest/building-examples.html[image:https://img.shields.io/website.svg?label=symbiflow-examples.rtfd.io&longCache=true&style=flat-square&url=http%3A%2F%2Fsymbiflow-examples.rtfd.io%2Fen%2Flatest%2Findex.html&logo=ReadTheDocs&logoColor=fff[title='symbiflow-examples.rtfd.io']], assuming that the environment is prepared already and available in the PATH.
