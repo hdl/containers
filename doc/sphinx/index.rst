@@ -6,10 +6,10 @@ HDL Containers
    :height: 22
    :target: https://github.com/hdl/containers
 
-.. image:: _static/banner.svg
+.. image:: _static/banner_path.svg
    :width: 500 px
    :align: center
-   :target: https://github.com/ghdl/ghdl-cosim
+   :target: https://github.com/hdl/containers
 
 .. raw:: html
 
