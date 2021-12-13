@@ -64,42 +64,47 @@ Multiple colours and arrow types are used for describing different dependency ty
 [#img-graph]
 .Subgraphs and images.
 [link=../img/graph.svg]
-graphviz::../../graph/graph.dot[format="svg", align="center"]
+graphviz::../../../graph/graph.dot[format="svg", align="center"]
 
 [#img-graph-base]
 .Base: workflows, dockerfiles, images and tests.
 [link=../img/base.svg]
-graphviz::../../graph/base.dot[format="svg", align="center"]
+graphviz::../../../graph/base.dot[format="svg", align="center"]
 
 [#img-graph-sim]
 .Sim: workflows, dockerfiles, images and tests.
 [link=../img/sim.svg]
-graphviz::../../graph/sim.dot[format="svg", align="center"]
+graphviz::../../../graph/sim.dot[format="svg", align="center"]
 
 [#img-graph-synth]
 .Synth: workflows, dockerfiles, images and tests.
 [link=../img/synth.svg]
-graphviz::../../graph/synth.dot[format="svg", align="center"]
+graphviz::../../../graph/synth.dot[format="svg", align="center"]
 
 [#img-graph-impl]
 .Impl: workflows, dockerfiles, images and tests.
 [link=../img/impl.svg]
-graphviz::../../graph/impl.dot[format="svg", align="center"]
+graphviz::../../../graph/impl.dot[format="svg", align="center"]
 
 [#img-graph-formal]
 .Formal: workflows, dockerfiles, images and tests.
 [link=../img/formal.svg]
-graphviz::../../graph/formal.dot[format="svg", align="center"]
+graphviz::../../../graph/formal.dot[format="svg", align="center"]
 
 [#img-graph-asic]
 .ASIC: workflows, dockerfiles, images and tests.
 [link=../img/asic.svg]
-graphviz::../../graph/asic.dot[format="svg", align="center"]
+graphviz::../../../graph/asic.dot[format="svg", align="center"]
+
+[#img-graph-symbiflow]
+.SymbiFlow: workflows, dockerfiles, images and tests.
+[link=../img/symbiflow.svg]
+graphviz::../../../graph/symbiflow.dot[format="svg", align="center"]
 
 [#img-graph-legend]
 .Legend of the directed graph.
 [link=../img/legend.svg]
-graphviz::../../graph/legend.dot[format="svg", align="center"]
+graphviz::../../../graph/legend.dot[format="svg", align="center"]
 
 Package images
 ==============
