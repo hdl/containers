@@ -6,6 +6,14 @@ HDL Containers
    :height: 22
    :target: https://github.com/hdl/containers
 
+.. image:: _static/banner.svg
+   :width: 500 px
+   :align: center
+   :target: https://github.com/ghdl/ghdl-cosim
+
+.. raw:: html
+
+    <br>
 
 This repository contains scripts and GitHub Actions (GHA) YAML workflows for building, testing and deploying https://opencontainers.org/[OCI] images (aka https://www.docker.com/[Docker] | https://podman.io[Podman] images) including open source https://en.wikipedia.org/wiki/Electronic_design_automation[electronic design automation (EDA)] tooling.
 All of them are pushed to http://gcr.io/hdl-containers/[gcr.io/hdl-containers], and mirrored to https://github.com/orgs/hdl/packages[ghcr.io/hdl] and https://hub.docker.com/u/hdlc[hub.docker.com/u/hdlc]:
@@ -33,7 +41,7 @@ Find usage guidelines and how to contribute in the following sections:
 .. note::
   Do you want to improve this page? `Edit it on GitHub <https://github.com/hdl/containers/edit/main/doc>`__
 
-.. toctree:: 
+.. toctree::
   :hidden:
 
   CollectionsAndArchitectures
@@ -41,4 +49,3 @@ Find usage guidelines and how to contribute in the following sections:
   ToDo
   Context
   References
-  
