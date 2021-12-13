@@ -15,8 +15,13 @@ HDL Containers
 
     <br>
 
-This repository contains scripts and GitHub Actions (GHA) YAML workflows for building, testing and deploying https://opencontainers.org/[OCI] images (aka https://www.docker.com/[Docker] | https://podman.io[Podman] images) including open source https://en.wikipedia.org/wiki/Electronic_design_automation[electronic design automation (EDA)] tooling.
-All of them are pushed to http://gcr.io/hdl-containers/[gcr.io/hdl-containers], and mirrored to https://github.com/orgs/hdl/packages[ghcr.io/hdl] and https://hub.docker.com/u/hdlc[hub.docker.com/u/hdlc]:
+    <hr>
+
+This repository contains scripts and recipes for building, testing and deploying `OCI <https://opencontainers.org/>`__
+images (aka `Docker <https://www.docker.com/>`__ | `Podman <https://podman.io>`__ images) including open source `Electronic Design Automation (EDA) <https://en.wikipedia.org/wiki/Electronic_design_automation>`__ tooling.
+All the images are pushed to `gcr.io/hdl-containers <http://gcr.io/hdl-containers/>`__, and mirrored to
+`ghcr.io/hdl <https://github.com/orgs/hdl/packages>`__ and
+`hub.docker.com/u/hdlc <https://hub.docker.com/u/hdlc>`__:
 
 .. |SHIELD:WorkflowTest| image:: https://img.shields.io/badge/-gcr.io/hdl--containers-555555.svg?longCache=true&style=flat-square&logo=OpenContainersInitiative&logoColor=f2f1ef
    :alt: 'Google Container Registry'
@@ -37,9 +42,6 @@ Find usage guidelines and how to contribute in the following sections:
 
 - `User Guide <ug/index.html>`__
 - `Development and contributing <dev/index.html>`__
-
-.. note::
-  Do you want to improve this page? `Edit it on GitHub <https://github.com/hdl/containers/edit/main/doc>`__
 
 .. toctree::
   :hidden:
