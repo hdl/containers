@@ -37,11 +37,11 @@ clean-img:
 	if [ -d public/img ]; then rm -rf public/img; fi
 
 all: clean-img main-html ug-html dev-html
-	mkdir -p public/img/
-	cp -vr img/* public/img/
+	mkdir -p asciidoctor/public/img/
+	cp -vr asciidoctor/img/* asciidoctor/public/img/
 
 main-html:
-	cd main && \
+	cd asciidoctor/main && \
 	./gen_tool_table.py && \
 	asciidoctor \
 	  -r ../lib/OCIImage-inline-macro.rb \
@@ -51,7 +51,7 @@ main-html:
 	  --out-file ../public/index.html
 
 ug-html:
-	cd ug && \
+	cd asciidoctor/ug && \
 	asciidoctor \
 	  -r ../lib/OCIImage-inline-macro.rb \
 	  -r ../lib/GHAStatus-inline-macro.rb \
@@ -60,7 +60,7 @@ ug-html:
 	  --out-file ../public/ug/index.html
 
 dev-html:
-	cd dev && \
+	cd asciidoctor/dev && \
 	asciidoctor \
 	  -r ../lib/OCIImage-inline-macro.rb \
 	  -r ../lib/GHAStatus-inline-macro.rb \

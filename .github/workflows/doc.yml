@@ -73,8 +73,8 @@ jobs:
     - name: Publish site to gh-pages (doc)
       if: github.event_name != 'pull_request'
       run: |
-        sudo chown -R $USER:$USER doc/public
-        mv doc/public ./
+        sudo chown -R $USER:$USER doc/asciidoctor/public
+        mv doc/asciidoctor/public ./
         cd public
         git init
         cp ../.git/config ./.git/config
