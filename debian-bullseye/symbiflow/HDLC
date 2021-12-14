@@ -30,7 +30,10 @@ env-and-toolchain() {
   rm -rf symbiflow-examples
   case "$1" in
     eos-s3)
-      curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs-install/quicklogic-arch-defs-63c3d8f9.tar.gz | tar -xzC /usr/local --strip-components=1
+      curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs-install/quicklogic-arch-defs-63c3d8f9.tar.gz | tar -xzC /usr/local
+      echo 'export PATH=/usr/local/quicklogic-arch-defs/bin:$PATH' > conda.sh
+      cat /usr/local/etc/profile.d/conda.sh >> conda.sh
+      mv conda.sh /usr/local/etc/profile.d/conda.sh
       ;;
     xc7)
       xc7-arch-defs toolchain

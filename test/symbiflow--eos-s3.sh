@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env -S bash -l
 
 # Copyright 2020-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
@@ -21,8 +21,6 @@ set -e
 cd $(dirname "$0")
 
 ./_env.sh
-
-ls -lah /usr/local/bin/python
 
 which ql_symbiflow
 which symbiflow_analysis
