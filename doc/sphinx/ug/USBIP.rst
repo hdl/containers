@@ -16,7 +16,7 @@ on GNU/Linux, USB/IP is implemented as a few kernel modules with companion users
 However, the default underlying Hyper-V VM machine (based on `Alpine Linux <https://alpinelinux.org/>`__) shipped with
 *Docker Desktop* (aka *docker-for-win*/*docker-for-mac*) does not include the required kernel modules.
 Fortunately, privileged docker containers allow installing missing kernel modules.
-The shell script in link:{repotree}usbip/[`usbip/`] supports customising the native VM in *Docker Desktop* for adding
+The shell script in :ghsrc:`usbip/ <usbip/>` supports customising the native VM in *Docker Desktop* for adding
 USB over IP support.
 
 .. code-block:: bash
@@ -92,7 +92,7 @@ Alternatives
    We are aware of `cezuni/usbip-win <https://github.com/cezuni/usbip-win>`__. However, it seems to be in very early development state and the install procedure is quite complex yet.
 
 
-Serial (COM) devices can be shared with open source tools. On the one hand, `hub4com <https://sourceforge.net/projects/com0com/files/hub4com/>`__ from project http://com0com.sourceforge.net/[com0com] allows to publish a port through a RFC2217 server. On the other hand, ``socat`` can be used to link the network connection to a virtual ``tty`` device.
+Serial (COM) devices can be shared with open source tools. On the one hand, `hub4com <https://sourceforge.net/projects/com0com/files/hub4com/>`__ from project `com0com <http://com0com.sourceforge.net/>`__ allows to publish a port through a RFC2217 server. On the other hand, ``socat`` can be used to link the network connection to a virtual ``tty`` device.
 
 .. code-block::
 

@@ -26,7 +26,7 @@ Those are used for:
 *  Ready-to-use images based on the runtime base image (``REGISTRY/[ARCHITECTURE/][COLLECTION/]build/base``) are produced.
 *  Ready-to-use images are tested before uploading.
 
-In some dockerfiles/workflows, <<Package images>> are created too.
+In some dockerfiles/workflows, :ref:`Package images <Development:package-images>` are created too.
 Those are based on ``scratch`` and contain pre-built assets.
 Therefore, they are not really useful *per se*, but meant to be used for building other.
 In fact, multiple tools are merged into ready-to-use images for common use cases (such as ``impl``,
@@ -42,11 +42,13 @@ In fact, multiple tools are merged into ready-to-use images for common use cases
 
    Currently, many projects don't use containers at all, hence, all images are generated in this repository.
    However, the workload is expected to be distributed between multiple projects in the ecosystem.
-   
+
+.. _Development:graphs:
+
 Graphs
 ======
 
-Understanding how all the pieces in this project fit together might be daunting for newcomers. Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem. Subdir link:{repotree}graph/[`graph/`] contains the sources of `directed graphs <https://en.wikipedia.org/wiki/Directed_graph>`__, where the relations between workflows, dockerfiles, images and tests are shown.
+Understanding how all the pieces in this project fit together might be daunting for newcomers. Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem. Subdir :ghsrc:`graph/ <graph/>` contains the sources of `directed graphs <https://en.wikipedia.org/wiki/Directed_graph>`__, where the relations between workflows, dockerfiles, images and tests are shown.
 
 (`Graphviz <https://graphviz.org/>`__)'s ``digraph`` format is used, hence, graphs can be rendered to multiple image formats. The SVG output is shown in xref:img-graph[xrefstyle=short] describes which images are created in each map. See the details in the figure corresponding to the name of the subgraph:
 Base (xref:img-graph-base[xrefstyle=short]),
@@ -106,10 +108,12 @@ graphviz::../../../graph/symbiflow.dot[format="svg", align="center"]
 [link=../img/legend.svg]
 graphviz::../../../graph/legend.dot[format="svg", align="center"]
 
+.. _Development:package-images:
+
 Package images
 ==============
 
-Each EDA tool/project is built once only for each collection and architecture in this image/container ecosystem. However, some (many) of the tools need to be included in multiple images for different purposes. Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each tool/project. Therefore, ``REGISTRY/[ARCHITECTURE/][COLLECTION/]pkg/`` images are created/used (coloured [blue]#BLUE# in the <<Graphs>>). These are all based on ``scratch`` and are not runnable. Instead, they contain pre-built artifacts, to be then added into other images through ``COPY --from=``.
+Each EDA tool/project is built once only for each collection and architecture in this image/container ecosystem. However, some (many) of the tools need to be included in multiple images for different purposes. Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each tool/project. Therefore, ``REGISTRY/[ARCHITECTURE/][COLLECTION/]pkg/`` images are created/used (coloured [blue]#BLUE# in the :ref:`Graphs <Development:graphs>`). These are all based on ``scratch`` and are not runnable. Instead, they contain pre-built artifacts, to be then added into other images through ``COPY --from=``.
 
 Since ``pkg`` images are not runnable *per se*, but an intermediate utility, the usage of environment variables ``PREFIX`` and ``DESTDIR`` in the dockerfiles might be misleading. All the tools in the ecosystem are expected to be installed into ``/usr/local``, the standard location for user built tools on most GNU/Linux distributions. Hence:
 
@@ -123,15 +127,17 @@ Utils
 
 .. important::
 
-   Some helper shell and Python utilities are available in link:{repotree}utils/bin[`utils/bin`] and link:{repotree}utils/pyHDLC[`utils/pyHDLC`], respectively.
-   A link:{repotree}utils/setup.sh[`utils/setup.sh`] script is provided for installing Python dependencies and adding the ``bin`` subdir to the ``PATH``.
-   Since ``pip`` is used for installing link:{repotree}utils/pyHDLC/requirements.txt[`utils/pyHDLC/requirements.txt`], it is desirable to create a virtual environment (`docs.python.org/3/library/venv <https://docs.python.org/3/library/venv.html>`__) before running `setup.sh`:
+   Some helper shell and Python utilities are available in :ghsrc:`utils/bin <utils/bin>` and :ghsrc:`utils/pyHDLC <utils/pyHDLC>`, respectively.
+   A :ghsrc:`utils/setup.sh <utils/setup.sh>` script is provided for installing Python dependencies and adding the ``bin`` subdir to the ``PATH``.
+   Since ``pip`` is used for installing :ghsrc:`utils/pyHDLC/requirements.txt <utils/pyHDLC/requirements.txt>`, it is desirable to create a virtual environment (`docs.python.org/3/library/venv <https://docs.python.org/3/library/venv.html>`__) before running ``setup.sh``:
 
-.. code-block:: shell
+  .. code-block:: shell
+     
+    virtualenv venv
+    source venv/bin/activate
+    ./utils/setup.sh
 
-   virtualenv venv
-   source venv/bin/activate
-   ./utils/setup.sh
+.. _Development:build:
 
 Build
 -----
@@ -179,7 +185,7 @@ Build
 Inspect
 -------
 
-All ready-to-use images (coloured [green]#GREEN# or [maroon]#BROWN# in the <<Graphs>>) are runnable.
+All ready-to-use images (coloured [green]#GREEN# or [maroon]#BROWN# in the :ref:`Graphs <Development:graphs>`) are runnable.
 Therefore, users/contributors can run containers and test the tools interactively or through scripting.
 However, since ``pkg`` images are not runnable, creating another image is required in order to inspect
 their content from a container. For instance:
@@ -189,8 +195,8 @@ their content from a container. For instance:
    FROM busybox
    COPY --from=REGISTRY/pkg/TOOL_NAME /TOOL_NAME /
 
-In fact, ``pyHDLC test`` uses a similar dockerfile for running ``.pkg.sh`` scripts from link:{repotree}test/[`test/`].
-See <<Test>>.
+In fact, ``pyHDLC test`` uses a similar dockerfile for running ``.pkg.sh`` scripts from :ghsrc:`test/ <test/>`.
+See :ref:`Test <Development:test>`.
 
 Alternatively, or as a complement, `wagoodman/dive <https://github.com/wagoodman/dive>`__ is a lightweight tool with a nice terminal based GUI for exploring layers and contents of container images.
 It can be downloaded as a tarball/zipfile, or used as a container:
@@ -207,7 +213,7 @@ It can be downloaded as a tarball/zipfile, or used as a container:
 [link=img/dive.png]
 image::dive.png[wagoodman/dive, align="center"]
 
-link:{repotree}utils/bin/dockerDive[`dockerDive`] is a wrapper around the wagoodman/dive container, which supports one
+:ghsrc:`dockerDive <utils/bin/dockerDive>` is a wrapper around the wagoodman/dive container, which supports one
 or two arguments for specifying the image to be inspected.
 The default registry prefix is ``gcr.io/hdl-containers``, however, it can be overriden through envvar ``HDL_REGISTRY``.
 
@@ -223,16 +229,18 @@ or, inspect any image from any registry:
 
    HDL_REGISTRY=docker.io dockerDive python:slim-bullseye
 
+.. _Development:test:
+
 Test
 ----
 
-There is a test script in link:{repotree}test/[`test/`] for each image in this ecosystem, according to the following convention:
+There is a test script in :ghsrc:`test/ <test/>` for each image in this ecosystem, according to the following convention:
 
 *  Scripts for package images, ``/[ARCHITECTURE/][COLLECTION/]pkg/TOOL_NAME[/SUBNAME]``, are named ``TOOL_NAME[--SUBNAME].pkg.sh``.
 *  Scripts for other images, ``/[ARCHITECTURE/][COLLECTION/]NAME[/SUBNAME]``, are named ``NAME[--SUBNAME].sh``.
 *  Other helper scripts are named ``_*.sh``.
 
-Furthermore, `hdl/smoke-test <https://github.com/hdl/smoke-tests>`__ is a submodule of this repository (link:{repotree}test/[`test/smoke-test`]). Smoke-tests contains fine grained tests that cover the most important functionalities of the tools. Those are used in other packaging projects too. Therefore, container tests are expected to execute the smoke-tests corresponding to the tools available in the image, before executing more specific tests.
+Furthermore, `hdl/smoke-test <https://github.com/hdl/smoke-tests>`__ is a submodule of this repository (:ghsrc:`test/smoke-test <test>`). Smoke-tests contains fine grained tests that cover the most important functionalities of the tools. Those are used in other packaging projects too. Therefore, container tests are expected to execute the smoke-tests corresponding to the tools available in the image, before executing more specific tests.
 
 ``pyHDLC test`` allows testing the runnable and package images.
 
@@ -269,37 +277,37 @@ Step by step checklist
 
 #. Create or update dockerfile(s).
 
-*  For each tool and collection, a https://docs.docker.com/engine/reference/builder/[Dockerfile] recipe exists.
+  *  For each tool and collection, a `Dockerfile <https://docs.docker.com/engine/reference/builder/>`__ recipe exists.
 
-   *  It is recommended, but not required, to add tools to multiple collections at the same time. That is, to create one dockerfile for each collection. Nevertheless, it is possible to add a tool to just one or to a limited set of collections.
-   *  All dockerfiles must use, at least, two stages.
+     *  It is recommended, but not required, to add tools to multiple collections at the same time. That is, to create one dockerfile for each collection. Nevertheless, it is possible to add a tool to just one or to a limited set of collections.
+     *  All dockerfiles must use, at least, two stages.
  
-      *  One stage, named `build`, is to be based on `$REGISTRY/build/base` or `$REGISTRY/build/build` or `$REGISTRY/build/dev`. In this first stage, you need to add the missing build dependencies. Then, build the tool/project using the standard `PREFIX`, but install to a custom location using `DESTDIR`. See <<Package images>>.
-      *  If the tool/project is to be used standalone, create an stage based on `$REGISTRY/build/base`. Install runtime dependencies only.
-      *  If the tool/project is to be packaged, create an stage based on `scratch`.
-      *  In any case, copy the tool artifacts from the build stage using `COPY --from=STAGE_NAME`.
-      *  In practice, several dockerfiles produce at least one package image and one ready-to-use image. Therefore, dockerfiles will likely have more than two stages.
+        *  One stage, named ``build``, is to be based on ``$REGISTRY/build/base`` or ``$REGISTRY/build/build`` or ``$REGISTRY/build/dev``. In this first stage, you need to add the missing build dependencies. Then, build the tool/project using the standard ``PREFIX``, but install to a custom location using ``DESTDIR``. See :ref:`Package images <Development:package-images>`.
+        *  If the tool/project is to be used standalone, create an stage based on ``$REGISTRY/build/base``. Install runtime dependencies only.
+        *  If the tool/project is to be packaged, create an stage based on ``scratch``.
+        *  In any case, copy the tool artifacts from the build stage using ``COPY --from=STAGE_NAME``.
+        *  In practice, several dockerfiles produce at least one package image and one ready-to-use image. Therefore, dockerfiles will likely have more than two stages.
 
-*  Some tools are to be added to existing images which include several tools (coloured [maroon]#BROWN# in the <<Graphs>>). After creating the dockerfile where the corresponding package image is defined, add `COPY --from=$REGISTRY/pkg/TOOL_NAME` statements to the dockerfiles of multi-tool images.
+  *  Some tools are to be added to existing images which include several tools (coloured [maroon]#BROWN# in the :ref:`Graphs <Development:graphs>`). After creating the dockerfile where the corresponding package image is defined, add ``COPY --from=$REGISTRY/pkg/TOOL_NAME`` statements to the dockerfiles of multi-tool images.
 
-#. Build and test the dockerfile(s) locally. Use helper scripts from link:{repotree}utils[`utils`], as explained in <<Build>> and <<Test>>.
+#. Build and test the dockerfile(s) locally. Use helper scripts from :ghsrc:`utils <utils>`, as explained in :ref:`Build <Development:build>` and :ref:`Test <Development:test>`.
 
-*  If a new tool was added, or a new image is to be generated, a test script needs to be added to link:{repotree}test/[`test/`]. See <<Test>> for naming guidelines.
-*  Be careful with the order. If you add a new tool and include it in one of the multi-tool images, the package image needs to be built first.
+  *  If a new tool was added, or a new image is to be generated, a test script needs to be added to :ghsrc:`test/ <test/>`. See :ref:`Test <Development:test>` for naming guidelines.
+  *  Be careful with the order. If you add a new tool and include it in one of the multi-tool images, the package image needs to be built first.
 
 #. Create or update workflow(s).
 
-*  For each tool or multi-tool image, a GitHub Actions workflow is added to link:{repotree}.github/workflows[`.github/workflows/`]. Find documentation at https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions[Workflow syntax for GitHub Actions]. Copying some of the existing workflows in this repo and adapting it is suggested.
-*  In each workflow, all the images produced from stages of the corresponding dockerfile are built, tested and pushed. Scripts from link:{repotree}utils[`utils`] are used.
-*  The workflow matrix is used for deciding which collections is each tool to be built for.
+  *  For each tool or multi-tool image, a GitHub Actions workflow is added to :ghsrc:`.github/workflows <.github/workflows/>`. Find documentation at `Workflow syntax for GitHub Actions <https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions>`__. Copying some of the existing workflows in this repo and adapting it is suggested.
+  *  In each workflow, all the images produced from stages of the corresponding dockerfile are built, tested and pushed. Scripts from :ghsrc:`utils <utils>` are used.
+  *  The workflow matrix is used for deciding which collections is each tool to be built for.
 
 #. Update the documentation.
 
-*  If a new tool was added,
+  *  If a new tool was added,
    
-   *  Ensure that the tool is listed at `hdl/awesome <https://github.com/hdl/awesome>`__, since that's where all the tool/projects in the table point to.
-   *  If a tool from the *To Do* list was added, remove it from the list.
-   *  Add a shield/badge to the table in <<Continuous Integration (CI)>>.
+     *  Ensure that the tool is listed at `hdl/awesome <https://github.com/hdl/awesome>`__, since that's where all the tool/projects in the table point to.
+     *  If a tool from the *To Do* list was added, remove it from the list.
+     *  Add a shield/badge to the table in :ref:`Continuous Integration (CI) <Development:continous-integration>`.
 
-*  Edit link:{repotree}doc/main/tools.yml[`doc/main/tools.yml`]. The table in link:../index.html#_tools_and_images[Tools and images] is autogenerated from that YAML file, using link:{repotree}doc/gen_tool_table.py[`doc/gen_tool_table.py`]
-*  Update the <<Graphs>>.
+  *  Edit :ghsrc:`doc/main/tools.yml <doc/main/tools.yml>`. The table in :ref:`Tools and images <tools-and-images>` is autogenerated from that YAML file, using :ghsrc:`doc/gen_tool_table.py <doc/gen_tool_table.py>`
+  *  Update the :ref:`Graphs <Development:graphs>`.
