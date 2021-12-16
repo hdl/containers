@@ -34,9 +34,8 @@ See, for instance:
   :~/symbiflow-examples# docker run --rm -it \
     -v /$(pwd)://wrk \
     -w //wrk \
-    gcr.io/hdl-containers/symbiflow/xc7/a100t
-  ...
-  root@c3d4dd1d97cc:/wrk# conda activate xc7
+    gcr.io/hdl-containers/conda/symbiflow/xc7/a100t
+  
   ...
   (xc7) root@c3d4dd1d97cc:/wrk# TARGET="arty_100" make -C xc7/picosoc_demo/
   ...
