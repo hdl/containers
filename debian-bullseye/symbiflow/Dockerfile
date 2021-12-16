@@ -27,40 +27,40 @@ RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && env-and-toolchain xc7
 
 #---
 
-FROM $REGISTRY/symbiflow/xc7/toolchain AS a50t
+FROM $REGISTRY/conda/symbiflow/xc7/toolchain AS a50t
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && xc7-arch-defs xc7a50t_test
 
 #---
 
-FROM $REGISTRY/symbiflow/xc7/toolchain AS a100t
+FROM $REGISTRY/conda/symbiflow/xc7/toolchain AS a100t
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && xc7-arch-defs xc7a100t_test
 
 #---
 
-FROM $REGISTRY/symbiflow/xc7/toolchain AS a200t
+FROM $REGISTRY/conda/symbiflow/xc7/toolchain AS a200t
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && xc7-arch-defs xc7a200t_test
 
 #---
 
-FROM $REGISTRY/symbiflow/xc7/toolchain AS z010
+FROM $REGISTRY/conda/symbiflow/xc7/toolchain AS z010
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && xc7-arch-defs xc7z010_test
 
 #---
 
-FROM $REGISTRY/symbiflow/xc7/toolchain AS z020
+FROM $REGISTRY/conda/symbiflow/xc7/toolchain AS z020
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && xc7-arch-defs xc7z020_test
 
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
-FROM $REGISTRY/symbiflow/xc7/a50t AS xc7-a50t
-FROM $REGISTRY/symbiflow/xc7/a100t AS xc7-a100t
+FROM $REGISTRY/conda/symbiflow/xc7/a50t AS xc7-a50t
+FROM $REGISTRY/conda/symbiflow/xc7/a100t AS xc7-a100t
 # TODO: This is temporarily disabled because of space limits on GitHub Actions default runners
-#FROM $REGISTRY/symbiflow/xc7/a200t AS xc7-a200t
-FROM $REGISTRY/symbiflow/xc7/z010 AS xc7-z010
-FROM $REGISTRY/symbiflow/xc7/z020 AS xc7-z020
+#FROM $REGISTRY/conda/symbiflow/xc7/a200t AS xc7-a200t
+FROM $REGISTRY/conda/symbiflow/xc7/z010 AS xc7-z010
+FROM $REGISTRY/conda/symbiflow/xc7/z020 AS xc7-z020
 
-FROM $REGISTRY/symbiflow/xc7/toolchain AS xc7
+FROM $REGISTRY/conda/symbiflow/xc7/toolchain AS xc7
 
 COPY --from=xc7-a50t /usr/local/share/symbiflow/arch/xc7a50t_test /usr/local/share/symbiflow/arch/xc7a50t_test
 COPY --from=xc7-a100t /usr/local/share/symbiflow/arch/xc7a100t_test /usr/local/share/symbiflow/arch/xc7a100t_test

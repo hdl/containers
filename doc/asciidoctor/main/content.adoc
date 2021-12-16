@@ -99,15 +99,15 @@ The base is OCIImage:conda[], which includes a https://docs.conda.io/en/latest/m
 On top of that, the following ready-to-use images allow following the guidelines in https://github.com/SymbiFlow/symbiflow-examples[image:https://img.shields.io/badge/SymbiFlow-symbiflow--examples-9258ff.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef&labelColor=5a2ab5[title='SymbiFlow/symbiflow-examples GitHub repository']]
 (https://symbiflow-examples.rtfd.io/en/latest/building-examples.html[image:https://img.shields.io/website.svg?label=symbiflow-examples.rtfd.io&longCache=true&style=flat-square&url=http%3A%2F%2Fsymbiflow-examples.rtfd.io%2Fen%2Flatest%2Findex.html&logo=ReadTheDocs&logoColor=fff[title='symbiflow-examples.rtfd.io']]):
 
-* OCIImage:symbiflow/xc7/toolchain[]: the toolchain for ``FPGA_FAM=xc7``, on top of ``conda``.
+* OCIImage:conda/symbiflow/xc7/toolchain[]: the toolchain for ``FPGA_FAM=xc7``, on top of ``conda``.
   The following images are based on this:
-** OCIImage:symbiflow/xc7/a50t[]: includes architecture definitions for _xc7a50t_.
-** OCIImage:symbiflow/xc7/a100t[]: includes architecture definitions for _xc7a100t_.
-** OCIImage:symbiflow/xc7/a200t[]: includes architecture definitions for _xc7a200t_.
-** OCIImage:symbiflow/xc7/z010[]: includes architecture definitions for _xc7z010_.
-** OCIImage:symbiflow/xc7/z020[]: includes architecture definitions for _xc7z020_.
-** OCIImage:symbiflow/xc7[]: includes all the architecture definitions for the _xc7_ family, except _xc7a200t_ (due to hard disk limits on GitHub Actions).
-* OCIImage:symbiflow/eos-s3[]: the toolchain for ``FPGA_FAM=eos-s3`` and the architecture definitions, on top of ``conda``.
+** OCIImage:conda/symbiflow/xc7/a50t[]: includes architecture definitions for _xc7a50t_.
+** OCIImage:conda/symbiflow/xc7/a100t[]: includes architecture definitions for _xc7a100t_.
+** OCIImage:conda/symbiflow/xc7/a200t[]: includes architecture definitions for _xc7a200t_.
+** OCIImage:conda/symbiflow/xc7/z010[]: includes architecture definitions for _xc7z010_.
+** OCIImage:conda/symbiflow/xc7/z020[]: includes architecture definitions for _xc7z020_.
+** OCIImage:conda/symbiflow/xc7[]: includes all the architecture definitions for the _xc7_ family, except _xc7a200t_ (due to hard disk limits on GitHub Actions).
+* OCIImage:conda/symbiflow/eos-s3[]: the toolchain for ``FPGA_FAM=eos-s3`` and the architecture definitions, on top of ``conda``.
 
 [IMPORTANT]
 ====

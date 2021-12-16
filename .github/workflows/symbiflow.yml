@@ -33,7 +33,7 @@ jobs:
   xc7-toolchain:
     uses: hdl/containers/.github/workflows/common.yml@main
     with:
-      key: symbiflow/xc7/toolchain
+      key: conda/symbiflow/xc7/toolchain
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
       gcr_token: '${{ secrets.GCR_JSON_KEY }}'
@@ -57,7 +57,7 @@ jobs:
     needs: [ xc7-devices ]
     uses: hdl/containers/.github/workflows/common.yml@main
     with:
-      key: symbiflow/xc7
+      key: conda/symbiflow/xc7
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
       gcr_token: '${{ secrets.GCR_JSON_KEY }}'

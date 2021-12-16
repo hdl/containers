@@ -111,14 +111,14 @@ defaults:
     # SuperProve
     pkg/superprove: *EmptyPkgTarget
     # SymbiFlow:
-    symbiflow/xc7/toolchain: { <<: *SymbiFlowDockerfile, target: xc7-toolchain }
-    symbiflow/xc7/a50t:      { <<: *SymbiFlowDockerfile, target: a50t          }
-    symbiflow/xc7/a100t:     { <<: *SymbiFlowDockerfile, target: a100t         }
-    symbiflow/xc7/a200t:     { <<: *SymbiFlowDockerfile, target: a200t         }
-    symbiflow/xc7/z010:      { <<: *SymbiFlowDockerfile, target: z010          }
-    symbiflow/xc7/z020:      { <<: *SymbiFlowDockerfile, target: z020          }
-    symbiflow/xc7:           { <<: *SymbiFlowDockerfile, target: xc7           }
-    symbiflow/eos-s3:        { <<: *SymbiFlowDockerfile, target: eos-s3        }
+    conda/symbiflow/xc7/toolchain: { <<: *SymbiFlowDockerfile, target: xc7-toolchain }
+    conda/symbiflow/xc7/a50t:      { <<: *SymbiFlowDockerfile, target: a50t          }
+    conda/symbiflow/xc7/a100t:     { <<: *SymbiFlowDockerfile, target: a100t         }
+    conda/symbiflow/xc7/a200t:     { <<: *SymbiFlowDockerfile, target: a200t         }
+    conda/symbiflow/xc7/z010:      { <<: *SymbiFlowDockerfile, target: z010          }
+    conda/symbiflow/xc7/z020:      { <<: *SymbiFlowDockerfile, target: z020          }
+    conda/symbiflow/xc7:           { <<: *SymbiFlowDockerfile, target: xc7           }
+    conda/symbiflow/eos-s3:        { <<: *SymbiFlowDockerfile, target: eos-s3        }
     # SymbiYosys
     pkg/symbiyosys: *EmptyPkgTarget
     # Yices2
@@ -156,11 +156,11 @@ jobs:
     z3:         *SysDebianAmd64
 
   runonly:
-    conda:                   *SysDebianBullseyeAmd64
-    prog:                    *SysDebianAmd64
-    sim:                     *SysDebianAmd64
-    symbiflow/xc7/toolchain: *SysDebianBullseyeAmd64
-    symbiflow/xc7:           *SysDebianBullseyeAmd64
+    conda:                         *SysDebianBullseyeAmd64
+    prog:                          *SysDebianAmd64
+    sim:                           *SysDebianAmd64
+    conda/symbiflow/xc7/toolchain: *SysDebianBullseyeAmd64
+    conda/symbiflow/xc7:           *SysDebianBullseyeAmd64
 
   custom:
     base:
@@ -244,13 +244,13 @@ jobs:
       sys: *SysDebianAmd64
     symbiflow-xc7-devices:
       images:
-        - [ symbiflow/xc7/a50t  ]
-        - [ symbiflow/xc7/a100t ]
-        - [ symbiflow/xc7/a200t ]
-        - [ symbiflow/xc7/z010  ]
-        - [ symbiflow/xc7/z020  ]
+        - [ conda/symbiflow/xc7/a50t  ]
+        - [ conda/symbiflow/xc7/a100t ]
+        - [ conda/symbiflow/xc7/a200t ]
+        - [ conda/symbiflow/xc7/z010  ]
+        - [ conda/symbiflow/xc7/z020  ]
       sys: *SysDebianBullseyeAmd64
     symbiflow-eos-s3:
       images:
-        - symbiflow/eos-s3
+        - conda/symbiflow/eos-s3
       sys: *SysDebianBullseyeAmd64
