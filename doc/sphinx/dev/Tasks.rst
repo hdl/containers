@@ -24,3 +24,5 @@ The strategical priorities are the following:
    These are all in no particular order, although most of them are closely related to each other.
    It you want to tackle any of them, `let us know <https://github.com/hdl/containers/issues/new>`__ or `join the chat <https://gitter.im/hdl/community>`__!
    
+.. include:: Credentials.rst
+   

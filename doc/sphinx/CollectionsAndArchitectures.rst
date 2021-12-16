@@ -1,7 +1,7 @@
 .. _colections:
 
 Collections and architectures
-#############################
+=============================
 
 Images are organised in *collections* and built for multiple architectures.
 A *collection* is a set of images which share a common ancestor; a base layer.
@@ -25,11 +25,14 @@ Architectures:
 * `riscv64 <https://hub.docker.com/u/riscv64>`__
 
 Each image is published to
+
 .. |SHIELD:WorkflowTest| image: https://img.shields.io/badge/-gcr.io/hdl--containers/&#91;ARCHITECTURE/&#93;&#91;COLLECTION/&#93;IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef
    :alt:
    :height: 22
    :target: 
+
 and
+
 .. |SHIELD:WorkflowTest| image: https://img.shields.io/badge/-ghcr.io/hdl/&#91;ARCHITECTURE/&#93;&#91;COLLECTION/&#93;IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef
    :alt:
    :height: 22

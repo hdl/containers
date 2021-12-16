@@ -1,7 +1,7 @@
 .. _Development:credentials:
 
 Credentials
-###########
+===========
 
 In order to push images to container registries, credentials are required.
 The default ``github.token`` is enough for publishint to GHCR, however, docker.io and GCR do need specific secrets to be

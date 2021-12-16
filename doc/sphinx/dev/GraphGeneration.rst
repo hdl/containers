@@ -1,7 +1,7 @@
 .. _Development:graph-generation:
 
 Graph generation/parsing
-########################
+========================
 
 Currently, the :ref:`Graphs <Development:graphs>` are updated manually.
 That is error prone, because the information shown in them is also defined in the dockerfiles and CI workflows.
@@ -100,7 +100,7 @@ Therefore, the complexity of generating the JSON given a set of nodes, edges and
    Do you want to give it a try? `Let us know <https://github.com/hdl/containers/issues/new>`__ or `join the chat <https://gitter.im/hdl/community>`__!
 
 Reading dockerfiles
-===================
+-------------------
 
 One of the two sources of information for the graph are dockerfiles.
 As far as we are aware, there is no tool for generating a DAG from the stages of a dockerfile.
@@ -110,7 +110,7 @@ Hence, it can be used for getting the stages and ``COPY --from`` or ``--mount`` 
 See :ghsrc:`utils/pyHDLC/map.py <utils/pyHDLC/map.py>`].
 
 Reading GitHub Actions workflow files
-=====================================
+-------------------------------------
 
 The second source of information are CI workflow files.
 Since YAML is used, reading it from any language is trivial, however, semantic analysis needs to be done.

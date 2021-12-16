@@ -1,10 +1,8 @@
 .. _UserGuide:
 
-HDLC: User Guide
-################
+Introduction
+############
 
-.. tip::
-   Do you want to improve this page? `Edit it on GitHub <https://github.com/hdl/containers/edit/main/doc>`__!
 
 .. important::
    Image names and tags in this documentation are provided without the *registry prefix*.

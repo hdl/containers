@@ -99,3 +99,5 @@ On top of that, the following ready-to-use images allow following the guidelines
   * xc7: 18 GB (would be 30 GB if a200t was included)
 
   * eos-s3: 2 GB
+
+.. include::ToDo.rst 

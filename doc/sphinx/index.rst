@@ -38,14 +38,12 @@ All the images are pushed to `gcr.io/hdl-containers <http://gcr.io/hdl-container
    :height: 22
    :target: https://hub.docker.com/u/hdlc
 
-Find usage guidelines and how to contribute in the following sections:
-
-- `User Guide <ug/index.html>`
-- `Development and contributing <dev/index.html>`__
+.. include::CollectionsAndArchitectures.rst
 
 .. toctree::
   :hidden:
 
+  Home <http://hdl.github.io/containers>
   CollectionsAndArchitectures
   ToolsAndImages
   ToDo
@@ -60,20 +58,23 @@ Find usage guidelines and how to contribute in the following sections:
   Fine-grained pulling <ug/FineGrained>
   All-in-one images <ug/AllInOne>
   Tools with GUI <ug/GUI>
-  USB/IP protocol support for Docker Desktop <ug/USBIP>
+  USB/IP <ug/USBIP>
 
 .. toctree:: 
   :caption: Development
   :hidden:
 
   dev/Contributing
+  Graphs <dev/Graphs>
+  Package Images <dev/PackageImages>
+  Utils <dev/Utils>
   Continuous Integration <dev/CI>
   Tasks <dev/Tasks>
-  Credentials <dev/Credentials>
-  Graph Generation <dev/Graph>
 
 .. toctree:: 
+  :caption: Appendix
   :hidden:
 
+  References 
 
   
