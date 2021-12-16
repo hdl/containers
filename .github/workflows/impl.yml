@@ -130,7 +130,7 @@ jobs:
 
     - name: Release
       if: github.event_name != 'pull_request'
-      uses: ./utils/with-post-step
+      uses: pyTooling/Actions/with-post-step@r0
       with:
         main: |
           echo '${{ secrets.GCR_JSON_KEY }}' | docker login gcr.io -u _json_key --password-stdin

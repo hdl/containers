@@ -74,7 +74,7 @@ runs:
       check_call(['pyHDLC', 'build'] + runtest + cargs + ['-d'] + '${{ inputs.images }}'.split(' '))
 
   - name: Release
-    uses: ./utils/with-post-step
+    uses: pyTooling/Actions/with-post-step@r0
     with:
       main: |
         # Release

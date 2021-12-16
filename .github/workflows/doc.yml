@@ -49,7 +49,7 @@ jobs:
       run: make -C doc asciidoctor-py pyHDLC
 
     - name: Push container images
-      uses: ./utils/with-post-step
+      uses: pyTooling/Actions/with-post-step@r0
       with:
         main: |
           echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
