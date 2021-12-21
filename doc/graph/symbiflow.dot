@@ -86,14 +86,14 @@ digraph G {
       "t_SymbiFlow_eos-s3"        [label="conda/symbiflow/eos-s3"];
     }
 
-    "symbiflow/xc7/toolchain"  -> "t_SymbiFlow_xc7_toolchain";
-    "symbiflow/xc7/a50t"       -> "t_SymbiFlow_xc7_a50t";
-    "symbiflow/xc7/a100t"      -> "t_SymbiFlow_xc7_a100t";
-    "symbiflow/xc7/a200t"      -> "t_SymbiFlow_xc7_a200t";
-    "symbiflow/xc7/z010"       -> "t_SymbiFlow_xc7_z010";
-    "symbiflow/xc7/z020"       -> "t_SymbiFlow_xc7_z020";
-    "symbiflow/xc7"            -> "t_SymbiFlow_xc7";
-    "symbiflow/eos-s3"         -> "t_SymbiFlow_eos-s3";
+    "conda/symbiflow/xc7/toolchain"  -> "t_SymbiFlow_xc7_toolchain";
+    "conda/symbiflow/xc7/a50t"       -> "t_SymbiFlow_xc7_a50t";
+    "conda/symbiflow/xc7/a100t"      -> "t_SymbiFlow_xc7_a100t";
+    "conda/symbiflow/xc7/a200t"      -> "t_SymbiFlow_xc7_a200t";
+    "conda/symbiflow/xc7/z010"       -> "t_SymbiFlow_xc7_z010";
+    "conda/symbiflow/xc7/z020"       -> "t_SymbiFlow_xc7_z020";
+    "conda/symbiflow/xc7"            -> "t_SymbiFlow_xc7";
+    "conda/symbiflow/eos-s3"         -> "t_SymbiFlow_eos-s3";
   }
 
   # Dockerfile dependencies
@@ -105,21 +105,21 @@ digraph G {
   # Image dependencies
 
   { edge [style=dashed]
-    "symbiflow/xc7/toolchain" -> "conda/symbiflow/xc7/a50t";
-    "symbiflow/xc7/toolchain" -> "conda/symbiflow/xc7/a100t";
-    "symbiflow/xc7/toolchain" -> "conda/symbiflow/xc7/a200t";
-    "symbiflow/xc7/toolchain" -> "conda/symbiflow/xc7/z010";
-    "symbiflow/xc7/toolchain" -> "conda/symbiflow/xc7/z020";
-    "symbiflow/xc7/toolchain" -> "conda/symbiflow/xc7";
+    "conda/symbiflow/xc7/toolchain" -> "conda/symbiflow/xc7/a50t";
+    "conda/symbiflow/xc7/toolchain" -> "conda/symbiflow/xc7/a100t";
+    "conda/symbiflow/xc7/toolchain" -> "conda/symbiflow/xc7/a200t";
+    "conda/symbiflow/xc7/toolchain" -> "conda/symbiflow/xc7/z010";
+    "conda/symbiflow/xc7/toolchain" -> "conda/symbiflow/xc7/z020";
+    "conda/symbiflow/xc7/toolchain" -> "conda/symbiflow/xc7";
   }
 
   { edge [style=dashed, color=grey]
-    "symbiflow/xc7/a50t"  -> "conda/symbiflow/xc7";
-    "symbiflow/xc7/a100t" -> "conda/symbiflow/xc7";
+    "conda/symbiflow/xc7/a50t"  -> "conda/symbiflow/xc7";
+    "conda/symbiflow/xc7/a100t" -> "conda/symbiflow/xc7";
     # TODO: This is temporarily disabled because of space limits on GitHub Actions default runners
-    #"symbiflow/xc7/a200t" -> "conda/symbiflow/xc7";
-    "symbiflow/xc7/z010"  -> "conda/symbiflow/xc7";
-    "symbiflow/xc7/z020"  -> "conda/symbiflow/xc7";
+    #"conda/symbiflow/xc7/a200t" -> "conda/symbiflow/xc7";
+    "conda/symbiflow/xc7/z010"  -> "conda/symbiflow/xc7";
+    "conda/symbiflow/xc7/z020"  -> "conda/symbiflow/xc7";
   }
 
 }
