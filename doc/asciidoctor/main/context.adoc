@@ -1,15 +1,16 @@
 == Context
 
-This project started in GitHub repository https://github.com/ghdl/ghdl[ghdl/ghdl] (which was named tgingold/ghdl back
-then).
-The main purpose was testing GHDL on multiple GNU/Linux distributions (Debian, Ubuntu and Fedora), since https://travis-ci.org/[Travis CI] supported Ubuntu only and Docker.
+This project started in early 2017 at GitHub repository https://github.com/ghdl/ghdl[ghdl/ghdl] (which was named
+tgingold/ghdl back then).
+The main purpose was testing GHDL on multiple GNU/Linux distributions (Debian, Ubuntu and Fedora), since
+https://travis-ci.org/[Travis CI] supported Ubuntu only and Docker.
 For each target platform, two images were used, one for building and another one for testing.
 
 Later, most of the Docker related sources were split to repository https://github.com/ghdl/docker[ghdl/docker].
 There, some additional simulation tools were added, such as http://vunit.github.io/[VUnit] and http://gtkwave.sourceforge.net/[GtkWave].
 Images including the https://github.com/ghdl/ghdl-language-server[ghdl-language-server] were also added.
-When synthesis features were developed in GHDL, and since it provides a plugin for https://github.com/YosysHQ/yosys[Yosys],
-tools for providing a complete open source bitstream generation and formal verification workflow were requested and
+When experimental synthesis support was added to GHDL in 2019, and since it provides a plugin for https://github.com/YosysHQ/yosys[Yosys],
+containers including tools for providing a complete open source bitstream generation and formal verification workflow were requested and
 contributed.
 Those were
 https://github.com/YosysHQ/nextpnr[nextpnr],
@@ -19,16 +20,24 @@ https://github.com/YosysHQ/SymbiYosys[SymbiYosys],
 etc.
 
 At some point, ghdl/docker had as much content related to non-GHDL tools, as resources related to the organisation.
+In the second half of 2019, sharing the development effort was proposed to maintainers of Yosys (https://github.com/YosysHQ/yosys/issues/1287[YosysHQ/yosys#1287])
+and LibreCores (https://github.com/librecores/docker-images/issues/33[librecores/docker-images#33]) which went unfortunately
+unnoticed.
+
 At the same time, https://symbiflow.github.io[SymbiFlow] aimed at gathering open source projects for providing an
 integrated open source EDA solution.
 However, it did not have official container images and https://symbiflow.github.io/developers.html[help was wanted].
 This repository was initially created for moving all the tools which were not part of GHDL, from ghdl/docker to
 symbiflow/containers.
-However, apart from adding known Verilog tools, the scope was widened.
-Hence, the repository was published in https://github.com/hdl/containers[hdl/containers].
+However, since the scope of SymbiFlow was (partially still is) Verilog, the scope was widened to include VHDL, and the
+repository was published at https://github.com/hdl/containers[hdl/containers] in 2020.
 
-In parallel to splitting ghdl/docker form ghdl/ghdl, https://github.com/dbhi/qus[dbhi/qus] was created as a
-generalisation of https://github.com/multiarch/qemu-user-static[multiarch/qemu-user-static].
-_qus_ was used in https://github.com/dbhi/containers[dbhi/containers] to build multi-architecture container images and
+In parallel to splitting ghdl/docker from ghdl/ghdl, in early 2019 https://github.com/dbhi/qus[dbhi/qus] was created as
+a generalisation of https://github.com/multiarch/qemu-user-static[multiarch/qemu-user-static].
+_qus_ is used in https://github.com/dbhi/containers[dbhi/containers] to build multi-architecture container images and
 manifests on Continuous Integration (CI) services with amd64 hosts only (say Travis CI or https://github.com/features/actions[GitHub Actions]).
 Currently, hdl/containers uses the same solution to build container images for _foreign_ architectures.
+
+Until the end of 2020, the scope of hdl/containers was limited to HDL simulation, formal verification and FPGA bitstream
+generation; and container images were distributed through ``docker.io`` only.
+Since 2021, tools for ASIC development are also provided, and two other registries are used as well: ``gcr.io`` and ``ghcr.io``.
