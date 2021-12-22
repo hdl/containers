@@ -54,7 +54,12 @@ Moreover, https://github.com/PyFPGA/[PyFPGA] is a set of Python classes for vend
 https://github.com/PyFPGA/openflow[PyFPGA/openflow] allows running GHDL, Yosys, etc. in containers.
 In fact, openflow can be used along with https://github.com/olofk/edalize[Edalize]'s `EDALIZE_LAUNCHER` environment
 variable.
-See also https://github.com/librecores/eda-container-wrapper[librecores/eda-container-wrapper].
+See also:
+
+* https://github.com/librecores/eda-container-wrapper[librecores/eda-container-wrapper]
+* https://github.com/olofk/edalize/pull/221[Support for open source EDA tools from containers (olofk/edalize#221)]
+** https://gist.github.com/olofk/f6873f448bf0cdaf1e2260058a0da09c[olofk/edalize_docker_launcher.py]
+** https://gist.github.com/carlosedp/c0e29d55e48309a48961f2e3939acfe9[carlosedp/runme.py]
 
 
 == All-in-one images
