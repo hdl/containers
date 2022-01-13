@@ -1,6 +1,7 @@
 __pycache__/
 *.egg-info/
 .vscode
+
 /doc/asciidoctor/.asciidoctor
 /doc/asciidoctor/public/
 /doc/asciidoctor/main/tools.adoc
@@ -12,4 +13,7 @@ __pycache__/
 /doc/asciidoctor/img/legend.svg
 /doc/asciidoctor/img/sim.svg
 /doc/asciidoctor/img/synth.svg
+
+/doc/sphinx/_build/
+/doc/sphinx/_theme/
 /utils/pyHDLC/dist/

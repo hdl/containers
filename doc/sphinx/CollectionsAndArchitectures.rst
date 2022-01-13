@@ -1,12 +1,14 @@
+.. include:: shields.collections.inc
+
 .. _colections:
 
 Collections and architectures
 =============================
 
-Images are organised in *collections* and built for multiple architectures.
+Images in this repository are organised in *collections* and built for multiple architectures.
 A *collection* is a set of images which share a common ancestor; a base layer.
 Having images with a common ancestor allows reducing bandwidth and disk usage when pulling several of them.
-See `docs.docker.com: About storage drivers | Images and layers <https://docs.docker.com/storage/storagedriver/#images-and-layers>`__
+See `docs.docker.com: About storage drivers | Images and layers <https://docs.docker.com/storage/storagedriver/#images-and-layers>`__.
 
 Collections:
 
@@ -24,26 +26,22 @@ Architectures:
 * `mips64le <https://hub.docker.com/u/mips64le>`__
 * `riscv64 <https://hub.docker.com/u/riscv64>`__
 
-Each image is published to
+Each image is published to both `gcr.io` and `ghcr.io`:
 
-.. |SHIELD:WorkflowTest| image: https://img.shields.io/badge/-gcr.io/hdl--containers/&#91;ARCHITECTURE/&#93;&#91;COLLECTION/&#93;IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef
-   :alt:
-   :height: 22
-   :target: 
+.. centered:: |SHIELD:Generic:GCR| |SHIELD:Generic:GHCR|
 
-and
+However, fields ``ARCHITECURE`` and ``COLLECTION`` are optional because:
 
-.. |SHIELD:WorkflowTest| image: https://img.shields.io/badge/-ghcr.io/hdl/&#91;ARCHITECTURE/&#93;&#91;COLLECTION/&#93;IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef
-   :alt:
-   :height: 22
-   :target: 
+* Images for the default architecture are mirrored to |SHIELD:Mirror:GCR:NoArchitecture| and
+  |SHIELD:Mirror:GHCR:NoArchitecture|.
 
-However, the ``ARCHITECURE`` and ``COLLECTION`` are optional because:
+* Images of the default collection are mirrored to |SHIELD:Mirror:GCR:NoCollection| and
+  |SHIELD:Mirror:GHCR:NoCollection|.
 
-* Images for the default architecture are mirrored to image:https://img.shields.io/badge/-gcr.io/hdl--containers/COLLECTION/IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[] and image:https://img.shields.io/badge/-ghcr.io/hdl/COLLECTION/IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[].
-* Images of the default collection are mirrored to image:https://img.shields.io/badge/-gcr.io/hdl--containers/ARCHITECTURE/IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[] and image:https://img.shields.io/badge/-ghcr.io/hdl/ARCHITECTURE/IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[].
-* Images of the default collection for the default architecture are mirrored to https://hub.docker.com/u/hdlc[image:https://img.shields.io/badge/-docker.io/hdlc-555555.svg?longCache=true&style=flat-square&logo=Docker&logoColor=f2f1ef[title='Docker Hub']].
-* Images of the default collection for the default architecture which are not ``build`` or ``pkg`` are mirrored to image:https://img.shields.io/badge/-gcr.io/hdl--containers/IMAGE-555555.svg?longCache=true&style=flat-square&logo=Google%20Cloud&logoColor=f2f1ef[] and image:https://img.shields.io/badge/-ghcr.io/hdl/IMAGE-555555.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef[].
+* Images of the default collection for the default architecture are mirrored to |SHIELD:Mirror:Docker|.
+
+* Images of the default collection for the default architecture which are not ``build`` or ``pkg`` are mirrored to
+  |SHIELD:Mirror:GCR:Default| and |SHIELD:Mirror:GHCR:Default|.
 
 .. important::
    Image names and tags in this documentation are provided without the *registry prefix*.
@@ -51,6 +49,8 @@ However, the ``ARCHITECURE`` and ``COLLECTION`` are optional because:
    See :ref:`User Guide <UserGuide>` for further details.
 
 .. important::
-   The table below shows the tools available in the default collection for the default architecture.
+   The table in :ref:`tools-and-images` shows the tools available in the default collection for the default
+   architecture.
    Some tools are available in a subset of collections or for a subset of architectures only.
-   Browse the registries and/or the Continuous Integration workflows for finding images available in collections other than the default.
+   Browse the registries and/or the Continuous Integration workflows for finding images available in collections other
+   than the default.

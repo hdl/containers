@@ -10,7 +10,7 @@ Utils
    Since ``pip`` is used for installing :ghsrc:`utils/pyHDLC/requirements.txt <utils/pyHDLC/requirements.txt>`, it is desirable to create a virtual environment (`docs.python.org/3/library/venv <https://docs.python.org/3/library/venv.html>`__) before running ``setup.sh``:
 
   .. code-block:: shell
-     
+
     virtualenv venv
     source venv/bin/activate
     ./utils/setup.sh
@@ -28,7 +28,7 @@ Build
 
    positional arguments:
      Image                 image name(s), without registry prefix.
-   
+
    optional arguments:
      -h, --help            show this help message and exit
      -a ARCHITECTURE, --arch ARCHITECTURE
@@ -86,10 +86,12 @@ It can be downloaded as a tarball/zipfile, or used as a container:
      wagoodman/dive \
      REGISTRY/[ARCHITECTURE/][COLLECTION/]IMAGE[:TAG]
 
-[#img-dive]
-.Inspection of `REGISTRY/pkg/yosys` with https://github.com/wagoodman/dive[wagoodman/dive].
-[link=img/dive.png]
-image::dive.png[wagoodman/dive, align="center"]
+.. figure:: ../_static/img/dive.png
+  :alt: gh:wagoodman/dive
+  :width: 100%
+  :align: center
+
+  Inspection of ``REGISTRY/pkg/yosys`` with :ghrepo:`wagoodman/dive`.
 
 :ghsrc:`dockerDive <utils/bin/dockerDive>` is a wrapper around the wagoodman/dive container, which supports one
 or two arguments for specifying the image to be inspected.
@@ -127,10 +129,10 @@ It is used in CI but can be useful locally too:
 .. code-block:: shell
 
    usage: pyHDLC test [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY] Image[#<DirName>] [Image[#<DirName>] ...]
-   
+
    positional arguments:
      Image                 image name(s), without registry prefix.
-   
+
    optional arguments:
      -h, --help            show this help message and exit
      -a ARCHITECTURE, --arch ARCHITECTURE
@@ -145,7 +147,7 @@ It is used in CI but can be useful locally too:
 
 .. important::
 
-   ``DirName`` allows to optionally specify the name of the directory inside the package image which needs to be copied 
+   ``DirName`` allows to optionally specify the name of the directory inside the package image which needs to be copied
    to the temporary image for testing.
    By default, the escaped name of the image is used as the location.
    Therefore, ``DirName`` is used exceptionally.

@@ -102,8 +102,9 @@ intersphinx_mapping = {
 
 extlinks = {
     "wikipedia": ("https://en.wikipedia.org/wiki/%s", None),
+    "ghrepo": ("https://github.com/%s", ""),
     "ghsharp": ("https://github.com/hdl/containers/issues/%s", "#"),
     "ghissue": ("https://github.com/hdl/containers/issues/%s", "issue #"),
     "ghpull": ("https://github.com/hdl/containers/pull/%s", "pull request #"),
-    "ghsrc": ("https://github.com/hdl/containers/blob/main/%s", None),
+    "ghsrc": ("https://github.com/hdl/containers/blob/main/%s", ""),
 }

@@ -8,12 +8,11 @@ Then, smoke tests are executed and, if successful, the corresponding images are 
 However, some specific tools are *not* built from sources, but installed through system package managers.
 Those are marked with ``!`` in the table below.
 
-.. note::
-  
+include::ToolsTable.py[]
+
+.. NOTE::
   Package images are not to be used for executing the tools, but for composing images including multiple resources.
   See `Development: Package images <dev/index.html#_package_images>`__ for further details.
-
-include::ToolsTable.py[]
 
 Images including multiple tools
 ===============================
@@ -100,4 +99,16 @@ On top of that, the following ready-to-use images allow following the guidelines
 
   * eos-s3: 2 GB
 
-.. include::ToDo.rst 
+.. _tools-and-images:to-do:
+
+To Do
+=====
+
+* `BitMan <https://github.com/khoapham/bitman>`__
+* `ecpprog <https://hdl.github.io/awesome/items/ecpprog>`__
+* `fujprog <https://hdl.github.io/awesome/items/fujprog>`__
+* `netlistsvg <https://hdl.github.io/awesome/items/netlistsvg>`__
+* `xschem <https://github.com/StefanSchippers/xschem>`__ (`#28 <https://github.com/hdl/containers/issues/28>`__)
+* `IRSIM <http://opencircuitdesign.com/irsim/>`__ (`#30 <https://github.com/hdl/containers/issues/30>`__)
+* `ecpdap <https://github.com/adamgreig/ecpdap>`__
+* `LSOracle <https://github.com/lnis-uofu/LSOracle>`__
