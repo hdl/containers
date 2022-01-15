@@ -1,9 +1,11 @@
 <p align="center">
-  <a title="hdl.github.io/containers" href="https://hdl.github.io/containers"><img src="https://img.shields.io/website.svg?label=hdl.github.io%2Fcontainers&longCache=true&style=flat-square&url=http%3A%2F%2Fhdl.github.io%2Fcontainers%2Findex.html&logo=Asciidoctor&logoColor=fff"></a><!--
+  <a title="hdl.github.io/containers" href="https://hdl.github.io/containers"><img src="https://img.shields.io/website?longCache=true&style=flat-square&label=hdl.github.io%2Fcontainers&logo=GitHub&logoColor=fff&up_color=blueviolet&up_message=Read%20now%20%E2%9E%9A&url=https%3A%2F%2Fhdl.github.io%2Fcontainers%2Findex.html"></a><!--
   -->
-  <a title="hdl/packages GitHub repository" href="https://github.com/hdl/packages"><img src="https://img.shields.io/badge/hdl-packages-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef"></a><!--
+  <a title="Apache-2.0" href="https://hdl.github.io/containers/License.html"><img src="https://img.shields.io/github/license/hdl/containers?longCache=true&style=flat-square&logo=Apache&label=Code"></a><!--
   -->
-  <a title="hdl/community on gitter.im" href="https://gitter.im/hdl/community"><img src="https://img.shields.io/gitter/room/hdl/community.svg?longCache=true&style=flat-square&logo=gitter&logoColor=fff&color=4db797"></a><!--
+  <a title="CC-BY-4.0" href="https://hdl.github.io/containers/Doc-License.html"><img src="https://img.shields.io/badge/Doc-CC--BY%204.0-bf7600?longCache=true&style=flat-square&logo=CreativeCommons"></a><!--
+  -->
+  <a title="hdl/community on gitter.im" href="https://gitter.im/hdl/community"><img src="https://img.shields.io/gitter/room/hdl/community.svg?longCache=true&style=flat-square&logo=gitter&logoColor=fff&color=4db797&label=Chat"></a><!--
   -->
 </p>
 
