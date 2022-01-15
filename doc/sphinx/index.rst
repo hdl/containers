@@ -1,4 +1,4 @@
-.. include:: shields.index.inc
+.. include:: shields/shields.index.inc
 
 HDL Containers
 ##############

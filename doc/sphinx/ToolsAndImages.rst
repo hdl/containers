@@ -3,7 +3,7 @@
 Tools and images
 ################
 
-.. include:: shields.tools.inc
+.. include:: shields/shields.tools.gen.inc
 
 By default, latest development versions (branches ``master`` | ``main``) of tools are built.
 Then, smoke tests are executed and, if successful, the corresponding images are updated in the registries.
@@ -49,7 +49,7 @@ Images including multiple tools
 SymbiFlow (Conda)
 =================
 
-.. include:: shields.conda.inc
+.. include:: shields/shields.conda.inc
 
 `SymbiFlow <https://hdl.github.io/awesome/items/symbiflow/>`__ is an ecosystem of EDA tools for the development of FPGAs
 of multiple vendors.

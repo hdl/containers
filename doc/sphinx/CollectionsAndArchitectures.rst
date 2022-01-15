@@ -1,4 +1,4 @@
-.. include:: shields.collections.inc
+.. include:: shields/shields.collections.inc
 
 .. _colections:
 

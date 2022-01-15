@@ -97,17 +97,28 @@ with (ROOT/'ToolsTable.inc').open('w') as fptr:
         tablefmt='rst'
     ))
 
-# -- Generate shields.tools.inc ----------------------------------------------------------------------------------------
+# -- Generate shields.tools.inc and shields.build.inc ------------------------------------------------------------------
 
-with (ROOT / 'shields.tools.inc').open('w', encoding='utf-8') as wfptr:
-    for image in shields:
-        arr = image.replace('/',':', 1).replace('/','--').split(':')
-        wfptr.write(f"""
+def OCIImage(image):
+    arr = image.replace('/',':', 1).replace('/','--').split(':')
+    return f"""
 .. |SHIELD:Image:{image}| image:: https://img.shields.io/docker/image-size/hdlc/{arr[0]}/{arr[1] if len(arr) > 1 else 'latest'}?longCache=true&style=flat-square&label={image}&logo=Docker&logoColor=fff
    :alt: '{image} container image size'
    :height: 22
    :target: https://gcr.io/hdl-containers/{'debian/bullseye/' if arr[0] in ['pkg', 'build'] else ''}{image}
-""")
+"""
+
+with (ROOT / 'shields/shields.tools.gen.inc').open('w', encoding='utf-8') as wfptr:
+    for image in shields:
+        wfptr.write(OCIImage(image))
+
+with (ROOT / 'shields/shields.build.gen.inc').open('w', encoding='utf-8') as wfptr:
+    for image in [
+        'build/base',
+        'build/build',
+        'build/dev',
+    ]:
+        wfptr.write(OCIImage(image))
 
 # -- General configuration ---------------------------------------------------------------------------------------------
 
