@@ -1,7 +1,7 @@
 # Authors:
 #   Unai Martinez-Corral
 #
-# Copyright 2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2021-2022 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,56 +17,10 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-build:
-	docker run --rm \
-	  -v /$(shell pwd)/..://documents/ \
-	  hdlc/doc:asciidoctor-py \
-	  make -C doc all
-
-asciidoctor-py:
-	docker build \
-	  -t hdlc/doc:asciidoctor-py \
-	  -f- ../ < doc--asciidoctor-py.dockerfile
-
 pyHDLC:
 	docker build \
 	  -t hdlc/doc:pyHDLC \
 	  -f- ../ < doc--pyHDLC.dockerfile
-
-clean-img:
-	if [ -d public/img ]; then rm -rf public/img; fi
-
-all: clean-img main-html ug-html dev-html
-	mkdir -p asciidoctor/public/img/
-	cp -vr asciidoctor/img/* asciidoctor/public/img/
-
-main-html:
-	cd asciidoctor/main && \
-	./gen_tool_table.py && \
-	asciidoctor \
-	  -r ../lib/OCIImage-inline-macro.rb \
-	  -r ../lib/GHAStatus-inline-macro.rb \
-	  -r asciidoctor-diagram \
-	  index.adoc \
-	  --out-file ../public/index.html
-
-ug-html:
-	cd asciidoctor/ug && \
-	asciidoctor \
-	  -r ../lib/OCIImage-inline-macro.rb \
-	  -r ../lib/GHAStatus-inline-macro.rb \
-	  -r asciidoctor-diagram \
-	  index.adoc \
-	  --out-file ../public/ug/index.html
-
-dev-html:
-	cd asciidoctor/dev && \
-	asciidoctor \
-	  -r ../lib/OCIImage-inline-macro.rb \
-	  -r ../lib/GHAStatus-inline-macro.rb \
-	  -r asciidoctor-diagram \
-	  index.adoc \
-	  --out-file ../public/dev/index.html
 
 map:
 	docker run --rm \
