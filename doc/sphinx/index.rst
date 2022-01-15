@@ -1,16 +1,13 @@
-.. include:: shields/shields.index.inc
-
 HDL Containers
 ##############
+
+.. include:: shields/shields.index.inc
 
 .. centered::
   |SHIELD:Code:Repository|
   |SHIELD:Code:License|
+  |SHIELD:Documentation:License|
   |SHIELD:Community:Chat|
-  |SHIELD:HDL:packages|
-  |SHIELD:HDL:awesome|
-  |SHIELD:HDL:constraints|
-  |SHIELD:HDL:smoke-tests|
 
 .. raw:: html
 
@@ -41,7 +38,7 @@ All the images are pushed to `gcr.io/hdl-containers <http://gcr.io/hdl-container
   Home <http://hdl.github.io/containers>
   CollectionsAndArchitectures
   ToolsAndImages
-  Context
+  About
 
 .. toctree::
   :caption: User Guide
@@ -69,5 +66,6 @@ All the images are pushed to `gcr.io/hdl-containers <http://gcr.io/hdl-container
   :hidden:
 
   References
-
+  License
+  Doc-License
 

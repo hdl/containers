@@ -262,7 +262,8 @@ intersphinx_mapping = {
     "edaa":    ("https://edaa-org.github.io", None),
     "clitool": ("https://edaa-org.github.io/pyEDAA.CLITool", None),
     "edalize": ("https://edalize.rtfd.io/en/latest", None),
-    "pyfpga":  ("https://pyfpga.github.io/pyfpga", None)
+    "pyfpga":  ("https://pyfpga.github.io/pyfpga", None),
+    "qus":     ("https://dbhi.github.io/qus", None),
 }
 
 # -- Sphinx.Ext.ExtLinks -----------------------------------------------------------------------------------------------
