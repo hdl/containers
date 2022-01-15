@@ -198,7 +198,11 @@ texinfo_documents = [
 # -- Sphinx.Ext.InterSphinx --------------------------------------------------------------------------------------------
 
 intersphinx_mapping = {
-    "python": ("https://docs.python.org/3/", None),
+    "python":  ("https://docs.python.org/3/", None),
+    "edaa":    ("https://edaa-org.github.io", None),
+    "clitool": ("https://edaa-org.github.io/pyEDAA.CLITool", None),
+    "edalize": ("https://edalize.rtfd.io/en/latest", None),
+    "pyfpga":  ("https://pyfpga.github.io/pyfpga", None)
 }
 
 # -- Sphinx.Ext.ExtLinks -----------------------------------------------------------------------------------------------
