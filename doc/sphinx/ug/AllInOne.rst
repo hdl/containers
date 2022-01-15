@@ -6,7 +6,7 @@ All-in-one images
 .. role:: maroon
 
 .. NOTE::
-   These images are coloured :maroon:`BROWN` in the :ref:`Graph generation/parsing <Development:graph-generation>`.
+   These images are coloured :maroon:`BROWN` in the :ref:`Development:graphs`.
 
 Multiple tools from fine-grained images are included in larger images for common use cases.
 These are named ``REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]MAIN_USAGE``.

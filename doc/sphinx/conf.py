@@ -126,6 +126,7 @@ extensions = [
     # Standard Sphinx extensions
     "sphinx.ext.extlinks",
     "sphinx.ext.intersphinx",
+    "sphinx.ext.graphviz",
 ]
 
 templates_path = ["_templates"]

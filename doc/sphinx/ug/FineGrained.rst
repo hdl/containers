@@ -6,7 +6,7 @@ Fine-grained pulling
 .. role:: green
 
 .. NOTE::
-  These images are coloured :green:`GREEN` in the :ref:`Graph generation/parsing <Development:graph-generation>`.
+  These images are coloured :green:`GREEN` in the :ref:`Development:graphs`.
 
 Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully.
 These are typically named ``REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]TOOL_NAME``.
