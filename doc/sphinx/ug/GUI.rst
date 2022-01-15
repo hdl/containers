@@ -7,7 +7,7 @@ By default, tools with Graphical User Interface (GUI) cannot be used in containe
 server.
 However, there are multiple alternatives for making an `X11 <https://en.wikipedia.org/wiki/X_Window_System>`__ or
 `Wayland <https://en.wikipedia.org/wiki/Wayland_(display_server_protocol)>`__ server visible to the container.
-`mviereck/x11docker <https://github.com/mviereck/x11docker>`__ and `mviereck/runx <https://github.com/mviereck/runx>`__
+`gh:mviereck/x11docker <https://github.com/mviereck/x11docker>`__ and `gh:mviereck/runx <https://github.com/mviereck/runx>`__
 are full-featured helper scripts for setting up the environment and running GUI applications and desktop environments in
 OCI containers.
 GNU/Linux and Windows hosts are supported, and security related options are provided (such as cookie authentication).
