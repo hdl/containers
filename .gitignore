@@ -1,9 +1,10 @@
 __pycache__/
 *.egg-info/
 .vscode
-/doc/sphinx/_build/
-/doc/sphinx/_theme/
-/doc/sphinx/CIStatus.inc
-/doc/sphinx/ToolsTable.inc
-/doc/sphinx/shields/shields.*.gen.inc
+/doc/_build/
+/doc/_theme/
+/doc/CIStatus.inc
+/doc/ToolsTable.inc
+/doc/shields/shields.*.gen.inc
 /utils/pyHDLC/dist/
+/utils/map.svg

@@ -19,14 +19,14 @@
 
 pyHDLC:
 	docker build \
-	  -t hdlc/doc:pyHDLC \
+	  -t ghcr.io/hdl/containers/doc \
 	  -f- ../ < doc--pyHDLC.dockerfile
 
 map:
 	docker run --rm \
 	  -v /$(shell pwd)/..://wrk/ \
 	  -w //wrk/utils \
-	  hdlc/doc:pyHDLC \
+	  ghcr.io/hdl/containers/doc \
 	  sh -c 'pip3 install -e .; python3 pyHDLC/map.py'
 
 SPHINXOPTS    =
@@ -39,4 +39,4 @@ PAPEROPT_letter = -D latex_paper_size=letter
 ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees -T -D language=en $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 %:
-	cd sphinx && $(SPHINXBUILD) -b $@ $(ALLSPHINXOPTS) $(BUILDDIR)/$@
+	$(SPHINXBUILD) -b $@ $(ALLSPHINXOPTS) $(BUILDDIR)/$@

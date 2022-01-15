@@ -38,9 +38,9 @@ env:
 jobs:
 
 
-  map:
+  image:
     runs-on: ubuntu-latest
-    name: '🗺️ Map'
+    name: '⛴️ Image'
     steps:
 
     - name: '🧰 Checkout'
@@ -48,6 +48,25 @@ jobs:
 
     - name: '⛴️ Build image hdlc/doc:pyHDLC'
       run: make -C doc pyHDLC
+
+    - name: '🛰️ Push container image'
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+      uses: pyTooling/Actions/with-post-step@r0
+      with:
+        main: |
+          echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
+          docker push ghcr.io/hdl/containers/doc
+        post: docker logout docker.io
+
+
+  map:
+    needs: image
+    runs-on: ubuntu-latest
+    name: '🗺️ Map'
+    steps:
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
 
     - name: '🗺️ Generate map'
       run: make -C doc map
@@ -58,17 +77,9 @@ jobs:
         name: Map
         path: utils/map.svg
 
-    - name: '🛰️ Push container image'
-      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
-      uses: pyTooling/Actions/with-post-step@r0
-      with:
-        main: |
-          echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
-          docker push hdlc/doc:pyHDLC
-        post: docker logout docker.io
-
 
   doc:
+    needs: image
     runs-on: ubuntu-latest
     name: '📓 Docs'
     steps:

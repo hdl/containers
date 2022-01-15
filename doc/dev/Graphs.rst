@@ -29,47 +29,47 @@ All of those are explained in the legend: :numref:`img-graph-legend`.
    That info is not tracked in the graphs yet.
    Please, see whether a dockerfile exists in the corresponding subdir.
 
-.. graphviz:: ../../graph/graph.dot
+.. graphviz:: ../graph/graph.dot
    :name: img-graph
    :align: center
    :caption: Subgraphs and images
 
-.. graphviz:: ../../graph/base.dot
+.. graphviz:: ../graph/base.dot
    :name: img-graph-base
    :align: center
    :caption: Base: workflows, dockerfiles, images and tests.
 
-.. graphviz:: ../../graph/sim.dot
+.. graphviz:: ../graph/sim.dot
    :name: img-graph-sim
    :align: center
    :caption: Sim: workflows, dockerfiles, images and tests.
 
-.. graphviz:: ../../graph/synth.dot
+.. graphviz:: ../graph/synth.dot
    :name: img-graph-synth
    :align: center
    :caption: Synth: workflows, dockerfiles, images and tests.
 
-.. graphviz:: ../../graph/impl.dot
+.. graphviz:: ../graph/impl.dot
    :name: img-graph-impl
    :align: center
    :caption: Impl: workflows, dockerfiles, images and tests.
 
-.. graphviz:: ../../graph/formal.dot
+.. graphviz:: ../graph/formal.dot
    :name: img-graph-formal
    :align: center
    :caption: Formal: workflows, dockerfiles, images and tests.
 
-.. graphviz:: ../../graph/asic.dot
+.. graphviz:: ../graph/asic.dot
    :name: img-graph-asic
    :align: center
    :caption: ASIC: workflows, dockerfiles, images and tests.
 
-.. graphviz:: ../../graph/symbiflow.dot
+.. graphviz:: ../graph/symbiflow.dot
    :name: img-graph-symbiflow
    :align: center
    :caption: SymbiFlow: workflows, dockerfiles, images and tests.
 
-.. graphviz:: ../../graph/symbiflow.dot
+.. graphviz:: ../graph/symbiflow.dot
    :name: img-graph-legend
    :align: center
    :caption: Legend of the directed graph.

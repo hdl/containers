@@ -31,8 +31,8 @@ Those are used for:
 
 * Ready-to-use images are tested before uploading.
 
-The :ref:`Package images <Development:package-images>` are created in some dockerfiles/workflows are based on
-``scratch`` and contain pre-built assets.
+The :ref:`Package images <Development:package-images>` created in some dockerfiles/workflows are based on ``scratch``
+and contain pre-built assets.
 Therefore, they are not really useful *per se*, but meant to be used for building other.
 In fact, multiple tools are merged into ready-to-use images for common use cases (such as ``impl``,
 ``formal`` or ``prog``).

@@ -185,7 +185,7 @@ source_suffix = {
 
 master_doc = "index"
 project = u"HDL Containers: Building and deploying container images for open source Electronic Design Automation"
-copyright = u"2019-2021, Unai Martinez-Corral and contributors"
+copyright = u"2019-2022, Unai Martinez-Corral and contributors"
 author = u"Unai Martinez-Corral and contributors"
 
 version = "latest"
@@ -193,7 +193,14 @@ release = version  # The full version, including alpha/beta/rc tags.
 
 language = None
 
-exclude_patterns = []
+exclude_patterns = [
+    '_build',
+    '_theme',
+    'logo',
+    'graph',
+    '.dockerfile',
+    '.yml',
+]
 
 numfig = True
 
@@ -220,8 +227,8 @@ else:
 
 html_static_path = ["_static"]
 
-html_logo = str(ROOT / "../logo/icon.svg")
-html_favicon = str(ROOT / "../logo/icon.png")
+html_logo = str(ROOT / "logo/icon.svg")
+html_favicon = str(ROOT / "logo/icon.png")
 
 htmlhelp_basename = "HDLCDoc"
 
