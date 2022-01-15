@@ -52,6 +52,9 @@ if (ROOT / "_theme").is_dir():
         "home_breadcrumbs": False,
         "vcs_pageview_mode": "blob",
     }
+    html_css_files = [
+        'theme_overrides.css',
+    ]
 else:
     html_theme = "alabaster"
 
