@@ -2,23 +2,28 @@
    :alt: 'hdl/conda-ci GitHub repository'
    :height: 22
    :target: https://github.com/hdl/conda-ci
+   :class: shield
 
 .. |SHIELD:HDL:conda-compilers| image:: https://img.shields.io/badge/hdl-conda--compilers-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef
    :alt: 'hdl/conda-compilers GitHub repository'
    :height: 22
    :target: https://github.com/hdl/conda-compilers
+   :class: shield
 
 .. |SHIELD:HDL:conda-eda| image:: https://img.shields.io/badge/hdl-conda--eda-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef
    :alt: 'hdl/conda-eda GitHub repository'
    :height: 22
    :target: https://github.com/hdl/conda-eda
+   :class: shield
 
 .. |SHIELD:HDL:conda-misc| image:: https://img.shields.io/badge/hdl-conda--misc-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef
    :alt: 'hdl/conda-misc GitHub repository'
    :height: 22
    :target: https://github.com/hdl/conda-misc
+   :class: shield
 
 .. |SHIELD:HDL:conda-prog| image:: https://img.shields.io/badge/hdl-conda--prog-f2f1ef.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef
    :alt: 'hdl/conda-prog GitHub repository'
    :height: 22
    :target: https://github.com/hdl/conda-prog
+   :class: shield

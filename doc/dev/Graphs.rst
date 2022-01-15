@@ -69,7 +69,7 @@ All of those are explained in the legend: :numref:`img-graph-legend`.
    :align: center
    :caption: SymbiFlow: workflows, dockerfiles, images and tests.
 
-.. graphviz:: ../graph/symbiflow.dot
+.. graphviz:: ../graph/legend.dot
    :name: img-graph-legend
    :align: center
    :caption: Legend of the directed graph.

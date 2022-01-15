@@ -106,6 +106,7 @@ def OCIImageShield(image):
    :alt: '{image} container image size'
    :height: 22
    :target: https://gcr.io/hdl-containers/{'debian/bullseye/' if arr[0] in ['pkg', 'build'] else ''}{image}
+   :class: shield
 """
 
 with (ROOT / 'shields/shields.tools.gen.inc').open('w', encoding='utf-8') as wfptr:
@@ -164,6 +165,7 @@ with (ROOT/'CIStatus.inc').open('w') as wfptr:
    :alt: '{workflow} workflow Status'
    :height: 22
    :target: https://github.com/hdl/containers/actions/workflows/{workflow}.yml
+   :class: shield
 """)
     for workflow in CIWorkflows:
         wfptr.write(f"\n|SHIELD:Workflow:{workflow}|\n")
