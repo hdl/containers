@@ -1,6 +1,0 @@
-:author: Unai Martinez-Corral and contributors
-:email: https://github.com/umarcor[@GitHub] https://gitlab.com/umarcor[@GitLab] https://twitter.com/unaimarcor[@Twitter]
-:description: Container images for hardware description and Electronic Design Automation
-:repotree: https://github.com/hdl/containers/tree/main/
-:stem:
-:reproducible:

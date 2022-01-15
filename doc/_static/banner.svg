@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.1"
-   width="174.36267"
+   width="430.36267"
    height="144.27875"
    id="svg2"
-   sodipodi:docname="icon.svg"
+   sodipodi:docname="banner.svg"
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -26,10 +26,10 @@
      inkscape:window-height="1017"
      id="namedview28"
      showgrid="false"
-     inkscape:zoom="3.7639344"
-     inkscape:cx="74.523084"
-     inkscape:cy="55.925523"
-     inkscape:window-x="1912"
+     inkscape:zoom="0.9409836"
+     inkscape:cx="224.76481"
+     inkscape:cy="77.047039"
+     inkscape:window-x="-8"
      inkscape:window-y="1072"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg2"
@@ -208,9 +208,9 @@
     </clipPath>
   </defs>
   <rect
-     style="fill:#f2f1ef;fill-opacity:1;stroke:none;stroke-width:4.01882;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     style="fill:#f2f1ef;fill-opacity:1;stroke:none;stroke-width:10.8987;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      id="rect11065"
-     width="40.227646"
+     width="295.85193"
      height="140.27875"
      x="132.51074"
      y="2.0000057"
@@ -313,6 +313,57 @@
      style="fill:none;stroke:#37342d;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.5"
      d="M 155.83131,25.51264 V 119.0318"
      id="path10949"
+     inkscape:export-filename="T:\hdl\containers\doc\img\icon.png"
+     inkscape:export-xdpi="266.47906"
+     inkscape:export-ydpi="266.47906" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:64px;line-height:0.7;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="280.69812"
+     y="67.607674"
+     id="text2006"><tspan
+       sodipodi:role="line"
+       id="tspan2004"
+       x="280.69812"
+       y="67.607674"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;font-family:Teko;-inkscape-font-specification:Teko;text-align:center;text-anchor:middle">HDL</tspan><tspan
+       sodipodi:role="line"
+       x="280.69812"
+       y="118.24691"
+       id="tspan3736"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;font-family:Teko;-inkscape-font-specification:Teko;text-align:center;text-anchor:middle">Containers</tspan></text>
+  <path
+     style="fill:none;fill-opacity:1;stroke:#37342d;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 388.51075,2 h 39.85192 v 140.27874 h -39.85192"
+     id="path9320"
+     inkscape:export-filename="T:\hdl\containers\doc\img\icon.png"
+     inkscape:export-xdpi="266.47906"
+     inkscape:export-ydpi="266.47906" />
+  <path
+     style="fill:none;stroke:#37342d;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.5"
+     d="m 406.62138,13.64548 h 10.3615 v 15.67508"
+     id="path9322"
+     inkscape:export-filename="T:\hdl\containers\doc\img\icon.png"
+     inkscape:export-xdpi="266.47906"
+     inkscape:export-ydpi="266.47906" />
+  <path
+     style="fill:none;stroke:#37342d;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.5"
+     d="m 406.62138,130.99216 h 10.3615 v -15.67508"
+     id="path9324"
+     inkscape:export-filename="T:\hdl\containers\doc\img\icon.png"
+     inkscape:export-xdpi="266.47906"
+     inkscape:export-ydpi="266.47906" />
+  <path
+     style="fill:none;stroke:#37342d;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.5"
+     d="m 393.97199,25.64548 v 93.51916"
+     id="path9326"
+     inkscape:export-filename="T:\hdl\containers\doc\img\icon.png"
+     inkscape:export-xdpi="266.47906"
+     inkscape:export-ydpi="266.47906" />
+  <path
+     style="fill:none;stroke:#37342d;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.5"
+     d="M 405.04211,25.51264 V 119.0318"
+     id="path9328"
      inkscape:export-filename="T:\hdl\containers\doc\img\icon.png"
      inkscape:export-xdpi="266.47906"
      inkscape:export-ydpi="266.47906" />

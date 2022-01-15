@@ -1,2 +1,0 @@
-:imagesdir: ../img
-:favicon: ../../logo/icon.png

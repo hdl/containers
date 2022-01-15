@@ -1,7 +1,7 @@
 # Authors:
 #   Unai Martinez-Corral
 #
-# Copyright 2020-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2020-2022 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,50 +38,63 @@ env:
 jobs:
 
 
-  images:
-    if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
+  image:
     runs-on: ubuntu-latest
+    name: '⛴️ Image'
     steps:
 
-    - uses: actions/checkout@v2
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
 
-    - name: Build hdlc/doc images
-      run: make -C doc asciidoctor-py pyHDLC
+    - name: '⛴️ Build image hdlc/doc:pyHDLC'
+      run: make -C doc pyHDLC
 
-    - name: Push container images
+    - name: '🛰️ Push container image'
+      if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       uses: pyTooling/Actions/with-post-step@r0
       with:
         main: |
-          echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
-          docker push hdlc/doc:asciidoctor-py
-          docker push hdlc/doc:pyHDLC
+          echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
+          docker push ghcr.io/hdl/containers/doc
         post: docker logout docker.io
 
 
-  asciidoc:
-    needs: images
+  map:
+    needs: image
     runs-on: ubuntu-latest
+    name: '🗺️ Map'
     steps:
 
-    - uses: actions/checkout@v2
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
 
-    - name: Build site
-      run: |
-        make -C doc
-        make -C doc map
+    - name: '🗺️ Generate map'
+      run: make -C doc map
 
-    - name: Publish site to gh-pages (doc)
-      if: github.event_name != 'pull_request'
-      run: |
-        sudo chown -R $USER:$USER doc/asciidoctor/public
-        mv doc/asciidoctor/public ./
-        cd public
-        git init
-        cp ../.git/config ./.git/config
-        touch .nojekyll
-        mv ../utils/map.svg ./img/
-        git add .
-        git config --local user.email "push@gha"
-        git config --local user.name "GHA"
-        git commit -am "update ${{ github.sha }}"
-        git push -u origin +HEAD:gh-pages
+    - name: '📤 Upload artifact: map'
+      uses: actions/upload-artifact@v2
+      with:
+        name: Map
+        path: utils/map.svg
+
+
+  doc:
+    needs: image
+    runs-on: ubuntu-latest
+    name: '📓 Docs'
+    steps:
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
+
+    - name: '📓 BuildTheDocs (BTD)'
+      uses: buildthedocs/btd@v0
+      with:
+        token: ${{ github.token }}
+        skip-deploy: ${{ github.event_name == 'pull_request' }}
+
+    - name: '📤 Upload artifact: Sphinx HTML'
+      uses: actions/upload-artifact@v2
+      with:
+        name: Documentation-HTML
+        path: doc/_build/html

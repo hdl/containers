@@ -3,7 +3,7 @@
 # Authors:
 #   Unai Martinez-Corral
 #
-# Copyright 2020-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2020-2022 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ FROM python:slim-bullseye
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     graphviz \
+    make \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
