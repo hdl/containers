@@ -3,6 +3,19 @@
 HDL Containers
 ##############
 
+.. centered::
+  |SHIELD:Code:Repository|
+  |SHIELD:Code:License|
+  |SHIELD:Community:Chat|
+  |SHIELD:HDL:packages|
+  |SHIELD:HDL:awesome|
+  |SHIELD:HDL:constraints|
+  |SHIELD:HDL:smoke-tests|
+
+.. raw:: html
+
+    <br>
+
 .. image:: _static/banner_path.svg
    :width: 500 px
    :align: center
