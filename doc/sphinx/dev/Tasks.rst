@@ -3,9 +3,8 @@
 Tasks
 #####
 
-The strategical priorities are the following:
-
 * Add the missing ASIC tools to collection ``debian/bullseye``.
+  All together in OpenROAD (:ghsharp:`46`).
   Following the order in `efabless/openlane: OpenLANE Design Stages <https://github.com/efabless/openlane#openlane-design-stages>`__
   is suggested.
 
@@ -33,8 +32,8 @@ The strategical priorities are the following:
   Currently, images are not versioned explicitly.
   Images are only pushed when builds and tests are successful.
   Users which cannot afford breaking changes can use the image by digest, instead of doing it by name.
-  However, we should probably leverage manifests for publishing some *versioned ecosystems*, impliying that we run a
-  full test suite on an specific group of images and we then tag them all together as a *nicely behaving family/release*.
+  However, we should probably leverage manifests for publishing some *versioned ecosystems*, implying that we run a full
+  test suite on an specific group of images and we then tag them all together as a *nicely behaving family/release*.
 
 .. NOTE::
    These are all in no particular order, although most of them are closely related to each other.

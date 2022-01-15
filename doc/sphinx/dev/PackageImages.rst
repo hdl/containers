@@ -3,11 +3,13 @@
 Package images
 ##############
 
+.. role:: blue
+
 Each EDA tool/project is built once only for each collection and architecture in this image/container ecosystem.
 However, some (many) of the tools need to be included in multiple images for different purposes.
 Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each
 tool/project.
-Therefore, ``REGISTRY/[ARCHITECTURE/][COLLECTION/]pkg/`` images are created/used (coloured [blue]#BLUE# in the
+Therefore, ``REGISTRY/[ARCHITECTURE/][COLLECTION/]pkg/`` images are created/used (coloured :blue:`BLUE` in the
 :ref:`Graphs <Development:graphs>`).
 These are all based on ``scratch`` and are not runnable.
 Instead, they contain pre-built artifacts, to be then added into other images through ``COPY --from=``.

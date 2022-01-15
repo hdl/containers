@@ -32,7 +32,7 @@ sys_path.insert(0, abspath("."))
 
 # -- Generate ToolsTable.inc -------------------------------------------------------------------------------------------
 
-shields = [
+imageShields = [
     'sim',
     'sim/osvb',
     'sim/scipy-slim',
@@ -69,12 +69,12 @@ if not tools.exists():
 with tools.open('r', encoding='utf-8') as stream:
     tools = yaml_load(stream, Loader=yaml_Loader)
 
-with (ROOT/'ToolsTable.inc').open('w') as fptr:
+with (ROOT/'ToolsTable.inc').open('w') as wfptr:
     def table_row(tool, var):
         pkgImages = [f"pkg/{item}" for item in var['pkg']] if 'pkg' in var else []
         useImages = var['use'] if 'use' in var else []
-        shields.extend(pkgImages)
-        shields.extend(useImages)
+        imageShields.extend(pkgImages)
+        imageShields.extend(useImages)
         pkg = ' '.join([f"|SHIELD:Image:{item}|" for item in pkgImages])
         use = ' '.join([f"|SHIELD:Image:{item}|" for item in useImages])
         _in = var['in'] if 'in' in var else []
@@ -83,14 +83,14 @@ with (ROOT/'ToolsTable.inc').open('w') as fptr:
             f"`{tool} <{var['url']}>`__{' !' if ('src' in var and not var['src']) else ''}",
             '%s' % ('-' if len(pkg) == 0 else pkg),
             '%s' % ('-' if len(use) == 0 else use),
-            #fptr.write('%s\n' % ('Y' if any(_initem.startswith('synth') for _initem in _in) else '-'))
+            #'%s\n' % ('Y' if any(_initem.startswith('synth') for _initem in _in) else '-')
             '%s' % ('S' if any(_initem.startswith('sim') for _initem in _in) else '-'),
             '%s' % ('I' if any(_initem.startswith('impl') for _initem in _in) else '-'),
             '%s' % ('F' if any(_initem.startswith('formal') for _initem in _in) else '-'),
             '%s' % ('P' if any(_initem.startswith('prog') for _initem in _in) else '-'),
             f"{'-' if len(otherin) == 0 else otherin}\n",
         ]
-    fptr.write(tabulate(
+    wfptr.write(tabulate(
         [table_row(tool, var) for tool, var in tools.items()],
         #'Image', 'Included in',
         headers=['Tool', 'Package', 'Ready-to-use', 'S', 'I', 'F', 'P', 'Others'],
@@ -99,7 +99,7 @@ with (ROOT/'ToolsTable.inc').open('w') as fptr:
 
 # -- Generate shields.tools.inc and shields.build.inc ------------------------------------------------------------------
 
-def OCIImage(image):
+def OCIImageShield(image):
     arr = image.replace('/',':', 1).replace('/','--').split(':')
     return f"""
 .. |SHIELD:Image:{image}| image:: https://img.shields.io/docker/image-size/hdlc/{arr[0]}/{arr[1] if len(arr) > 1 else 'latest'}?longCache=true&style=flat-square&label={image}&logo=Docker&logoColor=fff
@@ -109,8 +109,8 @@ def OCIImage(image):
 """
 
 with (ROOT / 'shields/shields.tools.gen.inc').open('w', encoding='utf-8') as wfptr:
-    for image in shields:
-        wfptr.write(OCIImage(image))
+    for image in imageShields:
+        wfptr.write(OCIImageShield(image))
 
 with (ROOT / 'shields/shields.build.gen.inc').open('w', encoding='utf-8') as wfptr:
     for image in [
@@ -118,7 +118,55 @@ with (ROOT / 'shields/shields.build.gen.inc').open('w', encoding='utf-8') as wfp
         'build/build',
         'build/dev',
     ]:
-        wfptr.write(OCIImage(image))
+        wfptr.write(OCIImageShield(image))
+
+# -- Generate CIStatus.inc ---------------------------------------------------------------------------------------------
+
+CIWorkflows = [
+    'doc',
+    'base',
+    'ghdl',
+    'gtkwave',
+    'iverilog',
+    'verilator',
+    'xyce',
+    'apicula',
+    'arachne-pnr',
+    'ghdl-yosys-plugin',
+    'icestorm',
+    'nextpnr',
+    'openfpgaloader',
+    'prjoxide',
+    'prjtrellis',
+    'SymbiFlow',
+    'yosys',
+    'boolector',
+    'cvc',
+    'pono',
+    'superprove',
+    'symbiyosys',
+    'yices2',
+    'z3',
+    'klayout',
+    'magic',
+    'netgen',
+    'vtr',
+    'formal',
+    'sim',
+    'impl',
+    'prog',
+]
+
+with (ROOT/'CIStatus.inc').open('w') as wfptr:
+    for workflow in CIWorkflows:
+        wfptr.write(f"""
+.. |SHIELD:Workflow:{workflow}| image:: https://img.shields.io/github/workflow/status/hdl/containers/{workflow}/main?longCache=true&style=flat-square&label={workflow}&logo=GitHub%20Actions&logoColor=fff
+   :alt: '{workflow} workflow Status'
+   :height: 22
+   :target: https://github.com/hdl/containers/actions/workflows/{workflow}.yml
+""")
+    for workflow in CIWorkflows:
+        wfptr.write(f"\n|SHIELD:Workflow:{workflow}|\n")
 
 # -- General configuration ---------------------------------------------------------------------------------------------
 

@@ -16,6 +16,7 @@ __pycache__/
 
 /doc/sphinx/_build/
 /doc/sphinx/_theme/
+/doc/sphinx/CIStatus.inc
 /doc/sphinx/ToolsTable.inc
 /doc/sphinx/shields/shields.*.gen.inc
 /utils/pyHDLC/dist/
