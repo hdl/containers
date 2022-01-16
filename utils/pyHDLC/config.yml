@@ -1,7 +1,7 @@
 # Authors:
 #   Unai Martinez-Corral
 #
-# Copyright 2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2021-2022 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,12 +35,8 @@ anchors:
     dockerfile: osvb
   <<: &SymbiFlowDockerfile
     dockerfile: symbiflow
-  <<: &SysDebianBullseyeAmd64
-    debian/bullseye:
-      - amd64
   <<: &SysDebianAmd64
-    <<: *SysDebianBullseyeAmd64
-    debian/buster:
+    debian/bullseye:
       - amd64
   <<: &SysDebianDefaultArchSet
     <<: *SysDebianAmd64
@@ -130,7 +126,7 @@ defaults:
 jobs:
 
   default:
-    apicula:        *SysDebianBullseyeAmd64
+    apicula:        *SysDebianAmd64
     arachne-pnr:    *SysDebianDefaultArchSet
     icestorm:       *SysDebianDefaultArchSet
     iverilog:       *SysDebianAmd64
@@ -139,7 +135,7 @@ jobs:
     magic:          *SysDebianDefaultArchSet
     netgen:         *SysDebianDefaultArchSet
     openfpgaloader: *SysDebianDefaultArchSet
-    prjoxide:       *SysDebianBullseyeAmd64
+    prjoxide:       *SysDebianAmd64
     prjtrellis:     *SysDebianAmd64
     verilator:      *SysDebianDefaultArchSet
     vtr:            *SysDebianAmd64
@@ -156,11 +152,11 @@ jobs:
     z3:         *SysDebianAmd64
 
   runonly:
-    conda:                         *SysDebianBullseyeAmd64
+    conda:                         *SysDebianAmd64
     prog:                          *SysDebianAmd64
     sim:                           *SysDebianAmd64
-    conda/symbiflow/xc7/toolchain: *SysDebianBullseyeAmd64
-    conda/symbiflow/xc7:           *SysDebianBullseyeAmd64
+    conda/symbiflow/xc7/toolchain: *SysDebianAmd64
+    conda/symbiflow/xc7:           *SysDebianAmd64
 
   custom:
     base:
@@ -221,9 +217,6 @@ jobs:
         - { arch: ecp5,  prj: prjtrellis }
         - { arch: nexus, prj: prjoxide   }
       sys: *SysDebianAmd64
-      exclude:
-        - sys: { debian/buster: [amd64] }
-          params: { arch: nexus, prj: prjoxide }
     nextpnr:
       images:
         - pkg/nextpnr/generic
@@ -249,8 +242,8 @@ jobs:
         - [ conda/symbiflow/xc7/a200t ]
         - [ conda/symbiflow/xc7/z010  ]
         - [ conda/symbiflow/xc7/z020  ]
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     symbiflow-eos-s3:
       images:
         - conda/symbiflow/eos-s3
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
