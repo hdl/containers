@@ -3,6 +3,9 @@
 Utils
 #####
 
+CLI
+===
+
 .. IMPORTANT::
   Some helper shell and Python utilities are available in :ghsrc:`utils/bin <utils/bin>` and
   :ghsrc:`utils/pyHDLC <utils/pyHDLC>`, respectively.
@@ -21,7 +24,7 @@ Utils
 .. _Development:build:
 
 Build
-=====
+-----
 
 ``pyHDLC build`` helps building one or multiple images at once, by hiding all common options:
 
@@ -64,7 +67,7 @@ Build
    `DOCKERFILE` defaults to `Image` if `None`.
 
 Inspect
-=======
+-------
 
 .. role:: green
 
@@ -122,7 +125,7 @@ or, inspect any image from any registry:
 .. _Development:test:
 
 Test
-====
+----
 
 There is a test script in :ghsrc:`test/ <test/>` for each image in this ecosystem, according to the following
 convention:
@@ -169,3 +172,11 @@ It is used in CI but can be useful locally too:
   to the temporary image for testing.
   By default, the escaped name of the image is used as the location.
   Therefore, ``DirName`` is used exceptionally.
+
+.. _Development:utils:pyHDLC:
+
+pyHDLC Reference
+================
+
+.. automodule:: pyHDLC
+  :exclude-members: Config, ConfigDefaultImageItem, ConfigDefaults, ConfigJobs, ConfigJobsCustomItem, ConfigJobsCustomExcludeItem

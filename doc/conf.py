@@ -29,6 +29,7 @@ from tabulate import tabulate
 ROOT = Path(__file__).resolve().parent
 
 sys_path.insert(0, abspath("."))
+sys_path.insert(0, abspath("../utils/"))
 
 # -- Generate ToolsTable.inc -------------------------------------------------------------------------------------------
 
@@ -173,11 +174,15 @@ with (ROOT/'CIStatus.inc').open('w') as wfptr:
 # -- General configuration ---------------------------------------------------------------------------------------------
 
 extensions = [
-    # Standard Sphinx extensions
+    "sphinx.ext.autodoc",
     "sphinx.ext.extlinks",
     "sphinx.ext.intersphinx",
     "sphinx.ext.graphviz",
 ]
+
+autodoc_default_options = {
+    "members": True,
+}
 
 templates_path = ["_templates"]
 
