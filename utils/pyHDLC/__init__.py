@@ -1,7 +1,7 @@
 # Authors:
 #   Unai Martinez-Corral
 #
-# Copyright 2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2021-2022 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -206,6 +206,18 @@ def GenerateJobList(
     fmt: str = 'gha',
     dry: bool = False,
 ) -> None:
+    """
+    Generate list of jobs for a named task.
+
+    :param name:
+      Identifier to extract jobs from the YAML configuration file.
+
+    :param fmt:
+      Output format (by default, print GitHub Actions' set-output syntax).
+
+    :param dry:
+      Do not set the output, just print the list of jobs.
+    """
     jobs = _generateJobList(name)
     _printJobList(jobs)
     if dry:
@@ -221,6 +233,26 @@ def PullImage(
     architecture: str = CONFIG.defaults.architecture,
     dry: bool = False,
 ) -> None:
+    """
+    Pull container image(s) from registry.
+
+    :param image:
+      Bare image name(s), without registry, collection or architecture.
+      The supported syntax for each image name is ``name[#location]``, where the optional ``location`` is ignored if
+      provided (it's used in :func:`TestImage` only).
+
+    :param registry:
+      Optionally, set the prefix of the registry.
+
+    :param collection:
+      Optionally, set the collection to pull the image for.
+
+    :param architecture:
+      Optionally, set the architecture to pull the image for.
+
+    :param dry:
+      Do not pull the image, just print the command that would be executed.
+    """
     for img in [image] if isinstance(image, str) else image:
         imageName = f"{registry}/{architecture}/{collection}/{img.split('#')[0]}"
         _exec(
@@ -285,6 +317,44 @@ def BuildImage(
     default: bool = False,
     test: bool = False,
 ) -> None:
+    """
+    Build and optionally test container image(s).
+
+    :param image:
+      Bare image name(s), without registry, collection or architecture.
+      The supported syntax for each image name is ``name[#location]``, where the optional ``location`` is ignored during
+      the build if provided (it's used for testing only, see :func:`TestImage`).
+
+    :param registry:
+      Optionally, set the prefix of the registry.
+
+    :param collection:
+      Optionally, set the collection to build the image from.
+
+    :param architecture:
+      Optionally, set the architecture to build the image for.
+
+    :param dockerfile:
+      Optionally, set the Dockerfile to build the image with.
+
+    :param target:
+      Optionally, set the target stage in the dockerfile.
+
+    :param argimg:
+      Optionally, set the build argument IMAGE.
+
+    :param pkg:
+      Optionally, specify explicitly whether the image to be built is a package image.
+
+    :param dry:
+      Do not build the image, just print the command(s) that would be executed.
+
+    :param default:
+      Instead of providing all of the parameters, get them from the YAML configuration file.
+
+    :param test:
+      Test the image(s) after building.
+    """
     for rimg in [image] if isinstance(image, str) else image:
 
         [img, isPkg, withDir, dockerfile, target, argimg] = _NormaliseBuildParams(
@@ -346,6 +416,26 @@ def TestImage(
     architecture: str = CONFIG.defaults.architecture,
     dry: bool = False,
 ) -> None:
+    """
+    Test container image(s).
+
+    :param image:
+      Bare image name(s), without registry, collection or architecture.
+      The supported syntax for each image name is ``name[#location]``, where the optional ``location`` is used as the
+      location in package images to copy the content from.
+
+    :param registry:
+      Optionally, set the prefix of the registry.
+
+    :param collection:
+      Optionally, set the collection to test the image from.
+
+    :param architecture:
+      Optionally, set the architecture to test the image for.
+
+    :param dry:
+      Do not test the image, just print the command(s) that would be executed.
+    """
     imagePrefix = f"{registry}/{architecture}/{collection}"
     for img in [image] if isinstance(image, str) else image:
         if img.startswith("pkg/"):
@@ -420,6 +510,32 @@ def PushImage(
     dry: bool = False,
     mirror: Optional[Union[str, List[str]]] = None,
 ) -> None:
+    """
+    Push container image(s) to registry/registries.
+
+    :param image:
+      Bare image name(s), without registry, collection or architecture.
+      The supported syntax for each image name is ``name[#location]``, where the optional ``location`` is ignored if
+      provided (it's used in :func:`TestImage` only).
+
+    :param registry:
+      Optionally, set the prefix of the registry.
+
+    :param collection:
+      Optionally, set the collection to push the image from.
+
+    :param architecture:
+      Optionally, set the architecture to push the image for.
+
+    :param dry:
+      Do not push the image, just print the command(s) that would be executed.
+
+    :param mirror:
+      List of additional registry/registries to push to. Supported placeholders:
+
+      * ``#A``: architecture
+      * ``#C``: collection
+    """
     def dpush(imgName):
         _exec(args=["docker", "push", imgName], dry=dry, collapse=f"Push {imgName}")
 
