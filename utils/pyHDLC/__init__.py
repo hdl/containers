@@ -421,7 +421,7 @@ def TestImage(
 
     :param image:
       Bare image name(s), without registry, collection or architecture.
-      The supported syntax for each image name is ``name[#location]``, where the optional ``location`` is used as the
+      The supported syntax for each image name is ``name[#<DirName>]``, where the optional ``<DirName>`` is used as the
       location in package images to copy the content from.
 
     :param registry:

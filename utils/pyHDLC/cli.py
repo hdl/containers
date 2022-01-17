@@ -49,14 +49,14 @@ class WithRegistryAttributes(Attribute):
                 dest="Image",
                 nargs="+",
                 type=str,
-                help="image name(s), without registry prefix.",
+                help="Image name(s), without registry prefix.",
             ),
             ArgumentAttribute(
                 "-r",
                 "--registry",
                 dest="Registry",
                 type=str,
-                help="container image registry prefix.",
+                help="Container image registry prefix.",
                 default="gcr.io/hdl-containers",
             ),
             ArgumentAttribute(
@@ -64,7 +64,7 @@ class WithRegistryAttributes(Attribute):
                 "--collection",
                 dest="Collection",
                 type=str,
-                help="name of the collection/subset of images.",
+                help="Name of the collection/subset of images.",
                 default="debian/bullseye",
             ),
             ArgumentAttribute(
@@ -72,7 +72,7 @@ class WithRegistryAttributes(Attribute):
                 "--arch",
                 dest="Architecture",
                 type=str,
-                help="name of the architecture.",
+                help="Name of the architecture.",
                 default="amd64",
             ),
             # ... add more if needed
@@ -116,7 +116,7 @@ class CLI(ArgParseMixin):
         "-n",
         "--noexec",
         dest="noexec",
-        help="print commands but do not execute them.",
+        help="Print commands but do not execute them.",
         default=False,
     )
     def Run(self):
@@ -148,20 +148,24 @@ class CLI(ArgParseMixin):
             except KeyError:
                 print("command {0} is unknown.".format(args.Command))
 
-    @CommandAttribute("jobs", help="Generate list of jobs by name.")
+    @CommandAttribute(
+        "jobs",
+        help="Generate list of jobs for a named task.",
+        description="Generate list of jobs for a named task."
+    )
     @ArgumentAttribute(
         "-f",
         "--format",
         dest="Format",
         type=str,
         choices=["gha","GHA"],
-        help="output format.",
+        help="Output format (by default, print GitHub Actions' set-output syntax).",
         default="GHA",
     )
     @ArgumentAttribute(
         dest="Name",
         type=str,
-        help="Name (keyword) of the job list.",
+        help="Identifier to extract jobs from the YAML configuration file.",
     )
     def HandleJobs(self, args):
         GenerateJobList(
@@ -170,7 +174,11 @@ class CLI(ArgParseMixin):
             dry=args.noexec,
         )
 
-    @CommandAttribute("pull", help="Pull images by name.")
+    @CommandAttribute(
+        "pull",
+        help="Pull images by name.",
+        description="Pull container image(s) from registry."
+    )
     @WithRegistryAttributes()
     def HandlePull(self, args):
         PullImage(
@@ -181,48 +189,57 @@ class CLI(ArgParseMixin):
             dry=args.noexec,
         )
 
-    @CommandAttribute("build", help="Build images by name.")
+    @CommandAttribute(
+        "build",
+        help="Build images by name.",
+        description="""\
+Build one or multiple images (and optionally test them) at once, reusing common parameters.
+
+.. important::
+   `DOCKERFILE` defaults to `Image` if `None`.
+"""
+    )
     @WithRegistryAttributes()
     @ArgumentAttribute(
         "-f",
         "--dockerfile",
         dest="Dockerfile",
         type=str,
-        help="dockerfile to be built, from the collection.",
+        help="Dockerfile to be built, from the collection.",
     )
     @ArgumentAttribute(
         "-t",
         "--target",
         dest="Target",
         type=str,
-        help="target stage in the dockerfile.",
+        help="Target stage in the dockerfile.",
     )
     @ArgumentAttribute(
         "-i",
         "--argimg",
         dest="ArgImg",
         type=str,
-        help="base image passed as an ARG to the dockerfile.",
+        help="Base image passed as an ARG to the dockerfile.",
     )
     @SwitchArgumentAttribute(
         "-p",
         "--pkg",
         dest="Pkg",
-        help="preprend 'pkg/' to Image and set Target to 'pkg' (if unset).",
+        help="Preprend 'pkg/' to Image and set Target to 'pkg' (if unset).",
         default=False,
     )
     @SwitchArgumentAttribute(
         "-d",
         "--default",
         dest="Default",
-        help="set default Dockerfile, Target and ArgImg options, given the image name(s).",
+        help="Set default Dockerfile, Target and ArgImg options, given the image name(s).",
         default=False,
     )
     @SwitchArgumentAttribute(
         "-q",
         "--test",
         dest="Test",
-        help="test each image right after building it.",
+        help="Test each image right after building it.",
         default=False,
     )
     def HandleBuild(self, args):
@@ -240,7 +257,17 @@ class CLI(ArgParseMixin):
             test=args.Test,
         )
 
-    @CommandAttribute("test", help="Test images by name.")
+    @CommandAttribute(
+        "test",
+        help="Test images by name.",
+        description="""
+Test container image(s).
+
+.. IMPORTANT::
+  The supported syntax for each Image is ``name[#<DirName>]``, where the optional ``<DirName>`` is used as the location in
+  package images to copy the content from.
+"""
+    )
     @WithRegistryAttributes()
     def HandleTest(self, args):
         TestImage(
@@ -251,7 +278,11 @@ class CLI(ArgParseMixin):
             dry=args.noexec,
         )
 
-    @CommandAttribute("push", help="Push images by name.")
+    @CommandAttribute(
+        "push",
+        help="Push images by name.",
+        description="Push container image(s) to registry/registries."
+    )
     @WithRegistryAttributes()
     @ArgumentAttribute(
         "-m",
@@ -259,7 +290,7 @@ class CLI(ArgParseMixin):
         nargs="*",
         dest="Mirror",
         type=str,
-        help="registry to mirror the image(s) to.",
+        help="List of additional registry/registries to push to. Supported placeholders: `#A` (architecture), `#C` (collection)."
     )
     def HandlePush(self, args):
         PushImage(
