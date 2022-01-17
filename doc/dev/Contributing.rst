@@ -86,8 +86,7 @@ Step by step checklist
     ``COPY --from=$REGISTRY/pkg/TOOL_NAME`` statements to the dockerfiles of multi-tool images.
 
 2. Build and test the dockerfile(s) locally.
-   Use helper scripts from :ghsrc:`utils <utils>`, as explained in :ref:`Build <Development:build>` and
-   :ref:`Test <Development:test>`.
+   Use helper scripts from :ghsrc:`utils <utils>`, as explained in :ref:`Development:utils`.
 
   * If a new tool was added, or a new image is to be generated, a test script needs to be added to :ghsrc:`test/ <test/>`.
     See :ref:`Test <Development:test>` for naming guidelines.

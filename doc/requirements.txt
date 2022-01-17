@@ -1,3 +1,4 @@
 pyyaml
 sphinx
+sphinxcontrib-autoprogram
 tabulate

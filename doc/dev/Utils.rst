@@ -3,71 +3,65 @@
 Utils
 #####
 
-CLI
-===
+.. toctree::
+  :hidden:
 
-.. IMPORTANT::
-  Some helper shell and Python utilities are available in :ghsrc:`utils/bin <utils/bin>` and
-  :ghsrc:`utils/pyHDLC <utils/pyHDLC>`, respectively.
-  A :ghsrc:`utils/setup.sh <utils/setup.sh>` script is provided for installing Python dependencies and adding the
-  ``bin`` subdir to the ``PATH``.
-  Since ``pip`` is used for installing :ghsrc:`utils/pyHDLC/requirements.txt <utils/pyHDLC/requirements.txt>`, it is
-  desirable to create a virtual environment (`docs.python.org/3/library/venv <https://docs.python.org/3/library/venv.html>`__)
-  before running ``setup.sh``:
+  pyHDLC_Reference
 
-  .. code-block:: shell
-
-    virtualenv venv
-    source venv/bin/activate
-    ./utils/setup.sh
-
-.. _Development:build:
-
-Build
------
-
-``pyHDLC build`` helps building one or multiple images at once, by hiding all common options:
+Some helper shell and Python utilities are available in :ghsrc:`utils/bin <utils/bin>` and
+:ghsrc:`utils/pyHDLC <utils/pyHDLC>`, respectively.
+A :ghsrc:`utils/setup.sh <utils/setup.sh>` script is provided for installing Python dependencies and adding the ``bin``
+subdir to the ``PATH``.
+Since ``pip`` is used for installing :ghsrc:`utils/pyHDLC/requirements.txt <utils/pyHDLC/requirements.txt>`, it is
+desirable to create a virtual environment (`docs.python.org/3/library/venv <https://docs.python.org/3/library/venv.html>`__)
+before running ``setup.sh``:
 
 .. code-block:: shell
 
-   usage: pyHDLC build [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY] [-f DOCKERFILE] [-t TARGET] [-a ARGIMG] [-p] [-d] [-q] Image [Image ...]
+  virtualenv venv
+  source venv/bin/activate
+  ./utils/setup.sh
 
-   positional arguments:
-     Image                 image name(s), without registry prefix.
+.. _Development:utils:pyHDLC:
 
-   optional arguments:
-     -h, --help            show this help message and exit
-     -a ARCHITECTURE, --arch ARCHITECTURE
-                           name of the architecture.
-                           (default: amd64)
-     -c COLLECTION, --collection COLLECTION
-                           name of the collection/subset of images.
-                           (default: debian/bullseye)
-     -r REGISTRY, --registry REGISTRY
-                           container image registry prefix.
-                           (default: gcr.io/hdl-containers)
-     -f DOCKERFILE, --dockerfile DOCKERFILE
-                           dockerfile to be built, from the collection.
-                           (default: None)
-     -t TARGET, --target TARGET
-                           target stage in the dockerfile.
-                           (default: None)
-     -i ARGIMG, --argimg ARGIMG
-                           base image passed as an ARG to the dockerfile.
-                           (default: None)
-     -p, --pkg             preprend 'pkg/' to Image and set Target to 'pkg' (if unset).
-                           (default: False)
-     -d, --default         set default Dockerfile, Target and ArgImg options, given the image name(s).
-                           (default: False)
-     -q, --test            test each image right after building it.
-                           (default: False)
+.. autoprogram:: pyHDLC.cli:CLI().MainParser
+  :prog: pyHDLC
+  :groups:
 
-.. important::
 
-   `DOCKERFILE` defaults to `Image` if `None`.
+.. _Development:test:
+
+Smoke-tests
+===========
+
+There is a test script in :ghsrc:`test/ <test/>` for each image in this ecosystem, according to the following
+convention:
+
+* Scripts for package images, ``/[ARCHITECTURE/][COLLECTION/]pkg/TOOL_NAME[/SUBNAME]``, are named
+  ``TOOL_NAME[--SUBNAME].pkg.sh``.
+
+* Scripts for other images, ``/[ARCHITECTURE/][COLLECTION/]NAME[/SUBNAME]``, are named ``NAME[--SUBNAME].sh``.
+
+* Other helper scripts are named ``_*.sh``.
+
+Furthermore, `hdl/smoke-tests <https://github.com/hdl/smoke-tests>`__ is a submodule of this repository
+(:ghsrc:`test/smoke-tests <test>`).
+Smoke-tests contains fine-grained tests that cover the most important functionalities of the tools.
+Those are used in other packaging projects too.
+Therefore, container tests are expected to execute the smoke-tests corresponding to the tools available in the image,
+before executing more specific tests.
+
+``pyHDLC test`` allows testing the runnable and package images.
+It is used in CI but can be useful locally too.
+When using `pyHDLC test`, ``DirName`` allows to optionally specify the name of the directory inside the package image
+which needs to be copied to the temporary image for testing.
+By default, the escaped name of the image is used as the location.
+
+
+.. _Development:inspect:
 
 Inspect
--------
+=======
 
 .. role:: green
 
@@ -121,62 +115,3 @@ or, inspect any image from any registry:
 .. code-block:: bash
 
    HDL_REGISTRY=docker.io dockerDive python:slim-bullseye
-
-.. _Development:test:
-
-Test
-----
-
-There is a test script in :ghsrc:`test/ <test/>` for each image in this ecosystem, according to the following
-convention:
-
-* Scripts for package images, ``/[ARCHITECTURE/][COLLECTION/]pkg/TOOL_NAME[/SUBNAME]``, are named
-  ``TOOL_NAME[--SUBNAME].pkg.sh``.
-
-* Scripts for other images, ``/[ARCHITECTURE/][COLLECTION/]NAME[/SUBNAME]``, are named ``NAME[--SUBNAME].sh``.
-
-* Other helper scripts are named ``_*.sh``.
-
-Furthermore, `hdl/smoke-test <https://github.com/hdl/smoke-tests>`__ is a submodule of this repository
-(:ghsrc:`test/smoke-test <test>`).
-Smoke-tests contains fine-grained tests that cover the most important functionalities of the tools.
-Those are used in other packaging projects too.
-Therefore, container tests are expected to execute the smoke-tests corresponding to the tools available in the image,
-before executing more specific tests.
-
-``pyHDLC test`` allows testing the runnable and package images.
-
-It is used in CI but can be useful locally too:
-
-.. code-block:: shell
-
-   usage: pyHDLC test [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY] Image[#<DirName>] [Image[#<DirName>] ...]
-
-   positional arguments:
-     Image                 image name(s), without registry prefix.
-
-   optional arguments:
-     -h, --help            show this help message and exit
-     -a ARCHITECTURE, --arch ARCHITECTURE
-                           name of the architecture.
-                           (default: amd64)
-     -c COLLECTION, --collection COLLECTION
-                           name of the collection/subset of images.
-                           (default: debian/bullseye)
-     -r REGISTRY, --registry REGISTRY
-                           container image registry prefix.
-                           (default: gcr.io/hdl-containers)
-
-.. IMPORTANT::
-  ``DirName`` allows to optionally specify the name of the directory inside the package image which needs to be copied
-  to the temporary image for testing.
-  By default, the escaped name of the image is used as the location.
-  Therefore, ``DirName`` is used exceptionally.
-
-.. _Development:utils:pyHDLC:
-
-pyHDLC Reference
-================
-
-.. automodule:: pyHDLC
-  :exclude-members: Config, ConfigDefaultImageItem, ConfigDefaults, ConfigJobs, ConfigJobsCustomItem, ConfigJobsCustomExcludeItem

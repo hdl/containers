@@ -178,6 +178,7 @@ extensions = [
     "sphinx.ext.extlinks",
     "sphinx.ext.intersphinx",
     "sphinx.ext.graphviz",
+    "sphinxcontrib.autoprogram"
 ]
 
 autodoc_default_options = {
