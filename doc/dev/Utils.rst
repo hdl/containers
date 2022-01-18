@@ -141,6 +141,8 @@ The fields and types supported in the configuration file are defined through dat
 However, some details about the syntax can be non-obvious.
 See the clarifications below:
 
+.. _Development:configuration:defaults:
+
 Defaults
 --------
 
@@ -153,6 +155,8 @@ If the following conditions are met, images need not to be explicitly listed in 
 Otherwise, a dictionary is expected, with the fields that need to be overriden (``dockerfile``, ``target`` and/or
 ``argimg``).
 
+.. _Development:configuration:jobs:
+
 Jobs
 ----
 
@@ -161,7 +165,7 @@ There are four kinds of job lists:
 * **default**: two images are built for each collection and architecture, a regular image and a package image.
 * **pkgonly**: a package image is built for each collection and architecture.
 * **runonly**: a regular image is built for each collection and architecture.
-* **custom**: the lists of images are declared as cross-products, and ``exclude`` is supported.
+* **custom**: the lists of jobs/tasks are declared as cross-products, and ``exclude`` is supported.
 
 In **default**, **pkgonly** and **runonly**, a dictionary of lists is expected per keyword; each key corresponding to a
 collection and the lists specifying the architectures.

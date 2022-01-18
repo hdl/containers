@@ -29,15 +29,29 @@ from pyHDLC.run import _exec
 
 @dataclass
 class ConfigDefaultImageItem(YamlDataClassConfig):
+    """
+    Optionally overridable fields for image build argument defaults.
+    """
+    #: The dockerfile to pass to `docker build`.
     dockerfile: Optional[str] = None
+    #: The target stage to pass to `docker build`.
     target: Optional[str] = None
+    #: The base IMAGE to pass as a build-arg to `docker build`.
     argimg: Optional[str] = None
 
 @dataclass
 class ConfigDefaults(YamlDataClassConfig):
+    """
+    Default global parameters and images which need explicitly overriding build argument defaults.
+    See :ref:`Development:configuration:defaults`.
+    """
+    #: Default registry prefix.
     registry: str = "gcr.io/hdl-containers"
+    #: Default collection.
     collection: str = "debian/bullseye"
+    #: Default architecture.
     architecture: str = "amd64"
+    #: Allows override default image build arguments.
     images: Optional[Dict[str, ConfigDefaultImageItem]] = None
 
 ConfigJobsSysDict = Dict[str, List[str]]
@@ -45,27 +59,55 @@ ConfigJobsDict = Dict[str, ConfigJobsSysDict]
 
 @dataclass
 class ConfigJobsCustomExcludeItem(YamlDataClassConfig):
+    """
+    An exclusion rule for a list of taks generated through a cross-product.
+    """
+    #: Collection(s) and architecture(s).
     sys: ConfigJobsSysDict
+    #: Combination of argument values to exclude.
     params: Dict[str, str]
 
 @dataclass
 class ConfigJobsCustomItem(YamlDataClassConfig):
+    """
+    A custom list of jobs/tasks defined by combining lists of images and system, optionally applying exclusion rules.
+    """
+    #: Either a list or a list of lists of image names.
+    #: Argument substitution is supported through ``${arg}``.
     images: List[Any]
+    #: Collection(s) and architecture(s).
     sys: ConfigJobsSysDict
+    #: Optionally, declare combinations of *sys* and *images* which should be excluded from the produced cross-products.
     exclude: Optional[List[ConfigJobsCustomExcludeItem]] = None #= {}
 
 @dataclass
 class ConfigJobs(YamlDataClassConfig):
+    """
+    List of jobs/tasks to be used in CI to dynamically spawn jobs.
+    See :ref:`Development:configuration:jobs`.
+    """
+    #: Build two images for each collection and architecture, a regular image and a package image.
     default: ConfigJobsDict #= {}
+    #: Build a package image for each collection and architecture.
     pkgonly: ConfigJobsDict #= {}
+    #: Build a regular image for each collection and architecture.
     runonly: ConfigJobsDict #= {}
+    #: Declare the lists of jobs/tasks as cross-products (``exclude`` is supported).
     custom: Dict[str, ConfigJobsCustomItem] #= {}
 
 @dataclass
 class Config(YamlDataClassConfig):
+    """
+    Configuration containing global defaults, image building argument overrides and job/task list declarations.
+    See :ref:`Development:configuration`.
+    """
+    #: Version of the configuration file syntax.
     HDLC: Optional[int] = None
+    #: Placeholder for anchors used to reduce verbosity. This field is resolved by the loader and ignored by the analyzer.
     anchors: Optional[Any] = None #= {}
+    #: Default global parameters and images which need explicitly overriding build argument defaults.
     defaults: ConfigDefaults = ConfigDefaults()
+    #: List of jobs/tasks to be used in CI to dynamically spawn jobs.
     jobs: Optional[ConfigJobs] = None #= ConfigJobs()
 
 
