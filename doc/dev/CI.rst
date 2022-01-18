@@ -39,7 +39,7 @@ As shown in :numref:`img-ci`, the following wrappers are used:
   including setup, pulling/building/testing and releasing.
 * :ghsrc:`Common <.github/workflows/common.yml>` is a Reusable Workflow with two jobs.
   The first job, named *matrix*, uses ``pyHDLC jobs`` to generate a list of tasks to be used in the second job, named
-  *jobs*.
+  *jobs* (see `docs.github.com: Workflow syntax for GitHub Actions » jobs.<job_id>.outputs <https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idoutputs>`__).
   Then, the Composite Action is used in each of the dynamically generated jobs.
 * :ghsrc:`Dispatch <.github/workflows/dispatch.yml>` is a Dispatchable Workflow, which calls the Reusable Workflow.
   In practice, *Dispatch* documents the internal triggering interface, but it is not used explicitly.
