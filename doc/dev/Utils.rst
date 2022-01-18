@@ -16,7 +16,7 @@ Since ``pip`` is used for installing :ghsrc:`utils/pyHDLC/requirements.txt <util
 desirable to create a virtual environment (`docs.python.org/3/library/venv <https://docs.python.org/3/library/venv.html>`__)
 before running ``setup.sh``:
 
-.. code-block:: shell
+.. sourcecode:: shell
 
   virtualenv venv
   source venv/bin/activate
@@ -74,7 +74,7 @@ However, since ``pkg`` images are not runnable, creating another image is requir
 from a container.
 For instance:
 
-.. code-block:: dockerfile
+.. sourcecode:: dockerfile
 
    FROM busybox
    COPY --from=REGISTRY/pkg/TOOL_NAME /TOOL_NAME /
@@ -86,7 +86,7 @@ Alternatively, or as a complement, `gh:wagoodman/dive <https://github.com/wagood
 a nice terminal based GUI for exploring layers and contents of container images.
 It can be downloaded as a tarball/zipfile, or used as a container:
 
-.. code-block:: bash
+.. sourcecode:: bash
 
    docker run --rm -it \
      -v //var/run/docker.sock://var/run/docker.sock \
@@ -106,12 +106,124 @@ The default registry prefix is ``gcr.io/hdl-containers``, however, it can be ove
 
 For instance, inspect image ``gcr.io/hdl-containers/debian/bullseye/ghdl``:
 
-.. code-block:: bash
+.. sourcecode:: bash
 
    dockerDive debian/bullseye ghdl
 
 or, inspect any image from any registry:
 
-.. code-block:: bash
+.. sourcecode:: bash
 
    HDL_REGISTRY=docker.io dockerDive python:slim-bullseye
+
+
+.. _Development:configuration:
+
+YAML Configuration File
+=======================
+
+Most of the complexity regarding images, dockerfiles, arguments and jobs is defined in the YAML configuration file
+(see :ghsrc:`config.yml <utils/pyHDLC/config.yml>`), which contains two data fields:
+
+* **defaults**: which dockerfile and (optionally) target stage or base image to be used when building "non-regular" images.
+  That is, using a non-empty target, an specific base image, etc.
+  If the image name is not defined in this field, the dockerfile defaults to the image name and the target depends on
+  option *package*.
+* **jobs**: which images and for which collections and architectures to build each list of tasks.
+  For convenienve, the keywords match the name of the main tool/group in the list.
+
+.. TIP::
+  Contributors will find that field **anchors** in :ghsrc:`config.yml <utils/pyHDLC/config.yml>` is ignored by pyHDLC
+  commands when analyzing the file.
+  That's because anchors are used to reduce the verbosity of the YAML file, but they are resolved by the loader.
+
+The fields and types supported in the configuration file are defined through dataclasses (see :ref:`Development:utils:pyHDLC:Reference:Dataclasses`).
+However, some details about the syntax can be non-obvious.
+See the clarifications below:
+
+Defaults
+--------
+
+If the following conditions are met, images need not to be explicitly listed in the configuration file:
+
+* The dockerfile to be used matches the image name.
+* The default target is empty, or ``pkg`` if a package image is being built.
+* The ``argimg`` is empty.
+
+Otherwise, a dictionary is expected, with the fields that need to be overriden (``dockerfile``, ``target`` and/or
+``argimg``).
+
+Jobs
+----
+
+There are four kinds of job lists:
+
+* **default**: two images are built for each collection and architecture, a regular image and a package image.
+* **pkgonly**: a package image is built for each collection and architecture.
+* **runonly**: a regular image is built for each collection and architecture.
+* **custom**: the lists of images are declared as cross-products, and ``exclude`` is supported.
+
+In **default**, **pkgonly** and **runonly**, a dictionary of lists is expected per keyword; each key corresponding to a
+collection and the lists specifying the architectures.
+Conversely, in **custom** three fields are expected:
+
+* **sys**: a dictionary of lists, such as the one expected in **default**, **pkgonly** and **runonly**.
+
+* **images**: either a list or a list of lists of image names.
+
+  * If a single list is provided, all images are built sequentially in a single job:
+
+    .. sourcecode:: yaml
+
+      images:
+        - formal/min
+        - formal
+        - formal/all
+
+    If a list of lists is provided, each of them is built sequentially in a different job:
+
+    .. sourcecode:: yaml
+
+      images:
+        - [ conda/symbiflow/xc7/a50t  ]
+        - [ conda/symbiflow/xc7/a100t ]
+        - [ conda/symbiflow/xc7/a200t ]
+
+  * Argument substitution is supported through ``${arg}``.
+    If any of the items in the list is a dictionary, instead of a string, it is used as an argument in the substitution
+    phase.
+    If the same argument is provided multiple times, a cross-product of the arguments and the lists is produced:
+
+    .. sourcecode:: yaml
+
+      images:
+        - sim/${prj}-slim
+        - sim/${prj}
+        - prj: scipy
+        - prj: octave
+
+    .. sourcecode:: yaml
+
+      images:
+        - pkg/nextpnr/${arch}
+        - nextpnr/${arch}
+        - nextpnr/${prj}
+        - { arch: ice40, prj: icestorm   }
+        - { arch: ecp5,  prj: prjtrellis }
+
+* **exclude**: optionally, declare combinations of *sys* and *images* which should be excluded from the produced
+  cross-products.
+  For example:
+
+  .. sourcecode:: yaml
+
+      images:
+        - pkg/nextpnr/${arch}
+        - nextpnr/${arch}
+        - nextpnr/${prj}
+        - { arch: ecp5,  prj: prjtrellis }
+        - { arch: nexus, prj: prjoxide   }
+      sys: *SysDebianAmd64
+      exclude:
+        - sys: { debian/buster: [amd64] }
+          params: { arch: nexus, prj: prjoxide }
