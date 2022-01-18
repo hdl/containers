@@ -137,6 +137,9 @@ Most of the complexity regarding images, dockerfiles, arguments and jobs is defi
   commands when analyzing the file.
   That's because anchors are used to reduce the verbosity of the YAML file, but they are resolved by the loader.
 
+  * `yaml.org <https://yaml.org>`__
+  * `blog.daemonl.com: YAML - Anchors, References, Extend <https://blog.daemonl.com/2016/02/yaml.html>`__
+
 The fields and types supported in the configuration file are defined through dataclasses (see :ref:`Development:utils:pyHDLC:Reference:Dataclasses`).
 However, some details about the syntax can be non-obvious.
 See the clarifications below:
