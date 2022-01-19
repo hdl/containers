@@ -157,54 +157,79 @@ with (ROOT / "shields/shields.build.gen.inc").open("w", encoding="utf-8") as wfp
 # -- Generate CIStatus.inc ---------------------------------------------------------------------------------------------
 
 CIWorkflows = [
-    "doc",
-    "base",
-    "ghdl",
-    "gtkwave",
-    "iverilog",
-    "verilator",
-    "xyce",
-    "apicula",
-    "arachne-pnr",
-    "ghdl-yosys-plugin",
-    "icestorm",
-    "nextpnr",
-    "openfpgaloader",
-    "prjoxide",
-    "prjtrellis",
-    "SymbiFlow",
-    "yosys",
-    "boolector",
-    "cvc",
-    "pono",
-    "superprove",
-    "symbiyosys",
-    "yices2",
-    "z3",
-    "klayout",
-    "magic",
-    "netgen",
-    "vtr",
-    "formal",
-    "sim",
-    "impl",
-    "prog",
+    [
+        "doc",
+        "base",
+        "ghdl",
+        "gtkwave",
+        "iverilog",
+        "verilator",
+        "xyce",
+    ],
+    [
+        "apicula",
+        "arachne-pnr",
+        "ghdl-yosys-plugin",
+        "icestorm",
+        "nextpnr",
+        "openfpgaloader",
+        "prjoxide",
+        "prjtrellis",
+        "SymbiFlow",
+        "vtr",
+        "yosys",
+    ],
+    [
+        "boolector",
+        "cvc",
+        "pono",
+        "superprove",
+        "symbiyosys",
+        "yices2",
+        "z3",
+    ],
+    [
+        "klayout",
+        "magic",
+        "netgen",
+    ],
+    [
+        "formal",
+        "sim",
+        "impl",
+        "prog",
+    ],
 ]
 
 with (ROOT / "CIStatus.inc").open("w") as wfptr:
-    for workflow in CIWorkflows:
-        attrs = f"longCache=true&style=flat-square&label={workflow}&logo=GitHub%20Actions&logoColor=fff"
-        wfptr.write(
-            f"""
+    # Generate shields before using them in the table
+    for sublist in CIWorkflows:
+        for workflow in sublist:
+            attrs = f"longCache=true&style=flat-square&label={workflow}&logo=GitHub%20Actions&logoColor=fff"
+            wfptr.write(
+                f"""\
 .. |SHIELD:Workflow:{workflow}| image:: https://img.shields.io/github/workflow/status/hdl/containers/{workflow}/main?{attrs}
    :alt: '{workflow} workflow Status'
    :height: 22
    :target: https://github.com/hdl/containers/actions/workflows/{workflow}.yml
-   :class: shield
+   :class: shield\n
 """
+            )
+    # Get the length of each column
+    lengths = [len(sublist) for sublist in CIWorkflows]
+    # Generate the table
+    wfptr.write(
+        tabulate(
+            [
+                [
+                    (f"|SHIELD:Workflow:{sublist[num]}|" if lengths[index] > num else " ")
+                    for index, sublist in enumerate(CIWorkflows)
+                ] for num in range(max(lengths))
+            ],
+            headers=["Base and Simulation", "Synthesis, PnR and Prog", "Formal", "ASIC", "All-in-one"],
+            tablefmt="rst",
         )
-    for workflow in CIWorkflows:
-        wfptr.write(f"\n|SHIELD:Workflow:{workflow}|\n")
+    )
 
 # -- General configuration ---------------------------------------------------------------------------------------------
 
