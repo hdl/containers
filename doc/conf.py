@@ -34,63 +34,69 @@ sys_path.insert(0, abspath("../utils/"))
 # -- Generate ToolsTable.inc -------------------------------------------------------------------------------------------
 
 imageShields = [
-    'sim',
-    'sim/osvb',
-    'sim/scipy-slim',
-    'sim/scipy',
-    'sim/octave-slim',
-    'sim/octave',
-    'impl',
-    'impl/ice40',
-    'impl/ecp5',
-    'impl/generic',
-    'impl/pnr',
-    'impl/icestorm',
-    'impl/prjtrellis',
-    'formal',
-    'formal/min',
-    'formal/all',
-    'prog',
-    'conda',
-    'conda/symbiflow/xc7/toolchain',
-    'conda/symbiflow/xc7/a50t',
-    'conda/symbiflow/xc7/a100t',
-    'conda/symbiflow/xc7/a200t',
-    'conda/symbiflow/xc7/z010',
-    'conda/symbiflow/xc7/z020',
-    'conda/symbiflow/xc7',
-    'conda/symbiflow/eos-s3'
+    "sim",
+    "sim/osvb",
+    "sim/scipy-slim",
+    "sim/scipy",
+    "sim/octave-slim",
+    "sim/octave",
+    "impl",
+    "impl/ice40",
+    "impl/ecp5",
+    "impl/generic",
+    "impl/pnr",
+    "impl/icestorm",
+    "impl/prjtrellis",
+    "formal",
+    "formal/min",
+    "formal/all",
+    "prog",
+    "conda",
+    "conda/symbiflow/xc7/toolchain",
+    "conda/symbiflow/xc7/a50t",
+    "conda/symbiflow/xc7/a100t",
+    "conda/symbiflow/xc7/a200t",
+    "conda/symbiflow/xc7/z010",
+    "conda/symbiflow/xc7/z020",
+    "conda/symbiflow/xc7",
+    "conda/symbiflow/eos-s3",
 ]
 
-tools = ROOT / 'tools.yml'
+tools = ROOT / "tools.yml"
 
 if not tools.exists():
-    raise(Exception('Tools YAML file %s not found!' % str(tools)))
+    raise (Exception("Tools YAML file %s not found!" % str(tools)))
 
-with tools.open('r', encoding='utf-8') as stream:
+with tools.open("r", encoding="utf-8") as stream:
     tools = yaml_load(stream, Loader=yaml_Loader)
 
-with (ROOT/'ToolsTable.inc').open('w', encoding='utf-8') as wfptr:
+with (ROOT / "ToolsTable.inc").open("w", encoding="utf-8") as wfptr:
+
     def table_row(tool, var):
-        pkgImages = [f"pkg/{item}" for item in var['pkg']] if 'pkg' in var else []
-        useImages = var['use'] if 'use' in var else []
+        pkgImages = [f"pkg/{item}" for item in var["pkg"]] if "pkg" in var else []
+        useImages = var["use"] if "use" in var else []
         imageShields.extend(pkgImages)
         imageShields.extend(useImages)
         pkg = [f"  * |SHIELD:Image:{item}|\n" for item in pkgImages]
         use = [f"  * |SHIELD:Image:{item}|\n" for item in useImages]
-        _in = var['in'] if 'in' in var else []
-        otherin = ', '.join(f'`{item}`' for item in (var['otherin'] if 'otherin' in var else []))
-        return ([
-            f"`{tool} <{var['url']}>`__{' !' if ('src' in var and not var['src']) else ''}",
-            '%s' % ('∅' if len(pkg) == 0 else pkg[0]),
-            '%s' % ('∅' if len(use) == 0 else use[0]),
-            #'%s\n' % ('Y' if any(_initem.startswith('synth') for _initem in _in) else '-')
-            '%s' % ('S' if any(_initem.startswith('sim') for _initem in _in) else '🗆'),
-            '%s' % ('I' if any(_initem.startswith('impl') for _initem in _in) else '🗆'),
-            '%s' % ('F' if any(_initem.startswith('formal') for _initem in _in) else '🗆'),
-            '%s' % ('P' if any(_initem.startswith('prog') for _initem in _in) else '🗆'),
-            f"{'∅' if len(otherin) == 0 else otherin}\n",
-        ], [] if len(pkg) <2 else pkg[1:], [] if len(use) <2 else use[1:] )
+        _in = var["in"] if "in" in var else []
+        otherin = ", ".join(f"`{item}`" for item in (var["otherin"] if "otherin" in var else []))
+        return (
+            [
+                f"`{tool} <{var['url']}>`__{' !' if ('src' in var and not var['src']) else ''}",
+                "%s" % ("∅" if len(pkg) == 0 else pkg[0]),
+                "%s" % ("∅" if len(use) == 0 else use[0]),
+                #'%s\n' % ('Y' if any(_initem.startswith('synth') for _initem in _in) else '-')
+                "%s" % ("S" if any(_initem.startswith("sim") for _initem in _in) else "🗆"),
+                "%s" % ("I" if any(_initem.startswith("impl") for _initem in _in) else "🗆"),
+                "%s" % ("F" if any(_initem.startswith("formal") for _initem in _in) else "🗆"),
+                "%s" % ("P" if any(_initem.startswith("prog") for _initem in _in) else "🗆"),
+                f"{'∅' if len(otherin) == 0 else otherin}\n",
+            ],
+            [] if len(pkg) < 2 else pkg[1:],
+            [] if len(use) < 2 else use[1:],
+        )
+
     table = []
     for tool, var in tools.items():
         (row, pkg, use) = table_row(tool, var)
@@ -99,93 +105,104 @@ with (ROOT/'ToolsTable.inc').open('w', encoding='utf-8') as wfptr:
         len_use = len(use)
         if len_pkg > 0 or len_use > 0:
             for num in range(max(len_pkg, len_use)):
-                table.append([
-                    ' ',
-                    pkg[num] if len_pkg > num else ' ',
-                    use[num] if len_use > num else ' ',
-                    ' ',
-                    ' ',
-                    ' ',
-                    ' ',
-                    ' ',
-                ])
-    wfptr.write(tabulate(
-        table,
-        #'Image', 'Included in',
-        headers=['Tool', 'Package', 'Ready-to-use', 'S', 'I', 'F', 'P', 'Others'],
-        tablefmt='rst'
-    ).replace('..', '  '))
+                table.append(
+                    [
+                        " ",
+                        pkg[num] if len_pkg > num else " ",
+                        use[num] if len_use > num else " ",
+                        " ",
+                        " ",
+                        " ",
+                        " ",
+                        " ",
+                    ]
+                )
+    wfptr.write(
+        tabulate(
+            table,
+            #'Image', 'Included in',
+            headers=["Tool", "Package", "Ready-to-use", "S", "I", "F", "P", "Others"],
+            tablefmt="rst",
+        ).replace("..", "  ")
+    )
 
 # -- Generate shields.tools.inc and shields.build.inc ------------------------------------------------------------------
 
+
 def OCIImageShield(image):
-    arr = image.replace('/',':', 1).replace('/','--').split(':')
+    arr = image.replace("/", ":", 1).replace("/", "--").split(":")
+    attrs = f"longCache=true&style=flat-square&label={image}&logo=Docker&logoColor=fff"
+    name = f"{arr[0]}/{arr[1] if len(arr) > 1 else 'latest'}"
     return f"""
-.. |SHIELD:Image:{image}| image:: https://img.shields.io/docker/image-size/hdlc/{arr[0]}/{arr[1] if len(arr) > 1 else 'latest'}?longCache=true&style=flat-square&label={image}&logo=Docker&logoColor=fff
+.. |SHIELD:Image:{image}| image:: https://img.shields.io/docker/image-size/hdlc/{name}?{attrs}
    :alt: '{image} container image size'
    :height: 22
    :target: https://gcr.io/hdl-containers/{'debian/bullseye/' if arr[0] in ['pkg', 'build'] else ''}{image}
    :class: shield
 """
 
-with (ROOT / 'shields/shields.tools.gen.inc').open('w', encoding='utf-8') as wfptr:
+
+with (ROOT / "shields/shields.tools.gen.inc").open("w", encoding="utf-8") as wfptr:
     for image in imageShields:
         wfptr.write(OCIImageShield(image))
 
-with (ROOT / 'shields/shields.build.gen.inc').open('w', encoding='utf-8') as wfptr:
+with (ROOT / "shields/shields.build.gen.inc").open("w", encoding="utf-8") as wfptr:
     for image in [
-        'build/base',
-        'build/build',
-        'build/dev',
+        "build/base",
+        "build/build",
+        "build/dev",
     ]:
         wfptr.write(OCIImageShield(image))
 
 # -- Generate CIStatus.inc ---------------------------------------------------------------------------------------------
 
 CIWorkflows = [
-    'doc',
-    'base',
-    'ghdl',
-    'gtkwave',
-    'iverilog',
-    'verilator',
-    'xyce',
-    'apicula',
-    'arachne-pnr',
-    'ghdl-yosys-plugin',
-    'icestorm',
-    'nextpnr',
-    'openfpgaloader',
-    'prjoxide',
-    'prjtrellis',
-    'SymbiFlow',
-    'yosys',
-    'boolector',
-    'cvc',
-    'pono',
-    'superprove',
-    'symbiyosys',
-    'yices2',
-    'z3',
-    'klayout',
-    'magic',
-    'netgen',
-    'vtr',
-    'formal',
-    'sim',
-    'impl',
-    'prog',
+    "doc",
+    "base",
+    "ghdl",
+    "gtkwave",
+    "iverilog",
+    "verilator",
+    "xyce",
+    "apicula",
+    "arachne-pnr",
+    "ghdl-yosys-plugin",
+    "icestorm",
+    "nextpnr",
+    "openfpgaloader",
+    "prjoxide",
+    "prjtrellis",
+    "SymbiFlow",
+    "yosys",
+    "boolector",
+    "cvc",
+    "pono",
+    "superprove",
+    "symbiyosys",
+    "yices2",
+    "z3",
+    "klayout",
+    "magic",
+    "netgen",
+    "vtr",
+    "formal",
+    "sim",
+    "impl",
+    "prog",
 ]
 
-with (ROOT/'CIStatus.inc').open('w') as wfptr:
+with (ROOT / "CIStatus.inc").open("w") as wfptr:
     for workflow in CIWorkflows:
-        wfptr.write(f"""
-.. |SHIELD:Workflow:{workflow}| image:: https://img.shields.io/github/workflow/status/hdl/containers/{workflow}/main?longCache=true&style=flat-square&label={workflow}&logo=GitHub%20Actions&logoColor=fff
+        attrs = f"longCache=true&style=flat-square&label={workflow}&logo=GitHub%20Actions&logoColor=fff"
+        wfptr.write(
+            f"""
+.. |SHIELD:Workflow:{workflow}| image:: https://img.shields.io/github/workflow/status/hdl/containers/{workflow}/main?{attrs}
    :alt: '{workflow} workflow Status'
    :height: 22
    :target: https://github.com/hdl/containers/actions/workflows/{workflow}.yml
    :class: shield
-""")
+"""
+        )
     for workflow in CIWorkflows:
         wfptr.write(f"\n|SHIELD:Workflow:{workflow}|\n")
 
@@ -196,7 +213,7 @@ extensions = [
     "sphinx.ext.extlinks",
     "sphinx.ext.intersphinx",
     "sphinx.ext.graphviz",
-    "sphinxcontrib.autoprogram"
+    "sphinxcontrib.autoprogram",
 ]
 
 autodoc_default_options = {
@@ -210,9 +227,9 @@ source_suffix = {
 }
 
 master_doc = "index"
-project = u"HDL Containers: Building and deploying container images for open source Electronic Design Automation"
-copyright = u"2019-2022, Unai Martinez-Corral and contributors"
-author = u"Unai Martinez-Corral and contributors"
+project = "HDL Containers: Building and deploying container images for open source Electronic Design Automation"
+copyright = "2019-2022, Unai Martinez-Corral and contributors"
+author = "Unai Martinez-Corral and contributors"
 
 version = "latest"
 release = version  # The full version, including alpha/beta/rc tags.
@@ -220,12 +237,12 @@ release = version  # The full version, including alpha/beta/rc tags.
 language = None
 
 exclude_patterns = [
-    '_build',
-    '_theme',
-    'logo',
-    'graph',
-    '.dockerfile',
-    '.yml',
+    "_build",
+    "_theme",
+    "logo",
+    "graph",
+    ".dockerfile",
+    ".yml",
 ]
 
 numfig = True
@@ -246,7 +263,7 @@ if (ROOT / "_theme").is_dir():
         "vcs_pageview_mode": "blob",
     }
     html_css_files = [
-        'theme_overrides.css',
+        "theme_overrides.css",
     ]
 else:
     html_theme = "alabaster"
@@ -265,14 +282,28 @@ latex_elements = {
 }
 
 latex_documents = [
-    (master_doc, "HDLCDoc.tex", u"Building and deploying container images for open source Electronic Design Automation (Documentation)", author, "manual"),
+    (
+        master_doc,
+        "HDLCDoc.tex",
+        "Building and deploying container images for open source Electronic Design Automation (Documentation)",
+        author,
+        "manual",
+    ),
 ]
 
 # -- Options for manual page output ------------------------------------------------------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "HDLC", u"Building and deploying container images for open source Electronic Design Automation (Documentation)", [author], 1)]
+man_pages = [
+    (
+        master_doc,
+        "HDLC",
+        "Building and deploying container images for open source Electronic Design Automation (Documentation)",
+        [author],
+        1,
+    )
+]
 
 # -- Options for Texinfo output ----------------------------------------------------------------------------------------
 
@@ -280,7 +311,7 @@ texinfo_documents = [
     (
         master_doc,
         "HDLC",
-        u"Building and deploying container images for open source Electronic Design Automation (Documentation)",
+        "Building and deploying container images for open source Electronic Design Automation (Documentation)",
         author,
         "HDL Containers",
         "HDL verification.",
@@ -291,12 +322,12 @@ texinfo_documents = [
 # -- Sphinx.Ext.InterSphinx --------------------------------------------------------------------------------------------
 
 intersphinx_mapping = {
-    "python":  ("https://docs.python.org/3/", None),
-    "edaa":    ("https://edaa-org.github.io", None),
+    "python": ("https://docs.python.org/3/", None),
+    "edaa": ("https://edaa-org.github.io", None),
     "clitool": ("https://edaa-org.github.io/pyEDAA.CLITool", None),
     "edalize": ("https://edalize.rtfd.io/en/latest", None),
-    "pyfpga":  ("https://pyfpga.github.io/pyfpga", None),
-    "qus":     ("https://dbhi.github.io/qus", None),
+    "pyfpga": ("https://pyfpga.github.io/pyfpga", None),
+    "qus": ("https://dbhi.github.io/qus", None),
 }
 
 # -- Sphinx.Ext.ExtLinks -----------------------------------------------------------------------------------------------
