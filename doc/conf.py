@@ -70,33 +70,51 @@ if not tools.exists():
 with tools.open('r', encoding='utf-8') as stream:
     tools = yaml_load(stream, Loader=yaml_Loader)
 
-with (ROOT/'ToolsTable.inc').open('w') as wfptr:
+with (ROOT/'ToolsTable.inc').open('w', encoding='utf-8') as wfptr:
     def table_row(tool, var):
         pkgImages = [f"pkg/{item}" for item in var['pkg']] if 'pkg' in var else []
         useImages = var['use'] if 'use' in var else []
         imageShields.extend(pkgImages)
         imageShields.extend(useImages)
-        pkg = ' '.join([f"|SHIELD:Image:{item}|" for item in pkgImages])
-        use = ' '.join([f"|SHIELD:Image:{item}|" for item in useImages])
+        pkg = [f"  * |SHIELD:Image:{item}|\n" for item in pkgImages]
+        use = [f"  * |SHIELD:Image:{item}|\n" for item in useImages]
         _in = var['in'] if 'in' in var else []
         otherin = ', '.join(f'`{item}`' for item in (var['otherin'] if 'otherin' in var else []))
-        return [
+        return ([
             f"`{tool} <{var['url']}>`__{' !' if ('src' in var and not var['src']) else ''}",
-            '%s' % ('-' if len(pkg) == 0 else pkg),
-            '%s' % ('-' if len(use) == 0 else use),
+            '%s' % ('∅' if len(pkg) == 0 else pkg[0]),
+            '%s' % ('∅' if len(use) == 0 else use[0]),
             #'%s\n' % ('Y' if any(_initem.startswith('synth') for _initem in _in) else '-')
-            '%s' % ('S' if any(_initem.startswith('sim') for _initem in _in) else '-'),
-            '%s' % ('I' if any(_initem.startswith('impl') for _initem in _in) else '-'),
-            '%s' % ('F' if any(_initem.startswith('formal') for _initem in _in) else '-'),
-            '%s' % ('P' if any(_initem.startswith('prog') for _initem in _in) else '-'),
-            f"{'-' if len(otherin) == 0 else otherin}\n",
-        ]
+            '%s' % ('S' if any(_initem.startswith('sim') for _initem in _in) else '🗆'),
+            '%s' % ('I' if any(_initem.startswith('impl') for _initem in _in) else '🗆'),
+            '%s' % ('F' if any(_initem.startswith('formal') for _initem in _in) else '🗆'),
+            '%s' % ('P' if any(_initem.startswith('prog') for _initem in _in) else '🗆'),
+            f"{'∅' if len(otherin) == 0 else otherin}\n",
+        ], [] if len(pkg) <2 else pkg[1:], [] if len(use) <2 else use[1:] )
+    table = []
+    for tool, var in tools.items():
+        (row, pkg, use) = table_row(tool, var)
+        table.append(row)
+        len_pkg = len(pkg)
+        len_use = len(use)
+        if len_pkg > 0 or len_use > 0:
+            for num in range(max(len_pkg, len_use)):
+                table.append([
+                    ' ',
+                    pkg[num] if len_pkg > num else ' ',
+                    use[num] if len_use > num else ' ',
+                    ' ',
+                    ' ',
+                    ' ',
+                    ' ',
+                    ' ',
+                ])
     wfptr.write(tabulate(
-        [table_row(tool, var) for tool, var in tools.items()],
+        table,
         #'Image', 'Included in',
         headers=['Tool', 'Package', 'Ready-to-use', 'S', 'I', 'F', 'P', 'Others'],
         tablefmt='rst'
-    ))
+    ).replace('..', '  '))
 
 # -- Generate shields.tools.inc and shields.build.inc ------------------------------------------------------------------
 

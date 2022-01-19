@@ -23,3 +23,12 @@
 .blue    { color: blue;    }
 .navy    { color: navy;    }
 .purple  { color: purple;  }
+
+td > ul.simple {
+  margin-bottom: unset;
+}
+
+td > ul.simple > li {
+  margin-left: unset;
+  list-style: none;
+}

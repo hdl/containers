@@ -7,7 +7,7 @@ Tools and images
 
 By default, latest development versions (branches ``master`` | ``main``) of tools are built.
 Then, smoke tests are executed and, if successful, the corresponding images are updated in the registries.
-However, some specific tools are *not* built from sources, but installed through system package managers.
+However, some specific tools are *not* built from sources, but installed through (system) package managers.
 Those are marked with ``!`` in the table below.
 
 .. include:: ToolsTable.inc
