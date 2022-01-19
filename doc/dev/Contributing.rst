@@ -55,8 +55,30 @@ In fact, multiple tools are merged into ready-to-use images for common use cases
 Dockerfiles
 ===========
 
-Two kinds of dockerfile definitions are supported by the utils used in this repository: single-file solutions, or aided
-by additional assets.
+Two kinds of `Dockerfile <https://docs.docker.com/engine/reference/builder/>`__ definitions are supported by the utils
+used in this repository: single-file solutions, or aided by additional assets.
+Nonetheless, all dockerfiles use, at least, two or three stages:
+
+* A global argument named ``REGISTRY`` defines the default registry path and collection to be used.
+
+* One stage, named ``build``, based on ``$REGISTRY/build/base`` or ``$REGISTRY/build/build`` or ``$REGISTRY/build/dev``,
+  is used to (optionally) install build dependencies, and to actually build the tool.
+
+  * The tool/project is built using the standard ``PREFIX``, but installed to a custom location using ``DESTDIR``.
+    See :ref:`Package images <Development:package-images>`.
+
+* If the tool/project is to be packaged, one stage based on image ``scratch`` is named ``pkg`` and it contains the
+  artifacts of the build stage only.
+
+  * Tool artifacts are copied from the build stage using ``COPY --from=STAGE_NAME``.
+
+* If the tool/project is to be used standalone, a final stage based on image ``$REGISTRY/build/base`` is used to
+  (optionally) install runtime dependencies, to copy the build artifacts from the build stage, and to (optionally) set
+  the default command for the image.
+
+.. NOTE::
+  In some dockerfiles, global argument ``IMAGE`` is used to compose stages on top of multiple intermediate images.
+
 
 .. _Development:contributing:Dockerfiles:single-file:
 
@@ -65,15 +87,6 @@ Single-file example
 
 Some tools are defined in a dockerfile only, without any additional assets.
 In those cases, the dockerfile is named after the name of the main tool/image built there.
-
-The most important design choices to take into account are the following:
-
-* A global argument named ``REGISTRY`` defines the default registry path and collection to be used.
-* One stage based on image ``build/build`` or ``build/dev`` is used to (optionally) install build dependencies, and to
-  actually build the tool.
-* One stage based on image ``scratch`` is named ``pkg`` and it contains the artifacts of the build stage only.
-* A final stage based on image ``build/base`` is used to (optionally) install runtime dependencies, to copy the build
-  artifacts from the build stage, and to (optionally) set the default command for the image.
 
 .. sourcecode:: dockerfile
   :caption: Reference Dockerfile to build a TOOL and generate a regular image and a package image.
@@ -118,6 +131,7 @@ The most important design choices to take into account are the following:
   Typically, stage ``pkg`` is used as a target to build a package image, and the dockerfile is used without a target in
   order to build the regular image for the tool.
   However, some tools/groups require additional stages, and some other don't have the package or the regular stage.
+
 
 .. _Development:contributing:Dockerfiles:with-assets:
 
@@ -224,6 +238,8 @@ Find further details about BuildKit's mount syntax in `gh:moby/buildkit: fronten
   That depends on the version of Docker.
   Recent versions should not require it.
 
+.. _Development:contributing:checklist:
+
 Step by step checklist
 ======================
 
@@ -231,28 +247,11 @@ Step by step checklist
 
 1. Create or update dockerfile(s).
 
-  * For each tool and collection, a `Dockerfile <https://docs.docker.com/engine/reference/builder/>`__ recipe exists.
+  * For each tool and collection, a Dockerfile recipe exists.
+    Find details about the requirements when writing dockerfiles in :ref:`Development:contributing:Dockerfiles`.
 
      * Optionally, add tools to multiple collections at the same time.
        That is, create one dockerfile for each collection.
-
-     * All dockerfiles must use, at least, two stages:
-
-        * One stage, named ``build``, is to be based on ``$REGISTRY/build/base`` or ``$REGISTRY/build/build`` or
-          ``$REGISTRY/build/dev``.
-          In this first stage, you need to add the missing build dependencies.
-          Then, build the tool/project using the standard ``PREFIX``, but install to a custom location using ``DESTDIR``.
-          See :ref:`Package images <Development:package-images>`.
-
-        * If the tool/project is to be used standalone, create an stage based on ``$REGISTRY/build/base``.
-          Install runtime dependencies only.
-
-        * If the tool/project is to be packaged, create an stage based on ``scratch``.
-
-        * In any case, copy the tool artifacts from the build stage using ``COPY --from=STAGE_NAME``.
-
-        * In practice, several dockerfiles produce at least one package image and one ready-to-use image.
-          Therefore, dockerfiles will likely have more than two stages.
 
   * Some tools are to be added to existing images which include several tools (coloured :maroon:`BROWN` in the
     :ref:`Graphs <Development:graphs>`).
@@ -260,10 +259,10 @@ Step by step checklist
     ``COPY --from=$REGISTRY/pkg/TOOL_NAME`` statements to the dockerfiles of multi-tool images.
 
 2. Build and test the dockerfile(s) locally.
-   Use helper scripts from :ghsrc:`utils <utils>`, as explained in :ref:`Development:utils`.
+   Use helper scripts from subdir :ghsrc:`utils/`, as explained in :ref:`Development:utils`.
 
-  * If a new tool was added, or a new image is to be generated, a test script needs to be added to :ghsrc:`test/ <test/>`.
-    See :ref:`Test <Development:test>` for naming guidelines.
+  * If a new tool was added, or a new image is to be generated, a test script needs to be added to :ghsrc:`test/`.
+    See :ref:`Development:test` for naming guidelines.
 
   * Be careful with the order.
     If you add a new tool and include it in one of the multi-tool images, the package image needs to be built first.
@@ -271,26 +270,28 @@ Step by step checklist
 3. Create or update workflow(s).
 
   * For each tool or multi-tool image, a GitHub Actions workflow is added to :ghsrc:`.github/workflows <.github/workflows/>`.
-    Find documentation at `Workflow syntax for GitHub Actions <https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions>`__.
-    Copying some of the existing workflows in this repo and adapting it is suggested.
+    In each workflow, multiple images produced from stages of the corresponding dockerfile are built, tested and pushed.
+    Scripts from :ghsrc:`utils/` are used.
+    Find details at :ref:`Development:continous-integration:structure`.
 
-  * In each workflow, all the images produced from stages of the corresponding dockerfile are built, tested and pushed.
-    Scripts from :ghsrc:`utils <utils>` are used.
+      * Copying some of the existing workflows in this repo and adapting it is suggested.
 
-  * The workflow matrix is used for deciding which collections is each tool to be built for.
+      * If necessary, update the :ghsrc:`config.yml <utils/pyHDLC/config.yml>` to override the defaults or to define new
+        job/task lists.
 
 4. Update the documentation.
 
   * If a new tool was added,
 
      * Ensure that the tool is listed at `hdl/awesome <https://github.com/hdl/awesome>`__, since that's where all the
-       tool/projects in the table point to.
+       tool/projects in :ref:`tools-and-images` point to.
 
-     * If a tool from the *To Do* list was added, remove it from the list.
+     * If a tool from the :ref:`tools-and-images:to-do` list was added, remove it from the list.
 
-     * Add a shield/badge to the table in :ref:`Continuous Integration (CI) <Development:continous-integration>`.
+     * Add a shield/badge to :ref:`Continuous Integration (CI) » Status <Development:continous-integration:status>` by
+       editing variable ``CIWorkflows`` in :ghsrc:`doc/conf.py`.
 
   * Edit :ghsrc:`doc/tools.yml <doc/tools.yml>`.
     The table in :ref:`Tools and images <tools-and-images>` is autogenerated from that YAML file.
 
-  * Update the :ref:`Graphs <Development:graphs>`.
+  * Update the :ref:`Graphs <Development:graphs>` in :ghsrc:`doc/graph/`.

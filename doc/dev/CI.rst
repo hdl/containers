@@ -7,10 +7,14 @@ Continuous Integration (CI)
    At the moment, there is no triggering mechanism set up between different GitHub repositories.
    All the workflows in this repo are triggered by push events, CRON jobs, or manually.
 
+.. _Development:continous-integration:status:
+
 Status
 ======
 
 .. include:: ../CIStatus.inc
+
+.. _Development:continous-integration:structure:
 
 Structure
 =========
@@ -34,6 +38,7 @@ As shown in :numref:`img-ci`, the following wrappers are used:
 .. TIP::
   In `pyTooling/Actions: Context <https://github.com/pyTooling/Actions/#context>`__, details about Action and Workflow
   kinds supported in GitHub Actions are explained.
+  See also `Workflow syntax for GitHub Actions <https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions>`__.
 
 * :ghsrc:`build-test-release <utils/build-test-release/action.yml>` is a local Composite Action with three steps,
   including setup, pulling/building/testing and releasing.
