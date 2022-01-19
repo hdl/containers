@@ -50,6 +50,180 @@ In fact, multiple tools are merged into ready-to-use images for common use cases
    However, the workload is expected to be distributed between multiple projects in the ecosystem.
 
 
+.. _Development:contributing:Dockerfiles:
+
+Dockerfiles
+===========
+
+Two kinds of dockerfile definitions are supported by the utils used in this repository: single-file solutions, or aided
+by additional assets.
+
+.. _Development:contributing:Dockerfiles:single-file:
+
+Single-file example
+-------------------
+
+Some tools are defined in a dockerfile only, without any additional assets.
+In those cases, the dockerfile is named after the name of the main tool/image built there.
+
+The most important design choices to take into account are the following:
+
+* A global argument named ``REGISTRY`` defines the default registry path and collection to be used.
+* One stage based on image ``build/build`` or ``build/dev`` is used to (optionally) install build dependencies, and to
+  actually build the tool.
+* One stage based on image ``scratch`` is named ``pkg`` and it contains the artifacts of the build stage only.
+* A final stage based on image ``build/base`` is used to (optionally) install runtime dependencies, to copy the build
+  artifacts from the build stage, and to (optionally) set the default command for the image.
+
+.. sourcecode:: dockerfile
+  :caption: Reference Dockerfile to build a TOOL and generate a regular image and a package image.
+
+  ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
+
+  #--
+
+  FROM $REGISTRY/build/build AS build
+
+  RUN apt-get update -qq \
+   && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+      ... \
+   && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+   && rm -rf /var/lib/apt/lists/*
+
+  RUN git clone REPOSITORY_URL /tmp/TOOL \
+   && cd /tmp/TOOL \
+   && ./configure \
+   && make -j$(nproc) \
+   && make DESTDIR=/opt/TOOL install
+
+  #---
+
+  FROM scratch AS pkg
+  COPY --from=build /opt/TOOL /TOOL
+
+  #---
+
+  FROM $REGISTRY/build/base
+
+  RUN apt-get update -qq \
+   && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+      ... \
+   && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+   && rm -rf /var/lib/apt/lists/*
+
+  COPY --from=build /opt/TOOL /
+  CMD ["TOOL"]
+
+.. NOTE::
+  Typically, stage ``pkg`` is used as a target to build a package image, and the dockerfile is used without a target in
+  order to build the regular image for the tool.
+  However, some tools/groups require additional stages, and some other don't have the package or the regular stage.
+
+.. _Development:contributing:Dockerfiles:with-assets:
+
+Example with HDLC script
+------------------------
+
+On the other hand, the dockerfiles to build tools with additional assets are named ``Dockerfile`` and located in a
+subdir under the collection directory, named after the name of the main tool/image built there.
+Those are typically used along with a shell script named ``HDLC``.
+The structure of these dockerfiles is similar to the :ref:`Development:contributing:Dockerfiles:single-file`, however,
+BuilKit's ``--mount`` feature is used to source a helper script (``HDLC``) without creating additional stages/steps (see
+:ref:`Development:contributing:BuildKit`).
+A similar strategy can be used to run or copy additional assets into the images.
+
+.. sourcecode:: bash
+  :caption: Reference HDLC script to decouple dependency lists and build steps from the Dockerfile.
+
+  makedepends=(
+    ...
+  )
+
+  build() {
+    mkdir /tmp/TOOL
+    cd /tmp/TOOL
+    git clone REPOSITORY_URL ./
+    ./configure
+    make -j$(nproc)
+    make DESTDIR=/opt/TOOL install
+  }
+
+  depends=(
+    ...
+  )
+
+.. NOTE::
+  The default shell in the collections used in this repository is set to ``bash``.
+  Therefore, arrays and other bash extensions are supported in these scripts.
+
+.. sourcecode:: dockerfile
+  :caption:
+    Reference Dockerfile to build a TOOL and generate a regular image and a package image, using an HDLC script and
+    BuildKit mount features.
+
+  ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
+
+  #---
+
+  FROM $REGISTRY/build/build AS build
+
+  RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+   && mkdir -p /usr/share/man/man1/ \
+   && apt-get update -qq \
+   && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
+   && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+   && update-ca-certificates \
+   && rm -rf /var/lib/apt/lists/*
+
+  RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+
+  #---
+
+  FROM scratch AS pkg
+  COPY --from=build /opt/TOOL /TOOL
+
+  #---
+
+  FROM $REGISTRY/build/base
+
+  RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+   && apt-get update -qq \
+   && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
+   && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+   && rm -rf /var/lib/apt/lists/*
+
+  COPY --from=build /opt/TOOL /
+  CMD ["TOOL"]
+
+
+.. _Development:contributing:BuildKit:
+
+BuildKit
+========
+
+The usage of dockerfiles in this repository relies on the image build engine making an analysis and pruning of the stages.
+Furthermore, option ``--mount`` used in some of the dockerfiles requires `docs.docker.com: BuildKit <https://docs.docker.com/go/buildkit/>`__.
+Therefore, enabling BuildKit is required in order to build the images.
+
+Depending on the version of Docker on your host or CI service, BuildKit features might need to be enabled explicitly.
+As explained in `docs.docker.com: To enable BuildKit builds <https://docs.docker.com/develop/develop-images/build_enhancements/#to-enable-buildkit-builds>`__, either set the ``DOCKER_BUILDKIT=1`` environment variable, or set the daemon feature to
+``true`` in the JSON configuration file: (``{ "features": { "buildkit": true } }``).
+
+Find further details about BuildKit's mount syntax in `gh:moby/buildkit: frontend/dockerfile/docs/syntax.md <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md>`__.
+
+* `bind <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypebind-the-default-mount-type>`__
+* `cache <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypecache>`__
+* `tmpfs <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypetmpfs>`__
+* `secret <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypesecret>`__
+* `ssh <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypessh>`__
+* `here-documents <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#here-documents>`__
+
+.. NOTE::
+  In order to use those features, apart from using BuildKit ``# syntax=docker/dockerfile:1.3`` might need to be added as
+  the first line of the Dockerfile.
+  That depends on the version of Docker.
+  Recent versions should not require it.
+
 Step by step checklist
 ======================
 
