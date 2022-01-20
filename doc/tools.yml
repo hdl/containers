@@ -207,6 +207,7 @@ nextpnr:
   use:
     - 'nextpnr/generic'
     - 'nextpnr/ice40'
+    - 'nextpnr/nexus'
     - 'nextpnr/ecp5'
     - 'nextpnr/icestorm'
     - 'nextpnr/prjoxide'
