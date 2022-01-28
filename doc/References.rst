@@ -29,6 +29,7 @@ References
     * :gh:`lccidocker`
 
 * :gh:`0x01be/rudder`
+* :gh:`Mluckydwyer/hw-ci`
 * :gh:`limerainne/Dockerize-EDA`
 * :gh:`alpin3/ulx3s`
 * :gh:`vmunoz82/eda_tools`
