@@ -50,16 +50,16 @@ Google Container Regisry (GCR)
 
 * `salrashid123/gcr_stats <https://github.com/salrashid123/gcr_stats>`__
 * `gregsramblings/google-cloud-4-words <https://github.com/gregsramblings/google-cloud-4-words>`__: The Google Cloud Developer's Cheat Sheet
+* :ghrepo:`gh:google/go-containerregistry: cmd/crane/README.md <https://github.com/google/go-containerregistry/blob/main/cmd/crane/README.md>`
 
 USB/IP
 ======
 
 * `gw0/docker-alpine-kernel-modules <https://github.com/gw0/docker-alpine-kernel-modules>`__
 * `virtualhere/docker <https://github.com/virtualhere/docker>`__
-  
+
   * `Windows USB Server <https://www.virtualhere.com/windows_server_software>`__
   * `USB Client <https://www.virtualhere.com/usb_client_software>`__
   * `Linux Console Client <https://www.virtualhere.com/linux_console>`__
   * `Client API <https://www.virtualhere.com/client_api>`__
   * `hub.docker.com/r/virtualhere/virtualhere-client <https://hub.docker.com/r/virtualhere/virtualhere-client>`__
-  
