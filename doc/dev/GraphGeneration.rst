@@ -26,24 +26,23 @@ So far, the following options were analysed:
 
 * `Graphviz <https://graphviz.org/>`__
 
-  * `windler/dotgraph <https://github.com/windler/dotgraph>`__
+  * :gh:`windler/dotgraph`
   * `blockdiag <http://blockdiag.com/en/blockdiag/examples.html>`__
 
 * `Gephi <https://gephi.org/>`__
 
-  * `gephi/gephi#1594 <https://github.com/gephi/gephi/issues/1594>`__
+  * :gh:`gh:gephi/gephi#1594 <gephi/gephi/issues/1594>`
 
 * `aafigure <https://aafigure.readthedocs.io/en/latest/shortintro.html>`__
 * `draw.io <https://draw.io>`__
 
-  * `jgraph/mxgraph <https://github.com/jgraph/mxgraph>`__
+  * :gh:`jgraph/mxgraph`
 
 * `yEd <https://www.yworks.com/products/yed>`__
 * `texample.net/tikz <https://texample.net/tikz/>`__
-* `ajstarks/svgo <https://github.com/ajstarks/svgo>`__
-* `kieler/elkjs <https://github.com/kieler/elkjs>`__ (`Nic30/d3-hwschematic <https://github.com/Nic30/d3-hwschematic>`__,
-  `nturley/netlistsvg <https://github.com/nturley/netlistsvg>`__)
-* `dagrejs/dagre-d3 <https://github.com/dagrejs/dagre-d3/wiki>`__
+* :gh:`ajstarks/svgo`
+* :gh:`kieler/elkjs` (:gh:`Nic30/d3-hwschematic`, :gh:`nturley/netlistsvg`)
+* :gh:`gh:dagrejs/dagre-d3 <dagrejs/dagre-d3/wiki>`
 * `graphdracula.net <https://graphdracula.net>`__
 
 Graphviz and Gephi are probably the most known tools for generating all kinds of diagrams.
@@ -76,15 +75,15 @@ Yet, generating an SVG programmatically seems not to be as straightforward as us
 ``dot``.
 The following references illustrate advanced features for building custom views/GUIs/editors:
 
-*  `kieler/elkjs <https://github.com/kieler/elkjs>`__
+* :gh:`kieler/elkjs`
 
-*  `eclipse.org/elk/documentation: JSON format <https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html>`__
+* `eclipse.org/elk/documentation: JSON format <https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html>`__
 
-*  `rtsys.informatik.uni-kiel.de/elklive <https://rtsys.informatik.uni-kiel.de/elklive/index.html>`__
+* `rtsys.informatik.uni-kiel.de/elklive <https://rtsys.informatik.uni-kiel.de/elklive/index.html>`__
 
-*  `rtsys.informatik.uni-kiel.de/elklive/elkgraph <https://rtsys.informatik.uni-kiel.de/elklive/elkgraph.html>`__
+* `rtsys.informatik.uni-kiel.de/elklive/elkgraph <https://rtsys.informatik.uni-kiel.de/elklive/elkgraph.html>`__
 
-*  `eclipse/sprotty <https://github.com/eclipse/sprotty>`__
+* :gh:`eclipse/sprotty`
 
 However, it seems that writing a JSON is cumbersome.
 On the one hand, some nodes need to have a size for them to be shown.
@@ -93,27 +92,22 @@ Ports need to be explicitly defined for that purpose.
 Therefore, the complexity of generating the JSON given a set of nodes, edges and clusters is non-trivial.
 
 .. NOTE::
-   Branch `utils/pyHDLC/map.py@pymap <https://github.com/hdl/containers/tree/pymap/utils/pyHDLC/map.py>`__ contains work
-   in progress.
+   Branch :gh:`utils/pyHDLC/map.py@pymap <hdl/containers/tree/pymap/utils/pyHDLC/map.py>` contains work in progress.
    First, ``GenerateMap`` builds a DAG by parsing the dockerfiles.
    Then, ``report`` prints the content in the terminal, for debugging purposes.
    Last, ``dotgraph`` generates a Graphviz dot diagram.
    The dot diagram does not have clusters.
    We want to add those by parsing the GitHub Actions workflows (see below).
    However, we want to first reproduce the dot output using elkjs.
-   See function ``elkjsgraph`` in
-   `utils/pyHDLC/map.py@pymap <https://github.com/hdl/containers/tree/pymap/utils/pyHDLC/map.py>`__.
-   Do you want to give it a try?
-   `Let us know <https://github.com/hdl/containers/issues/new>`__
-   or `join the chat <https://gitter.im/hdl/community>`__!
+   See function ``elkjsgraph`` in :gh:`utils/pyHDLC/map.py@pymap <hdl/containers/tree/pymap/utils/pyHDLC/map.py>`.
+   Do you want to give it a try? :gh:`Let us know <hdl/containers/issues/new>` or `join the chat <https://gitter.im/hdl/community>`__!
 
 Reading dockerfiles
 -------------------
 
 One of the two sources of information for the graph are dockerfiles.
 As far as we are aware, there is no tool for generating a DAG from the stages of a dockerfile.
-However, `asottile/dockerfile <https://github.com/asottile/dockerfile>`__ is an interesting Python module which wraps
-docker/moby's golang parser.
+However, :gh:`asottile/dockerfile` is an interesting Python module which wraps docker/moby's golang parser.
 Hence, it can be used for getting the stages and ``COPY --from`` or ``--mount`` statements for generating the hierarchy.
 See :ghsrc:`utils/pyHDLC/map.py <utils/pyHDLC/map.py>`.
 
@@ -123,7 +117,6 @@ Reading GitHub Actions workflow files
 The second source of information are CI workflow files.
 Since YAML is used, reading it from any language is trivial, however, semantic analysis needs to be done.
 Particularly, variables from ``matrix`` need to be expanded/replaced.
-`nektos/act <https://github.com/nektos/act>`__ is written in golang, and it allows executing GitHub Actions workflows
-locally.
+:gh:`nektos/act` is written in golang, and it allows executing GitHub Actions workflows locally.
 Therefore, it might have the required features.
 However, as far as we are aware, it's not meant to be used as a library.

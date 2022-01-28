@@ -36,8 +36,8 @@ build in each workflow/job execution.
 As shown in :numref:`img-ci`, the following wrappers are used:
 
 .. TIP::
-  In `pyTooling/Actions: Context <https://github.com/pyTooling/Actions/#context>`__, details about Action and Workflow
-  kinds supported in GitHub Actions are explained.
+  In :gh:`pyTooling/Actions: Context <pyTooling/Actions/#context>`, details about Action and Workflow kinds supported in
+  GitHub Actions are explained.
   See also `Workflow syntax for GitHub Actions <https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions>`__.
 
 * :ghsrc:`build-test-release <utils/build-test-release/action.yml>` is a local Composite Action with three steps,

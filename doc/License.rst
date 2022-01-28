@@ -161,7 +161,7 @@ The text should be enclosed in the appropriate comment syntax for the file forma
 We also recommend that a file or class name and description of purpose be included on the same "printed page" as the
 copyright notice for easier identification within third-party archives.
 
-.. code-block:: none
+.. sourcecode:: none
 
   Copyright [yyyy] [name of copyright owner]
 

@@ -51,8 +51,7 @@ SymbiFlow (Conda)
 
 .. include:: shields/shields.conda.inc
 
-`SymbiFlow <https://hdl.github.io/awesome/items/symbiflow/>`__ is an ecosystem of EDA tools for the development of FPGAs
-of multiple vendors.
+:awesome:`SymbiFlow <symbiflow>` is an ecosystem of EDA tools for the development of FPGAs of multiple vendors.
 The tools used in the SymbiFlow ecosystem are packaged by `Antmicro <https://antmicro.com>`__ and contributors using
 `Conda <https://docs.conda.io/en/latest>`__.
 The sources of Conda packages for EDA tooling are found in
@@ -124,12 +123,12 @@ On top of that, the following ready-to-use images allow following the guidelines
 To Do
 =====
 
-* `BitMan <https://github.com/khoapham/bitman>`__
-* `ecpprog <https://hdl.github.io/awesome/items/ecpprog>`__
-* `fujprog <https://hdl.github.io/awesome/items/fujprog>`__
-* `netlistsvg <https://hdl.github.io/awesome/items/netlistsvg>`__
-* `xschem <https://github.com/StefanSchippers/xschem>`__ (`#28 <https://github.com/hdl/containers/issues/28>`__)
-* `IRSIM <http://opencircuitdesign.com/irsim/>`__ (`#30 <https://github.com/hdl/containers/issues/30>`__)
-* `ecpdap <https://github.com/adamgreig/ecpdap>`__
-* `LSOracle <https://github.com/lnis-uofu/LSOracle>`__
-* `OpenROAD <https://hdl.github.io/awesome/items/openroad/>`__ (`#46 <https://github.com/hdl/containers/issues/46>`__)
+* :gh:`BitMan <khoapham/bitman>`
+* :awesome:`ecpprog`
+* :awesome:`fujprog`
+* :awesome:`netlistsvg`
+* :gh:`xschem <StefanSchippers/xschem>` (:ghsharp:`28`)
+* `IRSIM <http://opencircuitdesign.com/irsim/>`__ (:ghsharp:`30`)
+* :gh:`ecpdap <adamgreig/ecpdap>`
+* :gh:`LSOracle <lnis-uofu/LSOracle>`
+* :awesome:`OpenROAD <openroad>` (:ghsharp:`46`)

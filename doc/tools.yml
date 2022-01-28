@@ -21,7 +21,6 @@
 
 apicula:
   src: true
-  url: 'https://hdl.github.io/awesome/items/apicula'
   pkg:
     - 'apicula'
   use:
@@ -31,7 +30,6 @@ apicula:
 
 arache-pnr:
   src: true
-  url: 'https://hdl.github.io/awesome/items/arachne-pnr'
   pkg:
     - 'arachne-pnr'
   use:
@@ -41,7 +39,6 @@ arache-pnr:
 
 boolector:
   src: true
-  url: 'https://hdl.github.io/awesome/items/boolector'
   pkg:
     - 'boolector'
   in:
@@ -52,7 +49,6 @@ boolector:
 
 cocotb:
   src: true
-  url: 'https://hdl.github.io/awesome/items/cocotb'
   in:
     - 'sim/osvb'
     - 'sim/scipy'
@@ -62,7 +58,6 @@ cocotb:
 
 cvc:
   src: true
-  url: 'https://hdl.github.io/awesome/items/cvc'
   pkg:
     - 'cvc'
   in:
@@ -73,7 +68,6 @@ cvc:
 
 ghdl:
   src: true
-  url: 'https://hdl.github.io/awesome/items/ghdl'
   pkg:
     - 'ghdl'
     - 'ghdl/llvm'
@@ -97,7 +91,6 @@ ghdl:
 
 ghdl-yosys-plugin:
   src: true
-  url: 'https://hdl.github.io/awesome/items/ghdl-yosys-plugin'
   pkg:
     - 'ghdl-yosys-plugin'
   use:
@@ -112,7 +105,6 @@ ghdl-yosys-plugin:
 
 graphviz:
   src: false
-  url: 'https://hdl.github.io/awesome/items/graphviz'
   in:
     - 'impl'
     - 'formal/min'
@@ -126,7 +118,6 @@ graphviz:
 
 gtkwave:
   src: true
-  url: 'https://hdl.github.io/awesome/items/gtkwave'
   pkg:
     - 'gtkwave'
   use:
@@ -136,7 +127,6 @@ gtkwave:
 
 icestorm:
   src: true
-  url: 'https://hdl.github.io/awesome/items/icestorm'
   pkg:
     - 'icestorm'
   use:
@@ -152,7 +142,6 @@ icestorm:
 
 iverilog:
   src: true
-  url: 'https://hdl.github.io/awesome/items/iverilog'
   pkg:
     - 'iverilog'
   use:
@@ -169,7 +158,6 @@ iverilog:
 
 klayout:
   src: true
-  url: 'https://hdl.github.io/awesome/items/klayout'
   pkg:
     - 'klayout'
   use:
@@ -178,7 +166,6 @@ klayout:
 
 magic:
   src: true
-  url: 'https://hdl.github.io/awesome/items/magic'
   pkg:
     - 'magic'
   use:
@@ -188,7 +175,6 @@ magic:
 
 netgen:
   src: true
-  url: 'https://hdl.github.io/awesome/items/netgen'
   pkg:
     - 'netgen'
   use:
@@ -198,7 +184,6 @@ netgen:
 
 nextpnr:
   src: true
-  url: 'https://hdl.github.io/awesome/items/nextpnr'
   pkg:
     - 'nextpnr/generic'
     - 'nextpnr/ice40'
@@ -220,7 +205,6 @@ nextpnr:
 
 openfpgaloader:
   src: true
-  url: 'https://hdl.github.io/awesome/items/openfpgaloader'
   pkg:
     - 'openfpgaloader'
   use:
@@ -230,7 +214,6 @@ openfpgaloader:
 
 openocd:
   src: false
-  url: 'https://hdl.github.io/awesome/items/openocd'
   in:
     - 'prog'
 
@@ -238,7 +221,6 @@ openocd:
 
 pono:
   src: true
-  url: 'https://hdl.github.io/awesome/items/pono'
   pkg:
     - 'pono'
   in:
@@ -249,7 +231,6 @@ pono:
 
 prjoxide:
   src: true
-  url: 'https://hdl.github.io/awesome/items/prjoxide'
   pkg:
     - 'prjoxide'
   use:
@@ -261,7 +242,6 @@ prjoxide:
 
 prjtrellis:
   src: true
-  url: 'https://hdl.github.io/awesome/items/prjtrellis'
   pkg:
     - 'prjtrellis'
   use:
@@ -276,7 +256,6 @@ prjtrellis:
 
 superprove:
   src: true
-  url: 'https://hdl.github.io/awesome/items/superprove'
   pkg:
     - 'superprove'
   in:
@@ -286,7 +265,6 @@ superprove:
 
 symbiyosys:
   src: true
-  url: 'https://hdl.github.io/awesome/items/symbiyosys'
   pkg:
     - 'symbiyosys'
   in:
@@ -298,7 +276,6 @@ symbiyosys:
 
 verilator:
   src: true
-  url: 'https://hdl.github.io/awesome/items/verilator'
   pkg:
     - 'verilator'
   use:
@@ -315,7 +292,6 @@ verilator:
 
 vtr:
   src: true
-  url: 'https://hdl.github.io/awesome/items/vtr'
   pkg:
     - 'vtr'
   use:
@@ -325,7 +301,6 @@ vtr:
 
 vunit:
   src: true
-  url: 'https://hdl.github.io/awesome/items/vunit'
   in:
     - 'sim/osvb'
     - 'sim/scipy'
@@ -335,7 +310,6 @@ vunit:
 
 yices2:
   src: true
-  url: 'https://hdl.github.io/awesome/items/yices2'
   pkg:
     - 'yices2'
   in:
@@ -346,7 +320,6 @@ yices2:
 
 xyce:
   src: true
-  url: 'https://hdl.github.io/awesome/items/xyce'
   pkg:
     - 'xyce'
   use:
@@ -356,7 +329,6 @@ xyce:
 
 yosys:
   src: true
-  url: 'https://hdl.github.io/awesome/items/yosys'
   pkg:
     - 'yosys'
   use:
@@ -373,7 +345,6 @@ yosys:
 
 z3:
   src: true
-  url: 'https://hdl.github.io/awesome/items/z3'
   pkg:
     - 'z3'
   in:

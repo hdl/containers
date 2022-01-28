@@ -44,8 +44,7 @@ convention:
 
 * Other helper scripts are named ``_*.sh``.
 
-Furthermore, `hdl/smoke-tests <https://github.com/hdl/smoke-tests>`__ is a submodule of this repository
-(:ghsrc:`test/smoke-tests <test>`).
+Furthermore, :gh:`hdl/smoke-tests` is a submodule of this repository (:ghsrc:`test/smoke-tests <test>`).
 Smoke-tests contains fine-grained tests that cover the most important functionalities of the tools.
 Those are used in other packaging projects too.
 Therefore, container tests are expected to execute the smoke-tests corresponding to the tools available in the image,
@@ -82,8 +81,8 @@ For instance:
 In fact, ``pyHDLC test`` uses a similar dockerfile for running ``.pkg.sh`` scripts from :ghsrc:`test/ <test/>`.
 See :ref:`Test <Development:test>`.
 
-Alternatively, or as a complement, `gh:wagoodman/dive <https://github.com/wagoodman/dive>`__ is a lightweight tool with
-a nice terminal based GUI for exploring layers and contents of container images.
+Alternatively, or as a complement, :gh:`wagoodman/dive` is a lightweight tool with a nice terminal based GUI for
+exploring layers and contents of container images.
 It can be downloaded as a tarball/zipfile, or used as a container:
 
 .. sourcecode:: bash
@@ -98,7 +97,7 @@ It can be downloaded as a tarball/zipfile, or used as a container:
   :width: 100%
   :align: center
 
-  Inspection of ``REGISTRY/pkg/yosys`` with :ghrepo:`wagoodman/dive`.
+  Inspection of ``REGISTRY/pkg/yosys`` with :gh:`wagoodman/dive`.
 
 :ghsrc:`dockerDive <utils/bin/dockerDive>` is a wrapper around the wagoodman/dive container, which supports one
 or two arguments for specifying the image to be inspected.

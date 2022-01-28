@@ -81,9 +81,10 @@ with (ROOT / "ToolsTable.inc").open("w", encoding="utf-8") as wfptr:
         use = [f"  * |SHIELD:Image:{item}|\n" for item in useImages]
         _in = var["in"] if "in" in var else []
         otherin = ", ".join(f"`{item}`" for item in (var["otherin"] if "otherin" in var else []))
+        url = f"`{tool} <{var['url']}>`__" if 'url' in var else f' :awesome:`{tool}`'
         return (
             [
-                f"`{tool} <{var['url']}>`__{' !' if ('src' in var and not var['src']) else ''}",
+                f"{url}{' !' if ('src' in var and not var['src']) else ''}",
                 "%s" % ("∅" if len(pkg) == 0 else pkg[0]),
                 "%s" % ("∅" if len(use) == 0 else use[0]),
                 #'%s\n' % ('Y' if any(_initem.startswith('synth') for _initem in _in) else '-')
@@ -348,6 +349,7 @@ texinfo_documents = [
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
+    "constraints": ("https://hdl.github.io/constraints", None),
     "edaa": ("https://edaa-org.github.io", None),
     "clitool": ("https://edaa-org.github.io/pyEDAA.CLITool", None),
     "edalize": ("https://edalize.rtfd.io/en/latest", None),
@@ -359,7 +361,8 @@ intersphinx_mapping = {
 
 extlinks = {
     "wikipedia": ("https://en.wikipedia.org/wiki/%s", None),
-    "ghrepo": ("https://github.com/%s", ""),
+    "awesome": ("https://hdl.github.io/awesome/items/%s", ""),
+    "gh": ("https://github.com/%s", "gh:"),
     "ghsharp": ("https://github.com/hdl/containers/issues/%s", "#"),
     "ghissue": ("https://github.com/hdl/containers/issues/%s", "issue #"),
     "ghpull": ("https://github.com/hdl/containers/pull/%s", "pull request #"),

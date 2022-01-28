@@ -14,17 +14,17 @@ This is the recommended approach for users who are less familiar with containers
 full-featured virtual machines.
 Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one images.
 
-* `gh:tmeissner/formal_hw_verification <https://github.com/tmeissner/formal_hw_verification>`__:
+* :gh:`tmeissner/formal_hw_verification`:
   the CI workflow uses image ``REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]formal/all`` along with GitHub Actions'
   *Docker Step* syntax.
 
-* `gh:stnolting/neorv32-setups <https://github.com/stnolting/neorv32-setups>`__:
+* :gh:`stnolting/neorv32-setups`:
   the implementation workflow (for generating bitstreams from VHDL sources) uses image
   ``REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]impl`` along with GitHub Actions' *Docker Step* syntax.
 
 .. TIP::
-  * `gh:pyTooling/Actions <https://github.com/pyTooling/Actions/#context>`__
-  * `docs.github.com: Learn GitHub Actions > Referencing a container on Docker Hub <https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub>`__
+  * :gh:`pyTooling/Actions <pyTooling/Actions/#context>`
+  * `docs.github.com: Learn GitHub Actions » Referencing a container on Docker Hub <https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub>`__
 
 
 SymbiFlow
@@ -43,7 +43,7 @@ environment is prepared already and available in the PATH.
 Hence, the Conda environment can be activated straightaway.
 See, for instance:
 
-.. code-block:: bash
+.. sourcecode:: bash
 
   :~# git clone https://github.com/SymbiFlow/symbiflow-examples
   ...

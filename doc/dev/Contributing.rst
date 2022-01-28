@@ -39,9 +39,8 @@ In fact, multiple tools are merged into ready-to-use images for common use cases
 
 .. IMPORTANT::
    Before working on adding or extending the support for a tool, please check the
-   `issues <https://github.com/hdl/containers/issues>`__
-   and `pull requests <https://github.com/hdl/containers/pulls>`__;
-   `open an issue <https://github.com/hdl/containers/issues/new>`__
+   :gh:`issues <hdl/containers/issues>` and :gh:`pull requests <hdl/containers/pulls>`;
+   :gh:`open an issue <hdl/containers/issues/new>`
    or `let us know through the chat <https://gitter.im/hdl/community>`__.
    Someone might be working on that already!
 
@@ -223,14 +222,14 @@ Depending on the version of Docker on your host or CI service, BuildKit features
 As explained in `docs.docker.com: To enable BuildKit builds <https://docs.docker.com/develop/develop-images/build_enhancements/#to-enable-buildkit-builds>`__, either set the ``DOCKER_BUILDKIT=1`` environment variable, or set the daemon feature to
 ``true`` in the JSON configuration file: (``{ "features": { "buildkit": true } }``).
 
-Find further details about BuildKit's mount syntax in `gh:moby/buildkit: frontend/dockerfile/docs/syntax.md <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md>`__.
+Find further details about BuildKit's mount syntax in :gh:`moby/buildkit: frontend/dockerfile/docs/syntax.md <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md>`.
 
-* `bind <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypebind-the-default-mount-type>`__
-* `cache <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypecache>`__
-* `tmpfs <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypetmpfs>`__
-* `secret <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypesecret>`__
-* `ssh <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypessh>`__
-* `here-documents <https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#here-documents>`__
+* :gh:`bind <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypebind-the-default-mount-type>`
+* :gh:`cache <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypecache>`
+* :gh:`tmpfs <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypetmpfs>`
+* :gh:`secret <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypesecret>`
+* :gh:`ssh <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypessh>`
+* :gh:`here-documents <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#here-documents>`
 
 .. NOTE::
   In order to use those features, apart from using BuildKit ``# syntax=docker/dockerfile:1.3`` might need to be added as
@@ -283,8 +282,8 @@ Step by step checklist
 
   * If a new tool was added,
 
-     * Ensure that the tool is listed at `hdl/awesome <https://github.com/hdl/awesome>`__, since that's where all the
-       tool/projects in :ref:`tools-and-images` point to.
+     * Ensure that the tool is listed at :gh:`hdl/awesome`, since that's where all the tool/projects in
+       :ref:`tools-and-images` point to.
 
      * If a tool from the :ref:`tools-and-images:to-do` list was added, remove it from the list.
 

@@ -5,8 +5,8 @@ Graphs
 
 Understanding how all the pieces in this project fit together might be daunting for newcomers.
 Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem.
-Subdir :ghsrc:`graph/ <graph/>` contains the sources of `directed graphs <https://en.wikipedia.org/wiki/Directed_graph>`__,
-where the relations between workflows, dockerfiles, images and tests are shown.
+Subdir :ghsrc:`graph/ <graph/>` contains the sources of :wikipedia:`directed graphs <Directed_graph>`, where the
+relations between workflows, dockerfiles, images and tests are shown.
 
 (`Graphviz <https://graphviz.org/>`__)'s ``digraph`` format is used, hence, graphs can be rendered to multiple image
 formats.

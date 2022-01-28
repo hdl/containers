@@ -19,15 +19,15 @@ These are typically named ``REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]TOOL_NAM
 Makefiles
 =========
 
-* `gh:ghdl-yosys-blink: Makefile <https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile>`__:
+* :gh:`ghdl-yosys-blink: Makefile <antonblanchard/ghdl-yosys-blink/blob/master/Makefile>`:
   an example showcasing how to use this fine-grained approach with a makefile.
-  The same make based strategy is used in `antonblanchard/microwatt <https://github.com/antonblanchard/microwatt/blob/master/Makefile>`__.
+  The same make based strategy is used in :gh:`gh:antonblanchard/microwatt <antonblanchard/microwatt/blob/master/Makefile>`.
 
-* `gh:marph91/icestick-remote <https://github.com/marph91/icestick-remote>`__: the CI workflow for synthesis uses this approach.
+* :gh:`marph91/icestick-remote`: the CI workflow for synthesis uses this approach.
 
 Those projects use a partial Makefile such as the following, for optionally wrapping regular tool calls:
 
-.. code-block:: bash
+.. sourcecode:: bash
 
    CONTAINER_ENGINE ?= docker
 
@@ -55,19 +55,20 @@ Edalize's Launcher
 ------------------
 
 Edalize (see :doc:`edalize:index`) provides ``EDALIZE_LAUNCHER``, which allows overriding each command:
-`gh:olofk/edalize: search?q=EDALIZE_LAUNCHER <https://github.com/olofk/edalize/search?q=EDALIZE_LAUNCHER>`__.
-`el_docker <https://github.com/olofk/edalize/blob/master/scripts/el_docker>`__ is a built-in launcher for Docker.
+:gh:`olofk/edalize: search?q=EDALIZE_LAUNCHER <olofk/edalize/search?q=EDALIZE_LAUNCHER>`.
+:gh:`el_docker <olofk/edalize/blob/master/scripts/el_docker>` is a built-in launcher for Docker.
 See also:
 
 * `olofkindgren.blogspot.com: Edalize 0.3.0 <https://olofkindgren.blogspot.com/2022/01/edalize-030.html>`__
-* `Support for open source EDA tools from containers (gh:olofk/edalize#221) <https://github.com/olofk/edalize/pull/221>`__
-* `gh:librecores/eda-container-wrapper <https://github.com/librecores/eda-container-wrapper>`__
+* :gh:`Support for open source EDA tools from containers (gh:olofk/edalize#221) <olofk/edalize/pull/221>`
+* :gh:`librecores/eda-container-wrapper`
 * `carlosedp/runme.py <https://gist.github.com/carlosedp/c0e29d55e48309a48961f2e3939acfe9>`__
+
+  * :gh:`Improve launcher script with new containers (gh:olofk/edalize#299) <olofk/edalize/pull/299>`
 
 PyFPGA's OpenFlow
 -----------------
 
-PyFPGA's OpenFlow (see :doc:`pyfpga:index` and `gh:PyFPGA/openflow <https://github.com/PyFPGA/openflow>`__) allows
-running tools in containers, similarly to ``el_docker``.
-In fact, OpenFlow can be used along with `Edalize <https://github.com/olofk/edalize>`__'s ``EDALIZE_LAUNCHER``
-environment variable.
+PyFPGA's OpenFlow (see :doc:`pyfpga:index` and :gh:`PyFPGA/openflow`) allows running tools in containers, similarly to
+``el_docker``.
+In fact, OpenFlow can be used along with :gh:`Edalize <olofk/edalize>`'s ``EDALIZE_LAUNCHER`` environment variable.

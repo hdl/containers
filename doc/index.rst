@@ -25,10 +25,10 @@ HDL Containers
     <hr>
 
 This repository contains scripts and recipes for building, testing and deploying `OCI <https://opencontainers.org/>`__
-images (aka `Docker <https://www.docker.com/>`__ | `Podman <https://podman.io>`__ images) including open source `Electronic Design Automation (EDA) <https://en.wikipedia.org/wiki/Electronic_design_automation>`__ tooling.
+images (aka `Docker <https://www.docker.com/>`__ | `Podman <https://podman.io>`__ images) including open source
+:wikipedia:`Electronic Design Automation (EDA) <Electronic_design_automation>` tooling.
 All the images are pushed to `gcr.io/hdl-containers <http://gcr.io/hdl-containers/>`__, and mirrored to
-`ghcr.io/hdl <https://github.com/orgs/hdl/packages>`__ and
-`hub.docker.com/u/hdlc <https://hub.docker.com/u/hdlc>`__:
+`ghcr.io/hdl <https://github.com/orgs/hdl/packages>`__ and `hub.docker.com/u/hdlc <https://hub.docker.com/u/hdlc>`__:
 
 .. centered:: |SHIELD:Registry:GCR| |SHIELD:Registry:GHCR| |SHIELD:Registry:Docker|
 
