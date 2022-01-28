@@ -41,7 +41,6 @@ RUN git clone https://github.com/KLayout/klayout.git /tmp/klayout \
    -rpath /usr/local/lib \
    -ruby /usr/bin/ruby \
    -python /usr/bin/python3 \
-   -qt5 \
    -option -j$(nproc) \
  && mkdir -p /opt/klayout/usr/local/lib \
  && cd /opt/klayout/usr/local/bin \
