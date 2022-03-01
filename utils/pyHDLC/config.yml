@@ -152,7 +152,7 @@ jobs:
     z3:         *SysDebianAmd64
 
   runonly:
-    conda:                         *SysDebianAmd64
+    conda:                         *SysDebianDefaultArchSet
     prog:                          *SysDebianAmd64
     sim:                           *SysDebianAmd64
     conda/symbiflow/xc7/toolchain: *SysDebianAmd64

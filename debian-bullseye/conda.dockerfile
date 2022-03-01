@@ -32,7 +32,7 @@ RUN apt-get update -qq \
 
 ENV PREFIX=/usr/local
 
-RUN curl -fsSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh > conda_installer.sh \
+RUN curl -fsSL "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-$(arch | sed s/arm64/aarch64/ | sed s/amd64/x86_64/).sh" > conda_installer.sh \
  && chmod +x conda_installer.sh \
  && ./conda_installer.sh -u -b -p "$PREFIX" \
  && rm conda_installer.sh \
