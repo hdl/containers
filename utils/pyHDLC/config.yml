@@ -39,12 +39,12 @@ anchors:
     debian/bullseye:
       - amd64
   <<: &SysDebianDefaultArchSet
-    <<: *SysDebianAmd64
+    <<: *SysDebianDefaultArchSet
     debian/bullseye:
-      - amd64
+      #- amd64
       - arm64v8
-      - ppc64le
-      - s390x
+      #- ppc64le
+      #- s390x
       #- riscv64 ! for now, only 'sid-slim' is available in https://hub.docker.com/r/riscv64/debian
 
 
@@ -126,37 +126,37 @@ defaults:
 jobs:
 
   default:
-    apicula:        *SysDebianAmd64
+    apicula:        *SysDebianDefaultArchSet
     arachne-pnr:    *SysDebianDefaultArchSet
     icestorm:       *SysDebianDefaultArchSet
-    iverilog:       *SysDebianAmd64
+    iverilog:       *SysDebianDefaultArchSet
     gtkwave:        *SysDebianDefaultArchSet
-    klayout:        *SysDebianAmd64
+    klayout:        *SysDebianDefaultArchSet
     magic:          *SysDebianDefaultArchSet
     netgen:         *SysDebianDefaultArchSet
     openfpgaloader: *SysDebianDefaultArchSet
-    prjoxide:       *SysDebianAmd64
-    prjtrellis:     *SysDebianAmd64
+    prjoxide:       *SysDebianDefaultArchSet
+    prjtrellis:     *SysDebianDefaultArchSet
     verilator:      *SysDebianDefaultArchSet
-    vtr:            *SysDebianAmd64
-    xyce:           *SysDebianAmd64
-    yosys:          *SysDebianAmd64
+    vtr:            *SysDebianDefaultArchSet
+    xyce:           *SysDebianDefaultArchSet
+    yosys:          *SysDebianDefaultArchSet
 
   pkgonly:
-    boolector:  *SysDebianAmd64
-    cvc:        *SysDebianAmd64
-    pono:       *SysDebianAmd64
-    superprove: *SysDebianAmd64
-    symbiyosys: *SysDebianAmd64
-    yices2:     *SysDebianAmd64
-    z3:         *SysDebianAmd64
+    boolector:  *SysDebianDefaultArchSet
+    cvc:        *SysDebianDefaultArchSet
+    pono:       *SysDebianDefaultArchSet
+    superprove: *SysDebianDefaultArchSet
+    symbiyosys: *SysDebianDefaultArchSet
+    yices2:     *SysDebianDefaultArchSet
+    z3:         *SysDebianDefaultArchSet
 
   runonly:
     conda:                         *SysDebianDefaultArchSet
-    prog:                          *SysDebianAmd64
-    sim:                           *SysDebianAmd64
-    conda/symbiflow/xc7/toolchain: *SysDebianAmd64
-    conda/symbiflow/xc7:           *SysDebianAmd64
+    prog:                          *SysDebianDefaultArchSet
+    sim:                           *SysDebianDefaultArchSet
+    conda/symbiflow/xc7/toolchain: *SysDebianDefaultArchSet
+    conda/symbiflow/xc7:           *SysDebianDefaultArchSet
 
   custom:
     base:
@@ -173,41 +173,41 @@ jobs:
         - formal/min
         - formal
         - formal/all
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
     ghdl-yosys-plugin:
       images:
         - pkg/ghdl-yosys-plugin#ghdl
         - ghdl/yosys
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
     ghdl:
       images:
         - pkg/ghdl
         - pkg/ghdl/llvm#ghdl
         - ghdl
         - ghdl/llvm
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
     impl-build:
       images:
         - build/impl
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
     impl-prjs:
       images:
         - impl/${arch}
         - impl/${prj}
         - { arch: ice40, prj: icestorm   }
         - { arch: ecp5,  prj: prjtrellis }
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
     impl:
       images:
         - impl/generic
         - impl/pnr
         - impl
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
     nextpnr-build:
       images:
         - build/nextpnr/base
         - build/nextpnr/build
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
     nextpnr-prjs:
       images:
         - pkg/nextpnr/${arch}
@@ -216,25 +216,25 @@ jobs:
         - { arch: ice40, prj: icestorm   }
         - { arch: ecp5,  prj: prjtrellis }
         - { arch: nexus, prj: prjoxide   }
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
     nextpnr:
       images:
         - pkg/nextpnr/generic
         - nextpnr/generic
         - nextpnr
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
     osvb:
       images:
         - pkg/osvb
         - sim/osvb
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
     cosim:
       images:
         - sim/${prj}-slim
         - sim/${prj}
         - prj: scipy
         - prj: octave
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
     symbiflow-xc7-devices:
       images:
         - [ conda/symbiflow/xc7/a50t  ]
@@ -242,8 +242,8 @@ jobs:
         - [ conda/symbiflow/xc7/a200t ]
         - [ conda/symbiflow/xc7/z010  ]
         - [ conda/symbiflow/xc7/z020  ]
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
     symbiflow-eos-s3:
       images:
         - conda/symbiflow/eos-s3
-      sys: *SysDebianAmd64
+      sys: *SysDebianDefaultArchSet
