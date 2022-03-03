@@ -26,6 +26,8 @@ FROM $REGISTRY/build/build AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    autoconf \
+    automake \
     ca-certificates \
     curl \
     cmake \
@@ -51,7 +53,7 @@ RUN mkdir -p Trilinos/trilinos-source \
  && curl -fsSL https://github.com/trilinos/Trilinos/archive/trilinos-release-12-12-1.tar.gz | \
     tar xz -C Trilinos/trilinos-source --strip-components=1 \
  && mkdir -p Xyce \
- && curl -fsSL https://xyce.sandia.gov/downloads/_assets/documents/Xyce-6.12.tar.gz | \
+ && curl -fsSL https://github.com/Xyce/Xyce/archive/refs/tags/Release-6.12.0.tar.gz | \
     tar xz -C Xyce --strip-components=1
 
 ENV ARCHDIR=$XYCE_OUTDIR
@@ -102,9 +104,9 @@ RUN cd Trilinos \
 ENV xyceBuildDir=/opt/Xyce/xyce-build/
 
 # Build Xyce
-RUN mkdir xyce-build \
- && cd xyce-build \
- && ../Xyce/configure \
+RUN cd Xyce && ./bootstrap \
+ && mkdir xyce-build && cd xyce-build \
+ && ../configure \
       CXXFLAGS="-O3 -std=c++11" \
       LDFLAGS="-Wl,-rpath=$xyceBuildDir/utils/XyceCInterface -Wl,-rpath=$xyceBuildDir/lib" \
       CPPFLAGS="-I/usr/include/suitesparse" \
