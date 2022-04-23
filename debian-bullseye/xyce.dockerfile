@@ -80,9 +80,14 @@ RUN cd Trilinos \
         -DTeuchos_ENABLE_COMPLEX=ON \
       -DTrilinos_ENABLE_Amesos=ON \
         -DAmesos_ENABLE_KLU=ON \
+      -DTrilinos_ENABLE_Amesos2=ON \
+        -DAmesos2_ENABLE_KLU2=ON \
+        -DAmesos2_ENABLE_Basker=ON \
       -DTrilinos_ENABLE_Sacado=ON \
-      -DTrilinos_ENABLE_Kokkos=OFF \
+      -DTrilinos_ENABLE_Stokhos=ON \
+      -DTrilinos_ENABLE_Kokkos=ON \
       -DTrilinos_ENABLE_ALL_OPTIONAL_PACKAGES=OFF \
+      -DTrilinos_ENABLE_CXX11=ON \
       -DTPL_ENABLE_AMD=ON \
       -DAMD_LIBRARY_DIRS="/usr/lib" \
       -DTPL_AMD_INCLUDE_DIRS="/usr/include/suitesparse" \
@@ -107,6 +112,8 @@ RUN cd Xyce && ./bootstrap \
       ARCHDIR=$XYCE_OUTDIR \
       --enable-shared \
       --enable-xyce-shareable \
+      --enable-stokhos \
+      --enable-amesos2 \
  && make DESTDIR=/tmp/xyce/ -j$(nproc) install
 
 #---
