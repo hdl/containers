@@ -3,7 +3,7 @@
 # Authors:
 #   Unai Martinez-Corral
 #
-# Copyright 2020-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2020-2022 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ RUN mkdir /tmp/osvb \
  && cd /tmp/vunit \
  && python3 setup.py bdist_wheel \
  && mv dist/*.whl /tmp/osvb/ \
- && git clone -b 2021.06 --recurse-submodules https://github.com/osvvm/OsvvmLibraries /tmp/osvb/osvvmlibs
+ && git clone -b 2022.06 --recurse-submodules https://github.com/osvvm/OsvvmLibraries /tmp/osvb/osvvmlibs
 
 #---
 

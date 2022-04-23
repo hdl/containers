@@ -2,7 +2,7 @@
 #   Unai Martinez-Corral
 #   Torsten Meissner
 #
-# Copyright 2019-2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2019-2022 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
