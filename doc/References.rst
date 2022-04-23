@@ -4,9 +4,8 @@ References
 ##########
 
 * :gh:`hadolint/hadolint`: Haskell Dockerfile Linter
-* SymbiFlow:
+* F4PGA:
 
-  * :gh:`SymbiFlow/symbiflow-examples`
   * :gh:`SymbiFlow/make-env`
 
     * `bit.ly/edda-conda-eda-spec <http://bit.ly/edda-conda-eda-spec>`__: Conda based system for FPGA and ASIC Dev

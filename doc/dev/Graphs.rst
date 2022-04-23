@@ -18,7 +18,7 @@ Synth (:numref:`img-graph-synth`),
 Impl (:numref:`img-graph-impl`),
 Formal (:numref:`img-graph-formal`),
 ASIC (:numref:`img-graph-asic`), and
-SymbiFlow (:numref:`img-graph-symbiflow`).
+F4PGA (:numref:`img-graph-f4pga`).
 Multiple colours and arrow types are used for describing different dependency types.
 All of those are explained in the legend: :numref:`img-graph-legend`.
 
@@ -64,10 +64,10 @@ All of those are explained in the legend: :numref:`img-graph-legend`.
    :align: center
    :caption: ASIC: workflows, dockerfiles, images and tests.
 
-.. graphviz:: ../graph/symbiflow.dot
-   :name: img-graph-symbiflow
+.. graphviz:: ../graph/f4pga.dot
+   :name: img-graph-f4pga
    :align: center
-   :caption: SymbiFlow: workflows, dockerfiles, images and tests.
+   :caption: F4PGA: workflows, dockerfiles, images and tests.
 
 .. graphviz:: ../graph/legend.dot
    :name: img-graph-legend

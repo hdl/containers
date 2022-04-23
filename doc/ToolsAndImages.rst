@@ -44,15 +44,15 @@ Images including multiple tools
 
 * **P**\ rogramming: |SHIELD:Image:prog|
 
-.. _tools-and-images:symbiflow:
+.. _tools-and-images:f4pga:
 
-SymbiFlow (Conda)
-=================
+F4PGA (Conda)
+=============
 
 .. include:: shields/shields.conda.inc
 
-:awesome:`SymbiFlow <symbiflow>` is an ecosystem of EDA tools for the development of FPGAs of multiple vendors.
-The tools used in the SymbiFlow ecosystem are packaged by `Antmicro <https://antmicro.com>`__ and contributors using
+:awesome:`F4PGA <f4pga>` is an ecosystem of EDA tools for the development of FPGAs of multiple vendors.
+The tools used in the F4PGA ecosystem are packaged by `Antmicro <https://antmicro.com>`__ and contributors using
 `Conda <https://docs.conda.io/en/latest>`__.
 The sources of Conda packages for EDA tooling are found in
 |SHIELD:HDL:conda-ci|,
@@ -61,39 +61,39 @@ The sources of Conda packages for EDA tooling are found in
 |SHIELD:HDL:conda-misc| and
 |SHIELD:HDL:conda-prog|.
 
-.. |SHIELD:SymbiFlow-Examples:Repository| image:: https://img.shields.io/badge/SymbiFlow-symbiflow--examples-9258ff.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef&labelColor=5a2ab5
-   :alt: 'SymbiFlow/symbiflow-examples GitHub repository'
+.. |SHIELD:F4PGA-Examples:Repository| image:: https://img.shields.io/badge/chipsalliance-f4pga--examples-9258ff.svg?longCache=true&style=flat-square&logo=GitHub&logoColor=f2f1ef&labelColor=5a2ab5
+   :alt: 'chipsalliance/f4pga-examples GitHub repository'
    :height: 22
-   :target: https://github.com/SymbiFlow/symbiflow-examples
+   :target: https://github.com/chipsalliance/f4pga-examples
 
-.. |SHIELD:SymbiFlow-Examples:Documentation| image:: https://img.shields.io/website.svg?label=symbiflow-examples.rtfd.io&longCache=true&style=flat-square&url=http%3A%2F%2Fsymbiflow-examples.rtfd.io%2Fen%2Flatest%2Findex.html&logo=ReadTheDocs&logoColor=fff
-   :alt: 'symbiflow-examples.rtfd.io'
+.. |SHIELD:F4PGA-Examples:Documentation| image:: https://img.shields.io/website.svg?label=f4pga-examples.rtfd.io&longCache=true&style=flat-square&url=http%3A%2F%2Ff4pga-examples.rtfd.io%2Fen%2Flatest%2Findex.html&logo=ReadTheDocs&logoColor=fff
+   :alt: 'f4pga-examples.rtfd.io'
    :height: 22
-   :target: https://symbiflow-examples.rtfd.io/en/latest/building-examples.html
+   :target: https://f4pga-examples.rtfd.io/en/latest/building-examples.html
 
 In HDL Containers, as a complement to container images based on tools built on other container images, a set of
-Conda-based SymbiFlow images is provided.
+Conda-based F4PGA images is provided.
 The base is |SHIELD:Image:conda|, which includes a `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`__ setup.
 On top of that, the following ready-to-use images allow following the guidelines in
-|SHIELD:SymbiFlow-Examples:Repository| ( |SHIELD:SymbiFlow-Examples:Documentation| ):
+|SHIELD:F4PGA-Examples:Repository| ( |SHIELD:F4PGA-Examples:Documentation| ):
 
-* |SHIELD:Image:conda/symbiflow/xc7/toolchain|: the toolchain for ``FPGA_FAM=xc7``, on top of ``conda``.
+* |SHIELD:Image:conda/f4pga/xc7/toolchain|: the toolchain for ``FPGA_FAM=xc7``, on top of ``conda``.
   The following images are based on this:
 
-  * |SHIELD:Image:conda/symbiflow/xc7/a50t|: includes architecture definitions for *xc7a50t*.
+  * |SHIELD:Image:conda/f4pga/xc7/a50t|: includes architecture definitions for *xc7a50t*.
 
-  * |SHIELD:Image:conda/symbiflow/xc7/a100t|: includes architecture definitions for *xc7a100t*.
+  * |SHIELD:Image:conda/f4pga/xc7/a100t|: includes architecture definitions for *xc7a100t*.
 
-  * |SHIELD:Image:conda/symbiflow/xc7/a200t|: includes architecture definitions for *xc7a200t*.
+  * |SHIELD:Image:conda/f4pga/xc7/a200t|: includes architecture definitions for *xc7a200t*.
 
-  * |SHIELD:Image:conda/symbiflow/xc7/z010|: includes architecture definitions for *xc7z010*.
+  * |SHIELD:Image:conda/f4pga/xc7/z010|: includes architecture definitions for *xc7z010*.
 
-  * |SHIELD:Image:conda/symbiflow/xc7/z020|: includes architecture definitions for *xc7z020*.
+  * |SHIELD:Image:conda/f4pga/xc7/z020|: includes architecture definitions for *xc7z020*.
 
-  * |SHIELD:Image:conda/symbiflow/xc7|: includes all the architecture definitions for the *xc7* family, except
+  * |SHIELD:Image:conda/f4pga/xc7|: includes all the architecture definitions for the *xc7* family, except
     *xc7a200t* (due to hard disk limits on GitHub Actions).
 
-* |SHIELD:Image:conda/symbiflow/eos-s3|: the toolchain for ``FPGA_FAM=eos-s3`` and the architecture definitions, on top
+* |SHIELD:Image:conda/f4pga/eos-s3|: the toolchain for ``FPGA_FAM=eos-s3`` and the architecture definitions, on top
   of ``conda``.
 
 .. important::

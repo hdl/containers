@@ -22,8 +22,11 @@ cd $(dirname "$0")
 
 ./_env.sh
 
-./conda--symbiflow--xc7--toolchain.sh
-
-ls -lah /usr/local/share/symbiflow/arch/xc7a100t_test
+./conda--f4pga--xc7--toolchain.sh
+./conda--f4pga--xc7--a50t.sh
+./conda--f4pga--xc7--a100t.sh
+# TODO: This is temporarily disabled because of space limits on GitHub Actions default runners
+#./conda--f4pga--xc7--a200t.sh
+./conda--f4pga--xc7--z010.sh
 
 ./_todo.sh

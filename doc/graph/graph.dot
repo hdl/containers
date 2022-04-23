@@ -31,7 +31,7 @@ digraph G {
     m_impl
     m_formal
     m_asic
-    m_symbiflow
+    m_f4pga
   }
 
   # Images
@@ -111,14 +111,14 @@ digraph G {
       "sim/octave-slim"
       "sim/octave"
       "conda"
-      "conda/symbiflow/xc7/toolchain"
-      "conda/symbiflow/xc7/a50t"
-      "conda/symbiflow/xc7/a100t"
-      "conda/symbiflow/xc7/a200t"
-      "conda/symbiflow/xc7/z010"
-      "conda/symbiflow/xc7/z020"
-      "conda/symbiflow/xc7"
-      "conda/symbiflow/eos-s3"
+      "conda/f4pga/xc7/toolchain"
+      "conda/f4pga/xc7/a50t"
+      "conda/f4pga/xc7/a100t"
+      "conda/f4pga/xc7/a200t"
+      "conda/f4pga/xc7/z010"
+      "conda/f4pga/xc7/z020"
+      "conda/f4pga/xc7"
+      "conda/f4pga/eos-s3"
     }
   }
 
@@ -173,7 +173,7 @@ digraph G {
 
   {
     "build/base"
-  } -> m_symbiflow;
+  } -> m_f4pga;
 
   # Generated images
 
@@ -281,18 +281,18 @@ digraph G {
     };
   }
 
-  subgraph cluster_symbiflow {
-    label = "SymbiFlow";
-    m_symbiflow -> {
+  subgraph cluster_f4pga {
+    label = "F4PGA";
+    m_f4pga -> {
       "conda"
-      "conda/symbiflow/xc7/toolchain"
-      "conda/symbiflow/xc7/a50t"
-      "conda/symbiflow/xc7/a100t"
-      "conda/symbiflow/xc7/a200t"
-      "conda/symbiflow/xc7/z010"
-      "conda/symbiflow/xc7/z020"
-      "conda/symbiflow/xc7"
-      "conda/symbiflow/eos-s3"
+      "conda/f4pga/xc7/toolchain"
+      "conda/f4pga/xc7/a50t"
+      "conda/f4pga/xc7/a100t"
+      "conda/f4pga/xc7/a200t"
+      "conda/f4pga/xc7/z010"
+      "conda/f4pga/xc7/z020"
+      "conda/f4pga/xc7"
+      "conda/f4pga/eos-s3"
     }
   }
 

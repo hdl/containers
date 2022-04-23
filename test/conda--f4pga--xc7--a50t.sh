@@ -22,8 +22,8 @@ cd $(dirname "$0")
 
 ./_env.sh
 
-./conda--symbiflow--xc7--toolchain.sh
+./conda--f4pga--xc7--toolchain.sh
 
-ls -lah /usr/local/share/symbiflow/arch/xc7z010_test
+ls -lah /usr/local/share/symbiflow/arch/xc7a50t_test
 
 ./_todo.sh

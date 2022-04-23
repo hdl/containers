@@ -33,8 +33,8 @@ anchors:
     dockerfile: nextpnr
   <<: &OSVBDockerfile
     dockerfile: osvb
-  <<: &SymbiFlowDockerfile
-    dockerfile: symbiflow
+  <<: &F4PGADockerfile
+    dockerfile: f4pga
   <<: &SysDebianAmd64
     debian/bullseye:
       - amd64
@@ -106,15 +106,15 @@ defaults:
       argimg: sim/octave-slim
     # SuperProve
     pkg/superprove: *EmptyPkgTarget
-    # SymbiFlow:
-    conda/symbiflow/xc7/toolchain: { <<: *SymbiFlowDockerfile, target: xc7-toolchain }
-    conda/symbiflow/xc7/a50t:      { <<: *SymbiFlowDockerfile, target: a50t          }
-    conda/symbiflow/xc7/a100t:     { <<: *SymbiFlowDockerfile, target: a100t         }
-    conda/symbiflow/xc7/a200t:     { <<: *SymbiFlowDockerfile, target: a200t         }
-    conda/symbiflow/xc7/z010:      { <<: *SymbiFlowDockerfile, target: z010          }
-    conda/symbiflow/xc7/z020:      { <<: *SymbiFlowDockerfile, target: z020          }
-    conda/symbiflow/xc7:           { <<: *SymbiFlowDockerfile, target: xc7           }
-    conda/symbiflow/eos-s3:        { <<: *SymbiFlowDockerfile, target: eos-s3        }
+    # F4PGA:
+    conda/f4pga/xc7/toolchain: { <<: *F4PGADockerfile, target: xc7-toolchain }
+    conda/f4pga/xc7/a50t:      { <<: *F4PGADockerfile, target: a50t          }
+    conda/f4pga/xc7/a100t:     { <<: *F4PGADockerfile, target: a100t         }
+    conda/f4pga/xc7/a200t:     { <<: *F4PGADockerfile, target: a200t         }
+    conda/f4pga/xc7/z010:      { <<: *F4PGADockerfile, target: z010          }
+    conda/f4pga/xc7/z020:      { <<: *F4PGADockerfile, target: z020          }
+    conda/f4pga/xc7:           { <<: *F4PGADockerfile, target: xc7           }
+    conda/f4pga/eos-s3:        { <<: *F4PGADockerfile, target: eos-s3        }
     # SymbiYosys
     pkg/symbiyosys: *EmptyPkgTarget
     # Yices2
@@ -155,8 +155,8 @@ jobs:
     conda:                         *SysDebianDefaultArchSet
     prog:                          *SysDebianAmd64
     sim:                           *SysDebianAmd64
-    conda/symbiflow/xc7/toolchain: *SysDebianAmd64
-    conda/symbiflow/xc7:           *SysDebianAmd64
+    conda/f4pga/xc7/toolchain: *SysDebianAmd64
+    conda/f4pga/xc7:           *SysDebianAmd64
 
   custom:
     base:
@@ -235,15 +235,15 @@ jobs:
         - prj: scipy
         - prj: octave
       sys: *SysDebianAmd64
-    symbiflow-xc7-devices:
+    f4pga-xc7-devices:
       images:
-        - [ conda/symbiflow/xc7/a50t  ]
-        - [ conda/symbiflow/xc7/a100t ]
-        - [ conda/symbiflow/xc7/a200t ]
-        - [ conda/symbiflow/xc7/z010  ]
-        - [ conda/symbiflow/xc7/z020  ]
+        - [ conda/f4pga/xc7/a50t  ]
+        - [ conda/f4pga/xc7/a100t ]
+        - [ conda/f4pga/xc7/a200t ]
+        - [ conda/f4pga/xc7/z010  ]
+        - [ conda/f4pga/xc7/z020  ]
       sys: *SysDebianAmd64
-    symbiflow-eos-s3:
+    f4pga-eos-s3:
       images:
-        - conda/symbiflow/eos-s3
+        - conda/f4pga/eos-s3
       sys: *SysDebianAmd64

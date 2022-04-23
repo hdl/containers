@@ -27,32 +27,32 @@ Coherently, some common Unix tools (such as make or cmake) are also included in 
   * `docs.github.com: Learn GitHub Actions » Referencing a container on Docker Hub <https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub>`__
 
 
-SymbiFlow
-=========
+F4PGA
+=====
 
-.. |SHIELD:SymbiFlow:Examples| image:: https://img.shields.io/website.svg?label=symbiflow-examples.rtfd.io&longCache=true&style=flat-square&url=http%3A%2F%2Fsymbiflow-examples.rtfd.io%2Fen%2Flatest%2Findex.html&logo=ReadTheDocs&logoColor=fff
-   :alt: 'symbiflow-examples.rtfd.io'
+.. |SHIELD:F4PGA:Examples| image:: https://img.shields.io/website.svg?label=f4pga-examples.rtfd.io&longCache=true&style=flat-square&url=http%3A%2F%2Ff4pga-examples.rtfd.io%2Fen%2Flatest%2Findex.html&logo=ReadTheDocs&logoColor=fff
+   :alt: 'f4pga-examples.rtfd.io'
    :height: 22
-   :target: https://symbiflow-examples.rtfd.io/en/latest/building-examples.html
+   :target: https://f4pga-examples.rtfd.io/en/latest/building-examples.html
 
-As explained in :ref:`SymbiFlow (Conda) <tools-and-images:symbiflow>`, multiple ready-to-use images are provided
-including Miniconda, SymbiFlow toolchains and architecture definitions for Xilinx's **xc7** or QuickLogic's **eos-s3**
+As explained in :ref:`F4PGA (Conda) <tools-and-images:f4pga>`, multiple ready-to-use images are provided
+including Miniconda, F4PGA toolchains and architecture definitions for Xilinx's **xc7** or QuickLogic's **eos-s3**
 devices.
-These container images are expected to be used as explained in |SHIELD:SymbiFlow:Examples|, assuming that the
+These container images are expected to be used as explained in |SHIELD:F4PGA:Examples|, assuming that the
 environment is prepared already and available in the PATH.
 Hence, the Conda environment can be activated straightaway.
 See, for instance:
 
 .. sourcecode:: bash
 
-  :~# git clone https://github.com/SymbiFlow/symbiflow-examples
+  :~# git clone https://github.com/chipsalliance/f4pga-examples
   ...
-  :~# cd symbiflow-examples
+  :~# cd f4pga-examples
 
-  :~/symbiflow-examples# docker run --rm -it \
+  :~/f4pga-examples# docker run --rm -it \
     -v /$(pwd)://wrk \
     -w //wrk \
-    gcr.io/hdl-containers/conda/symbiflow/xc7/a100t
+    gcr.io/hdl-containers/conda/f4pga/xc7/a100t
 
   ...
   (xc7) root@c3d4dd1d97cc:/wrk# TARGET="arty_100" make -C xc7/picosoc_demo/

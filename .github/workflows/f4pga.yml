@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: 'SymbiFlow'
+name: 'f4pga'
 
 on:
   pull_request:
@@ -26,14 +26,14 @@ on:
     - cron: '0 0 * * 5'
   workflow_dispatch:
   repository_dispatch:
-    types: [ symbiflow ]
+    types: [ f4pga ]
 
 jobs:
 
   xc7-toolchain:
     uses: hdl/containers/.github/workflows/common.yml@main
     with:
-      key: conda/symbiflow/xc7/toolchain
+      key: conda/f4pga/xc7/toolchain
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
       gcr_token: '${{ secrets.GCR_JSON_KEY }}'
@@ -45,7 +45,7 @@ jobs:
     needs: [ xc7-toolchain ]
     uses: hdl/containers/.github/workflows/common.yml@main
     with:
-      key: symbiflow-xc7-devices
+      key: f4pga-xc7-devices
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
       gcr_token: '${{ secrets.GCR_JSON_KEY }}'
@@ -57,7 +57,7 @@ jobs:
     needs: [ xc7-devices ]
     uses: hdl/containers/.github/workflows/common.yml@main
     with:
-      key: conda/symbiflow/xc7
+      key: conda/f4pga/xc7
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
       gcr_token: '${{ secrets.GCR_JSON_KEY }}'
@@ -68,7 +68,7 @@ jobs:
   eos-s3:
     uses: hdl/containers/.github/workflows/common.yml@main
     with:
-      key: symbiflow-eos-s3
+      key: f4pga-eos-s3
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
       gcr_token: '${{ secrets.GCR_JSON_KEY }}'

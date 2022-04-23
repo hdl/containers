@@ -37,12 +37,12 @@ In the second half of 2019, sharing the development effort was proposed to maint
 and LibreCores (:gh:`librecores/docker-images#33 <librecores/docker-images/issues/33>`), which went unfortunately
 unnoticed.
 
-At the same time, `SymbiFlow <https://symbiflow.github.io>`__ aimed at gathering open source projects for providing an
-integrated open source EDA solution.
-However, it did not have official container images and `help was wanted <https://symbiflow.github.io/developers.html>`__.
+At the same time, `F4PGA <https://f4pga.org>`__ aimed at gathering open source projects for providing an integrated open
+source EDA solution.
+However, it did not have official container images and `help was wanted <https://f4pga.org/developers.html>`__.
 This repository was initially created for moving all the tools which were not part of GHDL, from ghdl/docker to
-symbiflow/containers.
-However, since SymbiFlow was (partially still is) focused on Verilog, the scope was widened to include VHDL, and the
+f4pga/containers.
+However, since F4PGA was (partially still is) focused on Verilog, the scope was widened to include VHDL, and the
 repository was published at :gh:`hdl/containers` in 2020.
 
 In parallel to splitting ghdl/docker form ghdl/ghdl, in early 2019 :gh:`dbhi/qus` (see :doc:`qus:index`) was created

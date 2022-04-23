@@ -191,9 +191,9 @@ Conversely, in **custom** three fields are expected:
     .. sourcecode:: yaml
 
       images:
-        - [ conda/symbiflow/xc7/a50t  ]
-        - [ conda/symbiflow/xc7/a100t ]
-        - [ conda/symbiflow/xc7/a200t ]
+        - [ conda/f4pga/xc7/a50t  ]
+        - [ conda/f4pga/xc7/a100t ]
+        - [ conda/f4pga/xc7/a200t ]
 
   * Argument substitution is supported through ``${arg}``.
     If any of the items in the list is a dictionary, instead of a string, it is used as an argument in the substitution
