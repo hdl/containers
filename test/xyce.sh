@@ -22,4 +22,6 @@ cd $(dirname "$0")
 
 ./_env.sh
 
+which Xyce
+
 ./_todo.sh
