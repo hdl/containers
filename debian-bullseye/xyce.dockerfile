@@ -28,6 +28,7 @@ RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     autoconf \
     automake \
+    bison \
     ca-certificates \
     curl \
     cmake \
@@ -53,7 +54,7 @@ RUN mkdir -p Trilinos/trilinos-source \
  && curl -fsSL https://github.com/trilinos/Trilinos/archive/trilinos-release-12-12-1.tar.gz | \
     tar xz -C Trilinos/trilinos-source --strip-components=1 \
  && mkdir -p Xyce \
- && curl -fsSL https://github.com/Xyce/Xyce/archive/refs/tags/Release-6.12.0.tar.gz | \
+ && curl -fsSL https://github.com/Xyce/Xyce/archive/refs/tags/Release-7.3.0.tar.gz | \
     tar xz -C Xyce --strip-components=1
 
 ENV ARCHDIR=$XYCE_OUTDIR
