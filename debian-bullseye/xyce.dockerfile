@@ -49,13 +49,10 @@ ENV CPATH="${CPATH}:/tmp/xyce${XYCE_OUTDIR}include"
 
 WORKDIR /tmp/build/
 
-# Get Trilinos and Xyce
+# Get Trilinos
 RUN mkdir -p Trilinos/trilinos-source \
  && curl -fsSL https://github.com/trilinos/Trilinos/archive/trilinos-release-12-12-1.tar.gz | \
-    tar xz -C Trilinos/trilinos-source --strip-components=1 \
- && mkdir -p Xyce \
- && curl -fsSL https://github.com/Xyce/Xyce/archive/refs/tags/Release-7.3.0.tar.gz | \
-    tar xz -C Xyce --strip-components=1
+    tar xz -C Trilinos/trilinos-source --strip-components=1
 
 ENV ARCHDIR=$XYCE_OUTDIR
 ENV FLAGS="-O3 -fPIC"
@@ -72,11 +69,11 @@ RUN cd Trilinos \
       -DBUILD_SHARED_LIBS=ON \
       -DTrilinos_ENABLE_EXPLICIT_INSTANTIATION=ON \
       -DTrilinos_ENABLE_NOX=ON \
-      -DNOX_ENABLE_LOCA=ON \
+        -DNOX_ENABLE_LOCA=ON \
       -DTrilinos_ENABLE_EpetraExt=ON \
-      -DEpetraExt_BUILD_BTF=ON \
-      -DEpetraExt_BUILD_EXPERIMENTAL=ON \
-      -DEpetraExt_BUILD_GRAPH_REORDERINGS=ON \
+        -DEpetraExt_BUILD_BTF=ON \
+        -DEpetraExt_BUILD_EXPERIMENTAL=ON \
+        -DEpetraExt_BUILD_GRAPH_REORDERINGS=ON \
       -DTrilinos_ENABLE_TrilinosCouplings=ON \
       -DTrilinos_ENABLE_Ifpack=ON \
       -DTrilinos_ENABLE_Isorropia=ON \
@@ -84,10 +81,10 @@ RUN cd Trilinos \
       -DTrilinos_ENABLE_Belos=ON \
       -DTrilinos_ENABLE_Triutils=ON \
       -DTrilinos_ENABLE_Teuchos=ON \
-      -DTeuchos_ENABLE_COMPLEX=ON \
+        -DTeuchos_ENABLE_COMPLEX=ON \
       -DTrilinos_ENABLE_Amesos=ON \
-      -DAmesos_ENABLE_KLU=ON \
-      -DAmesos_ENABLE_UMFPACK=ON \
+        -DAmesos_ENABLE_KLU=ON \
+        -DAmesos_ENABLE_UMFPACK=ON \
       -DTrilinos_ENABLE_Sacado=ON \
       -DTrilinos_ENABLE_Kokkos=OFF \
       -DTrilinos_ENABLE_ALL_OPTIONAL_PACKAGES=OFF \
@@ -101,6 +98,11 @@ RUN cd Trilinos \
       -DTPL_ENABLE_LAPACK=ON \
       ./trilinos-source \
  && make DESTDIR=/tmp/xyce/ -j$(nproc) install
+
+# Get Xyce
+RUN mkdir -p Xyce \
+ && curl -fsSL https://github.com/Xyce/Xyce/archive/refs/tags/Release-7.3.0.tar.gz | \
+    tar xz -C Xyce --strip-components=1
 
 ENV xyceBuildDir=/opt/Xyce/xyce-build/
 
