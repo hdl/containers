@@ -54,7 +54,6 @@ RUN mkdir -p Trilinos/trilinos-source \
  && curl -fsSL https://github.com/trilinos/Trilinos/archive/trilinos-release-12-12-1.tar.gz | \
     tar xz -C Trilinos/trilinos-source --strip-components=1
 
-ENV ARCHDIR=$XYCE_OUTDIR
 ENV FLAGS="-O3 -fPIC"
 
 # Build Trilinos
@@ -114,6 +113,7 @@ RUN cd Xyce && ./bootstrap \
       LDFLAGS="-Wl,-rpath=$xyceBuildDir/utils/XyceCInterface -Wl,-rpath=$xyceBuildDir/lib" \
       CPPFLAGS="-I/usr/include/suitesparse" \
       ADMS_CXXFLAGS="-O1" \
+      ARCHDIR=$XYCE_OUTDIR \
       --disable-reaction_parser \
       --disable-verbose_linear \
       --disable-verbose_nonlinear \
