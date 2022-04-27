@@ -54,10 +54,9 @@ RUN mkdir -p Trilinos/trilinos-source \
  && curl -fsSL https://github.com/trilinos/Trilinos/archive/trilinos-release-12-12-1.tar.gz | \
     tar xz -C Trilinos/trilinos-source --strip-components=1
 
-ENV FLAGS="-O3 -fPIC"
-
 # Build Trilinos
 RUN cd Trilinos \
+ && FLAGS="-O3 -fPIC" \
  && cmake \
       -G "Unix Makefiles" \
       -DCMAKE_CXX_FLAGS="$FLAGS" \
@@ -75,24 +74,18 @@ RUN cd Trilinos \
         -DEpetraExt_BUILD_GRAPH_REORDERINGS=ON \
       -DTrilinos_ENABLE_TrilinosCouplings=ON \
       -DTrilinos_ENABLE_Ifpack=ON \
-      -DTrilinos_ENABLE_Isorropia=ON \
       -DTrilinos_ENABLE_AztecOO=ON \
       -DTrilinos_ENABLE_Belos=ON \
-      -DTrilinos_ENABLE_Triutils=ON \
       -DTrilinos_ENABLE_Teuchos=ON \
         -DTeuchos_ENABLE_COMPLEX=ON \
       -DTrilinos_ENABLE_Amesos=ON \
         -DAmesos_ENABLE_KLU=ON \
-        -DAmesos_ENABLE_UMFPACK=ON \
       -DTrilinos_ENABLE_Sacado=ON \
       -DTrilinos_ENABLE_Kokkos=OFF \
       -DTrilinos_ENABLE_ALL_OPTIONAL_PACKAGES=OFF \
       -DTPL_ENABLE_AMD=ON \
       -DAMD_LIBRARY_DIRS="/usr/lib" \
       -DTPL_AMD_INCLUDE_DIRS="/usr/include/suitesparse" \
-      -DTPL_ENABLE_UMFPACK=ON \
-      -DUMFPACK_LIBRARY_DIRS="/usr/lib" \
-      -DTPL_UMFPACK_INCLUDE_DIRS="/usr/include/suitesparse" \
       -DTPL_ENABLE_BLAS=ON \
       -DTPL_ENABLE_LAPACK=ON \
       ./trilinos-source \
@@ -103,21 +96,15 @@ RUN mkdir -p Xyce \
  && curl -fsSL https://codeload.github.com/Xyce/Xyce/tar.gz/master | \
     tar xz -C Xyce --strip-components=1
 
-ENV xyceBuildDir=/opt/Xyce/xyce-build/
-
 # Build Xyce
 RUN cd Xyce && ./bootstrap \
  && mkdir xyce-build && cd xyce-build \
+ && xyceBuildDir=/opt/Xyce/xyce-build/ \
  && ../configure \
-      CXXFLAGS="-O3 -std=c++11" \
+      CXXFLAGS="-O3" \
       LDFLAGS="-Wl,-rpath=$xyceBuildDir/utils/XyceCInterface -Wl,-rpath=$xyceBuildDir/lib" \
       CPPFLAGS="-I/usr/include/suitesparse" \
-      ADMS_CXXFLAGS="-O1" \
       ARCHDIR=$XYCE_OUTDIR \
-      --disable-reaction_parser \
-      --disable-verbose_linear \
-      --disable-verbose_nonlinear \
-      --disable-verbose_time \
       --enable-shared \
       --enable-xyce-shareable \
  && make DESTDIR=/tmp/xyce/ -j$(nproc) install
@@ -144,7 +131,6 @@ RUN apt-get update -qq \
     libblas3 \
     liblapack3 \
     libsuitesparseconfig5 \
-    libumfpack5 \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/*
