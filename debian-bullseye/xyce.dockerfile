@@ -100,7 +100,7 @@ RUN cd Trilinos \
 
 # Get Xyce
 RUN mkdir -p Xyce \
- && curl -fsSL https://github.com/Xyce/Xyce/archive/refs/tags/Release-7.3.0.tar.gz | \
+ && curl -fsSL https://github.com/Xyce/Xyce/archive/refs/tags/Release-7.4.0.tar.gz | \
     tar xz -C Xyce --strip-components=1
 
 ENV xyceBuildDir=/opt/Xyce/xyce-build/
