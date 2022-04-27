@@ -32,7 +32,7 @@ makedepends=(
 build() {
   mkdir /tmp/cvc5
   cd /tmp/cvc5
-  curl -fsSL https://codeload.github.com/cvc5/cvc5/tar.gz/master | tar xzf - --strip-components=1
+  curl -fsSL https://codeload.github.com/cvc5/cvc5/tar.gz/main | tar xzf - --strip-components=1
   ./configure.sh --auto-download
   cd build
   make -j$(nproc)
