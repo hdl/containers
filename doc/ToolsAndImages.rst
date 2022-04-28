@@ -14,7 +14,7 @@ Those are marked with ``!`` in the table below.
 
 .. NOTE::
   Package images are not to be used for executing the tools, but for composing images including multiple resources.
-  See `Development: Package images <dev/index.html#_package_images>`__ for further details.
+  See :ref:`Development:package-images` for further details.
 
 Images including multiple tools
 ===============================

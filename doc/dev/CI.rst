@@ -38,13 +38,13 @@ As shown in :numref:`img-ci`, the following wrappers are used:
 .. TIP::
   In :gh:`pyTooling/Actions: Context <pyTooling/Actions/#context>`, details about Action and Workflow kinds supported in
   GitHub Actions are explained.
-  See also `Workflow syntax for GitHub Actions <https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions>`__.
+  See also `Workflow syntax for GitHub Actions <https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions>`__.
 
 * :ghsrc:`build-test-release <utils/build-test-release/action.yml>` is a local Composite Action with three steps,
   including setup, pulling/building/testing and releasing.
 * :ghsrc:`Common <.github/workflows/common.yml>` is a Reusable Workflow with two jobs.
   The first job, named *matrix*, uses ``pyHDLC jobs`` to generate a list of tasks to be used in the second job, named
-  *jobs* (see `docs.github.com: Workflow syntax for GitHub Actions » jobs.<job_id>.outputs <https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idoutputs>`__).
+  *jobs* (see `docs.github.com: Workflow syntax for GitHub Actions » jobs.<job_id>.outputs <https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idoutputs>`__).
   Then, the Composite Action is used in each of the dynamically generated jobs.
 * :ghsrc:`Dispatch <.github/workflows/dispatch.yml>` is a Dispatchable Workflow, which calls the Reusable Workflow.
   In practice, *Dispatch* documents the internal triggering interface, but it is not used explicitly.

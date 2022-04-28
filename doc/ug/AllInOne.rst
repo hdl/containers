@@ -24,7 +24,7 @@ Coherently, some common Unix tools (such as make or cmake) are also included in 
 
 .. TIP::
   * :gh:`pyTooling/Actions <pyTooling/Actions/#context>`
-  * `docs.github.com: Learn GitHub Actions » Referencing a container on Docker Hub <https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub>`__
+  * `docs.github.com: Learn GitHub Actions » Referencing a container on Docker Hub <https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub>`__
 
 
 F4PGA
