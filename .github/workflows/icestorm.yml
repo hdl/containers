@@ -33,7 +33,7 @@ env:
 
 jobs:
   icestorm:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: icestorm
       submodules: recursive

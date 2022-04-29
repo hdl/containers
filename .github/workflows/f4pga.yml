@@ -31,7 +31,7 @@ on:
 jobs:
 
   xc7-toolchain:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: conda/f4pga/xc7/toolchain
       skip-release: ${{ github.event_name == 'pull_request' }}
@@ -43,7 +43,7 @@ jobs:
 
   xc7-devices:
     needs: [ xc7-toolchain ]
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: f4pga-xc7-devices
       skip-release: ${{ github.event_name == 'pull_request' }}
@@ -55,7 +55,7 @@ jobs:
 
   xc7:
     needs: [ xc7-devices ]
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: conda/f4pga/xc7
       skip-release: ${{ github.event_name == 'pull_request' }}
@@ -66,7 +66,7 @@ jobs:
       docker_pass: '${{ secrets.DOCKER_PASS }}'
 
   eos-s3:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: f4pga-eos-s3
       skip-release: ${{ github.event_name == 'pull_request' }}

@@ -34,7 +34,7 @@ env:
 jobs:
 
   sim:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: sim
       submodules: recursive
@@ -47,7 +47,7 @@ jobs:
 
   osvb:
     needs: sim
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: osvb
       submodules: recursive
@@ -60,7 +60,7 @@ jobs:
 
   cosim:
     needs: osvb
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: cosim
       submodules: recursive

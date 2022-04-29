@@ -34,7 +34,7 @@ env:
 
 jobs:
   apicula:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: apicula
       submodules: recursive

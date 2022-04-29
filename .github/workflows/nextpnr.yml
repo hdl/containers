@@ -75,7 +75,7 @@ jobs:
 
   nextpnr-prjs:
     needs: [ nextpnr-build ]
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: nextpnr-prjs
       submodules: recursive
@@ -89,7 +89,7 @@ jobs:
 
   nextpnr:
     needs: [ nextpnr-build, nextpnr-prjs ]
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: nextpnr
       submodules: recursive

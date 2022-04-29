@@ -30,7 +30,7 @@ env:
 
 jobs:
   klayout:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: klayout
       submodules: recursive

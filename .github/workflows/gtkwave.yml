@@ -33,7 +33,7 @@ env:
 
 jobs:
   gtkwave:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: gtkwave
       submodules: recursive

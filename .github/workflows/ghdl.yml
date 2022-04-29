@@ -33,7 +33,7 @@ env:
 
 jobs:
   ghdl:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: ghdl
       submodules: recursive

@@ -33,7 +33,7 @@ env:
 
 jobs:
   ghdl-yosys-plugin:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: ghdl-yosys-plugin
       submodules: recursive

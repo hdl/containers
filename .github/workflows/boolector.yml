@@ -31,7 +31,7 @@ on:
 
 jobs:
   boolector:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: boolector
       skip-release: ${{ github.event_name == 'pull_request' }}

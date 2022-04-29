@@ -34,7 +34,7 @@ env:
 
 jobs:
   yices2:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: yices2
       skip-release: ${{ github.event_name == 'pull_request' }}

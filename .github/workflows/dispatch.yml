@@ -36,7 +36,7 @@ on:
 
 jobs:
   dispatch:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: ${{ github.event.inputs.key }}
       submodules: ${{ github.event.inputs.submodules }}

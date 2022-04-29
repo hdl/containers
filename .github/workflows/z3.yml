@@ -33,7 +33,7 @@ env:
 
 jobs:
   z3:
-    uses: hdl/containers/.github/workflows/common.yml@main
+    uses: ./.github/workflows/common.yml
     with:
       key: z3
       skip-release: ${{ github.event_name == 'pull_request' }}
