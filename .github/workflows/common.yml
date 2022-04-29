@@ -100,3 +100,15 @@ jobs:
         architecture: ${{ matrix.arch }}
         collection: ${{ matrix.os }}
         images: ${{ matrix.imgs }}
+
+  status:
+    needs: jobs
+    runs-on: ubuntu-latest
+    name: Update status
+    steps:
+    - run: |
+        HDLC_KEY=$(echo ${{ inputs.key }} | sed 's#/#_#g')
+        date > "$HDLC_KEY".status
+        GITHUB_TOKEN='${{ github.token }}' gh release upload status "$HDLC_KEY".status --clobber -R hdl/containers
+        curl -fsSL https://github.com/hdl/containers/releases/download/status/"$HDLC_KEY".status > "$HDLC_KEY".compare
+        diff "$HDLC_KEY".status "$HDLC_KEY".compare
