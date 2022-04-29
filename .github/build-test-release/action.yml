@@ -136,3 +136,14 @@ runs:
       name: Summary_${{ inputs.key }}_${{ hashFiles('summary') }}
       path: summary
       retention-days: 1
+
+  - name: Update status
+    shell: bash
+    run: |
+      for image in ${{ inputs.images }}; do
+        item=hdlc_$(echo "$image" | sed 's#/#--#g' | sed 's/#.*//g').status
+        date > "$item"
+        GITHUB_TOKEN='${{ github.token }}' gh release upload status "$item" --clobber -R hdl/containers
+        curl -fsSL https://github.com/hdl/containers/releases/download/status/"$item" > "${item%.*}".compare
+        diff "$item" "${item%.*}".compare
+      done

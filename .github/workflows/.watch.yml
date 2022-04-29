@@ -78,3 +78,9 @@ jobs:
       env:
         GH_INPUT_SCHEDULE: ${{ needs.watch.outputs.schedule }}
         GH_WATCH_RESULT: ${{ needs.watch.result }}
+
+# HDLC_KEY=$(echo ${{ inputs.key }} | sed 's#/#_#g')
+# date > "$HDLC_KEY".status
+# gh release upload status "$HDLC_KEY".status --clobber -R hdl/containers
+# curl -fsSL https://github.com/hdl/containers/releases/download/status/"$HDLC_KEY".status > "$HDLC_KEY".compare
+# diff "$HDLC_KEY".status "$HDLC_KEY".compare
