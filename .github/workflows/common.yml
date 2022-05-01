@@ -106,9 +106,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Update status
     steps:
+
+    - name: '📥 Download artifact'
+      uses: actions/download-artifact@v3
+
     - run: |
-        HDLC_KEY=$(echo ${{ inputs.key }} | sed 's#/#_#g')
-        date > "$HDLC_KEY".status
-        GITHUB_TOKEN='${{ github.token }}' gh release upload status "$HDLC_KEY".status --clobber -R hdl/containers
-        curl -fsSL https://github.com/hdl/containers/releases/download/status/"$HDLC_KEY".status > "$HDLC_KEY".compare
-        diff "$HDLC_KEY".status "$HDLC_KEY".compare
+        ls -la ./artifact/
+        for item in ./artifact/*.status; do
+          sfile="hdlc_"$(basename "$item")
+          echo "$item $sfile"
+          cp "$item" "$sfile"
+          GITHUB_TOKEN='${{ github.token }}' gh release upload status "$sfile" --clobber -R hdl/containers
+          curl -fsSL https://github.com/hdl/containers/releases/download/status/"$sfile" > "${sfile%.*}".compare
+          diff "$sfile" "${sfile%.*}".compare
+        done

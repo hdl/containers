@@ -93,3 +93,15 @@ runs:
         echo '${{ inputs.docker_pass }}' | docker login docker.io -u '${{ inputs.docker_user }}' --password-stdin
         dockerRelease ${{ inputs.architecture }} ${{ inputs.collection }} ${{ inputs.images }}
       post: for registry in gcr.io ghcr.io docker.io; do docker logout "$registry"; done
+
+  - shell: bash
+    run: |
+      for image in ${{ inputs.images }}; do
+        id=$(echo "$image" | sed 's#/#--#g' | sed 's/#.*//g')
+        date > "$id".status
+      done
+
+  - name: '📤 Upload artifact'
+    uses: actions/upload-artifact@v3
+    with:
+      path: '*.status'
