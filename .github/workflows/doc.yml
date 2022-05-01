@@ -44,7 +44,7 @@ jobs:
     steps:
 
     - name: 🧰 Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: ⛴️ Build image hdlc/doc:pyHDLC
       run: make -C doc pyHDLC
@@ -66,13 +66,13 @@ jobs:
     steps:
 
     - name: 🧰 Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: 🗺️ Generate map
       run: make -C doc map
 
     - name: '📤 Upload artifact: map'
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Map
         path: utils/map.svg
@@ -85,7 +85,7 @@ jobs:
     steps:
 
     - name: 🧰 Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: 📓 BuildTheDocs (BTD)
       uses: buildthedocs/btd@v0
@@ -94,7 +94,7 @@ jobs:
         skip-deploy: ${{ github.event_name == 'pull_request' }}
 
     - name: '📤 Upload artifact: Sphinx HTML'
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Documentation-HTML
         path: doc/_build/html

@@ -36,6 +36,7 @@ jobs:
 # TODO: Support 'skip-test' in the reusable workflow 'common.yml'.
 # Then, use the reusable workflow 'common.py' here.
 
+
   matrix:
     runs-on: ubuntu-latest
     outputs:
@@ -43,7 +44,7 @@ jobs:
     steps:
 
     - name: 🧰 Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: 🛠️ Setup
       run: ./utils/setup.sh
@@ -51,6 +52,7 @@ jobs:
     - name: 🔧 Generate matrix
       id: nextpnr-build
       run: pyHDLC jobs nextpnr-build
+
 
   nextpnr-build:
     needs: matrix
@@ -63,7 +65,7 @@ jobs:
     steps:
 
     - name: 🧰 Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         submodules: recursive
 
