@@ -41,9 +41,15 @@ jobs:
     outputs:
       nextpnr-build: ${{ steps.nextpnr-build.outputs.matrix }}
     steps:
-    - uses: actions/checkout@v2
-    - run: ./utils/setup.sh
-    - id: nextpnr-build
+
+    - name: 🧰 Checkout
+      uses: actions/checkout@v2
+
+    - name: 🛠️ Setup
+      run: ./utils/setup.sh
+
+    - name: 🔧 Generate matrix
+      id: nextpnr-build
       run: pyHDLC jobs nextpnr-build
 
   nextpnr-build:
@@ -56,11 +62,13 @@ jobs:
     name: nextpnr-build ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
 
-    - uses: actions/checkout@v2
+    - name: 🧰 Checkout
+      uses: actions/checkout@v2
       with:
         submodules: recursive
 
-    - uses: ./utils/build-test-release
+    - name: 🚧 Build, test and release
+      uses: ./utils/build-test-release
       with:
         gcr_token: '${{ secrets.GCR_JSON_KEY }}'
         gh_token: '${{ github.token }}'

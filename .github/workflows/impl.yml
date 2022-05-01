@@ -45,13 +45,21 @@ jobs:
       #impl-prjs: ${{ steps.impl-prjs.outputs.matrix }}
       impl: ${{ steps.impl.outputs.matrix }}
     steps:
-    - uses: actions/checkout@v2
-    - run: ./utils/setup.sh
-    - id: impl-build
+
+    - name: 🧰 Checkout
+      uses: actions/checkout@v2
+
+    - name: 🛠️ Setup
+      run: ./utils/setup.sh
+
+    - name: 🔧 Generate build matrix
+      id: impl-build
       run: pyHDLC jobs impl-build
     #- id: impl-prjs
     #  run: pyHDLC jobs impl-prjs
-    - id: impl
+
+    - name: 🔧 Generate matrix
+      id: impl
       run: pyHDLC jobs impl
 
 
@@ -65,13 +73,13 @@ jobs:
     name: impl-build ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
 
-    - uses: actions/checkout@v2
+    - name: 🧰 Checkout
+      uses: actions/checkout@v2
       with:
         submodules: recursive
 
-    - run: ./utils/setup.sh ${{ matrix.sys.arch }}
-
-    - uses: ./utils/build-test-release
+    - name: 🚧 Build, test and release
+      uses: ./utils/build-test-release
       with:
         gcr_token: '${{ secrets.GCR_JSON_KEY }}'
         gh_token: '${{ github.token }}'
@@ -106,26 +114,30 @@ jobs:
     name: '[${{ matrix.sys.os }}|${{ matrix.sys.arch }}] impl · ${{ matrix.task.arch }} ${{ matrix.task.prj }}'
     steps:
 
-    - uses: actions/checkout@v2
+    - name: 🧰 Checkout
+      uses: actions/checkout@v2
       with:
         submodules: recursive
 
-    - run: ./utils/setup.sh ${{ matrix.sys.arch }}
+    - name: 🛠️ Setup
+      run: ./utils/setup.sh ${{ matrix.sys.arch }}
 
     # TODO: Action 'build-test-release' cannot be used here yet, because 'task.arch' and 'task.prj' are not provided by
     # 'pyHDLC jobs'. Hence, 'config.yml' needs to be extended in order to handle generation of 'pull' image lists.
-    - run: >-
+    - name: 🚧 Build
+      run: >-
         pyHDLC pull -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }}
         build/impl
         pkg/nextpnr/${{ matrix.task.arch }}
         pkg/${{ matrix.task.prj }}
 
-    - run: >-
+    - name: 🚦 Test
+      run: >-
         pyHDLC build -q -a ${{ matrix.sys.arch }} -c ${{ matrix.sys.os }} -d
         impl/${{ matrix.task.arch }}
         impl/${{ matrix.task.prj }}
 
-    - name: Release
+    - name: 🛰️ Release
       if: github.event_name != 'pull_request'
       uses: pyTooling/Actions/with-post-step@r0
       with:
@@ -149,11 +161,13 @@ jobs:
     name: impl ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
 
-    - uses: actions/checkout@v2
+    - name: 🧰 Checkout
+      uses: actions/checkout@v2
       with:
         submodules: recursive
 
-    - uses: ./utils/build-test-release
+    - name: 🚧 Build, test and release
+      uses: ./utils/build-test-release
       with:
         gcr_token: '${{ secrets.GCR_JSON_KEY }}'
         gh_token: '${{ github.token }}'

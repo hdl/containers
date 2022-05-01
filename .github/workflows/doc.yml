@@ -40,16 +40,16 @@ jobs:
 
   image:
     runs-on: ubuntu-latest
-    name: '⛴️ Image'
+    name: ⛴️ Image
     steps:
 
-    - name: '🧰 Checkout'
+    - name: 🧰 Checkout
       uses: actions/checkout@v2
 
-    - name: '⛴️ Build image hdlc/doc:pyHDLC'
+    - name: ⛴️ Build image hdlc/doc:pyHDLC
       run: make -C doc pyHDLC
 
-    - name: '🛰️ Push container image'
+    - name: 🛰️ Push container image
       if: github.event_name != 'pull_request' && github.repository == 'hdl/containers'
       uses: pyTooling/Actions/with-post-step@r0
       with:
@@ -65,10 +65,10 @@ jobs:
     name: '🗺️ Map'
     steps:
 
-    - name: '🧰 Checkout'
+    - name: 🧰 Checkout
       uses: actions/checkout@v2
 
-    - name: '🗺️ Generate map'
+    - name: 🗺️ Generate map
       run: make -C doc map
 
     - name: '📤 Upload artifact: map'
@@ -84,10 +84,10 @@ jobs:
     name: '📓 Docs'
     steps:
 
-    - name: '🧰 Checkout'
+    - name: 🧰 Checkout
       uses: actions/checkout@v2
 
-    - name: '📓 BuildTheDocs (BTD)'
+    - name: 📓 BuildTheDocs (BTD)
       uses: buildthedocs/btd@v0
       with:
         token: ${{ github.token }}

@@ -55,15 +55,23 @@ env:
 
 jobs:
 
+
   matrix:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.generate.outputs.matrix }}
     steps:
-    - uses: actions/checkout@v2
-    - run: ./utils/setup.sh
-    - id: generate
+
+    - name: 🧰 Checkout
+      uses: actions/checkout@v2
+
+    - name: 🛠️ Setup
+      run: ./utils/setup.sh
+
+    - name: 🔧 Generate matrix
+      id: generate
       run: pyHDLC jobs ${{ inputs.key }}
+
 
   jobs:
     needs: matrix
@@ -76,11 +84,13 @@ jobs:
     name: ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
 
-    - uses: actions/checkout@v2
+    - name: 🧰 Checkout
+      uses: actions/checkout@v2
       with:
         submodules: ${{ inputs.submodules }}
 
-    - uses: ./utils/build-test-release
+    - name: 🚧 Build, test and release
+      uses: ./utils/build-test-release
       with:
         gcr_token: '${{ secrets.gcr_token }}'
         gh_token: '${{ github.token }}'
