@@ -94,11 +94,15 @@ runs:
         dockerRelease ${{ inputs.architecture }} ${{ inputs.collection }} ${{ inputs.images }}
       post: for registry in gcr.io ghcr.io docker.io; do docker logout "$registry"; done
 
-  - shell: bash
+  - name: Update status
+    shell: bash
     run: |
       for image in ${{ inputs.images }}; do
-        id=$(echo "$image" | sed 's#/#--#g' | sed 's/#.*//g')
-        date > "$id".status
+        item=hdlc_$(echo "$image" | sed 's#/#--#g' | sed 's/#.*//g').status
+        date > "$item"
+        GITHUB_TOKEN='${{ github.token }}' gh release upload status "$item" --clobber -R hdl/containers
+        curl -fsSL https://github.com/hdl/containers/releases/download/status/"$item" > "${item%.*}".compare
+        diff "$item" "${item%.*}".compare
       done
 
   - name: '📤 Upload artifact'
