@@ -94,12 +94,16 @@ runs:
         dockerRelease ${{ inputs.architecture }} ${{ inputs.collection }} ${{ inputs.images }}
       post: for registry in gcr.io ghcr.io docker.io; do docker logout "$registry"; done
 
-  - name: Update status
-    shell: bash
+  - shell: bash
     run: |
+      # Update status
       for image in ${{ inputs.images }}; do
-        item=hdlc_$(echo "$image" | sed 's#/#--#g' | sed 's/#.*//g').status
+        item=hdlc_'${{ inputs.architecture }}'_$(echo '${{ inputs.collection }}' | sed 's#/#-#g' )_$(echo "$image" | sed 's#/#--#g' | sed 's/#.*//g').status
         date > "$item"
+
+        echo "$item"
+        cat "$item"
+
         GITHUB_TOKEN='${{ github.token }}' gh release upload status "$item" --clobber -R hdl/containers
         curl -fsSL https://github.com/hdl/containers/releases/download/status/"$item" > "${item%.*}".compare
         diff "$item" "${item%.*}".compare
