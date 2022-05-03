@@ -74,6 +74,8 @@ defaults:
     impl/icestorm:   { <<: *ImplDockerfile, target: icestorm }
     impl/ecp5:       { <<: *ImplDockerfile, target: ecp5 }
     impl/prjtrellis: { <<: *ImplDockerfile, target: prjtrellis }
+    impl/nexus:      { <<: *ImplDockerfile, target: nexus }
+    impl/prjoxide:   { <<: *ImplDockerfile, target: prjoxide }
     impl/generic:    { <<: *ImplDockerfile, target: generic }
     impl/pnr:        { <<: *ImplDockerfile, target: pnr }
     # NextPnR
@@ -152,9 +154,9 @@ jobs:
     z3:         *SysDebianAmd64
 
   runonly:
-    conda:                         *SysDebianDefaultArchSet
-    prog:                          *SysDebianAmd64
-    sim:                           *SysDebianAmd64
+    conda:                     *SysDebianDefaultArchSet
+    prog:                      *SysDebianAmd64
+    sim:                       *SysDebianAmd64
     conda/f4pga/xc7/toolchain: *SysDebianAmd64
     conda/f4pga/xc7:           *SysDebianAmd64
 
@@ -196,6 +198,7 @@ jobs:
         - impl/${prj}
         - { arch: ice40, prj: icestorm   }
         - { arch: ecp5,  prj: prjtrellis }
+        - { arch: nexus, prj: prjoxide   }
       sys: *SysDebianAmd64
     impl:
       images:

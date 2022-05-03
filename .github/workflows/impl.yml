@@ -55,7 +55,9 @@ jobs:
     - name: 🔧 Generate build matrix
       id: impl-build
       run: pyHDLC jobs impl-build
-    #- id: impl-prjs
+
+    #- name: 🔧 Generate prjs matrix
+    #  id: impl-prjs
     #  run: pyHDLC jobs impl-prjs
 
     - name: 🔧 Generate matrix
@@ -110,6 +112,7 @@ jobs:
         task:
           - { arch: ice40, prj: icestorm   }
           - { arch: ecp5,  prj: prjtrellis }
+          - { arch: nexus, prj: prjoxide   }
 
     name: '[${{ matrix.sys.os }}|${{ matrix.sys.arch }}] impl · ${{ matrix.task.arch }} ${{ matrix.task.prj }}'
     steps:
@@ -181,6 +184,8 @@ jobs:
           build/impl
           pkg/nextpnr/ice40
           pkg/nextpnr/ecp5
+          pkg/nextpnr/nexus
           pkg/nextpnr/generic
           pkg/icestorm
           pkg/prjtrellis
+          pkg/prjoxide

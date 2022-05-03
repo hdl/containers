@@ -74,6 +74,22 @@ COPY --from=pkg-prjtrellis /prjtrellis /
 #---
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg/nextpnr/nexus AS pkg-nextpnr-nexus
+
+FROM $REGISTRY/build/impl AS nexus
+COPY --from=pkg-nextpnr-nexus /nextpnr-nexus /
+
+#---
+
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg/prjoxide AS pkg-prjoxide
+
+FROM nexus AS prjoxide
+COPY --from=pkg-prjoxide /prjoxide /
+
+#---
+
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
 FROM $REGISTRY/pkg/nextpnr/generic AS pkg-nextpnr-generic
 
 FROM $REGISTRY/build/impl AS generic
@@ -82,6 +98,7 @@ COPY --from=pkg-nextpnr-generic /nextpnr-generic /
 #---
 
 FROM $REGISTRY/build/impl AS pnr
+COPY --from=pkg-nextpnr-nexus /nextpnr-nexus /
 COPY --from=pkg-nextpnr-ecp5 /nextpnr-ecp5 /
 COPY --from=pkg-nextpnr-ice40 /nextpnr-ice40 /
 COPY --from=pkg-nextpnr-generic /nextpnr-generic /
@@ -91,3 +108,4 @@ COPY --from=pkg-nextpnr-generic /nextpnr-generic /
 FROM pnr
 COPY --from=pkg-icestorm /icestorm /
 COPY --from=pkg-prjtrellis /prjtrellis /
+COPY --from=pkg-prjoxide /prjoxide /
