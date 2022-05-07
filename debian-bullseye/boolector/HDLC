@@ -20,6 +20,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+set -e
+
 makedepends=(
   binutils
   cmake
@@ -27,9 +29,9 @@ makedepends=(
 )
 
 build() {
-  mkdir /tmp/boolector
+  git clone https://github.com/boolector/boolector.git /tmp/boolector
   cd /tmp/boolector
-  curl -fsSL https://codeload.github.com/boolector/boolector/tar.gz/master | tar xzf - --strip-components=1
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//g' > /tmp/hdlc.boolector.version
   ./contrib/setup-btor2tools.sh
   ./contrib/setup-lingeling.sh
   ./configure.sh
