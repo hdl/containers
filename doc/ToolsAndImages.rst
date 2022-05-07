@@ -32,9 +32,10 @@ Images including multiple tools
 
   * |SHIELD:Image:impl/ice40| nextpnr-ice40 only, and |SHIELD:Image:impl/icestorm| including icestorm.
   * |SHIELD:Image:impl/ecp5| nextpnr-ecp5 only, and |SHIELD:Image:impl/prjtrellis| including prjtrellis.
+  * |SHIELD:Image:impl/nexus| nextpnr-nexus only, and |SHIELD:Image:impl/prjoxide| including prjoxide.
   * |SHIELD:Image:impl/generic| nextpnr-generic only.
-  * |SHIELD:Image:impl/pnr| all nextpnr targets (ecp5, ice40, and generic).
-  * |SHIELD:Image:impl| impl:pnr, including icestorm and prjtrellis.
+  * |SHIELD:Image:impl/pnr| all nextpnr targets (ecp5, ice40, nexus, and generic).
+  * |SHIELD:Image:impl| impl:pnr, including icestorm, prjtrellis and prjoxide.
 
 * **F**\ ormal:
 
