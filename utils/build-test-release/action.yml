@@ -61,7 +61,11 @@ runs:
   steps:
 
   - shell: bash
-    run: ./utils/setup.sh ${{ inputs.architecture }}
+    run: |
+      # Setup
+      echo '::group::Setup'
+      ./utils/setup.sh ${{ inputs.architecture }}
+      echo '::endgroup::'
 
   - shell: python
     run: |
