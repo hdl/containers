@@ -41,6 +41,8 @@ build() {
   git clone https://github.com/gtkwave/gtkwave.git /tmp/gtkwave
   cd /tmp/gtkwave/gtkwave3-gtk3
   ./autogen.sh
+  versionString=$(cat configure | grep 'PACKAGE_VERSION=' | sed "s/.*='\(.*\)'/\1/" )
+  git describe --long --tags | sed 's/nightly/'"$versionString"'/;s/[^-]*-g/g/' > /tmp/hdlc.gtkwave.version
   ./configure --with-tk=/usr/lib --enable-gtk3
   make -j$(nproc)
   make DESTDIR=/opt/gtkwave check install
