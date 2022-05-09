@@ -20,6 +20,7 @@
 from typing import Any, Dict, List, Optional, Tuple, Union
 from pathlib import Path
 from string import Template
+from re import search as re_search, IGNORECASE as re_IGNORECASE
 
 from dataclasses import dataclass
 from yamldataclassconfig.config import YamlDataClassConfig
@@ -424,22 +425,40 @@ def BuildImage(
         if target not in [None, '']:
             cmd += [f"--target={target}"]
 
-        cpath = Path(collection.replace("/", "-"))
-        dpath = cpath / dockerfile
+        def _getCollectionAndDockerfilePaths(collection, dockerfile):
+            collectionPath = Path(collection.replace("/", "-"))
+            dockerfilePath = collectionPath / dockerfile
 
-        if dpath.is_dir():
-            cpath = dpath
-            dpath = dpath / 'Dockerfile'
-        else:
-            dpath = cpath / f"{dockerfile}.dockerfile"
-            cmd += ["-f", str(dpath)]
+            if dockerfilePath.is_dir():
+                contextPath = dockerfilePath
+                dockerfilePath = contextPath / 'Dockerfile'
+            else:
+                contextPath = collectionPath
+                dockerfilePath = contextPath / f"{dockerfile}.dockerfile"
 
-        if not dpath.exists():
-            raise Exception(f"Dockerfile <{dpath}> does not exist!")
+            if not dockerfilePath.exists():
+                raise Exception(f"Dockerfile <{dockerfilePath}> does not exist!")
 
-        cmd += [str(cpath)]
+            return (contextPath, dockerfilePath)
+
+        (contextPath, dockerfilePath) = _getCollectionAndDockerfilePaths(collection, dockerfile)
+
+        if len(dockerfilePath.suffix) != 0:
+            cmd += ["-f", str(dockerfilePath)]
+
+        cmd += [str(contextPath)]
 
         _exec(args=cmd, dry=dry, collapse=f"[Build] Build {imageName}")
+
+        with dockerfilePath.open('r') as rfptr:
+            for line in rfptr:
+                if re_search('FROM scratch AS version', line, re_IGNORECASE):
+                    _exec(
+                        args=['docker', 'build', '--target', 'version', '-o', 'dist', str(contextPath)],
+                        dry=dry,
+                        collapse=f"[Build] Version {imageName}"
+                    )
+                    break
 
         if test:
             TestImage(
@@ -578,8 +597,16 @@ def PushImage(
       * ``#A``: architecture
       * ``#C``: collection
     """
-    def dpush(imgName):
-        _exec(args=["docker", "push", imgName], dry=dry, collapse=f"Push {imgName}")
+    def dpush(args: List[str]):
+        _exec(args=["docker", "push"]+args, dry=dry, collapse=f"Push {' '.join(args)}")
+
+    def dtag(imgName: str, tags: List[str]):
+        for tag in tags:
+            _exec(
+                args=["docker", "tag", imgName, tag],
+                dry=dry,
+                collapse=f"Tag {tag}",
+            )
 
     mirrors = [] if mirror is None else [mirror] if isinstance(mirror, str) else mirror
 
@@ -589,17 +616,23 @@ def PushImage(
         # There, it denotes keywords for replacement.
         img = rimg.split('#')[0]
         imageName = f"{registry}/{architecture}/{collection}/{img}"
-        dpush(imageName)
+        dpush([imageName])
+
+        print('\nChecking version file...')
+        versionString = None
+        versionFile = Path('dist') / f'hdlc.{rimg if rimg[0:4] != "pkg/" else rimg[4:]}.version'
+        if versionFile.exists():
+            with versionFile.open('r') as rfptr:
+                versionString = rfptr.read().strip()
+        print(f'{rimg}: {versionString}')
+
         for mirror in mirrors:
-            mimg = (
-                img.replace("/", ":", 1).replace("/", "--")
-                if mirror.startswith("docker.io")
-                else img
-            )
+            isDocker = mirror.startswith("docker.io")
+            mimg = img.replace("/", ":", 1).replace("/", "--") if isDocker else img
             mirrorName = f"{mirror.replace('#A', architecture).replace('#C', collection)}/{mimg}"
-            _exec(
-                args=["docker", "tag", imageName, mirrorName],
-                dry=dry,
-                collapse=f"Tag {imageName} {mirrorName}",
-            )
-            dpush(mirrorName)
+            if isDocker or (versionString is None):
+                dtag(imageName, [mirrorName])
+                dpush([mirrorName])
+                continue
+            dtag(imageName, [mirrorName, f'{mirrorName}:{versionString}'])
+            dpush(['--all-tags', mirrorName])
