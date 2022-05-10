@@ -27,18 +27,14 @@ ARG IMAGE="build/base"
 
 FROM $REGISTRY/build/build AS build
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    python3-dev \
-    python3-pip \
-    python3-setuptools \
-    python3-wheel
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /opt/apicula /tmp/apicula \
- && curl -fsSL https://files.pythonhosted.org/packages/1a/d6/b3162f87ff114d639095fe7c0655080ee16caff9037d6629f738d8b28d92/Apycula-0.0.1a6.tar.gz | tar -xvzf - --strip-components=1 -C /opt/apicula \
- && cd /opt/apicula \
- && python3 setup.py bdist_wheel \
- && mv dist/*.whl /tmp/apicula/
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
