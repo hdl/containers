@@ -21,15 +21,17 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+set -e
+
 makedepends=(
   binutils
   python3-distutils
 )
 
 build() {
-  mkdir /tmp/z3
+ git clone https://github.com/Z3Prover/z3.git /tmp/z3
   cd /tmp/z3
-  curl -fsSL https://codeload.github.com/Z3Prover/z3/tar.gz/master | tar xzf - --strip-components=1
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/^z3-//;s/-/./g;s/^v//g' > /tmp/hdlc.z3.version
   python3 scripts/mk_make.py
   cd build
   make PREFIX=/usr/local
