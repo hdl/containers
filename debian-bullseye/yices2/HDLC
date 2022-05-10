@@ -20,6 +20,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+set -e
+
 makedepends=(
   binutils
   autoconf
@@ -28,9 +30,9 @@ makedepends=(
 )
 
 build() {
-  mkdir /tmp/yices2
+  git clone https://github.com/SRI-CSL/yices2.git /tmp/yices2
   cd /tmp/yices2
-  curl -fsSL https://codeload.github.com/SRI-CSL/yices2/tar.gz/master | tar xzf - --strip-components=1
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/^Yices-//;s/-/./g;s/^v//g' > /tmp/hdlc.yices2.version
   autoconf
   ./configure
   make -j$(nproc)
