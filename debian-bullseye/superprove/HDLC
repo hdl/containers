@@ -20,6 +20,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+set -e
+
 CTX=/tmp/ctx
 
 makedepends=(
@@ -38,9 +40,10 @@ prepare() {
 }
 
 build() {
-  mkdir /tmp/superprove
-  cd /tmp/superprove
-  git clone --recursive https://github.com/sterin/super-prove-build .
+  git clone --recursive https://github.com/sterin/super-prove-build /tmp/superprove
+  cd /tmp/superprove/super_prove
+  git describe --always | sed 's/\(.*\)/g\1/' > /tmp/hdlc.superprove.version
+  cd ..
   patch -p1 < ${CTX}/rm-system.patch
   mkdir build && cd build
   PREFIX=/usr/local
