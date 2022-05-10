@@ -35,16 +35,16 @@ makedepends=(
 )
 
 build() {
- mkdir /tmp/pono
- cd /tmp/pono
- curl -fsSL https://codeload.github.com/upscale-project/pono/tar.gz/master | tar xzf - --strip-components=1
- ./contrib/setup-smt-switch.sh
- ./contrib/setup-btor2tools.sh
- ./configure.sh
- PREFIX=/usr/local
- make -C build -j$(nproc) PREFIX="$PREFIX"
- DESTDIR=/opt/pono
- mkdir -p "${DESTDIR}${PREFIX}"/bin "${DESTDIR}${PREFIX}"/lib
- cp build/pono "${DESTDIR}${PREFIX}"/bin/
- cp build/libpono.so "${DESTDIR}${PREFIX}"/lib/
+  git clone https://github.com/upscale-project/pono.git /tmp/pono
+  cd /tmp/pono
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//g' > /tmp/hdlc.pono.version
+  ./contrib/setup-smt-switch.sh
+  ./contrib/setup-btor2tools.sh
+  ./configure.sh
+  PREFIX=/usr/local
+  make -C build -j$(nproc) PREFIX="$PREFIX"
+  DESTDIR=/opt/pono
+  mkdir -p "${DESTDIR}${PREFIX}"/bin "${DESTDIR}${PREFIX}"/lib
+  cp build/pono "${DESTDIR}${PREFIX}"/bin/
+  cp build/libpono.so "${DESTDIR}${PREFIX}"/lib/
 }
