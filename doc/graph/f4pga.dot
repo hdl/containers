@@ -27,12 +27,20 @@ digraph G {
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
     d_conda     [label="conda"];
     d_f4pga [label="conda/f4pga"];
+    d_verible [label="verible"];
   }
 
   # Images
 
   { node [shape=cylinder]
     "build/base"
+    "build/build"
+    { node [color=limegreen, fontcolor=limegreen]
+      "verible"
+    }
+    { node [color=mediumblue, fontcolor=mediumblue]
+      "pkg/verible"
+    }
     { node [color=brown, fontcolor=brown]
       "conda"
       "conda/f4pga/xc7/toolchain"
@@ -44,6 +52,18 @@ digraph G {
       "conda/f4pga/xc7"
       "conda/f4pga/eos-s3"
     }
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange]
+    "scratch"
+  }
+
+  { rank=same
+    "build/base"
+    "build/build"
+    "scratch"
   }
 
   # Workflows
@@ -96,9 +116,36 @@ digraph G {
     "conda/f4pga/eos-s3"         -> "t_F4PGA_eos-s3";
   }
 
+  subgraph cluster_verible {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_verible_build/build" [label="build/build"]
+      "p_verible_build/base" [label="build/base"]
+      "p_verible_scratch" [label="scratch"]
+    }
+
+    d_verible -> {
+      "verible"
+      "pkg/verible"
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      "t_verible" [label="verible"];
+      "t_pkg/verible" [label="verible.pkg"];
+    }
+
+    "verible" -> "t_verible";
+    "pkg/verible" -> "t_pkg/verible";
+  }
+
   # Dockerfile dependencies
 
   "build/base" -> "p_conda_build/base" -> d_conda;
+
+  "build/build" -> "p_verible_build/build" -> d_verible;
+  "build/base" -> "p_verible_build/base" -> d_verible;
+  "scratch" -> "p_verible_scratch" -> d_verible;
 
   "conda" -> "p_F4PGA_conda" -> d_f4pga;
 
@@ -111,6 +158,9 @@ digraph G {
     "conda/f4pga/xc7/toolchain" -> "conda/f4pga/xc7/z010";
     "conda/f4pga/xc7/toolchain" -> "conda/f4pga/xc7/z020";
     "conda/f4pga/xc7/toolchain" -> "conda/f4pga/xc7";
+
+    "p_verible_build/base" -> "verible";
+    "p_verible_scratch" -> "pkg/verible";
   }
 
   { edge [style=dashed, color=grey]
