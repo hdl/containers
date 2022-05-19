@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import List, Optional
+from typing import List
 from pathlib import Path
 from sys import executable, platform, stdout as sys_stdout, stderr as sys_stderr
 from os import environ
@@ -32,13 +32,16 @@ isWin: bool = platform == "win32"
 shell: List[str] = [which("bash")] if platform == "win32" else []
 
 
-def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] = None):
+def _exec(args: List[str], dry: bool = False, collapse: str = None):
     isGroup = isGHA and collapse is not None
 
     if isGroup:
         print(f"\n::group::{collapse}")
         sys_stdout.flush()
         sys_stderr.flush()
+
+    if isGroup:
+        GHASummary([f"- {collapse}"])
 
     print("·", " ".join(args))
     sys_stdout.flush()
@@ -53,11 +56,11 @@ def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] 
         sys_stderr.flush()
 
 
-def _sh(args: List[str], dry: Optional[bool] = False):
+def _sh(args: List[str], dry: bool = False):
     _exec(shell + args, dry=dry)
 
 
-def _py(args: List[str], dry: Optional[bool] = False):
+def _py(args: List[str], dry: bool = False):
     _exec([executable] + args, dry=dry)
 
 
