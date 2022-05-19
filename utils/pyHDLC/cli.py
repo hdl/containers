@@ -149,16 +149,14 @@ class CLI(ArgParseMixin):
                 print("command {0} is unknown.".format(args.Command))
 
     @CommandAttribute(
-        "jobs",
-        help="Generate list of jobs for a named task.",
-        description="Generate list of jobs for a named task."
+        "jobs", help="Generate list of jobs for a named task.", description="Generate list of jobs for a named task."
     )
     @ArgumentAttribute(
         "-f",
         "--format",
         dest="Format",
         type=str,
-        choices=["gha","GHA"],
+        choices=["gha", "GHA"],
         help="Output format (by default, print GitHub Actions' set-output syntax).",
         default="GHA",
     )
@@ -174,11 +172,7 @@ class CLI(ArgParseMixin):
             dry=args.noexec,
         )
 
-    @CommandAttribute(
-        "pull",
-        help="Pull images by name.",
-        description="Pull container image(s) from registry."
-    )
+    @CommandAttribute("pull", help="Pull images by name.", description="Pull container image(s) from registry.")
     @WithRegistryAttributes()
     def HandlePull(self, args):
         PullImage(
@@ -197,7 +191,7 @@ Build one or multiple images (and optionally test them) at once, reusing common 
 
 .. important::
    `DOCKERFILE` defaults to `Image` if `None`.
-"""
+""",
     )
     @WithRegistryAttributes()
     @ArgumentAttribute(
@@ -266,7 +260,7 @@ Test container image(s).
 .. IMPORTANT::
   The supported syntax for each Image is ``name[#<DirName>]``, where the optional ``<DirName>`` is used as the location in
   package images to copy the content from.
-"""
+""",
     )
     @WithRegistryAttributes()
     def HandleTest(self, args):
@@ -279,9 +273,7 @@ Test container image(s).
         )
 
     @CommandAttribute(
-        "push",
-        help="Push images by name.",
-        description="Push container image(s) to registry/registries."
+        "push", help="Push images by name.", description="Push container image(s) to registry/registries."
     )
     @WithRegistryAttributes()
     @ArgumentAttribute(
@@ -290,7 +282,7 @@ Test container image(s).
         nargs="*",
         dest="Mirror",
         type=str,
-        help="List of additional registry/registries to push to. Supported placeholders: `#A` (architecture), `#C` (collection)."
+        help="List of additional registry/registries to push to. Supported placeholders: `#A` (architecture), `#C` (collection).",
     )
     def HandlePush(self, args):
         PushImage(

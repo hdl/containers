@@ -33,6 +33,7 @@ class ConfigDefaultImageItem(YamlDataClassConfig):
     """
     Optionally overridable fields for image build argument defaults.
     """
+
     #: The dockerfile to pass to `docker build`.
     dockerfile: Optional[str] = None
     #: The target stage to pass to `docker build`.
@@ -40,12 +41,14 @@ class ConfigDefaultImageItem(YamlDataClassConfig):
     #: The base IMAGE to pass as a build-arg to `docker build`.
     argimg: Optional[str] = None
 
+
 @dataclass
 class ConfigDefaults(YamlDataClassConfig):
     """
     Default global parameters and images which need explicitly overriding build argument defaults.
     See :ref:`Development:configuration:defaults`.
     """
+
     #: Default registry prefix.
     registry: str = "gcr.io/hdl-containers"
     #: Default collection.
@@ -55,31 +58,37 @@ class ConfigDefaults(YamlDataClassConfig):
     #: Allows override default image build arguments.
     images: Optional[Dict[str, ConfigDefaultImageItem]] = None
 
+
 ConfigJobsSysDict = Dict[str, List[str]]
 ConfigJobsDict = Dict[str, ConfigJobsSysDict]
+
 
 @dataclass
 class ConfigJobsCustomExcludeItem(YamlDataClassConfig):
     """
     An exclusion rule for a list of taks generated through a cross-product.
     """
+
     #: Collection(s) and architecture(s).
     sys: ConfigJobsSysDict
     #: Combination of argument values to exclude.
     params: Dict[str, str]
+
 
 @dataclass
 class ConfigJobsCustomItem(YamlDataClassConfig):
     """
     A custom list of jobs/tasks defined by combining lists of images and system, optionally applying exclusion rules.
     """
+
     #: Either a list or a list of lists of image names.
     #: Argument substitution is supported through ``${arg}``.
     images: List[Any]
     #: Collection(s) and architecture(s).
     sys: ConfigJobsSysDict
     #: Optionally, declare combinations of *sys* and *images* which should be excluded from the produced cross-products.
-    exclude: Optional[List[ConfigJobsCustomExcludeItem]] = None #= {}
+    exclude: Optional[List[ConfigJobsCustomExcludeItem]] = None  # = {}
+
 
 @dataclass
 class ConfigJobs(YamlDataClassConfig):
@@ -87,14 +96,16 @@ class ConfigJobs(YamlDataClassConfig):
     List of jobs/tasks to be used in CI to dynamically spawn jobs.
     See :ref:`Development:configuration:jobs`.
     """
+
     #: Build two images for each collection and architecture, a regular image and a package image.
-    default: ConfigJobsDict #= {}
+    default: ConfigJobsDict  # = {}
     #: Build a package image for each collection and architecture.
-    pkgonly: ConfigJobsDict #= {}
+    pkgonly: ConfigJobsDict  # = {}
     #: Build a regular image for each collection and architecture.
-    runonly: ConfigJobsDict #= {}
+    runonly: ConfigJobsDict  # = {}
     #: Declare the lists of jobs/tasks as cross-products (``exclude`` is supported).
-    custom: Dict[str, ConfigJobsCustomItem] #= {}
+    custom: Dict[str, ConfigJobsCustomItem]  # = {}
+
 
 @dataclass
 class Config(YamlDataClassConfig):
@@ -102,39 +113,31 @@ class Config(YamlDataClassConfig):
     Configuration containing global defaults, image building argument overrides and job/task list declarations.
     See :ref:`Development:configuration`.
     """
+
     #: Version of the configuration file syntax.
     HDLC: Optional[int] = None
     #: Placeholder for anchors used to reduce verbosity. This field is resolved by the loader and ignored by the analyzer.
-    anchors: Optional[Any] = None #= {}
+    anchors: Optional[Any] = None  # = {}
     #: Default global parameters and images which need explicitly overriding build argument defaults.
     defaults: ConfigDefaults = ConfigDefaults()
     #: List of jobs/tasks to be used in CI to dynamically spawn jobs.
-    jobs: Optional[ConfigJobs] = None #= ConfigJobs()
+    jobs: Optional[ConfigJobs] = None  # = ConfigJobs()
 
 
 CONFIG = Config()
-CPATH = Path(__file__).resolve().parent / 'config.yml'
+CPATH = Path(__file__).resolve().parent / "config.yml"
 if CPATH.exists():
     CONFIG.load(CPATH)
     print(f"Read configuration file {CPATH!s} (HDLC v{CONFIG.HDLC})")
 
 
-def _generateJobList(
-    name: str
-) -> List[Dict[str, str]]:
+def _generateJobList(name: str) -> List[Dict[str, str]]:
 
     cjobs = CONFIG.jobs
 
-    def _combine(
-        systems: ConfigJobsDict,
-        images: List[str]
-    ) -> List[Dict[str, str]]:
+    def _combine(systems: ConfigJobsDict, images: List[str]) -> List[Dict[str, str]]:
         return [
-            {
-                "os": collection,
-                "arch": architecture,
-                "imgs": " ".join(imgs)
-            }
+            {"os": collection, "arch": architecture, "imgs": " ".join(imgs)}
             for imgs in images
             for collection, architectures in systems.items()
             for architecture in architectures
@@ -170,13 +173,10 @@ def _generateJobList(
                     return _combine(
                         custom.sys,
                         [
-                            [
-                                Template(pattern).substitute(params)
-                                for pattern in patterns
-                            ]
+                            [Template(pattern).substitute(params) for pattern in patterns]
                             # TODO Handle individual params being a list of strings, instead of a single string.
                             for params in paramSets
-                        ]
+                        ],
                     )
 
                 excludes = [
@@ -206,12 +206,10 @@ def _generateJobList(
                     {
                         "os": item[0],
                         "arch": architecture,
-                        "imgs": " ".join([
-                            Template(pattern).substitute(item[2])
-                            for pattern in patterns
-                        ])
+                        "imgs": " ".join([Template(pattern).substitute(item[2]) for pattern in patterns]),
                     }
-                    for item in systems if len(item[1]) != 0
+                    for item in systems
+                    if len(item[1]) != 0
                     for architecture in item[1]
                 ]
 
@@ -231,20 +229,18 @@ def _generateJobList(
     raise Exception(f"Unknown job {name}")
 
 
-def _jobSummary(
-    jobs: List[Dict[str, str]]
-) -> None:
+def _jobSummary(jobs: List[Dict[str, str]]) -> None:
     content = []
     for job in jobs:
         content.append(f"- {job['arch']} | {job['os']}")
-        imgs = job['imgs']
-        content.extend([f"  - {img}" for img in imgs.split(' ')] if ' ' in imgs else [f"  - {imgs}"])
+        imgs = job["imgs"]
+        content.extend([f"  - {img}" for img in imgs.split(" ")] if " " in imgs else [f"  - {imgs}"])
     return content
 
 
 def GenerateJobList(
     name: str,
-    fmt: str = 'gha',
+    fmt: str = "gha",
     dry: bool = False,
 ) -> None:
     """
@@ -262,12 +258,12 @@ def GenerateJobList(
     jobs = _generateJobList(name)
 
     summary = _jobSummary(jobs)
-    print('\n'.join(summary))
+    print("\n".join(summary))
 
     if dry:
         return
     if fmt.lower() in ["gha"]:
-        print(f'::set-output name=matrix::{jobs!s}')
+        print(f"::set-output name=matrix::{jobs!s}")
         GHASummary(summary)
 
 
@@ -300,9 +296,7 @@ def PullImage(
     """
     for img in [image] if isinstance(image, str) else image:
         imageName = f"{registry}/{architecture}/{collection}/{img.split('#')[0]}"
-        _exec(
-            args=["docker", "pull", imageName], dry=dry, collapse=f"[Pull] Pull {imageName}"
-        )
+        _exec(args=["docker", "pull", imageName], dry=dry, collapse=f"[Pull] Pull {imageName}")
 
 
 def _NormaliseBuildParams(
@@ -313,13 +307,13 @@ def _NormaliseBuildParams(
     pkg: bool = False,
     default: bool = False,
 ) -> Tuple[str, bool, Optional[str], str, Optional[str], Optional[str]]:
-    items = image.split('#')
+    items = image.split("#")
     imageNameWithoutDirSuffix = items[0]
     withDir = None
     if len(items) > 1:
         withDir = items[1]
 
-    if imageNameWithoutDirSuffix.startswith('pkg/'):
+    if imageNameWithoutDirSuffix.startswith("pkg/"):
         isPkg = True
         imageNameWithoutPrefixOrSuffix = imageNameWithoutDirSuffix[4:]
     else:
@@ -329,14 +323,20 @@ def _NormaliseBuildParams(
             imageNameWithoutDirSuffix = f"pkg/{imageNameWithoutDirSuffix}"
 
     if default:
+
         def get_default_params():
             cfgi = CONFIG.defaults.images
             if cfgi is not None:
-                key = imageNameWithoutPrefixOrSuffix if isPkg and (imageNameWithoutDirSuffix not in cfgi) else imageNameWithoutDirSuffix
+                key = (
+                    imageNameWithoutPrefixOrSuffix
+                    if isPkg and (imageNameWithoutDirSuffix not in cfgi)
+                    else imageNameWithoutDirSuffix
+                )
                 if key in cfgi:
                     cfg = cfgi[key]
                     return [cfg.dockerfile, cfg.target, cfg.argimg]
             return [None, None, None]
+
         [dockerfile, target, argimg] = get_default_params()
 
     return (
@@ -403,12 +403,7 @@ def BuildImage(
     for rimg in [image] if isinstance(image, str) else image:
 
         [img, isPkg, withDir, dockerfile, target, argimg] = _NormaliseBuildParams(
-            image=rimg,
-            dockerfile=dockerfile,
-            target=target,
-            argimg=argimg,
-            pkg=pkg,
-            default=default
+            image=rimg, dockerfile=dockerfile, target=target, argimg=argimg, pkg=pkg, default=default
         )
 
         imageName = f"{registry}/{architecture}/{collection}/{img}"
@@ -424,7 +419,7 @@ def BuildImage(
         if argimg is not None:
             cmd += ["--build-arg", f"IMAGE={argimg}"]
 
-        if target not in [None, '']:
+        if target not in [None, ""]:
             cmd += [f"--target={target}"]
 
         def _getCollectionAndDockerfilePaths(collection, dockerfile):
@@ -433,7 +428,7 @@ def BuildImage(
 
             if dockerfilePath.is_dir():
                 contextPath = dockerfilePath
-                dockerfilePath = contextPath / 'Dockerfile'
+                dockerfilePath = contextPath / "Dockerfile"
             else:
                 contextPath = collectionPath
                 dockerfilePath = contextPath / f"{dockerfile}.dockerfile"
@@ -452,13 +447,13 @@ def BuildImage(
 
         _exec(args=cmd, dry=dry, collapse=f"[Build] Build {imageName}")
 
-        with dockerfilePath.open('r') as rfptr:
+        with dockerfilePath.open("r") as rfptr:
             for line in rfptr:
-                if re_search('FROM scratch AS version', line, re_IGNORECASE):
+                if re_search("FROM scratch AS version", line, re_IGNORECASE):
                     _exec(
-                        args=['docker', 'build', '--target', 'version', '-o', 'dist', str(contextPath)],
+                        args=["docker", "build", "--target", "version", "-o", "dist", str(contextPath)],
                         dry=dry,
-                        collapse=f"[Build] Version {imageName}"
+                        collapse=f"[Build] Version {imageName}",
                     )
                     break
 
@@ -503,66 +498,84 @@ def TestImage(
     for img in [image] if isinstance(image, str) else image:
         if img.startswith("pkg/"):
             pimg = img[4:]
-            if '#' in pimg:
+            if "#" in pimg:
                 # If a custom package location is specified, split it.
-                [pimg, pdir] = pimg.split('#')
+                [pimg, pdir] = pimg.split("#")
             else:
                 # Otherwise, use the "escaped" image name as the location of the package.
-                pdir = pimg.replace('/', '-')
+                pdir = pimg.replace("/", "-")
 
-            testScript = pimg.replace('/', '--')
+            testScript = pimg.replace("/", "--")
 
             # The testScript is used as a tag for the temporary image.
             # Nevertheless, any other image name and/or tag might be used.
             testImage = f"{imagePrefix}/testpkg:{testScript}"
 
-            _exec(args=[
-                "docker",
-                "build",
-                "-t",
-                f"{testImage!s}",
-                "--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1",
-                "--build-arg",
-                f"IMAGE={imagePrefix!s}/pkg/{pimg!s}",
-                "--build-arg",
-                f"PACKAGE={pdir!s}",
-                "-f",
-                str(Path(__file__).resolve().parent / "testpkg.dockerfile"),
-                "."
-            ], dry=dry, collapse=f"[Test] Build {testImage!s}")
+            _exec(
+                args=[
+                    "docker",
+                    "build",
+                    "-t",
+                    f"{testImage!s}",
+                    "--progress=plain",
+                    "--build-arg",
+                    "BUILDKIT_INLINE_CACHE=1",
+                    "--build-arg",
+                    f"IMAGE={imagePrefix!s}/pkg/{pimg!s}",
+                    "--build-arg",
+                    f"PACKAGE={pdir!s}",
+                    "-f",
+                    str(Path(__file__).resolve().parent / "testpkg.dockerfile"),
+                    ".",
+                ],
+                dry=dry,
+                collapse=f"[Test] Build {testImage!s}",
+            )
 
-            _exec(args=[
-                "docker",
-                "run",
-                "--rm",
-                "-v",
-                f"{Path.cwd() / 'test'}://wrk",
-                f"{testImage!s}",
-                f"//wrk/{testScript}.pkg.sh"
-            ], dry=dry, collapse=f"[Test] Test {testImage}")
+            _exec(
+                args=[
+                    "docker",
+                    "run",
+                    "--rm",
+                    "-v",
+                    f"{Path.cwd() / 'test'}://wrk",
+                    f"{testImage!s}",
+                    f"//wrk/{testScript}.pkg.sh",
+                ],
+                dry=dry,
+                collapse=f"[Test] Test {testImage}",
+            )
 
             continue
 
         # If not a package image...
 
-        imageName=f"{imagePrefix}/{img}"
+        imageName = f"{imagePrefix}/{img}"
 
-        _exec(args=[
-            'docker',
-            'inspect',
-            """--format={{ println "Architecture:" .Architecture .Variant }}{{ println "Size:" .Size }}VirtualSize: {{ .VirtualSize }}""",
-            f"{imageName}"
-        ], dry=dry, collapse=f"[Test] Inspect {imageName}")
+        _exec(
+            args=[
+                "docker",
+                "inspect",
+                """--format={{ println "Architecture:" .Architecture .Variant }}{{ println "Size:" .Size }}VirtualSize: {{ .VirtualSize }}""",
+                f"{imageName}",
+            ],
+            dry=dry,
+            collapse=f"[Test] Inspect {imageName}",
+        )
 
-        _exec(args=[
-            'docker',
-            'run',
-            '--rm',
-            '-v',
-            f"{Path.cwd() / 'test'}://wrk",
-            f"{imageName!s}",
-            f"//wrk/{img.replace(':', '--').replace('/', '--')!s}.sh"
-        ], dry=dry, collapse=f"[Test] Test {imageName!s}")
+        _exec(
+            args=[
+                "docker",
+                "run",
+                "--rm",
+                "-v",
+                f"{Path.cwd() / 'test'}://wrk",
+                f"{imageName!s}",
+                f"//wrk/{img.replace(':', '--').replace('/', '--')!s}.sh",
+            ],
+            dry=dry,
+            collapse=f"[Test] Test {imageName!s}",
+        )
 
 
 def PushImage(
@@ -599,8 +612,9 @@ def PushImage(
       * ``#A``: architecture
       * ``#C``: collection
     """
+
     def dpush(args: List[str]):
-        _exec(args=["docker", "push"]+args, dry=dry, collapse=f"Push {' '.join(args)}")
+        _exec(args=["docker", "push"] + args, dry=dry, collapse=f"Push {' '.join(args)}")
 
     def dtag(imgName: str, tags: List[str]):
         for tag in tags:
@@ -616,17 +630,17 @@ def PushImage(
         # Note that '#' might be used in the image names as a package location, to be used in TestImage.
         # This usage of '#' is different from the one in the mirror names below.
         # There, it denotes keywords for replacement.
-        img = rimg.split('#')[0]
+        img = rimg.split("#")[0]
         imageName = f"{registry}/{architecture}/{collection}/{img}"
         dpush([imageName])
 
-        print('\nChecking version file...')
+        print("\nChecking version file...")
         versionString = None
-        versionFile = Path('dist') / f'hdlc.{rimg if rimg[0:4] != "pkg/" else rimg[4:]}.version'
+        versionFile = Path("dist") / f'hdlc.{rimg if rimg[0:4] != "pkg/" else rimg[4:]}.version'
         if versionFile.exists():
-            with versionFile.open('r') as rfptr:
+            with versionFile.open("r") as rfptr:
                 versionString = rfptr.read().strip()
-        print(f'{rimg}: {versionString}')
+        print(f"{rimg}: {versionString}")
 
         for mirror in mirrors:
             isDocker = mirror.startswith("docker.io")
@@ -636,5 +650,5 @@ def PushImage(
                 dtag(imageName, [mirrorName])
                 dpush([mirrorName])
                 continue
-            dtag(imageName, [mirrorName, f'{mirrorName}:{versionString}'])
-            dpush(['--all-tags', mirrorName])
+            dtag(imageName, [mirrorName, f"{mirrorName}:{versionString}"])
+            dpush(["--all-tags", mirrorName])

@@ -30,7 +30,7 @@ from pyHDLC import CONFIG, _generateJobList, _NormaliseBuildParams
 ROOT = Path(__file__).resolve().parent.parent
 ARCH = "amd64"
 COLLECTION = "debian/bullseye"
-CDIR = ROOT.parent / COLLECTION.replace('/','-')
+CDIR = ROOT.parent / COLLECTION.replace("/", "-")
 
 
 class Stage:
@@ -131,10 +131,7 @@ class CollectionMap:
                     + (f" <{art[2]}>" if art[2] is not None else "")
                 )
             for stg in dfile.stages:
-                print(
-                    f"    - {stg.value}"
-                    + (f" [{stg.tag}]" if stg.tag is not None else "")
-                )
+                print(f"    - {stg.value}" + (f" [{stg.tag}]" if stg.tag is not None else ""))
                 for dep in stg.depends:
                     print("      +", dep)
 
@@ -206,14 +203,10 @@ class CollectionMap:
 
         dot.render()
 
-    def ParseDockerfile(
-        self,
-        dfilepath: Path,
-        debug: bool = False
-    ):
+    def ParseDockerfile(self, dfilepath: Path, debug: bool = False):
         dfilename = Path(dfilepath.name).stem
         dkey = dfilename
-        if dfilename == 'Dockerfile':
+        if dfilename == "Dockerfile":
             dkey = dfilepath.parent.name
             dfilename = f"{dkey}/{dfilename}"
 
@@ -231,9 +224,7 @@ class CollectionMap:
                 if not _val.startswith("REGISTRY="):
                     if _val.startswith("IMAGE="):
                         if dfile.argimg is not None:
-                            raise Exception(
-                                f"ARG IMAGE was already defined in <{dfilename}> [{_val}]!"
-                            )
+                            raise Exception(f"ARG IMAGE was already defined in <{dfilename}> [{_val}]!")
                         # Extract image name from IMAGE="name"
                         dfile.argimg = _val[7:-1]
                     elif _val.startswith("ARCHITECTURE="):
@@ -260,7 +251,7 @@ class CollectionMap:
 
                 continue
 
-            if item.cmd.upper() == "COPY" and len(item.flags)>0:
+            if item.cmd.upper() == "COPY" and len(item.flags) > 0:
                 if "--from=" in item.flags[0].lower():
                     stg.addDep(dfile.markOrigin(item.flags[0][7:]))
 
@@ -307,7 +298,7 @@ def GenerateMap(debug: bool = False):
             raise Exception(f"Dockerfile <{dockerfile}> not found in data!")
         if debug:
             argimgstr = f" with ARG IMAGE={argimg}" if argimg is not None else ""
-            targetstr = f" (target <{target}>)" if target not in [None, ''] else ""
+            targetstr = f" (target <{target}>)" if target not in [None, ""] else ""
             print(f"  · Add artifact <{image}> built from dockerfile <{dockerfile}>{argimgstr}{targetstr}")
 
         cmap.data[dockerfile].addArtifact((f"!R|{image}", target, argimg))
@@ -315,10 +306,7 @@ def GenerateMap(debug: bool = False):
     return cmap
 
 
-def GetImagesFromJobs(
-    collection: str = COLLECTION,
-    architecture: str = ARCH
-) -> List[str]:
+def GetImagesFromJobs(collection: str = COLLECTION, architecture: str = ARCH) -> List[str]:
     """
     Return a list of all the image names in all the jobs defined in the configuration.
     First, extract the keys/names of all jobs types.
@@ -328,16 +316,22 @@ def GetImagesFromJobs(
     """
     cjobs = CONFIG.jobs
 
-    images = [image.split('#')[0] for sublist in [
-        job['imgs'].split(' ')
-        for name in [item for items in [cjobs.default, cjobs.pkgonly, cjobs.runonly, cjobs.custom] for item in items]
-        for job in _generateJobList(name)
-        if (job['os'] == collection) and (job['arch'] == architecture)
-    ] for image in sublist]
+    images = [
+        image.split("#")[0]
+        for sublist in [
+            job["imgs"].split(" ")
+            for name in [
+                item for items in [cjobs.default, cjobs.pkgonly, cjobs.runonly, cjobs.custom] for item in items
+            ]
+            for job in _generateJobList(name)
+            if (job["os"] == collection) and (job["arch"] == architecture)
+        ]
+        for image in sublist
+    ]
 
     dups = [item for num, item in enumerate(images) if item in images[:num]]
     if dups != []:
-        raise Exception(f'Found duplicates in the list of all images extracted from jobs: {dups}')
+        raise Exception(f"Found duplicates in the list of all images extracted from jobs: {dups}")
 
     return images
 
