@@ -25,7 +25,7 @@ from re import search as re_search, IGNORECASE as re_IGNORECASE
 from dataclasses import dataclass
 from yamldataclassconfig.config import YamlDataClassConfig
 
-from pyHDLC.run import _exec
+from pyHDLC.run import _exec, GHASummary
 
 
 @dataclass
@@ -231,17 +231,15 @@ def _generateJobList(
     raise Exception(f"Unknown job {name}")
 
 
-def _printJobList(
+def _jobSummary(
     jobs: List[Dict[str, str]]
 ) -> None:
+    content = []
     for job in jobs:
-        print(f"- {job['arch']} | {job['os']}")
+        content.append(f"- {job['arch']} | {job['os']}")
         imgs = job['imgs']
-        if ' ' in imgs:
-            for img in imgs.split(' '):
-                print(f"  - {img}")
-        else:
-            print(f"  - {imgs}")
+        content.extend([f"  - {img}" for img in imgs.split(' ')] if ' ' in imgs else [f"  - {imgs}"])
+    return content
 
 
 def GenerateJobList(
@@ -262,11 +260,15 @@ def GenerateJobList(
       Do not set the output, just print the list of jobs.
     """
     jobs = _generateJobList(name)
-    _printJobList(jobs)
+
+    summary = _jobSummary(jobs)
+    print('\n'.join(summary))
+
     if dry:
         return
     if fmt.lower() in ["gha"]:
         print(f'::set-output name=matrix::{jobs!s}')
+        GHASummary(summary)
 
 
 def PullImage(

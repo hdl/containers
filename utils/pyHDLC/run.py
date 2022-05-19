@@ -59,3 +59,12 @@ def _sh(args: List[str], dry: Optional[bool] = False):
 
 def _py(args: List[str], dry: Optional[bool] = False):
     _exec([executable] + args, dry=dry)
+
+
+def GHASummary(content: List[str]):
+    if not isGHA:
+        print('· Printing GHA summary skipped')
+        return
+    with Path(environ['GITHUB_STEP_SUMMARY']).open('a') as wfptr:
+        for line in content:
+            wfptr.write(f'{line}\n')
