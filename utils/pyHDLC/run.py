@@ -18,8 +18,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from typing import List, Optional
-import sys
-from sys import executable, platform
+from pathlib import Path
+from sys import executable, platform, stdout as sys_stdout, stderr as sys_stderr
 from os import environ
 from subprocess import check_call, STDOUT
 from shutil import which
@@ -37,17 +37,20 @@ def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] 
 
     if isGroup:
         print(f"\n::group::{collapse}")
-        sys.stdout.flush()
+        sys_stdout.flush()
+        sys_stderr.flush()
 
     print("·", " ".join(args))
-    sys.stdout.flush()
+    sys_stdout.flush()
+    sys_stderr.flush()
 
     if not dry:
         check_call(args, stderr=STDOUT)
 
     if isGroup:
         print("\n::endgroup::")
-        sys.stdout.flush()
+        sys_stdout.flush()
+        sys_stderr.flush()
 
 
 def _sh(args: List[str], dry: Optional[bool] = False):
