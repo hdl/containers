@@ -100,3 +100,5 @@ jobs:
         architecture: ${{ matrix.arch }}
         collection: ${{ matrix.os }}
         images: ${{ matrix.imgs }}
+
+    - run: echo '### Bye! :rocket:' >> $GITHUB_STEP_SUMMARY
