@@ -48,6 +48,9 @@ digraph G {
       "pkg/magic"
       "pkg/netgen"
     }
+    { node [color=brown, fontcolor=brown]
+      "magic/irsim"
+    }
   }
 
   # External images
@@ -116,21 +119,25 @@ digraph G {
       "p_magic_build/build" [label="build/build"]
       "p_magic_build/base" [label="build/base"]
       "p_magic_scratch" [label="scratch"]
+      "p_magic_pkg/irsim" [label="pkg/irsim"]
     }
 
     d_magic -> {
       "magic"
       "pkg/magic"
+      "magic/irsim"
     } [style=dotted];
 
-    {
+    { rank=same
       node [shape=folder, color=red, fontcolor=red]
       "t_magic" [label="magic"];
       "t_pkg/magic" [label="magic.pkg"];
+      "t_magic/irsim" [label="magic--irsim"];
     }
 
     "magic" -> "t_magic";
     "pkg/magic" -> "t_pkg/magic";
+    "magic/irsim" -> "t_magic/irsim";
   }
 
   subgraph cluster_netgen {
@@ -166,6 +173,7 @@ digraph G {
   "build/base" -> "p_klayout_build/base" -> d_klayout;
   "scratch" -> "p_klayout_scratch" -> d_klayout;
 
+  "pkg/irsim" -> "p_magic_pkg/irsim" -> d_magic;
   "build/build" -> "p_magic_build/build" -> d_magic;
   "build/base" -> "p_magic_build/base" -> d_magic;
   "scratch" -> "p_magic_scratch" -> d_magic;
@@ -183,8 +191,13 @@ digraph G {
     "p_klayout_scratch" -> "pkg/klayout";
     "p_magic_build/base" -> "magic";
     "p_magic_scratch" -> "pkg/magic";
+    "magic" -> "magic/irsim";
     "p_netgen_build/base" -> "netgen";
     "p_netgen_scratch" -> "pkg/netgen";
+  }
+
+  { edge [style=dashed, color=grey]
+    "p_magic_pkg/irsim" -> "magic/irsim";
   }
 
 }

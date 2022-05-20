@@ -52,7 +52,7 @@ COPY --from=build /opt/magic /magic
 
 #---
 
-FROM $REGISTRY/build/base
+FROM $REGISTRY/build/base AS magic
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -67,3 +67,12 @@ RUN apt-get update -qq \
 
 COPY --from=build /opt/magic /
 CMD ["magic"]
+
+#---
+
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg/irsim AS pkg-irsim
+
+FROM $REGISTRY/magic AS irsim
+
+COPY --from=pkg-irsim /irsim /

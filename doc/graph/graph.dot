@@ -133,6 +133,7 @@ digraph G {
       "conda/f4pga/xc7/z020"
       "conda/f4pga/xc7"
       "conda/f4pga/eos-s3"
+      "magic/irsim"
     }
   }
 
@@ -301,6 +302,7 @@ digraph G {
       "irsim"
       "klayout"
       "magic"
+      "magic/irsim"
       "netgen"
       "pkg/irsim"
       "pkg/klayout"

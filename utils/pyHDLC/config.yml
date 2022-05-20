@@ -117,6 +117,9 @@ defaults:
     conda/f4pga/xc7/z020:      { <<: *F4PGADockerfile, target: z020          }
     conda/f4pga/xc7:           { <<: *F4PGADockerfile, target: xc7           }
     conda/f4pga/eos-s3:        { <<: *F4PGADockerfile, target: eos-s3        }
+    # ASIC:
+    magic:       { dockerfile: magic, target: magic }
+    magic/irsim: { dockerfile: magic, target: irsim }
 
 
 jobs:
@@ -129,7 +132,6 @@ jobs:
     irsim:          *SysDebianDefaultArchSet
     iverilog:       *SysDebianAmd64
     klayout:        *SysDebianAmd64
-    magic:          *SysDebianDefaultArchSet
     netgen:         *SysDebianDefaultArchSet
     openfpgaloader: *SysDebianDefaultArchSet
     prjoxide:       *SysDebianAmd64
@@ -202,6 +204,13 @@ jobs:
         - impl/pnr
         - impl
       sys: *SysDebianAmd64
+    magic:
+      images:
+        - pkg/magic
+        - magic
+        - magic/irsim
+      sys:
+        <<: *SysDebianDefaultArchSet
     nextpnr-build:
       images:
         - build/nextpnr/base

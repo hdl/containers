@@ -146,6 +146,8 @@ irsim:
     - 'irsim'
   use:
     - 'irsim'
+  otherin:
+    - 'magic/irsim'
 
 #---
 
@@ -179,6 +181,7 @@ magic:
     - 'magic'
   use:
     - 'magic'
+    - 'magic/irsim'
 
 #---
 
