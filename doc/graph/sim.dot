@@ -32,6 +32,7 @@ digraph G {
     d_octave    [label="octave"];
     d_scipy     [label="scipy"];
     d_osvb      [label="osvb"];
+    d_xschem    [label="xschem"];
     d_xyce      [label="xyce"];
   }
 
@@ -45,6 +46,7 @@ digraph G {
       "verilator"
       "ghdl/llvm"
       "gtkwave"
+      "xschem"
       "xyce"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
@@ -52,6 +54,7 @@ digraph G {
       "pkg/iverilog"
       "pkg/verilator"
       "pkg/osvb"
+      "pkg/xschem"
       "pkg/xyce"
     }
     { node [color=brown, fontcolor=brown]
@@ -196,6 +199,29 @@ digraph G {
     "sim/octave" -> "t_sim/octave";
   }
 
+  subgraph cluster_xschem {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_xschem_build/build" [label="build/build"]
+      "p_xschem_build/base" [label="build/base"]
+      "p_xschem_scratch" [label="scratch"]
+    }
+
+    d_xschem -> {
+      "xschem"
+      "pkg/xschem"
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      "t_xschem" [label="xschem"];
+      "t_pkg/xschem" [label="xschem.pkg"];
+    }
+
+    "xschem" -> "t_xschem";
+    "pkg/xschem" -> "t_pkg/xschem";
+  }
+
   subgraph cluster_xyce {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
@@ -233,6 +259,10 @@ digraph G {
   "build/base" -> "p_verilator_build/base" -> d_verilator;
   "scratch" -> "p_verilator_scratch" -> d_verilator;
 
+  "build/build" -> "p_xschem_build/build" -> d_xschem;
+  "build/base" -> "p_xschem_build/base" -> d_xschem;
+  "scratch" -> "p_xschem_scratch" -> d_xschem;
+
   "build/build" -> "p_xyce_build/build" -> d_xyce;
   "build/base" -> "p_xyce_build/base" -> d_xyce;
   "scratch" -> "p_xyce_scratch" -> d_xyce;
@@ -252,6 +282,9 @@ digraph G {
 
     "p_verilator_build/base" -> "verilator";
     "p_verilator_scratch" -> "pkg/verilator";
+
+    "p_xschem_build/base" -> "xschem";
+    "p_xschem_scratch" -> "pkg/xschem";
 
     "p_xyce_build/base" -> "xyce";
     "p_xyce_scratch" -> "pkg/xyce";

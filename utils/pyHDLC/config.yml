@@ -141,6 +141,7 @@ jobs:
     prjtrellis:     *SysDebianAmd64
     verilator:      *SysDebianDefaultArchSet
     vtr:            *SysDebianAmd64
+    xschem:         *SysDebianAmd64
     xyce:           *SysDebianAmd64
     yosys:          *SysDebianAmd64
 

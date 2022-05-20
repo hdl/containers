@@ -167,6 +167,7 @@ CIWorkflows = [
         "gtkwave",
         "iverilog",
         "verilator",
+        "xschem",
         "xyce",
     ],
     [

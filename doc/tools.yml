@@ -318,6 +318,15 @@ yices2:
 
 #---
 
+xschem:
+  src: true
+  pkg:
+    - 'xschem'
+  use:
+    - 'xschem'
+
+#---
+
 xyce:
   src: true
   pkg:

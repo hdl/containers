@@ -62,6 +62,8 @@ digraph G {
       "prjtrellis"
       "verilator"
       "vtr"
+      "xschem"
+      "xyce"
       "yosys"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
@@ -93,6 +95,8 @@ digraph G {
       "pkg/yosys"
       "pkg/verilator"
       "pkg/vtr"
+      "pkg/xschem"
+      "pkg/xyce"
       "pkg/z3"
     }
     { node [color=brown, fontcolor=brown]
@@ -214,6 +218,8 @@ digraph G {
       "gtkwave"
       "iverilog"
       "verilator"
+      "xschem"
+      "xyce"
       "sim"
       "sim/osvb"
       "sim/scipy-slim"
@@ -224,6 +230,8 @@ digraph G {
       "pkg/iverilog"
       "pkg/verilator"
       "pkg/gtkwave"
+      "pkg/xschem"
+      "pkg/xyce"
     };
   }
 
