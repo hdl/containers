@@ -130,4 +130,3 @@ To Do
 * :awesome:`netlistsvg`
 * :gh:`ecpdap <adamgreig/ecpdap>`
 * :gh:`LSOracle <lnis-uofu/LSOracle>`
-* :awesome:`OpenROAD <openroad>` (:ghsharp:`46`)

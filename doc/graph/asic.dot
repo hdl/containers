@@ -29,11 +29,13 @@ digraph G {
     d_klayout [label="klayout"];
     d_magic [label="magic"];
     d_netgen [label="netgen"];
+    d_openroad [label="openroad"];
   }
 
   # Images
 
   { node [shape=cylinder]
+    "build/dev"
     "build/build"
     "build/base"
     { node [color=limegreen, fontcolor=limegreen]
@@ -41,12 +43,14 @@ digraph G {
       "klayout"
       "magic"
       "netgen"
+      "openroad"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
       "pkg/irsim"
       "pkg/klayout"
       "pkg/magic"
       "pkg/netgen"
+      "pkg/openroad"
     }
     { node [color=brown, fontcolor=brown]
       "magic/irsim"
@@ -60,6 +64,7 @@ digraph G {
   }
 
   { rank=same
+    "build/dev"
     "build/build"
     "build/base"
     "scratch"
@@ -163,6 +168,29 @@ digraph G {
     "pkg/netgen" -> "t_pkg/netgen";
   }
 
+  subgraph cluster_openroad {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_openroad_build/dev" [label="build/dev"]
+      "p_openroad_build/base" [label="build/base"]
+      "p_openroad_scratch" [label="scratch"]
+    }
+
+    d_openroad -> {
+      "openroad"
+      "pkg/openroad"
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      "t_openroad" [label="openroad"];
+      "t_pkg/openroad" [label="openroad.pkg"];
+    }
+
+    "openroad" -> "t_openroad";
+    "pkg/openroad" -> "t_pkg/openroad";
+  }
+
   # Dockerfile dependencies
 
   "build/build" -> "p_irsim_build/build" -> d_irsim;
@@ -182,6 +210,10 @@ digraph G {
   "build/base" -> "p_netgen_build/base" -> d_netgen;
   "scratch" -> "p_netgen_scratch" -> d_netgen;
 
+  "build/dev" -> "p_openroad_build/dev" -> d_openroad;
+  "build/base" -> "p_openroad_build/base" -> d_openroad;
+  "scratch" -> "p_openroad_scratch" -> d_openroad;
+
   # Image dependencies
 
   { edge [style=dashed]
@@ -194,6 +226,8 @@ digraph G {
     "magic" -> "magic/irsim";
     "p_netgen_build/base" -> "netgen";
     "p_netgen_scratch" -> "pkg/netgen";
+    "p_openroad_build/base" -> "openroad";
+    "p_openroad_scratch" -> "pkg/openroad";
   }
 
   { edge [style=dashed, color=grey]

@@ -134,6 +134,7 @@ jobs:
     klayout:        *SysDebianAmd64
     netgen:         *SysDebianDefaultArchSet
     openfpgaloader: *SysDebianDefaultArchSet
+    openroad:       *SysDebianAmd64
     prjoxide:       *SysDebianAmd64
     prjtrellis:     *SysDebianAmd64
     verilator:      *SysDebianDefaultArchSet

@@ -197,6 +197,7 @@ CIWorkflows = [
         "klayout",
         "magic",
         "netgen",
+        "openroad",
     ],
     [
         "formal",

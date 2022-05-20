@@ -58,6 +58,7 @@ digraph G {
       "nextpnr/ecp5"
       "nextpnr"
       "openfpgaloader"
+      "openroad"
       "prjoxide"
       "prjtrellis"
       "verilator"
@@ -86,6 +87,7 @@ digraph G {
       "pkg/nextpnr/ecp5"
       "pkg/nextpnr/generic"
       "pkg/openfpgaloader"
+      "pkg/openroad"
       "pkg/osvb"
       "pkg/pono"
       "pkg/prjoxide"
@@ -182,6 +184,7 @@ digraph G {
 
   {
     "scratch"
+    "build/dev"
     "build/build"
     "build/base"
   } -> m_asic;
@@ -304,10 +307,12 @@ digraph G {
       "magic"
       "magic/irsim"
       "netgen"
+      "openroad"
       "pkg/irsim"
       "pkg/klayout"
       "pkg/magic"
       "pkg/netgen"
+      "pkg/openroad"
     };
   }
 
