@@ -20,30 +20,14 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 FROM $REGISTRY/build/build AS build
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    csh \
-    libcairo2-dev \
-    libglu1-mesa-dev \
-    libncurses-dev \
-    libx11-dev \
-    m4 \
-    python3-dev \
-    tcl \
-    tcl-dev \
-    tcl-expect \
-    tcsh \
-    tk-dev \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/RTimothyEdwards/magic /tmp/magic \
- && mkdir -p /opt/magic/ \
- && cd /tmp/magic \
- && ./configure \
- && make -j$(nproc) \
- && make install \
- && make DESTDIR=/opt/magic install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
@@ -54,14 +38,9 @@ COPY --from=build /opt/magic /magic
 
 FROM $REGISTRY/build/base AS magic
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    libcairo2 \
-    libglu1-mesa \
-    libncurses6 \
-    libx11-6 \
-    tcl \
-    tk \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
