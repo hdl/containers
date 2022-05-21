@@ -76,14 +76,14 @@ digraph G {
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red];
-      "t_F4PGA_xc7_toolchain" [label="conda/f4pga/xc7/toolchain"];
-      "t_F4PGA_xc7_a50t"      [label="conda/f4pga/xc7/a50t"];
-      "t_F4PGA_xc7_a100t"     [label="conda/f4pga/xc7/a100t"];
-      "t_F4PGA_xc7_a200t"     [label="conda/f4pga/xc7/a200t"];
-      "t_F4PGA_xc7_z010"      [label="conda/f4pga/xc7/z010"];
-      "t_F4PGA_xc7_z020"      [label="conda/f4pga/xc7/z020"];
-      "t_F4PGA_xc7"           [label="conda/f4pga/xc7"];
-      "t_F4PGA_eos-s3"        [label="conda/f4pga/eos-s3"];
+      "t_F4PGA_xc7_toolchain" [label="conda--f4pga--xc7--toolchain"];
+      "t_F4PGA_xc7_a50t"      [label="conda--f4pga--xc7--a50t"];
+      "t_F4PGA_xc7_a100t"     [label="conda--f4pga--xc7--a100t"];
+      "t_F4PGA_xc7_a200t"     [label="conda--f4pga--xc7--a200t"];
+      "t_F4PGA_xc7_z010"      [label="conda--f4pga--xc7--z010"];
+      "t_F4PGA_xc7_z020"      [label="conda--f4pga--xc7--z020"];
+      "t_F4PGA_xc7"           [label="conda--f4pga--xc7"];
+      "t_F4PGA_eos-s3"        [label="conda--f4pga--eos-s3"];
     }
 
     "conda/f4pga/xc7/toolchain"  -> "t_F4PGA_xc7_toolchain";
