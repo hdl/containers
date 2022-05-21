@@ -37,7 +37,7 @@ RUN apt-get update -qq \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-RUN git clone git://opencircuitdesign.com/magic /tmp/magic \
+RUN git clone https://github.com/RTimothyEdwards/magic /tmp/magic \
  && mkdir -p /opt/magic/ \
  && cd /tmp/magic \
  && ./configure \
