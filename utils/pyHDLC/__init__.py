@@ -327,14 +327,14 @@ def _NormaliseBuildParams(
         def get_default_params():
             cfgi = CONFIG.defaults.images
             if cfgi is not None:
-                key = (
-                    imageNameWithoutPrefixOrSuffix
-                    if isPkg and (imageNameWithoutDirSuffix not in cfgi)
-                    else imageNameWithoutDirSuffix
-                )
-                if key in cfgi:
-                    cfg = cfgi[key]
-                    return [cfg.dockerfile, cfg.target, cfg.argimg]
+                isPkgDefault = isPkg and (imageNameWithoutDirSuffix not in cfgi)
+                cfg = cfgi.get(imageNameWithoutPrefixOrSuffix if isPkgDefault else imageNameWithoutDirSuffix)
+                if cfg is not None:
+                    return [
+                        cfg.dockerfile,
+                        'pkg' if isPkgDefault else cfg.target,
+                        cfg.argimg
+                    ]
             return [None, None, None]
 
         [dockerfile, target, argimg] = get_default_params()
