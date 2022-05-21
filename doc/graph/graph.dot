@@ -45,7 +45,6 @@ digraph G {
       "arachne-pnr"
       "ghdl"
       "ghdl/llvm"
-      "ghdl/yosys"
       "gtkwave"
       "icestorm"
       "iverilog"
@@ -100,6 +99,7 @@ digraph G {
       "pkg/z3"
     }
     { node [color=brown, fontcolor=brown]
+      "ghdl/yosys"
       "formal/min"
       "formal"
       "formal/all"
