@@ -54,11 +54,14 @@ defaults:
     build/base:  { <<: *BaseDockerfile, target: base }
     build/build: { <<: *BaseDockerfile, target: build }
     build/dev:   { <<: *BaseDockerfile }
-    # Boolector
-    pkg/boolector: *EmptyPkgTarget
-    # CVC
-    pkg/cvc: *EmptyPkgTarget
     # Formal
+    pkg/boolector:  *EmptyPkgTarget
+    pkg/cvc:        *EmptyPkgTarget
+    pkg/pono:       *EmptyPkgTarget
+    pkg/superprove: *EmptyPkgTarget
+    pkg/symbiyosys: *EmptyPkgTarget
+    pkg/yices2:     *EmptyPkgTarget
+    pkg/z3:         *EmptyPkgTarget
     formal/min: { <<: *FormalDockerfile, target: min }
     formal:     { <<: *FormalDockerfile, target: latest }
     formal/all: { <<: *FormalDockerfile }
@@ -95,7 +98,6 @@ defaults:
     # Sim
     sim/osvb:
       <<: *OSVBDockerfile
-    pkg/pono: *EmptyPkgTarget
     sim/scipy-slim:
       dockerfile: scipy
     sim/scipy:
@@ -106,8 +108,6 @@ defaults:
     sim/octave:
       <<: *OSVBDockerfile
       argimg: sim/octave-slim
-    # SuperProve
-    pkg/superprove: *EmptyPkgTarget
     # F4PGA:
     conda/f4pga/xc7/toolchain: { <<: *F4PGADockerfile, target: xc7-toolchain }
     conda/f4pga/xc7/a50t:      { <<: *F4PGADockerfile, target: a50t          }
@@ -117,12 +117,6 @@ defaults:
     conda/f4pga/xc7/z020:      { <<: *F4PGADockerfile, target: z020          }
     conda/f4pga/xc7:           { <<: *F4PGADockerfile, target: xc7           }
     conda/f4pga/eos-s3:        { <<: *F4PGADockerfile, target: eos-s3        }
-    # SymbiYosys
-    pkg/symbiyosys: *EmptyPkgTarget
-    # Yices2
-    pkg/yices2: *EmptyPkgTarget
-    # Z3
-    pkg/z3: *EmptyPkgTarget
 
 
 jobs:
@@ -130,9 +124,9 @@ jobs:
   default:
     apicula:        *SysDebianAmd64
     arachne-pnr:    *SysDebianDefaultArchSet
+    gtkwave:        *SysDebianDefaultArchSet
     icestorm:       *SysDebianDefaultArchSet
     iverilog:       *SysDebianAmd64
-    gtkwave:        *SysDebianDefaultArchSet
     klayout:        *SysDebianAmd64
     magic:          *SysDebianDefaultArchSet
     netgen:         *SysDebianDefaultArchSet
