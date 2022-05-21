@@ -1,4 +1,8 @@
 <p align="center">
+  <a title="hdl.github.io/containers" href="https://hdl.github.io/containers"><img src="./doc/_static/banner_path.svg"/></a>
+</p>
+
+<p align="center">
   <a title="hdl.github.io/containers" href="https://hdl.github.io/containers"><img src="https://img.shields.io/website?longCache=true&style=flat-square&label=hdl.github.io%2Fcontainers&logo=GitHub&logoColor=fff&up_color=blueviolet&up_message=Read%20now%20%E2%9E%9A&url=https%3A%2F%2Fhdl.github.io%2Fcontainers%2Findex.html"></a><!--
   -->
   <a title="Apache-2.0" href="https://hdl.github.io/containers/License.html"><img src="https://img.shields.io/github/license/hdl/containers?longCache=true&style=flat-square&logo=Apache&label=Code"></a><!--
