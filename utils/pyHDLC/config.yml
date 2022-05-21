@@ -126,6 +126,7 @@ jobs:
     arachne-pnr:    *SysDebianDefaultArchSet
     gtkwave:        *SysDebianDefaultArchSet
     icestorm:       *SysDebianDefaultArchSet
+    irsim:          *SysDebianDefaultArchSet
     iverilog:       *SysDebianAmd64
     klayout:        *SysDebianAmd64
     magic:          *SysDebianDefaultArchSet

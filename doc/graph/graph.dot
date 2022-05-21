@@ -47,6 +47,7 @@ digraph G {
       "ghdl/llvm"
       "gtkwave"
       "icestorm"
+      "irsim"
       "iverilog"
       "klayout"
       "magic"
@@ -75,6 +76,7 @@ digraph G {
       "pkg/ghdl-yosys-plugin"
       "pkg/gtkwave"
       "pkg/icestorm"
+      "pkg/irsim"
       "pkg/iverilog"
       "pkg/klayout"
       "pkg/magic"
@@ -296,9 +298,11 @@ digraph G {
   subgraph cluster_asic {
     label = "ASIC";
     m_asic -> {
+      "irsim"
       "klayout"
       "magic"
       "netgen"
+      "pkg/irsim"
       "pkg/klayout"
       "pkg/magic"
       "pkg/netgen"

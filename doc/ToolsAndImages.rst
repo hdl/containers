@@ -128,7 +128,6 @@ To Do
 * :awesome:`ecpprog`
 * :awesome:`fujprog`
 * :awesome:`netlistsvg`
-* `IRSIM <http://opencircuitdesign.com/irsim/>`__ (:ghsharp:`30`)
 * :gh:`ecpdap <adamgreig/ecpdap>`
 * :gh:`LSOracle <lnis-uofu/LSOracle>`
 * :awesome:`OpenROAD <openroad>` (:ghsharp:`46`)

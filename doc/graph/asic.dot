@@ -25,6 +25,7 @@ digraph G {
   # Dockerfiles
 
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_irsim [label="irsim"];
     d_klayout [label="klayout"];
     d_magic [label="magic"];
     d_netgen [label="netgen"];
@@ -36,11 +37,13 @@ digraph G {
     "build/build"
     "build/base"
     { node [color=limegreen, fontcolor=limegreen]
+      "irsim"
       "klayout"
       "magic"
       "netgen"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
+      "pkg/irsim"
       "pkg/klayout"
       "pkg/magic"
       "pkg/netgen"
@@ -60,6 +63,29 @@ digraph G {
   }
 
   # Workflows
+
+  subgraph cluster_irsim {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      "p_irsim_build/build" [label="build/build"]
+      "p_irsim_build/base" [label="build/base"]
+      "p_irsim_scratch" [label="scratch"]
+    }
+
+    d_irsim -> {
+      "irsim"
+      "pkg/irsim"
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      "t_irsim" [label="irsim"];
+      "t_pkg/irsim" [label="irsim.pkg"];
+    }
+
+    "irsim" -> "t_irsim";
+    "pkg/irsim" -> "t_pkg/irsim";
+  }
 
   subgraph cluster_klayout {
     { rank=same
@@ -132,6 +158,10 @@ digraph G {
 
   # Dockerfile dependencies
 
+  "build/build" -> "p_irsim_build/build" -> d_irsim;
+  "build/base" -> "p_irsim_build/base" -> d_irsim;
+  "scratch" -> "p_irsim_scratch" -> d_irsim;
+
   "build/build" -> "p_klayout_build/build" -> d_klayout;
   "build/base" -> "p_klayout_build/base" -> d_klayout;
   "scratch" -> "p_klayout_scratch" -> d_klayout;
@@ -147,6 +177,8 @@ digraph G {
   # Image dependencies
 
   { edge [style=dashed]
+    "p_irsim_build/base" -> "irsim";
+    "p_irsim_scratch" -> "pkg/irsim";
     "p_klayout_build/base" -> "klayout";
     "p_klayout_scratch" -> "pkg/klayout";
     "p_magic_build/base" -> "magic";

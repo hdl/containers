@@ -193,6 +193,7 @@ CIWorkflows = [
         "z3",
     ],
     [
+        "irsim",
         "klayout",
         "magic",
         "netgen",
