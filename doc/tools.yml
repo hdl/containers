@@ -235,6 +235,9 @@ prjoxide:
     - 'prjoxide'
   use:
     - 'prjoxide'
+  in:
+    - 'impl/prjoxide'
+    - 'impl'
   otherin:
     - 'nextpnr/prjoxide'
 
