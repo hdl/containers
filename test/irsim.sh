@@ -23,6 +23,7 @@ cd $(dirname "$0")
 ./_env.sh
 
 which irsim
-#irsim --help
+irsim --help
+irsim --version
 
 ./_todo.sh
