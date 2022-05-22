@@ -31,6 +31,11 @@ RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
+FROM scratch AS version
+COPY --from=build /tmp/hdlc.magic.version /
+
+#---
+
 FROM scratch AS pkg
 COPY --from=build /opt/magic /magic
 

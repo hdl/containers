@@ -40,6 +40,7 @@ build() {
   git clone https://github.com/RTimothyEdwards/magic /tmp/magic
   mkdir -p /opt/magic/
   cd /tmp/magic
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//g' > /tmp/hdlc.magic.version
   ./configure
   make -j$(nproc)
   make install
