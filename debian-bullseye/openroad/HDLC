@@ -2,9 +2,8 @@
 
 # Authors:
 #   Unai Martinez-Corral
-#   Torsten Meissner
 #
-# Copyright 2021 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2022 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,19 +34,32 @@ makedepends=(
   tcllib
 )
 
-build() {
+makedepends_gui=(
+  qtbase5-dev
+)
+
+setup() {
   git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git /tmp/openroad
   cd /tmp/openroad
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//g' > /tmp/hdlc.openroad.version
   mkdir build
-  cd build
+}
+
+build() {
+  cd /tmp/openroad/build
   cmake ..
   make DESTDIR=/opt/openroad install
 }
+
+# -DBUILD_GUI=ON
 
 depends=(
   libomp5-11
   libpython3.9
   libspdlog1
   tcl
+)
+
+depends_gui=(
+  libqt5widgets5
 )

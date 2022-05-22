@@ -59,6 +59,7 @@ digraph G {
       "nextpnr"
       "openfpgaloader"
       "openroad"
+      "openroad/gui"
       "prjoxide"
       "prjtrellis"
       "verilator"
@@ -88,6 +89,7 @@ digraph G {
       "pkg/nextpnr/generic"
       "pkg/openfpgaloader"
       "pkg/openroad"
+      "pkg/openroad/gui"
       "pkg/osvb"
       "pkg/pono"
       "pkg/prjoxide"
@@ -308,11 +310,13 @@ digraph G {
       "magic/irsim"
       "netgen"
       "openroad"
+      "openroad/gui"
       "pkg/irsim"
       "pkg/klayout"
       "pkg/magic"
       "pkg/netgen"
       "pkg/openroad"
+      "pkg/openroad/gui"
     };
   }
 

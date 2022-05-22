@@ -120,6 +120,9 @@ defaults:
     # ASIC:
     magic:       { dockerfile: magic, target: magic }
     magic/irsim: { dockerfile: magic, target: irsim }
+    openroad:         { dockerfile: openroad, target: openroad }
+    pkg/openroad/gui: { dockerfile: openroad, target: pkg-gui }
+    openroad/gui:     { dockerfile: openroad, target: gui }
 
 
 jobs:
@@ -134,7 +137,6 @@ jobs:
     klayout:        *SysDebianAmd64
     netgen:         *SysDebianDefaultArchSet
     openfpgaloader: *SysDebianDefaultArchSet
-    openroad:       *SysDebianAmd64
     prjoxide:       *SysDebianAmd64
     prjtrellis:     *SysDebianAmd64
     verilator:      *SysDebianDefaultArchSet
@@ -234,6 +236,13 @@ jobs:
         - pkg/nextpnr/generic
         - nextpnr/generic
         - nextpnr
+      sys: *SysDebianAmd64
+    openroad:
+      images:
+        - pkg/openroad
+        - openroad
+        - pkg/openroad/gui
+        - openroad/gui
       sys: *SysDebianAmd64
     osvb:
       images:

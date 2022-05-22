@@ -21,7 +21,7 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 #---
 
-FROM $REGISTRY/build/dev AS build
+FROM $REGISTRY/build/dev AS setup
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
@@ -30,12 +30,31 @@ RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
-RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && setup
 
 #---
 
 FROM scratch AS version
-COPY --from=build /tmp/hdlc.openroad.version /
+COPY --from=setup /tmp/hdlc.openroad.version /
+
+#---
+
+FROM setup AS build
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+
+#---
+
+FROM setup AS build-gui
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends_gui[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
@@ -44,7 +63,12 @@ COPY --from=build /opt/openroad /openroad
 
 #---
 
-FROM $REGISTRY/build/base
+FROM scratch AS pkg-gui
+COPY --from=build-gui /opt/openroad /openroad-gui
+
+#---
+
+FROM $REGISTRY/build/base AS run
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
@@ -52,4 +76,20 @@ RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
+#---
+
+FROM run AS openroad
+
 COPY --from=build /opt/openroad /
+
+#---
+
+FROM run AS gui
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends_gui[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build-gui /opt/openroad /

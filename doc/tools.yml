@@ -235,8 +235,10 @@ openroad:
   src: true
   pkg:
     - 'openroad'
+    - 'openroad/gui'
   use:
     - 'openroad'
+    - 'openroad/gui'
 
 #---
 

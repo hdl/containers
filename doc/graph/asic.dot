@@ -44,6 +44,7 @@ digraph G {
       "magic"
       "netgen"
       "openroad"
+      "openroad/gui"
     }
     { node [color=mediumblue, fontcolor=mediumblue]
       "pkg/irsim"
@@ -51,6 +52,7 @@ digraph G {
       "pkg/magic"
       "pkg/netgen"
       "pkg/openroad"
+      "pkg/openroad/gui"
     }
     { node [color=brown, fontcolor=brown]
       "magic/irsim"
@@ -178,17 +180,24 @@ digraph G {
 
     d_openroad -> {
       "openroad"
+      "openroad/gui"
       "pkg/openroad"
+      "pkg/openroad/gui"
     } [style=dotted];
 
     {
       node [shape=folder, color=red, fontcolor=red]
       "t_openroad" [label="openroad"];
       "t_pkg/openroad" [label="openroad.pkg"];
+      "t_openroad/gui" [label="openroad--gui"];
+      "t_pkg/openroad/gui" [label="openroad--gui.pkg"];
     }
 
     "openroad" -> "t_openroad";
     "pkg/openroad" -> "t_pkg/openroad";
+
+    "openroad/gui" -> "t_openroad/gui";
+    "pkg/openroad/gui" -> "t_pkg/openroad/gui";
   }
 
   # Dockerfile dependencies
@@ -228,6 +237,8 @@ digraph G {
     "p_netgen_scratch" -> "pkg/netgen";
     "p_openroad_build/base" -> "openroad";
     "p_openroad_scratch" -> "pkg/openroad";
+    "p_openroad_build/base" -> "openroad/gui";
+    "p_openroad_scratch" -> "pkg/openroad/gui";
   }
 
   { edge [style=dashed, color=grey]
