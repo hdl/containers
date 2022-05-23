@@ -13,10 +13,14 @@ See `docs.docker.com: About storage drivers | Images and layers <https://docs.do
 Collections:
 
 * ``debian/bullseye`` based on ``ARCHITECTURE/debian:bullseye-slim`` (default)
-* ``centos/7`` based on ``ARCHITECTURE/centos:7``
+* ``rockylinux/8`` based on ``ARCHITECTURE/rockylinux:8``
 
 .. IMPORTANT::
-  Deprecated collections:
+  Deprecated:
+
+  * ``centos/7`` based on ``ARCHITECTURE/centos:7``
+
+  Removed:
 
   * ``debian/buster`` based on ``ARCHITECTURE/debian:buster-slim``
 

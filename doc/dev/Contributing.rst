@@ -12,7 +12,7 @@ All the images in the ecosystem are based on these:
 
 .. include:: ../shields/shields.build.gen.inc
 
-* |SHIELD:Image:build/base| Debian Buster, Debian Bullseye or CentOS 7, with updated ``ca-certificates``, ``curl`` and
+* |SHIELD:Image:build/base| Debian Bullseye or Rocky Linux 8, with updated ``ca-certificates``, ``curl`` and
   Python 3.
 
 * |SHIELD:Image:build/build| based on ``base``, includes ``clang`` and ``make``.
