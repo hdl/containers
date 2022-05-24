@@ -133,6 +133,7 @@ jobs:
   default:
     apicula:        *SysDebianAmd64
     arachne-pnr:    *SysDebianDefaultArchSet
+    coriolis:       *SysDebianAmd64
     gtkwave:        *SysDebianDefaultArchSet
     icestorm:       *SysDebianDefaultArchSet
     irsim:          *SysDebianDefaultArchSet
