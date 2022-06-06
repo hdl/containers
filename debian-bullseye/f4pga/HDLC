@@ -26,7 +26,7 @@ xc7-arch-defs() {
 env-and-toolchain() {
   mkdir f4pga-examples
   curl -fsSL https://codeload.github.com/chipsalliance/f4pga-examples/tar.gz/main | tar xzf - -C f4pga-examples --strip-components=1
-  conda env create -f ./f4pga-examples/"$1"/environment.yml
+  F4PGA_FAM="$1" conda env create -f ./f4pga-examples/"$1"/environment.yml
   rm -rf f4pga-examples
   case "$1" in
     eos-s3)
@@ -35,6 +35,8 @@ env-and-toolchain() {
       ;;
     xc7)
       xc7-arch-defs toolchain
+      echo 'export F4PGA_INSTALL_DIR=/usr/local' > conda.sh
+      echo 'export F4PGA_ENV_SHARE=/usr/local/share/symbiflow' >> conda.sh
       ;;
     *)
       echo "Unknown env/toolchain <$1>!"
