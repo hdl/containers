@@ -30,6 +30,7 @@ digraph G {
     d_verilator [label="verilator"];
     d_sim       [label="sim"];
     d_octave    [label="octave"];
+    d_gnuplot   [label="gnuplot"];
     d_scipy     [label="scipy"];
     d_osvb      [label="osvb"];
     d_xschem    [label="xschem"];
@@ -63,6 +64,7 @@ digraph G {
       "sim/scipy"
       "sim/octave-slim"
       "sim/octave"
+      "sim/octave/gnuplot"
       "sim/osvb"
     }
   }
@@ -161,7 +163,7 @@ digraph G {
     "sim" -> {
       d_osvb;
       d_scipy;
-      d_octave
+      d_octave;
     };
 
     d_osvb -> {
@@ -171,23 +173,20 @@ digraph G {
       "sim/octave"
     } [style=dotted];
 
-    {
-      "sim/scipy-slim"
-      "sim/octave-slim"
-    } -> d_osvb;
-
     d_scipy -> "sim/scipy-slim" [style=dotted];
     d_octave -> "sim/octave-slim" [style=dotted];
+    d_gnuplot -> "sim/octave/gnuplot" [style=dotted];
 
     { rank=same
       node [shape=folder, color=red, fontcolor=red]
-      "t_sim"             [label="sim"];
-      "t_pkg/osvb"        [label="osvb.pkg"];
-      "t_sim/osvb"        [label="sim--osvb"];
-      "t_sim/scipy-slim"  [label="sim--scipy-slim"];
-      "t_sim/scipy"       [label="sim--scipy"];
-      "t_sim/octave-slim" [label="sim--octave-slim"];
-      "t_sim/octave"      [label="sim--octave"];
+      "t_sim"                [label="sim"];
+      "t_pkg/osvb"           [label="osvb.pkg"];
+      "t_sim/osvb"           [label="sim--osvb"];
+      "t_sim/scipy-slim"     [label="sim--scipy-slim"];
+      "t_sim/scipy"          [label="sim--scipy"];
+      "t_sim/octave-slim"    [label="sim--octave-slim"];
+      "t_sim/octave"         [label="sim--octave"];
+      "t_sim/octave/gnuplot" [label="sim--octave--gnuplot"];
     }
 
     "sim" -> "t_sim";
@@ -197,6 +196,7 @@ digraph G {
     "sim/scipy" -> "t_sim/scipy";
     "sim/octave-slim" -> "t_sim/octave-slim";
     "sim/octave" -> "t_sim/octave";
+    "sim/octave/gnuplot" -> "t_sim/octave/gnuplot";
   }
 
   subgraph cluster_xschem {
@@ -271,6 +271,13 @@ digraph G {
   "pkg/verilator" -> "p_sim_pkg/verilator" -> d_sim;
   "pkg/iverilog" -> "p_sim_pkg/iverilog" -> d_sim;
 
+   {
+     "sim/scipy-slim"
+     "sim/octave-slim"
+   } -> d_osvb;
+
+   "sim/octave" -> d_gnuplot;
+
   # Image dependencies
 
   { edge [style=dashed]
@@ -296,7 +303,7 @@ digraph G {
     };
 
     "sim/scipy-slim" -> "sim/scipy";
-    "sim/octave-slim" -> "sim/octave";
+    "sim/octave-slim" -> "sim/octave" -> "sim/octave/gnuplot";
   }
 
   { edge [style=dashed, color=grey]

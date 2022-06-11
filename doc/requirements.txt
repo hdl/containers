@@ -2,3 +2,6 @@ pyyaml
 sphinx <6.0
 sphinxcontrib-autoprogram
 tabulate
+
+pyAttributes
+yamldataclassconfig

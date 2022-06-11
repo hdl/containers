@@ -22,11 +22,13 @@ Images including multiple tools
 * **S**\ imulation:
 
   * |SHIELD:Image:sim| GHDL + Verilator + Icarus Verilog
-  * |SHIELD:Image:sim/osvb| cocotb, OSVVM and VUnit; on top of ``sim``.
-  * |SHIELD:Image:sim/scipy-slim| ``matplotlib`` and ``numpy``, on top of ``sim``.
-  * |SHIELD:Image:sim/scipy| ``osvb`` on top of ``scipy-slim``.
-  * |SHIELD:Image:sim/octave-slim| ``octave``, on top of ``sim``.
-  * |SHIELD:Image:sim/octave| ``osvb`` on top of ``octave-slim``.
+  * |SHIELD:Image:sim/osvb| CoCoTb, OSVVM and VUnit; on top of ``sim``.
+  * |SHIELD:Image:sim/scipy-slim| matplotlib and numpy; on top of ``sim``.
+  * |SHIELD:Image:sim/scipy| ``osvb``; on top of ``sim/scipy-slim``.
+  * |SHIELD:Image:sim/octave-slim| ``octave``; on top of ``sim``.
+  * |SHIELD:Image:sim/octave| ``osvb``; on top of ``sim/octave-slim``.
+
+    * |SHIELD:Image:sim/octave/gnuplot| gnuplot; on top of ``sim/octave``.
 
 * **I**\ mplementation: GHDL + Yosys + nextpnr
 

@@ -40,6 +40,7 @@ imageShields = [
     "sim/scipy",
     "sim/octave-slim",
     "sim/octave",
+    "sim/octave/gnuplot",
     "impl",
     "impl/ice40",
     "impl/ecp5",

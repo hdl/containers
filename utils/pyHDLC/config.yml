@@ -21,7 +21,7 @@ HDLC: 0
 
 
 anchors:
-  <<: &EmptyPkgTarget
+  <<: &EmptyTarget
     target: ''
   <<: &BaseDockerfile
     dockerfile: base
@@ -55,13 +55,13 @@ defaults:
     build/build: { <<: *BaseDockerfile, target: build }
     build/dev:   { <<: *BaseDockerfile }
     # Formal
-    pkg/boolector:  *EmptyPkgTarget
-    pkg/cvc:        *EmptyPkgTarget
-    pkg/pono:       *EmptyPkgTarget
-    pkg/superprove: *EmptyPkgTarget
-    pkg/symbiyosys: *EmptyPkgTarget
-    pkg/yices2:     *EmptyPkgTarget
-    pkg/z3:         *EmptyPkgTarget
+    pkg/boolector:  *EmptyTarget
+    pkg/cvc:        *EmptyTarget
+    pkg/pono:       *EmptyTarget
+    pkg/superprove: *EmptyTarget
+    pkg/symbiyosys: *EmptyTarget
+    pkg/yices2:     *EmptyTarget
+    pkg/z3:         *EmptyTarget
     formal/min: { <<: *FormalDockerfile, target: min }
     formal:     { <<: *FormalDockerfile, target: latest }
     formal/all: { <<: *FormalDockerfile }
@@ -108,6 +108,9 @@ defaults:
     sim/octave:
       <<: *OSVBDockerfile
       argimg: sim/octave-slim
+    sim/octave/gnuplot:
+      dockerfile: gnuplot
+      argimg: sim/octave
     # F4PGA:
     conda/f4pga/xc7/toolchain: { <<: *F4PGADockerfile, target: xc7-toolchain }
     conda/f4pga/xc7/a50t:      { <<: *F4PGADockerfile, target: a50t          }
@@ -256,6 +259,10 @@ jobs:
         - sim/${prj}
         - prj: scipy
         - prj: octave
+      sys: *SysDebianAmd64
+    gnuplot:
+      images:
+        - sim/octave/gnuplot
       sys: *SysDebianAmd64
     f4pga-xc7-devices:
       images:
