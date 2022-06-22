@@ -124,6 +124,10 @@ On top of that, the following ready-to-use images allow following the guidelines
 To Do
 =====
 
+* :awesome:`ngspice`
+
+  * :gh:`google/skywater-pdk#374 <google/skywater-pdk/issues/374>`
+
 * :gh:`BitMan <khoapham/bitman>`
 * :awesome:`ecpprog`
 * :awesome:`fujprog`
