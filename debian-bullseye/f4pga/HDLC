@@ -20,7 +20,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 xc7-arch-defs() {
-  curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs-gha/symbiflow-"$1"-latest | xargs curl -fsSL | tar -xJC /usr/local
+  curl -fsSL https://github.com/SymbiFlow/f4pga-arch-defs/releases/download/latest/symbiflow-"$1"-latest | xargs curl -fsSL | tar -xJC /usr/local
 }
 
 env-and-toolchain() {

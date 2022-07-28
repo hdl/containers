@@ -22,13 +22,4 @@ cd $(dirname "$0")
 
 ./_env.sh
 
-which symbiflow_generate_constraints
-which symbiflow_pack
-which symbiflow_place
-which symbiflow_route
-which symbiflow_synth
-which symbiflow_write_bitstream
-which symbiflow_write_fasm
-which vpr_common
-
 ./_todo.sh
