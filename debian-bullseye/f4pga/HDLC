@@ -32,7 +32,7 @@ env-and-toolchain() {
   echo 'export F4PGA_INSTALL_DIR=/usr/local' >> conda.sh
   case "$1" in
     eos-s3)
-      curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs-install/quicklogic-arch-defs-63c3d8f9.tar.gz | tar -xzC /usr/local
+      curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs-install/quicklogic-arch-defs-qlf-fc5d8da.tar.gz | tar -xzC /usr/local
       echo 'export PATH=/usr/local/quicklogic-arch-defs/bin:$PATH' >> conda.sh
       echo 'export F4PGA_BIN_DIR=/usr/local/quicklogic-arch-defs/bin' >> conda.sh
       echo 'export F4PGA_SHARE_DIR=/usr/local/quicklogic-arch-defs/share/symbiflow' >> conda.sh
