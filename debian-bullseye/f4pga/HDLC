@@ -25,7 +25,7 @@ xc7-arch-defs() {
 
 env-and-toolchain() {
   mkdir f4pga-examples
-  curl -fsSL https://codeload.github.com/umarcor/f4pga-examples/tar.gz/containers | tar xzf - -C f4pga-examples --strip-components=1
+  curl -fsSL https://codeload.github.com/chipsalliance/f4pga-examples/tar.gz/main | tar xzf - -C f4pga-examples --strip-components=1
   FPGA_FAM="$1" conda env create -f ./f4pga-examples/"$1"/environment.yml
   rm -rf f4pga-examples
   echo 'export FPGA_FAM='"$1" > conda.sh
