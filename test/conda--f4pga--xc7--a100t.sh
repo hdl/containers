@@ -24,6 +24,6 @@ cd $(dirname "$0")
 
 ./conda--f4pga--xc7--toolchain.sh
 
-ls -lah /usr/local/share/symbiflow/arch/xc7a100t_test
+ls -lah /usr/local/share/f4pga/arch/xc7a100t_test
 
 ./_todo.sh

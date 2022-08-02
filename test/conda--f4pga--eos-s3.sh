@@ -27,7 +27,6 @@ which symbiflow_analysis
 which symbiflow_fasm2bels
 which symbiflow_generate_constraints
 which symbiflow_generate_bitstream
-which symbiflow_generate_libfile
 which symbiflow_pack
 which symbiflow_place
 which symbiflow_repack

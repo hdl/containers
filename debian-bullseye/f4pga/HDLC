@@ -19,7 +19,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-xc7-arch-defs() {
+get-arch-defs-package() {
   curl -fsSL https://github.com/SymbiFlow/f4pga-arch-defs/releases/download/latest/symbiflow-"$1"-latest | xargs curl -fsSL | tar -xJC /usr/local
 }
 
@@ -28,24 +28,17 @@ env-and-toolchain() {
   curl -fsSL https://codeload.github.com/chipsalliance/f4pga-examples/tar.gz/main | tar xzf - -C f4pga-examples --strip-components=1
   FPGA_FAM="$1" conda env create -f ./f4pga-examples/"$1"/environment.yml
   rm -rf f4pga-examples
-  echo 'export FPGA_FAM='"$1" > conda.sh
-  echo 'export F4PGA_INSTALL_DIR=/usr/local' >> conda.sh
+  cat > conda.sh <<EOF
+export FPGA_FAM='$1'
+export F4PGA_INSTALL_DIR=/usr/local
+export F4PGA_SHARE_DIR=/usr/local/share/f4pga
+EOF
   case "$1" in
-    eos-s3)
-      curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs-install/quicklogic-arch-defs-qlf-fc5d8da.tar.gz | tar -xzC /usr/local
-      echo 'export PATH=/usr/local/quicklogic-arch-defs/bin:$PATH' >> conda.sh
-      echo 'export F4PGA_BIN_DIR=/usr/local/quicklogic-arch-defs/bin' >> conda.sh
-      echo 'export F4PGA_SHARE_DIR=/usr/local/quicklogic-arch-defs/share/symbiflow' >> conda.sh
-      ;;
-    xc7)
-      xc7-arch-defs toolchain
-      echo 'export F4PGA_SHARE_DIR=/usr/local/share/symbiflow' >> conda.sh
-      ;;
-    *)
-      echo "Unknown env/toolchain <$1>!"
-      exit 1
-      ;;
+    eos-s3) PACKAGES='install-ql ql-eos-s3_wlcsp' ;;
+    xc7)    PACKAGES='install-xc7' ;;
+    *) echo "Unknown env/toolchain <$1>!"; exit 1 ;;
   esac
+  for PKG in $PACKAGES; do get-arch-defs-package "$PKG"; done
   cat /usr/local/etc/profile.d/conda.sh >> conda.sh
   echo "conda activate $1" >> conda.sh
   mv conda.sh /usr/local/etc/profile.d/conda.sh

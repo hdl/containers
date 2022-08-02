@@ -28,27 +28,27 @@ RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && env-and-toolchain xc7
 #---
 
 FROM $REGISTRY/conda/f4pga/xc7/toolchain AS a50t
-RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && xc7-arch-defs xc7a50t_test
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && get-arch-defs-package xc7a50t_test
 
 #---
 
 FROM $REGISTRY/conda/f4pga/xc7/toolchain AS a100t
-RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && xc7-arch-defs xc7a100t_test
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && get-arch-defs-package xc7a100t_test
 
 #---
 
 FROM $REGISTRY/conda/f4pga/xc7/toolchain AS a200t
-RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && xc7-arch-defs xc7a200t_test
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && get-arch-defs-package xc7a200t_test
 
 #---
 
 FROM $REGISTRY/conda/f4pga/xc7/toolchain AS z010
-RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && xc7-arch-defs xc7z010_test
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && get-arch-defs-package xc7z010_test
 
 #---
 
 FROM $REGISTRY/conda/f4pga/xc7/toolchain AS z020
-RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && xc7-arch-defs xc7z020_test
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && get-arch-defs-package xc7z020_test
 
 #---
 
