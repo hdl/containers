@@ -22,28 +22,44 @@
 set -e
 
 get-arch-defs-package() {
-  curl -fsSL https://github.com/SymbiFlow/f4pga-arch-defs/releases/download/latest/symbiflow-"$1"-latest \
-    | xargs curl -fsSL \
-    | tar -xJC /usr/local
+  # TODO: add a variant to get an specific version, instead of the latest
+  if [ -z "$2" ]; then
+    curl -fsSL https://github.com/SymbiFlow/f4pga-arch-defs/releases/download/latest/symbiflow-"$1"-latest \
+      | xargs curl -fsSL \
+      | tar -xJC /usr/local
+  else
+    f4pga_timestamp=''
+    f4pga_hash=''
+    curl -fsSL https://storage.googleapis.com/symbiflow-arch-defs/artifacts/prod/foss-fpga-tools/symbiflow-arch-defs/continuous/install/${f4pga_timestamp}/symbiflow-arch-defs-${1}-${f4pga_hash}.tar.xz \
+      | tar -xJC /usr/local
+  fi
 }
 
 env-and-toolchain() {
   f4pga_fam="$1"
-
   case "$f4pga_fam" in
     eos-s3) PACKAGES='install-ql ql-eos-s3_wlcsp' ;;
     xc7)    PACKAGES='install-xc7' ;;
-    *) echo "Unknown env/toolchain <${f4pga_fam}>!"; exit 1 ;;
+    *) echo "Unknown env/toolchain <$1>!"; exit 1 ;;
   esac
-  for PKG in $PACKAGES; do get-arch-defs-package "$PKG"; done
 
-  conda env create -f "/usr/local/${f4pga_fam}_env/${f4pga_fam}_environment.yml"
-  rm -rf "/usr/local/${f4pga_fam}_env"
-  (
-    source /usr/local/etc/profile.d/conda.sh
-    conda activate "$f4pga_fam"
-    pip3 install https://github.com/chipsalliance/f4pga/archive/main.zip#subdirectory=f4pga
-  )
+  # WIP: accept a second argument to decide whether to bootstrap the envs from the packages or from f4pga-examples
+  if [ -z "$2" ]; then
+    for PKG in $PACKAGES; do get-arch-defs-package "$PKG"; done
+    conda env create -f "/usr/local/${f4pga_fam}_env/${f4pga_fam}_environment.yml"
+    rm -rf "/usr/local/${f4pga_fam}_env"
+    (
+      source /usr/local/etc/profile.d/conda.sh
+      conda activate $1
+      pip3 install https://github.com/chipsalliance/f4pga/archive/main.zip#subdirectory=f4pga
+    )
+  else
+    mkdir f4pga-examples
+    curl -fsSL https://codeload.github.com/chipsalliance/f4pga-examples/tar.gz/${version} | tar xzf - -C f4pga-examples --strip-components=1
+    FPGA_FAM="$f4pga_fam" conda env create -f ./f4pga-examples/"$1"/environment.yml
+    # TODO: get timestamp and hash, save them to /usr/local/share/f4pga/packages.version
+    rm -rf f4pga-examples
+  fi
 
   cat > conda.sh <<EOF
 export FPGA_FAM='$f4pga_fam'
