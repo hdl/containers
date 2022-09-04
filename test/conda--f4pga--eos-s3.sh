@@ -25,7 +25,6 @@ cd $(dirname "$0")
 which ql_symbiflow
 which symbiflow_analysis
 which symbiflow_fasm2bels
-which symbiflow_generate_constraints
 which symbiflow_generate_bitstream
 which symbiflow_pack
 which symbiflow_place
@@ -37,6 +36,5 @@ which symbiflow_write_binary
 which symbiflow_write_fasm
 which symbiflow_write_jlink
 which symbiflow_write_openocd
-which vpr_common
 
 ./_todo.sh
