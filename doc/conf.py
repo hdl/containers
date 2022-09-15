@@ -166,6 +166,7 @@ CIWorkflows = [
         "ghdl",
         "gtkwave",
         "iverilog",
+        "verible",
         "verilator",
         "xschem",
         "xyce",
@@ -232,7 +233,7 @@ with (ROOT / "CIStatus.inc").open("w") as wfptr:
                     for index, sublist in enumerate(CIWorkflows)
                 ] for num in range(max(lengths))
             ],
-            headers=["Base and Simulation", "Synthesis, PnR and Prog", "Formal", "ASIC", "All-in-one"],
+            headers=["Base, Simulation and Linting", "Synthesis, PnR and Prog", "Formal", "ASIC", "All-in-one"],
             tablefmt="rst",
         )
     )

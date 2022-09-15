@@ -300,6 +300,15 @@ symbiyosys:
 
 #---
 
+verible:
+  src: true
+  pkg:
+    - 'verible'
+  use:
+    - 'verible'
+
+#---
+
 verilator:
   src: true
   pkg:
