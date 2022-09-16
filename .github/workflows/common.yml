@@ -56,14 +56,32 @@ env:
 jobs:
 
 
+  gen:
+    runs-on: ubuntu-latest
+    outputs:
+      content: ${{ steps.gen.outputs.content }}
+    steps:
+    - id: gen
+      shell: python
+      run: |
+        steps = [
+          { name: 🧰 Checkout, uses: actions/checkout@v3 },
+          { name: 🛠️ Setup, run: ./utils/setup.sh },
+          { name: 🔧 Generate matrix, id: generate, run: 'pyHDLC jobs ${{ inputs.key }}' }
+        ]
+        print(f"::set-output name=content::{steps!s}")
+
+
   matrix:
+    needs: gen
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.generate.outputs.matrix }}
-    steps:
-    - { name: 🧰 Checkout, uses: actions/checkout@v3 }
-    - { name: 🛠️ Setup, run: ./utils/setup.sh }
-    - { name: 🔧 Generate matrix, id: generate, run: 'pyHDLC jobs ${{ inputs.key }}' }
+    steps: ${{ needs.gen.outputs.content }}
+
+#    - { name: 🧰 Checkout, uses: actions/checkout@v3 }
+#    - { name: 🛠️ Setup, run: ./utils/setup.sh }
+#    - { name: 🔧 Generate matrix, id: generate, run: 'pyHDLC jobs ${{ inputs.key }}' }
 
 
   jobs:
