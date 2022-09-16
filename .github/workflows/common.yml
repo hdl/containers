@@ -63,7 +63,9 @@ jobs:
     steps:
     - { name: 🧰 Checkout, uses: actions/checkout@v3 }
     - { name: 🛠️ Setup, run: ./utils/setup.sh }
-    - { name: 🔧 Generate matrix, id: generate, run: pyHDLC jobs ${{ inputs.key }} }
+    - name: 🔧 Generate matrix
+      id: generate
+      run: pyHDLC jobs ${{ inputs.key }}
 
 
   jobs:
