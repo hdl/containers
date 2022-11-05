@@ -17,6 +17,12 @@ Periodically, a new key needs to be created and the outdated ones need to be rem
 
 .. sourcecode:: shell
 
+   # List the projects:
+   ~ gcloud projects list
+
+   # Set the project for the current workspace:
+   ~ gcloud config set project [PROJECT_ID]
+
    # List the available service accounts:
    ~ gcloud iam service-accounts list
 
