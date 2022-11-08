@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from typing import Any, Dict, List, Optional, Tuple, Union
+from os import environ
 from pathlib import Path
 from string import Template
 from re import search as re_search, IGNORECASE as re_IGNORECASE
@@ -250,7 +251,7 @@ def GenerateJobList(
       Identifier to extract jobs from the YAML configuration file.
 
     :param fmt:
-      Output format (by default, print GitHub Actions' set-output syntax).
+      Output format (by default, print to GITHUB_OUTPUT).
 
     :param dry:
       Do not set the output, just print the list of jobs.
@@ -263,7 +264,8 @@ def GenerateJobList(
     if dry:
         return
     if fmt.lower() in ["gha"]:
-        print(f"::set-output name=matrix::{jobs!s}")
+        with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
+            gho.write(f"matrix={jobs!s}\n")
         GHASummary(summary)
 
 
