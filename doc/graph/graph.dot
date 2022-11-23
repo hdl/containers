@@ -62,6 +62,7 @@ digraph G {
       "openroad/gui"
       "prjoxide"
       "prjtrellis"
+      "verible"
       "verilator"
       "vtr"
       "xschem"
@@ -98,6 +99,7 @@ digraph G {
       "pkg/symbiyosys"
       "pkg/yices2"
       "pkg/yosys"
+      "pkg/verible"
       "pkg/verilator"
       "pkg/vtr"
       "pkg/xschem"
@@ -332,6 +334,8 @@ digraph G {
       "conda/f4pga/xc7/z020"
       "conda/f4pga/xc7"
       "conda/f4pga/eos-s3"
+      "verible"
+      "pkg/verible"
     }
   }
 
