@@ -18,13 +18,13 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 from os import environ
 from pathlib import Path
 from string import Template
 from re import search as re_search, IGNORECASE as re_IGNORECASE
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from yamldataclassconfig.config import YamlDataClassConfig
 
 from pyHDLC.run import _exec, GHASummary
@@ -37,11 +37,11 @@ class ConfigDefaultImageItem(YamlDataClassConfig):
     """
 
     #: The dockerfile to pass to `docker build`.
-    dockerfile: Optional[str] = None
+    dockerfile: str = None
     #: The target stage to pass to `docker build`.
-    target: Optional[str] = None
+    target: str = None
     #: The base IMAGE to pass as a build-arg to `docker build`.
-    argimg: Optional[str] = None
+    argimg: str = None
 
 
 @dataclass
@@ -58,7 +58,7 @@ class ConfigDefaults(YamlDataClassConfig):
     #: Default architecture.
     architecture: str = "amd64"
     #: Allows override default image build arguments.
-    images: Optional[Dict[str, ConfigDefaultImageItem]] = None
+    images: Dict[str, ConfigDefaultImageItem] = None
 
 
 ConfigJobsSysDict = Dict[str, List[str]]
@@ -89,7 +89,7 @@ class ConfigJobsCustomItem(YamlDataClassConfig):
     #: Collection(s) and architecture(s).
     sys: ConfigJobsSysDict
     #: Optionally, declare combinations of *sys* and *images* which should be excluded from the produced cross-products.
-    exclude: Optional[List[ConfigJobsCustomExcludeItem]] = None  # = {}
+    exclude: List[ConfigJobsCustomExcludeItem] = field(default_factory=list)
 
 
 @dataclass
@@ -100,13 +100,13 @@ class ConfigJobs(YamlDataClassConfig):
     """
 
     #: Build two images for each collection and architecture, a regular image and a package image.
-    default: ConfigJobsDict  # = {}
+    default: ConfigJobsDict = field(default_factory=dict)
     #: Build a package image for each collection and architecture.
-    pkgonly: ConfigJobsDict  # = {}
+    pkgonly: ConfigJobsDict = field(default_factory=dict)
     #: Build a regular image for each collection and architecture.
-    runonly: ConfigJobsDict  # = {}
+    runonly: ConfigJobsDict = field(default_factory=dict)
     #: Declare the lists of jobs/tasks as cross-products (``exclude`` is supported).
-    custom: Dict[str, ConfigJobsCustomItem]  # = {}
+    custom: Dict[str, ConfigJobsCustomItem] = field(default_factory=dict)
 
 
 @dataclass
@@ -117,16 +117,16 @@ class Config(YamlDataClassConfig):
     """
 
     #: Version of the configuration file syntax.
-    HDLC: Optional[int] = None
+    HDLC: int = None
     #: Placeholder for anchors used to reduce verbosity. This field is resolved by the loader and ignored by the analyzer.
-    anchors: Optional[Any] = None  # = {}
+    anchors: Dict = field(default_factory=dict)
     #: Default global parameters and images which need explicitly overriding build argument defaults.
-    defaults: ConfigDefaults = ConfigDefaults()
+    defaults: ConfigDefaults = field(default_factory=ConfigDefaults)
     #: List of jobs/tasks to be used in CI to dynamically spawn jobs.
-    jobs: Optional[ConfigJobs] = None  # = ConfigJobs()
+    jobs: ConfigJobs = field(default_factory=ConfigJobs)
 
 
-CONFIG = Config()
+CONFIG: Config = Config()
 CPATH = Path(__file__).resolve().parent / "config.yml"
 if CPATH.exists():
     CONFIG.load(CPATH)
@@ -304,12 +304,12 @@ def PullImage(
 
 def _NormaliseBuildParams(
     image: str,
-    dockerfile: Optional[str] = None,
-    target: Optional[str] = None,
-    argimg: Optional[str] = None,
+    dockerfile: str = None,
+    target: str = None,
+    argimg: str = None,
     pkg: bool = False,
     default: bool = False,
-) -> Tuple[str, bool, Optional[str], str, Optional[str], Optional[str]]:
+) -> Tuple[str, bool, str, str, str, str]:
     items = image.split("#")
     imageNameWithoutDirSuffix = items[0]
     withDir = None
@@ -357,9 +357,9 @@ def BuildImage(
     registry: str = CONFIG.defaults.registry,
     collection: str = CONFIG.defaults.collection,
     architecture: str = CONFIG.defaults.architecture,
-    dockerfile: Optional[str] = None,
-    target: Optional[str] = None,
-    argimg: Optional[str] = None,
+    dockerfile: str = None,
+    target: str = None,
+    argimg: str = None,
     pkg: bool = False,
     dry: bool = False,
     default: bool = False,
@@ -587,7 +587,7 @@ def PushImage(
     collection: str = CONFIG.defaults.collection,
     architecture: str = CONFIG.defaults.architecture,
     dry: bool = False,
-    mirror: Optional[Union[str, List[str]]] = None,
+    mirror: Union[str, List[str]] = None,
 ) -> None:
     """
     Push container image(s) to registry/registries.
