@@ -134,3 +134,4 @@ To Do
 * :awesome:`netlistsvg`
 * :gh:`ecpdap <adamgreig/ecpdap>`
 * :gh:`LSOracle <lnis-uofu/LSOracle>`
+* :gh:`OpenSourceTCAD <thesourcerer8/OpenSourceTCAD>`
