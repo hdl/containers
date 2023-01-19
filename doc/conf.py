@@ -212,10 +212,9 @@ with (ROOT / "CIStatus.inc").open("w") as wfptr:
     # Generate shields before using them in the table
     for sublist in CIWorkflows:
         for workflow in sublist:
-            attrs = f"longCache=true&style=flat-square&label={workflow}&logo=GitHub%20Actions&logoColor=fff"
             wfptr.write(
                 f"""\
-.. |SHIELD:Workflow:{workflow}| image:: https://img.shields.io/github/workflow/status/hdl/containers/{workflow}/main?{attrs}
+.. |SHIELD:Workflow:{workflow}| image:: https://img.shields.io/github/actions/workflow/status/hdl/containers/{workflow}.yml?branch=main&longCache=true&style=flat-square&label={workflow}&logo=GitHub%20Actions&logoColor=fff
    :alt: '{workflow} workflow Status'
    :height: 22
    :target: https://github.com/hdl/containers/actions/workflows/{workflow}.yml
