@@ -259,7 +259,7 @@ source_suffix = {
 
 master_doc = "index"
 project = "HDL Containers: Building and deploying container images for open source Electronic Design Automation"
-copyright = "2019-2022, Unai Martinez-Corral and contributors"
+copyright = "2019-2023, Unai Martinez-Corral and contributors"
 author = "Unai Martinez-Corral and contributors"
 
 version = "latest"
