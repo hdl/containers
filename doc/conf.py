@@ -367,10 +367,10 @@ intersphinx_mapping = {
 
 extlinks = {
     "wikipedia": ("https://en.wikipedia.org/wiki/%s", None),
-    "awesome": ("https://hdl.github.io/awesome/items/%s", ""),
-    "gh": ("https://github.com/%s", "gh:"),
-    "ghsharp": ("https://github.com/hdl/containers/issues/%s", "#"),
-    "ghissue": ("https://github.com/hdl/containers/issues/%s", "issue #"),
-    "ghpull": ("https://github.com/hdl/containers/pull/%s", "pull request #"),
-    "ghsrc": ("https://github.com/hdl/containers/blob/main/%s", ""),
+    "awesome": ("https://hdl.github.io/awesome/items/%s", "%s"),
+    "gh": ("https://github.com/%s", "gh:%s"),
+    "ghsharp": ("https://github.com/hdl/containers/issues/%s", "#%s"),
+    "ghissue": ("https://github.com/hdl/containers/issues/%s", "issue #%s"),
+    "ghpull": ("https://github.com/hdl/containers/pull/%s", "pull request #%s"),
+    "ghsrc": ("https://github.com/hdl/containers/blob/main/%s", "%s"),
 }
