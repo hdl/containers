@@ -28,7 +28,7 @@ apicula:
 
 #---
 
-arache-pnr:
+arachne-pnr:
   src: true
   pkg:
     - 'arachne-pnr'
