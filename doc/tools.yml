@@ -215,6 +215,15 @@ nextpnr:
 
 #---
 
+nvc:
+  src: true
+  pkg:
+    - 'nvc'
+  use:
+    - 'nvc'
+
+#---
+
 openfpgaloader:
   src: true
   pkg:

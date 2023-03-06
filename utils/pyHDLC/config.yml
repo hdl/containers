@@ -139,6 +139,12 @@ jobs:
     iverilog:       *SysDebianAmd64
     klayout:        *SysDebianAmd64
     netgen:         *SysDebianDefaultArchSet
+    nvc:
+      # ppc64le and s390x fail with error:
+      #   ../thirdparty/cpustate.c:184:2: error: Please port fill_cpu_state to this OS/CPU combination
+      debian/bullseye:
+        - amd64
+        - arm64v8
     openfpgaloader: *SysDebianDefaultArchSet
     prjoxide:       *SysDebianAmd64
     prjtrellis:     *SysDebianAmd64
