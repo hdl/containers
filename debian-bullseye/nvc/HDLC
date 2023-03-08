@@ -26,8 +26,6 @@ makedepends=(
   autoconf
   check
   flex
-  libdw1
-  libdwarf1
   libdw-dev
   libffi-dev
   llvm-dev
@@ -47,8 +45,8 @@ build() {
 }
 
 depends=(
-  clang
+  binutils
   libdw1
-  libdwarf1
+  libllvm11
   make
 )
