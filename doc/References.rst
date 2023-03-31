@@ -63,6 +63,7 @@ ASIC
   * :gh:`efabless/foss-asic-tools`
   * :gh:`hpretl/iic-osic-tools`
 
+* :gh:`mabrains/OpenAnalogDesign`
 * :gh:`RISC-V bring-up tracker <carlosedp/riscv-bringup>`
 * `A Step-by-Step Example: Layout of a CMOS Inverter Using SkyWater Technology (SKW) 130nm Process <https://docs.google.com/document/d/1hSLKsz9xcEJgAMmYYer5cDwvPqas9_JGRUAgEORx1Yw>`__
 
