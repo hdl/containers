@@ -26,11 +26,14 @@ makedepends=(
   autoconf
   check
   flex
+  bison
   libdw-dev
   libffi-dev
   llvm-dev
   pkg-config
   zlib1g-dev
+  libzstd-dev
+  tcl-dev
 )
 
 build() {
@@ -49,4 +52,6 @@ depends=(
   libdw1
   libllvm11
   make
+  libzstd1
+  libtcl8.6
 )
