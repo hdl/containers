@@ -29,6 +29,7 @@ RUN apt-get update -qq \
     autoconf \
     bison \
     flex \
+    help2man \
     libfl-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
