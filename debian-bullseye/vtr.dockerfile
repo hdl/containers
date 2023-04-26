@@ -37,9 +37,11 @@ RUN apt-get update -qq \
     libgtk-3-dev \
     libfontconfig1-dev \
     liblist-moreutils-perl \
+    libreadline-dev \
     libx11-dev \
     libxft-dev \
     ninja-build \
+    tcl-dev \
     wget \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
