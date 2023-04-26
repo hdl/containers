@@ -53,6 +53,9 @@ RUN git clone https://github.com/verilog-to-routing/vtr-verilog-to-routing.git /
  && cmake --build ./ \
  && DESTDIR=/opt/vtr cmake --build ./ --target install
 
+RUN apt update -qq && apt install -y tree \
+ && tree /opt/vtr
+
 #---
 
 FROM scratch AS pkg
@@ -63,7 +66,11 @@ COPY --from=build /opt/vtr /vtr
 
 FROM $REGISTRY/build/base
 
+RUN ls -lah /tmp
+
 COPY --from=build /opt/vtr /
+
+RUN ls -lah /tmp
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
