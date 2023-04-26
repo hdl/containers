@@ -47,6 +47,7 @@ build() {
 
 depends=(
   libcairo2
+  libx11-xcb1
   libxpm4
   tcl8.6
   tk8.6
