@@ -47,6 +47,7 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://github.com/verilog-to-routing/vtr-verilog-to-routing.git /tmp/vtr \
+ && cd /tmp/vtr && git checkout -b tmp 0b71b60b6fdd82958b18be517d67bec777fee549 \
  && mkdir -p /tmp/vtr/build \
  && cd /tmp/vtr/build \
  && cmake -G "Ninja" -DCMAKE_INSTALL_PREFIX="/usr/local" .. \
