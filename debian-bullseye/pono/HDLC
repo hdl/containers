@@ -20,6 +20,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+set -e
+
 makedepends=(
   autoconf
   binutils
@@ -30,6 +32,7 @@ makedepends=(
   libfl-dev
   libgmp-dev
   m4
+  patch
   python3-toml
   openjdk-11-jre-headless
 )
