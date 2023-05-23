@@ -31,6 +31,7 @@ RUN apt-get update -qq \
     flex \
     gperf \
     libreadline-dev \
+    zlib1g-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
