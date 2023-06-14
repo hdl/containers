@@ -145,7 +145,7 @@ jobs:
   default:
     apicula:        *SysDebianBullseyeAmd64
     arachne-pnr:    *SysDebianBullseyeDefaultArchSet
-    gtkwave:        *SysDebianBullseyeDefaultArchSet
+    gtkwave:        *SysDebianDefaultArchSet
     icestorm:       *SysDebianBullseyeDefaultArchSet
     irsim:          *SysDebianBullseyeDefaultArchSet
     iverilog:       *SysDebianBullseyeAmd64
