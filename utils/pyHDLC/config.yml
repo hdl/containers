@@ -168,7 +168,7 @@ jobs:
     yosys:          *SysDebianBullseyeAmd64
 
   pkgonly:
-    boolector:  *SysDebianBullseyeAmd64
+    boolector:  *SysDebianAmd64
     cvc:        *SysDebianBullseyeAmd64
     pono:       *SysDebianBullseyeAmd64
     superprove: *SysDebianBullseyeAmd64
