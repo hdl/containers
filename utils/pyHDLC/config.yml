@@ -175,7 +175,7 @@ jobs:
 
   pkgonly:
     boolector:  *SysDebianAmd64
-    cvc:        *SysDebianBullseyeAmd64
+    cvc:        *SysDebianAmd64
     pono:       *SysDebianBullseyeAmd64
     superprove: *SysDebianBullseyeAmd64
     symbiyosys: *SysDebianAmd64
