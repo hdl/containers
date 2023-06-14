@@ -12,6 +12,7 @@ See `docs.docker.com: About storage drivers | Images and layers <https://docs.do
 
 Collections:
 
+* ``debian/bookworm`` based on ``ARCHITECTURE/debian:bookworm-slim``
 * ``debian/bullseye`` based on ``ARCHITECTURE/debian:bullseye-slim`` (default)
 * ``rockylinux/8`` based on ``ARCHITECTURE/rockylinux:8``
 

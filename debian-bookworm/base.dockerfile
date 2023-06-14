@@ -1,9 +1,7 @@
-# syntax=docker/dockerfile:1.2
-
 # Authors:
 #   Unai Martinez-Corral
 #
-# Copyright 2020-2022 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright 2019-2023 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,14 +17,42 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM python:slim-bookworm
+ARG ARCHITECTURE='amd64'
+
+#---
+
+FROM $ARCHITECTURE/debian:bookworm-slim AS base
+
+SHELL ["/bin/bash", "-c"]
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    graphviz \
-    make \
+    ca-certificates \
+    curl \
+    python3 \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
-RUN --mount=type=bind,src=.,target=/tmp/containers/ \
- pip3 install -r /tmp/containers/utils/pyHDLC/requirements.txt
+#---
+
+FROM base AS build
+
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    clang \
+    git \
+    make
+
+ENV CC clang
+ENV CXX clang++
+
+#---
+
+FROM build
+
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    cmake \
+    libboost-all-dev \
+    python3-dev

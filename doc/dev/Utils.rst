@@ -113,7 +113,7 @@ or, inspect any image from any registry:
 
 .. sourcecode:: bash
 
-   HDL_REGISTRY=docker.io dockerDive python:slim-bullseye
+   HDL_REGISTRY=docker.io dockerDive python:slim-bookworm
 
 
 .. _Development:configuration:

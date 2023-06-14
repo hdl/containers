@@ -7,13 +7,13 @@ As explained in :ref:`Tools and images <tools-and-images>` and in the :ref:`User
 multiple collections of images are provided.
 For each collection, a set of base images is provided, which are to be used for building and for runtime.
 These are defined in ``base.dockerfile``.
-See, for instance, :ghsrc:`debian-bullseye/base.dockerfile <debian-bullseye/base.dockerfile>`.
+See, for instance, :ghsrc:`debian-bookworm/base.dockerfile <debian-bookworm/base.dockerfile>`.
 All the images in the ecosystem are based on these:
 
 .. include:: ../shields/shields.build.gen.inc
 
-* |SHIELD:Image:build/base| Debian Bullseye or Rocky Linux 8, with updated ``ca-certificates``, ``curl`` and
-  Python 3.
+* |SHIELD:Image:build/base| Debian Bookworm, Debian Bullseye or Rocky Linux 8, with updated ``ca-certificates``,
+  ``curl`` and Python 3.
 
 * |SHIELD:Image:build/build| based on ``base``, includes ``clang`` and ``make``.
 
@@ -90,7 +90,7 @@ In those cases, the dockerfile is named after the name of the main tool/image bu
 .. sourcecode:: dockerfile
   :caption: Reference Dockerfile to build a TOOL and generate a regular image and a package image.
 
-  ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
+  ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
 
   #--
 
@@ -174,7 +174,7 @@ A similar strategy can be used to run or copy additional assets into the images.
     Reference Dockerfile to build a TOOL and generate a regular image and a package image, using an HDLC script and
     BuildKit mount features.
 
-  ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
+  ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
 
   #---
 
