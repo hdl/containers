@@ -164,7 +164,7 @@ jobs:
     verilator:      *SysDebianBullseyeDefaultArchSet
     vtr:            *SysDebianBullseyeAmd64
     xschem:         *SysDebianBullseyeAmd64
-    xyce:           *SysDebianBullseyeAmd64
+    xyce:           *SysDebianAmd64
     yosys:          *SysDebianBullseyeAmd64
 
   pkgonly:
