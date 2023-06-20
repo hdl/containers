@@ -29,10 +29,26 @@ env:
   DOCKER_BUILDKIT: 1
 
 jobs:
+
+
   magic:
     uses: ./.github/workflows/common.yml
     with:
       key: magic
+      submodules: recursive
+      skip-release: ${{ github.event_name == 'pull_request' }}
+    secrets:
+      gcr_token: '${{ secrets.GCR_JSON_KEY }}'
+      gh_token: '${{ github.token }}'
+      docker_user: '${{ secrets.DOCKER_USER }}'
+      docker_pass: '${{ secrets.DOCKER_PASS }}'
+
+
+  magic-irsim:
+    needs: magic
+    uses: ./.github/workflows/common.yml
+    with:
+      key: magic-irsim
       submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:

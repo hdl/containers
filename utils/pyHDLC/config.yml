@@ -150,6 +150,7 @@ jobs:
     irsim:          *SysDebianDefaultArchSet
     iverilog:       *SysDebianBullseyeAmd64
     klayout:        *SysDebianBullseyeAmd64
+    magic:          *SysDebianDefaultArchSet
     netgen:         *SysDebianBullseyeDefaultArchSet
     nvc:
       # ppc64le and s390x fail with error:
@@ -230,13 +231,11 @@ jobs:
         - impl/pnr
         - impl
       sys: *SysDebianBullseyeAmd64
-    magic:
+    magic-irsim:
       images:
-        - pkg/magic
-        - magic
         - magic/irsim
       sys:
-        <<: *SysDebianBullseyeDefaultArchSet
+        <<: *SysDebianDefaultArchSet
     nextpnr-build:
       images:
         - build/nextpnr/base
