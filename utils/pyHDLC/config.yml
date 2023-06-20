@@ -147,7 +147,7 @@ jobs:
     arachne-pnr:    *SysDebianBullseyeDefaultArchSet
     gtkwave:        *SysDebianDefaultArchSet
     icestorm:       *SysDebianBullseyeDefaultArchSet
-    irsim:          *SysDebianBullseyeDefaultArchSet
+    irsim:          *SysDebianDefaultArchSet
     iverilog:       *SysDebianBullseyeAmd64
     klayout:        *SysDebianBullseyeAmd64
     netgen:         *SysDebianBullseyeDefaultArchSet
