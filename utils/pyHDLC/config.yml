@@ -162,7 +162,7 @@ jobs:
     prjoxide:       *SysDebianBullseyeAmd64
     prjtrellis:     *SysDebianBullseyeAmd64
     verible:        *SysDebianAmd64
-    verilator:      *SysDebianBullseyeDefaultArchSet
+    verilator:      *SysDebianDefaultArchSet
     vtr:            *SysDebianBullseyeAmd64
     xschem:         *SysDebianBullseyeAmd64
     xyce:           *SysDebianAmd64
