@@ -18,11 +18,12 @@ Collections:
 .. IMPORTANT::
   Deprecated:
 
-  * ``centos/7`` based on ``ARCHITECTURE/centos:7``
+  * *None*
 
   Removed:
 
   * ``debian/buster`` based on ``ARCHITECTURE/debian:buster-slim``
+  * ``centos/7`` based on ``ARCHITECTURE/centos:7``
 
 Architectures:
 

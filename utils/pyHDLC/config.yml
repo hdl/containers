@@ -179,8 +179,6 @@ jobs:
         - build/dev
       sys:
         <<: *SysDebianDefaultArchSet
-        centos/7:
-          - amd64
         rockylinux/8:
           - amd64
           - arm64v8
