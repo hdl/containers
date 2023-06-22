@@ -169,7 +169,7 @@ jobs:
     vtr:            *SysDebianBullseyeAmd64
     xschem:         *SysDebianAmd64
     xyce:           *SysDebianAmd64
-    yosys:          *SysDebianBullseyeAmd64
+    yosys:          *SysDebianAmd64
 
   pkgonly:
     boolector:  *SysDebianAmd64
