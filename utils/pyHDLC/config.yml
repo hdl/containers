@@ -177,7 +177,7 @@ jobs:
     boolector:  *SysDebianAmd64
     cvc:        *SysDebianAmd64
     pono:       *SysDebianBullseyeAmd64
-    superprove: *SysDebianBullseyeAmd64
+    superprove: *SysDebianAmd64
     symbiyosys: *SysDebianAmd64
     yices2:     *SysDebianAmd64
     z3:         *SysDebianAmd64
