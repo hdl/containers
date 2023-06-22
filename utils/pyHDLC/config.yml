@@ -178,7 +178,7 @@ jobs:
     superprove: *SysDebianBullseyeAmd64
     symbiyosys: *SysDebianBullseyeAmd64
     yices2:     *SysDebianAmd64
-    z3:         *SysDebianBullseyeAmd64
+    z3:         *SysDebianAmd64
 
   runonly:
     conda:                     *SysDebianBullseyeDefaultArchSet
