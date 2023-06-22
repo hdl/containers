@@ -158,6 +158,9 @@ jobs:
       debian/bullseye:
         - amd64
         - arm64v8
+      debian/bookworm:
+        - amd64
+        - arm64v8
     openfpgaloader: *SysDebianBullseyeDefaultArchSet
     prjoxide:       *SysDebianBullseyeAmd64
     prjtrellis:     *SysDebianBullseyeAmd64
