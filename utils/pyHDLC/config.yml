@@ -177,7 +177,7 @@ jobs:
     pono:       *SysDebianBullseyeAmd64
     superprove: *SysDebianBullseyeAmd64
     symbiyosys: *SysDebianBullseyeAmd64
-    yices2:     *SysDebianBullseyeAmd64
+    yices2:     *SysDebianAmd64
     z3:         *SysDebianBullseyeAmd64
 
   runonly:
