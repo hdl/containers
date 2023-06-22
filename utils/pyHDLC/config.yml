@@ -164,7 +164,7 @@ jobs:
     verible:        *SysDebianAmd64
     verilator:      *SysDebianDefaultArchSet
     vtr:            *SysDebianBullseyeAmd64
-    xschem:         *SysDebianBullseyeAmd64
+    xschem:         *SysDebianAmd64
     xyce:           *SysDebianAmd64
     yosys:          *SysDebianBullseyeAmd64
 
