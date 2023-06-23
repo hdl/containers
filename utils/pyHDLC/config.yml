@@ -181,7 +181,7 @@ jobs:
     z3:         *SysDebianAmd64
 
   runonly:
-    conda:                     *SysDebianBullseyeDefaultArchSet
+    conda:                     *SysDebianDefaultArchSet
     prog:                      *SysDebianBullseyeAmd64
     sim:                       *SysDebianBullseyeAmd64
     conda/f4pga/xc7/toolchain: *SysDebianBullseyeAmd64
