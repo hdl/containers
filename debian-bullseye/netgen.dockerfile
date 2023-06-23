@@ -1,5 +1,7 @@
 # Authors:
 #   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
 #   Sai Charan Lanka
 #
 # Copyright Unai Martinez-Corral

@@ -1,7 +1,10 @@
 # Authors:
-#   Sebastian Birke <git@se-bi.de>
+#   Sebastian Birke
+#     <git@se-bi.de>
 #   Anton Blanchard
 #   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
 #
 # Copyright Unai Martinez-Corral
 #

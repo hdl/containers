@@ -1,5 +1,7 @@
 # Authors:
 #   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
 #   Carlos Eduardo de Paula
 #
 # Copyright Unai Martinez-Corral

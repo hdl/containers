@@ -1,5 +1,10 @@
 #!/usr/bin/env -S bash -l
 
+# Authors:
+#   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
+#
 # Copyright Unai Martinez-Corral
 #
 # Licensed under the Apache License, Version 2.0 (the "License");

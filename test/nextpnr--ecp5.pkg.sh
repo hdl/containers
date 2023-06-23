@@ -3,6 +3,8 @@
 # Authors:
 #   Sebastian Birke <git@se-bi.de>
 #   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
 #
 # Copyright Unai Martinez-Corral
 #

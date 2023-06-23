@@ -1,7 +1,11 @@
 #!/usr/bin/env sh
 
 # Authors:
-#   Sai Charan Lanka <lankasaicharan123@gmail.com>
+#   Sai Charan Lanka
+#     <lankasaicharan123@gmail.com>
+#   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
 #
 # Copyright Unai Martinez-Corral
 #

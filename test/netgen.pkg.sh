@@ -1,7 +1,11 @@
 #!/bin/sh
+
 # Authors:
-#   Unai Martinez-Corral
 #   Sai Charan Lanka
+#     <lankasaicharan123@gmail.com>
+#   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
 #
 # Copyright Unai Martinez-Corral
 #

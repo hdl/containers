@@ -1,5 +1,7 @@
 # Authors:
 #   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
 #   Torsten Meissner
 #
 # Copyright Unai Martinez-Corral

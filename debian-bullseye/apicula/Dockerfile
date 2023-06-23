@@ -2,6 +2,8 @@
 
 # Authors:
 #   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
 #   Lucas Teske
 #
 # Copyright Unai Martinez-Corral

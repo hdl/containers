@@ -3,6 +3,8 @@
 # Authors:
 #   Patrick Lehmann
 #   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
 #
 # Copyright Unai Martinez-Corral
 #

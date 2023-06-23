@@ -2,6 +2,9 @@
 
 # Authors:
 #   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#   Patrick Richer St-Onge
+#     <pars@kaloom.com>
 #
 # Copyright Unai Martinez-Corral
 #

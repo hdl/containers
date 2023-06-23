@@ -2,6 +2,7 @@
 
 # Authors:
 #   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
 #
 # Copyright Unai Martinez-Corral
 #

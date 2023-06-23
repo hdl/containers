@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# Authors:
+#   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#
 # Copyright Unai Martinez-Corral
 #
 # Licensed under the Apache License, Version 2.0 (the "License");

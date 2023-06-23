@@ -1,5 +1,12 @@
 #!/usr/bin/env sh
 
+# Authors:
+#   Staf Verhaegen
+#     <staf@stafverhaegen.be>
+#   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
+#
 # Copyright Unai Martinez-Corral
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
