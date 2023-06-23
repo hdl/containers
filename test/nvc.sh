@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-# Copyright 2020-2023 Unai Martinez-Corral <unai.martinezcorral@ehu.eus>
+# Copyright Unai Martinez-Corral
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
