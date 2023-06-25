@@ -245,7 +245,7 @@ jobs:
       images:
         - build/nextpnr/base
         - build/nextpnr/build
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     nextpnr-prjs:
       images:
         - pkg/nextpnr/${arch}
@@ -254,13 +254,13 @@ jobs:
         - { arch: ice40, prj: icestorm   }
         - { arch: ecp5,  prj: prjtrellis }
         - { arch: nexus, prj: prjoxide   }
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     nextpnr:
       images:
         - pkg/nextpnr/generic
         - nextpnr/generic
         - nextpnr
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     openroad:
       images:
         - pkg/openroad
