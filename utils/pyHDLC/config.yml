@@ -151,7 +151,7 @@ jobs:
     icestorm:       *SysDebianDefaultArchSet
     irsim:          *SysDebianDefaultArchSet
     iverilog:       *SysDebianAmd64
-    klayout:        *SysDebianBullseyeAmd64
+    klayout:        *SysDebianAmd64
     magic:          *SysDebianDefaultArchSet
     netgen:         *SysDebianDefaultArchSet
     nvc:
