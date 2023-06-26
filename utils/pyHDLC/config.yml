@@ -221,7 +221,7 @@ jobs:
     impl-build:
       images:
         - build/impl
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     impl-prjs:
       images:
         - impl/${arch}
@@ -229,13 +229,13 @@ jobs:
         - { arch: ice40, prj: icestorm   }
         - { arch: ecp5,  prj: prjtrellis }
         - { arch: nexus, prj: prjoxide   }
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     impl:
       images:
         - impl/generic
         - impl/pnr
         - impl
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     magic-irsim:
       images:
         - magic/irsim
