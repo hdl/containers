@@ -164,7 +164,7 @@ jobs:
         - amd64
         - arm64v8
     openfpgaloader: *SysDebianDefaultArchSet
-    prjoxide:       *SysDebianBullseyeAmd64
+    prjoxide:       *SysDebianAmd64
     prjtrellis:     *SysDebianAmd64
     verible:        *SysDebianAmd64
     verilator:      *SysDebianDefaultArchSet
