@@ -210,7 +210,7 @@ jobs:
       images:
         - pkg/ghdl-yosys-plugin#ghdl
         - ghdl/yosys
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     ghdl:
       images:
         - pkg/ghdl
