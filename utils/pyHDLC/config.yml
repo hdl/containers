@@ -217,7 +217,7 @@ jobs:
         - pkg/ghdl/llvm#ghdl
         - ghdl
         - ghdl/llvm
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     impl-build:
       images:
         - build/impl
