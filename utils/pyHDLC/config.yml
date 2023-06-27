@@ -205,7 +205,7 @@ jobs:
         - formal/min
         - formal
         - formal/all
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     ghdl-yosys-plugin:
       images:
         - pkg/ghdl-yosys-plugin#ghdl
