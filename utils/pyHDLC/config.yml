@@ -185,7 +185,7 @@ jobs:
   runonly:
     conda:                     *SysDebianDefaultArchSet
     prog:                      *SysDebianBullseyeAmd64
-    sim:                       *SysDebianBullseyeAmd64
+    sim:                       *SysDebianAmd64
     conda/f4pga/xc7/toolchain: *SysDebianBullseyeAmd64
     conda/f4pga/xc7:           *SysDebianBullseyeAmd64
 
@@ -272,18 +272,18 @@ jobs:
       images:
         - pkg/osvb
         - sim/osvb
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     cosim:
       images:
         - sim/${prj}-slim
         - sim/${prj}
         - prj: scipy
         - prj: octave
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     gnuplot:
       images:
         - sim/octave/gnuplot
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     f4pga-xc7-devices:
       images:
         - [ conda/f4pga/xc7/a50t  ]
