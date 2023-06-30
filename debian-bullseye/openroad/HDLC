@@ -44,13 +44,35 @@ setup() {
   git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git /tmp/openroad
   cd /tmp/openroad
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//g' > /tmp/hdlc.openroad.version
-  mkdir build
+  mkdir build /tmp/boost /tmp/or-tools
 }
 
 build() {
+
+  # See https://github.com/The-OpenROAD-Project/OpenROAD/blob/master/etc/DependencyInstaller.sh
+
+  # system package libboost-all-dev is version 1.74.0, but openroad requires at least 1.78
+  cd /tmp/boost
+  boostVersion=1.80.0
+  curl -fsSL "https://boostorg.jfrog.io/artifactory/main/release/${boostVersion}/source/boost_${boostVersion//./_}.tar.gz" |\
+  tar -xz --strip 1
+  ./bootstrap.sh --prefix='/usr/local'
+  ./b2 install --with-iostreams --with-test --with-serialization --with-system --with-thread -j $(nproc)
+
+  # or-tools is not available as a system package
+  cd /tmp/or-tools
+  # OpenROAD's build recipes expect or-tools to be located at '/opt/or-tools'.
+  # See https://github.com/search?q=repo%3AThe-OpenROAD-Project%2FOpenROAD%20or-tools&type=code
+  orToolsPath='/opt/or-tools'
+  mkdir -p "$orToolsPath"
+  orToolsVersion=9.5.2237
+  curl -fsSL "https://github.com/google/or-tools/releases/download/v$(echo "$orToolsVersion" | sed 's/\(.*\)\..*/\1/')/or-tools_amd64_debian-11_cpp_v${orToolsVersion}.tar.gz" |\
+  tar -xz --strip 1 -C "$orToolsPath"
+
   cd /tmp/openroad/build
   cmake ..
   make DESTDIR=/opt/openroad install
+
 }
 
 # -DBUILD_GUI=ON
