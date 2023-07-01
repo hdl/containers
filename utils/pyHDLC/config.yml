@@ -267,7 +267,7 @@ jobs:
         - openroad
         - pkg/openroad/gui
         - openroad/gui
-      sys: *SysDebianBullseyeAmd64
+      sys: *SysDebianAmd64
     osvb:
       images:
         - pkg/osvb

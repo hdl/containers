@@ -1,0 +1,101 @@
+# Authors:
+#   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
+#
+# Copyright Unai Martinez-Corral
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
+
+#---
+
+FROM $REGISTRY/build/dev AS setup
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && setup
+
+#---
+
+FROM scratch AS version
+COPY --from=setup /tmp/hdlc.openroad.version /
+
+#---
+
+FROM setup AS build
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+
+#---
+
+FROM setup AS build-gui
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends_gui[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+
+#---
+
+FROM scratch AS pkg
+COPY --from=build /opt/openroad /openroad
+COPY --from=build /opt/or-tools /or-tools
+
+#---
+
+FROM scratch AS pkg-gui
+COPY --from=build-gui /opt/openroad /openroad-gui
+COPY --from=build /opt/or-tools /or-tools
+
+#---
+
+FROM $REGISTRY/build/base AS run
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
+
+#---
+
+FROM run AS openroad
+
+COPY --from=build /opt/openroad /
+COPY --from=build /opt/or-tools /opt/or-tools
+
+#---
+
+FROM run AS gui
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends_gui[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build-gui /opt/openroad /
+COPY --from=build-gui /opt/or-tools /opt/or-tools
