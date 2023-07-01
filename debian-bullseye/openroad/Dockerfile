@@ -62,11 +62,13 @@ RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 FROM scratch AS pkg
 COPY --from=build /opt/openroad /openroad
+COPY --from=build /opt/or-tools /or-tools
 
 #---
 
 FROM scratch AS pkg-gui
 COPY --from=build-gui /opt/openroad /openroad-gui
+COPY --from=build /opt/or-tools /or-tools
 
 #---
 
@@ -83,6 +85,7 @@ RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
 FROM run AS openroad
 
 COPY --from=build /opt/openroad /
+COPY --from=build /opt/or-tools /opt/or-tools
 
 #---
 
@@ -95,3 +98,4 @@ RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=build-gui /opt/openroad /
+COPY --from=build-gui /opt/or-tools /opt/or-tools
