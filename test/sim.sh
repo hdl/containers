@@ -28,6 +28,7 @@ cd $(dirname "$0")
 ./_env.sh
 
 ./ghdl.sh
+./nvc.sh
 ./verilator.sh
 ./iverilog.sh
 

@@ -179,6 +179,7 @@ digraph G {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_sim_ghdl/llvm" [label="ghdl/llvm"]
+      "p_sim_pkg/nvc" [label="pkg/nvc"]
       "p_sim_pkg/verilator" [label="pkg/verilator"]
       "p_sim_pkg/iverilog" [label="pkg/iverilog"]
     }
@@ -297,6 +298,7 @@ digraph G {
   "scratch" -> "p_xyce_scratch" -> d_xyce;
 
   "ghdl/llvm" -> "p_sim_ghdl/llvm" -> d_sim;
+  "pkg/nvc" -> "p_sim_pkg/nvc" -> d_sim;
   "pkg/verilator" -> "p_sim_pkg/verilator" -> d_sim;
   "pkg/iverilog" -> "p_sim_pkg/iverilog" -> d_sim;
 
@@ -339,6 +341,7 @@ digraph G {
   }
 
   { edge [style=dashed, color=grey]
+    "p_sim_pkg/nvc" -> "sim";
     "p_sim_pkg/verilator" -> "sim";
     "p_sim_pkg/iverilog" -> "sim";
   }
