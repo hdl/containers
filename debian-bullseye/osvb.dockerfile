@@ -45,7 +45,7 @@ RUN mkdir /tmp/osvb \
  && cd /tmp/vunit \
  && python3 setup.py bdist_wheel \
  && mv dist/*.whl /tmp/osvb/ \
- && git clone -b 2022.04 --recurse-submodules https://github.com/osvvm/OsvvmLibraries /tmp/osvb/osvvmlibs
+ && git clone -b 2022.06 --recurse-submodules https://github.com/osvvm/OsvvmLibraries /tmp/osvb/osvvmlibs
 
 #---
 
