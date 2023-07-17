@@ -35,7 +35,7 @@ COPY --from=build-mcode / /ghdl/usr/local/
 
 #---
 
-FROM ghdl/pkg:bullseye-llvm-9 AS build-llvm
+FROM ghdl/pkg:bullseye-llvm-11 AS build-llvm
 
 # TODO Build GHDL on $REGISTRY/build/build instead of picking ghdl/pkg:bullseye-mcode
 
@@ -70,8 +70,7 @@ COPY --from=build-llvm / /usr/local/
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     gcc \
-    libgnat-9 \
-    libllvm9 \
+    libllvm11 \
     zlib1g-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists
