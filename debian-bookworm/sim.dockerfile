@@ -42,6 +42,11 @@ RUN apt-get update -qq \
     libzstd1 \
     perl \
     python3-pip \
+    python3-venv \
     make \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
+
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"

@@ -32,9 +32,9 @@ RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     g++ \
     git \
-    python3-dev \
-    python3-setuptools \
-    python3-wheel
+    python3-dev
+
+RUN pip3 install -U setuptools wheel
 
 RUN mkdir /tmp/osvb \
  && git clone -b master --recurse-submodules https://github.com/cocotb/cocotb /tmp/cocotb \
@@ -66,7 +66,7 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/*
 
 RUN --mount=type=cache,from=pkg-osvb,src=/osvb/,target=/tmp/osvb/ \
- pip3 install -U /tmp/osvb/*.whl pytest --progress-bar off --break-system-packages \
+ pip3 install -U /tmp/osvb/*.whl pytest --progress-bar off \
  && rm -rf ~/.cache \
  && mkdir /opt/osvb \
  && cp -vr /tmp/osvb/osvvmlibs/ /opt/osvb/osvvmlibs/
