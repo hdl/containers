@@ -21,7 +21,7 @@ Images including multiple tools
 
 * **S**\ imulation:
 
-  * |SHIELD:Image:sim| GHDL + Verilator + Icarus Verilog
+  * |SHIELD:Image:sim| GHDL + NVC + Verilator + Icarus Verilog
   * |SHIELD:Image:sim/osvb| CoCoTb, OSVVM and VUnit; on top of ``sim``.
   * |SHIELD:Image:sim/scipy-slim| matplotlib and numpy; on top of ``sim``.
   * |SHIELD:Image:sim/scipy| ``osvb``; on top of ``sim/scipy-slim``.

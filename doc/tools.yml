@@ -232,6 +232,13 @@ nvc:
     - 'nvc'
   use:
     - 'nvc'
+  in:
+    - 'sim'
+    - 'sim/osvb'
+    - 'sim/scipy-slim'
+    - 'sim/scipy'
+    - 'sim/octave-slim'
+    - 'sim/octave'
 
 #---
 
