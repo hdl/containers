@@ -44,4 +44,5 @@ RUN apt-get update -qq \
     python3-pip \
     tcl8.6 \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/* \
+ && ln -sfv tclsh8.6 /usr/bin/tclsh

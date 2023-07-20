@@ -27,6 +27,8 @@ cd $(dirname "$0")
 
 ./_env.sh
 
+which tclsh
+
 ./ghdl.sh
 ./nvc.sh
 ./verilator.sh
