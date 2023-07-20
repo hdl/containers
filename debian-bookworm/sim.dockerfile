@@ -38,12 +38,12 @@ RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     binutils \
     libdw1 \
-    libtcl8.6 \
     libzstd1 \
+    make \
     perl \
     python3-pip \
     python3-venv \
-    make \
+    tcl8.6 \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
