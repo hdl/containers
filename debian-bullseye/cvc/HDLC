@@ -31,12 +31,13 @@ makedepends=(
   libfl-dev
   m4
   patch
-  python3-toml
+  python3-pip
   python3-pyparsing
   openjdk-11-jre-headless
 )
 
 build() {
+  pip3 install tomli
   git clone https://github.com/cvc5/cvc5.git /tmp/cvc5
   cd /tmp/cvc5
   git tag -d latest
