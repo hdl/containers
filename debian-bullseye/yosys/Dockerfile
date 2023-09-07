@@ -33,6 +33,14 @@ RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} ${testdepends[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && runtests
+
 #---
 
 FROM scratch AS pkg

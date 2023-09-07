@@ -33,11 +33,19 @@ makedepends=(
   make
 )
 
+testdepends=(
+  g++
+)
+
 build() {
   git clone https://github.com/YosysHQ/yosys.git /tmp/yosys
   cd /tmp/yosys
   make -j $(nproc)
   make DESTDIR=/opt/yosys install
+}
+
+runtests() {
+  cd /tmp/yosys
   make test
 }
 
