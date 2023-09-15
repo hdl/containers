@@ -166,6 +166,7 @@ jobs:
     openfpgaloader: *SysDebianDefaultArchSet
     prjoxide:       *SysDebianAmd64
     prjtrellis:     *SysDebianAmd64
+    synlig:         *SysDebianAmd64
     verible:        *SysDebianAmd64
     verilator:      *SysDebianDefaultArchSet
     vtr:            *SysDebianBullseyeAmd64
@@ -179,6 +180,7 @@ jobs:
     pono:       *SysDebianBullseyeAmd64
     superprove: *SysDebianBullseyeAmd64
     symbiyosys: *SysDebianAmd64
+    uhdm:       *SysDebianAmd64
     yices2:     *SysDebianAmd64
     z3:         *SysDebianAmd64
 
