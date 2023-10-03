@@ -36,6 +36,7 @@ RUN apt-get update -qq \
     python3-pip \
     python3-venv \
     openjdk-17-jre-headless \
+    tree \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && update-ca-certificates  \
  && rm -rf /var/lib/apt/lists/*
@@ -58,9 +59,8 @@ RUN git clone https://github.com/alainmarcel/Surelog.git /tmp/Surelog \
 
 RUN mkdir /tmp/synlig && cd /tmp/synlig \
  && curl -fsSL https://codeload.github.com/chipsalliance/synlig/tar.gz/main | tar xzf - --strip-components=1 \
- && make -j`nproc` install \
- && ls -la out \
- && ls -la out/bin \
+ && make install \
+ && tree out \
  && mkdir -p /opt/synlig/ \
  && cp build/systemverilog-plugin/systemverilog.so /opt/synlig/
 
