@@ -58,7 +58,7 @@ RUN git clone https://github.com/alainmarcel/Surelog.git /tmp/Surelog \
 
 RUN mkdir /tmp/synlig && cd /tmp/synlig \
  && curl -fsSL https://codeload.github.com/chipsalliance/synlig/tar.gz/main | tar xzf - --strip-components=1 \
- && make -C frontends/systemverilog -j`nproc` \
+ && make -j`nproc` \
  && mkdir -p /opt/synlig/ \
  && cp build/systemverilog-plugin/systemverilog.so /opt/synlig/
 
