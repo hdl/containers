@@ -18,7 +18,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
+ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 #---
 
@@ -34,15 +34,10 @@ RUN apt-get update -qq \
  && update-ca-certificates  \
  && rm -rf /var/lib/apt/lists/*
 
-ENV VIRTUAL_ENV=/opt/venv
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
-RUN pip3 install orderedmultidict
-
 RUN git clone https://github.com/alainmarcel/UHDM.git /tmp/UHDM \
  && cd /tmp/UHDM \
  && git submodule update --init --recursive \
+ && pip3 install orderedmultidict \
  && make DESTDIR=/opt/uhdm install
 
 #---
