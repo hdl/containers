@@ -2,6 +2,8 @@
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
+#   Niklaus Leuenberger
+#     <niklaus.leuenb@gmail.com>
 #
 # Copyright Unai Martinez-Corral
 #
@@ -23,15 +25,26 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 #---
 
-FROM ghdl/pkg:bullseye-mcode AS build-mcode
+FROM $REGISTRY/build/build AS build-mcode
 
-# TODO Build GHDL on $REGISTRY/build/build instead of picking ghdl/pkg:bullseye-mcode
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    gcc gnat libz-dev \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/ghdl/ghdl /tmp/ghdl \
+ && mkdir /tmp/ghdl/build \
+ && cd /tmp/ghdl/build \
+ && ../configure --prefix=/opt/ghdl \
+ && make \
+ && make install
 
 #---
 
 FROM scratch AS pkg-mcode
 
-COPY --from=build-mcode / /ghdl/usr/local/
+COPY --from=build-mcode /opt/ghdl /ghdl/usr/local/
 
 #---
 
@@ -59,7 +72,7 @@ RUN apt-get update -qq \
 
 FROM base AS mcode
 
-COPY --from=build-mcode / /usr/local/
+COPY --from=build-mcode /opt/ghdl /usr/local/
 
 #--
 
