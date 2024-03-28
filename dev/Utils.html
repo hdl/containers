@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Utils &mdash; HDL Containers: Building and deploying container images for open source Electronic Design Automation latest documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyHDLC Reference" href="pyHDLC_Reference.html" />
+    <link rel="prev" title="Package images" href="PackageImages.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/icon.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="http://hdl.github.io/containers">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CollectionsAndArchitectures.html">Collections and architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ToolsAndImages.html">Tools and images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../About.html">About</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ug/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/FineGrained.html">Fine-grained pulling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/AllInOne.html">All-in-one images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/GUI.html">Tools with GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/USBIP.html">USB/IP</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphs.html">Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackageImages.html">Package images</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyHDLC_Reference.html">pyHDLC Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyhdlc">pyHDLC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#options">options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyhdlc-build">pyHDLC build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyhdlc-help">pyHDLC help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyhdlc-jobs">pyHDLC jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyhdlc-pull">pyHDLC pull</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyhdlc-push">pyHDLC push</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyhdlc-test">pyHDLC test</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#smoke-tests">Smoke-tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inspect">Inspect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#yaml-configuration-file">YAML Configuration File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defaults">Defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jobs">Jobs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CI.html">Continuous Integration (CI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tasks.html">Tasks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HDL Containers: Building and deploying container images for open source Electronic Design Automation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Utils</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/hdl/containers/blob/main/doc/dev/Utils.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utils">
+<span id="development-utils"></span><h1>Utils<a class="headerlink" href="#utils" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>Some helper shell and Python utilities are available in <a class="reference external" href="https://github.com/hdl/containers/blob/main/utils/bin">utils/bin</a> and
+<a class="reference external" href="https://github.com/hdl/containers/blob/main/utils/pyHDLC">utils/pyHDLC</a>, respectively.
+A <a class="reference external" href="https://github.com/hdl/containers/blob/main/utils/setup.sh">utils/setup.sh</a> script is provided for installing Python dependencies and adding the <code class="docutils literal notranslate"><span class="pre">bin</span></code>
+subdir to the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.
+Since <code class="docutils literal notranslate"><span class="pre">pip</span></code> is used for installing <a class="reference external" href="https://github.com/hdl/containers/blob/main/utils/pyHDLC/requirements.txt">utils/pyHDLC/requirements.txt</a>, it is
+desirable to create a virtual environment (<a class="reference external" href="https://docs.python.org/3/library/venv.html">docs.python.org/3/library/venv</a>)
+before running <code class="docutils literal notranslate"><span class="pre">setup.sh</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>virtualenv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+./utils/setup.sh
+</pre></div>
+</div>
+<section id="pyhdlc">
+<span id="development-utils-pyhdlc"></span><h2>pyHDLC<a class="headerlink" href="#pyhdlc" title="Permalink to this heading">¶</a></h2>
+<p>Helper tool for building one or multiple images, for easily browsing publicly
+available tags, and for generating graphs showing the dependencies between them.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: pyHDLC [-n] {help,jobs,pull,build,test,push} ...</span>
+</pre></div>
+</div>
+<p>Happy hacking!</p>
+<section id="options">
+<h3>options<a class="headerlink" href="#options" title="Permalink to this heading">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-n">
+<span id="cmdoption-pyhdlc-n"></span><span id="cmdoption-pyHDLC-noexec"></span><span id="cmdoption-pyhdlc-noexec"></span><span class="sig-name descname"><span class="pre">-n</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--noexec</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print commands but do not execute them.</p>
+</dd></dl>
+
+</section>
+<section id="pyhdlc-build">
+<h3>pyHDLC build<a class="headerlink" href="#pyhdlc-build" title="Permalink to this heading">¶</a></h3>
+<p>Build one or multiple images (and optionally test them) at once, reusing common parameters.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><cite>DOCKERFILE</cite> defaults to <cite>Image</cite> if <cite>None</cite>.</p>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: pyHDLC build [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY]</span>
+<span class="go">                    [-f DOCKERFILE] [-t TARGET] [-i ARGIMG] [-p] [-d] [-q]</span>
+<span class="go">                    Image [Image ...]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-build-arg-image">
+<span id="cmdoption-pyhdlc-build-arg-image"></span><span class="sig-name descname"><span class="pre">image</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-build-arg-image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Image name(s), without registry prefix.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-build-h">
+<span id="cmdoption-pyhdlc-build-h"></span><span id="cmdoption-pyHDLC-build-help"></span><span id="cmdoption-pyhdlc-build-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-build-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-build-a">
+<span id="cmdoption-pyhdlc-build-a"></span><span id="cmdoption-pyHDLC-build-arch"></span><span id="cmdoption-pyhdlc-build-arch"></span><span class="sig-name descname"><span class="pre">-a</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;architecture&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--arch</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;architecture&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-build-a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the architecture.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-build-c">
+<span id="cmdoption-pyhdlc-build-c"></span><span id="cmdoption-pyHDLC-build-collection"></span><span id="cmdoption-pyhdlc-build-collection"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;collection&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--collection</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;collection&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-build-c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the collection/subset of images.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-build-r">
+<span id="cmdoption-pyhdlc-build-r"></span><span id="cmdoption-pyHDLC-build-registry"></span><span id="cmdoption-pyhdlc-build-registry"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;registry&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--registry</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;registry&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-build-r" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container image registry prefix.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-build-f">
+<span id="cmdoption-pyhdlc-build-f"></span><span id="cmdoption-pyHDLC-build-dockerfile"></span><span id="cmdoption-pyhdlc-build-dockerfile"></span><span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;dockerfile&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--dockerfile</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;dockerfile&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-build-f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dockerfile to be built, from the collection.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-build-t">
+<span id="cmdoption-pyhdlc-build-t"></span><span id="cmdoption-pyHDLC-build-target"></span><span id="cmdoption-pyhdlc-build-target"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;target&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--target</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;target&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-build-t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Target stage in the dockerfile.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-build-i">
+<span id="cmdoption-pyhdlc-build-i"></span><span id="cmdoption-pyHDLC-build-argimg"></span><span id="cmdoption-pyhdlc-build-argimg"></span><span class="sig-name descname"><span class="pre">-i</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;argimg&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--argimg</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;argimg&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-build-i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base image passed as an ARG to the dockerfile.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-build-p">
+<span id="cmdoption-pyhdlc-build-p"></span><span id="cmdoption-pyHDLC-build-pkg"></span><span id="cmdoption-pyhdlc-build-pkg"></span><span class="sig-name descname"><span class="pre">-p</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--pkg</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-build-p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprend ‘pkg/’ to Image and set Target to ‘pkg’ (if unset).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-build-d">
+<span id="cmdoption-pyhdlc-build-d"></span><span id="cmdoption-pyHDLC-build-default"></span><span id="cmdoption-pyhdlc-build-default"></span><span class="sig-name descname"><span class="pre">-d</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--default</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-build-d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set default Dockerfile, Target and ArgImg options, given the image name(s).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-build-q">
+<span id="cmdoption-pyhdlc-build-q"></span><span id="cmdoption-pyHDLC-build-test"></span><span id="cmdoption-pyhdlc-build-test"></span><span class="sig-name descname"><span class="pre">-q</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--test</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-build-q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test each image right after building it.</p>
+</dd></dl>
+
+</section>
+<section id="pyhdlc-help">
+<h3>pyHDLC help<a class="headerlink" href="#pyhdlc-help" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: pyHDLC help [-h] [Command]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-help-arg-command">
+<span id="cmdoption-pyhdlc-help-arg-command"></span><span class="sig-name descname"><span class="pre">command</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-help-arg-command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print help page(s) for a command.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-help-h">
+<span id="cmdoption-pyhdlc-help-h"></span><span id="cmdoption-pyHDLC-help-help"></span><span id="cmdoption-pyhdlc-help-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-help-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</section>
+<section id="pyhdlc-jobs">
+<h3>pyHDLC jobs<a class="headerlink" href="#pyhdlc-jobs" title="Permalink to this heading">¶</a></h3>
+<p>Generate list of jobs for a named task.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: pyHDLC jobs [-h] [-f {gha,GHA}] Name</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-jobs-arg-name">
+<span id="cmdoption-pyhdlc-jobs-arg-name"></span><span class="sig-name descname"><span class="pre">name</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-jobs-arg-name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifier to extract jobs from the YAML configuration file.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-jobs-h">
+<span id="cmdoption-pyhdlc-jobs-h"></span><span id="cmdoption-pyHDLC-jobs-help"></span><span id="cmdoption-pyhdlc-jobs-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-jobs-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-jobs-f">
+<span id="cmdoption-pyhdlc-jobs-f"></span><span id="cmdoption-pyHDLC-jobs-format"></span><span id="cmdoption-pyhdlc-jobs-format"></span><span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"> <span class="pre">{gha,GHA}</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--format</span></span><span class="sig-prename descclassname"> <span class="pre">{gha,GHA}</span></span><a class="headerlink" href="#cmdoption-pyHDLC-jobs-f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output format (by default, print GitHub Actions’ set-output syntax).</p>
+</dd></dl>
+
+</section>
+<section id="pyhdlc-pull">
+<h3>pyHDLC pull<a class="headerlink" href="#pyhdlc-pull" title="Permalink to this heading">¶</a></h3>
+<p>Pull container image(s) from registry.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: pyHDLC pull [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY]</span>
+<span class="go">                   Image [Image ...]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-pull-arg-image">
+<span id="cmdoption-pyhdlc-pull-arg-image"></span><span class="sig-name descname"><span class="pre">image</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-pull-arg-image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Image name(s), without registry prefix.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-pull-h">
+<span id="cmdoption-pyhdlc-pull-h"></span><span id="cmdoption-pyHDLC-pull-help"></span><span id="cmdoption-pyhdlc-pull-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-pull-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-pull-a">
+<span id="cmdoption-pyhdlc-pull-a"></span><span id="cmdoption-pyHDLC-pull-arch"></span><span id="cmdoption-pyhdlc-pull-arch"></span><span class="sig-name descname"><span class="pre">-a</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;architecture&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--arch</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;architecture&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-pull-a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the architecture.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-pull-c">
+<span id="cmdoption-pyhdlc-pull-c"></span><span id="cmdoption-pyHDLC-pull-collection"></span><span id="cmdoption-pyhdlc-pull-collection"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;collection&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--collection</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;collection&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-pull-c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the collection/subset of images.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-pull-r">
+<span id="cmdoption-pyhdlc-pull-r"></span><span id="cmdoption-pyHDLC-pull-registry"></span><span id="cmdoption-pyhdlc-pull-registry"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;registry&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--registry</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;registry&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-pull-r" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container image registry prefix.</p>
+</dd></dl>
+
+</section>
+<section id="pyhdlc-push">
+<h3>pyHDLC push<a class="headerlink" href="#pyhdlc-push" title="Permalink to this heading">¶</a></h3>
+<p>Push container image(s) to registry/registries.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: pyHDLC push [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY]</span>
+<span class="go">                   [-m [MIRROR ...]]</span>
+<span class="go">                   Image [Image ...]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-push-arg-image">
+<span id="cmdoption-pyhdlc-push-arg-image"></span><span class="sig-name descname"><span class="pre">image</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-push-arg-image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Image name(s), without registry prefix.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-push-h">
+<span id="cmdoption-pyhdlc-push-h"></span><span id="cmdoption-pyHDLC-push-help"></span><span id="cmdoption-pyhdlc-push-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-push-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-push-a">
+<span id="cmdoption-pyhdlc-push-a"></span><span id="cmdoption-pyHDLC-push-arch"></span><span id="cmdoption-pyhdlc-push-arch"></span><span class="sig-name descname"><span class="pre">-a</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;architecture&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--arch</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;architecture&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-push-a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the architecture.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-push-c">
+<span id="cmdoption-pyhdlc-push-c"></span><span id="cmdoption-pyHDLC-push-collection"></span><span id="cmdoption-pyhdlc-push-collection"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;collection&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--collection</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;collection&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-push-c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the collection/subset of images.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-push-r">
+<span id="cmdoption-pyhdlc-push-r"></span><span id="cmdoption-pyHDLC-push-registry"></span><span id="cmdoption-pyhdlc-push-registry"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;registry&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--registry</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;registry&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-push-r" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container image registry prefix.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-push-m">
+<span id="cmdoption-pyhdlc-push-m"></span><span id="cmdoption-pyHDLC-push-mirror"></span><span id="cmdoption-pyhdlc-push-mirror"></span><span class="sig-name descname"><span class="pre">-m</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;mirror&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--mirror</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;mirror&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-push-m" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of additional registry/registries to push to. Supported placeholders: <cite>#A</cite> (architecture), <cite>#C</cite> (collection).</p>
+</dd></dl>
+
+</section>
+<section id="pyhdlc-test">
+<h3>pyHDLC test<a class="headerlink" href="#pyhdlc-test" title="Permalink to this heading">¶</a></h3>
+<p>Test container image(s).</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The supported syntax for each Image is <code class="docutils literal notranslate"><span class="pre">name[#&lt;DirName&gt;]</span></code>, where the optional <code class="docutils literal notranslate"><span class="pre">&lt;DirName&gt;</span></code> is used as the location in
+package images to copy the content from.</p>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: pyHDLC test [-h] [-a ARCHITECTURE] [-c COLLECTION] [-r REGISTRY]</span>
+<span class="go">                   Image [Image ...]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-test-arg-image">
+<span id="cmdoption-pyhdlc-test-arg-image"></span><span class="sig-name descname"><span class="pre">image</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-test-arg-image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Image name(s), without registry prefix.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-test-h">
+<span id="cmdoption-pyhdlc-test-h"></span><span id="cmdoption-pyHDLC-test-help"></span><span id="cmdoption-pyhdlc-test-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-pyHDLC-test-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-test-a">
+<span id="cmdoption-pyhdlc-test-a"></span><span id="cmdoption-pyHDLC-test-arch"></span><span id="cmdoption-pyhdlc-test-arch"></span><span class="sig-name descname"><span class="pre">-a</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;architecture&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--arch</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;architecture&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-test-a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the architecture.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-test-c">
+<span id="cmdoption-pyhdlc-test-c"></span><span id="cmdoption-pyHDLC-test-collection"></span><span id="cmdoption-pyhdlc-test-collection"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;collection&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--collection</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;collection&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-test-c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the collection/subset of images.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-pyHDLC-test-r">
+<span id="cmdoption-pyhdlc-test-r"></span><span id="cmdoption-pyHDLC-test-registry"></span><span id="cmdoption-pyhdlc-test-registry"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;registry&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--registry</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;registry&gt;</span></span><a class="headerlink" href="#cmdoption-pyHDLC-test-r" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container image registry prefix.</p>
+</dd></dl>
+
+</section>
+</section>
+<section id="smoke-tests">
+<span id="development-test"></span><h2>Smoke-tests<a class="headerlink" href="#smoke-tests" title="Permalink to this heading">¶</a></h2>
+<p>There is a test script in <a class="reference external" href="https://github.com/hdl/containers/blob/main/test/">test/</a> for each image in this ecosystem, according to the following
+convention:</p>
+<ul class="simple">
+<li><p>Scripts for package images, <code class="docutils literal notranslate"><span class="pre">/[ARCHITECTURE/][COLLECTION/]pkg/TOOL_NAME[/SUBNAME]</span></code>, are named
+<code class="docutils literal notranslate"><span class="pre">TOOL_NAME[--SUBNAME].pkg.sh</span></code>.</p></li>
+<li><p>Scripts for other images, <code class="docutils literal notranslate"><span class="pre">/[ARCHITECTURE/][COLLECTION/]NAME[/SUBNAME]</span></code>, are named <code class="docutils literal notranslate"><span class="pre">NAME[--SUBNAME].sh</span></code>.</p></li>
+<li><p>Other helper scripts are named <code class="docutils literal notranslate"><span class="pre">_*.sh</span></code>.</p></li>
+</ul>
+<p>Furthermore, <a class="reference external" href="https://github.com/hdl/smoke-tests">gh:hdl/smoke-tests</a> is a submodule of this repository (<a class="reference external" href="https://github.com/hdl/containers/blob/main/test">test/smoke-tests</a>).
+Smoke-tests contains fine-grained tests that cover the most important functionalities of the tools.
+Those are used in other packaging projects too.
+Therefore, container tests are expected to execute the smoke-tests corresponding to the tools available in the image,
+before executing more specific tests.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pyHDLC</span> <span class="pre">test</span></code> allows testing the runnable and package images.
+It is used in CI but can be useful locally too.
+When using <cite>pyHDLC test</cite>, <code class="docutils literal notranslate"><span class="pre">DirName</span></code> allows to optionally specify the name of the directory inside the package image
+which needs to be copied to the temporary image for testing.
+By default, the escaped name of the image is used as the location.</p>
+</section>
+<section id="inspect">
+<span id="development-inspect"></span><h2>Inspect<a class="headerlink" href="#inspect" title="Permalink to this heading">¶</a></h2>
+<p>All ready-to-use images (coloured <span class="green">GREEN</span> or <span class="maroon">BROWN</span> in the <a class="reference internal" href="Graphs.html#development-graphs"><span class="std std-ref">Graphs</span></a>) are
+runnable.
+Therefore, users/contributors can run containers and test the tools interactively or through scripting.
+However, since <code class="docutils literal notranslate"><span class="pre">pkg</span></code> images are not runnable, creating another image is required in order to inspect their content
+from a container.
+For instance:</p>
+<div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">busybox</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>REGISTRY/pkg/TOOL_NAME<span class="w"> </span>/TOOL_NAME<span class="w"> </span>/
+</pre></div>
+</div>
+<p>In fact, <code class="docutils literal notranslate"><span class="pre">pyHDLC</span> <span class="pre">test</span></code> uses a similar dockerfile for running <code class="docutils literal notranslate"><span class="pre">.pkg.sh</span></code> scripts from <a class="reference external" href="https://github.com/hdl/containers/blob/main/test/">test/</a>.
+See <a class="reference internal" href="#development-test"><span class="std std-ref">Test</span></a>.</p>
+<p>Alternatively, or as a complement, <a class="reference external" href="https://github.com/wagoodman/dive">gh:wagoodman/dive</a> is a lightweight tool with a nice terminal based GUI for
+exploring layers and contents of container images.
+It can be downloaded as a tarball/zipfile, or used as a container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>//var/run/docker.sock://var/run/docker.sock<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>wagoodman/dive<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>REGISTRY/<span class="o">[</span>ARCHITECTURE/<span class="o">][</span>COLLECTION/<span class="o">]</span>IMAGE<span class="o">[</span>:TAG<span class="o">]</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/dive.png"><img alt="gh:wagoodman/dive" src="../_images/dive.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Inspection of <code class="docutils literal notranslate"><span class="pre">REGISTRY/pkg/yosys</span></code> with <a class="reference external" href="https://github.com/wagoodman/dive">gh:wagoodman/dive</a>.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p><a class="reference external" href="https://github.com/hdl/containers/blob/main/utils/bin/dockerDive">dockerDive</a> is a wrapper around the wagoodman/dive container, which supports one
+or two arguments for specifying the image to be inspected.
+The default registry prefix is <code class="docutils literal notranslate"><span class="pre">gcr.io/hdl-containers</span></code>, however, it can be overriden through envvar <code class="docutils literal notranslate"><span class="pre">HDL_REGISTRY</span></code>.</p>
+<p>For instance, inspect image <code class="docutils literal notranslate"><span class="pre">gcr.io/hdl-containers/debian/bullseye/ghdl</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dockerDive<span class="w"> </span>debian/bullseye<span class="w"> </span>ghdl
+</pre></div>
+</div>
+<p>or, inspect any image from any registry:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">HDL_REGISTRY</span><span class="o">=</span>docker.io<span class="w"> </span>dockerDive<span class="w"> </span>python:slim-bookworm
+</pre></div>
+</div>
+</section>
+<section id="yaml-configuration-file">
+<span id="development-configuration"></span><h2>YAML Configuration File<a class="headerlink" href="#yaml-configuration-file" title="Permalink to this heading">¶</a></h2>
+<p>Most of the complexity regarding images, dockerfiles, arguments and jobs is defined in the YAML configuration file
+(see <a class="reference external" href="https://github.com/hdl/containers/blob/main/utils/pyHDLC/config.yml">config.yml</a>), which contains two data fields:</p>
+<ul class="simple">
+<li><p><strong>defaults</strong>: which dockerfile and (optionally) target stage or base image to be used when building “non-regular” images.
+That is, using a non-empty target, an specific base image, etc.
+If the image name is not defined in this field, the dockerfile defaults to the image name and the target depends on
+option <em>package</em>.</p></li>
+<li><p><strong>jobs</strong>: which images and for which collections and architectures to build each list of tasks.
+For convenienve, the keywords match the name of the main tool/group in the list.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Contributors will find that field <strong>anchors</strong> in <a class="reference external" href="https://github.com/hdl/containers/blob/main/utils/pyHDLC/config.yml">config.yml</a> is ignored by pyHDLC
+commands when analyzing the file.
+That’s because anchors are used to reduce the verbosity of the YAML file, but they are resolved by the loader.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://yaml.org">yaml.org</a></p></li>
+<li><p><a class="reference external" href="https://blog.daemonl.com/2016/02/yaml.html">blog.daemonl.com: YAML - Anchors, References, Extend</a></p></li>
+</ul>
+</div>
+<p>The fields and types supported in the configuration file are defined through dataclasses (see <a class="reference internal" href="pyHDLC_Reference.html#development-utils-pyhdlc-reference-dataclasses"><span class="std std-ref">Dataclasses</span></a>).
+However, some details about the syntax can be non-obvious.
+See the clarifications below:</p>
+<section id="defaults">
+<span id="development-configuration-defaults"></span><h3>Defaults<a class="headerlink" href="#defaults" title="Permalink to this heading">¶</a></h3>
+<p>If the following conditions are met, images need not to be explicitly listed in the configuration file:</p>
+<ul class="simple">
+<li><p>The dockerfile to be used matches the image name.</p></li>
+<li><p>The default target is empty, or <code class="docutils literal notranslate"><span class="pre">pkg</span></code> if a package image is being built.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">argimg</span></code> is empty.</p></li>
+</ul>
+<p>Otherwise, a dictionary is expected, with the fields that need to be overriden (<code class="docutils literal notranslate"><span class="pre">dockerfile</span></code>, <code class="docutils literal notranslate"><span class="pre">target</span></code> and/or
+<code class="docutils literal notranslate"><span class="pre">argimg</span></code>).</p>
+</section>
+<section id="jobs">
+<span id="development-configuration-jobs"></span><h3>Jobs<a class="headerlink" href="#jobs" title="Permalink to this heading">¶</a></h3>
+<p>There are four kinds of job lists:</p>
+<ul class="simple">
+<li><p><strong>default</strong>: two images are built for each collection and architecture, a regular image and a package image.</p></li>
+<li><p><strong>pkgonly</strong>: a package image is built for each collection and architecture.</p></li>
+<li><p><strong>runonly</strong>: a regular image is built for each collection and architecture.</p></li>
+<li><p><strong>custom</strong>: the lists of jobs/tasks are declared as cross-products, and <code class="docutils literal notranslate"><span class="pre">exclude</span></code> is supported.</p></li>
+</ul>
+<p>In <strong>default</strong>, <strong>pkgonly</strong> and <strong>runonly</strong>, a dictionary of lists is expected per keyword; each key corresponding to a
+collection and the lists specifying the architectures.
+Conversely, in <strong>custom</strong> three fields are expected:</p>
+<ul>
+<li><p><strong>sys</strong>: a dictionary of lists, such as the one expected in <strong>default</strong>, <strong>pkgonly</strong> and <strong>runonly</strong>.</p></li>
+<li><p><strong>images</strong>: either a list or a list of lists of image names.</p>
+<ul>
+<li><p>If a single list is provided, all images are built sequentially in a single job:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">images</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">formal/min</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">formal</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">formal/all</span>
+</pre></div>
+</div>
+<p>If a list of lists is provided, each of them is built sequentially in a different job:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">images</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">conda/f4pga/xc7/a50t</span><span class="w">  </span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">conda/f4pga/xc7/a100t</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">conda/f4pga/xc7/a200t</span><span class="w"> </span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Argument substitution is supported through <code class="docutils literal notranslate"><span class="pre">${arg}</span></code>.
+If any of the items in the list is a dictionary, instead of a string, it is used as an argument in the substitution
+phase.
+If the same argument is provided multiple times, a cross-product of the arguments and the lists is produced:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">images</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sim/${prj}-slim</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sim/${prj}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">prj</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scipy</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">prj</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">octave</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">images</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg/nextpnr/${arch}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nextpnr/${arch}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nextpnr/${prj}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> arch</span><span class="p">:</span><span class="w"> </span><span class="nv">ice40</span><span class="p p-Indicator">,</span><span class="nt"> prj</span><span class="p">:</span><span class="w"> </span><span class="nv">icestorm</span><span class="w">   </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> arch</span><span class="p">:</span><span class="w"> </span><span class="nv">ecp5</span><span class="p p-Indicator">,</span><span class="nt">  prj</span><span class="p">:</span><span class="w"> </span><span class="nv">prjtrellis</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>exclude</strong>: optionally, declare combinations of <em>sys</em> and <em>images</em> which should be excluded from the produced
+cross-products.
+For example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">images</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pkg/nextpnr/${arch}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nextpnr/${arch}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nextpnr/${prj}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> arch</span><span class="p">:</span><span class="w"> </span><span class="nv">ecp5</span><span class="p p-Indicator">,</span><span class="nt">  prj</span><span class="p">:</span><span class="w"> </span><span class="nv">prjtrellis</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> arch</span><span class="p">:</span><span class="w"> </span><span class="nv">nexus</span><span class="p p-Indicator">,</span><span class="nt"> prj</span><span class="p">:</span><span class="w"> </span><span class="nv">prjoxide</span><span class="w">   </span><span class="p p-Indicator">}</span>
+<span class="nt">sys</span><span class="p">:</span><span class="w"> </span><span class="nv">*SysDebianAmd64</span>
+<span class="nt">exclude</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">sys</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> debian/buster</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">amd64</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">    </span><span class="nt">params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> arch</span><span class="p">:</span><span class="w"> </span><span class="nv">nexus</span><span class="p p-Indicator">,</span><span class="nt"> prj</span><span class="p">:</span><span class="w"> </span><span class="nv">prjoxide</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="PackageImages.html" class="btn btn-neutral float-left" title="Package images" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pyHDLC_Reference.html" class="btn btn-neutral float-right" title="pyHDLC Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, Unai Martinez-Corral and contributors.</p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

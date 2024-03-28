@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Package images &mdash; HDL Containers: Building and deploying container images for open source Electronic Design Automation latest documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utils" href="Utils.html" />
+    <link rel="prev" title="Graph generation/parsing" href="GraphGeneration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/icon.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="http://hdl.github.io/containers">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CollectionsAndArchitectures.html">Collections and architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ToolsAndImages.html">Tools and images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../About.html">About</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ug/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/FineGrained.html">Fine-grained pulling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/AllInOne.html">All-in-one images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/GUI.html">Tools with GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/USBIP.html">USB/IP</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphs.html">Graphs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Package images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CI.html">Continuous Integration (CI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tasks.html">Tasks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HDL Containers: Building and deploying container images for open source Electronic Design Automation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Package images</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/hdl/containers/blob/main/doc/dev/PackageImages.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="package-images">
+<span id="development-package-images"></span><h1>Package images<a class="headerlink" href="#package-images" title="Permalink to this heading">¶</a></h1>
+<p>Each EDA tool/project is built once only for each collection and architecture in this image/container ecosystem.
+However, some (many) of the tools need to be included in multiple images for different purposes.
+Moreover, it is desirable to keep build recipes separated, in order to better understand the dependencies of each
+tool/project.
+Therefore, <code class="docutils literal notranslate"><span class="pre">REGISTRY/[ARCHITECTURE/][COLLECTION/]pkg/</span></code> images are created/used (coloured <span class="blue">BLUE</span> in the
+<a class="reference internal" href="Graphs.html#development-graphs"><span class="std std-ref">Graphs</span></a>).
+These are all based on <code class="docutils literal notranslate"><span class="pre">scratch</span></code> and are not runnable.
+Instead, they contain pre-built artifacts, to be then added into other images through <code class="docutils literal notranslate"><span class="pre">COPY</span> <span class="pre">--from=</span></code>.</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">pkg</span></code> images are not runnable <em>per se</em>, but an intermediate utility, the usage of environment variables
+<code class="docutils literal notranslate"><span class="pre">PREFIX</span></code> and <code class="docutils literal notranslate"><span class="pre">DESTDIR</span></code> in the dockerfiles might be misleading.
+All the tools in the ecosystem are expected to be installed into <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>, the standard location for user built
+tools on most GNU/Linux distributions.
+Hence:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PREFIX</span></code> should typically not need to be modified.
+Most of the tools will default to <code class="docutils literal notranslate"><span class="pre">PREFIX=/usr/local</span></code>, which is correct.
+Yet, some tools might default to <code class="docutils literal notranslate"><span class="pre">/</span></code> or <code class="docutils literal notranslate"><span class="pre">/usr</span></code>.
+In those cases, setting it explicitly is required.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DESTDIR</span></code> must be set to an empty location when calling <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> or when copying the artifacts otherhow.
+The content of the corresponding package images is taken from that empty location.
+Therefore, if <code class="docutils literal notranslate"><span class="pre">DESTDIR</span></code> was unset, the artifacts of the tool might potentially be mixed with other existing assets
+in <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>.
+In most of the dockerfiles, <code class="docutils literal notranslate"><span class="pre">/opt/TOOL_NAME</span></code> is used as the temporary empty location.</p></li>
+</ul>
+<p>Despite the usage of these variables being documented in <a class="reference external" href="https://www.gnu.org/prep/standards/html_node/index.html">GNU Coding Standards</a>,
+<code class="docutils literal notranslate"><span class="pre">DESTDIR</span></code> seems not to be very used, except by packagers.
+As a result, contributors might need to patch the build scripts upstream.
+Sometimes <code class="docutils literal notranslate"><span class="pre">DESTDIR</span></code> is not supported at all, or it is supported but some lines in the makefiles are missing it.
+Do not hesitate to reach for help through the issues or the chat!</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="GraphGeneration.html" class="btn btn-neutral float-left" title="Graph generation/parsing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Utils.html" class="btn btn-neutral float-right" title="Utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, Unai Martinez-Corral and contributors.</p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

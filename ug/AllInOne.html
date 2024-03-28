@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All-in-one images &mdash; HDL Containers: Building and deploying container images for open source Electronic Design Automation latest documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tools with GUI" href="GUI.html" />
+    <link rel="prev" title="Fine-grained pulling" href="FineGrained.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/icon.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="http://hdl.github.io/containers">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CollectionsAndArchitectures.html">Collections and architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ToolsAndImages.html">Tools and images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../About.html">About</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FineGrained.html">Fine-grained pulling</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">All-in-one images</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#f4pga">F4PGA</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="GUI.html">Tools with GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USBIP.html">USB/IP</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Graphs.html">Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/PackageImages.html">Package images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/CI.html">Continuous Integration (CI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Tasks.html">Tasks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HDL Containers: Building and deploying container images for open source Electronic Design Automation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>All-in-one images</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/hdl/containers/blob/main/doc/ug/AllInOne.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="all-in-one-images">
+<span id="userguide-all-in-one"></span><h1>All-in-one images<a class="headerlink" href="#all-in-one-images" title="Permalink to this heading">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These images are coloured <span class="maroon">BROWN</span> in the <a class="reference internal" href="../dev/Graphs.html#development-graphs"><span class="std std-ref">Graphs</span></a>.</p>
+</div>
+<p>Multiple tools from fine-grained images are included in larger images for common use cases.
+These are named <code class="docutils literal notranslate"><span class="pre">REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]MAIN_USAGE</span></code>.
+This is the recommended approach for users who are less familiar with containers and want a quick replacement for
+full-featured virtual machines.
+Coherently, some common Unix tools (such as make or cmake) are also included in these all-in-one images.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/tmeissner/formal_hw_verification">gh:tmeissner/formal_hw_verification</a>:
+the CI workflow uses image <code class="docutils literal notranslate"><span class="pre">REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]formal/all</span></code> along with GitHub Actions’
+<em>Docker Step</em> syntax.</p></li>
+<li><p><a class="reference external" href="https://github.com/stnolting/neorv32-setups">gh:stnolting/neorv32-setups</a>:
+the implementation workflow (for generating bitstreams from VHDL sources) uses image
+<code class="docutils literal notranslate"><span class="pre">REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]impl</span></code> along with GitHub Actions’ <em>Docker Step</em> syntax.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/pyTooling/Actions/#context">pyTooling/Actions</a></p></li>
+<li><p><a class="reference external" href="https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions#referencing-a-container-on-docker-hub">docs.github.com: Learn GitHub Actions » Referencing a container on Docker Hub</a></p></li>
+</ul>
+</div>
+<section id="f4pga">
+<h2>F4PGA<a class="headerlink" href="#f4pga" title="Permalink to this heading">¶</a></h2>
+<p>As explained in <a class="reference internal" href="../ToolsAndImages.html#tools-and-images-f4pga"><span class="std std-ref">F4PGA (Conda)</span></a>, multiple ready-to-use images are provided
+including Miniconda, F4PGA toolchains and architecture definitions for Xilinx’s <strong>xc7</strong> or QuickLogic’s <strong>eos-s3</strong>
+devices.
+These container images are expected to be used as explained in <a class="reference external" href="https://f4pga-examples.rtfd.io/en/latest/building-examples.html"><img alt="'f4pga-examples.rtfd.io'" src="https://img.shields.io/website.svg?label=f4pga-examples.rtfd.io&amp;longCache=true&amp;style=flat-square&amp;url=http%3A%2F%2Ff4pga-examples.rtfd.io%2Fen%2Flatest%2Findex.html&amp;logo=ReadTheDocs&amp;logoColor=fff" style="height: 22px;" /></a>, assuming that the
+environment is prepared already and available in the PATH.
+Hence, the Conda environment can be activated straightaway.
+See, for instance:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>:~#<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/chipsalliance/f4pga-examples
+...
+:~#<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>f4pga-examples
+
+:~/f4pga-examples#<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>/<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>://wrk<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-w<span class="w"> </span>//wrk<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>gcr.io/hdl-containers/conda/f4pga/xc7/a100t
+
+...
+<span class="o">(</span>xc7<span class="o">)</span><span class="w"> </span>root@c3d4dd1d97cc:/wrk#<span class="w"> </span><span class="nv">TARGET</span><span class="o">=</span><span class="s2">&quot;arty_100&quot;</span><span class="w"> </span>make<span class="w"> </span>-C<span class="w"> </span>xc7/picosoc_demo/
+...
+<span class="o">(</span>xc7<span class="o">)</span><span class="w"> </span>root@c3d4dd1d97cc:/wrk#<span class="w"> </span>ls<span class="w"> </span>-1<span class="w"> </span>xc7/picosoc_demo/build/arty_100/
+constraints.place
+fasm.log
+pack.log
+packing_pin_util.rpt
+place.log
+pre_pack.report_timing.setup.rpt
+report_timing.hold.rpt
+report_timing.setup.rpt
+report_unconstrained_timing.hold.rpt
+report_unconstrained_timing.setup.rpt
+route.log
+top.bit
+top.eblif
+top.fasm
+top.ioplace
+top.json
+top.json.carry_fixup.json
+top.json.carry_fixup_out.json
+top.json.post_abc9.ilang
+top.json.pre_abc9.ilang
+top.net
+top.net.post_routing
+top.place
+top.route
+top.sdc
+top_io.json
+top_synth.log
+top_synth.v
+top_synth.v.premap.v
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="FineGrained.html" class="btn btn-neutral float-left" title="Fine-grained pulling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="GUI.html" class="btn btn-neutral float-right" title="Tools with GUI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, Unai Martinez-Corral and contributors.</p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
