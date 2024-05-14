@@ -41,6 +41,6 @@ build() {
   make -C build -j$(nproc) PREFIX="$PREFIX"
   DESTDIR=/opt/boolector
   mkdir -p "${DESTDIR}${PREFIX}"/bin "${DESTDIR}${PREFIX}"/lib
-  cp build/bin/boolector build/bin/btor* deps/btor2tools/bin/btorsim "${DESTDIR}${PREFIX}"/bin/
+  cp build/bin/boolector build/bin/btor* deps/btor2tools/build/bin/* "${DESTDIR}${PREFIX}"/bin/
   cp build/lib/libboolector.a "${DESTDIR}${PREFIX}"/lib/
 }
