@@ -44,7 +44,7 @@ jobs:
       matrix: ${{ steps.generate.outputs.matrix }}
     steps:
     - name: 🧰 Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: 🛠️ Setup
       run: ./utils/setup.sh
@@ -66,7 +66,7 @@ jobs:
     steps:
 
     - name: 🧰 Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules: recursive
 
