@@ -37,7 +37,7 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /tmp/symbiyosys && cd /tmp/symbiyosys \
- && curl -fsSL https://codeload.github.com/YosysHQ/SymbiYosys/tar.gz/master | tar xzf - --strip-components=1 \
+ && curl -fsSL https://codeload.github.com/YosysHQ/SymbiYosys/tar.gz/main | tar xzf - --strip-components=1 \
  && make DESTDIR=/opt/symbiyosys install
 
 #---
