@@ -27,6 +27,7 @@ FROM $REGISTRY/build/build AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    libgit2-dev \
     libqt5svg5-dev \
     libqt5xmlpatterns5-dev \
     python3-dev \
@@ -62,6 +63,7 @@ FROM $REGISTRY/build/base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    libgit2-1.5 \
     libpulse-mainloop-glib0 \
     libpython3.11 \
     libqt5core5a \
