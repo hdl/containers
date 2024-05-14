@@ -73,7 +73,7 @@ defaults:
     pkg/cvc:        *EmptyTarget
     pkg/pono:       *EmptyTarget
     pkg/superprove: *EmptyTarget
-    pkg/symbiyosys: *EmptyTarget
+    pkg/sby:        *EmptyTarget
     pkg/yices2:     *EmptyTarget
     pkg/z3:         *EmptyTarget
     formal/min: { <<: *FormalDockerfile, target: min }
@@ -178,7 +178,7 @@ jobs:
     cvc:        *SysDebianAmd64
     pono:       *SysDebianBullseyeAmd64
     superprove: *SysDebianBullseyeAmd64
-    symbiyosys: *SysDebianAmd64
+    sby:        *SysDebianAmd64
     yices2:     *SysDebianAmd64
     z3:         *SysDebianAmd64
 

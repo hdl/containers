@@ -100,7 +100,7 @@ digraph G {
       "pkg/prjoxide"
       "pkg/prjtrellis"
       "pkg/superprove"
-      "pkg/symbiyosys"
+      "pkg/sby"
       "pkg/yices2"
       "pkg/yosys"
       "pkg/verible"
@@ -298,7 +298,7 @@ digraph G {
   subgraph cluster_formal {
     label = "Formal";
     m_formal -> {
-      "pkg/symbiyosys"
+      "pkg/sby"
       "pkg/boolector"
       "pkg/cvc"
       "pkg/pono"

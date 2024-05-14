@@ -20,28 +20,27 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: 'symbiyosys'
+ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
-on:
-  pull_request:
-  push:
-  schedule:
-    - cron: '0 0 * * 5'
-  workflow_dispatch:
-  repository_dispatch:
-    types: [ symbiyosys ]
+#---
 
-env:
-  DOCKER_BUILDKIT: 1
+FROM $REGISTRY/build/base AS build
 
-jobs:
-  symbiyosys:
-    uses: ./.github/workflows/common.yml
-    with:
-      key: symbiyosys
-      skip-release: ${{ github.event_name == 'pull_request' }}
-    secrets:
-      gcr_token: '${{ secrets.GCR_JSON_KEY }}'
-      gh_token: '${{ github.token }}'
-      docker_user: '${{ secrets.DOCKER_USER }}'
-      docker_pass: '${{ secrets.DOCKER_PASS }}'
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    binutils \
+    g++ \
+    make \
+    python3-distutils \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates  \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir /tmp/sby && cd /tmp/sby \
+ && curl -fsSL https://codeload.github.com/YosysHQ/sby/tar.gz/main | tar xzf - --strip-components=1 \
+ && make DESTDIR=/opt/sby install
+
+#---
+
+FROM scratch
+COPY --from=build /opt/sby /sby

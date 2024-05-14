@@ -29,10 +29,10 @@ digraph G {
   { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
     d_boolector   [label="boolector"];
     d_pono        [label="pono"];
-    d_cvc        [label="cvc"];
+    d_cvc         [label="cvc"];
     d_formal      [label="formal"];
     d_superprove  [label="superprove"];
-    d_symbiyosys  [label="symbiyosys"];
+    d_sby         [label="sby"];
     d_yices2      [label="yices2"];
     d_z3          [label="z3"];
   }
@@ -50,7 +50,7 @@ digraph G {
       "pkg/cvc"
       "pkg/pono"
       "pkg/superprove"
-      "pkg/symbiyosys"
+      "pkg/sby"
       "pkg/yices2"
       "pkg/z3"
     }
@@ -132,18 +132,18 @@ digraph G {
     "pkg/superprove" -> "t_pkg/superprove";
   }
 
-  subgraph cluster_symbiyosys {
+  subgraph cluster_sby {
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
-      "p_symbiyosys_scratch" [label="scratch"]
-      "p_symbiyosys_build/base" [label="build/base"]
+      "p_sby_scratch" [label="scratch"]
+      "p_sby_build/base" [label="build/base"]
     }
 
-    d_symbiyosys -> "pkg/symbiyosys" [style=dotted];
+    d_sby -> "pkg/sby" [style=dotted];
 
-    "t_pkg/symbiyosys" [shape=folder, color=red, fontcolor=red, label="symbiyosys.pkg"];
+    "t_pkg/sby" [shape=folder, color=red, fontcolor=red, label="sby.pkg"];
 
-    "pkg/symbiyosys" -> "t_pkg/symbiyosys";
+    "pkg/sby" -> "t_pkg/sby";
   }
 
   subgraph cluster_yices2 {
@@ -181,7 +181,7 @@ digraph G {
       "p_formal_cvc" [label="pkg/cvc"]
       "p_formal_ghdl" [label="ghdl/yosys"]
       "p_formal_pono" [label="pkg/pono"]
-      "p_formal_symbiyosys" [label="pkg/symbiyosys"]
+      "p_formal_sby" [label="pkg/sby"]
       "p_formal_superprove" [label="pkg/superprove"]
       "p_formal_z3" [label="pkg/z3"]
       "p_formal_yices2" [label="pkg/yices2"]
@@ -210,7 +210,7 @@ digraph G {
     d_cvc
     d_pono
     d_superprove
-    d_symbiyosys
+    d_sby
     d_yices2
     d_z3
   }
@@ -224,7 +224,7 @@ digraph G {
   "scratch" -> "p_cvc_scratch" -> d_cvc;
 
   "ghdl/yosys" -> "p_formal_ghdl" -> d_formal;
-  "pkg/symbiyosys" -> "p_formal_symbiyosys" -> d_formal;
+  "pkg/sby" -> "p_formal_sby" -> d_formal;
   "pkg/boolector" -> "p_formal_boolector" -> d_formal;
   "pkg/cvc" -> "p_formal_cvc" -> d_formal;
   "pkg/pono" -> "p_formal_pono" -> d_formal;
@@ -235,8 +235,8 @@ digraph G {
   "build/build" -> "p_pono_build/build" -> d_pono;
   "scratch" -> "p_pono_scratch" -> d_pono;
 
-  "build/base" -> "p_symbiyosys_build/base" -> d_symbiyosys;
-  "scratch" -> "p_symbiyosys_scratch" -> d_symbiyosys;
+  "build/base" -> "p_sby_build/base" -> d_sby;
+  "scratch" -> "p_sby_scratch" -> d_sby;
 
   "build/build" -> "p_superprove_build/build" -> d_superprove;
   "scratch" -> "p_superprove_scratch" -> d_superprove;
@@ -255,14 +255,14 @@ digraph G {
     "p_formal_ghdl" -> "formal/min" -> "formal" -> "formal/all";
     "p_pono_scratch" -> "pkg/pono";
     "p_superprove_scratch" -> "pkg/superprove";
-    "p_symbiyosys_scratch" -> "pkg/symbiyosys";
+    "p_sby_scratch" -> "pkg/sby";
     "p_yices2_scratch" -> "pkg/yices2";
     "p_z3_scratch" -> "pkg/z3";
   }
 
   { edge [style=dashed, color=grey]
     {
-      "p_formal_symbiyosys",
+      "p_formal_sby",
       "p_formal_z3"
     } -> "formal/min";
 

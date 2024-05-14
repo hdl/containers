@@ -20,7 +20,7 @@ from build import build_image
 #    "synth:beta",
 #    "synth:formal",
 #
-#    "synth:symbiyosys",
+#    "synth:sby",
 #
 #    "build:base",
 #    "build:build",
@@ -42,7 +42,7 @@ def task(name, args, dry_run=False):
 
         "formal": ("cache", "formal"),
 
-        "symbiyosys": ("synth", "symbiyosys"),
+        "sby": ("synth", "sby"),
 
         "vunit": map( lambda backend: map( lambda tag: ("vunit", tag), [backend, "%s-master" % backend]
         ), ["mcode", "llvm", "gcc"]
@@ -82,7 +82,7 @@ def build(repo, tag, dry_run=False):
             return ("synth", tag, "yosys", {
                 "target": "yosys"
             })
-        if tag == "symbiyosys":
+        if tag == "sby":
             return ("synth", tag, "synth_formal", {
                 "args": [
                     'IMAGE=ghdl/synth:yosys'

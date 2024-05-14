@@ -26,12 +26,12 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
 
 # WORKAROUND: this is required because 'COPY --from' does not support ARGs
 FROM $REGISTRY/pkg/z3 AS pkg-z3
-FROM $REGISTRY/pkg/symbiyosys AS pkg-symbiyosys
+FROM $REGISTRY/pkg/sby AS pkg-sby
 
 FROM $REGISTRY/ghdl/yosys AS min
 
 COPY --from=pkg-z3 /z3 /
-COPY --from=pkg-symbiyosys /symbiyosys /
+COPY --from=pkg-sby /sby /
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

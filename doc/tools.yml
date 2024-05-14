@@ -316,10 +316,10 @@ superprove:
 
 #---
 
-symbiyosys:
+sby:
   src: true
   pkg:
-    - 'symbiyosys'
+    - 'sby'
   in:
     - 'formal/min'
     - 'formal'

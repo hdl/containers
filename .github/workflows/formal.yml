@@ -84,7 +84,7 @@ jobs:
         pull: >-
           ghdl/yosys
           pkg/z3
-          pkg/symbiyosys
+          pkg/sby
           pkg/yices2
           pkg/boolector
           pkg/cvc

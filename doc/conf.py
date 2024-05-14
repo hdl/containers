@@ -193,7 +193,7 @@ CIWorkflows = [
         "cvc",
         "pono",
         "superprove",
-        "symbiyosys",
+        "sby",
         "yices2",
         "z3",
     ],
