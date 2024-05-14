@@ -9,7 +9,7 @@ Credentials
 ===========
 
 In order to push images to container registries, credentials are required.
-The default ``github.token`` is enough for publishint to GHCR, however, docker.io and GCR do need specific secrets to be
+The default ``github.token`` is enough for publishing to GHCR, however, docker.io and GCR do need specific secrets to be
 setup.
 
 In The Google Cloud Platform (GCP), credentials are managed through a CLI tool named ``gcloud``.
