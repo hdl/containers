@@ -25,13 +25,10 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
 
 FROM $REGISTRY/build/build AS build
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    cargo \
- && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists/*
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-RUN git clone --recurse-submodules https://github.com/gatecat/prjoxide /tmp/prjoxide \
+RUN source "$HOME/.cargo/env" \
+ && git clone --recurse-submodules https://github.com/gatecat/prjoxide /tmp/prjoxide \
  && cd /tmp/prjoxide/libprjoxide \
  && cargo install --path prjoxide --root /opt/prjoxide/usr/local
 
