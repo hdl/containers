@@ -31,8 +31,9 @@ makedepends=(
   libfl-dev
   m4
   patch
-  python3-toml
   python3-pyparsing
+  python3-toml
+  python3-venv
   openjdk-11-jre-headless
 )
 
