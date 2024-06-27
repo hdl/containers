@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collections and architectures &mdash; HDL Containers: Building and deploying container images for open source Electronic Design Automation latest documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tools and images" href="ToolsAndImages.html" />
+    <link rel="prev" title="HDL Containers" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/icon.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="http://hdl.github.io/containers">Home</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Collections and architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ToolsAndImages.html">Tools and images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="About.html">About</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ug/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ug/FineGrained.html">Fine-grained pulling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ug/AllInOne.html">All-in-one images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ug/GUI.html">Tools with GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ug/USBIP.html">USB/IP</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dev/Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/Graphs.html">Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/PackageImages.html">Package images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/Utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/CI.html">Continuous Integration (CI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/Tasks.html">Tasks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="References.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HDL Containers: Building and deploying container images for open source Electronic Design Automation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Collections and architectures</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/hdl/containers/blob/main/doc/CollectionsAndArchitectures.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="collections-and-architectures">
+<span id="colections"></span><h1>Collections and architectures<a class="headerlink" href="#collections-and-architectures" title="Permalink to this heading">¶</a></h1>
+<p>Images in this repository are organised in <em>collections</em> and built for multiple architectures.
+A <em>collection</em> is a set of images which share a common ancestor; a base layer.
+Having images with a common ancestor allows reducing bandwidth and disk usage when pulling several of them.
+See <a class="reference external" href="https://docs.docker.com/storage/storagedriver/#images-and-layers">docs.docker.com: About storage drivers | Images and layers</a>.</p>
+<p>Collections:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">debian/bookworm</span></code> based on <code class="docutils literal notranslate"><span class="pre">ARCHITECTURE/debian:bookworm-slim</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">debian/bullseye</span></code> based on <code class="docutils literal notranslate"><span class="pre">ARCHITECTURE/debian:bullseye-slim</span></code> (default)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rockylinux/8</span></code> based on <code class="docutils literal notranslate"><span class="pre">ARCHITECTURE/rockylinux:8</span></code></p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Deprecated:</p>
+<ul class="simple">
+<li><p><em>None</em></p></li>
+</ul>
+<p>Removed:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">debian/buster</span></code> based on <code class="docutils literal notranslate"><span class="pre">ARCHITECTURE/debian:buster-slim</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">centos/7</span></code> based on <code class="docutils literal notranslate"><span class="pre">ARCHITECTURE/centos:7</span></code></p></li>
+</ul>
+</div>
+<p>Architectures:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://hub.docker.com/u/amd64">amd64</a></p></li>
+<li><p><a class="reference external" href="https://hub.docker.com/u/arm32v7">arm32v7</a></p></li>
+<li><p><a class="reference external" href="https://hub.docker.com/u/arm64v8">arm64v8</a></p></li>
+<li><p><a class="reference external" href="https://hub.docker.com/u/ppc64le">ppc64le</a></p></li>
+<li><p><a class="reference external" href="https://hub.docker.com/u/s390x">s390x</a></p></li>
+<li><p><a class="reference external" href="https://hub.docker.com/u/mips64le">mips64le</a></p></li>
+<li><p><a class="reference external" href="https://hub.docker.com/u/riscv64">riscv64</a></p></li>
+</ul>
+<p>Each image is published to both <cite>gcr.io</cite> and <cite>ghcr.io</cite>:</p>
+<p class="centered">
+<strong><a class="reference external" href="https://gcr.io/hdl-containers"><img alt="Full image name (GCR)" class="shield" src="https://img.shields.io/badge/-gcr.io/hdl--containers/[ARCHITECTURE/][COLLECTION/]IMAGE-555555.svg?longCache=true&amp;style=flat-square&amp;logo=Google%20Cloud&amp;logoColor=f2f1ef" style="height: 22px;" /></a> <a class="reference external" href="https://github.com/hdl/containers/packages"><img alt="Full image name (GHCR)" class="shield" src="https://img.shields.io/badge/-ghcr.io/hdl/[ARCHITECTURE/][COLLECTION/]IMAGE-555555.svg?longCache=true&amp;style=flat-square&amp;logo=GitHub&amp;logoColor=f2f1ef" style="height: 22px;" /></a></strong></p><p>However, fields <code class="docutils literal notranslate"><span class="pre">ARCHITECURE</span></code> and <code class="docutils literal notranslate"><span class="pre">COLLECTION</span></code> are optional because:</p>
+<ul class="simple">
+<li><p>Images for the default architecture are mirrored to <a class="reference external" href="https://gcr.io/hdl-containers"><img alt="SHIELD:Mirror:GCR:NoArchitecture" class="shield" src="https://img.shields.io/badge/-gcr.io/hdl--containers/COLLECTION/IMAGE-555555.svg?longCache=true&amp;style=flat-square&amp;logo=Google%20Cloud&amp;logoColor=f2f1ef" style="height: 22px;" /></a> and
+<a class="reference external" href="https://github.com/hdl/containers/packages"><img alt="SHIELD:Mirror:GHCR:NoArchitecture" class="shield" src="https://img.shields.io/badge/-ghcr.io/hdl/COLLECTION/IMAGE-555555.svg?longCache=true&amp;style=flat-square&amp;logo=GitHub&amp;logoColor=f2f1ef" style="height: 22px;" /></a>.</p></li>
+<li><p>Images of the default collection are mirrored to <a class="reference external" href="https://gcr.io/hdl-containers"><img alt="SHIELD:Mirror:GCR:NoCollection" class="shield" src="https://img.shields.io/badge/-gcr.io/hdl--containers/ARCHITECTURE/IMAGE-555555.svg?longCache=true&amp;style=flat-square&amp;logo=Google%20Cloud&amp;logoColor=f2f1ef" style="height: 22px;" /></a> and
+<a class="reference external" href="https://github.com/hdl/containers/packages"><img alt="SHIELD:Mirror:GHCR:NoCollection" class="shield" src="https://img.shields.io/badge/-ghcr.io/hdl/ARCHITECTURE/IMAGE-555555.svg?longCache=true&amp;style=flat-square&amp;logo=GitHub&amp;logoColor=f2f1ef" style="height: 22px;" /></a>.</p></li>
+<li><p>Images of the default collection for the default architecture are mirrored to <a class="reference external" href="https://hub.docker.com/u/hdlc"><img alt="SHIELD:Mirror:Docker" class="shield" src="https://img.shields.io/badge/-docker.io/hdlc-555555.svg?longCache=true&amp;style=flat-square&amp;logo=Docker&amp;logoColor=f2f1ef" style="height: 22px;" /></a>.</p></li>
+<li><p>Images of the default collection for the default architecture which are not <code class="docutils literal notranslate"><span class="pre">build</span></code> or <code class="docutils literal notranslate"><span class="pre">pkg</span></code> are mirrored to
+<a class="reference external" href="https://gcr.io/hdl-containers"><img alt="SHIELD:Mirror:GCR:Default" class="shield" src="https://img.shields.io/badge/-gcr.io/hdl--containers/IMAGE-555555.svg?longCache=true&amp;style=flat-square&amp;logo=Google%20Cloud&amp;logoColor=f2f1ef" style="height: 22px;" /></a> and <a class="reference external" href="https://github.com/hdl/containers/packages"><img alt="SHIELD:Mirror:GHCR:Default" class="shield" src="https://img.shields.io/badge/-ghcr.io/hdl/IMAGE-555555.svg?longCache=true&amp;style=flat-square&amp;logo=GitHub&amp;logoColor=f2f1ef" style="height: 22px;" /></a>.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Image names and tags in this documentation are provided without the <em>registry prefix</em>.
+Hence, one of the prefixes listed above needs to be used when actually pulling/using the images.
+See <a class="reference internal" href="ug/index.html#userguide"><span class="std std-ref">User Guide</span></a> for further details.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The table in <a class="reference internal" href="ToolsAndImages.html#tools-and-images"><span class="std std-ref">Tools and images</span></a> shows the tools available in the default collection for the default
+architecture.
+Some tools are available in a subset of collections or for a subset of architectures only.
+Browse the registries and/or the Continuous Integration workflows for finding images available in collections other
+than the default.</p>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="HDL Containers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ToolsAndImages.html" class="btn btn-neutral float-right" title="Tools and images" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, Unai Martinez-Corral and contributors.</p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

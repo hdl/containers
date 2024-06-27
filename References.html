@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>References &mdash; HDL Containers: Building and deploying container images for open source Electronic Design Automation latest documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Apache License 2.0" href="License.html" />
+    <link rel="prev" title="Tasks" href="dev/Tasks.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/icon.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="http://hdl.github.io/containers">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CollectionsAndArchitectures.html">Collections and architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ToolsAndImages.html">Tools and images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="About.html">About</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ug/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ug/FineGrained.html">Fine-grained pulling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ug/AllInOne.html">All-in-one images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ug/GUI.html">Tools with GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ug/USBIP.html">USB/IP</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dev/Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/Graphs.html">Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/PackageImages.html">Package images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/Utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/CI.html">Continuous Integration (CI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/Tasks.html">Tasks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#f4pga">F4PGA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#distroless">distroless</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#wolfi">Wolfi</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nixos">NixOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#librecores">LibreCores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#asic">ASIC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#google-container-regisry-gcr">Google Container Regisry (GCR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usb-ip">USB/IP</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HDL Containers: Building and deploying container images for open source Electronic Design Automation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>References</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/hdl/containers/blob/main/doc/References.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="references">
+<span id="id1"></span><h1>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/hadolint/hadolint">gh:hadolint/hadolint</a>: Haskell Dockerfile Linter</p></li>
+<li><p><a class="reference external" href="https://github.com/0x01be/rudder">gh:0x01be/rudder</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Mluckydwyer/hw-ci">gh:Mluckydwyer/hw-ci</a></p></li>
+<li><p><a class="reference external" href="https://github.com/limerainne/Dockerize-EDA">gh:limerainne/Dockerize-EDA</a></p></li>
+<li><p><a class="reference external" href="https://github.com/alpin3/ulx3s">gh:alpin3/ulx3s</a></p></li>
+<li><p><a class="reference external" href="https://github.com/vmunoz82/eda_tools">gh:vmunoz82/eda_tools</a></p></li>
+<li><p><a class="reference external" href="https://github.com/eine/elide/tree/master/elide/docker">eine/elide</a></p></li>
+<li><p><a class="reference external" href="https://github.com/cdsteinkuehler/QuartusBuildVMs">gh:cdsteinkuehler/QuartusBuildVMs</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ghdl/setup-ghdl-ci">gh:ghdl/setup-ghdl-ci</a></p></li>
+<li><p><a class="reference external" href="https://github.com/hackfin/ghdl-cross.mk">gh:hackfin/ghdl-cross.mk</a></p></li>
+<li><p><a class="reference external" href="https://github.com/rfdonnelly/docker-questa">gh:rfdonnelly/docker-questa</a></p></li>
+</ul>
+<section id="f4pga">
+<h2>F4PGA<a class="headerlink" href="#f4pga" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/SymbiFlow/make-env">gh:SymbiFlow/make-env</a></p>
+<ul>
+<li><p><a class="reference external" href="http://bit.ly/edda-conda-eda-spec">bit.ly/edda-conda-eda-spec</a>: Conda based system for FPGA and ASIC Dev</p></li>
+<li><p><a class="reference external" href="https://github.com/SymbiFlow/make-env/issues/15">Support providing the environment using docker rather than conda #15</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://github.com/im-tomu/fomu-toolchain">gh:im-tomu/fomu-toolchain</a></p></li>
+<li><p><a class="reference external" href="https://github.com/antmicro/runner">gh:antmicro/runner</a></p></li>
+</ul>
+</section>
+<section id="distroless">
+<h2>distroless<a class="headerlink" href="#distroless" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/GoogleContainerTools/distroless">gh:GoogleContainerTools/distroless</a></p></li>
+</ul>
+<section id="wolfi">
+<h3>Wolfi<a class="headerlink" href="#wolfi" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/wolfi-dev">gh:wolfi-dev</a></p></li>
+<li><p><a class="reference external" href="https://github.com/chainguard-dev/melange">gh:chainguard-dev/melange</a></p></li>
+<li><p><a class="reference external" href="https://github.com/chainguard-dev/apko">gh:chainguard-dev/apko</a></p></li>
+</ul>
+</section>
+</section>
+<section id="nixos">
+<h2>NixOS<a class="headerlink" href="#nixos" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-dockerTools">nixos.org/manual: pkgs.dockerTools</a></p></li>
+<li><p><a class="reference external" href="https://nix.dev/tutorials/building-and-running-docker-images">nix.dev/tutorials: Building and running Docker images</a></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="librecores">
+<h2>LibreCores<a class="headerlink" href="#librecores" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/librecores/ci-docker-image">gh:librecores/ci-docker-image</a></p></li>
+<li><p><a class="reference external" href="https://github.com/librecores/docker-images">gh:librecores/docker-images</a></p></li>
+<li><p>LibreCores CI Infrastructure (LCCI):</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/lccitools">gh:lccitools</a></p></li>
+<li><p><a class="reference external" href="https://github.com/lccidocker">gh:lccidocker</a></p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="asic">
+<h2>ASIC<a class="headerlink" href="#asic" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/The-OpenROAD-Project">gh:The-OpenROAD-Project</a></p></li>
+<li><p><a class="reference external" href="https://github.com/efabless/openlane">gh:efabless/openlane</a></p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/efabless/foss-asic-tools">gh:efabless/foss-asic-tools</a></p></li>
+<li><p><a class="reference external" href="https://github.com/hpretl/iic-osic-tools">gh:hpretl/iic-osic-tools</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://github.com/mabrains/OpenAnalogDesign">gh:mabrains/OpenAnalogDesign</a></p></li>
+<li><p><a class="reference external" href="https://github.com/carlosedp/riscv-bringup">RISC-V bring-up tracker</a></p></li>
+<li><p><a class="reference external" href="https://docs.google.com/document/d/1hSLKsz9xcEJgAMmYYer5cDwvPqas9_JGRUAgEORx1Yw">A Step-by-Step Example: Layout of a CMOS Inverter Using SkyWater Technology (SKW) 130nm Process</a></p></li>
+</ul>
+</section>
+<section id="google-container-regisry-gcr">
+<h2>Google Container Regisry (GCR)<a class="headerlink" href="#google-container-regisry-gcr" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/salrashid123/gcr_stats">gh:salrashid123/gcr_stats</a></p></li>
+<li><p><a class="reference external" href="https://github.com/gregsramblings/google-cloud-4-words">gh:gregsramblings/google-cloud-4-words</a>: The Google Cloud Developer’s Cheat Sheet</p></li>
+<li><p><a class="reference external" href="https://github.com/google/go-containerregistry/blob/main/cmd/crane/README.md">gh:google/go-containerregistry: cmd/crane/README.md</a></p></li>
+</ul>
+</section>
+<section id="usb-ip">
+<h2>USB/IP<a class="headerlink" href="#usb-ip" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/gw0/docker-alpine-kernel-modules">gh:gw0/docker-alpine-kernel-modules</a></p></li>
+<li><p><a class="reference external" href="https://github.com/virtualhere/docker">gh:virtualhere/docker</a></p>
+<ul>
+<li><p><a class="reference external" href="https://www.virtualhere.com/windows_server_software">Windows USB Server</a></p></li>
+<li><p><a class="reference external" href="https://www.virtualhere.com/usb_client_software">USB Client</a></p></li>
+<li><p><a class="reference external" href="https://www.virtualhere.com/linux_console">Linux Console Client</a></p></li>
+<li><p><a class="reference external" href="https://www.virtualhere.com/client_api">Client API</a></p></li>
+<li><p><a class="reference external" href="https://hub.docker.com/r/virtualhere/virtualhere-client">hub.docker.com/r/virtualhere/virtualhere-client</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dev/Tasks.html" class="btn btn-neutral float-left" title="Tasks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="License.html" class="btn btn-neutral float-right" title="Apache License 2.0" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, Unai Martinez-Corral and contributors.</p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

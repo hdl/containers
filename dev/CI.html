@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Continuous Integration (CI) &mdash; HDL Containers: Building and deploying container images for open source Electronic Design Automation latest documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tasks" href="Tasks.html" />
+    <link rel="prev" title="pyHDLC Reference" href="pyHDLC_Reference.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/icon.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="http://hdl.github.io/containers">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CollectionsAndArchitectures.html">Collections and architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ToolsAndImages.html">Tools and images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../About.html">About</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ug/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/FineGrained.html">Fine-grained pulling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/AllInOne.html">All-in-one images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/GUI.html">Tools with GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/USBIP.html">USB/IP</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graphs.html">Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PackageImages.html">Package images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Utils.html">Utils</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Continuous Integration (CI)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#status">Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#structure">Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Tasks.html">Tasks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HDL Containers: Building and deploying container images for open source Electronic Design Automation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Continuous Integration (CI)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/hdl/containers/blob/main/doc/dev/CI.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="continuous-integration-ci">
+<span id="development-continous-integration"></span><h1>Continuous Integration (CI)<a class="headerlink" href="#continuous-integration-ci" title="Permalink to this heading">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>At the moment, there is no triggering mechanism set up between different GitHub repositories.
+All the workflows in this repo are triggered by push events, CRON jobs, or manually.</p>
+</div>
+<section id="status">
+<span id="development-continous-integration-status"></span><h2>Status<a class="headerlink" href="#status" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Base, Simulation and Linting</p></th>
+<th class="head"><p>Synthesis, PnR and Prog</p></th>
+<th class="head"><p>Formal</p></th>
+<th class="head"><p>ASIC</p></th>
+<th class="head"><p>All-in-one</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/doc.yml"><img alt="'doc workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/doc.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=doc&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/apicula.yml"><img alt="'apicula workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/apicula.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=apicula&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/boolector.yml"><img alt="'boolector workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/boolector.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=boolector&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/irsim.yml"><img alt="'irsim workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/irsim.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=irsim&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/formal.yml"><img alt="'formal workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/formal.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=formal&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/base.yml"><img alt="'base workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/base.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=base&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/arachne-pnr.yml"><img alt="'arachne-pnr workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/arachne-pnr.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=arachne-pnr&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/cvc.yml"><img alt="'cvc workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/cvc.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=cvc&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/klayout.yml"><img alt="'klayout workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/klayout.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=klayout&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/sim.yml"><img alt="'sim workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/sim.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=sim&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/ghdl.yml"><img alt="'ghdl workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/ghdl.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=ghdl&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/ghdl-yosys-plugin.yml"><img alt="'ghdl-yosys-plugin workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/ghdl-yosys-plugin.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=ghdl-yosys-plugin&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/pono.yml"><img alt="'pono workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/pono.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=pono&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/magic.yml"><img alt="'magic workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/magic.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=magic&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/impl.yml"><img alt="'impl workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/impl.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=impl&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/gtkwave.yml"><img alt="'gtkwave workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/gtkwave.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=gtkwave&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/icestorm.yml"><img alt="'icestorm workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/icestorm.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=icestorm&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/superprove.yml"><img alt="'superprove workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/superprove.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=superprove&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/netgen.yml"><img alt="'netgen workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/netgen.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=netgen&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/prog.yml"><img alt="'prog workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/prog.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=prog&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/iverilog.yml"><img alt="'iverilog workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/iverilog.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=iverilog&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/nextpnr.yml"><img alt="'nextpnr workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/nextpnr.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=nextpnr&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/sby.yml"><img alt="'sby workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/sby.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=sby&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/openroad.yml"><img alt="'openroad workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/openroad.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=openroad&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/nvc.yml"><img alt="'nvc workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/nvc.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=nvc&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/openfpgaloader.yml"><img alt="'openfpgaloader workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/openfpgaloader.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=openfpgaloader&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/yices2.yml"><img alt="'yices2 workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/yices2.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=yices2&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/verible.yml"><img alt="'verible workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/verible.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=verible&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/prjoxide.yml"><img alt="'prjoxide workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/prjoxide.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=prjoxide&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/z3.yml"><img alt="'z3 workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/z3.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=z3&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/verilator.yml"><img alt="'verilator workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/verilator.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=verilator&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/prjtrellis.yml"><img alt="'prjtrellis workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/prjtrellis.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=prjtrellis&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/xschem.yml"><img alt="'xschem workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/xschem.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=xschem&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/f4pga.yml"><img alt="'f4pga workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/f4pga.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=f4pga&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/xyce.yml"><img alt="'xyce workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/xyce.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=xyce&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/vtr.yml"><img alt="'vtr workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/vtr.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=vtr&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><a class="reference external" href="https://github.com/hdl/containers/actions/workflows/yosys.yml"><img alt="'yosys workflow Status'" class="shield" src="https://img.shields.io/github/actions/workflow/status/hdl/containers/yosys.yml?branch=main&amp;longCache=true&amp;style=flat-square&amp;label=yosys&amp;logo=GitHub%20Actions&amp;logoColor=fff" style="height: 22px;" /></a></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="structure">
+<span id="development-continous-integration-structure"></span><h2>Structure<a class="headerlink" href="#structure" title="Permalink to this heading">¶</a></h2>
+<p>The continuous integration in this repository is based on commands <code class="docutils literal notranslate"><span class="pre">pull</span></code> and <code class="docutils literal notranslate"><span class="pre">build</span></code> provided by the Python utils
+(see <a class="reference internal" href="pyHDLC_Reference.html#development-utils-pyhdlc-reference"><span class="std std-ref">pyHDLC Reference</span></a>); so, contributors can execute exactly the same commands locally, for
+debugging and development.
+However, there are several layers of complexity around those commands, in order to precisely decide which images to
+build in each workflow/job execution.</p>
+<figure class="align-center" id="img-ci">
+<a class="reference internal image-reference" href="../_images/continuous_integration.svg"><img alt="Structure of the Continuous Integration (CI)" src="../_images/continuous_integration.svg" width="100%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Structure of the Continuous Integration (CI) in this repository.</span><a class="headerlink" href="#img-ci" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>As shown in <a class="reference internal" href="#img-ci"><span class="std std-numref">Fig. 12</span></a>, the following wrappers are used:</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In <a class="reference external" href="https://github.com/pyTooling/Actions/#context">pyTooling/Actions: Context</a>, details about Action and Workflow kinds supported in
+GitHub Actions are explained.
+See also <a class="reference external" href="https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions">Workflow syntax for GitHub Actions</a>.</p>
+</div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/hdl/containers/blob/main/utils/build-test-release/action.yml">build-test-release</a> is a local Composite Action with three steps,
+including setup, pulling/building/testing and releasing.</p></li>
+<li><p><a class="reference external" href="https://github.com/hdl/containers/blob/main/.github/workflows/common.yml">Common</a> is a Reusable Workflow with two jobs.
+The first job, named <em>matrix</em>, uses <code class="docutils literal notranslate"><span class="pre">pyHDLC</span> <span class="pre">jobs</span></code> to generate a list of tasks to be used in the second job, named
+<em>jobs</em> (see <a class="reference external" href="https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idoutputs">docs.github.com: Workflow syntax for GitHub Actions » jobs.&lt;job_id&gt;.outputs</a>).
+Then, the Composite Action is used in each of the dynamically generated jobs.</p></li>
+<li><p><a class="reference external" href="https://github.com/hdl/containers/blob/main/.github/workflows/dispatch.yml">Dispatch</a> is a Dispatchable Workflow, which calls the Reusable Workflow.
+In practice, <em>Dispatch</em> documents the internal triggering interface, but it is not used explicitly.
+There are dozens of workflows (one per tool or group) which are equivalent to <em>Dispatch</em> with some hardcoded inputs.
+Those are triggered through scheduled (CRON) events, by pushes, by Pull Requests or manually.</p></li>
+</ul>
+<p>Since most of the complexity of the orchestration is defined in the YAML configuration file used by pyHDLC, reading
+<a class="reference internal" href="Utils.html#development-configuration"><span class="std std-ref">YAML Configuration File</span></a> is strongly recommended.
+As shown in <a class="reference internal" href="#img-ci"><span class="std std-numref">Fig. 12</span></a>, data from the configuration file is used in the Reusable Workflow <em>Common</em> and in the
+build step of the Composite Action <em>build-test-release</em>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pyHDLC_Reference.html" class="btn btn-neutral float-left" title="pyHDLC Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Tasks.html" class="btn btn-neutral float-right" title="Tasks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, Unai Martinez-Corral and contributors.</p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

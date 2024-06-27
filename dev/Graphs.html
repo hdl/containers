@@ -1,0 +1,2518 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graphs &mdash; HDL Containers: Building and deploying container images for open source Electronic Design Automation latest documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Graph generation/parsing" href="GraphGeneration.html" />
+    <link rel="prev" title="Contributing" href="Contributing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/icon.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="http://hdl.github.io/containers">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CollectionsAndArchitectures.html">Collections and architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ToolsAndImages.html">Tools and images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../About.html">About</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ug/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/FineGrained.html">Fine-grained pulling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/AllInOne.html">All-in-one images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/GUI.html">Tools with GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/USBIP.html">USB/IP</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Graphs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="GraphGeneration.html">Graph generation/parsing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PackageImages.html">Package images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CI.html">Continuous Integration (CI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tasks.html">Tasks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HDL Containers: Building and deploying container images for open source Electronic Design Automation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Graphs</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/hdl/containers/blob/main/doc/dev/Graphs.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="graphs">
+<span id="development-graphs"></span><h1>Graphs<a class="headerlink" href="#graphs" title="Permalink to this heading">¶</a></h1>
+<p>Understanding how all the pieces in this project fit together might be daunting for newcomers.
+Fortunately, there is a map for helping maintainers and contributors traveling through the ecosystem.
+Subdir <a class="reference external" href="https://github.com/hdl/containers/blob/main/doc/graph/">doc/graph/</a> contains the sources of <a class="reference external" href="https://en.wikipedia.org/wiki/Directed_graph">directed graphs</a>, where the
+relations between workflows, dockerfiles, images and tests are shown.</p>
+<p>(<a class="reference external" href="https://graphviz.org/">Graphviz</a>)’s <code class="docutils literal notranslate"><span class="pre">digraph</span></code> format is used, hence, graphs can be rendered to multiple image
+formats.
+The output shown in <a class="reference internal" href="#img-graph"><span class="std std-numref">Fig. 2</span></a> describes which images are created in each map.
+See the details in the figure corresponding to the name of the subgraph:
+Base (<a class="reference internal" href="#img-graph-base"><span class="std std-numref">Fig. 3</span></a>),
+Sim (<a class="reference internal" href="#img-graph-sim"><span class="std std-numref">Fig. 4</span></a>),
+Synth (<a class="reference internal" href="#img-graph-synth"><span class="std std-numref">Fig. 5</span></a>),
+Impl (<a class="reference internal" href="#img-graph-impl"><span class="std std-numref">Fig. 6</span></a>),
+Formal (<a class="reference internal" href="#img-graph-formal"><span class="std std-numref">Fig. 7</span></a>),
+ASIC (<a class="reference internal" href="#img-graph-asic"><span class="std std-numref">Fig. 8</span></a>), and
+F4PGA (<a class="reference internal" href="#img-graph-f4pga"><span class="std std-numref">Fig. 9</span></a>).
+Multiple colours and arrow types are used for describing different dependency types.
+All of those are explained in the legend: <a class="reference internal" href="#img-graph-legend"><span class="std std-numref">Fig. 10</span></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>These graphs represent a single collection of images (the <em>virtual</em> aggregation of others).
+In practice, some tools might be missing in some collections.
+For instance, a tool might be available in Debian Buster based containers, but not in CentOS 7.
+That info is not tracked in the graphs yet.
+Please, see whether a dockerfile exists in the corresponding subdir.</p>
+</div>
+<figure class="align-center" id="img-graph">
+<div class="graphviz"><img src="../_images/graphviz-1c9c8facfb297ddb9ceb294cc06459ffd28f3e7e.png" alt="# Authors:
+#   Unai Martinez-Corral
+#     &lt;umartinezcorral&#64;antmicro.com&gt;
+#     &lt;unai.martinezcorral&#64;ehu.eus&gt;
+#
+# Copyright Unai Martinez-Corral
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Maps
+
+  { node [shape=point]
+    m_base
+    m_synth
+    m_sim
+    m_impl
+    m_formal
+    m_asic
+    m_f4pga
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    &quot;build/base&quot;
+    &quot;build/build&quot;
+    &quot;build/dev&quot;
+    { node [color=limegreen, fontcolor=limegreen]
+      &quot;apicula&quot;
+      &quot;arachne-pnr&quot;
+      &quot;ghdl&quot;
+      &quot;ghdl/llvm&quot;
+      &quot;gtkwave&quot;
+      &quot;icestorm&quot;
+      &quot;irsim&quot;
+      &quot;iverilog&quot;
+      &quot;klayout&quot;
+      &quot;magic&quot;
+      &quot;netgen&quot;
+      &quot;nextpnr/generic&quot;
+      &quot;nextpnr/ice40&quot;
+      &quot;nextpnr/nexus&quot;
+      &quot;nextpnr/ecp5&quot;
+      &quot;nextpnr&quot;
+      &quot;nvc&quot;
+      &quot;openfpgaloader&quot;
+      &quot;openroad&quot;
+      &quot;openroad/gui&quot;
+      &quot;prjoxide&quot;
+      &quot;prjtrellis&quot;
+      &quot;verible&quot;
+      &quot;verilator&quot;
+      &quot;vtr&quot;
+      &quot;xschem&quot;
+      &quot;xyce&quot;
+      &quot;yosys&quot;
+    }
+    { node [color=mediumblue, fontcolor=mediumblue]
+      &quot;pkg/apicula&quot;
+      &quot;pkg/arachne-pnr&quot;
+      &quot;pkg/boolector&quot;
+      &quot;pkg/cvc&quot;
+      &quot;pkg/ghdl&quot;
+      &quot;pkg/ghdl/llvm&quot;
+      &quot;pkg/ghdl-yosys-plugin&quot;
+      &quot;pkg/gtkwave&quot;
+      &quot;pkg/icestorm&quot;
+      &quot;pkg/irsim&quot;
+      &quot;pkg/iverilog&quot;
+      &quot;pkg/klayout&quot;
+      &quot;pkg/magic&quot;
+      &quot;pkg/netgen&quot;
+      &quot;pkg/nextpnr/ice40&quot;
+      &quot;pkg/nextpnr/nexus&quot;
+      &quot;pkg/nextpnr/ecp5&quot;
+      &quot;pkg/nextpnr/generic&quot;
+      &quot;pkg/nvc&quot;
+      &quot;pkg/openfpgaloader&quot;
+      &quot;pkg/openroad&quot;
+      &quot;pkg/openroad/gui&quot;
+      &quot;pkg/osvb&quot;
+      &quot;pkg/pono&quot;
+      &quot;pkg/prjoxide&quot;
+      &quot;pkg/prjtrellis&quot;
+      &quot;pkg/superprove&quot;
+      &quot;pkg/sby&quot;
+      &quot;pkg/yices2&quot;
+      &quot;pkg/yosys&quot;
+      &quot;pkg/verible&quot;
+      &quot;pkg/verilator&quot;
+      &quot;pkg/vtr&quot;
+      &quot;pkg/xschem&quot;
+      &quot;pkg/xyce&quot;
+      &quot;pkg/z3&quot;
+    }
+    { node [color=brown, fontcolor=brown]
+      &quot;ghdl/yosys&quot;
+      &quot;formal/min&quot;
+      &quot;formal&quot;
+      &quot;formal/all&quot;
+      &quot;nextpnr/icestorm&quot;
+      &quot;nextpnr/prjoxide&quot;
+      &quot;nextpnr/prjtrellis&quot;
+      &quot;impl&quot;
+      &quot;impl/ice40&quot;
+      &quot;impl/nexus&quot;
+      &quot;impl/ecp5&quot;
+      &quot;impl/icestorm&quot;
+      &quot;impl/prjoxide&quot;
+      &quot;impl/prjtrellis&quot;
+      &quot;impl/generic&quot;
+      &quot;impl/pnr&quot;
+      &quot;prog&quot;
+      &quot;sim&quot;
+      &quot;sim/osvb&quot;
+      &quot;sim/scipy-slim&quot;
+      &quot;sim/scipy&quot;
+      &quot;sim/octave-slim&quot;
+      &quot;sim/octave&quot;
+      &quot;sim/octave/gnuplot&quot;
+      &quot;conda&quot;
+      &quot;conda/f4pga/xc7/toolchain&quot;
+      &quot;conda/f4pga/xc7/a50t&quot;
+      &quot;conda/f4pga/xc7/a100t&quot;
+      &quot;conda/f4pga/xc7/a200t&quot;
+      &quot;conda/f4pga/xc7/z010&quot;
+      &quot;conda/f4pga/xc7/z020&quot;
+      &quot;conda/f4pga/xc7&quot;
+      &quot;conda/f4pga/eos-s3&quot;
+      &quot;magic/irsim&quot;
+    }
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange] rank=same
+    &quot;BASE IMAGE&quot;
+    &quot;scratch&quot;
+    &quot;ghdl/pkg:bullseye-mcode&quot;
+    &quot;ghdl/pkg:bullseye-llvm-9&quot;
+  }
+
+  # Dependencies
+
+  &quot;BASE IMAGE&quot; -&gt; m_base;
+
+  {
+    &quot;scratch&quot;
+    &quot;ghdl/pkg:bullseye-mcode&quot;
+    &quot;ghdl/pkg:bullseye-llvm-9&quot;
+    &quot;build/base&quot;
+    &quot;build/build&quot;
+  } -&gt; m_synth;
+
+  {
+    &quot;build/build&quot;
+    &quot;build/base&quot;
+    &quot;scratch&quot;
+    &quot;ghdl/llvm&quot;
+  } -&gt; m_sim;
+
+  {
+    &quot;scratch&quot;
+    &quot;build/build&quot;
+    &quot;build/base&quot;
+    &quot;build/dev&quot;
+    &quot;ghdl/yosys&quot;
+  } -&gt; m_impl;
+
+  {
+    &quot;scratch&quot;
+    &quot;build/base&quot;
+    &quot;build/build&quot;
+    &quot;ghdl/yosys&quot;
+   } -&gt; m_formal;
+
+  {
+    &quot;scratch&quot;
+    &quot;build/dev&quot;
+    &quot;build/build&quot;
+    &quot;build/base&quot;
+  } -&gt; m_asic;
+
+  {
+    &quot;build/base&quot;
+  } -&gt; m_f4pga;
+
+  # Generated images
+
+  subgraph cluster_base {
+    label = &quot;Base&quot;;
+    m_base -&gt; {
+      &quot;build/base&quot;
+      &quot;build/build&quot;
+      &quot;build/dev&quot;
+    } [style=dotted];
+  }
+
+  subgraph cluster_synth {
+    label = &quot;Synth&quot;;
+    m_synth -&gt; {
+      &quot;ghdl&quot;
+      &quot;ghdl/llvm&quot;
+      &quot;pkg/ghdl&quot;
+      &quot;pkg/ghdl/llvm&quot;
+      &quot;pkg/ghdl-yosys-plugin&quot;
+      &quot;ghdl/yosys&quot;
+      &quot;pkg/yosys&quot;
+      &quot;yosys&quot;
+    }
+  }
+
+  subgraph cluster_sim {
+    label = &quot;Sim&quot;;
+    m_sim -&gt; {
+      &quot;gtkwave&quot;
+      &quot;iverilog&quot;
+      &quot;nvc&quot;
+      &quot;verilator&quot;
+      &quot;xschem&quot;
+      &quot;xyce&quot;
+      &quot;sim&quot;
+      &quot;sim/osvb&quot;
+      &quot;sim/scipy-slim&quot;
+      &quot;sim/scipy&quot;
+      &quot;sim/octave-slim&quot;
+      &quot;sim/octave&quot;
+      &quot;sim/octave/gnuplot&quot;
+      &quot;pkg/osvb&quot;
+      &quot;pkg/gtkwave&quot;
+      &quot;pkg/iverilog&quot;
+      &quot;pkg/nvc&quot;
+      &quot;pkg/verilator&quot;
+      &quot;pkg/xschem&quot;
+      &quot;pkg/xyce&quot;
+    };
+  }
+
+  subgraph cluster_impl {
+    label = &quot;Impl&quot;;
+    m_impl -&gt; {
+      &quot;apicula&quot;
+      &quot;pkg/apicula&quot;
+      &quot;arachne-pnr&quot;
+      &quot;pkg/arachne-pnr&quot;
+      &quot;icestorm&quot;
+      &quot;pkg/icestorm&quot;
+      &quot;prog&quot;
+      &quot;nextpnr/generic&quot;
+      &quot;nextpnr/ice40&quot;
+      &quot;nextpnr/icestorm&quot;
+      &quot;nextpnr/nexus&quot;
+      &quot;nextpnr/prjoxide&quot;
+      &quot;nextpnr/ecp5&quot;
+      &quot;nextpnr/prjtrellis&quot;
+      &quot;nextpnr&quot;
+      &quot;impl/ice40&quot;
+      &quot;impl/nexus&quot;
+      &quot;impl/ecp5&quot;
+      &quot;impl/icestorm&quot;
+      &quot;impl/prjoxide&quot;
+      &quot;impl/prjtrellis&quot;
+      &quot;impl/generic&quot;
+      &quot;impl/pnr&quot;
+      &quot;impl&quot;
+      &quot;pkg/nextpnr/generic&quot;
+      &quot;pkg/nextpnr/ice40&quot;
+      &quot;pkg/nextpnr/nexus&quot;
+      &quot;pkg/nextpnr/ecp5&quot;
+      &quot;openfpgaloader&quot;
+      &quot;pkg/openfpgaloader&quot;
+      &quot;prjoxide&quot;
+      &quot;pkg/prjoxide&quot;
+      &quot;prjtrellis&quot;
+      &quot;pkg/prjtrellis&quot;
+      &quot;vtr&quot;
+      &quot;pkg/vtr&quot;
+    }
+  }
+
+  subgraph cluster_formal {
+    label = &quot;Formal&quot;;
+    m_formal -&gt; {
+      &quot;pkg/sby&quot;
+      &quot;pkg/boolector&quot;
+      &quot;pkg/cvc&quot;
+      &quot;pkg/pono&quot;
+      &quot;pkg/superprove&quot;
+      &quot;pkg/yices2&quot;
+      &quot;pkg/z3&quot;
+      &quot;formal/min&quot;
+      &quot;formal&quot;
+      &quot;formal/all&quot;
+    }
+  }
+
+  subgraph cluster_asic {
+    label = &quot;ASIC&quot;;
+    m_asic -&gt; {
+      &quot;irsim&quot;
+      &quot;klayout&quot;
+      &quot;magic&quot;
+      &quot;magic/irsim&quot;
+      &quot;netgen&quot;
+      &quot;openroad&quot;
+      &quot;openroad/gui&quot;
+      &quot;pkg/irsim&quot;
+      &quot;pkg/klayout&quot;
+      &quot;pkg/magic&quot;
+      &quot;pkg/netgen&quot;
+      &quot;pkg/openroad&quot;
+      &quot;pkg/openroad/gui&quot;
+    };
+  }
+
+  subgraph cluster_f4pga {
+    label = &quot;F4PGA&quot;;
+    m_f4pga -&gt; {
+      &quot;conda&quot;
+      &quot;conda/f4pga/xc7/toolchain&quot;
+      &quot;conda/f4pga/xc7/a50t&quot;
+      &quot;conda/f4pga/xc7/a100t&quot;
+      &quot;conda/f4pga/xc7/a200t&quot;
+      &quot;conda/f4pga/xc7/z010&quot;
+      &quot;conda/f4pga/xc7/z020&quot;
+      &quot;conda/f4pga/xc7&quot;
+      &quot;conda/f4pga/eos-s3&quot;
+      &quot;verible&quot;
+      &quot;pkg/verible&quot;
+    }
+  }
+
+}" class="graphviz" /></div>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Subgraphs and images</span><a class="headerlink" href="#img-graph" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="img-graph-base">
+<div class="graphviz"><img src="../_images/graphviz-38082d0c527f48bb90cde9b0c9b0a352e2cd73e3.png" alt="# Authors:
+#   Unai Martinez-Corral
+#     &lt;umartinezcorral&#64;antmicro.com&gt;
+#     &lt;unai.martinezcorral&#64;ehu.eus&gt;
+#
+# Copyright Unai Martinez-Corral
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Dockerfiles
+
+  { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_base  [label=&quot;base&quot;];
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    &quot;build/base&quot;
+    &quot;build/build&quot;
+    &quot;build/dev&quot;
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange]
+    &quot;BASE IMAGE&quot;
+  }
+
+  # Workflows
+
+  subgraph cluster_base {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_base_debian&quot; [label=&quot;BASE IMAGE&quot;]
+    }
+
+    d_base -&gt; {
+      &quot;build/base&quot;,
+      &quot;build/build&quot;,
+      &quot;build/dev&quot;
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      &quot;t_build/base&quot; [label=&quot;build--base&quot;];
+      &quot;t_build/build&quot; [label=&quot;build--build&quot;];
+      &quot;t_build/dev&quot; [label=&quot;build--dev&quot;];
+    }
+
+    &quot;build/base&quot; -&gt; &quot;t_build/base&quot;;
+    &quot;build/build&quot; -&gt; &quot;t_build/build&quot;;
+    &quot;build/dev&quot; -&gt; &quot;t_build/dev&quot;;
+  }
+
+  # Dockerfile dependencies
+
+  &quot;BASE IMAGE&quot; -&gt; &quot;p_base_debian&quot; -&gt; d_base;
+
+  # Image dependencies
+
+  { edge [style=dashed]
+    &quot;p_base_debian&quot; -&gt; &quot;build/base&quot; -&gt; &quot;build/build&quot; -&gt; &quot;build/dev&quot;;
+  }
+
+}" class="graphviz" /></div>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Base: workflows, dockerfiles, images and tests.</span><a class="headerlink" href="#img-graph-base" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="img-graph-sim">
+<div class="graphviz"><img src="../_images/graphviz-217eef15beb804a93225b61e5218f870719d62d3.png" alt="# Authors:
+#   Unai Martinez-Corral
+#     &lt;umartinezcorral&#64;antmicro.com&gt;
+#     &lt;unai.martinezcorral&#64;ehu.eus&gt;
+#
+# Copyright Unai Martinez-Corral
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Dockerfiles
+
+  { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_gtkwave   [label=&quot;gtkwave&quot;];
+    d_iverilog  [label=&quot;iverilog&quot;];
+    d_nvc       [label=&quot;nvc&quot;];
+    d_verilator [label=&quot;verilator&quot;];
+    d_sim       [label=&quot;sim&quot;];
+    d_octave    [label=&quot;octave&quot;];
+    d_gnuplot   [label=&quot;gnuplot&quot;];
+    d_scipy     [label=&quot;scipy&quot;];
+    d_osvb      [label=&quot;osvb&quot;];
+    d_xschem    [label=&quot;xschem&quot;];
+    d_xyce      [label=&quot;xyce&quot;];
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    &quot;build/build&quot;
+    &quot;build/base&quot;
+    { node [color=limegreen, fontcolor=limegreen]
+      &quot;ghdl/llvm&quot;
+      &quot;gtkwave&quot;
+      &quot;iverilog&quot;
+      &quot;nvc&quot;
+      &quot;verilator&quot;
+      &quot;xschem&quot;
+      &quot;xyce&quot;
+    }
+    { node [color=mediumblue, fontcolor=mediumblue]
+      &quot;pkg/gtkwave&quot;
+      &quot;pkg/iverilog&quot;
+      &quot;pkg/nvc&quot;
+      &quot;pkg/verilator&quot;
+      &quot;pkg/osvb&quot;
+      &quot;pkg/xschem&quot;
+      &quot;pkg/xyce&quot;
+    }
+    { node [color=brown, fontcolor=brown]
+      &quot;sim&quot;
+      &quot;sim/scipy-slim&quot;
+      &quot;sim/scipy&quot;
+      &quot;sim/octave-slim&quot;
+      &quot;sim/octave&quot;
+      &quot;sim/octave/gnuplot&quot;
+      &quot;sim/osvb&quot;
+    }
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange]
+    &quot;scratch&quot;
+  }
+
+  { rank=same
+    &quot;build/build&quot;
+    &quot;build/base&quot;
+    &quot;scratch&quot;
+    &quot;ghdl/llvm&quot;
+  }
+
+  # Workflows
+
+  subgraph cluster_gtkwave {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_gtkwave_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_gtkwave_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_gtkwave_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_gtkwave -&gt; {
+      &quot;gtkwave&quot;
+      &quot;pkg/gtkwave&quot;
+     } [style=dotted];
+
+    &quot;t_gtkwave&quot; [shape=folder, color=red, fontcolor=red, label=&quot;gtkwave&quot;];
+    &quot;t_pkg/gtkwave&quot; [shape=folder, color=red, fontcolor=red, label=&quot;gtkwave.pkg&quot;];
+
+    &quot;gtkwave&quot; -&gt; &quot;t_gtkwave&quot;;
+    &quot;pkg/gtkwave&quot; -&gt; &quot;t_pkg/gtkwave&quot;;
+  }
+
+  subgraph cluster_iverilog {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_iverilog_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_iverilog_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_iverilog_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_iverilog -&gt; {
+      &quot;iverilog&quot;
+      &quot;pkg/iverilog&quot;
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_iverilog&quot; [label=&quot;iverilog&quot;];
+      &quot;t_pkg/iverilog&quot; [label=&quot;iverilog.pkg&quot;];
+    }
+
+    &quot;iverilog&quot; -&gt; &quot;t_iverilog&quot;;
+    &quot;pkg/iverilog&quot; -&gt; &quot;t_pkg/iverilog&quot;;
+  }
+
+  subgraph cluster_nvc {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_nvc_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_nvc_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_nvc_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_nvc -&gt; {
+      &quot;nvc&quot;
+      &quot;pkg/nvc&quot;
+     } [style=dotted];
+
+    &quot;t_nvc&quot; [shape=folder, color=red, fontcolor=red, label=&quot;nvc&quot;];
+    &quot;t_pkg/nvc&quot; [shape=folder, color=red, fontcolor=red, label=&quot;nvc.pkg&quot;];
+
+    &quot;nvc&quot; -&gt; &quot;t_nvc&quot;;
+    &quot;pkg/nvc&quot; -&gt; &quot;t_pkg/nvc&quot;;
+  }
+
+  subgraph cluster_verilator {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_verilator_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_verilator_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_verilator_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_verilator -&gt; {
+      &quot;verilator&quot;
+      &quot;pkg/verilator&quot;
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_verilator&quot; [label=&quot;verilator&quot;];
+      &quot;t_pkg/verilator&quot; [label=&quot;verilator.pkg&quot;];
+    }
+
+    &quot;verilator&quot; -&gt; &quot;t_verilator&quot;;
+    &quot;pkg/verilator&quot; -&gt; &quot;t_pkg/verilator&quot;;
+  }
+
+  subgraph cluster_sim {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_sim_ghdl/llvm&quot; [label=&quot;ghdl/llvm&quot;]
+      &quot;p_sim_pkg/nvc&quot; [label=&quot;pkg/nvc&quot;]
+      &quot;p_sim_pkg/verilator&quot; [label=&quot;pkg/verilator&quot;]
+      &quot;p_sim_pkg/iverilog&quot; [label=&quot;pkg/iverilog&quot;]
+    }
+
+    d_sim -&gt; &quot;sim&quot; [style=dotted];
+
+    &quot;sim&quot; -&gt; {
+      d_osvb;
+      d_scipy;
+      d_octave;
+    };
+
+    d_osvb -&gt; {
+      &quot;pkg/osvb&quot;
+      &quot;sim/osvb&quot;
+      &quot;sim/scipy&quot;
+      &quot;sim/octave&quot;
+    } [style=dotted];
+
+    d_scipy -&gt; &quot;sim/scipy-slim&quot; [style=dotted];
+    d_octave -&gt; &quot;sim/octave-slim&quot; [style=dotted];
+    d_gnuplot -&gt; &quot;sim/octave/gnuplot&quot; [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_sim&quot;                [label=&quot;sim&quot;];
+      &quot;t_pkg/osvb&quot;           [label=&quot;osvb.pkg&quot;];
+      &quot;t_sim/osvb&quot;           [label=&quot;sim--osvb&quot;];
+      &quot;t_sim/scipy-slim&quot;     [label=&quot;sim--scipy-slim&quot;];
+      &quot;t_sim/scipy&quot;          [label=&quot;sim--scipy&quot;];
+      &quot;t_sim/octave-slim&quot;    [label=&quot;sim--octave-slim&quot;];
+      &quot;t_sim/octave&quot;         [label=&quot;sim--octave&quot;];
+      &quot;t_sim/octave/gnuplot&quot; [label=&quot;sim--octave--gnuplot&quot;];
+    }
+
+    &quot;sim&quot; -&gt; &quot;t_sim&quot;;
+    &quot;pkg/osvb&quot; -&gt; &quot;t_pkg/osvb&quot;;
+    &quot;sim/osvb&quot; -&gt; &quot;t_sim/osvb&quot;;
+    &quot;sim/scipy-slim&quot; -&gt; &quot;t_sim/scipy-slim&quot;;
+    &quot;sim/scipy&quot; -&gt; &quot;t_sim/scipy&quot;;
+    &quot;sim/octave-slim&quot; -&gt; &quot;t_sim/octave-slim&quot;;
+    &quot;sim/octave&quot; -&gt; &quot;t_sim/octave&quot;;
+    &quot;sim/octave/gnuplot&quot; -&gt; &quot;t_sim/octave/gnuplot&quot;;
+  }
+
+  subgraph cluster_xschem {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_xschem_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_xschem_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_xschem_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_xschem -&gt; {
+      &quot;xschem&quot;
+      &quot;pkg/xschem&quot;
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_xschem&quot; [label=&quot;xschem&quot;];
+      &quot;t_pkg/xschem&quot; [label=&quot;xschem.pkg&quot;];
+    }
+
+    &quot;xschem&quot; -&gt; &quot;t_xschem&quot;;
+    &quot;pkg/xschem&quot; -&gt; &quot;t_pkg/xschem&quot;;
+  }
+
+  subgraph cluster_xyce {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_xyce_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_xyce_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_xyce_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_xyce -&gt; {
+      &quot;xyce&quot;
+      &quot;pkg/xyce&quot;
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_xyce&quot; [label=&quot;xyce&quot;];
+      &quot;t_pkg/xyce&quot; [label=&quot;xyce.pkg&quot;];
+    }
+
+    &quot;xyce&quot; -&gt; &quot;t_xyce&quot;;
+    &quot;pkg/xyce&quot; -&gt; &quot;t_pkg/xyce&quot;;
+  }
+
+  # Dockerfile dependencies
+
+  &quot;build/build&quot; -&gt; &quot;p_gtkwave_build/build&quot; -&gt; d_gtkwave;
+  &quot;build/base&quot; -&gt; &quot;p_gtkwave_build/base&quot; -&gt; d_gtkwave;
+  &quot;scratch&quot; -&gt; &quot;p_gtkwave_scratch&quot; -&gt; d_gtkwave;
+
+  &quot;build/build&quot; -&gt; &quot;p_iverilog_build/build&quot; -&gt; d_iverilog;
+  &quot;build/base&quot; -&gt; &quot;p_iverilog_build/base&quot; -&gt; d_iverilog;
+  &quot;scratch&quot; -&gt; &quot;p_iverilog_scratch&quot; -&gt; d_iverilog;
+
+  &quot;build/build&quot; -&gt; &quot;p_nvc_build/build&quot; -&gt; d_nvc;
+  &quot;build/base&quot; -&gt; &quot;p_nvc_build/base&quot; -&gt; d_nvc;
+  &quot;scratch&quot; -&gt; &quot;p_nvc_scratch&quot; -&gt; d_nvc;
+
+  &quot;build/build&quot; -&gt; &quot;p_verilator_build/build&quot; -&gt; d_verilator;
+  &quot;build/base&quot; -&gt; &quot;p_verilator_build/base&quot; -&gt; d_verilator;
+  &quot;scratch&quot; -&gt; &quot;p_verilator_scratch&quot; -&gt; d_verilator;
+
+  &quot;build/build&quot; -&gt; &quot;p_xschem_build/build&quot; -&gt; d_xschem;
+  &quot;build/base&quot; -&gt; &quot;p_xschem_build/base&quot; -&gt; d_xschem;
+  &quot;scratch&quot; -&gt; &quot;p_xschem_scratch&quot; -&gt; d_xschem;
+
+  &quot;build/build&quot; -&gt; &quot;p_xyce_build/build&quot; -&gt; d_xyce;
+  &quot;build/base&quot; -&gt; &quot;p_xyce_build/base&quot; -&gt; d_xyce;
+  &quot;scratch&quot; -&gt; &quot;p_xyce_scratch&quot; -&gt; d_xyce;
+
+  &quot;ghdl/llvm&quot; -&gt; &quot;p_sim_ghdl/llvm&quot; -&gt; d_sim;
+  &quot;pkg/nvc&quot; -&gt; &quot;p_sim_pkg/nvc&quot; -&gt; d_sim;
+  &quot;pkg/verilator&quot; -&gt; &quot;p_sim_pkg/verilator&quot; -&gt; d_sim;
+  &quot;pkg/iverilog&quot; -&gt; &quot;p_sim_pkg/iverilog&quot; -&gt; d_sim;
+
+   {
+     &quot;sim/scipy-slim&quot;
+     &quot;sim/octave-slim&quot;
+   } -&gt; d_osvb;
+
+   &quot;sim/octave&quot; -&gt; d_gnuplot;
+
+  # Image dependencies
+
+  { edge [style=dashed]
+    &quot;p_gtkwave_build/base&quot; -&gt; &quot;gtkwave&quot;;
+    &quot;p_gtkwave_scratch&quot; -&gt; &quot;pkg/gtkwave&quot;;
+
+    &quot;p_iverilog_build/base&quot; -&gt; &quot;iverilog&quot;;
+    &quot;p_iverilog_scratch&quot; -&gt; &quot;pkg/iverilog&quot;;
+
+    &quot;p_nvc_build/base&quot; -&gt; &quot;nvc&quot;;
+    &quot;p_nvc_scratch&quot; -&gt; &quot;pkg/nvc&quot;;
+
+    &quot;p_verilator_build/base&quot; -&gt; &quot;verilator&quot;;
+    &quot;p_verilator_scratch&quot; -&gt; &quot;pkg/verilator&quot;;
+
+    &quot;p_xschem_build/base&quot; -&gt; &quot;xschem&quot;;
+    &quot;p_xschem_scratch&quot; -&gt; &quot;pkg/xschem&quot;;
+
+    &quot;p_xyce_build/base&quot; -&gt; &quot;xyce&quot;;
+    &quot;p_xyce_scratch&quot; -&gt; &quot;pkg/xyce&quot;;
+
+    &quot;p_sim_ghdl/llvm&quot; -&gt; &quot;sim&quot; -&gt; {
+      &quot;sim/osvb&quot;
+      &quot;sim/scipy-slim&quot;
+      &quot;sim/octave-slim&quot;
+    };
+
+    &quot;sim/scipy-slim&quot; -&gt; &quot;sim/scipy&quot;;
+    &quot;sim/octave-slim&quot; -&gt; &quot;sim/octave&quot; -&gt; &quot;sim/octave/gnuplot&quot;;
+  }
+
+  { edge [style=dashed, color=grey]
+    &quot;p_sim_pkg/nvc&quot; -&gt; &quot;sim&quot;;
+    &quot;p_sim_pkg/verilator&quot; -&gt; &quot;sim&quot;;
+    &quot;p_sim_pkg/iverilog&quot; -&gt; &quot;sim&quot;;
+  }
+
+}" class="graphviz" /></div>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Sim: workflows, dockerfiles, images and tests.</span><a class="headerlink" href="#img-graph-sim" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="img-graph-synth">
+<div class="graphviz"><img src="../_images/graphviz-16c0d5510e7581c3cb1e8c4f05c757f040481d12.png" alt="# Authors:
+#   Unai Martinez-Corral
+#     &lt;umartinezcorral&#64;antmicro.com&gt;
+#     &lt;unai.martinezcorral&#64;ehu.eus&gt;
+#
+# Copyright Unai Martinez-Corral
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Dockerfiles
+
+  { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_ghdl             [label=&quot;ghdl&quot;];
+    d_ghdlYosysPlugin  [label=&quot;ghdl-yosys-plugin&quot;];
+    d_yosys            [label=&quot;yosys&quot;];
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    &quot;build/base&quot;
+    &quot;build/build&quot;
+    { node [color=limegreen, fontcolor=limegreen]
+      &quot;ghdl&quot;
+      &quot;ghdl/llvm&quot;
+      &quot;ghdl/yosys&quot;
+      &quot;yosys&quot;
+    }
+    { node [color=mediumblue, fontcolor=mediumblue]
+      &quot;pkg/ghdl&quot;
+      &quot;pkg/ghdl/llvm&quot;
+      &quot;pkg/ghdl-yosys-plugin&quot;
+      &quot;pkg/yosys&quot;
+    }
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange]
+    &quot;scratch&quot;
+    &quot;ghdl/pkg:bullseye-mcode&quot;
+    &quot;ghdl/pkg:bullseye-llvm-9&quot;;
+  }
+
+  { rank=same
+    &quot;build/base&quot;
+    &quot;build/build&quot;
+    &quot;scratch&quot;
+    &quot;ghdl/pkg:bullseye-mcode&quot;
+    &quot;ghdl/pkg:bullseye-llvm-9&quot;
+  }
+
+  # Workflows
+
+  subgraph cluster_ghdl {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_ghdl_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_ghdl_scratch&quot; [label=&quot;scratch&quot;]
+      &quot;p_ghdl_bullseye&quot; [label=&quot;ghdl/pkg:bullseye-mcode&quot;]
+      &quot;p_ghdl_bullseye-llvm&quot; [label=&quot;ghdl/pkg:bullseye-llvm-9&quot;]
+    }
+
+    d_ghdl -&gt; { rank=same
+      &quot;ghdl&quot;,
+      &quot;ghdl/llvm&quot;,
+      &quot;pkg/ghdl&quot;,
+      &quot;pkg/ghdl/llvm&quot;
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      &quot;t_ghdl&quot; [label=&quot;ghdl&quot;];
+      &quot;t_ghdl/llvm&quot; [label=&quot;ghdl--llvm&quot;];
+      &quot;t_pkg/ghdl&quot; [label=&quot;ghdl.pkg&quot;];
+      &quot;t_pkg/ghdl/llvm&quot; [label=&quot;ghdl--llvm.pkg&quot;];
+    }
+
+    &quot;ghdl&quot; -&gt; &quot;t_ghdl&quot;;
+    &quot;ghdl/llvm&quot; -&gt; &quot;t_ghdl/llvm&quot;;
+    &quot;pkg/ghdl&quot; -&gt; &quot;t_pkg/ghdl&quot;;
+    &quot;pkg/ghdl/llvm&quot; -&gt; &quot;t_pkg/ghdl/llvm&quot;;
+  }
+
+  subgraph cluster_ghdlYosysPlugin {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_ghdl-yosys-plugin_yosys&quot; [label=&quot;yosys&quot;]
+      &quot;p_ghdl-yosys-plugin_pkg/ghdl&quot; [label=&quot;pkg/ghdl&quot;]
+    }
+
+    d_ghdlYosysPlugin -&gt; { rank=same
+      &quot;pkg/ghdl-yosys-plugin&quot;,
+      &quot;ghdl/yosys&quot;
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      &quot;t_pkg/ghdl-yosys-plugin&quot; [label=&quot;ghdl-yosys-plugin.pkg&quot;];
+      &quot;t_ghdl/yosys&quot; [label=&quot;ghdl--yosys&quot;];
+    }
+
+    &quot;pkg/ghdl-yosys-plugin&quot; -&gt; &quot;t_pkg/ghdl-yosys-plugin&quot;;
+    &quot;ghdl/yosys&quot; -&gt; &quot;t_ghdl/yosys&quot;;
+  }
+
+  subgraph cluster_yosys {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_yosys_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_yosys_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_yosys -&gt; { rank=same
+      &quot;pkg/yosys&quot;,
+      &quot;yosys&quot;
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      &quot;t_yosys&quot; [label=&quot;yosys&quot;];
+      &quot;t_pkg/yosys&quot; [label=&quot;yosys.pkg&quot;];
+    }
+
+    &quot;yosys&quot; -&gt; &quot;t_yosys&quot;;
+    &quot;pkg/yosys&quot; -&gt; &quot;t_pkg/yosys&quot;;
+  }
+
+  { rank=same
+    d_ghdl
+    d_yosys
+  }
+
+  # Dockerfile dependencies
+
+  &quot;scratch&quot; -&gt; &quot;p_ghdl_scratch&quot; -&gt; d_ghdl;
+  &quot;ghdl/pkg:bullseye-mcode&quot; -&gt; &quot;p_ghdl_bullseye&quot; -&gt; d_ghdl;
+  &quot;ghdl/pkg:bullseye-llvm-9&quot; -&gt; &quot;p_ghdl_bullseye-llvm&quot; -&gt; d_ghdl;
+  &quot;build/base&quot; -&gt; &quot;p_ghdl_build/base&quot; -&gt; d_ghdl;
+
+  &quot;pkg/ghdl&quot; -&gt; &quot;p_ghdl-yosys-plugin_pkg/ghdl&quot; -&gt; d_ghdlYosysPlugin;
+  &quot;yosys&quot; -&gt; &quot;p_ghdl-yosys-plugin_yosys&quot; -&gt; d_ghdlYosysPlugin;
+
+  &quot;build/build&quot; -&gt; &quot;p_yosys_build/build&quot; -&gt; d_yosys;
+  &quot;scratch&quot; -&gt; &quot;p_yosys_scratch&quot; -&gt; d_yosys;
+
+  # Image dependencies
+
+  { edge [style=dashed]
+    &quot;p_ghdl_scratch&quot; -&gt; { &quot;pkg/ghdl&quot;, &quot;pkg/ghdl/llvm&quot; };
+    &quot;p_ghdl_build/base&quot; -&gt; { &quot;ghdl&quot;, &quot;ghdl/llvm&quot; };
+
+    &quot;p_yosys_scratch&quot; -&gt; &quot;pkg/yosys&quot;;
+    &quot;p_yosys_build/build&quot; -&gt; &quot;yosys&quot;;
+
+    &quot;p_ghdl-yosys-plugin_yosys&quot; -&gt; &quot;ghdl/yosys&quot;;
+    &quot;p_ghdl-yosys-plugin_pkg/ghdl&quot; -&gt; &quot;pkg/ghdl-yosys-plugin&quot;;
+  }
+
+  { edge [style=dashed, color=grey]
+    &quot;p_ghdl_bullseye&quot; -&gt; {
+      &quot;ghdl&quot;,
+      &quot;pkg/ghdl&quot;
+    };
+    &quot;p_ghdl_bullseye-llvm&quot; -&gt; {
+      &quot;ghdl/llvm&quot;,
+      &quot;pkg/ghdl/llvm&quot;
+    };
+  }
+
+}" class="graphviz" /></div>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Synth: workflows, dockerfiles, images and tests.</span><a class="headerlink" href="#img-graph-synth" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="img-graph-impl">
+<div class="graphviz"><img src="../_images/graphviz-79bd996b73b1758b4727bc22b9c30b4a636bbf5c.png" alt="# Authors:
+#   Unai Martinez-Corral
+#     &lt;umartinezcorral&#64;antmicro.com&gt;
+#     &lt;unai.martinezcorral&#64;ehu.eus&gt;
+#
+# Copyright Unai Martinez-Corral
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Dockerfiles
+
+  { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_apicula        [label=&quot;apicula&quot;];
+    d_arachnepnr     [label=&quot;arachne-pnr&quot;];
+    d_icestorm       [label=&quot;icestorm&quot;];
+    d_impl           [label=&quot;impl&quot;];
+    d_nextpnr        [label=&quot;nextpnr&quot;];
+    d_openfpgaloader [label=&quot;openfpgaloader&quot;];
+    d_prjoxide       [label=&quot;prjoxide&quot;];
+    d_prjtrellis     [label=&quot;prjtrellis&quot;];
+    d_prog           [label=&quot;prog&quot;];
+    d_vtr            [label=&quot;vtr&quot;];
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    &quot;build/base&quot;
+    &quot;build/build&quot;
+    &quot;build/dev&quot;
+    { node [color=limegreen, fontcolor=limegreen]
+      &quot;apicula&quot;
+      &quot;arachne-pnr&quot;
+      &quot;ghdl/yosys&quot;
+      &quot;icestorm&quot;
+      &quot;nextpnr/ice40&quot;
+      &quot;nextpnr/nexus&quot;
+      &quot;nextpnr/ecp5&quot;
+      &quot;nextpnr/generic&quot;
+      &quot;nextpnr&quot;
+      &quot;openfpgaloader&quot;
+      &quot;prjoxide&quot;
+      &quot;prjtrellis&quot;
+      &quot;vtr&quot;
+    }
+    { node [color=mediumblue, fontcolor=mediumblue]
+      &quot;pkg/apicula&quot;
+      &quot;pkg/arachne-pnr&quot;
+      &quot;pkg/icestorm&quot;
+      &quot;pkg/nextpnr/generic&quot;
+      &quot;pkg/nextpnr/ice40&quot;
+      &quot;pkg/nextpnr/nexus&quot;
+      &quot;pkg/nextpnr/ecp5&quot;
+      &quot;pkg/openfpgaloader&quot;
+      &quot;pkg/prjoxide&quot;
+      &quot;pkg/prjtrellis&quot;
+      &quot;pkg/vtr&quot;
+    }
+    { node [color=brown, fontcolor=brown]
+      &quot;nextpnr/icestorm&quot;
+      &quot;nextpnr/prjoxide&quot;
+      &quot;nextpnr/prjtrellis&quot;
+      &quot;impl/generic&quot;
+      &quot;impl/ice40&quot;
+      &quot;impl/nexus&quot;
+      &quot;impl/ecp5&quot;
+      &quot;impl/icestorm&quot;
+      &quot;impl/prjoxide&quot;
+      &quot;impl/prjtrellis&quot;
+      &quot;impl/pnr&quot;
+      &quot;impl&quot;
+      &quot;prog&quot;
+    }
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange]
+    &quot;scratch&quot;
+  }
+
+  { rank=same
+    &quot;build/base&quot;
+    &quot;build/build&quot;
+    &quot;build/dev&quot;
+    &quot;ghdl/yosys&quot;
+    &quot;scratch&quot;
+  }
+
+  # Workflows
+
+  subgraph cluster_apicula {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_apicula_build/build&quot;  [label=&quot;build/build&quot;]
+      &quot;p_apicula_build/base&quot;   [label=&quot;build/base&quot;]
+      &quot;p_apicula_scratch&quot;      [label=&quot;scratch&quot;]
+    }
+
+    d_apicula -&gt; {
+      &quot;apicula&quot;
+      &quot;pkg/apicula&quot;
+     } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_apicula&quot;     [label=&quot;apicula&quot;];
+      &quot;t_pkg/apicula&quot; [label=&quot;apicula.pkg&quot;];
+    }
+
+    &quot;apicula&quot; -&gt; &quot;t_apicula&quot;;
+    &quot;pkg/apicula&quot; -&gt; &quot;t_pkg/apicula&quot;;
+  }
+
+  subgraph cluster_arachepnr {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_arachnepnr_pkg/icestorm&quot; [label=&quot;pkg/icestorm&quot;]
+      &quot;p_arachnepnr_build/build&quot;  [label=&quot;build/build&quot;]
+      &quot;p_arachnepnr_build/base&quot;   [label=&quot;build/base&quot;]
+      &quot;p_arachnepnr_scratch&quot;      [label=&quot;scratch&quot;]
+    }
+
+    d_arachnepnr -&gt; {
+      &quot;arachne-pnr&quot;
+      &quot;pkg/arachne-pnr&quot;
+     } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_arachne-pnr&quot;     [label=&quot;arachne-pnr&quot;];
+      &quot;t_pkg/arachne-pnr&quot; [label=&quot;arachne-pnr.pkg&quot;];
+    }
+
+    &quot;arachne-pnr&quot; -&gt; &quot;t_arachne-pnr&quot;;
+    &quot;pkg/arachne-pnr&quot; -&gt; &quot;t_pkg/arachne-pnr&quot;;
+  }
+
+  subgraph cluster_icestorm {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_icestorm_scratch&quot;     [label=&quot;scratch&quot;]
+      &quot;p_icestorm_build/base&quot;  [label=&quot;build/base&quot;]
+      &quot;p_icestorm_build/build&quot; [label=&quot;build/build&quot;]
+    }
+
+    d_icestorm -&gt; { rank=same
+      &quot;pkg/icestorm&quot;,
+      &quot;icestorm&quot;
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      &quot;t_icestorm&quot;     [label=&quot;icestorm&quot;];
+      &quot;t_pkg/icestorm&quot; [label=&quot;icestorm.pkg&quot;];
+    }
+
+    &quot;icestorm&quot; -&gt; &quot;t_icestorm&quot;;
+    &quot;pkg/icestorm&quot; -&gt; &quot;t_pkg/icestorm&quot;;
+  }
+
+  subgraph cluster_impl {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_impl_ghdl/yosys&quot;           [label=&quot;ghdl/yosys&quot;]
+      &quot;p_impl_pkg/nextpnr/generic&quot;  [label=&quot;pkg/nextpnr/generic&quot;]
+      &quot;p_impl_pkg/nextpnr/ice40&quot;    [label=&quot;pkg/nextpnr/ice40&quot;]
+      &quot;p_impl_pkg/nextpnr/nexus&quot;    [label=&quot;pkg/nextpnr/nexus&quot;]
+      &quot;p_impl_pkg/nextpnr/ecp5&quot;     [label=&quot;pkg/nextpnr/ecp5&quot;]
+      &quot;p_impl_pkg/icestorm&quot;         [label=&quot;pkg/icestorm&quot;]
+      &quot;p_impl_pkg/prjoxide&quot;         [label=&quot;pkg/prjoxide&quot;]
+      &quot;p_impl_pkg/prjtrellis&quot;       [label=&quot;pkg/prjtrellis&quot;]
+    }
+
+    { node [shape=cylinder]
+      &quot;build/impl&quot;
+    }
+
+    d_impl -&gt; {
+      &quot;build/impl&quot;
+      &quot;impl/generic&quot;
+      &quot;impl/ice40&quot;
+      &quot;impl/nexus&quot;
+      &quot;impl/ecp5&quot;
+      &quot;impl/icestorm&quot;
+      &quot;impl/prjoxide&quot;
+      &quot;impl/prjtrellis&quot;
+      &quot;impl/pnr&quot;
+      &quot;impl&quot;
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      &quot;t_impl/generic&quot;    [label=&quot;impl--generic&quot;];
+      &quot;t_impl/ice40&quot;      [label=&quot;impl--ice40&quot;];
+      &quot;t_impl/nexus&quot;      [label=&quot;impl--nexus&quot;];
+      &quot;t_impl/ecp5&quot;       [label=&quot;impl--ecp5&quot;];
+      &quot;t_impl/icestorm&quot;   [label=&quot;impl--icestorm&quot;];
+      &quot;t_impl/prjoxide&quot;   [label=&quot;impl--prjoxide&quot;];
+      &quot;t_impl/prjtrellis&quot; [label=&quot;impl--prjtrellis&quot;];
+      &quot;t_impl/pnr&quot;        [label=&quot;impl--pnr&quot;];
+      &quot;t_impl&quot;            [label=&quot;impl&quot;];
+    }
+
+    &quot;impl/generic&quot; -&gt; &quot;t_impl/generic&quot;;
+    &quot;impl/ice40&quot; -&gt; &quot;t_impl/ice40&quot;;
+    &quot;impl/nexus&quot; -&gt; &quot;t_impl/nexus&quot;;
+    &quot;impl/ecp5&quot; -&gt; &quot;t_impl/ecp5&quot;;
+    &quot;impl/icestorm&quot; -&gt; &quot;t_impl/icestorm&quot;;
+    &quot;impl/prjoxide&quot; -&gt; &quot;t_impl/prjoxide&quot;;
+    &quot;impl/prjtrellis&quot; -&gt; &quot;t_impl/prjtrellis&quot;;
+    &quot;impl/pnr&quot; -&gt; &quot;t_impl/pnr&quot;;
+    &quot;impl&quot; -&gt; &quot;t_impl&quot;;
+  }
+
+  subgraph cluster_nextpnr {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_nextpnr_scratch&quot;    [label=&quot;scratch&quot;]
+      &quot;p_nextpnr_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_nextpnr_build/dev&quot;  [label=&quot;build/dev&quot;]
+      &quot;p_nextpnr_icestorm&quot;   [label=&quot;pkg/icestorm&quot;]
+      &quot;p_nextpnr_prjoxide&quot;   [label=&quot;pkg/prjoxide&quot;]
+      &quot;p_nextpnr_prjtrellis&quot; [label=&quot;pkg/prjtrellis&quot;]
+    }
+
+    { node [shape=cylinder]
+      &quot;build/nextpnr/base&quot;
+      &quot;build/nextpnr/build&quot;
+    }
+
+    d_nextpnr -&gt; { rank=same
+      &quot;build/nextpnr/base&quot;
+      &quot;build/nextpnr/build&quot;
+    } [style=dotted];
+
+    d_nextpnr -&gt; { rank=same
+      &quot;nextpnr/generic&quot;,
+      &quot;nextpnr/ice40&quot;,
+      &quot;nextpnr/nexus&quot;,
+      &quot;nextpnr/ecp5&quot;,
+      &quot;nextpnr&quot;
+    } [style=dotted];
+
+    d_nextpnr -&gt; { rank=same
+      &quot;nextpnr/icestorm&quot;,
+      &quot;nextpnr/prjoxide&quot;
+      &quot;nextpnr/prjtrellis&quot;
+    } [style=dotted];
+
+    d_nextpnr -&gt; { rank=same
+      &quot;pkg/nextpnr/generic&quot;,
+      &quot;pkg/nextpnr/ice40&quot;,
+      &quot;pkg/nextpnr/nexus&quot;,
+      &quot;pkg/nextpnr/ecp5&quot;
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      &quot;t_nextpnr&quot;             [label=&quot;nextpnr&quot;];
+      &quot;t_nextpnr/generic&quot;     [label=&quot;nextpnr--generic&quot;];
+      &quot;t_nextpnr/ice40&quot;       [label=&quot;nextpnr--ice40&quot;];
+      &quot;t_nextpnr/nexus&quot;       [label=&quot;nextpnr--nexus&quot;];
+      &quot;t_nextpnr/ecp5&quot;        [label=&quot;nextpnr--ecp5&quot;];
+      &quot;t_nextpnr/icestorm&quot;    [label=&quot;nextpnr--icestorm&quot;];
+      &quot;t_nextpnr/prjoxide&quot;    [label=&quot;nextpnr--prjoxide&quot;];
+      &quot;t_nextpnr/prjtrellis&quot;  [label=&quot;nextpnr--prjtrellis&quot;];
+      &quot;t_pkg/nextpnr/generic&quot; [label=&quot;nextpnr--generic.pkg&quot;];
+      &quot;t_pkg/nextpnr/ice40&quot;   [label=&quot;nextpnr--ice40.pkg&quot;];
+      &quot;t_pkg/nextpnr/nexus&quot;   [label=&quot;nextpnr--nexus.pkg&quot;];
+      &quot;t_pkg/nextpnr/ecp5&quot;    [label=&quot;nextpnr--ecp5.pkg&quot;];
+    }
+
+    &quot;nextpnr/generic&quot;     -&gt; &quot;t_nextpnr/generic&quot;;
+    &quot;nextpnr/ice40&quot;       -&gt; &quot;t_nextpnr/ice40&quot;;
+    &quot;nextpnr/nexus&quot;       -&gt; &quot;t_nextpnr/nexus&quot;;
+    &quot;nextpnr/ecp5&quot;        -&gt; &quot;t_nextpnr/ecp5&quot;;
+    &quot;nextpnr&quot;             -&gt; &quot;t_nextpnr&quot;;
+    &quot;nextpnr/icestorm&quot;    -&gt; &quot;t_nextpnr/icestorm&quot;;
+    &quot;nextpnr/prjoxide&quot;    -&gt; &quot;t_nextpnr/prjoxide&quot;;
+    &quot;nextpnr/prjtrellis&quot;  -&gt; &quot;t_nextpnr/prjtrellis&quot;;
+    &quot;pkg/nextpnr/generic&quot; -&gt; &quot;t_pkg/nextpnr/generic&quot;;
+    &quot;pkg/nextpnr/ice40&quot;   -&gt; &quot;t_pkg/nextpnr/ice40&quot;;
+    &quot;pkg/nextpnr/nexus&quot;   -&gt; &quot;t_pkg/nextpnr/nexus&quot;;
+    &quot;pkg/nextpnr/ecp5&quot;    -&gt; &quot;t_pkg/nextpnr/ecp5&quot;;
+  }
+
+  subgraph cluster_openfpgaloader {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_openfpgaloader_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_openfpgaloader_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_openfpgaloader_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_openfpgaloader -&gt; {
+      &quot;openfpgaloader&quot;
+      &quot;pkg/openfpgaloader&quot;
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_openfpgaloader&quot; [label=&quot;openfpgaloader&quot;];
+      &quot;t_pkg/openfpgaloader&quot; [label=&quot;openfpgaloader.pkg&quot;];
+    }
+
+    &quot;openfpgaloader&quot; -&gt; &quot;t_openfpgaloader&quot;;
+    &quot;pkg/openfpgaloader&quot; -&gt; &quot;t_pkg/openfpgaloader&quot;;
+  }
+
+  subgraph cluster_prjoxide {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_prjoxide_scratch&quot; [label=&quot;scratch&quot;]
+      &quot;p_prjoxide_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_prjoxide_build/build&quot; [label=&quot;build/build&quot;]
+    }
+
+    d_prjoxide -&gt; { rank=same
+      &quot;pkg/prjoxide&quot;,
+      &quot;prjoxide&quot;
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      &quot;t_prjoxide&quot; [label=&quot;prjoxide&quot;];
+      &quot;t_pkg/prjoxide&quot; [label=&quot;prjoxide.pkg&quot;];
+    }
+
+    &quot;prjoxide&quot; -&gt; &quot;t_prjoxide&quot;;
+    &quot;pkg/prjoxide&quot; -&gt; &quot;t_pkg/prjoxide&quot;;
+  }
+
+  subgraph cluster_prjtrellis {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_prjtrellis_scratch&quot; [label=&quot;scratch&quot;]
+      &quot;p_prjtrellis_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_prjtrellis_build/dev&quot; [label=&quot;build/dev&quot;]
+    }
+
+    d_prjtrellis -&gt; { rank=same
+      &quot;pkg/prjtrellis&quot;,
+      &quot;prjtrellis&quot;
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      &quot;t_prjtrellis&quot; [label=&quot;prjtrellis&quot;];
+      &quot;t_pkg/prjtrellis&quot; [label=&quot;prjtrellis.pkg&quot;];
+    }
+
+    &quot;prjtrellis&quot; -&gt; &quot;t_prjtrellis&quot;;
+    &quot;pkg/prjtrellis&quot; -&gt; &quot;t_pkg/prjtrellis&quot;;
+  }
+
+  subgraph cluster_prog {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_prog_icestorm&quot; [label=&quot;pkg/icestorm&quot;]
+      &quot;p_prog_build/base&quot; [label=&quot;build/base&quot;]
+    }
+
+    d_prog -&gt; &quot;prog&quot; [style=dotted];
+
+    &quot;t_prog&quot; [shape=folder, color=red, fontcolor=red, label=&quot;prog&quot;];
+
+    &quot;prog&quot; -&gt; &quot;t_prog&quot;;
+  }
+
+  subgraph cluster_vtr {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_vtr_build/dev&quot;    [label=&quot;build/dev&quot;]
+      &quot;p_vtr_build/base&quot;   [label=&quot;build/base&quot;]
+      &quot;p_vtr_scratch&quot;      [label=&quot;scratch&quot;]
+    }
+
+    d_vtr -&gt; {
+      &quot;vtr&quot;
+      &quot;pkg/vtr&quot;
+     } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_vtr&quot;     [label=&quot;vtr&quot;];
+      &quot;t_pkg/vtr&quot; [label=&quot;vtr.pkg&quot;];
+    }
+
+    &quot;vtr&quot; -&gt; &quot;t_vtr&quot;;
+    &quot;pkg/vtr&quot; -&gt; &quot;t_pkg/vtr&quot;;
+  }
+
+  { rank=same
+    d_icestorm
+    d_prjtrellis
+  }
+
+  { rank=same
+    d_nextpnr
+    d_prog
+  }
+
+  # Dockerfile dependencies
+
+  &quot;build/build&quot; -&gt; &quot;p_apicula_build/build&quot; -&gt; d_apicula;
+  &quot;build/base&quot; -&gt; &quot;p_apicula_build/base&quot; -&gt; d_apicula;
+  &quot;scratch&quot; -&gt; &quot;p_apicula_scratch&quot; -&gt; d_apicula;
+
+  &quot;build/build&quot; -&gt; &quot;p_arachnepnr_build/build&quot; -&gt; d_arachnepnr;
+  &quot;build/base&quot; -&gt; &quot;p_arachnepnr_build/base&quot; -&gt; d_arachnepnr;
+  &quot;scratch&quot; -&gt; &quot;p_arachnepnr_scratch&quot; -&gt; d_arachnepnr;
+  &quot;pkg/icestorm&quot; -&gt; &quot;p_arachnepnr_pkg/icestorm&quot; -&gt; d_arachnepnr;
+
+  &quot;build/build&quot; -&gt; &quot;p_icestorm_build/build&quot; -&gt; d_icestorm;
+  &quot;build/base&quot; -&gt; &quot;p_icestorm_build/base&quot; -&gt; d_icestorm;
+  &quot;scratch&quot; -&gt; &quot;p_icestorm_scratch&quot; -&gt; d_icestorm;
+
+  &quot;ghdl/yosys&quot; -&gt; &quot;p_impl_ghdl/yosys&quot; -&gt; d_impl;
+  &quot;pkg/nextpnr/generic&quot; -&gt; &quot;p_impl_pkg/nextpnr/generic&quot; -&gt; d_impl;
+  &quot;pkg/nextpnr/ice40&quot; -&gt; &quot;p_impl_pkg/nextpnr/ice40&quot; -&gt; d_impl;
+  &quot;pkg/nextpnr/nexus&quot; -&gt; &quot;p_impl_pkg/nextpnr/nexus&quot; -&gt; d_impl;
+  &quot;pkg/nextpnr/ecp5&quot; -&gt; &quot;p_impl_pkg/nextpnr/ecp5&quot; -&gt; d_impl;
+  &quot;pkg/icestorm&quot; -&gt; &quot;p_impl_pkg/icestorm&quot; -&gt; d_impl;
+  &quot;pkg/prjoxide&quot; -&gt; &quot;p_impl_pkg/prjoxide&quot; -&gt; d_impl;
+  &quot;pkg/prjtrellis&quot; -&gt; &quot;p_impl_pkg/prjtrellis&quot; -&gt; d_impl;
+
+  &quot;scratch&quot; -&gt; &quot;p_nextpnr_scratch&quot; -&gt; d_nextpnr;
+  &quot;build/dev&quot; -&gt; &quot;p_nextpnr_build/dev&quot; -&gt; d_nextpnr;
+  &quot;build/base&quot; -&gt; &quot;p_nextpnr_build/base&quot; -&gt; d_nextpnr;
+  &quot;pkg/icestorm&quot; -&gt; &quot;p_nextpnr_icestorm&quot; -&gt; d_nextpnr;
+  &quot;pkg/prjoxide&quot; -&gt; &quot;p_nextpnr_prjoxide&quot; -&gt; d_nextpnr;
+  &quot;pkg/prjtrellis&quot; -&gt; &quot;p_nextpnr_prjtrellis&quot; -&gt; d_nextpnr;
+
+  &quot;build/build&quot; -&gt; &quot;p_openfpgaloader_build/build&quot; -&gt; d_openfpgaloader;
+  &quot;build/base&quot; -&gt; &quot;p_openfpgaloader_build/base&quot; -&gt; d_openfpgaloader;
+  &quot;scratch&quot; -&gt; &quot;p_openfpgaloader_scratch&quot; -&gt; d_openfpgaloader;
+
+  &quot;build/build&quot; -&gt; &quot;p_prjoxide_build/build&quot; -&gt; d_prjoxide;
+  &quot;build/base&quot; -&gt; &quot;p_prjoxide_build/base&quot; -&gt; d_prjoxide;
+  &quot;scratch&quot; -&gt; &quot;p_prjoxide_scratch&quot; -&gt; d_prjoxide;
+
+  &quot;build/dev&quot; -&gt; &quot;p_prjtrellis_build/dev&quot; -&gt; d_prjtrellis;
+  &quot;build/base&quot; -&gt; &quot;p_prjtrellis_build/base&quot; -&gt; d_prjtrellis;
+  &quot;scratch&quot; -&gt; &quot;p_prjtrellis_scratch&quot; -&gt; d_prjtrellis;
+
+  &quot;build/base&quot; -&gt; &quot;p_prog_build/base&quot; -&gt; d_prog;
+  &quot;pkg/icestorm&quot; -&gt; &quot;p_prog_icestorm&quot; -&gt; d_prog;
+
+  &quot;build/dev&quot; -&gt; &quot;p_vtr_build/dev&quot; -&gt; d_vtr;
+  &quot;build/base&quot; -&gt; &quot;p_vtr_build/base&quot; -&gt; d_vtr;
+  &quot;scratch&quot; -&gt; &quot;p_vtr_scratch&quot; -&gt; d_vtr;
+
+  # Image dependencies
+
+  { edge [style=dashed]
+    &quot;p_apicula_build/base&quot; -&gt; &quot;apicula&quot;;
+    &quot;p_apicula_scratch&quot; -&gt; &quot;pkg/apicula&quot;;
+
+    &quot;p_arachnepnr_build/base&quot; -&gt; &quot;arachne-pnr&quot;;
+    &quot;p_arachnepnr_scratch&quot; -&gt; &quot;pkg/arachne-pnr&quot;;
+
+    &quot;p_prog_build/base&quot; -&gt; &quot;prog&quot;;
+
+    &quot;p_openfpgaloader_build/base&quot; -&gt; &quot;openfpgaloader&quot;;
+    &quot;p_openfpgaloader_scratch&quot; -&gt; &quot;pkg/openfpgaloader&quot;;
+
+    &quot;p_nextpnr_build/base&quot; -&gt; &quot;build/nextpnr/base&quot; -&gt; {
+      &quot;nextpnr&quot;,
+      &quot;nextpnr/generic&quot;,
+      &quot;nextpnr/nexus&quot;,
+      &quot;nextpnr/ice40&quot;,
+      &quot;nextpnr/ecp5&quot;
+    };
+
+    &quot;p_nextpnr_scratch&quot; -&gt; {
+      &quot;pkg/nextpnr/generic&quot;,
+      &quot;pkg/nextpnr/ice40&quot;,
+      &quot;pkg/nextpnr/nexus&quot;,
+      &quot;pkg/nextpnr/ecp5&quot;
+    };
+
+    &quot;nextpnr/ice40&quot; -&gt; &quot;nextpnr/icestorm&quot;;
+    &quot;nextpnr/nexus&quot; -&gt; &quot;nextpnr/prjoxide&quot;;
+    &quot;nextpnr/ecp5&quot; -&gt; &quot;nextpnr/prjtrellis&quot;;
+
+    &quot;p_icestorm_build/base&quot; -&gt; &quot;icestorm&quot;;
+    &quot;p_icestorm_scratch&quot; -&gt; &quot;pkg/icestorm&quot;;
+
+    &quot;p_impl_ghdl/yosys&quot; -&gt; &quot;build/impl&quot; -&gt; {
+      &quot;impl/generic&quot;
+      &quot;impl/ice40&quot;
+      &quot;impl/nexus&quot;
+      &quot;impl/ecp5&quot;
+      &quot;impl/pnr&quot;
+    };
+
+    &quot;impl/ice40&quot; -&gt; &quot;impl/icestorm&quot;;
+    &quot;impl/nexus&quot; -&gt; &quot;impl/prjoxide&quot;;
+    &quot;impl/ecp5&quot; -&gt; &quot;impl/prjtrellis&quot;;
+    &quot;impl/pnr&quot; -&gt; &quot;impl&quot;;
+
+    &quot;p_prjoxide_scratch&quot; -&gt; &quot;pkg/prjoxide&quot;;
+    &quot;p_prjoxide_build/base&quot; -&gt; &quot;prjoxide&quot;;
+
+    &quot;p_prjtrellis_scratch&quot; -&gt; &quot;pkg/prjtrellis&quot;;
+    &quot;p_prjtrellis_build/base&quot; -&gt; &quot;prjtrellis&quot;;
+
+    &quot;p_vtr_build/base&quot; -&gt; &quot;vtr&quot;;
+    &quot;p_vtr_scratch&quot; -&gt; &quot;pkg/vtr&quot;;
+  }
+
+  { edge [style=dashed, color=grey]
+    &quot;p_prog_icestorm&quot; -&gt; &quot;prog&quot;;
+
+    {
+      &quot;pkg/nextpnr/ice40&quot;
+      &quot;pkg/nextpnr/nexus&quot;
+      &quot;pkg/nextpnr/ecp5&quot;
+    } -&gt; &quot;nextpnr&quot;;
+    &quot;p_nextpnr_icestorm&quot;   -&gt; &quot;nextpnr/icestorm&quot;;
+    &quot;p_nextpnr_prjoxide&quot;   -&gt; &quot;nextpnr/prjoxide&quot;;
+    &quot;p_nextpnr_prjtrellis&quot; -&gt; &quot;nextpnr/prjtrellis&quot;;
+
+    &quot;p_impl_pkg/icestorm&quot;        -&gt; { &quot;impl/icestorm&quot;, &quot;impl&quot; };
+    &quot;p_impl_pkg/prjoxide&quot;        -&gt; { &quot;impl/prjoxide&quot;, &quot;impl&quot; };
+    &quot;p_impl_pkg/prjtrellis&quot;      -&gt; { &quot;impl/prjtrellis&quot;, &quot;impl&quot; };
+    &quot;p_impl_pkg/nextpnr/generic&quot; -&gt; { &quot;impl/generic&quot;, &quot;impl/pnr&quot; };
+    &quot;p_impl_pkg/nextpnr/ice40&quot;   -&gt; { &quot;impl/ice40&quot;, &quot;impl/pnr&quot; };
+    &quot;p_impl_pkg/nextpnr/nexus&quot;   -&gt; { &quot;impl/nexus&quot;, &quot;impl/pnr&quot; };
+    &quot;p_impl_pkg/nextpnr/ecp5&quot;    -&gt; { &quot;impl/ecp5&quot;, &quot;impl/pnr&quot; };
+  }
+
+}" class="graphviz" /></div>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Impl: workflows, dockerfiles, images and tests.</span><a class="headerlink" href="#img-graph-impl" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="img-graph-formal">
+<div class="graphviz"><img src="../_images/graphviz-e1d43b6a79cb5de6f59d8605f3a4172146bbf9d1.png" alt="# Authors:
+#   Unai Martinez-Corral
+#     &lt;umartinezcorral&#64;antmicro.com&gt;
+#     &lt;unai.martinezcorral&#64;ehu.eus&gt;
+#
+# Copyright Unai Martinez-Corral
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Dockerfiles
+
+  { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_boolector   [label=&quot;boolector&quot;];
+    d_pono        [label=&quot;pono&quot;];
+    d_cvc         [label=&quot;cvc&quot;];
+    d_formal      [label=&quot;formal&quot;];
+    d_superprove  [label=&quot;superprove&quot;];
+    d_sby         [label=&quot;sby&quot;];
+    d_yices2      [label=&quot;yices2&quot;];
+    d_z3          [label=&quot;z3&quot;];
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    &quot;build/base&quot;
+    &quot;build/build&quot;
+    { node [color=limegreen, fontcolor=limegreen]
+      &quot;ghdl/yosys&quot;
+    }
+    { node [color=mediumblue, fontcolor=mediumblue]
+      &quot;pkg/boolector&quot;
+      &quot;pkg/cvc&quot;
+      &quot;pkg/pono&quot;
+      &quot;pkg/superprove&quot;
+      &quot;pkg/sby&quot;
+      &quot;pkg/yices2&quot;
+      &quot;pkg/z3&quot;
+    }
+    { node [color=brown, fontcolor=brown]
+      &quot;formal/min&quot;
+      &quot;formal&quot;
+      &quot;formal/all&quot;
+    }
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange]
+    &quot;scratch&quot;
+  }
+
+  { rank=same
+    &quot;scratch&quot;
+    &quot;build/base&quot;
+    &quot;build/build&quot;
+    &quot;ghdl/yosys&quot;
+  }
+
+  # Workflows
+
+  subgraph cluster_boolector {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_boolector_scratch&quot; [label=&quot;scratch&quot;]
+      &quot;p_boolector_build/build&quot; [label=&quot;build/build&quot;]
+    }
+
+    d_boolector -&gt; &quot;pkg/boolector&quot; [style=dotted];
+
+    &quot;t_pkg/boolector&quot; [shape=folder, color=red, fontcolor=red, label=&quot;boolector.pkg&quot;];
+
+    &quot;pkg/boolector&quot; -&gt; &quot;t_pkg/boolector&quot;;
+  }
+
+  subgraph cluster_cvc {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_cvc_scratch&quot; [label=&quot;scratch&quot;]
+      &quot;p_cvc_build/build&quot; [label=&quot;build/build&quot;]
+    }
+
+    d_cvc -&gt; &quot;pkg/cvc&quot; [style=dotted];
+
+    &quot;t_pkg/cvc&quot; [shape=folder, color=red, fontcolor=red, label=&quot;cvc.pkg&quot;];
+
+    &quot;pkg/cvc&quot; -&gt; &quot;t_pkg/cvc&quot;;
+  }
+
+  subgraph cluster_pono {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_pono_scratch&quot; [label=&quot;scratch&quot;]
+      &quot;p_pono_build/build&quot; [label=&quot;build/build&quot;]
+    }
+
+    d_pono -&gt; &quot;pkg/pono&quot; [style=dotted];
+
+    &quot;t_pkg/pono&quot; [shape=folder, color=red, fontcolor=red, label=&quot;pono.pkg&quot;];
+
+    &quot;pkg/pono&quot; -&gt; &quot;t_pkg/pono&quot;;
+  }
+
+  subgraph cluster_superprove {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_superprove_scratch&quot; [label=&quot;scratch&quot;]
+      &quot;p_superprove_build/build&quot; [label=&quot;build/build&quot;]
+    }
+
+    d_superprove -&gt; &quot;pkg/superprove&quot; [style=dotted];
+
+    &quot;t_pkg/superprove&quot; [shape=folder, color=red, fontcolor=red, label=&quot;superprove.pkg&quot;];
+
+    &quot;pkg/superprove&quot; -&gt; &quot;t_pkg/superprove&quot;;
+  }
+
+  subgraph cluster_sby {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_sby_scratch&quot; [label=&quot;scratch&quot;]
+      &quot;p_sby_build/base&quot; [label=&quot;build/base&quot;]
+    }
+
+    d_sby -&gt; &quot;pkg/sby&quot; [style=dotted];
+
+    &quot;t_pkg/sby&quot; [shape=folder, color=red, fontcolor=red, label=&quot;sby.pkg&quot;];
+
+    &quot;pkg/sby&quot; -&gt; &quot;t_pkg/sby&quot;;
+  }
+
+  subgraph cluster_yices2 {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_yices2_scratch&quot; [label=&quot;scratch&quot;]
+      &quot;p_yices2_build/build&quot; [label=&quot;build/build&quot;]
+    }
+
+    d_yices2 -&gt; &quot;pkg/yices2&quot; [style=dotted];
+
+    &quot;t_pkg/yices2&quot; [shape=folder, color=red, fontcolor=red, label=&quot;yices2.pkg&quot;];
+
+    &quot;pkg/yices2&quot; -&gt; &quot;t_pkg/yices2&quot;;
+  }
+
+  subgraph cluster_z3 {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_z3_scratch&quot; [label=&quot;scratch&quot;]
+      &quot;p_z3_build/build&quot; [label=&quot;build/build&quot;]
+    }
+
+    d_z3 -&gt; &quot;pkg/z3&quot; [style=dotted];
+
+    &quot;t_pkg/z3&quot; [shape=folder, color=red, fontcolor=red, label=&quot;z3.pkg&quot;];
+
+    &quot;pkg/z3&quot; -&gt; &quot;t_pkg/z3&quot;;
+  }
+
+  subgraph cluster_formal {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_formal_boolector&quot; [label=&quot;pkg/boolector&quot;]
+      &quot;p_formal_cvc&quot; [label=&quot;pkg/cvc&quot;]
+      &quot;p_formal_ghdl&quot; [label=&quot;ghdl/yosys&quot;]
+      &quot;p_formal_pono&quot; [label=&quot;pkg/pono&quot;]
+      &quot;p_formal_sby&quot; [label=&quot;pkg/sby&quot;]
+      &quot;p_formal_superprove&quot; [label=&quot;pkg/superprove&quot;]
+      &quot;p_formal_z3&quot; [label=&quot;pkg/z3&quot;]
+      &quot;p_formal_yices2&quot; [label=&quot;pkg/yices2&quot;]
+    }
+
+    d_formal -&gt; {
+      &quot;formal/min&quot;,
+      &quot;formal&quot;,
+      &quot;formal/all&quot;
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      &quot;t_formal/min&quot; [label=&quot;formal--min&quot;];
+      &quot;t_formal&quot; [label=&quot;formal&quot;];
+      &quot;t_formal/all&quot; [label=&quot;formal--all&quot;];
+    }
+
+    &quot;formal/min&quot; -&gt; &quot;t_formal/min&quot;;
+    &quot;formal&quot; -&gt; &quot;t_formal&quot;;
+    &quot;formal/all&quot; -&gt; &quot;t_formal/all&quot;;
+  }
+
+  { rank=same
+    d_boolector
+    d_cvc
+    d_pono
+    d_superprove
+    d_sby
+    d_yices2
+    d_z3
+  }
+
+  # Dockerfile dependencies
+
+  &quot;build/build&quot; -&gt; &quot;p_boolector_build/build&quot; -&gt; d_boolector;
+  &quot;scratch&quot; -&gt; &quot;p_boolector_scratch&quot; -&gt; d_boolector;
+
+  &quot;build/build&quot; -&gt; &quot;p_cvc_build/build&quot; -&gt; d_cvc;
+  &quot;scratch&quot; -&gt; &quot;p_cvc_scratch&quot; -&gt; d_cvc;
+
+  &quot;ghdl/yosys&quot; -&gt; &quot;p_formal_ghdl&quot; -&gt; d_formal;
+  &quot;pkg/sby&quot; -&gt; &quot;p_formal_sby&quot; -&gt; d_formal;
+  &quot;pkg/boolector&quot; -&gt; &quot;p_formal_boolector&quot; -&gt; d_formal;
+  &quot;pkg/cvc&quot; -&gt; &quot;p_formal_cvc&quot; -&gt; d_formal;
+  &quot;pkg/pono&quot; -&gt; &quot;p_formal_pono&quot; -&gt; d_formal;
+  &quot;pkg/yices2&quot; -&gt; &quot;p_formal_yices2&quot; -&gt; d_formal;
+  &quot;pkg/superprove&quot; -&gt; &quot;p_formal_superprove&quot; -&gt; d_formal;
+  &quot;pkg/z3&quot; -&gt; &quot;p_formal_z3&quot; -&gt; d_formal;
+
+  &quot;build/build&quot; -&gt; &quot;p_pono_build/build&quot; -&gt; d_pono;
+  &quot;scratch&quot; -&gt; &quot;p_pono_scratch&quot; -&gt; d_pono;
+
+  &quot;build/base&quot; -&gt; &quot;p_sby_build/base&quot; -&gt; d_sby;
+  &quot;scratch&quot; -&gt; &quot;p_sby_scratch&quot; -&gt; d_sby;
+
+  &quot;build/build&quot; -&gt; &quot;p_superprove_build/build&quot; -&gt; d_superprove;
+  &quot;scratch&quot; -&gt; &quot;p_superprove_scratch&quot; -&gt; d_superprove;
+
+  &quot;build/build&quot; -&gt; &quot;p_yices2_build/build&quot; -&gt; d_yices2;
+  &quot;scratch&quot; -&gt; &quot;p_yices2_scratch&quot; -&gt; d_yices2;
+
+  &quot;build/build&quot; -&gt; &quot;p_z3_build/build&quot; -&gt; d_z3;
+  &quot;scratch&quot; -&gt; &quot;p_z3_scratch&quot; -&gt; d_z3;
+
+  # Image dependencies
+
+  { edge [style=dashed]
+    &quot;p_boolector_scratch&quot; -&gt; &quot;pkg/boolector&quot;;
+    &quot;p_cvc_scratch&quot; -&gt; &quot;pkg/cvc&quot;;
+    &quot;p_formal_ghdl&quot; -&gt; &quot;formal/min&quot; -&gt; &quot;formal&quot; -&gt; &quot;formal/all&quot;;
+    &quot;p_pono_scratch&quot; -&gt; &quot;pkg/pono&quot;;
+    &quot;p_superprove_scratch&quot; -&gt; &quot;pkg/superprove&quot;;
+    &quot;p_sby_scratch&quot; -&gt; &quot;pkg/sby&quot;;
+    &quot;p_yices2_scratch&quot; -&gt; &quot;pkg/yices2&quot;;
+    &quot;p_z3_scratch&quot; -&gt; &quot;pkg/z3&quot;;
+  }
+
+  { edge [style=dashed, color=grey]
+    {
+      &quot;p_formal_sby&quot;,
+      &quot;p_formal_z3&quot;
+    } -&gt; &quot;formal/min&quot;;
+
+    {
+      &quot;p_formal_boolector&quot;,
+      &quot;p_formal_cvc&quot;,
+      &quot;p_formal_pono&quot;,
+      &quot;p_formal_yices2&quot;
+    } -&gt; &quot;formal&quot;;
+
+    {
+      &quot;p_formal_superprove&quot;
+    } -&gt; &quot;formal/all&quot;;
+  }
+
+}" class="graphviz" /></div>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Formal: workflows, dockerfiles, images and tests.</span><a class="headerlink" href="#img-graph-formal" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="img-graph-asic">
+<div class="graphviz"><img src="../_images/graphviz-cf39a6a1f148fc0f2dd0aba526abe91e83101128.png" alt="# Authors:
+#   Unai Martinez-Corral
+#     &lt;umartinezcorral&#64;antmicro.com&gt;
+#     &lt;unai.martinezcorral&#64;ehu.eus&gt;
+#
+# Copyright Unai Martinez-Corral
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Dockerfiles
+
+  { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_irsim [label=&quot;irsim&quot;];
+    d_klayout [label=&quot;klayout&quot;];
+    d_magic [label=&quot;magic&quot;];
+    d_netgen [label=&quot;netgen&quot;];
+    d_openroad [label=&quot;openroad&quot;];
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    &quot;build/dev&quot;
+    &quot;build/build&quot;
+    &quot;build/base&quot;
+    { node [color=limegreen, fontcolor=limegreen]
+      &quot;irsim&quot;
+      &quot;klayout&quot;
+      &quot;magic&quot;
+      &quot;netgen&quot;
+      &quot;openroad&quot;
+      &quot;openroad/gui&quot;
+    }
+    { node [color=mediumblue, fontcolor=mediumblue]
+      &quot;pkg/irsim&quot;
+      &quot;pkg/klayout&quot;
+      &quot;pkg/magic&quot;
+      &quot;pkg/netgen&quot;
+      &quot;pkg/openroad&quot;
+      &quot;pkg/openroad/gui&quot;
+    }
+    { node [color=brown, fontcolor=brown]
+      &quot;magic/irsim&quot;
+    }
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange]
+    &quot;scratch&quot;
+  }
+
+  { rank=same
+    &quot;build/dev&quot;
+    &quot;build/build&quot;
+    &quot;build/base&quot;
+    &quot;scratch&quot;
+  }
+
+  # Workflows
+
+  subgraph cluster_irsim {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_irsim_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_irsim_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_irsim_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_irsim -&gt; {
+      &quot;irsim&quot;
+      &quot;pkg/irsim&quot;
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_irsim&quot; [label=&quot;irsim&quot;];
+      &quot;t_pkg/irsim&quot; [label=&quot;irsim.pkg&quot;];
+    }
+
+    &quot;irsim&quot; -&gt; &quot;t_irsim&quot;;
+    &quot;pkg/irsim&quot; -&gt; &quot;t_pkg/irsim&quot;;
+  }
+
+  subgraph cluster_klayout {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_klayout_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_klayout_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_klayout_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_klayout -&gt; {
+      &quot;klayout&quot;
+      &quot;pkg/klayout&quot;
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_klayout&quot; [label=&quot;klayout&quot;];
+      &quot;t_pkg/klayout&quot; [label=&quot;klayout.pkg&quot;];
+    }
+
+    &quot;klayout&quot; -&gt; &quot;t_klayout&quot;;
+    &quot;pkg/klayout&quot; -&gt; &quot;t_pkg/klayout&quot;;
+  }
+
+  subgraph cluster_magic {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_magic_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_magic_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_magic_scratch&quot; [label=&quot;scratch&quot;]
+      &quot;p_magic_pkg/irsim&quot; [label=&quot;pkg/irsim&quot;]
+    }
+
+    d_magic -&gt; {
+      &quot;magic&quot;
+      &quot;pkg/magic&quot;
+      &quot;magic/irsim&quot;
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_magic&quot; [label=&quot;magic&quot;];
+      &quot;t_pkg/magic&quot; [label=&quot;magic.pkg&quot;];
+      &quot;t_magic/irsim&quot; [label=&quot;magic--irsim&quot;];
+    }
+
+    &quot;magic&quot; -&gt; &quot;t_magic&quot;;
+    &quot;pkg/magic&quot; -&gt; &quot;t_pkg/magic&quot;;
+    &quot;magic/irsim&quot; -&gt; &quot;t_magic/irsim&quot;;
+  }
+
+  subgraph cluster_netgen {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_netgen_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_netgen_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_netgen_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_netgen -&gt; {
+      &quot;netgen&quot;
+      &quot;pkg/netgen&quot;
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_netgen&quot; [label=&quot;netgen&quot;];
+      &quot;t_pkg/netgen&quot; [label=&quot;netgen.pkg&quot;];
+    }
+
+    &quot;netgen&quot; -&gt; &quot;t_netgen&quot;;
+    &quot;pkg/netgen&quot; -&gt; &quot;t_pkg/netgen&quot;;
+  }
+
+  subgraph cluster_openroad {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_openroad_build/dev&quot; [label=&quot;build/dev&quot;]
+      &quot;p_openroad_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_openroad_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_openroad -&gt; {
+      &quot;openroad&quot;
+      &quot;openroad/gui&quot;
+      &quot;pkg/openroad&quot;
+      &quot;pkg/openroad/gui&quot;
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_openroad&quot; [label=&quot;openroad&quot;];
+      &quot;t_pkg/openroad&quot; [label=&quot;openroad.pkg&quot;];
+      &quot;t_openroad/gui&quot; [label=&quot;openroad--gui&quot;];
+      &quot;t_pkg/openroad/gui&quot; [label=&quot;openroad--gui.pkg&quot;];
+    }
+
+    &quot;openroad&quot; -&gt; &quot;t_openroad&quot;;
+    &quot;pkg/openroad&quot; -&gt; &quot;t_pkg/openroad&quot;;
+
+    &quot;openroad/gui&quot; -&gt; &quot;t_openroad/gui&quot;;
+    &quot;pkg/openroad/gui&quot; -&gt; &quot;t_pkg/openroad/gui&quot;;
+  }
+
+  # Dockerfile dependencies
+
+  &quot;build/build&quot; -&gt; &quot;p_irsim_build/build&quot; -&gt; d_irsim;
+  &quot;build/base&quot; -&gt; &quot;p_irsim_build/base&quot; -&gt; d_irsim;
+  &quot;scratch&quot; -&gt; &quot;p_irsim_scratch&quot; -&gt; d_irsim;
+
+  &quot;build/build&quot; -&gt; &quot;p_klayout_build/build&quot; -&gt; d_klayout;
+  &quot;build/base&quot; -&gt; &quot;p_klayout_build/base&quot; -&gt; d_klayout;
+  &quot;scratch&quot; -&gt; &quot;p_klayout_scratch&quot; -&gt; d_klayout;
+
+  &quot;pkg/irsim&quot; -&gt; &quot;p_magic_pkg/irsim&quot; -&gt; d_magic;
+  &quot;build/build&quot; -&gt; &quot;p_magic_build/build&quot; -&gt; d_magic;
+  &quot;build/base&quot; -&gt; &quot;p_magic_build/base&quot; -&gt; d_magic;
+  &quot;scratch&quot; -&gt; &quot;p_magic_scratch&quot; -&gt; d_magic;
+
+  &quot;build/build&quot; -&gt; &quot;p_netgen_build/build&quot; -&gt; d_netgen;
+  &quot;build/base&quot; -&gt; &quot;p_netgen_build/base&quot; -&gt; d_netgen;
+  &quot;scratch&quot; -&gt; &quot;p_netgen_scratch&quot; -&gt; d_netgen;
+
+  &quot;build/dev&quot; -&gt; &quot;p_openroad_build/dev&quot; -&gt; d_openroad;
+  &quot;build/base&quot; -&gt; &quot;p_openroad_build/base&quot; -&gt; d_openroad;
+  &quot;scratch&quot; -&gt; &quot;p_openroad_scratch&quot; -&gt; d_openroad;
+
+  # Image dependencies
+
+  { edge [style=dashed]
+    &quot;p_irsim_build/base&quot; -&gt; &quot;irsim&quot;;
+    &quot;p_irsim_scratch&quot; -&gt; &quot;pkg/irsim&quot;;
+    &quot;p_klayout_build/base&quot; -&gt; &quot;klayout&quot;;
+    &quot;p_klayout_scratch&quot; -&gt; &quot;pkg/klayout&quot;;
+    &quot;p_magic_build/base&quot; -&gt; &quot;magic&quot;;
+    &quot;p_magic_scratch&quot; -&gt; &quot;pkg/magic&quot;;
+    &quot;magic&quot; -&gt; &quot;magic/irsim&quot;;
+    &quot;p_netgen_build/base&quot; -&gt; &quot;netgen&quot;;
+    &quot;p_netgen_scratch&quot; -&gt; &quot;pkg/netgen&quot;;
+    &quot;p_openroad_build/base&quot; -&gt; &quot;openroad&quot;;
+    &quot;p_openroad_scratch&quot; -&gt; &quot;pkg/openroad&quot;;
+    &quot;p_openroad_build/base&quot; -&gt; &quot;openroad/gui&quot;;
+    &quot;p_openroad_scratch&quot; -&gt; &quot;pkg/openroad/gui&quot;;
+  }
+
+  { edge [style=dashed, color=grey]
+    &quot;p_magic_pkg/irsim&quot; -&gt; &quot;magic/irsim&quot;;
+  }
+
+}" class="graphviz" /></div>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">ASIC: workflows, dockerfiles, images and tests.</span><a class="headerlink" href="#img-graph-asic" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="img-graph-f4pga">
+<div class="graphviz"><img src="../_images/graphviz-5e9ad22d55898867de0ce75c2e889becce885c65.png" alt="# Authors:
+#   Unai Martinez-Corral
+#     &lt;umartinezcorral&#64;antmicro.com&gt;
+#     &lt;unai.martinezcorral&#64;ehu.eus&gt;
+#
+# Copyright Unai Martinez-Corral
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+
+  # Dockerfiles
+
+  { node [shape=note, color=dodgerblue, fontcolor=dodgerblue]
+    d_conda     [label=&quot;conda&quot;];
+    d_f4pga [label=&quot;conda/f4pga&quot;];
+    d_verible [label=&quot;verible&quot;];
+  }
+
+  # Images
+
+  { node [shape=cylinder]
+    &quot;build/base&quot;
+    &quot;build/build&quot;
+    { node [color=limegreen, fontcolor=limegreen]
+      &quot;verible&quot;
+    }
+    { node [color=mediumblue, fontcolor=mediumblue]
+      &quot;pkg/verible&quot;
+    }
+    { node [color=brown, fontcolor=brown]
+      &quot;conda&quot;
+      &quot;conda/f4pga/xc7/toolchain&quot;
+      &quot;conda/f4pga/xc7/a50t&quot;
+      &quot;conda/f4pga/xc7/a100t&quot;
+      &quot;conda/f4pga/xc7/a200t&quot;
+      &quot;conda/f4pga/xc7/z010&quot;
+      &quot;conda/f4pga/xc7/z020&quot;
+      &quot;conda/f4pga/xc7&quot;
+      &quot;conda/f4pga/eos-s3&quot;
+    }
+  }
+
+  # External images
+
+  { node [shape=cylinder, color=orange, fontcolor=orange]
+    &quot;scratch&quot;
+  }
+
+  { rank=same
+    &quot;build/base&quot;
+    &quot;build/build&quot;
+    &quot;scratch&quot;
+  }
+
+  # Workflows
+
+  subgraph cluster_conda {
+    &quot;p_conda_build/base&quot; [shape=cylinder, color=grey, fontcolor=grey, label=&quot;build/base&quot;];
+    d_conda -&gt; &quot;conda&quot; [style=dotted];
+    &quot;t_conda&quot; [shape=folder, color=red, fontcolor=red, label=&quot;conda&quot;];
+    &quot;conda&quot; -&gt; &quot;t_conda&quot;;
+  }
+
+  subgraph cluster_F4PGA {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_F4PGA_conda&quot;  [label=&quot;conda&quot;]
+    }
+
+    d_f4pga -&gt; {
+      &quot;conda/f4pga/xc7/toolchain&quot;
+      { rank=same
+        &quot;conda/f4pga/xc7/a50t&quot;
+        &quot;conda/f4pga/xc7/a100t&quot;
+        &quot;conda/f4pga/xc7/a200t&quot;
+        &quot;conda/f4pga/xc7/z010&quot;
+        &quot;conda/f4pga/xc7/z020&quot;
+      }
+      &quot;conda/f4pga/xc7&quot;
+      &quot;conda/f4pga/eos-s3&quot;
+    } [style=dotted];
+
+    { rank=same
+      node [shape=folder, color=red, fontcolor=red];
+      &quot;t_F4PGA_xc7_toolchain&quot; [label=&quot;conda--f4pga--xc7--toolchain&quot;];
+      &quot;t_F4PGA_xc7_a50t&quot;      [label=&quot;conda--f4pga--xc7--a50t&quot;];
+      &quot;t_F4PGA_xc7_a100t&quot;     [label=&quot;conda--f4pga--xc7--a100t&quot;];
+      &quot;t_F4PGA_xc7_a200t&quot;     [label=&quot;conda--f4pga--xc7--a200t&quot;];
+      &quot;t_F4PGA_xc7_z010&quot;      [label=&quot;conda--f4pga--xc7--z010&quot;];
+      &quot;t_F4PGA_xc7_z020&quot;      [label=&quot;conda--f4pga--xc7--z020&quot;];
+      &quot;t_F4PGA_xc7&quot;           [label=&quot;conda--f4pga--xc7&quot;];
+      &quot;t_F4PGA_eos-s3&quot;        [label=&quot;conda--f4pga--eos-s3&quot;];
+    }
+
+    &quot;conda/f4pga/xc7/toolchain&quot;  -&gt; &quot;t_F4PGA_xc7_toolchain&quot;;
+    &quot;conda/f4pga/xc7/a50t&quot;       -&gt; &quot;t_F4PGA_xc7_a50t&quot;;
+    &quot;conda/f4pga/xc7/a100t&quot;      -&gt; &quot;t_F4PGA_xc7_a100t&quot;;
+    &quot;conda/f4pga/xc7/a200t&quot;      -&gt; &quot;t_F4PGA_xc7_a200t&quot;;
+    &quot;conda/f4pga/xc7/z010&quot;       -&gt; &quot;t_F4PGA_xc7_z010&quot;;
+    &quot;conda/f4pga/xc7/z020&quot;       -&gt; &quot;t_F4PGA_xc7_z020&quot;;
+    &quot;conda/f4pga/xc7&quot;            -&gt; &quot;t_F4PGA_xc7&quot;;
+    &quot;conda/f4pga/eos-s3&quot;         -&gt; &quot;t_F4PGA_eos-s3&quot;;
+  }
+
+  subgraph cluster_verible {
+    { rank=same
+      node [shape=cylinder, color=grey, fontcolor=grey]
+      &quot;p_verible_build/build&quot; [label=&quot;build/build&quot;]
+      &quot;p_verible_build/base&quot; [label=&quot;build/base&quot;]
+      &quot;p_verible_scratch&quot; [label=&quot;scratch&quot;]
+    }
+
+    d_verible -&gt; {
+      &quot;verible&quot;
+      &quot;pkg/verible&quot;
+    } [style=dotted];
+
+    {
+      node [shape=folder, color=red, fontcolor=red]
+      &quot;t_verible&quot; [label=&quot;verible&quot;];
+      &quot;t_pkg/verible&quot; [label=&quot;verible.pkg&quot;];
+    }
+
+    &quot;verible&quot; -&gt; &quot;t_verible&quot;;
+    &quot;pkg/verible&quot; -&gt; &quot;t_pkg/verible&quot;;
+  }
+
+  # Dockerfile dependencies
+
+  &quot;build/base&quot; -&gt; &quot;p_conda_build/base&quot; -&gt; d_conda;
+
+  &quot;build/build&quot; -&gt; &quot;p_verible_build/build&quot; -&gt; d_verible;
+  &quot;build/base&quot; -&gt; &quot;p_verible_build/base&quot; -&gt; d_verible;
+  &quot;scratch&quot; -&gt; &quot;p_verible_scratch&quot; -&gt; d_verible;
+
+  &quot;conda&quot; -&gt; &quot;p_F4PGA_conda&quot; -&gt; d_f4pga;
+
+  # Image dependencies
+
+  { edge [style=dashed]
+    &quot;conda/f4pga/xc7/toolchain&quot; -&gt; &quot;conda/f4pga/xc7/a50t&quot;;
+    &quot;conda/f4pga/xc7/toolchain&quot; -&gt; &quot;conda/f4pga/xc7/a100t&quot;;
+    &quot;conda/f4pga/xc7/toolchain&quot; -&gt; &quot;conda/f4pga/xc7/a200t&quot;;
+    &quot;conda/f4pga/xc7/toolchain&quot; -&gt; &quot;conda/f4pga/xc7/z010&quot;;
+    &quot;conda/f4pga/xc7/toolchain&quot; -&gt; &quot;conda/f4pga/xc7/z020&quot;;
+    &quot;conda/f4pga/xc7/toolchain&quot; -&gt; &quot;conda/f4pga/xc7&quot;;
+
+    &quot;p_verible_build/base&quot; -&gt; &quot;verible&quot;;
+    &quot;p_verible_scratch&quot; -&gt; &quot;pkg/verible&quot;;
+  }
+
+  { edge [style=dashed, color=grey]
+    &quot;conda/f4pga/xc7/a50t&quot;  -&gt; &quot;conda/f4pga/xc7&quot;;
+    &quot;conda/f4pga/xc7/a100t&quot; -&gt; &quot;conda/f4pga/xc7&quot;;
+    # TODO: This is temporarily disabled because of space limits on GitHub Actions default runners
+    #&quot;conda/f4pga/xc7/a200t&quot; -&gt; &quot;conda/f4pga/xc7&quot;;
+    &quot;conda/f4pga/xc7/z010&quot;  -&gt; &quot;conda/f4pga/xc7&quot;;
+    &quot;conda/f4pga/xc7/z020&quot;  -&gt; &quot;conda/f4pga/xc7&quot;;
+  }
+
+}" class="graphviz" /></div>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">F4PGA: workflows, dockerfiles, images and tests.</span><a class="headerlink" href="#img-graph-f4pga" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="img-graph-legend">
+<div class="graphviz"><img src="../_images/graphviz-a0d9e80e7dcb95d74d485c588065a4491e218a1d.png" alt="# Authors:
+#   Unai Martinez-Corral
+#     &lt;umartinezcorral&#64;antmicro.com&gt;
+#     &lt;unai.martinezcorral&#64;ehu.eus&gt;
+#
+# Copyright Unai Martinez-Corral
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+digraph G {
+
+  #splines=polyline; #curved
+  newrank=true;
+  node [fontsize=8];
+  edge [fontsize=8];
+
+  { rank=same
+    image_ext [shape=cylinder, color=orange, fontcolor=orange, label=&quot;&quot;];
+    image_hdl [shape=cylinder, label=&quot;&quot;];
+    image_hdlpkg [shape=cylinder, label=&quot;&quot;];
+    deps [shape=none, label=&quot;Publicly available images which the workflow depends on:\l- Black: own, generated in other workflows of this project\l- Orange: external, generated somewhere else\l&quot;]
+  }
+
+  subgraph cluster_legend {
+    test [shape=folder, color=magenta, fontcolor=magenta, label=&quot;Test&quot;];
+    image [shape=cylinder, label=&quot;Image&quot;];
+    image_base [shape=cylinder, color=grey, fontcolor=grey, label=&quot;&quot;];
+    image_dep [shape=cylinder, color=grey, fontcolor=grey, label=&quot;&quot;];
+    image_pkg [shape=cylinder, color=grey, fontcolor=grey, label=&quot;&quot;];
+    dockerfile [shape=note, color=dodgerblue, fontcolor=dodgerblue, label=&quot;Dockerfile&quot;];
+    {
+      image_base,
+      image_dep,
+      image_pkg
+    } -&gt; dockerfile;
+    dockerfile -&gt; image [style=dotted, label=&quot;Image\ngenerated\nby&quot;];
+    image_base -&gt; image [style=dashed, label=&quot;Image\nbased\non&quot;];
+    image_pkg -&gt; image [style=dashed, color=gray, label=&quot;Image\nimports\nfrom&quot;];
+    image -&gt; test;
+  }
+  { rank=same
+    image_base
+    image_dep
+    image_pkg
+    shadow [shape=none, label=&quot;Shadows of the images the workflow depends on.\lShown for ease of visualisation only.\l&quot;];
+  }
+  { rank=same
+    dockerfile
+    workflow [shape=none, label=&quot;A cluster represents a GitHub Actions workflow, which\ltypically uses a single dockerfile.\l The workflow and the dockerfile are named after the tools.\l&quot;];
+  }
+  { rank=same
+    image
+    desc [shape=none, label=&quot;Image(s) generated in the workflow:\l- Green: fine-grained ready-to-use image.\l- Brown: ready-to-use image including several tools.\l- Blue: package image, not executable.\lEach image has, at least and at most, two black input edges, one\ldotted and one dashed. It can optionally have other gray input edges.\l&quot;];
+  }
+  { rank=same
+    test
+    test_desc [shape=none, label=&quot;Each image has a test script, which is executed in a temporary\lcontainer before pushing the image to DockerHub.\lTests which are not complete yet are shown in Red.\l&quot;];
+  }
+  image_ext -&gt; image_dep;
+  image_hdl -&gt; image_base;
+  image_hdlpkg -&gt; image_pkg;
+
+}" class="graphviz" /></div>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Legend of the directed graph.</span><a class="headerlink" href="#img-graph-legend" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Contributing.html" class="btn btn-neutral float-left" title="Contributing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="GraphGeneration.html" class="btn btn-neutral float-right" title="Graph generation/parsing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, Unai Martinez-Corral and contributors.</p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

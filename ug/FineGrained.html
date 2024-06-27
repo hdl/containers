@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fine-grained pulling &mdash; HDL Containers: Building and deploying container images for open source Electronic Design Automation latest documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="All-in-one images" href="AllInOne.html" />
+    <link rel="prev" title="Introduction" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/icon.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="http://hdl.github.io/containers">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CollectionsAndArchitectures.html">Collections and architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ToolsAndImages.html">Tools and images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../About.html">About</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Fine-grained pulling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#makefiles">Makefiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-launchers">Python launchers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#eda2-s-docker-abstraction">EDA²’s Docker abstraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edalize-s-launcher">Edalize’s Launcher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyfpga-s-openflow">PyFPGA’s OpenFlow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AllInOne.html">All-in-one images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GUI.html">Tools with GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USBIP.html">USB/IP</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Graphs.html">Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/PackageImages.html">Package images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/CI.html">Continuous Integration (CI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Tasks.html">Tasks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HDL Containers: Building and deploying container images for open source Electronic Design Automation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Fine-grained pulling</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/hdl/containers/blob/main/doc/ug/FineGrained.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fine-grained-pulling">
+<span id="userguide-fine-grained"></span><h1>Fine-grained pulling<a class="headerlink" href="#fine-grained-pulling" title="Permalink to this heading">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These images are coloured <span class="green">GREEN</span> in the <a class="reference internal" href="../dev/Graphs.html#development-graphs"><span class="std std-ref">Graphs</span></a>.</p>
+</div>
+<p>Ready-to-use images are provided for each tool, which contain the tool and the dependencies for it to run successfully.
+These are typically named <code class="docutils literal notranslate"><span class="pre">REGISTRY_PREFIX/[ARCHITECTURE/][COLLECTION/]TOOL_NAME</span></code>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Since all the images in each collection are based on the same root image, pulling multiple images involves retrieving
+a few additional layers only.
+Therefore, this is the recommended approach for CI or other environments with limited resources.</p>
+</div>
+<section id="makefiles">
+<h2>Makefiles<a class="headerlink" href="#makefiles" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/antonblanchard/ghdl-yosys-blink/blob/master/Makefile">ghdl-yosys-blink: Makefile</a>:
+an example showcasing how to use this fine-grained approach with a makefile.
+The same make based strategy is used in <a class="reference external" href="https://github.com/antonblanchard/microwatt/blob/master/Makefile">gh:antonblanchard/microwatt</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/marph91/icestick-remote">gh:marph91/icestick-remote</a>: the CI workflow for synthesis uses this approach.</p></li>
+</ul>
+<p>Those projects use a partial Makefile such as the following, for optionally wrapping regular tool calls:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>CONTAINER_ENGINE<span class="w"> </span>?<span class="o">=</span><span class="w"> </span>docker
+
+<span class="nv">PWD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>shell<span class="w"> </span><span class="nb">pwd</span><span class="k">)</span>
+<span class="nv">CONTAINER_ARGS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span>PWD<span class="k">)</span>:/wrk<span class="w"> </span>-w<span class="w"> </span>/wrk
+
+<span class="nv">GHDL</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>CONTAINER_ENGINE<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CONTAINER_ARGS<span class="k">)</span><span class="w"> </span>gcr.io/hdl-containers/ghdl/yosys<span class="w"> </span>ghdl
+<span class="nv">YOSYS</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>CONTAINER_ENGINE<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CONTAINER_ARGS<span class="k">)</span><span class="w"> </span>gcr.io/hdl-containers/ghdl/yosys<span class="w"> </span>yosys
+<span class="nv">NEXTPNR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>CONTAINER_ENGINE<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CONTAINER_ARGS<span class="k">)</span><span class="w"> </span>gcr.io/hdl-containers/nextpnr/ice40<span class="w"> </span>nextpnr-ice40
+<span class="nv">ICEPACK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>CONTAINER_ENGINE<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CONTAINER_ARGS<span class="k">)</span><span class="w"> </span>gcr.io/hdl-containers/icestorm<span class="w"> </span>icepack
+</pre></div>
+</div>
+</section>
+<section id="python-launchers">
+<h2>Python launchers<a class="headerlink" href="#python-launchers" title="Permalink to this heading">¶</a></h2>
+<p>There are several EDA tooling management projects which allow wrapping the execution of commands on containers.
+Any of them can be used with the containers provided in this repository.</p>
+<section id="eda2-s-docker-abstraction">
+<h3>EDA²’s Docker abstraction<a class="headerlink" href="#eda2-s-docker-abstraction" title="Permalink to this heading">¶</a></h3>
+<p>Layer CLITool of EDA² (see <a class="reference external" href="https://edaa-org.github.io/index.html" title="(in Electronic Design Automation Abstraction vlatest)"><span>Electronic Design Automation Abstraction (EDA²) Documentation</span></a> and <a class="reference external" href="https://edaa-org.github.io/pyEDAA.CLITool/index.html" title="(in pyEDAA.CLITool v0.2)"><span>The pyEDAA.CLITool Documentation</span></a>), provides <code class="docutils literal notranslate"><span class="pre">Docker.py</span></code> to be combined with any
+of the tools supported in the same repository.</p>
+</section>
+<section id="edalize-s-launcher">
+<h3>Edalize’s Launcher<a class="headerlink" href="#edalize-s-launcher" title="Permalink to this heading">¶</a></h3>
+<p>Edalize (see <a class="reference external" href="https://edalize.readthedocs.io/en/latest/index.html" title="(in Edalize)"><span>Welcome to Edalize’s documentation!</span></a>) provides <code class="docutils literal notranslate"><span class="pre">EDALIZE_LAUNCHER</span></code>, which allows overriding each command:
+<a class="reference external" href="https://github.com/olofk/edalize/search?q=EDALIZE_LAUNCHER">olofk/edalize: search?q=EDALIZE_LAUNCHER</a>.
+<a class="reference external" href="https://github.com/olofk/edalize/blob/master/scripts/el_docker">el_docker</a> is a built-in launcher for Docker.
+See also:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://olofkindgren.blogspot.com/2022/01/edalize-030.html">olofkindgren.blogspot.com: Edalize 0.3.0</a></p></li>
+<li><p><a class="reference external" href="https://github.com/olofk/edalize/pull/221">Support for open source EDA tools from containers (gh:olofk/edalize#221)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/librecores/eda-container-wrapper">gh:librecores/eda-container-wrapper</a></p></li>
+<li><p><a class="reference external" href="https://gist.github.com/carlosedp/c0e29d55e48309a48961f2e3939acfe9">carlosedp/runme.py</a></p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/olofk/edalize/pull/299">Improve launcher script with new containers (gh:olofk/edalize#299)</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="pyfpga-s-openflow">
+<h3>PyFPGA’s OpenFlow<a class="headerlink" href="#pyfpga-s-openflow" title="Permalink to this heading">¶</a></h3>
+<p>PyFPGA’s OpenFlow (see <a class="reference external" href="https://pyfpga.github.io/pyfpga/index.html" title="(in PyFPGA)"><span>PyFPGA’s documentation</span></a> and <a class="reference external" href="https://github.com/PyFPGA/openflow">gh:PyFPGA/openflow</a>) allows running tools in containers, similarly to
+<code class="docutils literal notranslate"><span class="pre">el_docker</span></code>.
+In fact, OpenFlow can be used along with <a class="reference external" href="https://github.com/olofk/edalize">Edalize</a>’s <code class="docutils literal notranslate"><span class="pre">EDALIZE_LAUNCHER</span></code> environment variable.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="AllInOne.html" class="btn btn-neutral float-right" title="All-in-one images" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, Unai Martinez-Corral and contributors.</p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

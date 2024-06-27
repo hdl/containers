@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graph generation/parsing &mdash; HDL Containers: Building and deploying container images for open source Electronic Design Automation latest documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Package images" href="PackageImages.html" />
+    <link rel="prev" title="Graphs" href="Graphs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/icon.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="http://hdl.github.io/containers">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CollectionsAndArchitectures.html">Collections and architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ToolsAndImages.html">Tools and images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../About.html">About</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ug/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/FineGrained.html">Fine-grained pulling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/AllInOne.html">All-in-one images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/GUI.html">Tools with GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ug/USBIP.html">USB/IP</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Graphs.html">Graphs</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Graph generation/parsing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reading-dockerfiles">Reading dockerfiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-github-actions-workflow-files">Reading GitHub Actions workflow files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PackageImages.html">Package images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CI.html">Continuous Integration (CI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tasks.html">Tasks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HDL Containers: Building and deploying container images for open source Electronic Design Automation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="Graphs.html">Graphs</a> &raquo;</li>
+      <li>Graph generation/parsing</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/hdl/containers/blob/main/doc/dev/GraphGeneration.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="graph-generation-parsing">
+<span id="development-graph-generation"></span><h1>Graph generation/parsing<a class="headerlink" href="#graph-generation-parsing" title="Permalink to this heading">¶</a></h1>
+<p>Currently, the <a class="reference internal" href="Graphs.html#development-graphs"><span class="std std-ref">Graphs</span></a> are updated manually.
+That is error prone, because the information shown in them is also defined in the dockerfiles, configuration YAML file
+and CI workflows.
+Ideally, graphs would be auto-generated by parsing/analysing those.
+However, the complexity of the graphs is non-trivial.
+There are many tools for automatically generating diagrams from large datasets, but not so many with features for
+visualizing complex hierarchical nets.
+The requirements we are willing to satisfy are the following:</p>
+<ul class="simple">
+<li><p>Open source tool and format(s).</p></li>
+<li><p>Generates diagrams programmatically from a text representation and/or through a Python or Golang API.</p></li>
+<li><p>Supports hierarchical DAGs with multiple levels of hierarchy. I.e. (nested) clusters which are nodes and have ports.</p></li>
+<li><p>Generates SVG of the hierarchical DAGs.</p></li>
+<li><p>Supports node styles (shape and colour).</p></li>
+<li><p>Ideally:</p>
+<ul>
+<li><p>Clusters are collapsible when shown in an HTML site.</p></li>
+<li><p>Text in the nodes can be links to web sites.</p></li>
+</ul>
+</li>
+</ul>
+<p>So far, the following options were analysed:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://graphviz.org/">Graphviz</a></p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/windler/dotgraph">gh:windler/dotgraph</a></p></li>
+<li><p><a class="reference external" href="http://blockdiag.com/en/blockdiag/examples.html">blockdiag</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://gephi.org/">Gephi</a></p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/gephi/gephi/issues/1594">gh:gephi/gephi#1594</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://aafigure.readthedocs.io/en/latest/shortintro.html">aafigure</a></p></li>
+<li><p><a class="reference external" href="https://draw.io">draw.io</a></p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/jgraph/mxgraph">gh:jgraph/mxgraph</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://www.yworks.com/products/yed">yEd</a></p></li>
+<li><p><a class="reference external" href="https://texample.net/tikz/">texample.net/tikz</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ajstarks/svgo">gh:ajstarks/svgo</a></p></li>
+<li><p><a class="reference external" href="https://github.com/kieler/elkjs">gh:kieler/elkjs</a> (<a class="reference external" href="https://github.com/Nic30/d3-hwschematic">gh:Nic30/d3-hwschematic</a>, <a class="reference external" href="https://github.com/nturley/netlistsvg">gh:nturley/netlistsvg</a>)</p></li>
+<li><p><a class="reference external" href="https://github.com/dagrejs/dagre-d3/wiki">gh:dagrejs/dagre-d3</a></p></li>
+<li><p><a class="reference external" href="https://graphdracula.net">graphdracula.net</a></p></li>
+</ul>
+<p>Graphviz and Gephi are probably the most known tools for generating all kinds of diagrams.
+Unfortunately, none of them supports hierarchical clusters as required in this use case.
+The same issue applies to aafigure and graphdracula.</p>
+<p>yEd is a very interesting product, and fits most (if not all) the technical constraints.
+However, it’s not open source.
+The editor is freeware and the SDK is paid.
+For programmatic generation, the SDK is required.
+The draw.io/mxgraph toolkit seems to be the most similar open source solution.
+However, using SDKs for building custom interactive diagraming tools feels overkill in this use case.
+We don’t need graphs to be editable through a GUI!</p>
+<p>Similarly, Tikz and SVG generation libraries (such as svgo) can be used for having the work done, but they require
+writing a non-negligible plumbing which would increase the maintenance burden, instead of reducing it.
+This would be a last resort.</p>
+<p>Although d3-hwschematic and netlistsvg are very different use cases, the JSON format used in elkjs might be suitable.</p>
+<p>dagre-d3 is meant for DAGs and it supports nested clusters (experimentally,
+<a class="reference external" href="https://dagrejs.github.io/project/dagre-d3/latest/demo/clusters.html">Dagre D3 Demo: Clusters</a>).
+Although clusters seem not to have ports, it might be an easy update from the current solution.
+Since it’s a client-side JS library, it does not write an SVG file to disk by default, but achieving it should be
+trivial.</p>
+<p>As a result, it seems that the most suitable solution might be using the JSON format from elkjs, either with elkjs or
+with dagre-d3.
+Yet, generating an SVG programmatically seems not to be as straightforward as using other solutions such as Graphviz’s
+<code class="docutils literal notranslate"><span class="pre">dot</span></code>.
+The following references illustrate advanced features for building custom views/GUIs/editors:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/kieler/elkjs">gh:kieler/elkjs</a></p></li>
+<li><p><a class="reference external" href="https://www.eclipse.org/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html">eclipse.org/elk/documentation: JSON format</a></p></li>
+<li><p><a class="reference external" href="https://rtsys.informatik.uni-kiel.de/elklive/index.html">rtsys.informatik.uni-kiel.de/elklive</a></p></li>
+<li><p><a class="reference external" href="https://rtsys.informatik.uni-kiel.de/elklive/elkgraph.html">rtsys.informatik.uni-kiel.de/elklive/elkgraph</a></p></li>
+<li><p><a class="reference external" href="https://github.com/eclipse/sprotty">gh:eclipse/sprotty</a></p></li>
+</ul>
+<p>However, it seems that writing a JSON is cumbersome.
+On the one hand, some nodes need to have a size for them to be shown.
+On the other hand, it seems not possible to draw edges across hierarchies.
+Ports need to be explicitly defined for that purpose.
+Therefore, the complexity of generating the JSON given a set of nodes, edges and clusters is non-trivial.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Branch <a class="reference external" href="https://github.com/hdl/containers/tree/pymap/utils/pyHDLC/map.py">utils/pyHDLC/map.py&#64;pymap</a> contains work in progress.
+First, <code class="docutils literal notranslate"><span class="pre">GenerateMap</span></code> builds a DAG by parsing the dockerfiles.
+Then, <code class="docutils literal notranslate"><span class="pre">report</span></code> prints the content in the terminal, for debugging purposes.
+Last, <code class="docutils literal notranslate"><span class="pre">dotgraph</span></code> generates a Graphviz dot diagram.
+The dot diagram does not have clusters.
+We want to add those by parsing the GitHub Actions workflows (see below).
+However, we want to first reproduce the dot output using elkjs.
+See function <code class="docutils literal notranslate"><span class="pre">elkjsgraph</span></code> in <a class="reference external" href="https://github.com/hdl/containers/tree/pymap/utils/pyHDLC/map.py">utils/pyHDLC/map.py&#64;pymap</a>.
+Do you want to give it a try? <a class="reference external" href="https://github.com/hdl/containers/issues/new">Let us know</a> or <a class="reference external" href="https://gitter.im/hdl/community">join the chat</a>!</p>
+</div>
+<section id="reading-dockerfiles">
+<h2>Reading dockerfiles<a class="headerlink" href="#reading-dockerfiles" title="Permalink to this heading">¶</a></h2>
+<p>One of the two sources of information for the graph are dockerfiles.
+As far as we are aware, there is no tool for generating a DAG from the stages of a dockerfile.
+However, <a class="reference external" href="https://github.com/asottile/dockerfile">gh:asottile/dockerfile</a> is an interesting Python module which wraps docker/moby’s golang parser.
+Hence, it can be used for getting the stages and <code class="docutils literal notranslate"><span class="pre">COPY</span> <span class="pre">--from</span></code> or <code class="docutils literal notranslate"><span class="pre">--mount</span></code> statements for generating the hierarchy.
+See <a class="reference external" href="https://github.com/hdl/containers/blob/main/utils/pyHDLC/map.py">utils/pyHDLC/map.py</a>.</p>
+</section>
+<section id="reading-github-actions-workflow-files">
+<h2>Reading GitHub Actions workflow files<a class="headerlink" href="#reading-github-actions-workflow-files" title="Permalink to this heading">¶</a></h2>
+<p>The second source of information are CI workflow files.
+Since YAML is used, reading it from any language is trivial, however, semantic analysis needs to be done.
+Particularly, variables from <code class="docutils literal notranslate"><span class="pre">matrix</span></code> need to be expanded/replaced.
+<a class="reference external" href="https://github.com/nektos/act">gh:nektos/act</a> is written in golang, and it allows executing GitHub Actions workflows locally.
+Therefore, it might have the required features.
+However, as far as we are aware, it’s not meant to be used as a library.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Graphs.html" class="btn btn-neutral float-left" title="Graphs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="PackageImages.html" class="btn btn-neutral float-right" title="Package images" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, Unai Martinez-Corral and contributors.</p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

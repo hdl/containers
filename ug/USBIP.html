@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USB/IP protocol support for Docker Desktop &mdash; HDL Containers: Building and deploying container images for open source Electronic Design Automation latest documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contributing" href="../dev/Contributing.html" />
+    <link rel="prev" title="Tools with GUI" href="GUI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/icon.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="http://hdl.github.io/containers">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CollectionsAndArchitectures.html">Collections and architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ToolsAndImages.html">Tools and images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../About.html">About</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FineGrained.html">Fine-grained pulling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AllInOne.html">All-in-one images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GUI.html">Tools with GUI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">USB/IP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example-session">Example session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alternatives">Alternatives</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Graphs.html">Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/PackageImages.html">Package images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/CI.html">Continuous Integration (CI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/Tasks.html">Tasks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HDL Containers: Building and deploying container images for open source Electronic Design Automation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+        
+          
+            <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>USB/IP protocol support for Docker Desktop</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/hdl/containers/blob/main/doc/ug/USBIP.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usb-ip-protocol-support-for-docker-desktop">
+<span id="userguide-usbip"></span><h1>USB/IP protocol support for Docker Desktop<a class="headerlink" href="#usb-ip-protocol-support-for-docker-desktop" title="Permalink to this heading">¶</a></h1>
+<p>Virtual Machines used on Windows for running either Windows Subsystem for Linux (WSL) or Docker Desktop by default do
+not support sharing USB devices with the containers.
+Only those that are identified as storage or COM devices can be bind directly.
+See <a class="reference external" href="https://github.com/microsoft/WSL/issues/5158">microsoft/WSL#5158</a>.
+That prevents using arbitrary drivers inside the containers.
+As a result, most container users on Windows do install board programming tools through MSYS2 (see <a class="reference external" href="https://github.com/hdl/MINGW-packages">gh:hdl/MINGW-packages</a>).</p>
+<p>Nevertheless, USB/IP protocol allows passing USB device(s) from server(s) to client(s) over the network.
+As explained at <a class="reference external" href="https://www.kernel.org/doc/readme/tools-usb-usbip-README">kernel.org/doc/readme/tools-usb-usbip-README</a>,
+on GNU/Linux, USB/IP is implemented as a few kernel modules with companion userspace tools.
+However, the default underlying Hyper-V VM machine (based on <a class="reference external" href="https://alpinelinux.org/">Alpine Linux</a>) shipped with
+<em>Docker Desktop</em> (aka <em>docker-for-win</em>/<em>docker-for-mac</em>) does not include the required kernel modules.
+Fortunately, privileged docker containers allow installing missing kernel modules.
+The shell script in <a class="reference external" href="https://github.com/hdl/containers/blob/main/usbip/">usbip/</a> supports customising the native VM in <em>Docker Desktop</em> for adding
+USB over IP support.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build kernel modules: in an unprivileged `alpine` container, retrieve the corresponding</span>
+<span class="c1"># kernel sources, copy runtime config and enable USB/IP features, build `drivers/usb/usbip`</span>
+<span class="c1"># and save `*.ko` artifacts to relative subdir `dist` on the host.</span>
+./run.sh<span class="w"> </span>-m
+
+<span class="c1"># Load/insert kernel modules: use a privileged `busybox` container to load kernel modules</span>
+<span class="c1"># `usbip-core.ko` and `vhci-hcd.ko` from relative subdir `dist` on the host to the</span>
+<span class="c1"># underlying Hyper-V VM.</span>
+./run.sh<span class="w"> </span>-l
+
+<span class="c1"># Build image `vhcli`, using `busybox` as a base, and including the</span>
+<span class="c1"># [VirtualHere](https://www.virtualhere.com) GNU/Linux client for x86_64 along with the</span>
+<span class="c1"># `*.ko` files built previously through `./run.sh -m`.</span>
+./run.sh<span class="w"> </span>-v
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For manually selecting configuration options, building and inserting modules, see detailed procedure in
+<a class="reference external" href="https://github.com/gw0/docker-alpine-kernel-modules#usage">gw0/docker-alpine-kernel-modules#usage</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Modules will be removed when the Hyper-V VM is restarted (i.e. when the host or <em>Docker Desktop</em> are restarted).
+For a <em>permanent</em> install, modules need to be copied to <code class="docutils literal notranslate"><span class="pre">/lib/modules</span></code> in the underlying VM, and <code class="docutils literal notranslate"><span class="pre">/stc/modules</span></code>
+needs to be configured accordingly.
+Use <code class="docutils literal notranslate"><span class="pre">$(command</span> <span class="pre">-v</span> <span class="pre">winpty)</span> <span class="pre">docker</span> <span class="pre">run</span> <span class="pre">--rm</span> <span class="pre">-it</span> <span class="pre">--privileged</span> <span class="pre">--pid=host</span> <span class="pre">alpine</span> <span class="pre">nsenter</span> <span class="pre">-t</span> <span class="pre">1</span> <span class="pre">-m</span> <span class="pre">-u</span> <span class="pre">-n</span> <span class="pre">-i</span> <span class="pre">sh</span></code> to access
+a shell with full permissions on the VM.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>USB/IP is supported in Renode too.
+See <a class="reference external" href="https://renode.readthedocs.io/en/latest/tutorials/usbip.html">renode.rtfd.io/en/latest/tutorials/usbip</a>.</p>
+</div>
+<section id="example-session">
+<h2>Example session<a class="headerlink" href="#example-session" title="Permalink to this heading">¶</a></h2>
+<p>How to connect a <em>Docker Desktop</em> container to <em>VirtualHere USB Server for Windows</em>.</p>
+<ul class="simple">
+<li><p>Start <a class="reference external" href="https://www.virtualhere.com/sites/default/files/usbserver/vhusbdwin64.exe">vhusbdwin64.exe</a> on the host</p></li>
+<li><p>Ensure that the firewall is not blocking it.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start container named &#39;vhclient&#39;</span>
+./run.sh<span class="w"> </span>-s
+<span class="c1"># List usb devices available in the container</span>
+./run.sh<span class="w"> </span>-e<span class="w"> </span>lsusb
+<span class="c1"># LIST hubs/devices found by vhclient</span>
+./run.sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;LIST&quot;</span>
+<span class="c1"># Manually add to the client the hub/server running on the host</span>
+./run.sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;MANUAL HUB ADD,host.docker.internal:7575&quot;</span>
+
+sleep<span class="w"> </span><span class="m">10</span>
+
+./run.sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;LIST&quot;</span>
+<span class="c1"># Use a remote device in the container</span>
+./run.sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;USE,&lt;SERVER HOSTNAME&gt;.1&quot;</span>
+
+sleep<span class="w"> </span><span class="m">4</span>
+
+<span class="c1"># Check that the device is now available in the container</span>
+./run.sh<span class="w"> </span>-e<span class="w"> </span>lsusb
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>There is an issue/bug in <em>Docker Desktop</em> (<a class="reference external" href="https://github.com/docker/for-win/issues/4548">docker/for-win#4548</a>) that prevents the
+container where the USB device is added from seeing it.
+The workaround is to execute the board programming tool in a sibling container.
+For example: <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">--rm</span> <span class="pre">--privileged</span> <span class="pre">*/prog</span> <span class="pre">iceprog</span> <span class="pre">-t</span></code>.</p>
+</div>
+</section>
+<section id="alternatives">
+<h2>Alternatives<a class="headerlink" href="#alternatives" title="Permalink to this heading">¶</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Using <a class="reference external" href="https://www.virtualhere.com">VirtualHere</a> is the only solution we could successfully use in order to share
+FTDI devices (<a class="reference external" href="https://hdl.github.io/constraints/Data/Boards/index.html#boards-icestick" title="(in FPGA Board Constraints vlatest)"><span>iCEstick Evaluation Kit</span></a> boards) between a Windows 10 host and a Docker
+Desktop container running on the same host.
+However, since the USB/IP protocol is open source, we’d like to try any other (preferredly open and free source)
+server for Windows along with the default GNU/Linux usbip-tools.
+Should you know about any, please <a class="reference external" href="https://github.com/hdl/containers/issues/new">let us know</a>!</p>
+<p>We are aware of <a class="reference external" href="https://github.com/cezuni/usbip-win">gh:cezuni/usbip-win</a>.
+However, it seems to be in very early development state and the install procedure is quite complex yet.</p>
+</div>
+<p>Serial (COM) devices can be shared with open source tools.
+On the one hand, <a class="reference external" href="https://sourceforge.net/projects/com0com/files/hub4com/">hub4com</a> from project
+<a class="reference external" href="http://com0com.sourceforge.net/">com0com</a> allows to publish a port through a RFC2217 server.
+On the other hand, <code class="docutils literal notranslate"><span class="pre">socat</span></code> can be used to link the network connection to a virtual <code class="docutils literal notranslate"><span class="pre">tty</span></code> device.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                   <span class="n">HOST</span>                                           <span class="n">CONTAINER</span>
+        <span class="o">---------------------------</span>                 <span class="o">-------------------------------------</span>
+<span class="n">USB</span> <span class="o">&lt;-&gt;</span> <span class="o">|</span> <span class="n">COMX</span> <span class="o">&lt;-&gt;</span> <span class="n">RFC2217</span> <span class="n">server</span> <span class="o">|</span> <span class="o">&lt;-&gt;</span> <span class="n">network</span> <span class="o">&lt;-&gt;</span> <span class="o">|</span> <span class="n">socat</span> <span class="o">&lt;-&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ttySY</span> <span class="o">&lt;-&gt;</span> <span class="n">app</span><span class="o">/</span><span class="n">tool</span> <span class="o">|</span>
+        <span class="o">---------------------------</span>                 <span class="o">-------------------------------------</span>
+</pre></div>
+</div>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> <span class="c1">REM On the Windows host</span>
+<span class="gp">&gt;</span> com2tcp-rfc2217.bat COM<span class="p">&lt;</span>X<span class="p">&gt;</span> &lt;PORT&gt;
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># In the container</span>
+socat<span class="w"> </span>pty,link<span class="o">=</span>/dev/ttyS&lt;Y&gt;<span class="w"> </span>tcp:host.docker.internal:&lt;PORT&gt;
+</pre></div>
+</div>
+<p>It might be possible to replace <code class="docutils literal notranslate"><span class="pre">hub4com</span></code> with <a class="reference external" href="https://github.com/pyserial/pyserial">gh:pyserial/pyserial</a>.
+However, we did not test it.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pyserial.readthedocs.io/en/latest/examples.html#single-port-tcp-ip-serial-bridge-rfc-2217">pyserial.rtfd.io: Single-port TCP/IP - serial bridge (RFC 2217)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/issues/204">espressif/esp-idf#204</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="GUI.html" class="btn btn-neutral float-left" title="Tools with GUI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../dev/Contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, Unai Martinez-Corral and contributors.</p>
+  </div>Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
