@@ -26,6 +26,7 @@ makedepends=(
   flex
   gawk
   gcc
+  build-essential
   pkg-config
   zlib1g-dev
   clang
@@ -38,7 +39,7 @@ testdepends=(
 )
 
 build() {
-  git clone https://github.com/YosysHQ/yosys.git /tmp/yosys
+  git clone --recurse-submodules https://github.com/YosysHQ/yosys.git /tmp/yosys
   cd /tmp/yosys
   make -j $(nproc)
   make DESTDIR=/opt/yosys install

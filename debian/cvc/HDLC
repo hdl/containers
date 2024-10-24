@@ -37,9 +37,11 @@ makedepends=(
   libfl-dev
   m4
   patch
+  pkg-config
   python3-pyparsing
   python3-toml
   python3-venv
+  python3-pip
   "$HDLC_OPENJDK"
 )
 
