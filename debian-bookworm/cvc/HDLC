@@ -34,6 +34,7 @@ makedepends=(
   python3-pyparsing
   python3-toml
   python3-venv
+  python3-pip
   openjdk-17-jre-headless
 )
 
