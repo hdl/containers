@@ -56,4 +56,5 @@ depends=(
   tcl-dev
   graphviz
   xdot
+  gtkwave 
 )
