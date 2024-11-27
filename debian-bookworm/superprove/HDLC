@@ -1,10 +1,11 @@
-# HDLC cvc
+# HDLC superprove
 
 # Authors:
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
 #   Torsten Meissner
+#   Sverre Hamre
 #
 # Copyright Unai Martinez-Corral
 #
@@ -24,27 +25,36 @@
 
 set -e
 
+CTX=/tmp/ctx
+
 makedepends=(
+  binutils
   cmake
-  libgmp-dev
-  flex
-  libfl-dev
-  m4
+  ninja-build
   patch
-  python3-pyparsing
-  python3-toml
-  python3-venv
-  python3-pip
-  openjdk-17-jre-headless
+  # python-setuptools
+  # python-wheel-common
+  # python-dev-is-python2
+  zlib1g-dev
 )
 
+prepare() {
+  curl https://bootstrap.pypa.io/pip/2.7/get-pip.py | python
+}
+
 build() {
-  git clone https://github.com/cvc5/cvc5.git /tmp/cvc5
-  cd /tmp/cvc5
-  git tag -d latest
-  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//g' > /tmp/hdlc.cvc.version
-  ./configure.sh --auto-download
-  cd build
-  make -j$(nproc)
-  make DESTDIR=/opt/cvc install
+  git clone --recursive https://github.com/sterin/super-prove-build /tmp/superprove
+  cd /tmp/superprove/super_prove
+  git describe --always | sed 's/\(.*\)/g\1/' > /tmp/hdlc.superprove.version
+  cd ..
+  patch -p1 < ${CTX}/rm-system.patch
+  mkdir build && cd build
+  PREFIX=/usr/local
+  cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$PREFIX" -G Ninja ..
+  ninja
+  ninja package
+  DESTDIR=/opt/superprove
+  mkdir -p "${DESTDIR}${PREFIX}"
+  tar -C "${DESTDIR}${PREFIX}" -xzf super_prove*.tar.gz --strip 1
+  cp ${CTX}/suprove "${DESTDIR}${PREFIX}"/bin/suprove
 }

@@ -1,9 +1,11 @@
-# HDLC yosys
+# HDLC pono
 
 # Authors:
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
+#   Torsten Meissner
+#   Sverre Hamre
 #
 # Copyright Unai Martinez-Corral
 #
@@ -21,40 +23,31 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+set -e
+
 makedepends=(
   bison
+  cmake
   flex
-  gawk
-  gcc
-  g++
+  libbison-dev
+  libgmp-dev
+  python3-pyparsing
   pkg-config
-  zlib1g-dev
-  clang
-  git
-  make
+  meson
 )
 
-testdepends=(
-  g++
-)
 
 build() {
-  git clone --recurse-submodules https://github.com/YosysHQ/yosys.git /tmp/yosys
-  cd /tmp/yosys
-  make -j $(nproc)
-  make DESTDIR=/opt/yosys install
+  git clone https://github.com/upscale-project/pono.git /tmp/pono
+  cd /tmp/pono
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//g' > /tmp/hdlc.pono.version
+  ./contrib/setup-smt-switch.sh
+  ./contrib/setup-btor2tools.sh
+  ./configure.sh
+  PREFIX=/usr/local
+  make -C build -j$(nproc) PREFIX="$PREFIX"
+  DESTDIR=/opt/pono
+  mkdir -p "${DESTDIR}${PREFIX}"/bin "${DESTDIR}${PREFIX}"/lib
+  cp build/pono "${DESTDIR}${PREFIX}"/bin/
+  cp build/libpono.so "${DESTDIR}${PREFIX}"/lib/
 }
-
-runtests() {
-  cd /tmp/yosys
-  make test
-}
-
-depends=(
-  libffi-dev
-  libreadline-dev
-  tcl-dev
-  graphviz
-  xdot
-  gtkwave 
-)

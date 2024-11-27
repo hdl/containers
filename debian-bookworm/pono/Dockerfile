@@ -1,9 +1,9 @@
-# HDLC yosys
-
 # Authors:
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
+#   Torsten Meissner
+#   Sverre Hamre
 #
 # Copyright Unai Martinez-Corral
 #
@@ -21,40 +21,28 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-makedepends=(
-  bison
-  flex
-  gawk
-  gcc
-  g++
-  pkg-config
-  zlib1g-dev
-  clang
-  git
-  make
-)
+ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
 
-testdepends=(
-  g++
-)
+#---
 
-build() {
-  git clone --recurse-submodules https://github.com/YosysHQ/yosys.git /tmp/yosys
-  cd /tmp/yosys
-  make -j $(nproc)
-  make DESTDIR=/opt/yosys install
-}
+FROM $REGISTRY/build/build AS build
 
-runtests() {
-  cd /tmp/yosys
-  make test
-}
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && mkdir -p /usr/share/man/man1/ \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install ${makedepends[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
 
-depends=(
-  libffi-dev
-  libreadline-dev
-  tcl-dev
-  graphviz
-  xdot
-  gtkwave 
-)
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+
+#---
+
+FROM scratch AS version
+COPY --from=build /tmp/hdlc.pono.version /
+
+#---
+
+FROM scratch
+COPY --from=build /opt/pono /pono

@@ -1,9 +1,11 @@
-# HDLC yosys
+#!/usr/bin/env bash
 
 # Authors:
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
+#   Torsten Meissner
+#   Sverre Hamre
 #
 # Copyright Unai Martinez-Corral
 #
@@ -21,40 +23,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-makedepends=(
-  bison
-  flex
-  gawk
-  gcc
-  g++
-  pkg-config
-  zlib1g-dev
-  clang
-  git
-  make
-)
+tool=super_prove
 
-testdepends=(
-  g++
-)
+if [ "$1" != "${1#+}" ]; then
+  tool="${1#+}"
+  shift
+fi
 
-build() {
-  git clone --recurse-submodules https://github.com/YosysHQ/yosys.git /tmp/yosys
-  cd /tmp/yosys
-  make -j $(nproc)
-  make DESTDIR=/opt/yosys install
-}
-
-runtests() {
-  cd /tmp/yosys
-  make test
-}
-
-depends=(
-  libffi-dev
-  libreadline-dev
-  tcl-dev
-  graphviz
-  xdot
-  gtkwave 
-)
+exec ${tool}.sh "$@"

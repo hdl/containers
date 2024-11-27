@@ -1,9 +1,8 @@
-# HDLC yosys
-
 # Authors:
 #   Unai Martinez-Corral
-#     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
+#   Torsten Meissner
+#   Sverre Hamre
 #
 # Copyright Unai Martinez-Corral
 #
@@ -21,40 +20,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-makedepends=(
-  bison
-  flex
-  gawk
-  gcc
-  g++
-  pkg-config
-  zlib1g-dev
-  clang
-  git
-  make
-)
+diff --git a/cmake/install_rules.cmake b/cmake/install_rules.cmake
+index fed7af4..08e0cf5 100644
+--- a/cmake/install_rules.cmake
++++ b/cmake/install_rules.cmake
+@@ -62 +61,0 @@ function(install_python_requirements file)
+-                --system
+--
+2.33.0
 
-testdepends=(
-  g++
-)
-
-build() {
-  git clone --recurse-submodules https://github.com/YosysHQ/yosys.git /tmp/yosys
-  cd /tmp/yosys
-  make -j $(nproc)
-  make DESTDIR=/opt/yosys install
-}
-
-runtests() {
-  cd /tmp/yosys
-  make test
-}
-
-depends=(
-  libffi-dev
-  libreadline-dev
-  tcl-dev
-  graphviz
-  xdot
-  gtkwave 
-)
