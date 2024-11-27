@@ -23,7 +23,7 @@ ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
 
 #---
 
-FROM ghdl/pkg:bookworm-mcode AS build-mcode
+FROM docker.io/ghdl/pkg:bookworm-mcode AS build-mcode
 
 # TODO Build GHDL on $REGISTRY/build/build instead of picking ghdl/pkg:bookworm-mcode
 
@@ -35,7 +35,7 @@ COPY --from=build-mcode / /ghdl/usr/local/
 
 #---
 
-FROM ghdl/pkg:bookworm-llvm-14 AS build-llvm
+FROM docker.io/ghdl/pkg:bookworm-llvm-14 AS build-llvm
 
 # TODO Build GHDL on $REGISTRY/build/build instead of picking ghdl/pkg:bookworm-llvm-14
 
@@ -62,10 +62,12 @@ FROM base AS mcode
 COPY --from=build-mcode / /usr/local/
 
 #--
-
+   
 FROM base AS llvm
-
+   
 COPY --from=build-llvm / /usr/local/
+COPY --from=build-llvm / /ghdl/usr/local/
+COPY --from=build-mcode / /ghdl/usr/local/
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

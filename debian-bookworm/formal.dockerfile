@@ -69,16 +69,41 @@ RUN apt-get update -qq \
 
 #---
 
-# WORKAROUND: this is required because 'COPY --from' does not support ARGs
-# FROM $REGISTRY/pkg/superprove AS pkg-superprove
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs# Create a francendebian with python2.7 from debian bulseye
+RUN curl -O http://ftp.debian.org/debian/pool/main/libf/libffi/libffi7_3.3-6_amd64.deb
+RUN curl -O http://ftp.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1w-0+deb11u1_amd64.deb
+RUN curl -O http://ftp.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.18-8+deb11u1_amd64.deb
+RUN curl -O http://ftp.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.18-8+deb11u1_amd64.deb
+RUN curl -O http://ftp.debian.org/debian/pool/main/p/python2.7/libpython2.7-stdlib_2.7.18-8+deb11u1_amd64.deb
+RUN curl -O http://ftp.debian.org/debian/pool/main/p/python2.7/python2.7_2.7.18-8+deb11u1_amd64.deb
+# RUN curl -O http://ftp.debian.org/debian/pool/main/p/python2.7/libpython2.7-dev_2.7.18-8+deb11u1_amd64.deb
+# RUN curl -O http://ftp.debian.org/debian/pool/main/p/python2.7/python2.7-dev_2.7.18-8+deb11u1_amd64.deb
+# RUN curl -O http://ftp.debian.org/debian/pool/main/p/python2.7/libpython2.7_2.7.18-8+deb11u1_amd64.deb
 
-# FROM latest
+RUN apt-get update -qq \
+&& apt-get -y install mime-support 
 
-# COPY --from=pkg-superprove /superprove /
+RUN dpkg -i libffi7_3.3-6_amd64.deb 
+RUN dpkg -i libssl1.1_1.1.1w-0+deb11u1_amd64.deb 
+RUN dpkg -i libpython2.7-minimal_2.7.18-8+deb11u1_amd64.deb 
+RUN dpkg -i python2.7-minimal_2.7.18-8+deb11u1_amd64.deb 
+RUN dpkg -i libpython2.7-stdlib_2.7.18-8+deb11u1_amd64.deb 
+RUN dpkg -i python2.7_2.7.18-8+deb11u1_amd64.deb 
+# RUN dpkg -i libpython2.7_2.7.18-8+deb11u1_amd64.deb
+# RUN dpkg -i libpython2.7-dev_2.7.18-8+deb11u1_amd64.deb 
+# RUN dpkg -i python2.7-dev_2.7.18-8+deb11u1_amd64.deb 
+# End francendebian installs
 
-# RUN apt-get update -qq \
+
+FROM $REGISTRY/pkg/superprove AS pkg-superprove
+
+FROM latest
+
+COPY --from=pkg-superprove /superprove /
+
+RUN apt-get update -qq \
 #  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
    #  python \
    #  libpython2.7 \
-#  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
-#  && rm -rf /var/lib/apt/lists/*
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*

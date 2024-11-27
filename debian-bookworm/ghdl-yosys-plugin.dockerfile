@@ -19,15 +19,18 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
+# ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
+ARG REGISTRY='localhost/bookworm'
 
 #---
 
-FROM $REGISTRY/yosys AS base
+FROM $REGISTRY/pkg/yosys AS base
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     libgnat-12 \
+    gcc \
+    g++ \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists
 
