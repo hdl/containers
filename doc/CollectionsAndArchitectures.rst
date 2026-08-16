@@ -12,14 +12,14 @@ See `docs.docker.com: About storage drivers | Images and layers <https://docs.do
 
 Collections:
 
-* ``debian/bookworm`` based on ``ARCHITECTURE/debian:bookworm-slim``
-* ``debian/bullseye`` based on ``ARCHITECTURE/debian:bullseye-slim`` (default)
+* ``debian/trixie`` based on ``ARCHITECTURE/debian:trixie-slim`` (default)
 * ``rockylinux/8`` based on ``ARCHITECTURE/rockylinux:8``
 
 .. IMPORTANT::
   Deprecated:
 
-  * *None*
+  * ``debian/bookworm`` based on ``ARCHITECTURE/debian:bookworm-slim``
+  * ``debian/bullseye`` based on ``ARCHITECTURE/debian:bullseye-slim``
 
   Removed:
 
@@ -28,7 +28,7 @@ Collections:
 
 Architectures:
 
-* `amd64 <https://hub.docker.com/u/amd64>`__
+* `amd64 <https://hub.docker.com/u/amd64>`__ (default)
 * `arm32v7 <https://hub.docker.com/u/arm32v7>`__
 * `arm64v8 <https://hub.docker.com/u/arm64v8>`__
 * `ppc64le <https://hub.docker.com/u/ppc64le>`__
@@ -43,10 +43,8 @@ However, fields ``ARCHITECURE`` and ``COLLECTION`` are optional because:
 * All images for the default architecture and all images of the default collection are pushed to
   |SHIELD:Mirror:GHCR:NoArchitecture| and |SHIELD:Mirror:GHCR:NoCollection|, respectively.
 
-* Images of the default collection for the default architecture:
-
-  * All are pushed to |SHIELD:Mirror:Docker|.
-  * Those which are not ``build`` or ``pkg`` are pushed to |SHIELD:Mirror:GHCR:Default|.
+* Images of the default collection for the default architecture are pushed to
+  |SHIELD:Mirror:GHCR:Default| and |SHIELD:Mirror:Docker|.
 
 .. important::
    Image names and tags in this documentation are provided without the *registry prefix*.

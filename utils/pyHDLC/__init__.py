@@ -43,7 +43,7 @@ class Defaults():
     #: Default registry prefix.
     registry: str = "ghcr.io/hdl"
     #: Default collection.
-    collection: str = "debian/bullseye"
+    collection: str = "debian/trixie"
     #: Default architecture.
     architecture: str = "amd64"
 
