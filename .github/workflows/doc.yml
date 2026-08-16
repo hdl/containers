@@ -46,7 +46,7 @@ jobs:
     steps:
 
     - name: 🧰 Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: ⛴️ Build image hdlc/doc:pyHDLC
       run: make -C doc pyHDLC
@@ -68,7 +68,7 @@ jobs:
     steps:
 
     - name: 🧰 Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: 🗺️ Generate map
       run: make -C doc map
@@ -87,7 +87,7 @@ jobs:
     steps:
 
     - name: 🧰 Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: 📓 BuildTheDocs (BTD)
       uses: buildthedocs/btd@v0
