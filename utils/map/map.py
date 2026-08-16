@@ -283,7 +283,7 @@ def GenerateMap(debug: bool = False):
 
     print("[Map] Parse dockerfiles:")
 
-    for dfiles in ["debian", "debian-bullseye"]:
+    for dfiles in ["debian", "debian-trixie"]:
         for pattern in ["**/Dockerfile", "*.dockerfile"]:
             for dfilepath in [x for x in (ROOT.parent / dfiles).glob(pattern)]:
                 cmap.ParseDockerfile(dfilepath, debug)
@@ -308,7 +308,7 @@ def GenerateMap(debug: bool = False):
     return cmap
 
 
-def GetImagesFromJobs(collection: str = "debian/bullseye", architecture: str = "amd64") -> List[str]:
+def GetImagesFromJobs(collection: str = "debian/trixie", architecture: str = "amd64") -> List[str]:
     """
     Return a list of all the image names in all the jobs defined in the configuration.
     First, extract the keys/names of all jobs types.
