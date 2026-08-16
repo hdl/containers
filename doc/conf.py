@@ -163,53 +163,8 @@ with (ROOT / "shields/shields.build.gen.inc").open("w", encoding="utf-8") as wfp
 # -- Generate CIStatus.inc ---------------------------------------------------------------------------------------------
 
 CIWorkflows = [
-    [
-        ".doc",
-        "base",
-        "ghdl",
-        "gtkwave",
-        "iverilog",
-        "nvc",
-        "verible",
-        "verilator",
-        "xschem",
-        "xyce",
-    ],
-    [
-        "apicula",
-        "arachne-pnr",
-        "ghdl-yosys-plugin",
-        "icestorm",
-        "nextpnr",
-        "openfpgaloader",
-        "prjoxide",
-        "prjtrellis",
-        "f4pga",
-        "vtr",
-        "yosys",
-    ],
-    [
-        "boolector",
-        "cvc",
-        "pono",
-        "superprove",
-        "sby",
-        "yices2",
-        "z3",
-    ],
-    [
-        "irsim",
-        "klayout",
-        "magic",
-        "netgen",
-        "openroad",
-    ],
-    [
-        "formal",
-        "sim",
-        "impl",
-        "prog",
-    ],
+    [".doc", ".scheduler", ".watch"],
+    ["f4pga", "formal", "impl", "magic", "nextpnr", "sim"]
 ]
 
 with (ROOT / "CIStatus.inc").open("w") as wfptr:
@@ -225,21 +180,9 @@ with (ROOT / "CIStatus.inc").open("w") as wfptr:
    :class: shield\n
 """
             )
-    # Get the length of each column
-    lengths = [len(sublist) for sublist in CIWorkflows]
-    # Generate the table
-    wfptr.write(
-        tabulate(
-            [
-                [
-                    (f"|SHIELD:Workflow:{sublist[num]}|" if lengths[index] > num else " ")
-                    for index, sublist in enumerate(CIWorkflows)
-                ] for num in range(max(lengths))
-            ],
-            headers=["Base, Simulation and Linting", "Synthesis, PnR and Prog", "Formal", "ASIC", "All-in-one"],
-            tablefmt="rst",
-        )
-    )
+    wfptr.write('.. centered::\n  '+'\n.. centered::\n  '.join([
+        ' '.join([f"|SHIELD:Workflow:{item}|" for item in row]) for row in CIWorkflows
+    ]))
 
 # -- General configuration ---------------------------------------------------------------------------------------------
 
@@ -263,7 +206,7 @@ source_suffix = {
 
 master_doc = "index"
 project = "HDL Containers: Building and deploying container images for open source Electronic Design Automation"
-copyright = "2019-2023, Unai Martinez-Corral and contributors"
+copyright = "2019-2026, Unai Martinez-Corral and contributors"
 author = "Unai Martinez-Corral and contributors"
 
 version = "latest"

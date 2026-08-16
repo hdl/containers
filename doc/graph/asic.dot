@@ -23,6 +23,7 @@ digraph G {
 
   #splines=polyline; #curved
   newrank=true;
+  labelloc="b";
 
   # Dockerfiles
 
@@ -77,6 +78,8 @@ digraph G {
   # Workflows
 
   subgraph cluster_irsim {
+    label = "irsim";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_irsim_build/build" [label="build/build"]
@@ -100,6 +103,8 @@ digraph G {
   }
 
   subgraph cluster_klayout {
+    label = "klayout";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_klayout_build/build" [label="build/build"]
@@ -123,6 +128,8 @@ digraph G {
   }
 
   subgraph cluster_magic {
+    label = "magic";
+    style = "rounded";
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_magic_build/build" [label="build/build"]
@@ -150,6 +157,8 @@ digraph G {
   }
 
   subgraph cluster_netgen {
+    label = "netgen";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_netgen_build/build" [label="build/build"]
@@ -173,6 +182,8 @@ digraph G {
   }
 
   subgraph cluster_openroad {
+    label = "openroad";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_openroad_build/dev" [label="build/dev"]

@@ -23,6 +23,7 @@ digraph G {
 
   #splines=polyline; #curved
   newrank=true;
+  labelloc="b";
 
   # Dockerfiles
 
@@ -90,6 +91,8 @@ digraph G {
   # Workflows
 
   subgraph cluster_gtkwave {
+    label = "gtkwave";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_gtkwave_build/build" [label="build/build"]
@@ -110,6 +113,8 @@ digraph G {
   }
 
   subgraph cluster_iverilog {
+    label = "iverilog";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_iverilog_build/build" [label="build/build"]
@@ -133,6 +138,8 @@ digraph G {
   }
 
   subgraph cluster_nvc {
+    label = "nvc";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_nvc_build/build" [label="build/build"]
@@ -153,6 +160,8 @@ digraph G {
   }
 
   subgraph cluster_verilator {
+    label = "verilator";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_verilator_build/build" [label="build/build"]
@@ -176,6 +185,9 @@ digraph G {
   }
 
   subgraph cluster_sim {
+    label = "sim";
+    style = "rounded";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_sim_ghdl/llvm" [label="ghdl/llvm"]
@@ -226,6 +238,8 @@ digraph G {
   }
 
   subgraph cluster_xschem {
+    label = "xschem";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_xschem_build/build" [label="build/build"]
@@ -249,6 +263,8 @@ digraph G {
   }
 
   subgraph cluster_xyce {
+    label = "xyce";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_xyce_build/build" [label="build/build"]

@@ -23,6 +23,7 @@ digraph G {
 
   #splines=polyline; #curved
   newrank=true;
+  labelloc="b";
 
   # Dockerfiles
 
@@ -77,6 +78,8 @@ digraph G {
   # Workflows
 
   subgraph cluster_boolector {
+    label = "boolector";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_boolector_scratch" [label="scratch"]
@@ -91,6 +94,8 @@ digraph G {
   }
 
   subgraph cluster_cvc {
+    label = "cvc";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_cvc_scratch" [label="scratch"]
@@ -105,6 +110,8 @@ digraph G {
   }
 
   subgraph cluster_pono {
+    label = "pono";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_pono_scratch" [label="scratch"]
@@ -119,6 +126,8 @@ digraph G {
   }
 
   subgraph cluster_superprove {
+    label = "superprove";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_superprove_scratch" [label="scratch"]
@@ -133,6 +142,8 @@ digraph G {
   }
 
   subgraph cluster_sby {
+    label = "sby";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_sby_scratch" [label="scratch"]
@@ -147,6 +158,8 @@ digraph G {
   }
 
   subgraph cluster_yices2 {
+    label = "yices2";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_yices2_scratch" [label="scratch"]
@@ -161,6 +174,8 @@ digraph G {
   }
 
   subgraph cluster_z3 {
+    label = "z3";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_z3_scratch" [label="scratch"]
@@ -175,6 +190,9 @@ digraph G {
   }
 
   subgraph cluster_formal {
+    label = "formal";
+    style = "rounded";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_formal_boolector" [label="pkg/boolector"]

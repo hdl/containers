@@ -86,15 +86,48 @@ jobs:
             || github.event.head_commit.message
           }}
         HDLC_PUSH_TRIGGER: >-
+          netgen
           nvc
         HDLC_PUSH_CALL: >-
           boolector
-          netgen
         HDLC_SCHEDULE_TRIGGER: >-
+#          f4pga
+#          formal
+#          impl
+#          magic
+#          nextpnr
+        HDLC_SCHEDULE_CALL: >-
+          apicula
+          arachne-pnr
+          base
+          boolector
+          conda
+          cvc
+          ghdl
+          ghdl-yosys-plugin
+          gtkwave
+          icestorm
+          irsim
+          iverilog
+          klayout
           netgen
           nvc
-        HDLC_SCHEDULE_CALL: >-
-          boolector
+          openfpgaloader
+          openroad
+          pono
+          prjoxide
+          prjtrellis
+          prog
+          sby
+          superprove
+          verible
+          verilator
+          vtr
+          xschem
+          xyce
+          yices2
+          yosys
+          z3
 
   call:
     needs: dispatch
