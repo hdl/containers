@@ -23,6 +23,7 @@ digraph G {
 
   #splines=polyline; #curved
   newrank=true;
+  labelloc="b";
 
   # Dockerfiles
 
@@ -71,6 +72,8 @@ digraph G {
   # Workflows
 
   subgraph cluster_conda {
+    label = "conda";
+
     "p_conda_build/base" [shape=cylinder, color=grey, fontcolor=grey, label="build/base"];
     d_conda -> "conda" [style=dotted];
     "t_conda" [shape=folder, color=red, fontcolor=red, label="conda"];
@@ -78,6 +81,9 @@ digraph G {
   }
 
   subgraph cluster_F4PGA {
+    label = "f4pga";
+    style = "rounded";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_F4PGA_conda"  [label="conda"]
@@ -119,6 +125,8 @@ digraph G {
   }
 
   subgraph cluster_verible {
+    label = "verible";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_verible_build/build" [label="build/build"]

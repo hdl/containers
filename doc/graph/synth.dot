@@ -23,6 +23,7 @@ digraph G {
 
   #splines=polyline; #curved
   newrank=true;
+  labelloc="b";
 
   # Dockerfiles
 
@@ -70,6 +71,8 @@ digraph G {
   # Workflows
 
   subgraph cluster_ghdl {
+    label = "ghdl";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_ghdl_build/base" [label="build/base"]
@@ -100,6 +103,8 @@ digraph G {
   }
 
   subgraph cluster_ghdlYosysPlugin {
+    label = "ghdl-yosys-plugin";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_ghdl-yosys-plugin_yosys" [label="yosys"]
@@ -122,6 +127,8 @@ digraph G {
   }
 
   subgraph cluster_yosys {
+    label = "yosys";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_yosys_build/build" [label="build/build"]

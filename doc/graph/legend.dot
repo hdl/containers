@@ -23,8 +23,10 @@ digraph G {
 
   #splines=polyline; #curved
   newrank=true;
-  node [fontsize=8];
-  edge [fontsize=8];
+  graph [fontsize=9];
+  node [fontsize=9];
+  edge [fontsize=9];
+  labelloc="b";
 
   { rank=same
     image_ext [shape=cylinder, color=orange, fontcolor=orange, label=""];
@@ -34,6 +36,13 @@ digraph G {
   }
 
   subgraph cluster_legend {
+    label = "custom workflow name";
+    style = "rounded";
+
+  subgraph cluster_legend {
+    label = "reusable workflow key";
+    style = "";
+
     test [shape=folder, color=magenta, fontcolor=magenta, label="Test"];
     image [shape=cylinder, label="Image"];
     image_base [shape=cylinder, color=grey, fontcolor=grey, label=""];
@@ -50,6 +59,7 @@ digraph G {
     image_pkg -> image [style=dashed, color=gray, label="Image\nimports\nfrom"];
     image -> test;
   }
+  }
   { rank=same
     image_base
     image_dep
@@ -58,15 +68,15 @@ digraph G {
   }
   { rank=same
     dockerfile
-    workflow [shape=none, label="A cluster represents a GitHub Actions workflow, which\ltypically uses a single dockerfile.\l The workflow and the dockerfile are named after the tools.\l"];
+    workflow [shape=none, label="The label of a cluster represents the key input to the\lreusable workflow, which generates the matrix of jobs\lthrough pyHDLC.\lThe label of a cluster with rounded corners is the name of\la custom workflow, which may run the reusable workflow\lmultiple times and/or use the action(s) directly.\l"];
   }
   { rank=same
     image
-    desc [shape=none, label="Image(s) generated in the workflow:\l- Green: fine-grained ready-to-use image.\l- Brown: ready-to-use image including several tools.\l- Blue: package image, not executable.\lEach image has, at least and at most, two black input edges, one\ldotted and one dashed. It can optionally have other gray input edges.\l"];
+    desc [shape=none, label="Image(s) generated in the workflow:\l- Green: fine-grained ready-to-use image.\l- Brown: ready-to-use image including several tools.\l- Blue: package image, not executable.\lEach image has, at least and at most, two black input edges,\lone dotted and one dashed. It can optionally have other gray\linput edges.\l"];
   }
   { rank=same
     test
-    test_desc [shape=none, label="Each image has a test script, which is executed in a temporary\lcontainer before pushing the image to DockerHub.\lTests which are not complete yet are shown in Red.\l"];
+    test_desc [shape=none, label="For each image a test script is executed in a temporary\lcontainer before pushing the image to the registries.\lTests which are not complete yet are shown in Red.\l"];
   }
   image_ext -> image_dep;
   image_hdl -> image_base;

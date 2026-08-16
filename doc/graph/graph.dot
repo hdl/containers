@@ -206,6 +206,7 @@ digraph G {
 
   subgraph cluster_base {
     label = "Base";
+    style = "dashed";
     m_base -> {
       "build/base"
       "build/build"
@@ -215,6 +216,7 @@ digraph G {
 
   subgraph cluster_synth {
     label = "Synth";
+    style = "dashed";
     m_synth -> {
       "ghdl"
       "ghdl/llvm"
@@ -229,6 +231,7 @@ digraph G {
 
   subgraph cluster_sim {
     label = "Sim";
+    style = "dashed";
     m_sim -> {
       "gtkwave"
       "iverilog"
@@ -255,6 +258,7 @@ digraph G {
 
   subgraph cluster_impl {
     label = "Impl";
+    style = "dashed";
     m_impl -> {
       "apicula"
       "pkg/apicula"
@@ -297,6 +301,7 @@ digraph G {
 
   subgraph cluster_formal {
     label = "Formal";
+    style = "dashed";
     m_formal -> {
       "pkg/sby"
       "pkg/boolector"
@@ -313,6 +318,7 @@ digraph G {
 
   subgraph cluster_asic {
     label = "ASIC";
+    style = "dashed";
     m_asic -> {
       "irsim"
       "klayout"
@@ -332,6 +338,7 @@ digraph G {
 
   subgraph cluster_f4pga {
     label = "F4PGA";
+    style = "dashed";
     m_f4pga -> {
       "conda"
       "conda/f4pga/xc7/toolchain"

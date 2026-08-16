@@ -23,6 +23,7 @@ digraph G {
 
   #splines=polyline; #curved
   newrank=true;
+  labelloc="b";
 
   # Dockerfiles
 
@@ -47,6 +48,8 @@ digraph G {
   # Workflows
 
   subgraph cluster_base {
+    label = "base";
+
     { rank=same
       node [shape=cylinder, color=grey, fontcolor=grey]
       "p_base_debian" [label="BASE IMAGE"]

@@ -28,28 +28,31 @@ evname = environ["GITHUB_EVENT_NAME"]
 
 match evname:
   case "push":
-    keys_trigger = environ["HDLC_PUSH_TRIGGER"].split(' ')
+    keys_trigger = environ["HDLC_PUSH_TRIGGER"]
   case "schedule":
-    keys_trigger = environ["HDLC_SCHEDULE_TRIGGER"].split(' ')
+    keys_trigger = environ["HDLC_SCHEDULE_TRIGGER"]
   case "workflow_dispatch":
-    keys_trigger = environ["GH_INPUT_KEYS_TRIGGER"].split(' ')
+    keys_trigger = environ["GH_INPUT_KEYS_TRIGGER"]
   case _:
-    keys_trigger = []
+    keys_trigger = ""
     print(f"Empty dispatch key list for event name <{evname}>!")
 
 skip_dispatch = evname == 'pull_request'
 
 match evname:
   case "schedule":
-    keys_call = environ["HDLC_SCHEDULE_CALL"].split(' ')
+    keys_call = environ["HDLC_SCHEDULE_CALL"]
     skip_call = True
   case "workflow_dispatch":
-    keys_call = environ["GH_INPUT_KEYS_CALL"].split(' ')
+    keys_call = environ["GH_INPUT_KEYS_CALL"]
     skip_call = environ["GH_INPUT_SKIP-RELEASE"]
     skip_dispatch = skip_call
   case _:
-    keys_call = environ["HDLC_PUSH_CALL"].split(' ')
+    keys_call = environ["HDLC_PUSH_CALL"]
     skip_call = skip_dispatch
+
+keys_trigger = bool(keys_trigger) * keys_trigger.split(' ')
+keys_call = bool(keys_call) * keys_call.split(' ')
 
 if not (keys_trigger or keys_call):
   raise Exception(f"Both lists of keys empty <dispatch:{keys_trigger}> <call:{keys_call}>!")
@@ -63,12 +66,13 @@ with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
     "skip-release": skip_call
   }))
 
+message = f"message={environ['GITHUB_SHA'][0:8]} " + (
+  evname if evname in ['schedule', 'workflow_dispatch']
+  else environ['GH_MESSAGE'].split('\n')[0]
+)
+
 dispatch = []
 if keys_trigger:
-  message = f"message={environ['GITHUB_SHA'][0:8]} " + (
-    evname if evname in ['schedule', 'workflow_dispatch']
-    else environ['GH_MESSAGE'].split('\n')[0]
-  )
   dispatch = [f'{key}=' + check_output([
     "gh", "workflow", "run", ".build-test-release.yml", "-r", environ["GITHUB_REF_NAME"],
     "-f", f"key={key}",
@@ -87,13 +91,13 @@ with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as ghs:
   ghs.write('\n'.join([
     f"- Event: {evname}",
     f"- Watch: [{watchurl.split('/')[-1]}]({watchurl})",
-    f"- Dispatch (skip-release: {skip_dispatch}):",
+    f"- Dispatch (skip-release: {skip_dispatch}):" + (" none" * (not bool(dispatch))),
     *[
       (lambda key, idx : f"  - {key}: [{idx}](https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{idx})")
       (*(lambda l : l.split('='))(item))
       for item in dispatch
     ],
-    f"- Call (skip-release: {skip_call}):",
+    f"- Call (skip-release: {skip_call}):" + (" none" * (not bool(keys_call))),
     *[f'  - {call}' for call in keys_call],
     ""
   ]))
