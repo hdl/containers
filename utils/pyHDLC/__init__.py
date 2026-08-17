@@ -271,6 +271,12 @@ def GenerateJobList(
         GHASummary(summary)
 
 
+def _NormalisePlatform(
+    architecture: str = CONFIG.defaults.architecture,
+) -> str:
+    return f"linux/{architecture if 'arm' not in architecture else 'arm64'}"
+
+
 def PullImage(
     image: Union[str, List[str]],
     registry: str = CONFIG.defaults.registry,
@@ -300,7 +306,11 @@ def PullImage(
     """
     for img in [image] if isinstance(image, str) else image:
         imageName = f"{registry}/{architecture}/{collection}/{img.split('#')[0]}"
-        _exec(args=["docker", "pull", imageName], dry=dry, collapse=f"[Pull] Pull {imageName}")
+        _exec(
+            args=["docker", "pull", "--platform", _NormalisePlatform(architecture), imageName],
+            dry=dry,
+            collapse=f"[Pull] Pull {imageName}"
+        )
 
 
 def _NormaliseBuildParams(
@@ -412,7 +422,12 @@ def BuildImage(
 
         imageName = f"{registry}/{architecture}/{collection}/{img}"
 
-        cmd = ["docker", "build", "-t", imageName, "--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1"]
+        cmd = [
+            "docker", "build",
+            "--platform", _NormalisePlatform(architecture),
+            "-t", imageName,
+            "--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1"
+        ]
         cmd += [
             "--build-arg",
             f"ARCHITECTURE={architecture}"
@@ -519,17 +534,13 @@ def TestImage(
                 args=[
                     "docker",
                     "build",
-                    "-t",
-                    f"{testImage!s}",
+                    "--platform", _NormalisePlatform(architecture),
+                    "-t", f"{testImage!s}",
                     "--progress=plain",
-                    "--build-arg",
-                    "BUILDKIT_INLINE_CACHE=1",
-                    "--build-arg",
-                    f"IMAGE={imagePrefix!s}/pkg/{pimg!s}",
-                    "--build-arg",
-                    f"PACKAGE={pdir!s}",
-                    "-f",
-                    str(Path(__file__).resolve().parent / "testpkg.dockerfile"),
+                    "--build-arg", "BUILDKIT_INLINE_CACHE=1",
+                    "--build-arg", f"IMAGE={imagePrefix!s}/pkg/{pimg!s}",
+                    "--build-arg", f"PACKAGE={pdir!s}",
+                    "-f", str(Path(__file__).resolve().parent / "testpkg.dockerfile"),
                     ".",
                 ],
                 dry=dry,
