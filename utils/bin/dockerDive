@@ -41,4 +41,4 @@ esac
 $(command -v winpty) docker run --rm -it \
   -v //var/run/docker.sock://var/run/docker.sock \
   wagoodman/dive \
-  "${HDL_REGISTRY:-gcr.io/hdl-containers/amd64}/${_collection}${_image}"
+  "${HDL_REGISTRY:-ghcr.io/hdl/amd64}/${_collection}${_image}"

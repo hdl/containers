@@ -52,7 +52,7 @@ See, for instance:
   :~/f4pga-examples# docker run --rm -it \
     -v /$(pwd)://wrk \
     -w //wrk \
-    gcr.io/hdl-containers/conda/f4pga/xc7/a100t
+    ghcr.io/hdl/conda/f4pga/xc7/a100t
 
   ...
   (xc7) root@c3d4dd1d97cc:/wrk# TARGET="arty_100" make -C xc7/picosoc_demo/

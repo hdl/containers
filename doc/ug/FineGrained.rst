@@ -34,10 +34,10 @@ Those projects use a partial Makefile such as the following, for optionally wrap
    PWD = $(shell pwd)
    CONTAINER_ARGS = run --rm -v $(PWD):/wrk -w /wrk
 
-   GHDL    = $(CONTAINER_ENGINE) $(CONTAINER_ARGS) gcr.io/hdl-containers/ghdl/yosys ghdl
-   YOSYS   = $(CONTAINER_ENGINE) $(CONTAINER_ARGS) gcr.io/hdl-containers/ghdl/yosys yosys
-   NEXTPNR = $(CONTAINER_ENGINE) $(CONTAINER_ARGS) gcr.io/hdl-containers/nextpnr/ice40 nextpnr-ice40
-   ICEPACK = $(CONTAINER_ENGINE) $(CONTAINER_ARGS) gcr.io/hdl-containers/icestorm icepack
+   GHDL    = $(CONTAINER_ENGINE) $(CONTAINER_ARGS) ghcr.io/hdl/ghdl/yosys ghdl
+   YOSYS   = $(CONTAINER_ENGINE) $(CONTAINER_ARGS) ghcr.io/hdl/ghdl/yosys yosys
+   NEXTPNR = $(CONTAINER_ENGINE) $(CONTAINER_ARGS) ghcr.io/hdl/nextpnr/ice40 nextpnr-ice40
+   ICEPACK = $(CONTAINER_ENGINE) $(CONTAINER_ARGS) ghcr.io/hdl/icestorm icepack
 
 Python launchers
 ================

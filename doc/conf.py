@@ -143,7 +143,7 @@ def OCIImageShield(image):
 .. |SHIELD:Image:{image}| image:: https://img.shields.io/docker/image-size/hdlc/{name}?{attrs}
    :alt: '{image} container image size'
    :height: 22
-   :target: https://gcr.io/hdl-containers/{'debian/bullseye/' if arr[0] in ['pkg', 'build'] else ''}{image}
+   :target: https://ghcr.io/hdl/{'debian/bullseye/' if arr[0] in ['pkg', 'build'] else ''}{image}
    :class: shield
 """
 

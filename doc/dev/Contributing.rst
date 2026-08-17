@@ -90,7 +90,7 @@ In those cases, the dockerfile is named after the name of the main tool/image bu
 .. sourcecode:: dockerfile
   :caption: Reference Dockerfile to build a TOOL and generate a regular image and a package image.
 
-  ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
+  ARG REGISTRY='ghcr.io/hdl/debian/bookworm'
 
   #--
 
@@ -174,7 +174,7 @@ A similar strategy can be used to run or copy additional assets into the images.
     Reference Dockerfile to build a TOOL and generate a regular image and a package image, using an HDLC script and
     BuildKit mount features.
 
-  ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
+  ARG REGISTRY='ghcr.io/hdl/debian/bookworm'
 
   #---
 

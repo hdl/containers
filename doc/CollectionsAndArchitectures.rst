@@ -36,22 +36,17 @@ Architectures:
 * `mips64le <https://hub.docker.com/u/mips64le>`__
 * `riscv64 <https://hub.docker.com/u/riscv64>`__
 
-Each image is published to both `gcr.io` and `ghcr.io`:
-
-.. centered:: |SHIELD:Generic:GCR| |SHIELD:Generic:GHCR|
+Each image is published to `ghcr.io`: |SHIELD:Generic:GHCR|
 
 However, fields ``ARCHITECURE`` and ``COLLECTION`` are optional because:
 
-* Images for the default architecture are mirrored to |SHIELD:Mirror:GCR:NoArchitecture| and
-  |SHIELD:Mirror:GHCR:NoArchitecture|.
+* All images for the default architecture and all images of the default collection are pushed to
+  |SHIELD:Mirror:GHCR:NoArchitecture| and |SHIELD:Mirror:GHCR:NoCollection|, respectively.
 
-* Images of the default collection are mirrored to |SHIELD:Mirror:GCR:NoCollection| and
-  |SHIELD:Mirror:GHCR:NoCollection|.
+* Images of the default collection for the default architecture:
 
-* Images of the default collection for the default architecture are mirrored to |SHIELD:Mirror:Docker|.
-
-* Images of the default collection for the default architecture which are not ``build`` or ``pkg`` are mirrored to
-  |SHIELD:Mirror:GCR:Default| and |SHIELD:Mirror:GHCR:Default|.
+  * All are pushed to |SHIELD:Mirror:Docker|.
+  * Those which are not ``build`` or ``pkg`` are pushed to |SHIELD:Mirror:GHCR:Default|.
 
 .. important::
    Image names and tags in this documentation are provided without the *registry prefix*.

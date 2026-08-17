@@ -101,9 +101,9 @@ It can be downloaded as a tarball/zipfile, or used as a container:
 
 :ghsrc:`dockerDive <utils/bin/dockerDive>` is a wrapper around the wagoodman/dive container, which supports one
 or two arguments for specifying the image to be inspected.
-The default registry prefix is ``gcr.io/hdl-containers``, however, it can be overriden through envvar ``HDL_REGISTRY``.
+The default registry prefix is ``ghcr.io/hdl``, however, it can be overriden through envvar ``HDL_REGISTRY``.
 
-For instance, inspect image ``gcr.io/hdl-containers/debian/bullseye/ghdl``:
+For instance, inspect image ``ghcr.io/hdl/debian/bullseye/ghdl``:
 
 .. sourcecode:: bash
 

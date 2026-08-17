@@ -45,9 +45,6 @@ inputs:
     description: 'Skip pushing and mirroring to container registries.'
     required: false
     default: false
-  gcr_token:
-    description: 'Google Container Registry access token.'
-    required: false
   gh_token:
     description: 'GitHub Container Registry access token.'
     required: false
@@ -90,8 +87,7 @@ runs:
             echo "Skipping release..."
             exit 0
         fi
-        echo '${{ inputs.gcr_token }}' | docker login gcr.io -u _json_key --password-stdin
         echo '${{ inputs.gh_token }}' | docker login ghcr.io -u gha --password-stdin
         echo '${{ inputs.docker_pass }}' | docker login docker.io -u '${{ inputs.docker_user }}' --password-stdin
         dockerRelease ${{ inputs.architecture }} ${{ inputs.collection }} ${{ inputs.images }}
-      post: for registry in gcr.io ghcr.io docker.io; do docker logout "$registry"; done
+      post: for registry in ghcr.io docker.io; do docker logout "$registry"; done

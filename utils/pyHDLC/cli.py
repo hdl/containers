@@ -59,7 +59,7 @@ class WithRegistryAttributes(Attribute):
                 dest="Registry",
                 type=str,
                 help="Container image registry prefix.",
-                default="gcr.io/hdl-containers",
+                default="ghcr.io/hdl",
             ),
             ArgumentAttribute(
                 "-c",

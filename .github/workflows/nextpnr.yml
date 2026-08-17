@@ -75,7 +75,6 @@ jobs:
     - name: 🚧 Build, test and release
       uses: ./utils/build-test-release
       with:
-        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.DOCKER_USER }}'
         docker_pass: '${{ secrets.DOCKER_PASS }}'
@@ -94,7 +93,6 @@ jobs:
       submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
-      gcr_token: '${{ secrets.GCR_JSON_KEY }}'
       gh_token: '${{ github.token }}'
       docker_user: '${{ secrets.DOCKER_USER }}'
       docker_pass: '${{ secrets.DOCKER_PASS }}'
@@ -108,7 +106,6 @@ jobs:
       submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
-      gcr_token: '${{ secrets.GCR_JSON_KEY }}'
       gh_token: '${{ github.token }}'
       docker_user: '${{ secrets.DOCKER_USER }}'
       docker_pass: '${{ secrets.DOCKER_PASS }}'

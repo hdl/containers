@@ -67,13 +67,6 @@ ASIC
 * :gh:`RISC-V bring-up tracker <carlosedp/riscv-bringup>`
 * `A Step-by-Step Example: Layout of a CMOS Inverter Using SkyWater Technology (SKW) 130nm Process <https://docs.google.com/document/d/1hSLKsz9xcEJgAMmYYer5cDwvPqas9_JGRUAgEORx1Yw>`__
 
-Google Container Regisry (GCR)
-==============================
-
-* :gh:`salrashid123/gcr_stats`
-* :gh:`gregsramblings/google-cloud-4-words`: The Google Cloud Developer's Cheat Sheet
-* :gh:`gh:google/go-containerregistry: cmd/crane/README.md <google/go-containerregistry/blob/main/cmd/crane/README.md>`
-
 USB/IP
 ======
 

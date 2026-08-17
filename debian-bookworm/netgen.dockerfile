@@ -20,7 +20,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='gcr.io/hdl-containers/debian/bookworm'
+ARG REGISTRY='ghcr.io/hdl/debian/bookworm'
 
 #--
 

@@ -22,7 +22,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='gcr.io/hdl-containers/debian/bullseye'
+ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 ARG IMAGE="build/base"
 
 #---

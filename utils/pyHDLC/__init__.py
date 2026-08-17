@@ -53,7 +53,7 @@ class ConfigDefaults(YamlDataClassConfig):
     """
 
     #: Default registry prefix.
-    registry: str = "gcr.io/hdl-containers"
+    registry: str = "ghcr.io/hdl"
     #: Default collection.
     collection: str = "debian/bullseye"
     #: Default architecture.

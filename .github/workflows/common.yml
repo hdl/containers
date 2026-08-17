@@ -39,9 +39,6 @@ on:
         default: false
         type: string
     secrets:
-      gcr_token:
-        description: 'Google Container Registry access token.'
-        required: false
       gh_token:
         description: 'GitHub Container Registry access token.'
         required: false
@@ -94,7 +91,6 @@ jobs:
     - name: 🚧 Build, test and release
       uses: ./utils/build-test-release
       with:
-        gcr_token: '${{ secrets.gcr_token }}'
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.docker_user }}'
         docker_pass: '${{ secrets.docker_pass }}'

@@ -42,8 +42,8 @@ _push() {
   ./utils/pyHDLC/cli.py push -a "${HDL_ARCH}" -c "${_collection}" -m ${_mirrors} -- $@
 }
 
-_AnyCollection_DefaultArch_mirrors='gcr.io/hdl-containers/#C ghcr.io/hdl/#C'
-_DefaultCollection_AnyArch_mirrors='gcr.io/hdl-containers/#A ghcr.io/hdl/#A'
+_AnyCollection_DefaultArch_mirrors='ghcr.io/hdl/#C'
+_DefaultCollection_AnyArch_mirrors='ghcr.io/hdl/#A'
 
 if [ "$_collection" != "$HDL_DEFAULT_COLLECTION" ]; then
   if [ "$HDL_ARCH" != "$HDL_DEFAULT_ARCH" ]; then
@@ -85,5 +85,5 @@ fi
 
 if [ -n "$_toRoot" ]; then
   _print "[dockerRelease] default collection, default arch, root (future manifest?)"
-  _mirror="${_DefaultCollection_DefaultArch_mirrors} gcr.io/hdl-containers ghcr.io/hdl" _push $_toRoot
+  _mirror="${_DefaultCollection_DefaultArch_mirrors} ghcr.io/hdl" _push $_toRoot
 fi

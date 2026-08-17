@@ -86,7 +86,6 @@ jobs:
     - name: 🚧 Build, test and release
       uses: ./utils/build-test-release
       with:
-        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.DOCKER_USER }}'
         docker_pass: '${{ secrets.DOCKER_PASS }}'
@@ -148,13 +147,12 @@ jobs:
       uses: pyTooling/Actions/with-post-step@r0
       with:
         main: |
-          echo '${{ secrets.GCR_JSON_KEY }}' | docker login gcr.io -u _json_key --password-stdin
           echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
           echo '${{ secrets.DOCKER_PASS }}' | docker login docker.io -u '${{ secrets.DOCKER_USER }}' --password-stdin
           dockerRelease ${{ matrix.sys.arch }} ${{ matrix.sys.os }} \
             impl/${{ matrix.task.arch }} \
             impl/${{ matrix.task.prj }}
-        post: for registry in gcr.io ghcr.io docker.io; do docker logout "$registry"; done
+        post: for registry in ghcr.io docker.io; do docker logout "$registry"; done
 
 
   impl:
@@ -175,7 +173,6 @@ jobs:
     - name: 🚧 Build, test and release
       uses: ./utils/build-test-release
       with:
-        gcr_token: '${{ secrets.GCR_JSON_KEY }}'
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.DOCKER_USER }}'
         docker_pass: '${{ secrets.DOCKER_PASS }}'

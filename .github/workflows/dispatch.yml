@@ -44,7 +44,6 @@ jobs:
       submodules: ${{ github.event.inputs.submodules }}
       skip-release: ${{ github.event.inputs.skip-release }}
     secrets:
-      gcr_token: '${{ secrets.GCR_JSON_KEY }}'
       gh_token: '${{ github.token }}'
       docker_user: '${{ secrets.DOCKER_USER }}'
       docker_pass: '${{ secrets.DOCKER_PASS }}'
