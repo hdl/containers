@@ -46,8 +46,8 @@ RUN apt-get update -qq \
     git \
     make
 
-ENV CC clang
-ENV CXX clang++
+ENV CC=clang
+ENV CXX=clang++
 
 #---
 

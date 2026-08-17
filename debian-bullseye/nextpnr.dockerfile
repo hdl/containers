@@ -39,7 +39,7 @@ RUN apt-get update -qq \
 
 FROM $REGISTRY/build/dev AS build
 
-ENV LDFLAGS "-Wl,--copy-dt-needed-entries"
+ENV LDFLAGS="-Wl,--copy-dt-needed-entries"
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \

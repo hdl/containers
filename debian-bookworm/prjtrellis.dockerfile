@@ -25,7 +25,7 @@ ARG REGISTRY='ghcr.io/hdl/debian/bookworm'
 
 FROM $REGISTRY/build/dev AS build
 
-ENV LDFLAGS "-Wl,--copy-dt-needed-entries"
+ENV LDFLAGS="-Wl,--copy-dt-needed-entries"
 
 RUN git clone --recurse-submodules https://github.com/YosysHQ/prjtrellis /tmp/prjtrellis \
  && cd /tmp/prjtrellis/libtrellis \
