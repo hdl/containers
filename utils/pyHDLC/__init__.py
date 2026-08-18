@@ -429,9 +429,11 @@ def BuildImage(
         ]
         cmd += [
             "--build-arg",
-            f"ARCHITECTURE={architecture}"
-            if dockerfile == "base"
-            else f"REGISTRY={registry}/{architecture}/{collection}",
+            (
+                f"SYSIMAGE={architecture}/{collection.replace('/', ':')}"
+                if dockerfile == "base" else
+                f"REGISTRY={registry}/{architecture}/{collection}"
+            )
         ]
 
         if argimg is not None:
@@ -441,19 +443,20 @@ def BuildImage(
             cmd += [f"--target={target}"]
 
         def _getCollectionAndDockerfilePaths(collection, dockerfile):
-            collectionPath = Path(collection.replace("/", "-"))
-            dockerfilePath = collectionPath / dockerfile
-
-            if dockerfilePath.is_dir():
-                contextPath = dockerfilePath
-                dockerfilePath = contextPath / "Dockerfile"
-            else:
-                contextPath = collectionPath
-                dockerfilePath = contextPath / f"{dockerfile}.dockerfile"
-
+            for CollectionPath in [
+                Path(collection.replace("/", "-")),
+                Path(collection.split("/")[0])
+            ]:
+                dockerfilePath = CollectionPath / f"{dockerfile}.dockerfile"
+                if dockerfilePath.exists():
+                    contextPath = CollectionPath
+                    break
+                contextPath = CollectionPath / dockerfile
+                if contextPath.is_dir():
+                    dockerfilePath = contextPath / "Dockerfile"
+                    break
             if not dockerfilePath.exists():
                 raise Exception(f"Dockerfile <{dockerfilePath}> does not exist!")
-
             return (contextPath, dockerfilePath)
 
         (contextPath, dockerfilePath) = _getCollectionAndDockerfilePaths(collection, dockerfile)

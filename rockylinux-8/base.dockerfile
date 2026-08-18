@@ -19,11 +19,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG ARCHITECTURE='amd64'
+ARG SYSIMAGE='amd64/rockylinux:8'
 
 #---
 
-FROM $ARCHITECTURE/rockylinux:8 AS base
+FROM $SYSIMAGE AS base
 
 RUN dnf update -y \
  && dnf install yum-utils -y \

@@ -78,6 +78,7 @@ jobs:
       with:
         name: Map
         path: utils/map.svg
+        archive: false
 
 
   doc:

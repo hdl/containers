@@ -19,11 +19,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG ARCHITECTURE='amd64'
+ARG SYSIMAGE='amd64/debian:bullseye'
 
 #---
 
-FROM $ARCHITECTURE/debian:bookworm-slim AS base
+FROM $SYSIMAGE-slim AS base
 
 SHELL ["/bin/bash", "-c"]
 

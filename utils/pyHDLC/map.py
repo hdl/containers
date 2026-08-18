@@ -30,9 +30,6 @@ from pyHDLC import CONFIG, _generateJobList, _NormaliseBuildParams
 
 
 ROOT = Path(__file__).resolve().parent.parent
-ARCH = "amd64"
-COLLECTION = "debian/bullseye"
-CDIR = ROOT.parent / COLLECTION.replace("/", "-")
 
 
 class Stage:
@@ -229,8 +226,8 @@ class CollectionMap:
                             raise Exception(f"ARG IMAGE was already defined in <{dfilename}> [{_val}]!")
                         # Extract image name from IMAGE="name"
                         dfile.argimg = _val[7:-1]
-                    elif _val.startswith("ARCHITECTURE="):
-                        print("    ! Field ARCHITECTURE not handled yet")
+                    elif _val.startswith("SYSIMAGE="):
+                        print("    ! Field SYSIMAGE not handled yet")
                     else:
                         raise Exception(f"Unknown ARG <{_val}>!")
 
@@ -284,13 +281,14 @@ def GenerateMap(debug: bool = False):
 
     print("[Map] Parse dockerfiles:")
 
-    for pattern in ["**/Dockerfile", "*.dockerfile"]:
-        for dfilepath in [x for x in CDIR.glob(pattern)]:
-            cmap.ParseDockerfile(dfilepath, debug)
+    for dfiles in ["debian", "debian-bullseye"]:
+        for pattern in ["**/Dockerfile", "*.dockerfile"]:
+            for dfilepath in [x for x in (ROOT.parent / dfiles).glob(pattern)]:
+                cmap.ParseDockerfile(dfilepath, debug)
 
     print("[Map] Extract list of images from 'jobs':")
 
-    images = GetImagesFromJobs(COLLECTION, ARCH)
+    images = GetImagesFromJobs()
 
     print("[Map] Get the dockerfiles and params for each image:")
 
@@ -308,7 +306,7 @@ def GenerateMap(debug: bool = False):
     return cmap
 
 
-def GetImagesFromJobs(collection: str = COLLECTION, architecture: str = ARCH) -> List[str]:
+def GetImagesFromJobs(collection: str = "debian/bullseye", architecture: str = "amd64") -> List[str]:
     """
     Return a list of all the image names in all the jobs defined in the configuration.
     First, extract the keys/names of all jobs types.
