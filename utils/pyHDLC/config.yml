@@ -45,8 +45,8 @@ anchors:
     debian/bullseye:
       - amd64
       - arm64v8
-      - ppc64le
-      - s390x
+      #- ppc64le
+      #- s390x
       #- riscv64 ! for now, only 'sid-slim' is available in https://hub.docker.com/r/riscv64/debian
   <<: &SysDebianAmd64
     <<: *SysDebianBullseyeAmd64
