@@ -19,14 +19,37 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian/bookworm'
+ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
 #---
 
-FROM $REGISTRY/sim
+FROM $REGISTRY/build/build AS build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-  octave \
- && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists/*
+    pkg-config
+
+RUN mkdir /tmp/icestorm \
+ && cd /tmp/icestorm \
+ && curl -fsSL https://codeload.github.com/YosysHQ/icestorm/tar.gz/main | tar xzf - --strip-components=1 \
+ && ICEPROG=0 make -j $(nproc) \
+ && ICEPROG=0 make DESTDIR=/opt/icestorm install
+
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    libftdi1-dev
+
+RUN cd /tmp/icestorm/iceprog \
+ && make -j $(nproc) \
+ && make DESTDIR=/opt/iceprog install
+
+#---
+
+FROM scratch AS pkg
+COPY --from=build /opt/iceprog /iceprog
+COPY --from=build /opt/icestorm /icestorm
+
+#---
+
+FROM $REGISTRY/build/base
+COPY --from=build /opt/icestorm /

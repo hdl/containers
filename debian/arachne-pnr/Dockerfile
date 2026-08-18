@@ -1,10 +1,7 @@
-# HDLC yices2
-
 # Authors:
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
-#   Torsten Meissner
 #
 # Copyright Unai Martinez-Corral
 #
@@ -22,21 +19,25 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-set -e
+ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
-makedepends=(
-  binutils
-  autoconf
-  gperf
-  libgmp-dev
-)
+#---
 
-build() {
-  git clone https://github.com/SRI-CSL/yices2.git /tmp/yices2
-  cd /tmp/yices2
-  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/^Yices-//;s/-/./g;s/^v//g' > /tmp/hdlc.yices2.version
-  autoconf
-  ./configure
-  make -j$(nproc)
-  make DESTDIR=/opt/yices2 install
-}
+# WORKAROUND: this is required because 'COPY --from' does not support ARGs
+FROM $REGISTRY/pkg/icestorm AS pkg-icestorm
+
+FROM $REGISTRY/build/build AS build
+
+COPY --from=pkg-icestorm /icestorm/usr/local/share/icebox /usr/local/share/icebox
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+
+#---
+
+FROM scratch AS pkg
+COPY --from=build /opt/arachne-pnr /arachne-pnr
+
+#---
+
+FROM $REGISTRY/build/base
+COPY --from=build /opt/arachne-pnr /
