@@ -41,25 +41,44 @@ anchors:
     debian/bullseye:
       - amd64
   <<: &SysDebianBullseyeDefaultArchSet
-    <<: *SysDebianBullseyeAmd64
     debian/bullseye:
       - amd64
       - arm64v8
       #- ppc64le
       #- s390x
-      #- riscv64 ! for now, only 'sid-slim' is available in https://hub.docker.com/r/riscv64/debian
-  <<: &SysDebianAmd64
-    <<: *SysDebianBullseyeAmd64
+      #- riscv64 ! only 'trixie-slim' and 'sid-slim' available: https://hub.docker.com/r/riscv64/debian
+  <<: &SysDebianBookwormAmd64
     debian/bookworm:
       - amd64
-  <<: &SysDebianDefaultArchSet
-    <<: *SysDebianBullseyeDefaultArchSet
+  <<: &SysDebianBookwormDefaultArchSet
     debian/bookworm:
       - amd64
       - arm64v8
       - ppc64le
       - s390x
-      #- riscv64 ! for now, only 'sid-slim' is available in https://hub.docker.com/r/riscv64/debian
+      #- riscv64 ! only 'trixie-slim' and 'sid-slim' available: https://hub.docker.com/r/riscv64/debian
+  <<: &SysDebianLegacyAmd64
+    <<: *SysDebianBookwormAmd64
+    <<: *SysDebianBullseyeAmd64
+  <<: &SysDebianLegacyDefaultArchSet
+    <<: *SysDebianBookwormDefaultArchSet
+    <<: *SysDebianBullseyeDefaultArchSet
+  <<: &SysDebianTrixieAmd64
+    debian/trixie:
+      - amd64
+  <<: &SysDebianTrixieDefaultArchSet
+    debian/trixie:
+      - amd64
+      - arm64v8
+      - ppc64le
+      - s390x
+      - riscv64
+  <<: &SysDebianAmd64
+    <<: *SysDebianTrixieAmd64
+    <<: *SysDebianLegacyAmd64
+  <<: &SysDebianDefaultArchSet
+    <<: *SysDebianTrixieDefaultArchSet
+    <<: *SysDebianLegacyDefaultArchSet
 
 
 defaults:
@@ -145,15 +164,15 @@ defaults:
 jobs:
 
   default:
-    apicula:        *SysDebianAmd64
-    arachne-pnr:    *SysDebianDefaultArchSet
-    gtkwave:        *SysDebianDefaultArchSet
-    icestorm:       *SysDebianDefaultArchSet
-    irsim:          *SysDebianDefaultArchSet
-    iverilog:       *SysDebianAmd64
-    klayout:        *SysDebianAmd64
-    magic:          *SysDebianDefaultArchSet
-    netgen:         *SysDebianDefaultArchSet
+    apicula:        *SysDebianLegacyAmd64
+    arachne-pnr:    *SysDebianLegacyDefaultArchSet
+    gtkwave:        *SysDebianLegacyDefaultArchSet
+    icestorm:       *SysDebianLegacyDefaultArchSet
+    irsim:          *SysDebianLegacyDefaultArchSet
+    iverilog:       *SysDebianLegacyAmd64
+    klayout:        *SysDebianLegacyAmd64
+    magic:          *SysDebianLegacyDefaultArchSet
+    netgen:         *SysDebianLegacyDefaultArchSet
     nvc:
       # ppc64le and s390x fail with error:
       #   ../thirdparty/cpustate.c:184:2: error: Please port fill_cpu_state to this OS/CPU combination
@@ -163,29 +182,29 @@ jobs:
       debian/bookworm:
         - amd64
         - arm64v8
-    openfpgaloader: *SysDebianDefaultArchSet
-    prjoxide:       *SysDebianAmd64
-    prjtrellis:     *SysDebianAmd64
-    verible:        *SysDebianAmd64
-    verilator:      *SysDebianDefaultArchSet
+    openfpgaloader: *SysDebianLegacyDefaultArchSet
+    prjoxide:       *SysDebianLegacyAmd64
+    prjtrellis:     *SysDebianLegacyAmd64
+    verible:        *SysDebianLegacyAmd64
+    verilator:      *SysDebianLegacyDefaultArchSet
     vtr:            *SysDebianBullseyeAmd64
-    xschem:         *SysDebianAmd64
-    xyce:           *SysDebianAmd64
-    yosys:          *SysDebianAmd64
+    xschem:         *SysDebianLegacyAmd64
+    xyce:           *SysDebianLegacyAmd64
+    yosys:          *SysDebianLegacyAmd64
 
   pkgonly:
-    boolector:  *SysDebianAmd64
-    cvc:        *SysDebianAmd64
+    boolector:  *SysDebianLegacyAmd64
+    cvc:        *SysDebianLegacyAmd64
     pono:       *SysDebianBullseyeAmd64
     superprove: *SysDebianBullseyeAmd64
-    sby:        *SysDebianAmd64
-    yices2:     *SysDebianAmd64
-    z3:         *SysDebianAmd64
+    sby:        *SysDebianLegacyAmd64
+    yices2:     *SysDebianLegacyAmd64
+    z3:         *SysDebianLegacyAmd64
 
   runonly:
-    conda:                     *SysDebianDefaultArchSet
+    conda:                     *SysDebianLegacyDefaultArchSet
     prog:                      *SysDebianBullseyeAmd64
-    sim:                       *SysDebianAmd64
+    sim:                       *SysDebianLegacyAmd64
     conda/f4pga/xc7/toolchain: *SysDebianBullseyeAmd64
     conda/f4pga/xc7:           *SysDebianBullseyeAmd64
 
@@ -210,18 +229,18 @@ jobs:
       images:
         - pkg/ghdl-yosys-plugin#ghdl
         - ghdl/yosys
-      sys: *SysDebianAmd64
+      sys: *SysDebianLegacyAmd64
     ghdl:
       images:
         - pkg/ghdl
         - pkg/ghdl/llvm#ghdl
         - ghdl
         - ghdl/llvm
-      sys: *SysDebianAmd64
+      sys: *SysDebianLegacyAmd64
     impl-build:
       images:
         - build/impl
-      sys: *SysDebianAmd64
+      sys: *SysDebianLegacyAmd64
     impl-prjs:
       images:
         - impl/${arch}
@@ -229,23 +248,23 @@ jobs:
         - { arch: ice40, prj: icestorm   }
         - { arch: ecp5,  prj: prjtrellis }
         - { arch: nexus, prj: prjoxide   }
-      sys: *SysDebianAmd64
+      sys: *SysDebianLegacyAmd64
     impl:
       images:
         - impl/generic
         - impl/pnr
         - impl
-      sys: *SysDebianAmd64
+      sys: *SysDebianLegacyAmd64
     magic-irsim:
       images:
         - magic/irsim
       sys:
-        <<: *SysDebianDefaultArchSet
+        <<: *SysDebianLegacyDefaultArchSet
     nextpnr-build:
       images:
         - build/nextpnr/base
         - build/nextpnr/build
-      sys: *SysDebianAmd64
+      sys: *SysDebianLegacyAmd64
     nextpnr-prjs:
       images:
         - pkg/nextpnr/${arch}
@@ -254,13 +273,13 @@ jobs:
         - { arch: ice40, prj: icestorm   }
         - { arch: ecp5,  prj: prjtrellis }
         - { arch: nexus, prj: prjoxide   }
-      sys: *SysDebianAmd64
+      sys: *SysDebianLegacyAmd64
     nextpnr:
       images:
         - pkg/nextpnr/generic
         - nextpnr/generic
         - nextpnr
-      sys: *SysDebianAmd64
+      sys: *SysDebianLegacyAmd64
     openroad:
       images:
         - pkg/openroad
@@ -272,18 +291,18 @@ jobs:
       images:
         - pkg/osvb
         - sim/osvb
-      sys: *SysDebianAmd64
+      sys: *SysDebianLegacyAmd64
     cosim:
       images:
         - sim/${prj}-slim
         - sim/${prj}
         - prj: scipy
         - prj: octave
-      sys: *SysDebianAmd64
+      sys: *SysDebianLegacyAmd64
     gnuplot:
       images:
         - sim/octave/gnuplot
-      sys: *SysDebianAmd64
+      sys: *SysDebianLegacyAmd64
     f4pga-xc7-devices:
       images:
         - [ conda/f4pga/xc7/a50t  ]
