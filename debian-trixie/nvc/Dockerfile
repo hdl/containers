@@ -2,7 +2,6 @@
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
-#   Torsten Meissner
 #
 # Copyright Unai Martinez-Corral
 #
@@ -20,27 +19,35 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
+ARG REGISTRY='ghcr.io/hdl/debian/trixie'
 
 #---
 
-FROM $REGISTRY/build/base AS build
+FROM $REGISTRY/build/build AS build
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    binutils \
-    g++ \
-    make \
-    python3-setuptools \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && update-ca-certificates  \
+ && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /tmp/sby && cd /tmp/sby \
- && curl -fsSL https://codeload.github.com/YosysHQ/sby/tar.gz/main | tar xzf - --strip-components=1 \
- && make DESTDIR=/opt/sby install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
-FROM scratch
-COPY --from=build /opt/sby /sby
+FROM scratch AS pkg
+COPY --from=build /opt/nvc /nvc
+
+#---
+
+FROM $REGISTRY/build/base
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build /opt/nvc /
+CMD ["nvc"]

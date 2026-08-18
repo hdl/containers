@@ -165,40 +165,53 @@ jobs:
 
   default:
     apicula:        *SysDebianLegacyAmd64
-    arachne-pnr:    *SysDebianLegacyDefaultArchSet
+    arachne-pnr:    *SysDebianDefaultArchSet
     gtkwave:        *SysDebianLegacyDefaultArchSet
-    icestorm:       *SysDebianLegacyDefaultArchSet
-    irsim:          *SysDebianLegacyDefaultArchSet
-    iverilog:       *SysDebianLegacyAmd64
-    klayout:        *SysDebianLegacyAmd64
+    icestorm:       *SysDebianDefaultArchSet
+    irsim:
+      <<: *SysDebianDefaultArchSet
+      # riscv64 is not known by the configure script: checking build system type... ./config.guess: unable to guess system type
+      debian/trixie:
+        - amd64
+        - arm64v8
+        - ppc64le
+        - s390x
+    iverilog:       *SysDebianAmd64
+    klayout:        *SysDebianAmd64
     magic:          *SysDebianLegacyDefaultArchSet
-    netgen:         *SysDebianLegacyDefaultArchSet
+    netgen:         *SysDebianDefaultArchSet
     nvc:
+      *SysDebianAmd64
+      # arm64v8 fails with error:
+      # ../thirdparty/sha1.c:350:14: error: assigning to 'uint32x4_t' (vector of 4 'uint32_t' values) from incompatible type 'int'
+      #debian/trixie:
+      #  - amd64
+      #  - arm64v8
+      #debian/bookworm:
+      #  - amd64
+      #  - arm64v8
+      #debian/bullseye:
+      #  - amd64
+      #  - arm64v8
       # ppc64le and s390x fail with error:
       #   ../thirdparty/cpustate.c:184:2: error: Please port fill_cpu_state to this OS/CPU combination
-      debian/bullseye:
-        - amd64
-        - arm64v8
-      debian/bookworm:
-        - amd64
-        - arm64v8
-    openfpgaloader: *SysDebianLegacyDefaultArchSet
-    prjoxide:       *SysDebianLegacyAmd64
-    prjtrellis:     *SysDebianLegacyAmd64
+    openfpgaloader: *SysDebianDefaultArchSet
+    prjoxide:       *SysDebianAmd64
+    prjtrellis:     *SysDebianAmd64
     verible:        *SysDebianLegacyAmd64
     verilator:      *SysDebianLegacyDefaultArchSet
     vtr:            *SysDebianBullseyeAmd64
-    xschem:         *SysDebianLegacyAmd64
+    xschem:         *SysDebianAmd64
     xyce:           *SysDebianLegacyAmd64
     yosys:          *SysDebianLegacyAmd64
 
   pkgonly:
-    boolector:  *SysDebianLegacyAmd64
+    boolector:  *SysDebianAmd64
     cvc:        *SysDebianLegacyAmd64
     pono:       *SysDebianBullseyeAmd64
     superprove: *SysDebianBullseyeAmd64
-    sby:        *SysDebianLegacyAmd64
-    yices2:     *SysDebianLegacyAmd64
+    sby:        *SysDebianAmd64
+    yices2:     *SysDebianAmd64
     z3:         *SysDebianLegacyAmd64
 
   runonly:
