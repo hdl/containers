@@ -20,6 +20,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 pyyaml
+standard-imghdr
 sphinx <6.0
 sphinxcontrib-autoprogram
 tabulate
