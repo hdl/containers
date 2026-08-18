@@ -355,7 +355,6 @@ def _NormaliseBuildParams(
 
     return (
         imageNameWithoutDirSuffix,
-        isPkg,
         withDir,
         imageNameWithoutPrefixOrSuffix if dockerfile is None else dockerfile,
         "pkg" if isPkg and (target is None) else target,
@@ -416,7 +415,7 @@ def BuildImage(
     """
     for rimg in [image] if isinstance(image, str) else image:
 
-        [img, isPkg, withDir, dockerfile, target, argimg] = _NormaliseBuildParams(
+        [img, withDir, dockerfile, target, argimg] = _NormaliseBuildParams(
             image=rimg, dockerfile=dockerfile, target=target, argimg=argimg, pkg=pkg, default=default
         )
 

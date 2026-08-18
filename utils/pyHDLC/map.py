@@ -295,7 +295,7 @@ def GenerateMap(debug: bool = False):
     print("[Map] Get the dockerfiles and params for each image:")
 
     for image in images:
-        [_, _, _, dockerfile, target, argimg] = _NormaliseBuildParams(image, default=True)
+        [_, _, dockerfile, target, argimg] = _NormaliseBuildParams(image, default=True)
         if dockerfile not in cmap.data:
             raise Exception(f"Dockerfile <{dockerfile}> not found in data!")
         if debug:
