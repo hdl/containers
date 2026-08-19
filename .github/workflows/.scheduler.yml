@@ -21,26 +21,64 @@
 name: .scheduler
 
 on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '17 0 * * 5'
   workflow_dispatch:
     inputs:
-      keys:
-        description: 'Space-separated list of keys to trigger flows.'
-        required: true
+      keys-trigger:
+        description: 'Space-separated list of keys to trigger workflow dispatches.'
+        required: false
+        type: string
+      keys-call:
+        description: 'Space-separated list of keys to call workflows.'
+        required: false
+        type: string
+      skip-release:
+        description: 'Skip pushing and mirroring to container registries.'
+        required: false
+        default: false
         type: string
 
 jobs:
-  trigger:
+
+  dispatch:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.dispatch.outputs.matrix }}
+      skip-release: ${{ steps.dispatch.outputs.skip-release }}
     steps:
     - uses: actions/checkout@v7
-# TODO: pass meaningful message as "$4": ${{ github.event.head_commit.message }}
-# TODO: print branches and commit refs as a summary in the reusable workflow
-    - env:
-        GITHUB_TOKEN: ${{ github.token }}
-      run: |
-        for key in ${{ inputs.keys }}; do
-          ./.github/trigger.sh \
-            "${{ github.ref_name }}" \
-            "$key" \
-            "${{ github.event_name == 'pull_request' }}"
-        done
+    - name: 🔔 Dispatch and generate call matrix
+      id: dispatch
+      run: ./.github/dispatch.py
+      env:
+        GH_TOKEN: ${{ github.token }}
+        GH_INPUT_KEYS_TRIGGER: ${{ inputs.keys-trigger }}
+        GH_INPUT_KEYS_CALL: ${{ inputs.keys-call }}
+        GH_INPUT_SKIP-RELEASE: ${{ inputs.skip-release }}
+        GH_MESSAGE: ${{ github.event.head_commit.message }}
+        HDLC_PUSH_TRIGGER: >-
+          nvc
+        HDLC_PUSH_CALL: >-
+          boolector
+          netgen
+        HDLC_SCHEDULE_TRIGGER: >-
+          netgen
+          nvc
+        HDLC_SCHEDULE_CALL: >-
+          boolector
+
+  call:
+    needs: dispatch
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(needs.dispatch.outputs.matrix) }}
+    name: ${{ matrix.key }}
+    uses: $/.github/workflows/.build-test-release.yml
+    with:
+      key: ${{ matrix.key }}
+      skip-release: ${{ needs.dispatch.outputs.skip-release }}
+    secrets: inherit
