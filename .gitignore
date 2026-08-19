@@ -10,4 +10,4 @@ __pycache__/
 /utils/build/
 /utils/pyHDLC/build/
 /utils/pyHDLC/dist/
-/utils/map.svg
+/utils/map/map.svg

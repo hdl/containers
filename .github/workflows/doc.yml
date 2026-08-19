@@ -27,7 +27,7 @@ on:
     paths:
       - '.github/workflows/doc.yml'
       - 'doc/**'
-      - 'graph/**'
+      - 'utils/map/**'
   schedule:
     - cron: '0 0 * * 4'
   workflow_dispatch:
@@ -77,7 +77,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: Map
-        path: utils/map.svg
+        path: utils/map/map.svg
         archive: false
 
 

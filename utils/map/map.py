@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Authors:
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
@@ -200,7 +202,7 @@ class CollectionMap:
                 fontcolor="dodgerblue",
             )
 
-        dot.render()
+        dot.render(cleanup=True)
 
     def ParseDockerfile(self, dfilepath: Path, debug: bool = False):
         dfilename = Path(dfilepath.name).stem
@@ -310,7 +312,7 @@ def GetImagesFromJobs(collection: str = "debian/bullseye", architecture: str = "
     """
     Return a list of all the image names in all the jobs defined in the configuration.
     First, extract the keys/names of all jobs types.
-    Then, get the images generate in each job, for the selected Collection and Architecture.
+    Then, get the images generated in each job, for the selected Collection and Architecture.
     Last, flatten the lists of images into a single list.
     A check searches for duplicates, to ensure that each image is generated in a single job.
     """

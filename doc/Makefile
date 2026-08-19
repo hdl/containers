@@ -27,9 +27,9 @@ pyHDLC:
 map:
 	docker run --rm \
 	  -v /$(shell pwd)/..://wrk/ \
-	  -w //wrk/utils \
+	  -w //wrk/utils/map \
 	  ghcr.io/hdl/containers/doc \
-	  sh -c 'pip3 install -e .; python3 pyHDLC/map.py'
+	  sh -c 'pip3 install -e .. && pip install -r requirements.txt && ./map.py'
 
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build

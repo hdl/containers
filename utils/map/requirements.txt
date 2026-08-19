@@ -18,5 +18,5 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-pyAttributes
-yamldataclassconfig<2
+dockerfile
+graphviz
