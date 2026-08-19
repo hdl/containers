@@ -56,12 +56,12 @@ Dockerfiles
 
 Two kinds of `Dockerfile <https://docs.docker.com/engine/reference/builder/>`__ definitions are supported by the utils
 used in this repository: single-file solutions, or aided by additional assets.
-Nonetheless, all dockerfiles use, at least, two or three stages:
+Nonetheless, all dockerfiles use two or three stages at least:
 
 * A global argument named ``REGISTRY`` defines the default registry path and collection to be used.
 
-* One stage, named ``build``, based on ``$REGISTRY/build/base`` or ``$REGISTRY/build/build`` or ``$REGISTRY/build/dev``,
-  is used to (optionally) install build dependencies, and to actually build the tool.
+* One stage, named ``build`` and based on either of ``$REGISTRY/build/{base|build|dev}`` is used to (optionally) install
+  build dependencies, and to actually build the tool.
 
   * The tool/project is built using the standard ``PREFIX``, but installed to a custom location using ``DESTDIR``.
     See :ref:`Package images <Development:package-images>`.
