@@ -21,11 +21,19 @@
 name: .scheduler
 
 on:
+  #push:
+  schedule:
+    - cron: '17 0 * * 5'
   workflow_dispatch:
     inputs:
       keys:
         description: 'Space-separated list of keys to trigger flows.'
         required: true
+        type: string
+      skip-release:
+        description: 'Skip pushing and mirroring to container registries.'
+        required: false
+        default: false
         type: string
 
 jobs:
@@ -33,14 +41,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v7
-# TODO: pass meaningful message as "$4": ${{ github.event.head_commit.message }}
-# TODO: print branches and commit refs as a summary in the reusable workflow
     - env:
-        GITHUB_TOKEN: ${{ github.token }}
-      run: |
-        for key in ${{ inputs.keys }}; do
-          ./.github/trigger.sh \
-            "${{ github.ref_name }}" \
-            "$key" \
-            "${{ github.event_name == 'pull_request' }}"
-        done
+        GH_TOKEN: ${{ github.token }}
+        GH_INPUT_KEYS: ${{ inputs.keys }}
+        GH_INPUT_SKIP-RELEASE: ${{ inputs.skip-release }}
+        GH_MESSAGE: ${{ github.event.head_commit.message }}
+      run: ./.github/trigger.py
