@@ -30,3 +30,4 @@ gh api \
   -f "ref=$1" \
   -f "inputs[key]=$2" \
   -f "inputs[skip-release]=$3" \
+  -f "inputs[message]=$4"
