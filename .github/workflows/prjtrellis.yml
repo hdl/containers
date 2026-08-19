@@ -27,8 +27,6 @@ on:
   schedule:
     - cron: '0 0 * * 5'
   workflow_dispatch:
-  repository_dispatch:
-    types: [ prjtrellis ]
 
 env:
   DOCKER_BUILDKIT: 1

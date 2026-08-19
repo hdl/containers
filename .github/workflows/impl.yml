@@ -29,8 +29,6 @@ on:
   schedule:
     - cron: '0 0 * * 5'
   workflow_dispatch:
-  repository_dispatch:
-    types: [ impl ]
 
 env:
   DOCKER_BUILDKIT: 1

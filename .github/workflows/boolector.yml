@@ -28,8 +28,6 @@ on:
   schedule:
     - cron: '0 0 * * 5'
   workflow_dispatch:
-  repository_dispatch:
-    types: [ boolector ]
 
 jobs:
   boolector:
