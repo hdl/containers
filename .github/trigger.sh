@@ -23,14 +23,11 @@
 
 set -e
 
-if [ -z "$BOT_TOKEN" ]; then
-  echo "BOT_TOKEN cannot be empty!"
-  exit 1
-fi
-
-for etype; do
-  curl -X POST https://api.github.com/repos/hdl/containers/dispatches \
-  -H "Content-Type: application/json" -H 'Accept: application/vnd.github.everest-preview+json' \
-  -H "Authorization: token ${BOT_TOKEN}" \
-  --data "{\"event_type\": \"$etype\"}"
-done
+gh api \
+  --method POST /repos/hdl/containers/actions/workflows/dispatch.yml/dispatches \
+  -H "Accept: application/vnd.github+json" \
+  -H "X-GitHub-Api-Version: 2026-03-10" \
+  -f "ref=$1" \
+  -f "inputs[key]=$2" \
+  -f "inputs[submodules]=$3" \
+  -f "inputs[skip-release]=$4" \
