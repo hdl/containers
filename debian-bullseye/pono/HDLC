@@ -36,10 +36,16 @@ makedepends=(
   m4
   patch
   python3-toml
+  python3-pip
+  pkg-config
   openjdk-11-jre-headless
 )
 
 build() {
+  pip3 install meson
+  pip3 install ninja
+  pip3 install tomli
+  pip3 install pyparsing
   git clone https://github.com/upscale-project/pono.git /tmp/pono
   cd /tmp/pono
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//g' > /tmp/hdlc.pono.version

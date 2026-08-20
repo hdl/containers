@@ -28,6 +28,8 @@ FROM $REGISTRY/yosys AS base
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     libgnat-9 \
+    g++ \
+    make \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists
 
