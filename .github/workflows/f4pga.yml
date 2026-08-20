@@ -36,7 +36,6 @@ jobs:
       key: conda/f4pga/xc7/toolchain
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
-      gh_token: '${{ github.token }}'
       docker_user: '${{ secrets.DOCKER_USER }}'
       docker_pass: '${{ secrets.DOCKER_PASS }}'
 
@@ -47,7 +46,6 @@ jobs:
       key: f4pga-xc7-devices
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
-      gh_token: '${{ github.token }}'
       docker_user: '${{ secrets.DOCKER_USER }}'
       docker_pass: '${{ secrets.DOCKER_PASS }}'
 
@@ -58,7 +56,6 @@ jobs:
       key: conda/f4pga/xc7
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
-      gh_token: '${{ github.token }}'
       docker_user: '${{ secrets.DOCKER_USER }}'
       docker_pass: '${{ secrets.DOCKER_PASS }}'
 
@@ -68,6 +65,5 @@ jobs:
       key: f4pga-eos-s3
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
-      gh_token: '${{ github.token }}'
       docker_user: '${{ secrets.DOCKER_USER }}'
       docker_pass: '${{ secrets.DOCKER_PASS }}'

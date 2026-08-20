@@ -48,9 +48,6 @@ on:
         default: "dispatched"
         type: string
     secrets:
-      gh_token:
-        description: 'GitHub Container Registry access token.'
-        required: false
       docker_user:
         description: 'Docker Container Registry user name.'
         required: false

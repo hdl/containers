@@ -39,6 +39,5 @@ jobs:
       key: cvc
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
-      gh_token: '${{ github.token }}'
       docker_user: '${{ secrets.DOCKER_USER }}'
       docker_pass: '${{ secrets.DOCKER_PASS }}'

@@ -41,7 +41,6 @@ jobs:
       submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
-      gh_token: '${{ github.token }}'
       docker_user: '${{ secrets.DOCKER_USER }}'
       docker_pass: '${{ secrets.DOCKER_PASS }}'
 
@@ -54,6 +53,5 @@ jobs:
       submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets:
-      gh_token: '${{ github.token }}'
       docker_user: '${{ secrets.DOCKER_USER }}'
       docker_pass: '${{ secrets.DOCKER_PASS }}'
