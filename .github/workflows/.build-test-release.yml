@@ -46,29 +46,20 @@ on:
   workflow_dispatch:
     inputs: *inputs
 
-
 env:
   DOCKER_BUILDKIT: 1
 
 jobs:
-
 
   matrix:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.generate.outputs.matrix }}
     steps:
-
-    - name: 🧰 Checkout
-      uses: actions/checkout@v7
-
-    - name: 🛠️ Setup
-      run: ./utils/setup.sh
-
-    - name: 🔧 Generate matrix
-      id: generate
-      run: pyHDLC jobs ${{ inputs.key }}
-
+    - id: generate
+      uses: $/.github/generate-matrix
+      with:
+        key: ${{ inputs.key }}
 
   jobs:
     needs: matrix
@@ -79,7 +70,6 @@ jobs:
         include: ${{ fromJson(needs.matrix.outputs.matrix) }}
     name: ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
-
     - name: 📄 Build, test and release
       uses: $/.github/build-test-release
       with:

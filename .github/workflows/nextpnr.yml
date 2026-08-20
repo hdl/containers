@@ -37,23 +37,15 @@ jobs:
 # TODO: Support 'skip-test' in the reusable workflow '.build-test-release.yml'.
 # Then, use the reusable workflow '.build-test-release.yml' here.
 
-
   matrix:
     runs-on: ubuntu-latest
     outputs:
-      nextpnr-build: ${{ steps.nextpnr-build.outputs.matrix }}
+      matrix: ${{ steps.generate.outputs.matrix }}
     steps:
-
-    - name: 🧰 Checkout
-      uses: actions/checkout@v7
-
-    - name: 🛠️ Setup
-      run: ./utils/setup.sh
-
-    - name: 🔧 Generate matrix
-      id: nextpnr-build
-      run: pyHDLC jobs nextpnr-build
-
+    - id: generate
+      uses: $/.github/generate-matrix
+      with:
+        key: nextpnr-build
 
   nextpnr-build:
     needs: matrix
@@ -61,7 +53,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ fromJson(needs.matrix.outputs.nextpnr-build) }}
+        include: ${{ fromJson(needs.matrix.outputs.matrix) }}
     name: nextpnr-build ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
     - name: 📄 Build, test and release
@@ -76,7 +68,6 @@ jobs:
         collection: ${{ matrix.os }}
         images: ${{ matrix.imgs }}
 
-
   nextpnr-prjs:
     needs: [ nextpnr-build ]
     uses: $/.github/workflows/.build-test-release.yml
@@ -84,7 +75,6 @@ jobs:
       key: nextpnr-prjs
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets: inherit
-
 
   nextpnr:
     needs: [ nextpnr-build, nextpnr-prjs ]
