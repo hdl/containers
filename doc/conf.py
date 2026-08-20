@@ -164,7 +164,7 @@ with (ROOT / "shields/shields.build.gen.inc").open("w", encoding="utf-8") as wfp
 
 CIWorkflows = [
     [
-        "doc",
+        ".doc",
         "base",
         "ghdl",
         "gtkwave",
