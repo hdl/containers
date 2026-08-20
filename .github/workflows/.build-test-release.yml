@@ -79,7 +79,8 @@ jobs:
         include: ${{ fromJson(needs.matrix.outputs.matrix) }}
     name: ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
-    - name: 🚧 Build, test and release
+
+    - name: 📄 Build, test and release
       uses: $/utils/build-test-release
       with:
         gh_token: '${{ github.token }}'
