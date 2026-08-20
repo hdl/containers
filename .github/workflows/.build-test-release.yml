@@ -29,6 +29,11 @@ on:
         description: 'Name of the job in the configuration.'
         required: true
         type: string
+      skip-test:
+        description: 'Skip testing the built images.'
+        required: false
+        default: false
+        type: string
       skip-release:
         description: 'Skip pushing and mirroring to container registries.'
         required: false
@@ -76,6 +81,7 @@ jobs:
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.DOCKER_USER }}'
         docker_pass: '${{ secrets.DOCKER_PASS }}'
+        skip-test: ${{ inputs.skip-test }}
         skip-release: ${{ inputs.skip-release }}
         architecture: ${{ matrix.arch }}
         collection: ${{ matrix.os }}

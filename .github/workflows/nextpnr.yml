@@ -34,39 +34,14 @@ env:
   DOCKER_BUILDKIT: 1
 
 jobs:
-# TODO: Support 'skip-test' in the reusable workflow '.build-test-release.yml'.
-# Then, use the reusable workflow '.build-test-release.yml' here.
-
-  matrix:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.generate.outputs.matrix }}
-    steps:
-    - id: generate
-      uses: $/.github/generate-matrix
-      with:
-        key: nextpnr-build
 
   nextpnr-build:
-    needs: matrix
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJson(needs.matrix.outputs.matrix) }}
-    name: nextpnr-build ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
-    steps:
-    - name: 📄 Build, test and release
-      uses: $/.github/build-test-release
-      with:
-        gh_token: '${{ github.token }}'
-        docker_user: '${{ secrets.DOCKER_USER }}'
-        docker_pass: '${{ secrets.DOCKER_PASS }}'
-        skip-release: ${{ github.event_name == 'pull_request' }}
-        skip-test: True
-        architecture: ${{ matrix.arch }}
-        collection: ${{ matrix.os }}
-        images: ${{ matrix.imgs }}
+    uses: $/.github/workflows/.build-test-release.yml
+    with:
+      key: nextpnr-build
+      skip-test: True
+      skip-release: ${{ github.event_name == 'pull_request' }}
+    secrets: inherit
 
   nextpnr-prjs:
     needs: [ nextpnr-build ]
