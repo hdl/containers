@@ -64,16 +64,13 @@ runs:
     with:
       submodules: recursive
 
-  - shell: bash
-    run: |
-      # Setup
-      echo '::group::Setup'
-      ./utils/setup.sh ${{ inputs.architecture }}
-      echo '::endgroup::'
+  - name: 🛠️ Setup
+    shell: bash
+    run: ./utils/setup.sh ${{ inputs.architecture }}
 
-  - shell: python
+  - name: 🚧 [Pull,] Build [and Test]
+    shell: python
     run: |
-      # [Pull,] Build [and Test]
       from subprocess import check_call
       cargs = ['-a', '${{ inputs.architecture }}', '-c', '${{ inputs.collection }}']
       if "${{ inputs.pull }}".lower() not in ["none","false","no"]:
@@ -81,7 +78,7 @@ runs:
       runtest = [] if "${{ inputs.skip-test }}".lower() in ["true","skip","yes"] else ['-q']
       check_call(['pyHDLC', 'build'] + runtest + cargs + ['-d'] + '${{ inputs.images }}'.split(' '))
 
-  - name: Release
+  - name: 🛰️ Release
     uses: pyTooling/Actions/with-post-step@r7
     with:
       main: |

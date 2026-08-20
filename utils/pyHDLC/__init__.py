@@ -309,7 +309,7 @@ def PullImage(
         _exec(
             args=["docker", "pull", "--platform", _NormalisePlatform(architecture), imageName],
             dry=dry,
-            collapse=f"[Pull] Pull {imageName}"
+            collapse=f"🔽 Pull {imageName}"
         )
 
 
@@ -466,7 +466,7 @@ def BuildImage(
 
         cmd += [str(contextPath)]
 
-        _exec(args=cmd, dry=dry, collapse=f"[Build] Build {imageName}")
+        _exec(args=cmd, dry=dry, collapse=f"🚧 Build {imageName}")
 
         with dockerfilePath.open("r") as rfptr:
             for line in rfptr:
@@ -474,7 +474,7 @@ def BuildImage(
                     _exec(
                         args=["docker", "build", "--target", "version", "-o", "dist", str(contextPath)],
                         dry=dry,
-                        collapse=f"[Build] Version {imageName}",
+                        collapse=f"🚧 Version {imageName}",
                     )
                     break
 
@@ -546,7 +546,7 @@ def TestImage(
                     ".",
                 ],
                 dry=dry,
-                collapse=f"[Test] Build {testImage!s}",
+                collapse=f"🚦 Build {testImage!s}",
             )
 
             _exec(
@@ -560,7 +560,7 @@ def TestImage(
                     f"//wrk/{testScript}.pkg.sh",
                 ],
                 dry=dry,
-                collapse=f"[Test] Test {testImage}",
+                collapse=f"🚦 Test {testImage}",
             )
 
             continue
@@ -577,7 +577,7 @@ def TestImage(
                 f"{imageName}",
             ],
             dry=dry,
-            collapse=f"[Test] Inspect {imageName}",
+            collapse=f"🚦 Inspect {imageName}",
         )
 
         _exec(
@@ -591,7 +591,7 @@ def TestImage(
                 f"//wrk/{img.replace(':', '--').replace('/', '--')!s}.sh",
             ],
             dry=dry,
-            collapse=f"[Test] Test {imageName!s}",
+            collapse=f"🚦 Test {imageName!s}",
         )
 
 
@@ -631,33 +631,29 @@ def PushImage(
     """
 
     def dpush(args: List[str]):
-        _exec(args=["docker", "push"] + args, dry=dry, collapse=f"Push {' '.join(args)}")
+        _exec(args=["docker", "push"] + args, dry=dry, collapse=f"🔼 Push {' '.join(args)}")
 
     def dtag(imgName: str, tags: List[str]):
         for tag in tags:
-            _exec(
-                args=["docker", "tag", imgName, tag],
-                dry=dry,
-                collapse=f"Tag {tag}",
-            )
+            _exec(args=["docker", "tag", imgName, tag], dry=dry, collapse=f"🏷️ Tag {tag}")
 
     mirrors = [] if mirror is None else [mirror] if isinstance(mirror, str) else mirror
 
     for rimg in [image] if isinstance(image, str) else image:
-        # Note that '#' might be used in the image names as a package location, to be used in TestImage.
-        # This usage of '#' is different from the one in the mirror names below.
-        # There, it denotes keywords for replacement.
-        img = rimg.split("#")[0]
-        imageName = f"{registry}/{architecture}/{collection}/{img}"
-        dpush([imageName])
-
-        print("\nChecking version file...")
+        print("Checking version file...")
         versionString = None
         versionFile = Path("dist") / f'hdlc.{rimg if rimg[0:4] != "pkg/" else rimg[4:]}.version'
         if versionFile.exists():
             with versionFile.open("r") as rfptr:
                 versionString = rfptr.read().strip()
         print(f"{rimg}: {versionString}")
+
+        # Note that '#' might be used in the image names as a package location, to be used in TestImage.
+        # This usage of '#' is different from the one in the mirror names below.
+        # There, it denotes keywords for replacement.
+        img = rimg.split("#")[0]
+        imageName = f"{registry}/{architecture}/{collection}/{img}"
+        dpush([imageName])
 
         for mirror in mirrors:
             isDocker = mirror.startswith("docker.io")

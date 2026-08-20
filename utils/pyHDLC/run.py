@@ -38,7 +38,7 @@ def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] 
     isGroup = isGHA and collapse is not None
 
     if isGroup:
-        print(f"\n::group::{collapse}")
+        print(f"::group::{collapse}")
         sys_stdout.flush()
         sys_stderr.flush()
 
@@ -50,7 +50,7 @@ def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] 
         check_call(args, stderr=STDOUT)
 
     if isGroup:
-        print("\n::endgroup::")
+        print("::endgroup::")
         sys_stdout.flush()
         sys_stderr.flush()
 
