@@ -81,7 +81,7 @@ jobs:
     steps:
 
     - name: 📄 Build, test and release
-      uses: $/utils/build-test-release
+      uses: $/.github/build-test-release
       with:
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.DOCKER_USER }}'
