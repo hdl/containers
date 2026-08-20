@@ -40,7 +40,7 @@ As shown in :numref:`img-ci`, the following wrappers are used:
   GitHub Actions are explained.
   See also `Workflow syntax for GitHub Actions <https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions>`__.
 
-* :ghsrc:`build-test-release <utils/build-test-release/action.yml>` is a local Composite Action with three steps,
+* :ghsrc:`build-test-release <.github/build-test-release/action.yml>` is a local Composite Action with three steps,
   including setup, pulling/building/testing and releasing.
 * :ghsrc:`.build-test-release <.github/workflows/.build-test-release.yml>` is a Reusable and Dispatchable Workflow with
   two jobs.
