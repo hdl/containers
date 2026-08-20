@@ -38,6 +38,4 @@ jobs:
       key: iverilog
       submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
-    secrets:
-      docker_user: '${{ secrets.DOCKER_USER }}'
-      docker_pass: '${{ secrets.DOCKER_PASS }}'
+    secrets: inherit

@@ -48,13 +48,6 @@ on:
         required: false
         default: "dispatched"
         type: string
-    secrets:
-      docker_user:
-        description: 'Docker Container Registry user name.'
-        required: false
-      docker_pass:
-        description: 'Docker Container Registry password.'
-        required: false
   workflow_dispatch:
     inputs: *inputs
 
@@ -102,8 +95,8 @@ jobs:
       uses: ./utils/build-test-release
       with:
         gh_token: '${{ github.token }}'
-        docker_user: '${{ secrets.docker_user }}'
-        docker_pass: '${{ secrets.docker_pass }}'
+        docker_user: '${{ secrets.DOCKER_USER }}'
+        docker_pass: '${{ secrets.DOCKER_PASS }}'
         skip-release: ${{ inputs.skip-release }}
         architecture: ${{ matrix.arch }}
         collection: ${{ matrix.os }}
