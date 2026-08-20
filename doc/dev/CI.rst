@@ -42,16 +42,20 @@ As shown in :numref:`img-ci`, the following wrappers are used:
 
 * :ghsrc:`build-test-release <utils/build-test-release/action.yml>` is a local Composite Action with three steps,
   including setup, pulling/building/testing and releasing.
-* :ghsrc:`Common <.github/workflows/common.yml>` is a Reusable Workflow with two jobs.
+* :ghsrc:`.build-test-release <.github/workflows/.build-test-release.yml>` is a Reusable and Dispatchable Workflow with
+  two jobs.
   The first job, named *matrix*, uses ``pyHDLC jobs`` to generate a list of tasks to be used in the second job, named
   *jobs* (see `docs.github.com: Workflow syntax for GitHub Actions » jobs.<job_id>.outputs <https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idoutputs>`__).
   Then, the Composite Action is used in each of the dynamically generated jobs.
-* :ghsrc:`Dispatch <.github/workflows/dispatch.yml>` is a Dispatchable Workflow, which calls the Reusable Workflow.
-  In practice, *Dispatch* documents the internal triggering interface, but it is not used explicitly.
-  There are dozens of workflows (one per tool or group) which are equivalent to *Dispatch* with some hardcoded inputs.
-  Those are triggered through scheduled (CRON) events, by pushes, by Pull Requests or manually.
+* :ghsrc:`trigger.sh <.github/trigger.sh>` is a shell script to trigger the dispatchable workflow using the REST API endpoint.
+
+Workflows for each tool or group are triggered through scheduled (CRON) events, by pushes, by Pull Requests or manually.
+Those which need to use the reusable-dispatchable workflow once only can do so through the trigger script.
+If the reusable-dispatchable workflow needs to be used more than once sequentially, the workflow call syntax is used.
+In the most complex workflows, for which the reusable-dispatchable workflow is lacking flexibility, the composite action
+is used directly.
 
 Since most of the complexity of the orchestration is defined in the YAML configuration file used by pyHDLC, reading
 :ref:`Development:configuration` is strongly recommended.
-As shown in :numref:`img-ci`, data from the configuration file is used in the Reusable Workflow *Common* and in the
-build step of the Composite Action *build-test-release*.
+As shown in :numref:`img-ci`, data from the configuration file is used in the reusable-dispatchable workflow and in the
+build step of the composite action.
