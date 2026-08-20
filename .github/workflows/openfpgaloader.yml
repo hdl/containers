@@ -33,9 +33,8 @@ env:
 
 jobs:
   openfpgaloader:
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: openfpgaloader
-      submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets: inherit

@@ -30,7 +30,7 @@ on:
 
 jobs:
   xschem:
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: xschem
       skip-release: ${{ github.event_name == 'pull_request' }}

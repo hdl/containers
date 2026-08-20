@@ -29,5 +29,4 @@ gh api \
   -H "X-GitHub-Api-Version: 2026-03-10" \
   -f "ref=$1" \
   -f "inputs[key]=$2" \
-  -f "inputs[submodules]=$3" \
-  -f "inputs[skip-release]=$4" \
+  -f "inputs[skip-release]=$3" \

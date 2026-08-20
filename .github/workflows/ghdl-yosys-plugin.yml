@@ -33,9 +33,8 @@ env:
 
 jobs:
   ghdl-yosys-plugin:
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: ghdl-yosys-plugin
-      submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets: inherit

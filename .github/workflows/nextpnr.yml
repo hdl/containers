@@ -64,14 +64,8 @@ jobs:
         include: ${{ fromJson(needs.matrix.outputs.nextpnr-build) }}
     name: nextpnr-build ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
-
-    - name: 🧰 Checkout
-      uses: actions/checkout@v7
-      with:
-        submodules: recursive
-
     - name: 🚧 Build, test and release
-      uses: ./utils/build-test-release
+      uses: $/utils/build-test-release
       with:
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.DOCKER_USER }}'
@@ -85,19 +79,17 @@ jobs:
 
   nextpnr-prjs:
     needs: [ nextpnr-build ]
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: nextpnr-prjs
-      submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets: inherit
 
 
   nextpnr:
     needs: [ nextpnr-build, nextpnr-prjs ]
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: nextpnr
-      submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets: inherit

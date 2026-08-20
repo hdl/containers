@@ -75,14 +75,8 @@ jobs:
         include: ${{ fromJson(needs.matrix.outputs.impl-build) }}
     name: impl-build ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
-
-    - name: 🧰 Checkout
-      uses: actions/checkout@v7
-      with:
-        submodules: recursive
-
     - name: 🚧 Build, test and release
-      uses: ./utils/build-test-release
+      uses: $/utils/build-test-release
       with:
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.DOCKER_USER }}'
@@ -162,14 +156,8 @@ jobs:
         include: ${{ fromJson(needs.matrix.outputs.impl) }}
     name: impl ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
-
-    - name: 🧰 Checkout
-      uses: actions/checkout@v7
-      with:
-        submodules: recursive
-
     - name: 🚧 Build, test and release
-      uses: ./utils/build-test-release
+      uses: $/utils/build-test-release
       with:
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.DOCKER_USER }}'

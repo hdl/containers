@@ -59,17 +59,11 @@ jobs:
       fail-fast: false
       matrix:
         include: ${{ fromJson(needs.matrix.outputs.matrix) }}
-
     name: ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
 
-    - name: 🧰 Checkout
-      uses: actions/checkout@v7
-      with:
-        submodules: recursive
-
     - name: 🚧 Build, test and release
-      uses: ./utils/build-test-release
+      uses: $/utils/build-test-release
       with:
         gh_token: '${{ github.token }}'
         docker_user: '${{ secrets.DOCKER_USER }}'

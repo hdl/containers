@@ -33,7 +33,7 @@ env:
 
 jobs:
   arachne-pnr:
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: arachne-pnr
       skip-release: ${{ github.event_name == 'pull_request' }}

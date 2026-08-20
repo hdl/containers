@@ -33,7 +33,7 @@ env:
 
 jobs:
   xyce:
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: xyce
       skip-release: ${{ github.event_name == 'pull_request' }}
