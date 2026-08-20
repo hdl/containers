@@ -61,6 +61,7 @@ jobs:
     outputs:
       skip: ${{ steps.skipper.outputs.skip }}
       matrix: ${{ steps.generate.outputs.matrix }}
+    name: ${{ inputs.key }}-matrix
     steps:
     - name: ❔ Skipper
       if: github.event_name == 'workflow_dispatch'
