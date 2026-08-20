@@ -33,7 +33,7 @@ env:
 
 jobs:
   yosys:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: yosys
       submodules: recursive

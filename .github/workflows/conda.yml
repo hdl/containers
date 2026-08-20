@@ -30,7 +30,7 @@ on:
 
 jobs:
   conda:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: conda
       skip-release: ${{ github.event_name == 'pull_request' }}

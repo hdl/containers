@@ -34,7 +34,7 @@ env:
 
 jobs:
   cvc:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: cvc
       skip-release: ${{ github.event_name == 'pull_request' }}

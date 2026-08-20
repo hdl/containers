@@ -31,7 +31,7 @@ on:
 
 jobs:
   irsim:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: irsim
       skip-release: ${{ github.event_name == 'pull_request' }}

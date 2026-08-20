@@ -33,7 +33,7 @@ env:
 
 jobs:
   vtr:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: vtr
       submodules: recursive

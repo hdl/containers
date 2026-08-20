@@ -33,7 +33,7 @@ env:
 
 jobs:
   openfpgaloader:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: openfpgaloader
       submodules: recursive

@@ -33,7 +33,7 @@ env:
 
 jobs:
   verible:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: verible
       submodules: recursive

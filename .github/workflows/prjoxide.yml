@@ -33,7 +33,7 @@ env:
 
 jobs:
   prjoxide:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: prjoxide
       submodules: recursive

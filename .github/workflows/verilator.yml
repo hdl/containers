@@ -33,7 +33,7 @@ env:
 
 jobs:
   verilator:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: verilator
       submodules: recursive

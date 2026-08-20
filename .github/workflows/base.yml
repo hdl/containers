@@ -33,7 +33,7 @@ env:
 
 jobs:
   base:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: base
       skip-release: ${{ github.event_name == 'pull_request' }}

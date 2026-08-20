@@ -24,7 +24,7 @@
 set -e
 
 gh api \
-  --method POST /repos/hdl/containers/actions/workflows/common.yml/dispatches \
+  --method POST /repos/hdl/containers/actions/workflows/.build-test-release.yml/dispatches \
   -H "Accept: application/vnd.github+json" \
   -H "X-GitHub-Api-Version: 2026-03-10" \
   -f "ref=$1" \

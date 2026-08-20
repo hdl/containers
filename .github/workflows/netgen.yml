@@ -34,7 +34,7 @@ env:
 
 jobs:
   netgen:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: netgen
       submodules: recursive

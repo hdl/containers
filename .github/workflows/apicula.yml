@@ -34,7 +34,7 @@ env:
 
 jobs:
   apicula:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: apicula
       submodules: recursive

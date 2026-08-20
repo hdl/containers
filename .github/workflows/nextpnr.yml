@@ -34,8 +34,8 @@ env:
   DOCKER_BUILDKIT: 1
 
 jobs:
-# TODO: Support 'skip-test' in the reusable workflow 'common.yml'.
-# Then, use the reusable workflow 'common.py' here.
+# TODO: Support 'skip-test' in the reusable workflow '.build-test-release.yml'.
+# Then, use the reusable workflow '.build-test-release.yml' here.
 
 
   matrix:
@@ -85,7 +85,7 @@ jobs:
 
   nextpnr-prjs:
     needs: [ nextpnr-build ]
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: nextpnr-prjs
       submodules: recursive
@@ -97,7 +97,7 @@ jobs:
 
   nextpnr:
     needs: [ nextpnr-build, nextpnr-prjs ]
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: nextpnr
       submodules: recursive

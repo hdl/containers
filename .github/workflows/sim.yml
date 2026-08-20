@@ -34,7 +34,7 @@ env:
 jobs:
 
   sim:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: sim
       submodules: recursive
@@ -45,7 +45,7 @@ jobs:
 
   osvb:
     needs: sim
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: osvb
       submodules: recursive
@@ -56,7 +56,7 @@ jobs:
 
   cosim:
     needs: osvb
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: cosim
       submodules: recursive
@@ -67,7 +67,7 @@ jobs:
 
   gnuplot:
     needs: cosim
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: gnuplot
       submodules: recursive

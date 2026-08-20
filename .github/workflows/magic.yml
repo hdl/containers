@@ -35,7 +35,7 @@ jobs:
 
 
   magic:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: magic
       submodules: recursive
@@ -47,7 +47,7 @@ jobs:
 
   magic-irsim:
     needs: magic
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/.build-test-release.yml
     with:
       key: magic-irsim
       submodules: recursive

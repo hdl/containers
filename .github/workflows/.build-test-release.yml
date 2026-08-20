@@ -19,6 +19,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+name: .build-test-release
 run-name: '[${{ inputs.key }}] ${{ inputs.message }}'
 
 on:
