@@ -1,0 +1,126 @@
+# Authors:
+#   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
+#
+# Copyright Unai Martinez-Corral
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+HDLCI: 0
+
+_anchors:
+  <<: &EmptyTarget
+    target: ''
+  <<: &BaseDockerfile
+    dockerfile: base
+  <<: &FormalDockerfile
+    dockerfile: formal
+  <<: &ImplDockerfile
+    dockerfile: impl
+  <<: &NextpnrDockerfile
+    dockerfile: nextpnr
+  <<: &OSVBDockerfile
+    dockerfile: osvb
+  <<: &F4PGADockerfile
+    dockerfile: f4pga
+
+images:
+
+  # Base
+  build/base:  { <<: *BaseDockerfile, target: base }
+  build/build: { <<: *BaseDockerfile, target: build }
+  build/dev:   { <<: *BaseDockerfile }
+
+  # Formal
+  pkg/boolector:  *EmptyTarget
+  pkg/cvc:        *EmptyTarget
+  pkg/pono:       *EmptyTarget
+  pkg/superprove: *EmptyTarget
+  pkg/sby:        *EmptyTarget
+  pkg/yices2:     *EmptyTarget
+  pkg/z3:         *EmptyTarget
+  formal/min: { <<: *FormalDockerfile, target: min }
+  formal:     { <<: *FormalDockerfile, target: latest }
+  formal/all: { <<: *FormalDockerfile }
+
+  # GHDL
+  ghdl/yosys:    { dockerfile: ghdl-yosys-plugin }
+  pkg/ghdl:                        { target: pkg-mcode }
+  pkg/ghdl/llvm: { dockerfile: ghdl, target: pkg-llvm }
+  ghdl:                            { target: mcode }
+  ghdl/llvm:     { dockerfile: ghdl, target: llvm }
+
+  # Impl
+  build/impl:      { <<: *ImplDockerfile, target: base }
+  impl/ice40:      { <<: *ImplDockerfile, target: ice40 }
+  impl/icestorm:   { <<: *ImplDockerfile, target: icestorm }
+  impl/ecp5:       { <<: *ImplDockerfile, target: ecp5 }
+  impl/prjtrellis: { <<: *ImplDockerfile, target: prjtrellis }
+  impl/nexus:      { <<: *ImplDockerfile, target: nexus }
+  impl/prjoxide:   { <<: *ImplDockerfile, target: prjoxide }
+  impl/generic:    { <<: *ImplDockerfile, target: generic }
+  impl/pnr:        { <<: *ImplDockerfile, target: pnr }
+
+  # NextPnR
+  build/nextpnr/base:  { <<: *NextpnrDockerfile, target: base }
+  build/nextpnr/build: { <<: *NextpnrDockerfile, target: build }
+  pkg/nextpnr/ice40:   { <<: *NextpnrDockerfile, target: pkg-ice40 }
+  nextpnr/ice40:       { <<: *NextpnrDockerfile, target: ice40 }
+  nextpnr/icestorm:    { <<: *NextpnrDockerfile, target: icestorm }
+  pkg/nextpnr/nexus:   { <<: *NextpnrDockerfile, target: pkg-nexus }
+  nextpnr/nexus:       { <<: *NextpnrDockerfile, target: nexus }
+  nextpnr/prjoxide:    { <<: *NextpnrDockerfile, target: prjoxide }
+  pkg/nextpnr/ecp5:    { <<: *NextpnrDockerfile, target: pkg-ecp5 }
+  nextpnr/ecp5:        { <<: *NextpnrDockerfile, target: ecp5 }
+  nextpnr/prjtrellis:  { <<: *NextpnrDockerfile, target: prjtrellis }
+  pkg/nextpnr/generic: { <<: *NextpnrDockerfile, target: pkg-generic }
+  nextpnr/generic:     { <<: *NextpnrDockerfile, target: generic }
+
+  # Sim
+  sim/osvb:
+    <<: *OSVBDockerfile
+  sim/scipy-slim:
+    dockerfile: scipy
+  sim/scipy:
+    <<: *OSVBDockerfile
+    argimg: sim/scipy-slim
+  sim/octave-slim:
+    dockerfile: octave
+  sim/octave:
+    <<: *OSVBDockerfile
+    argimg: sim/octave-slim
+  sim/octave/gnuplot:
+    dockerfile: gnuplot
+    argimg: sim/octave
+
+  # F4PGA
+  conda/f4pga/xc7/toolchain: { <<: *F4PGADockerfile, target: xc7-toolchain }
+  conda/f4pga/xc7/a50t:      { <<: *F4PGADockerfile, target: a50t          }
+  conda/f4pga/xc7/a100t:     { <<: *F4PGADockerfile, target: a100t         }
+  conda/f4pga/xc7/a200t:     { <<: *F4PGADockerfile, target: a200t         }
+  conda/f4pga/xc7/z010:      { <<: *F4PGADockerfile, target: z010          }
+  conda/f4pga/xc7/z020:      { <<: *F4PGADockerfile, target: z020          }
+  conda/f4pga/xc7:           { <<: *F4PGADockerfile, target: xc7           }
+  conda/f4pga/eos-s3:        { <<: *F4PGADockerfile, target: eos-s3        }
+
+  # ASIC
+  magic:       { dockerfile: magic, target: magic }
+  magic/irsim: { dockerfile: magic, target: irsim }
+
+  # OpenROAD
+  openroad:         { dockerfile: openroad, target: openroad }
+  pkg/openroad/gui: { dockerfile: openroad, target: pkg-gui }
+  openroad/gui:     { dockerfile: openroad, target: gui }

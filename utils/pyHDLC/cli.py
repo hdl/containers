@@ -36,6 +36,7 @@ from pyAttributes.ArgParseAttributes import (
 )
 
 from pyHDLC import (
+    DEFAULTS,
     GenerateJobList,
     PullImage,
     BuildImage,
@@ -59,7 +60,7 @@ class WithRegistryAttributes(Attribute):
                 dest="Registry",
                 type=str,
                 help="Container image registry prefix.",
-                default="ghcr.io/hdl",
+                default=DEFAULTS.registry,
             ),
             ArgumentAttribute(
                 "-c",
@@ -67,7 +68,7 @@ class WithRegistryAttributes(Attribute):
                 dest="Collection",
                 type=str,
                 help="Name of the collection/subset of images.",
-                default="debian/bullseye",
+                default=DEFAULTS.collection,
             ),
             ArgumentAttribute(
                 "-a",
@@ -75,7 +76,7 @@ class WithRegistryAttributes(Attribute):
                 dest="Architecture",
                 type=str,
                 help="Name of the architecture.",
-                default="amd64",
+                default=DEFAULTS.architecture,
             ),
             # ... add more if needed
         ]:
