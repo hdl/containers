@@ -34,9 +34,8 @@ env:
 
 jobs:
   netgen:
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: netgen
-      submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets: inherit

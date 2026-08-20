@@ -34,36 +34,32 @@ env:
 jobs:
 
   sim:
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: sim
-      submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets: inherit
 
   osvb:
     needs: sim
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: osvb
-      submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets: inherit
 
   cosim:
     needs: osvb
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: cosim
-      submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets: inherit
 
   gnuplot:
     needs: cosim
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: gnuplot
-      submodules: recursive
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets: inherit

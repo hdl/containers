@@ -59,6 +59,11 @@ runs:
   using: 'composite'
   steps:
 
+  - name: 🧰 Checkout
+    uses: actions/checkout@v7
+    with:
+      submodules: recursive
+
   - shell: bash
     run: |
       # Setup

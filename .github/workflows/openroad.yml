@@ -30,7 +30,7 @@ on:
 
 jobs:
   openroad:
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: openroad
       skip-release: ${{ github.event_name == 'pull_request' }}

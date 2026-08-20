@@ -31,7 +31,7 @@ on:
 jobs:
 
   xc7-toolchain:
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: conda/f4pga/xc7/toolchain
       skip-release: ${{ github.event_name == 'pull_request' }}
@@ -39,7 +39,7 @@ jobs:
 
   xc7-devices:
     needs: [ xc7-toolchain ]
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: f4pga-xc7-devices
       skip-release: ${{ github.event_name == 'pull_request' }}
@@ -47,14 +47,14 @@ jobs:
 
   xc7:
     needs: [ xc7-devices ]
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: conda/f4pga/xc7
       skip-release: ${{ github.event_name == 'pull_request' }}
     secrets: inherit
 
   eos-s3:
-    uses: ./.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/.build-test-release.yml
     with:
       key: f4pga-eos-s3
       skip-release: ${{ github.event_name == 'pull_request' }}
