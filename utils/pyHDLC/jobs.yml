@@ -1,0 +1,236 @@
+# Authors:
+#   Unai Martinez-Corral
+#     <umartinezcorral@antmicro.com>
+#     <unai.martinezcorral@ehu.eus>
+#
+# Copyright Unai Martinez-Corral
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+HDLCJ: 0
+
+_anchors:
+  <<: &SysDebianBullseyeAmd64
+    debian/bullseye:
+      - amd64
+  <<: &SysDebianBullseyeDefaultArchSet
+    debian/bullseye:
+      - amd64
+      - arm64v8
+      #- ppc64le
+      #- s390x
+      #- riscv64 ! only 'trixie-slim' and 'sid-slim' available: https://hub.docker.com/r/riscv64/debian
+  <<: &SysDebianBookwormAmd64
+    debian/bookworm:
+      - amd64
+  <<: &SysDebianBookwormDefaultArchSet
+    debian/bookworm:
+      - amd64
+      - arm64v8
+      - ppc64le
+      - s390x
+      #- riscv64 ! only 'trixie-slim' and 'sid-slim' available: https://hub.docker.com/r/riscv64/debian
+  <<: &SysDebianLegacyAmd64
+    <<: *SysDebianBookwormAmd64
+    <<: *SysDebianBullseyeAmd64
+  <<: &SysDebianLegacyDefaultArchSet
+    <<: *SysDebianBookwormDefaultArchSet
+    <<: *SysDebianBullseyeDefaultArchSet
+  <<: &SysDebianTrixieAmd64
+    debian/trixie:
+      - amd64
+  <<: &SysDebianTrixieDefaultArchSet
+    debian/trixie:
+      - amd64
+      - arm64v8
+      - ppc64le
+      - s390x
+      - riscv64
+  <<: &SysDebianAmd64
+    <<: *SysDebianTrixieAmd64
+    <<: *SysDebianLegacyAmd64
+  <<: &SysDebianDefaultArchSet
+    <<: *SysDebianTrixieDefaultArchSet
+    <<: *SysDebianLegacyDefaultArchSet
+
+default:
+
+  apicula:        *SysDebianLegacyAmd64
+  arachne-pnr:    *SysDebianDefaultArchSet
+  gtkwave:        *SysDebianLegacyDefaultArchSet
+  icestorm:       *SysDebianDefaultArchSet
+  irsim:
+    <<: *SysDebianDefaultArchSet
+    # riscv64 is not known by the configure script: checking build system type... ./config.guess: unable to guess system type
+    debian/trixie:
+      - amd64
+      - arm64v8
+      - ppc64le
+      - s390x
+  iverilog:       *SysDebianAmd64
+  klayout:        *SysDebianAmd64
+  magic:          *SysDebianLegacyDefaultArchSet
+  netgen:         *SysDebianDefaultArchSet
+  nvc:
+    *SysDebianAmd64
+    # arm64v8 fails with error:
+    # ../thirdparty/sha1.c:350:14: error: assigning to 'uint32x4_t' (vector of 4 'uint32_t' values) from incompatible type 'int'
+    #debian/trixie:
+    #  - amd64
+    #  - arm64v8
+    #debian/bookworm:
+    #  - amd64
+    #  - arm64v8
+    #debian/bullseye:
+    #  - amd64
+    #  - arm64v8
+    # ppc64le and s390x fail with error:
+    #   ../thirdparty/cpustate.c:184:2: error: Please port fill_cpu_state to this OS/CPU combination
+  openfpgaloader: *SysDebianDefaultArchSet
+  prjoxide:       *SysDebianAmd64
+  prjtrellis:     *SysDebianAmd64
+  verible:        *SysDebianLegacyAmd64
+  verilator:      *SysDebianLegacyDefaultArchSet
+  vtr:            *SysDebianBullseyeAmd64
+  xschem:         *SysDebianAmd64
+  xyce:           *SysDebianLegacyAmd64
+  yosys:          *SysDebianLegacyAmd64
+
+pkgonly:
+
+  boolector:  *SysDebianAmd64
+  cvc:        *SysDebianLegacyAmd64
+  pono:       *SysDebianBullseyeAmd64
+  superprove: *SysDebianBullseyeAmd64
+  sby:        *SysDebianAmd64
+  yices2:     *SysDebianAmd64
+  z3:         *SysDebianLegacyAmd64
+
+runonly:
+
+  conda:                     *SysDebianLegacyDefaultArchSet
+  prog:                      *SysDebianBullseyeAmd64
+  sim:                       *SysDebianLegacyAmd64
+  conda/f4pga/xc7/toolchain: *SysDebianBullseyeAmd64
+  conda/f4pga/xc7:           *SysDebianBullseyeAmd64
+
+custom:
+
+  base:
+    images:
+      - build/base
+      - build/build
+      - build/dev
+    sys:
+      <<: *SysDebianDefaultArchSet
+      rockylinux/8:
+        - amd64
+        - arm64v8
+  formal:
+    images:
+      - formal/min
+      - formal
+      - formal/all
+    sys: *SysDebianBullseyeAmd64
+  ghdl-yosys-plugin:
+    images:
+      - pkg/ghdl-yosys-plugin#ghdl
+      - ghdl/yosys
+    sys: *SysDebianLegacyAmd64
+  ghdl:
+    images:
+      - pkg/ghdl
+      - pkg/ghdl/llvm#ghdl
+      - ghdl
+      - ghdl/llvm
+    sys: *SysDebianLegacyAmd64
+  impl-build:
+    images:
+      - build/impl
+    sys: *SysDebianLegacyAmd64
+  impl-prjs:
+    images:
+      - impl/${arch}
+      - impl/${prj}
+      - { arch: ice40, prj: icestorm   }
+      - { arch: ecp5,  prj: prjtrellis }
+      - { arch: nexus, prj: prjoxide   }
+    sys: *SysDebianLegacyAmd64
+  impl:
+    images:
+      - impl/generic
+      - impl/pnr
+      - impl
+    sys: *SysDebianLegacyAmd64
+  magic-irsim:
+    images:
+      - magic/irsim
+    sys:
+      <<: *SysDebianLegacyDefaultArchSet
+  nextpnr-build:
+    images:
+      - build/nextpnr/base
+      - build/nextpnr/build
+    sys: *SysDebianLegacyAmd64
+  nextpnr-prjs:
+    images:
+      - pkg/nextpnr/${arch}
+      - nextpnr/${arch}
+      - nextpnr/${prj}
+      - { arch: ice40, prj: icestorm   }
+      - { arch: ecp5,  prj: prjtrellis }
+      - { arch: nexus, prj: prjoxide   }
+    sys: *SysDebianLegacyAmd64
+  nextpnr:
+    images:
+      - pkg/nextpnr/generic
+      - nextpnr/generic
+      - nextpnr
+    sys: *SysDebianLegacyAmd64
+  openroad:
+    images:
+      - pkg/openroad
+      - openroad
+      - pkg/openroad/gui
+      - openroad/gui
+    sys: *SysDebianBullseyeAmd64
+  osvb:
+    images:
+      - pkg/osvb
+      - sim/osvb
+    sys: *SysDebianLegacyAmd64
+  cosim:
+    images:
+      - sim/${prj}-slim
+      - sim/${prj}
+      - prj: scipy
+      - prj: octave
+    sys: *SysDebianLegacyAmd64
+  gnuplot:
+    images:
+      - sim/octave/gnuplot
+    sys: *SysDebianLegacyAmd64
+  f4pga-xc7-devices:
+    images:
+      - [ conda/f4pga/xc7/a50t  ]
+      - [ conda/f4pga/xc7/a100t ]
+      - [ conda/f4pga/xc7/a200t ]
+      - [ conda/f4pga/xc7/z010  ]
+      - [ conda/f4pga/xc7/z020  ]
+    sys: *SysDebianBullseyeAmd64
+  f4pga-eos-s3:
+    images:
+      - conda/f4pga/eos-s3
+    sys: *SysDebianBullseyeAmd64

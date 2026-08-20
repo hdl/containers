@@ -118,22 +118,24 @@ or, inspect any image from any registry:
 
 .. _Development:configuration:
 
-YAML Configuration File
-=======================
+YAML Configuration Files
+========================
 
-Most of the complexity regarding images, dockerfiles, arguments and jobs is defined in the YAML configuration file
-(see :ghsrc:`config.yml <utils/pyHDLC/config.yml>`), which contains two data fields:
+Most of the complexity regarding images, dockerfiles, arguments and jobs is defined in the YAML configuration files:
 
-* **defaults**: which dockerfile and (optionally) target stage or base image to be used when building "non-regular" images.
-  That is, using a non-empty target, an specific base image, etc.
-  If the image name is not defined in this field, the dockerfile defaults to the image name and the target depends on
-  option *package*.
-* **jobs**: which images and for which collections and architectures to build each list of tasks.
-  For convenienve, the keywords match the name of the main tool/group in the list.
+* :ghsrc:`images.yml <utils/pyHDLC/images.yml>`:
+  which dockerfile and (optionally) target stage or base image to be used when building "non-regular" images.
+  That is, using a non-empty target, and/or a specific base image, etc.
+  If the image name is not defined in this configuration, the dockerfile defaults to the image name and the target
+  depends on option *package*.
+
+* :ghsrc:`jobs.yml <utils/pyHDLC/jobs.yml>`
+  which images and for which collections and architectures to build each list of tasks.
+  For convenience, the keywords match the name of the main tool/group in the list.
 
 .. TIP::
-  Contributors will find that field **anchors** in :ghsrc:`config.yml <utils/pyHDLC/config.yml>` is ignored by pyHDLC
-  commands when analyzing the file.
+  Contributors will find that field **_anchors** in the configuration files is ignored by pyHDLC commands when analyzing
+  the file.
   That's because anchors are used to reduce the verbosity of the YAML file, but they are resolved by the loader.
 
   * `yaml.org <https://yaml.org>`__
@@ -143,10 +145,10 @@ The fields and types supported in the configuration file are defined through dat
 However, some details about the syntax can be non-obvious.
 See the clarifications below:
 
-.. _Development:configuration:defaults:
+.. _Development:configuration:images:
 
-Defaults
---------
+Imagess
+-------
 
 If the following conditions are met, images need not to be explicitly listed in the configuration file:
 

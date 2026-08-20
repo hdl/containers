@@ -28,7 +28,7 @@ from pathlib import Path
 import dockerfile
 from graphviz import Digraph
 
-from pyHDLC import CONFIG, _generateJobList, _NormaliseBuildParams
+from pyHDLC import JOBS, _generateJobList, _NormaliseBuildParams
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -316,14 +316,13 @@ def GetImagesFromJobs(collection: str = "debian/bullseye", architecture: str = "
     Last, flatten the lists of images into a single list.
     A check searches for duplicates, to ensure that each image is generated in a single job.
     """
-    cjobs = CONFIG.jobs
 
     images = [
         image.split("#")[0]
         for sublist in [
             job["imgs"].split(" ")
             for name in [
-                item for items in [cjobs.default, cjobs.pkgonly, cjobs.runonly, cjobs.custom] for item in items
+                item for items in [JOBS.default, JOBS.pkgonly, JOBS.runonly, JOBS.custom] for item in items
             ]
             for job in _generateJobList(name)
             if (job["os"] == collection) and (job["arch"] == architecture)

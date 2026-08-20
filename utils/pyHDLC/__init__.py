@@ -31,6 +31,24 @@ from yamldataclassconfig.config import YamlDataClassConfig
 from pyHDLC.run import _exec, GHASummary
 
 
+ROOT = Path(__file__).resolve().parent
+
+
+class Defaults():
+    """
+    Default global parameters.
+    """
+
+    #: Default registry prefix.
+    registry: str = "ghcr.io/hdl"
+    #: Default collection.
+    collection: str = "debian/bullseye"
+    #: Default architecture.
+    architecture: str = "amd64"
+
+DEFAULTS: Defaults = Defaults()
+
+
 @dataclass
 class ConfigDefaultImageItem(YamlDataClassConfig):
     """
@@ -46,19 +64,17 @@ class ConfigDefaultImageItem(YamlDataClassConfig):
 
 
 @dataclass
-class ConfigDefaults(YamlDataClassConfig):
+class ConfigImages(YamlDataClassConfig):
     """
-    Default global parameters and images which need explicitly overriding build argument defaults.
-    See :ref:`Development:configuration:defaults`.
+    Image building argument overrides.
+    See :ref:`Development:configuration:images`.
     """
 
-    #: Default registry prefix.
-    registry: str = "ghcr.io/hdl"
-    #: Default collection.
-    collection: str = "debian/bullseye"
-    #: Default architecture.
-    architecture: str = "amd64"
-    #: Allows override default image build arguments.
+    #: Version of the configuration file syntax.
+    HDLCI: int = None
+    #: Placeholder for anchors used to reduce verbosity. This field is resolved by the loader and ignored by the analyzer.
+    _anchors: Dict = field(default_factory=dict)
+    #: Images which need explicitly overriding build argument defaults.
     images: Dict[str, ConfigDefaultImageItem] = None
 
 
@@ -100,6 +116,10 @@ class ConfigJobs(YamlDataClassConfig):
     See :ref:`Development:configuration:jobs`.
     """
 
+    #: Version of the configuration file syntax.
+    HDLCJ: int = None
+    #: Placeholder for anchors used to reduce verbosity. This field is resolved by the loader and ignored by the analyzer.
+    _anchors: Dict = field(default_factory=dict)
     #: Build two images for each collection and architecture, a regular image and a package image.
     default: ConfigJobsDict = field(default_factory=dict)
     #: Build a package image for each collection and architecture.
@@ -110,33 +130,20 @@ class ConfigJobs(YamlDataClassConfig):
     custom: Dict[str, ConfigJobsCustomItem] = field(default_factory=dict)
 
 
-@dataclass
-class Config(YamlDataClassConfig):
-    """
-    Configuration containing global defaults, image building argument overrides and job/task list declarations.
-    See :ref:`Development:configuration`.
-    """
+IMAGES: ConfigImages = ConfigImages()
+CIPATH = ROOT / "images.yml"
+if CIPATH.exists():
+    IMAGES.load(CIPATH)
+    print(f"Read images configuration file {CIPATH!s} (HDLC v{IMAGES.HDLCI})")
 
-    #: Version of the configuration file syntax.
-    HDLC: int = None
-    #: Placeholder for anchors used to reduce verbosity. This field is resolved by the loader and ignored by the analyzer.
-    anchors: Dict = field(default_factory=dict)
-    #: Default global parameters and images which need explicitly overriding build argument defaults.
-    defaults: ConfigDefaults = field(default_factory=ConfigDefaults)
-    #: List of jobs/tasks to be used in CI to dynamically spawn jobs.
-    jobs: ConfigJobs = field(default_factory=ConfigJobs)
-
-
-CONFIG: Config = Config()
-CPATH = Path(__file__).resolve().parent / "config.yml"
-if CPATH.exists():
-    CONFIG.load(CPATH)
-    print(f"Read configuration file {CPATH!s} (HDLC v{CONFIG.HDLC})")
+JOBS: ConfigJobs = ConfigJobs()
+CJPATH = ROOT / "jobs.yml"
+if CJPATH.exists():
+    JOBS.load(CJPATH)
+    print(f"Read jobs configuration file {CJPATH!s} (HDLC v{JOBS.HDLCJ})")
 
 
 def _generateJobList(name: str) -> List[Dict[str, str]]:
-
-    cjobs = CONFIG.jobs
 
     def _combine(systems: ConfigJobsDict, images: List[str]) -> List[Dict[str, str]]:
         return [
@@ -146,21 +153,19 @@ def _generateJobList(name: str) -> List[Dict[str, str]]:
             for architecture in architectures
         ]
 
-    if name in cjobs.default:
+    if name in JOBS.default:
         print(f"[Jobs] '{name}' is Default")
-        return _combine(cjobs.default[name], [[f"pkg/{name}", name]])
+        return _combine(JOBS.default[name], [[f"pkg/{name}", name]])
 
-    if name in cjobs.pkgonly:
+    if name in JOBS.pkgonly:
         print(f"[Jobs] '{name}' is PkgOnly")
-        return _combine(cjobs.pkgonly[name], [[f"pkg/{name}"]])
-        return
+        return _combine(JOBS.pkgonly[name], [[f"pkg/{name}"]])
 
-    if name in cjobs.runonly:
+    if name in JOBS.runonly:
         print(f"[Jobs] '{name}' is RunOnly")
-        return _combine(cjobs.runonly[name], [[name]])
-        return
+        return _combine(JOBS.runonly[name], [[name]])
 
-    if name in cjobs.custom:
+    if name in JOBS.custom:
         print(f"[Jobs] '{name}' is Custom")
 
         def _customItem(custom):
@@ -227,7 +232,7 @@ def _generateJobList(name: str) -> List[Dict[str, str]]:
 
             raise Exception("Not implemented yet!")
 
-        return _customItem(cjobs.custom[name])
+        return _customItem(JOBS.custom[name])
 
     raise Exception(f"Unknown job {name}")
 
@@ -272,16 +277,16 @@ def GenerateJobList(
 
 
 def _NormalisePlatform(
-    architecture: str = CONFIG.defaults.architecture,
+    architecture: str = DEFAULTS.architecture,
 ) -> str:
     return f"linux/{architecture if 'arm' not in architecture else 'arm64'}"
 
 
 def PullImage(
     image: Union[str, List[str]],
-    registry: str = CONFIG.defaults.registry,
-    collection: str = CONFIG.defaults.collection,
-    architecture: str = CONFIG.defaults.architecture,
+    registry: str = DEFAULTS.registry,
+    collection: str = DEFAULTS.collection,
+    architecture: str = DEFAULTS.architecture,
     dry: bool = False,
 ) -> None:
     """
@@ -339,7 +344,7 @@ def _NormaliseBuildParams(
     if default:
 
         def get_default_params():
-            cfgi = CONFIG.defaults.images
+            cfgi = IMAGES.images
             if cfgi is not None:
                 isPkgDefault = isPkg and (imageNameWithoutDirSuffix not in cfgi)
                 cfg = cfgi.get(imageNameWithoutPrefixOrSuffix if isPkgDefault else imageNameWithoutDirSuffix)
@@ -364,9 +369,9 @@ def _NormaliseBuildParams(
 
 def BuildImage(
     image: Union[str, List[str]],
-    registry: str = CONFIG.defaults.registry,
-    collection: str = CONFIG.defaults.collection,
-    architecture: str = CONFIG.defaults.architecture,
+    registry: str = DEFAULTS.registry,
+    collection: str = DEFAULTS.collection,
+    architecture: str = DEFAULTS.architecture,
     dockerfile: str = None,
     target: str = None,
     argimg: str = None,
@@ -490,9 +495,9 @@ def BuildImage(
 
 def TestImage(
     image: Union[str, List[str]],
-    registry: str = CONFIG.defaults.registry,
-    collection: str = CONFIG.defaults.collection,
-    architecture: str = CONFIG.defaults.architecture,
+    registry: str = DEFAULTS.registry,
+    collection: str = DEFAULTS.collection,
+    architecture: str = DEFAULTS.architecture,
     dry: bool = False,
 ) -> None:
     """
@@ -542,7 +547,7 @@ def TestImage(
                     "--build-arg", "BUILDKIT_INLINE_CACHE=1",
                     "--build-arg", f"IMAGE={imagePrefix!s}/pkg/{pimg!s}",
                     "--build-arg", f"PACKAGE={pdir!s}",
-                    "-f", str(Path(__file__).resolve().parent / "testpkg.dockerfile"),
+                    "-f", str(ROOT / "testpkg.dockerfile"),
                     ".",
                 ],
                 dry=dry,
@@ -597,9 +602,9 @@ def TestImage(
 
 def PushImage(
     image: Union[str, List[str]],
-    registry: str = CONFIG.defaults.registry,
-    collection: str = CONFIG.defaults.collection,
-    architecture: str = CONFIG.defaults.architecture,
+    registry: str = DEFAULTS.registry,
+    collection: str = DEFAULTS.collection,
+    architecture: str = DEFAULTS.architecture,
     dry: bool = False,
     mirror: Union[str, List[str]] = None,
 ) -> None:
