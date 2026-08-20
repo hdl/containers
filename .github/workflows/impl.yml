@@ -142,7 +142,7 @@ jobs:
 
     - name: 🛰️ Release
       if: github.event_name != 'pull_request'
-      uses: pyTooling/Actions/with-post-step@r0
+      uses: pyTooling/Actions/with-post-step@r7
       with:
         main: |
           echo '${{ github.token }}' | docker login ghcr.io -u gha --password-stdin
