@@ -74,3 +74,11 @@ jobs:
       key: ${{ matrix.key }}
       skip-release: ${{ needs.flow-matrix.outputs.skip-release }}
     secrets: inherit
+
+  results:
+    if: '!cancelled()'
+    needs: flows
+    runs-on: ubuntu-latest
+    name: flows-results
+    steps:
+    - run: echo "Results!"

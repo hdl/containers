@@ -104,3 +104,14 @@ jobs:
         architecture: ${{ matrix.arch }}
         collection: ${{ matrix.os }}
         images: ${{ matrix.imgs }}
+
+  results:
+    needs: [ matrix, jobs ]
+    if: >-
+      !cancelled() &&
+      github.event_name == 'workflow_dispatch' &&
+      needs.matrix.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    name: ${{ inputs.key }}-results
+    steps:
+    - run: echo 'Results!'
