@@ -20,7 +20,6 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from typing import List, Optional
-from pathlib import Path
 from sys import executable, platform, stdout as sys_stdout, stderr as sys_stderr
 from os import environ
 from subprocess import check_call, STDOUT
@@ -29,16 +28,13 @@ from shutil import which
 
 isGHA: bool = "GITHUB_ACTIONS" in environ
 
-isWin: bool = platform == "win32"
-
-shell: List[str] = [which("bash")] if platform == "win32" else []
-
 
 def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] = None):
     isGroup = isGHA and collapse is not None
 
     if isGroup:
         print(f"::group::{collapse}")
+        GHASummary([f"- {collapse}"])
         sys_stdout.flush()
         sys_stderr.flush()
 
@@ -56,6 +52,7 @@ def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] 
 
 
 def _sh(args: List[str], dry: Optional[bool] = False):
+    shell: List[str] = [which("bash")] if platform == "win32" else []
     _exec(shell + args, dry=dry)
 
 
@@ -67,6 +64,5 @@ def GHASummary(content: List[str]):
     if not isGHA:
         print("· Printing GHA summary skipped")
         return
-    with Path(environ["GITHUB_STEP_SUMMARY"]).open("a") as wfptr:
-        for line in content:
-            wfptr.write(f"{line}\n")
+    with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as ghs:
+        ghs.write(f"{'\n'.join(content)}\n")
