@@ -29,10 +29,6 @@ from shutil import which
 
 isGHA: bool = "GITHUB_ACTIONS" in environ
 
-isWin: bool = platform == "win32"
-
-shell: List[str] = [which("bash")] if platform == "win32" else []
-
 
 def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] = None):
     isGroup = isGHA and collapse is not None
@@ -56,6 +52,7 @@ def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] 
 
 
 def _sh(args: List[str], dry: Optional[bool] = False):
+    shell: List[str] = [which("bash")] if platform == "win32" else []
     _exec(shell + args, dry=dry)
 
 
@@ -67,6 +64,6 @@ def GHASummary(content: List[str]):
     if not isGHA:
         print("· Printing GHA summary skipped")
         return
-    with Path(environ["GITHUB_STEP_SUMMARY"]).open("a") as wfptr:
+    with Path(environ["GITHUB_STEP_SUMMARY"]).open("a") as ghs:
         for line in content:
-            wfptr.write(f"{line}\n")
+            ghs.write(f"{line}\n")
