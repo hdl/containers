@@ -36,7 +36,7 @@ inputs:
   pull:
     description: 'List of images from the same collection and architecture to be pulled before the build.'
     required: false
-    default: None
+    default: false
   skip-test:
     description: 'Skip testing the built images.'
     required: false
@@ -54,6 +54,9 @@ inputs:
   docker_pass:
     description: 'Docker Container Registry password.'
     required: false
+  key:
+    description: 'Optional key to tell artifacts apart.'
+    required: false
 
 runs:
   using: 'composite'
@@ -66,30 +69,67 @@ runs:
 
   - name: 🛠️ Setup
     shell: bash
-    run: ./utils/setup.sh ${{ inputs.architecture }}
+    run: |
+      ./utils/setup.sh ${{ inputs.architecture }}
+      touch JOB_SUMMARY.md
 
   - name: 🚧 [Pull,] Build [and Test]
+    id: build
     shell: python
     run: |
       from subprocess import check_call
       cargs = ['-a', '${{ inputs.architecture }}', '-c', '${{ inputs.collection }}']
-      if "${{ inputs.pull }}".lower() not in ["none","false","no"]:
+      if '${{ inputs.pull }}'.lower() not in ['none','false','no']:
           check_call(['pyHDLC', 'pull'] + cargs + '${{ inputs.pull }}'.split(' '))
-      runtest = [] if "${{ inputs.skip-test }}".lower() in ["true","skip","yes"] else ['-q']
+      runtest = [] if '${{ inputs.skip-test }}'.lower() in ['true','skip','yes'] else ['-q']
       check_call(['pyHDLC', 'build'] + runtest + cargs + ['-d'] + '${{ inputs.images }}'.split(' '))
+      check_call('cat "$GITHUB_STEP_SUMMARY" >> JOB_SUMMARY.md &&> "$GITHUB_STEP_SUMMARY"', shell=True)
 
   - name: 🛰️ Release
+    id: release
     uses: pyTooling/Actions/with-post-step@r7
     with:
       main: |
-        # Release
         # NOTE: the content of the shell if statement is executed if the command returns 0, thus,
         # the logic of the evaluations in Python is negated.
-        if python3 -c 'exit("${{ inputs.skip-release }}".lower() not in ["true","skip","yes"])'; then
-            echo "Skipping release..."
-            exit 0
+        if python3 -c 'exit('${{ inputs.skip-release }}'.lower() not in ['true','skip','yes'])'; then
+          echo 'Skipping release...'
+          exit 0
         fi
         echo '${{ inputs.gh_token }}' | docker login ghcr.io -u gha --password-stdin
         echo '${{ inputs.docker_pass }}' | docker login docker.io -u '${{ inputs.docker_user }}' --password-stdin
         dockerRelease ${{ inputs.architecture }} ${{ inputs.collection }} ${{ inputs.images }}
+        cat "$GITHUB_STEP_SUMMARY" >> JOB_SUMMARY.md &&> "$GITHUB_STEP_SUMMARY"
       post: for registry in ghcr.io docker.io; do docker logout "$registry"; done
+
+  - name: 💾 Artifact preparation
+    if: >-
+      !cancelled()
+    shell: bash
+    run: |
+      mkdir summary
+      SUMMARY=summary/$(basename "$GITHUB_STEP_SUMMARY")
+      echo "$SUMMARY"
+      mv JOB_SUMMARY.md "$SUMMARY".md
+      python -<<'EOF' | tee "$SUMMARY".json
+      from json import dumps as json_dumps
+      pull = '${{ inputs.pull }}'.split(' ')
+      if pull[0].lower() in ['none','false','no']:
+        pull = []
+      print(json_dumps({
+        'status': '${{ steps.build.outcome }}' if '${{ steps.release.outcome }}' != 'success' else 'success',
+        'architecture': '${{ inputs.architecture }}',
+        'collection': '${{ inputs.collection }}',
+        'images': '${{ inputs.images }}'.split(' '),
+        'pull': pull
+      }))
+      EOF
+
+  - name: '📤 Upload artifact: Summary'
+    if: >-
+      !cancelled()
+    uses: actions/upload-artifact@v7
+    with:
+      name: Summary-${{ inputs.key }}-${{ hashFiles('summary') }}
+      path: summary
+      retention-days: 1

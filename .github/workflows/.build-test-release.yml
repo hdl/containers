@@ -103,3 +103,31 @@ jobs:
         architecture: ${{ matrix.arch }}
         collection: ${{ matrix.os }}
         images: ${{ matrix.imgs }}
+        key: ${{ inputs.key }}
+
+  results:
+    needs: [ matrix, jobs ]
+    if: >-
+      !cancelled() &&
+      needs.matrix.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    name: ${{ inputs.key }}-results
+    steps:
+    - name: '📥 Download artifact(s): Summary'
+      uses: actions/download-artifact@v8
+      with:
+        pattern: Summary-${{ inputs.key }}-*
+        merge-multiple: true
+    - run: |
+        echo 'Summary!'
+        ls -lah .
+        for item in *.json; do
+          echo "- $item"
+          cat "$item"
+          echo ""
+        done
+        printf '<details>\n\n' >> "$GITHUB_STEP_SUMMARY"
+        for item in *.md; do
+          cat "$item" >> "$GITHUB_STEP_SUMMARY"
+        done
+        printf '\n\n</details>' >> "$GITHUB_STEP_SUMMARY"
