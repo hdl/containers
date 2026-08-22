@@ -103,3 +103,19 @@ jobs:
         architecture: ${{ matrix.arch }}
         collection: ${{ matrix.os }}
         images: ${{ matrix.imgs }}
+        key: ${{ inputs.key }}
+
+  results:
+    needs: [ matrix, jobs ]
+    if: >-
+      !cancelled() &&
+      needs.matrix.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    name: ${{ inputs.key }}-results
+    steps:
+    - name: 📋 Workflow summary
+      uses: $/.github/workflow-summary
+      with:
+        pattern: Summary_${{ inputs.key }}_*
+      env:
+        GH_OUTPUT_MATRIX: ${{ needs.matrix.outputs.matrix }}

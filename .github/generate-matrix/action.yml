@@ -35,10 +35,43 @@ runs:
   steps:
 
   - name: 🛠️ Setup
+    id: setup
     shell: bash
-    run: "${{ github.action_path }}/../../utils/setup.sh"
+    run: |
+      touch JOB_SUMMARY.md
+      "${{ github.action_path }}/../../utils/setup.sh"
 
   - name: 🔧 Generate matrix
     id: generate
     shell: bash
-    run: pyHDLC jobs ${{ inputs.key }}
+    run: |
+      pyHDLC jobs ${{ inputs.key }}
+      cat "$GITHUB_STEP_SUMMARY" >> JOB_SUMMARY.md &&> "$GITHUB_STEP_SUMMARY"
+
+  - name: 💾 Prepare artifact
+    if: >-
+      !cancelled()
+    shell: bash
+    run: |
+      mkdir summary
+      SUMMARY=summary/$(basename "$GITHUB_STEP_SUMMARY")
+      echo "$SUMMARY"
+      mv JOB_SUMMARY.md "$SUMMARY".md
+
+      python -<<'EOF' | tee "$SUMMARY".json
+      from json import dumps as json_dumps
+      gout = '${{ steps.generate.outcome }}'
+      print(json_dumps({
+        'status': '${{ steps.setup.outcome }}' if gout != 'skipped' else gout,
+        'key': '${{ inputs.key }}',
+      }))
+      EOF
+
+  - name: '📤 Upload artifact: Summary'
+    if: >-
+      !cancelled()
+    uses: actions/upload-artifact@v7
+    with:
+      name: Summary_${{ inputs.key }}_${{ hashFiles('summary') }}
+      path: summary
+      retention-days: 1
