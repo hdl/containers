@@ -25,49 +25,59 @@ from pathlib import Path
 from shutil import copyfileobj
 from json import load as json_load, loads as json_loads
 
+
+def _summary(job, isfirst):
+  _status = job['status']
+  _pull = job['pull']
+  return [
+    f"<details>\n\n<summary>{_status} [{job['run_attempt']}]" +
+    (isfirst * f" {job['architecture']}/{job['collection']} | {job['images']}")
+  ] \
+  + (len(_pull)>0) * [
+    "",
+    "- Pull:",
+    *[f"  - {img}" for img in _pull],
+    ""
+  ] \
+  + ["</summary>\n"] \
+  + (_status != 'success') * ["\nSee partial job summary."]
+
+
 metadata = {}
-for item in Path('.').glob('*.json'):
-  with open(item, 'r', encoding='utf-8') as ptr:
+for job in Path('.').glob('*.json'):
+  with open(job, 'r', encoding='utf-8') as ptr:
     content = json_load(ptr)
     if 'key' not in content:
-      metadata[item.stem] = content
+      metadata[job.stem] = content
 
 for job in json_loads(environ['GH_OUTPUT_MATRIX']):
-
-  for idx, item in metadata.items():
-
-    _status = item['status']
-    _architecture = item['architecture']
-    _collection = item['collection']
-    _images = ' '.join(item['images'])
-    _pull = item['pull']
-
+  attempts = [
+    {
+      'idx': idx,
+      **item,
+      'images': ' '.join(item['images'])
+    } for idx, item in metadata.items()
     if (
-      job['arch'] == _architecture and
-      job['os'] == _collection and
-      job['imgs'] == _images
-    ):
+      job['arch'] == item['architecture'] and
+      job['os'] == item['collection'] and
+      job['imgs'] == ' '.join(item['images'])
+    )
+  ]
 
-      summary = [f"{_status} {_architecture}/{_collection} | {_images}"]
-      if _pull:
-        summary.extend([
-          "",
-          "- Pull:",
-          *[f"  - {img}" for img in _pull],
-          ""
-        ])
-
-      with open(f'{idx}.md', 'r') as rptr, open(environ['GITHUB_STEP_SUMMARY'], 'a') as aptr:
-        aptr.write(f"<details>\n\n<summary>\n{'\n'.join(summary)}\n</summary>\n\n")
-        if _status != 'success':
-          aptr.write("See partial job summary.\n")
-        copyfileobj(rptr, aptr)
-        aptr.write('\n</details>\n\n')
-
-      del metadata[idx]
-
-      break
-
-  else:
-
+  if not attempts:
     raise Exception(f"Summary metadata of job <{job}> not found!")
+
+  for idx in [dic['idx'] for dic in attempts]:
+    del metadata[idx]
+
+  isfirst = True
+  with open(environ['GITHUB_STEP_SUMMARY'], 'a') as ghs:
+    for job in sorted(attempts, key=lambda dic: dic['run_attempt'], reverse=True):
+      ghs.write(f"{'\n'.join(_summary(job, isfirst))}\n")
+      with open(f"{job['idx']}.md", 'r') as rptr:
+        copyfileobj(rptr, ghs)
+      if not isfirst:
+        ghs.write('\n</details>\n')
+      else:
+        isfirst = False
+    ghs.write('\n</details>\n')
