@@ -24,6 +24,7 @@ from os import environ
 from pathlib import Path
 from string import Template
 from re import search as re_search, IGNORECASE as re_IGNORECASE
+from json import dumps as json_dumps
 
 from dataclasses import dataclass, field
 from yamldataclassconfig.config import YamlDataClassConfig
@@ -240,9 +241,10 @@ def _generateJobList(name: str) -> List[Dict[str, str]]:
 def _jobSummary(jobs: List[Dict[str, str]]) -> None:
     content = []
     for job in jobs:
-        content.append(f"- {job['arch']} | {job['os']}")
-        imgs = job["imgs"]
-        content.extend([f"  - {img}" for img in imgs.split(" ")] if " " in imgs else [f"  - {imgs}"])
+        content.extend([
+            f"- {job['arch']} | {job['os']}",
+            *[f"  - {img}" for img in job["imgs"].split(" ")]
+        ])
     return content
 
 
@@ -272,7 +274,7 @@ def GenerateJobList(
         return
     if fmt.lower() in ["gha"]:
         with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
-            gho.write(f"matrix={jobs!s}\n")
+            gho.write(f"matrix={json_dumps(jobs)}\n")
         GHASummary(summary)
 
 
