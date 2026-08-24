@@ -53,30 +53,45 @@ match evname:
 if not (keys_trigger or keys_call):
   raise Exception(f"Both lists of keys empty <dispatch:{keys_trigger}> <call:{keys_call}>!")
 
+if len(keys_trigger)+len(keys_call) != len(set([*keys_trigger, *keys_call])):
+  raise Exception(f"Key(s) requested for both dispatch and call <dispatch:{keys_trigger}> <call:{keys_call}>!")
+
 with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
   gho.write(
     f"matrix={[{'key': call} for call in keys_call]!s}\n"
     f"skip-release={skip_call}\n"
   )
 
-message = evname if evname in ["schedule", "workflow_dispatch"] else environ["GH_MESSAGE"]
-
-summary = [
-  f"- Event: {evname}",
-  f"- Dispatch (skip-release: {skip_dispatch}):"
-]
-
-for key in keys_trigger:
-  run = check_output([
-    "gh", "workflow", "run", ".build-test-release.yml",
-    "-r", environ["GITHUB_REF_NAME"],
+dispatch = []
+if keys_trigger:
+  message = f"message={environ['GITHUB_SHA'][0:8]} " + (
+    evname if evname in ['schedule', 'workflow_dispatch']
+    else environ['GH_MESSAGE'].split('\n')[0]
+  )
+  dispatch = [f'{key}=' + check_output([
+    "gh", "workflow", "run", ".build-test-release.yml", "-r", environ["GITHUB_REF_NAME"],
     "-f", f"key={key}",
     "-f", f"skip-release={str(skip_dispatch)}",
-    "-f", f"message={environ['GITHUB_SHA'][0:8]} {message.split('\n')[0]}"
-  ], encoding="utf-8")
-  summary.append(f"  - {key}: [{run.split('/')[-1]}]({run})")
+    "-f", message
+  ], encoding="utf-8").split('/')[-1].strip() for key in keys_trigger]
 
-summary.extend([f"- Call (skip-release: {skip_call}):", *[f'  - {call}' for call in keys_call]])
+watchurl = check_output([
+  "gh", "workflow", "run", ".watch.yml", "-r", environ['GITHUB_REF_NAME'],
+  "-f", f"ids={' '.join(['scheduler='+environ['GITHUB_RUN_ID'], *dispatch])}",
+  "-f", message
+], encoding="utf-8")
 
 with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as ghs:
-  ghs.write(f"{'\n'.join(summary)}\n")
+  ghs.write('\n'.join([
+    f"- Event: {evname}",
+    f"- Watch: [{watchurl.split('/')[-1]}]({watchurl})",
+    f"- Dispatch (skip-release: {skip_dispatch}):",
+    *[
+      (lambda key, idx : f"  - {key}: [{idx}](https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{idx})")
+      (*(lambda l : l.split('='))(item))
+      for item in dispatch
+    ],
+    f"- Call (skip-release: {skip_call}):",
+    *[f'  - {call}' for call in keys_call],
+    ""
+  ]))
