@@ -70,13 +70,14 @@ jobs:
       run: |
         from os import environ
         tsha = "${{ inputs.message }}".split(" ")[0]
-        csha = "${{ github.sha }}"[0:8]
-        if tsha and (csha != tsha):
-          with open(environ["GITHUB_STEP_SUMMARY"], 'a', encoding='utf-8') as ghs:
-            ghs.write(f"Trigger `{tsha}` and current `{csha}` SHA mismatch!")
-          with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
-            gho.write("skip=true\n")
-          exit(1)
+        if tsha != 'dispatched':
+          csha = "${{ github.sha }}"[0:8]
+          if tsha and (csha != tsha):
+            with open(environ["GITHUB_STEP_SUMMARY"], 'a', encoding='utf-8') as ghs:
+              ghs.write(f"Trigger `{tsha}` and current `{csha}` SHA mismatch!")
+            with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
+              gho.write("skip=true\n")
+            exit(1)
     - name: ⚙️ Generate matrix
       id: generate
       uses: $/.github/generate-matrix
