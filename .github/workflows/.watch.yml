@@ -34,15 +34,16 @@ on:
         default: "dispatched"
         type: string
 
+env:
+  GH_TOKEN: ${{ github.token }}
+  GH_REPO: ${{ github.repository }}
+
 jobs:
 
   watch:
     runs-on: ubuntu-latest
     steps:
-    - env:
-        GH_TOKEN: ${{ github.token }}
-        GH_REPO: ${{ github.repository }}
-      run: |
+    - run: |
         for ITEM in ${{ inputs.ids }}; do
           KEY="${ITEM%=*}"
           IDX="${ITEM#*=}"
@@ -51,10 +52,37 @@ jobs:
           echo "$IDX ($KEY) completed: $(gh run view "$IDX" --json conclusion --jq '.conclusion')"
         done
 
-# success
-# failure
-# cancelled
-# skipped
-# startup_failure
-# action_required
-# timed_out
+  timeout:
+    if: >-
+      always() &&
+      needs.watch.result == 'cancelled'
+    needs: watch
+    runs-on: ubuntu-latest
+    steps:
+    - name: ⏰ Check elapsed time and redispatch
+      env:
+        GH_MESSAGE: ${{ inputs.message }}
+      run: |
+        WATCH_JOB=$(gh run view ${{ github.run_id}} --json jobs \
+          --jq '.jobs | map(select(.name=="watch") | pick(.startedAt, .completedAt, .databaseId)) | first') \
+          python -<<'EOF'
+        from os import environ
+        from subprocess import check_output
+        from json import loads as json_loads
+        from datetime import datetime as dt
+        watch = json_loads(environ['WATCH_JOB'])
+        elapsed = (
+          dt.fromisoformat(watch['completedAt']) - dt.fromisoformat(watch['startedAt'])
+        ).total_seconds()
+        print(f'{int(elapsed/60)}m {int(elapsed%60)}s')
+        if elapsed>21500:
+          run = check_output([
+            'gh', 'workflow', 'run', '.watch.yml',
+            '-r', environ['GITHUB_REF_NAME'],
+            '-f', 'ids=${{ inputs.ids }}',
+            '-f', f"message={environ['GH_MESSAGE']}",
+          ], encoding='utf-8')
+          run_id = run.split('/')[-1]
+          with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as ghs:
+            ghs.write(f"Timeout! New watch dispatched: [{run_id}]({run})")
+        EOF
