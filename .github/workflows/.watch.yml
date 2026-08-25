@@ -40,6 +40,17 @@ env:
 
 jobs:
 
+  list:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 📋 List of run IDs to watch
+      run: |
+        for ITEM in ${{ inputs.ids }}; do
+          KEY="${ITEM%=*}"
+          IDX="${ITEM#*=}"
+          echo "  - $KEY: [$IDX](https://github.com/${{ github.repository }}/actions/runs/$IDX)" >> "$GITHUB_STEP_SUMMARY"
+        done
+
   watch:
     runs-on: ubuntu-latest
     steps:
