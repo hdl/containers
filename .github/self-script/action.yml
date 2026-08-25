@@ -25,9 +25,14 @@ inputs:
   scriptfile:
     description: 'Location of the script relative to `.github`.'
     required: true
+outputs:
+  cout:
+    description: 'Combined outputs as stringified JSON.'
+    value: ${{ steps.run.outputs.cout }}
 
 runs:
   using: 'composite'
   steps:
-  - shell: bash
+  - id: run
+    shell: bash
     run: ${{ github.action_path }}/../${{ inputs.scriptfile }}
