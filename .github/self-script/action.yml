@@ -18,24 +18,16 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: '[HDLC] Workflow summary'
-description: 'Process summary artifacts of the jobs in the workflow.'
+name: '[HDLC] Self-Repository Script Action'
+description: 'Execute script using self-repository syntax (without explicit actions/checkout).'
 
 inputs:
-  pattern:
-    description: 'Pattern to filter the artifacts.'
+  scriptfile:
+    description: 'Location of the script relative to `.github`.'
     required: true
 
 runs:
   using: 'composite'
   steps:
-
-  - name: '📥 Download artifact(s): Summary'
-    uses: actions/download-artifact@v8
-    with:
-      pattern: ${{ inputs.pattern }}
-      merge-multiple: true
-
-  - name: 📑 Process artifacts
-    shell: bash
-    run: ${{ github.action_path }}/summary.py
+  - shell: bash
+    run: ${{ github.action_path }}/../${{ inputs.scriptfile }}

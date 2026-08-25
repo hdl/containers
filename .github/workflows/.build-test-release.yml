@@ -114,9 +114,14 @@ jobs:
     runs-on: ubuntu-latest
     name: ${{ inputs.key }}-results
     steps:
-    - name: 📋 Workflow summary
-      uses: $/.github/workflow-summary
+    - name: '📥 Download artifact(s): Summary'
+      uses: actions/download-artifact@v8
       with:
         pattern: Summary_${{ inputs.key }}_*
+        merge-multiple: true
+    - name: 📑 Process artifacts
+      uses: $/.github/self-script
+      with:
+        scriptfile: summary.py
       env:
         GH_OUTPUT_MATRIX: ${{ needs.matrix.outputs.matrix }}
