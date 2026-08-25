@@ -40,6 +40,7 @@ for note in json_loads(check_output(
       'gh', 'workflow', 'run', '.watch.yml',
       '-r', environ['GITHUB_REF_NAME'],
       '-f', f"ids={environ['GH_INPUT_IDS']}",
+      '-f', f"rerun={environ['GH_INPUT_RERUN']}",
       '-f', f"message={environ['GH_INPUT_MESSAGE']}",
     ], encoding='utf-8')
     run_id = run.split('/')[-1]

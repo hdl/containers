@@ -35,6 +35,11 @@ on:
         description: 'Space-separated list of keys to call workflows.'
         required: false
         type: string
+      rerun:
+        description: 'Maximum number of attempts to run (failing) jobs.'
+        required: false
+        default: 3
+        type: string
       skip-release:
         description: 'Skip pushing and mirroring to container registries.'
         required: false
@@ -58,6 +63,7 @@ jobs:
         GH_REPO: ${{ github.repository }}
         GH_INPUT_KEYS_TRIGGER: ${{ inputs.keys-trigger }}
         GH_INPUT_KEYS_CALL: ${{ inputs.keys-call }}
+        GH_INPUT_RERUN: ${{ inputs.rerun }}
         GH_INPUT_SKIP-RELEASE: ${{ inputs.skip-release }}
         GH_MESSAGE: ${{ github.event.head_commit.message }}
         HDLC_PUSH_TRIGGER: >-

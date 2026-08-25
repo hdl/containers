@@ -79,6 +79,7 @@ if keys_trigger:
 watchurl = check_output([
   "gh", "workflow", "run", ".watch.yml", "-r", environ['GITHUB_REF_NAME'],
   "-f", f"ids={' '.join(['scheduler='+environ['GITHUB_RUN_ID'], *dispatch])}",
+  "-f", f"rerun={environ['GH_INPUT_RERUN']}",
   "-f", message
 ], encoding="utf-8")
 
