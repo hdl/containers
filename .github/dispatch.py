@@ -21,6 +21,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from os import environ
+from json import dumps as json_dumps
 from subprocess import check_output
 
 evname = environ["GITHUB_EVENT_NAME"]
@@ -57,10 +58,10 @@ if len(keys_trigger)+len(keys_call) != len(set([*keys_trigger, *keys_call])):
   raise Exception(f"Key(s) requested for both dispatch and call <dispatch:{keys_trigger}> <call:{keys_call}>!")
 
 with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
-  gho.write(
-    f"matrix={[{'key': call} for call in keys_call]!s}\n"
-    f"skip-release={skip_call}\n"
-  )
+  gho.write("cout=" + json_dumps({
+    "matrix": [{'key': call} for call in keys_call],
+    "skip-release": skip_call
+  }))
 
 dispatch = []
 if keys_trigger:

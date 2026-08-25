@@ -46,15 +46,16 @@ jobs:
   dispatch:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.dispatch.outputs.matrix }}
-      skip-release: ${{ steps.dispatch.outputs.skip-release }}
+      cout: ${{ steps.dispatch.outputs.cout }}
     steps:
-    - uses: actions/checkout@v7
     - name: 🔔 Dispatch and generate call matrix
       id: dispatch
-      run: ./.github/dispatch.py
+      uses: $/.github/self-script
+      with:
+        scriptfile: dispatch.py
       env:
         GH_TOKEN: ${{ github.token }}
+        GH_REPO: ${{ github.repository }}
         GH_INPUT_KEYS_TRIGGER: ${{ inputs.keys-trigger }}
         GH_INPUT_KEYS_CALL: ${{ inputs.keys-call }}
         GH_INPUT_SKIP-RELEASE: ${{ inputs.skip-release }}
@@ -75,10 +76,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ fromJson(needs.dispatch.outputs.matrix) }}
+        include: ${{ fromJson(needs.dispatch.outputs.cout).matrix }}
     name: ${{ matrix.key }}
     uses: $/.github/workflows/.build-test-release.yml
     with:
       key: ${{ matrix.key }}
-      skip-release: ${{ needs.dispatch.outputs.skip-release }}
+      skip-release: ${{ fromJson(needs.dispatch.outputs.cout).skip-release }}
     secrets: inherit
