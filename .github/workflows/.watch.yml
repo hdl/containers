@@ -56,13 +56,21 @@ jobs:
     steps:
     - name: 👀 Watch
       run: |
-        for ITEM in ${{ inputs.ids }}; do
-          KEY="${ITEM%=*}"
-          IDX="${ITEM#*=}"
-          echo "Watching $IDX ($KEY)..."
-          gh run watch "$IDX" -i 10 > /dev/null 2>&1
-          echo "$IDX ($KEY) completed: $(gh run view "$IDX" --json conclusion --jq '.conclusion')"
-        done
+        function watch() {
+          local IDX="${1#*=}"
+
+          echo "Watching $1..."
+          gh run watch "$IDX" -i 10 > /dev/null
+          echo "Completed $1"
+
+          local VIEW=$(gh run view "$IDX" --json attempt,conclusion)
+          echo "$1: $VIEW"
+          local ATTEMPT=$(jq -r '.attempt' <<<$VIEW)
+          echo "- $1: $(jq -r '.conclusion' <<<$VIEW) [$ATTEMPT]" >> conclusion.md
+        }
+        for ITEM in ${{ inputs.ids }}; do watch "$ITEM" & done
+        wait
+        cat conclusion.md | tee "$GITHUB_STEP_SUMMARY"
 
   timeout:
     if: >-
