@@ -60,29 +60,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: ⏰ Check annotations and redispatch
+      uses: $/.github/self-script
+      with:
+        scriptfile: timeout.py
       env:
-        GH_MESSAGE: ${{ inputs.message }}
-      run: |
-        WATCH_DBID=$(gh run view ${{ github.run_id}} --json jobs --jq '.jobs[] | select(.name=="watch") | .databaseId') \
-        python -<<'EOF'
-        from os import environ
-        from subprocess import check_output
-        from json import loads as json_loads
-        for note in json_loads(check_output([
-          'gh', 'api', 'repos/{owner}/{repo}/check-runs/'f"{environ['WATCH_DBID']}/annotations"
-        ])):
-          if (
-            note['annotation_level'] == 'failure' and
-            note['message'].startswith('The job has exceeded the maximum execution time of')
-          ):
-            run = check_output([
-              'gh', 'workflow', 'run', '.watch.yml',
-              '-r', environ['GITHUB_REF_NAME'],
-              '-f', 'ids=${{ inputs.ids }}',
-              '-f', f"message={environ['GH_MESSAGE']}",
-            ], encoding='utf-8')
-            run_id = run.split('/')[-1]
-            with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as ghs:
-              ghs.write(f"Timeout! New watch dispatched: [{run_id}]({run})")
-            break
-        EOF
+        GH_INPUT_IDS: ${{ inputs.ids }}
+        GH_INPUT_MESSAGE: ${{ inputs.message }}
