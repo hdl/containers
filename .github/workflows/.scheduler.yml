@@ -19,6 +19,14 @@
 # SPDX-License-Identifier: Apache-2.0
 
 name: .scheduler
+run-name: >-
+  🧱 ${{ case(
+    contains(fromJSON('["schedule", "workflow_dispatch"]'), github.event.name),
+      format('{0} {1}', github.event.name, github.sha),
+    github.event.name == 'pull_request',
+      format('#{0} {1}', github.event.pull_request.number, github.event.pull_request.title),
+    github.event.head_commit.message
+  )}}
 
 on:
   push:
@@ -65,7 +73,12 @@ jobs:
         GH_INPUT_KEYS_CALL: ${{ inputs.keys-call }}
         GH_INPUT_RERUN: ${{ inputs.rerun }}
         GH_INPUT_SKIP-RELEASE: ${{ inputs.skip-release }}
-        GH_MESSAGE: ${{ github.event.head_commit.message }}
+        GH_MESSAGE: >-
+          ${{
+            github.event.name == 'pull_request'
+            && format('#{0} {1}', github.event.pull_request.number, github.event.pull_request.title)
+            || github.event.head_commit.message
+          }}
         HDLC_PUSH_TRIGGER: >-
           nvc
         HDLC_PUSH_CALL: >-
