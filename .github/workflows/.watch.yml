@@ -19,7 +19,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 name: .watch
-run-name: '[watch] ${{ inputs.message }}'
+run-name: '👀 ${{ inputs.message }}'
 
 on:
   workflow_dispatch:
@@ -54,7 +54,8 @@ jobs:
   watch:
     runs-on: ubuntu-latest
     steps:
-    - run: |
+    - name: 👀 Watch
+      run: |
         for ITEM in ${{ inputs.ids }}; do
           KEY="${ITEM%=*}"
           IDX="${ITEM#*=}"
