@@ -42,6 +42,7 @@ on:
 env:
   GH_TOKEN: ${{ github.token }}
   GH_REPO: ${{ github.repository }}
+  GH_INPUT_IDS: ${{ inputs.ids }}
 
 jobs:
 
@@ -84,6 +85,12 @@ jobs:
         for ITEM in ${{ inputs.ids }}; do watch "$ITEM" & done
         wait
         cat conclusion.md | tee "$GITHUB_STEP_SUMMARY"
+    - name: 🐍 Install Python dependencies
+      run: pip3 install tabulate
+    - name: 📊 Collect and process results
+      uses: $/.github/self-script
+      with:
+        scriptfile: results.py
 
   timeout:
     if: >-
@@ -97,6 +104,5 @@ jobs:
       with:
         scriptfile: timeout.py
       env:
-        GH_INPUT_IDS: ${{ inputs.ids }}
         GH_INPUT_RERUN: ${{ inputs.rerun }}
         GH_INPUT_MESSAGE: ${{ inputs.message }}
