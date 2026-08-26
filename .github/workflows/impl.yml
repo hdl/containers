@@ -72,7 +72,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ fromJson(needs.matrix.outputs.impl-build) }}
+        include: ${{ fromJSON(needs.matrix.outputs.impl-build) }}
     name: impl-build ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
     - name: 📄 Build, test and release
@@ -153,7 +153,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ fromJson(needs.matrix.outputs.impl) }}
+        include: ${{ fromJSON(needs.matrix.outputs.impl) }}
     name: impl ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
     - name: 📄 Build, test and release

@@ -52,7 +52,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ fromJson(needs.matrix.outputs.matrix) }}
+        include: ${{ fromJSON(needs.matrix.outputs.matrix) }}
     name: ${{ matrix.arch }}/${{ matrix.os }} | ${{ matrix.imgs }}
     steps:
     - name: 📄 Build, test and release

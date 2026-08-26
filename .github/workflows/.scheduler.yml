@@ -82,10 +82,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ fromJson(needs.dispatch.outputs.cout).matrix }}
+        include: ${{ fromJSON(needs.dispatch.outputs.cout).matrix }}
     name: ${{ matrix.key }}
     uses: $/.github/workflows/.build-test-release.yml
     with:
       key: ${{ matrix.key }}
-      skip-release: ${{ fromJson(needs.dispatch.outputs.cout).skip-release }}
+      skip-release: ${{ fromJSON(needs.dispatch.outputs.cout).skip-release }}
     secrets: inherit
