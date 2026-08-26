@@ -58,15 +58,22 @@ jobs:
       run: |
         function watch() {
           local IDX="${1#*=}"
-
-          echo "Watching $1..."
-          gh run watch "$IDX" -i 10 > /dev/null
-          echo "Completed $1"
-
-          local VIEW=$(gh run view "$IDX" --json attempt,conclusion)
-          echo "$1: $VIEW"
-          local ATTEMPT=$(jq -r '.attempt' <<<$VIEW)
-          echo "- $1: $(jq -r '.conclusion' <<<$VIEW) [$ATTEMPT]" >> conclusion.md
+          local ATTEMPT=0
+          local CONCLUSION="failure"
+          while [ "$CONCLUSION" = "failure" ] && [ "$ATTEMPT" -lt 3 ]; do
+            if [ "$ATTEMPT" -gt 0 ]; then
+              echo "Rerun $1 after attempt $ATTEMPT"
+              gh run rerun "$IDX" --failed
+            fi
+            echo "Watching $1..."
+            gh run watch "$IDX" -i 10 > /dev/null
+            echo "Completed $1"
+            local VIEW=$(gh run view "$IDX" --json attempt,conclusion)
+            ATTEMPT=$(jq -r '.attempt' <<<$VIEW)
+            CONCLUSION=$(jq -r '.conclusion' <<<$VIEW)
+          done
+          local MDREF="${1%=*}: [$IDX](https://github.com/${{ github.repository }}/actions/runs/$IDX)"
+          echo "- $MDREF | $CONCLUSION [$ATTEMPT]" >> conclusion.md
         }
         for ITEM in ${{ inputs.ids }}; do watch "$ITEM" & done
         wait
