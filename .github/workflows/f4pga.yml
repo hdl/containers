@@ -38,7 +38,7 @@ jobs:
     secrets: inherit
 
   xc7-devices:
-    needs: [ xc7-toolchain ]
+    needs: xc7-toolchain
     uses: $/.github/workflows/.build-test-release.yml
     with:
       key: f4pga-xc7-devices
@@ -46,7 +46,7 @@ jobs:
     secrets: inherit
 
   xc7:
-    needs: [ xc7-devices ]
+    needs: xc7-devices
     uses: $/.github/workflows/.build-test-release.yml
     with:
       key: conda/f4pga/xc7

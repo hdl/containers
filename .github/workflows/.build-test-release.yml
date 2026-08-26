@@ -107,7 +107,9 @@ jobs:
         key: ${{ inputs.key }}
 
   results:
-    needs: [ matrix, jobs ]
+    needs:
+      - matrix
+      - jobs
     if: >-
       !cancelled() &&
       needs.matrix.outputs.skip != 'true'

@@ -93,7 +93,7 @@ jobs:
 
 
   impl-prjs:
-    needs: [ impl-build ]
+    needs: impl-build
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -148,7 +148,10 @@ jobs:
 
 
   impl:
-    needs: [ matrix, impl-build, impl-prjs ]
+    needs:
+      - matrix
+      - impl-build
+      - impl-prjs
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

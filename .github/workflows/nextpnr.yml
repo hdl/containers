@@ -44,7 +44,7 @@ jobs:
     secrets: inherit
 
   nextpnr-prjs:
-    needs: [ nextpnr-build ]
+    needs: nextpnr-build
     uses: $/.github/workflows/.build-test-release.yml
     with:
       key: nextpnr-prjs
@@ -52,7 +52,9 @@ jobs:
     secrets: inherit
 
   nextpnr:
-    needs: [ nextpnr-build, nextpnr-prjs ]
+    needs:
+      - nextpnr-build
+      - nextpnr-prjs
     uses: $/.github/workflows/.build-test-release.yml
     with:
       key: nextpnr
