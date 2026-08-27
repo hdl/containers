@@ -67,7 +67,7 @@ jobs:
     - name: 🗑️ Delete old workflow runs
       run: |
         gh api rate_limit
-        gh run list --created "<$(date -d '1 month ago' '+%Y-%m-%d')" -L 100 --json databaseId -q '.[].databaseId' \
+        gh run list --created "<$(date -d '2 days ago' '+%Y-%m-%d')" -L 500 --json databaseId -q '.[].databaseId' \
         | xargs -r -n1 -P4 gh run delete
     - name: 🔔 Dispatch and generate call matrix
       id: dispatch
