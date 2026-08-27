@@ -60,15 +60,21 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       cout: ${{ steps.dispatch.outputs.cout }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
     steps:
+    - name: 🗑️ Delete old workflow runs
+      run: |
+        gh api rate_limit
+        gh run list --created "<$(date -d '1 month ago' '+%Y-%m-%d')" -L 100 --json databaseId -q '.[].databaseId' \
+        | xargs -r -n1 -P4 gh run delete
     - name: 🔔 Dispatch and generate call matrix
       id: dispatch
       uses: $/.github/self-script
       with:
         scriptfile: dispatch.py
       env:
-        GH_TOKEN: ${{ github.token }}
-        GH_REPO: ${{ github.repository }}
         GH_INPUT_KEYS_TRIGGER: ${{ inputs.keys-trigger }}
         GH_INPUT_KEYS_CALL: ${{ inputs.keys-call }}
         GH_INPUT_RERUN: ${{ inputs.rerun }}
