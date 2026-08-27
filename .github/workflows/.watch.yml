@@ -73,7 +73,7 @@ jobs:
               gh run rerun "$IDX" --failed
             fi
             echo "Watching $1..."
-            gh run watch "$IDX" -i 10 > /dev/null
+            gh run watch "$IDX" -i 300 > /dev/null
             echo "Completed $1"
             local VIEW=$(gh run view "$IDX" --json attempt,conclusion)
             ATTEMPT=$(jq -r '.attempt' <<<$VIEW)
