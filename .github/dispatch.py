@@ -62,7 +62,7 @@ if len(keys_trigger)+len(keys_call) != len(set([*keys_trigger, *keys_call])):
 
 with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
   gho.write("cout=" + json_dumps({
-    "matrix": [{'key': call} for call in keys_call],
+    "matrix": [{'key': call} for call in keys_call] if keys_call else 'skip',
     "skip-release": skip_call
   }))
 
