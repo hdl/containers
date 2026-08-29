@@ -43,45 +43,67 @@ def _log():
         raise Exception(f"Unknown log type <{content[0]}>!")
   print(f"Exiting function log")
 
-def _watch(item):
+def _watch(task):
   try:
-    key=item.split('=')
-    idx=key[1]
-    key=key[0]
-
+    key, idx = task.split('=')
     conclusion = 'failure'
     attempt = 0
-
     while conclusion == 'failure' and attempt<RERUN:
       if attempt>0:
-        LOGGER.put(('p', f"Rerun {item} after attempt {attempt}"))
+        LOGGER.put(('p', f"Rerun {task} after attempt {attempt}"))
         check_call(["gh", "run", "rerun", idx, "--failed"])
-      LOGGER.put(('p', f"Watching {item}..."))
+      LOGGER.put(('p', f"Watching {task}..."))
       check_call(["gh", "run", "watch", idx, "-i", str(300)], stdout=DEVNULL)
-      LOGGER.put(('p', f"Completed {item}"))
+      LOGGER.put(('p', f"Completed {task}"))
       view = json_loads(check_output(['gh', 'run', 'view', idx, '--json', 'attempt,conclusion'], encoding='utf-8'))
       attempt = int(view['attempt'])
       conclusion = view['conclusion']
-
     mdref=f"{key}: [{idx}](https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{idx})"
     LOGGER.put(('s', f"- {mdref} | {conclusion} [{attempt}]" ))
-
   finally:
     SYNC.put(current_thread())
 
 logger_thread = Thread(target=_log)
 logger_thread.start()
 
-pending = environ['GH_INPUT_IDS'].split(' ')
+pending = environ['GH_INPUT_IDS'].split()
+LOGGER.put(('p', '\n- '.join(['Tasks', *pending])))
+
+for p, key in enumerate(pending):
+  idx = None
+  skip_test = False
+  skip_release = False
+  if '=' in key:
+    key, idx = key.split('=')
+  if ':' in key:
+    key, skip = key.split(':')
+    skip_test = 'T' in skip
+    skip_release = 'R' in skip
+  pending[p] = f'{key}=' + (idx if idx is not None else check_output([
+      "gh", "workflow", "run", ".build-test-release.yml", "-r", environ["GITHUB_REF_NAME"],
+      "-f", f"key={key}",
+      "-f", f"skip-test={str(skip_test)}",
+      "-f", f"skip-release={str(skip_release)}",
+      "-f", f"message={environ['GH_INPUT_MESSAGE']}"
+    ], encoding="utf-8").split('/')[-1].strip())
+
+with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
+  gho.write(f"ids={' '.join(pending)}")
+
+LOGGER.put(('p', '\n'.join(['Runs:', *[
+  (lambda key, idx : f"- {key}: https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{idx}")
+  (*task.split('=')) for task in pending
+]])))
+
 active = {}
 
 def _startThread():
   if not pending:
     return
-  item = pending.pop(0)
-  thread = Thread(target=_watch, args=(item,))
+  task = pending.pop(0)
+  thread = Thread(target=_watch, args=(task,))
   thread.start()
-  active[thread] = item
+  active[thread] = task
 
 for _ in range(min(3, len(pending))):
   _startThread()
@@ -90,10 +112,10 @@ done = []
 
 while active:
   thread = SYNC.get()
-  item = active.pop(thread)
+  task = active.pop(thread)
   thread.join()
-  done.append(item)
-  LOGGER.put(('p', f"Thread {item} finished"))
+  done.append(task)
+  LOGGER.put(('p', f"Thread {task} finished"))
   _startThread()
   LOGGER.put(('p', '\n'.join([
     f"- {len(done)} done: {done}",

@@ -42,42 +42,36 @@ on:
 env:
   GH_TOKEN: ${{ github.token }}
   GH_REPO: ${{ github.repository }}
-  GH_INPUT_IDS: ${{ inputs.ids }}
   GH_INPUT_RERUN: ${{ inputs.rerun }}
   GH_INPUT_MESSAGE: ${{ inputs.message }}
 
 jobs:
 
-  inputs:
-    runs-on: ubuntu-latest
-    steps:
-    - name: 📋 List of run IDs to watch
-      run: |
-        echo "rerun: ${{ inputs.rerun }}" >> "$GITHUB_STEP_SUMMARY"
-        for ITEM in ${{ inputs.ids }}; do
-          KEY="${ITEM%=*}"
-          IDX="${ITEM#*=}"
-          echo "  - $KEY: [$IDX](https://github.com/${{ github.repository }}/actions/runs/$IDX)" >> "$GITHUB_STEP_SUMMARY"
-        done
-
   watch:
     runs-on: ubuntu-latest
+    outputs:
+      ids: ${{ steps.watch.outputs.ids }}
     steps:
     - name: 🧰 Checkout
       uses: actions/checkout@v7
+    - name: 🐍 Install Python dependencies
+      run: pip3 install tabulate
       # IMPORTANT:
       # If a Composite Action is used to wrap this script, the output is buffered/delayed!
       # See https://github.com/orgs/community/discussions/52284
     - name: 👀 Watch
+      id: watch
       run: ./.github/watch.py
       env:
         PYTHONUNBUFFERED: 1
-    - name: 🐍 Install Python dependencies
-      run: pip3 install tabulate
+        GH_INPUT_IDS: ${{ inputs.ids }}
     - name: 📊 Collect and process results
+      if: always()
       uses: $/.github/self-script
       with:
         scriptfile: results.py
+      env:
+        GH_INPUT_IDS: ${{ steps.watch.outputs.ids }}
 
   timeout:
     if: >-
@@ -90,3 +84,5 @@ jobs:
       uses: $/.github/self-script
       with:
         scriptfile: timeout.py
+      env:
+        GH_INPUT_IDS: ${{ needs.watch.outputs.ids }}
