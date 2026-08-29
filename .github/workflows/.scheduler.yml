@@ -130,6 +130,7 @@ jobs:
           z3
 
   call:
+    if: fromJSON(needs.dispatch.outputs.cout).matrix != 'skip'
     needs: dispatch
     strategy:
       fail-fast: false
