@@ -32,97 +32,106 @@ LOGGER = Queue()
 SYNC = Queue()
 
 def _log():
-  while (content := LOGGER.get())[0] != 'z':
-    match content[0]:
+  while True:
+    cmd, content = LOGGER.get()
+    match cmd:
+      case 'z':
+        print(f"Exiting function log [{content}]")
+        break
       case 'p':
-        print(content[1])
-      case 's':
-        with open(environ["GITHUB_STEP_SUMMARY"], 'a') as ghs:
-          ghs.write(f"{content[1]}\n")
+        print(content)
       case _:
-        raise Exception(f"Unknown log type <{content[0]}>!")
-  print(f"Exiting function log")
+        raise Exception(f"Unknown log type <{cmd}>!")
 
-def _watch(task):
+def _watch(key, idx):
   timeout = False
   try:
-    _, idx = task.split('=')
     conclusion = 'failure'
     attempt = 0
     while conclusion == 'failure' and attempt<RERUN:
       if attempt>0:
-        LOGGER.put(('p', f"Rerun {task} after attempt {attempt}"))
+        LOGGER.put(('p', f"Rerun {key} after attempt {attempt}"))
         check_call(["gh", "run", "rerun", idx, "--failed"])
-      LOGGER.put(('p', f"Watching {task}..."))
+      LOGGER.put(('p', f"Watching {key}..."))
       try:
         check_call(["gh", "run", "watch", idx, "-i", str(60)], stdout=DEVNULL, timeout=210)
       except TimeoutExpired:
-        LOGGER.put(('p', f"Thread {task} timed out"))
+        LOGGER.put(('p', f"Thread {key} timed out"))
         timeout = True
         break
-      LOGGER.put(('p', f"Completed {task}"))
-      view = json_loads(check_output(['gh', 'run', 'view', idx, '--json', 'attempt,conclusion'], encoding='utf-8'))
-      attempt = int(view['attempt'])
-      conclusion = view['conclusion']
+      LOGGER.put(('p', f"Completed {key}"))
+      attempt, conclusion = json_loads(check_output(
+        ['gh', 'run', 'view', idx, '--json', 'attempt,conclusion', '-q', '[.attempt, .conclusion]'],
+        encoding='utf-8'
+      ))
   finally:
     SYNC.put((current_thread(), timeout))
+
+def _dispatch(key):
+  fkey = f'{key}='
+  key, skip = key.split(':') if ':' in key else (key, '')
+  idx = check_output([
+      "gh", "workflow", "run", ".build-test-release.yml", "-r", environ["GITHUB_REF_NAME"],
+      "-f", f"key={key}",
+      "-f", f"skip-test={str('T' in skip)}",
+      "-f", f"skip-release={str('R' in skip)}",
+      "-f", f"message={environ['GH_INPUT_MESSAGE']}"
+    ], encoding="utf-8").split('/')[-1].strip()
+  LOGGER.put(('p', f"Dispatched {fkey[0:-1]}: https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{idx}"))
+  return fkey + idx
 
 logger_thread = Thread(target=_log)
 logger_thread.start()
 
-pending = environ['GH_INPUT_IDS'].split()
-LOGGER.put(('p', '\n- '.join(['Tasks', *pending])))
-
-for p, key in enumerate(pending):
-  idx = None
-  skip_test = False
-  skip_release = False
-  if '=' in key:
-    key, idx = key.split('=')
-  if ':' in key:
-    key, skip = key.split(':')
-    skip_test = 'T' in skip
-    skip_release = 'R' in skip
-  pending[p] = f'{key}=' + (idx if idx is not None else check_output([
-      "gh", "workflow", "run", ".build-test-release.yml", "-r", environ["GITHUB_REF_NAME"],
-      "-f", f"key={key}",
-      "-f", f"skip-test={str(skip_test)}",
-      "-f", f"skip-release={str(skip_release)}",
-      "-f", f"message={environ['GH_INPUT_MESSAGE']}"
-    ], encoding="utf-8").split('/')[-1].strip())
-
-with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
-  gho.write(f"ids={' '.join(pending)}")
-
-LOGGER.put(('p', '\n'.join(['Runs:', *[
-  (lambda key, idx : f"- {key}: https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{idx}")
-  (*task.split('=')) for task in pending
-]])))
-
 active = {}
+done = []
+pending = [
+  task if '=' in task[0] else [_dispatch(task[0]), *task[1:]]
+  for task in [task.split('>') for task in environ['GH_INPUT_IDS'].split()]
+]
+
+LOGGER.put(('p', '\n'.join(['Tasks:', *["  " * k + f"- {key.split('=')[0]}" +
+  (f": https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{key.split('=')[1]}" if '=' in key else "")
+  for task in pending
+  for k, key in enumerate(task)
+]])))
 
 def _startThread():
   if not pending:
     return
-  task = pending.pop(0)
-  thread = Thread(target=_watch, args=(task,))
+  while '!' in (task := pending.pop(0))[-1]:
+    done.append(task)
+  for k, key in enumerate(task):
+    if '=' not in key:
+      task[k] = _dispatch(key)
+      break
+    elif '!' not in key:
+      break
+  thread = Thread(target=_watch, args=(task[k], task[k].split('=')[1],))
   thread.start()
-  active[thread] = task
+  active[thread] = (task, k)
 
 for _ in range(min(3, len(pending))):
   _startThread()
 
-done = []
+def _output():
+  with open(environ['GITHUB_OUTPUT'], 'w', encoding='utf-8') as gho:
+    gho.write(f"ids={' '.join(['>'.join(task) for task in [*done, *pending, *[task for task, _ in active.values()]]])}\n")
 
 while active:
+  _output()
   thread, timeout = SYNC.get()
-  task = active.pop(thread)
+  task, k = active.pop(thread)
   thread.join()
   if timeout:
     pending.append(task)
   else:
-    done.append(task)
-    LOGGER.put(('p', f"Thread {task} finished"))
+    task[k] = f"!{task[k]}"
+    LOGGER.put(('p', f"Thread {task[k]} finished"))
+    if k < len(task)-1:
+      pending.append(task)
+    else:
+      done.append(task)
   _startThread()
   LOGGER.put(('p', '\n'.join([
     f"- {len(done)} done: {done}",
@@ -130,5 +139,6 @@ while active:
     f"- {len(active)} active: {active}"
   ])))
 
-LOGGER.put('z', 'hdlc::watch::main::close')
+_output()
+LOGGER.put(('z', 'hdlc::watch::main::close'))
 logger_thread.join()

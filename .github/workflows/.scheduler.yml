@@ -88,14 +88,22 @@ jobs:
         HDLC_PUSH_TRIGGER: >-
           netgen
           nvc
+          irsim
+          conda/f4pga/xc7/toolchain>f4pga-xc7-devices>conda/f4pga/xc7
+          f4pga-eos-s3
+          magic>magic-irsim
+          nextpnr-build:T>nextpnr-prjs>nextpnr
+          sim>osvb>cosim>gnuplot
         HDLC_PUSH_CALL: >-
           boolector
         HDLC_SCHEDULE_TRIGGER: >-
-#          f4pga
+          conda/f4pga/xc7/toolchain>f4pga-xc7-devices>conda/f4pga/xc7
+          f4pga-eos-s3
+          magic>magic-irsim
+          nextpnr-build:T>nextpnr-prjs>nextpnr
+          sim>osvb>cosim>gnuplot
 #          formal
 #          impl
-#          magic
-#          nextpnr
         HDLC_SCHEDULE_CALL: >-
           apicula
           arachne-pnr

@@ -36,14 +36,15 @@ results = [(lambda key, idx : {
     'workflow': key,
     'run_id': idx,
   }
-)(*item.split('=')) for item in environ['GH_INPUT_IDS'].split()]
+)(*key.split('=')) if '=' in key else {'workflow': key}
+for task in environ['GH_INPUT_IDS'].split() for key in task.split('>')]
 
 sym = {
   'success': '✔️',
   'failure': '❌',
   'cancelled': '✖️',
   'skipped': '➖',
-  '' : ''
+  '' : '🎬'
 }
 
 def _conclusion(conclusion):
@@ -51,12 +52,21 @@ def _conclusion(conclusion):
 
 mdtables = []
 for wflow in results:
+  if 'run_id' not in wflow:
+    mdtables.append([
+      "",
+      '⌚',
+      wflow['workflow'],
+      "",
+      ""
+    ])
+    continue
   run_url = f"https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{wflow['run_id']}"
   mdtables.extend([
     [
       f"[{wflow['run_id']}]({run_url})",
       _conclusion(wflow['conclusion']),
-      f"{wflow['workflow']}: {len(wflow['jobs'])} jobs",
+      f"{(lambda w: w.split('!')[1] if '!' in w else w)(wflow['workflow'])}: {len(wflow['jobs'])} jobs",
       "Attempt(s)",
       wflow['attempt']
     ],

@@ -66,7 +66,11 @@ with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
     "skip-release": skip_call
   }))
 
-keys_trigger = [(f'{key}R' if ':' in key else f'{key}:R') if skip_dispatch else key for key in keys_trigger]
+keys_trigger = ['>'.join([
+  (f'{key}R' if ':' in key else f'{key}:R')
+  if skip_dispatch else key
+  for key in seq.split('>')
+]) for seq in keys_trigger]
 
 watchurl = check_output([
   "gh", "workflow", "run", ".watch.yml", "-r", environ['GITHUB_REF_NAME'],

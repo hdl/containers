@@ -164,7 +164,7 @@ with (ROOT / "shields/shields.build.gen.inc").open("w", encoding="utf-8") as wfp
 
 CIWorkflows = [
     [".doc", ".scheduler", ".watch"],
-    ["f4pga", "formal", "impl", "magic", "nextpnr", "sim"]
+    ["formal", "impl"]
 ]
 
 with (ROOT / "CIStatus.inc").open("w") as wfptr:
