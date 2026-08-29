@@ -57,9 +57,40 @@ G: Any = nx.nx_agraph.read_dot(ROOT/"needs.dot")
 if not nx.is_directed_acyclic_graph(G):
   raise RuntimeError("Dependency graph contains a cycle!")
 
+#A = nx.nx_agraph.to_agraph(G)
+#A.layout(prog="dot")
+#A.draw(ROOT/"needs.svg")
+
+#import matplotlib.pyplot as plt
+#nx.draw(G, nx.nx_agraph.graphviz_layout(G, prog="dot"), with_labels=True)
+##plt.show()
+#plt.savefig("work/needsp.svg", format="svg", bbox_inches="tight")
+#plt.close()
+
+# CURRENTLY SUPPORTED SYNTAX:
 # F>: descendants of F and F
 # >T: ancestors of T and T
 # F>T: nodes which are both descendants of F and ancestors of T, and both F and T
+# TODO:
+# F·>: descendants of F only
+# >·T: ancestors of T only
+# F·>T: nodes which are both descendants of F and ancestors of T, and T but not F
+# F·>·T: nodes which are both descendants of F and ancestors of T, but no F or T
+# F>·T: nodes which are both descendants of F and ancestors of T, and F and but not T
+# F>T> == ( F>T | T> )
+# F>·T·> == ( F>·T | T·> )
+# F·>T> == ( F·>T | T> )
+# F·>·T·> == ( F·>T | T·> )
+# >F>T == ( >F | F>T )
+# >·F·>T == ( >·F | F·>T )
+# >F>·T == ( >F | F>·T )
+# >·F·>·T == ( >·F | F·>·T )
+# >F>T> == ( >F | T> | F>T )
+# >·F·>T> == ( >·F | T> | F·>T )
+# >F>·T·> == ( >F | T·> | F>·T )
+# >·F·>·T·> == ( >·F | T·> | F·>·T )
+#
+# https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.transitive_reduction.html
 
 if not any('base' in t for t in input_tasks):
   G.remove_node('base')
