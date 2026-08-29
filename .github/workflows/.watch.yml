@@ -43,6 +43,8 @@ env:
   GH_TOKEN: ${{ github.token }}
   GH_REPO: ${{ github.repository }}
   GH_INPUT_IDS: ${{ inputs.ids }}
+  GH_INPUT_RERUN: ${{ inputs.rerun }}
+  GH_INPUT_MESSAGE: ${{ inputs.message }}
 
 jobs:
 
@@ -61,30 +63,15 @@ jobs:
   watch:
     runs-on: ubuntu-latest
     steps:
+    - name: 🧰 Checkout
+      uses: actions/checkout@v7
+      # IMPORTANT:
+      # If a Composite Action is used to wrap this script, the output is buffered/delayed!
+      # See https://github.com/orgs/community/discussions/52284
     - name: 👀 Watch
-      run: |
-        function watch() {
-          local IDX="${1#*=}"
-          local ATTEMPT=0
-          local CONCLUSION="failure"
-          while [ "$CONCLUSION" = "failure" ] && [ "$ATTEMPT" -lt "${{ inputs.rerun }}" ]; do
-            if [ "$ATTEMPT" -gt 0 ]; then
-              echo "Rerun $1 after attempt $ATTEMPT"
-              gh run rerun "$IDX" --failed
-            fi
-            echo "Watching $1..."
-            gh run watch "$IDX" -i 300 > /dev/null
-            echo "Completed $1"
-            local VIEW=$(gh run view "$IDX" --json attempt,conclusion)
-            ATTEMPT=$(jq -r '.attempt' <<<$VIEW)
-            CONCLUSION=$(jq -r '.conclusion' <<<$VIEW)
-          done
-          local MDREF="${1%=*}: [$IDX](https://github.com/${{ github.repository }}/actions/runs/$IDX)"
-          echo "- $MDREF | $CONCLUSION [$ATTEMPT]" >> conclusion.md
-        }
-        for ITEM in ${{ inputs.ids }}; do watch "$ITEM" & done
-        wait
-        cat conclusion.md | tee "$GITHUB_STEP_SUMMARY"
+      run: ./.github/watch.py
+      env:
+        PYTHONUNBUFFERED: 1
     - name: 🐍 Install Python dependencies
       run: pip3 install tabulate
     - name: 📊 Collect and process results
@@ -103,6 +90,3 @@ jobs:
       uses: $/.github/self-script
       with:
         scriptfile: timeout.py
-      env:
-        GH_INPUT_RERUN: ${{ inputs.rerun }}
-        GH_INPUT_MESSAGE: ${{ inputs.message }}
