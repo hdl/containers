@@ -33,7 +33,7 @@ results = [(lambda key, idx : {
     pick(.name, .conclusion, .startedAt, .completedAt, .databaseId) | \
     select(.name | test("(dispatch|matrix|results)$") | not) )'
   ], encoding='utf-8'))
-})(*(lambda l : l.split('='))(item)) for item in environ['GH_INPUT_IDS'].split(' ')]
+})(*(lambda l : l.split('='))(item)) for item in environ['GH_INPUT_IDS'].split()]
 
 sym = {
   'success': '✔️',
