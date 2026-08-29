@@ -231,3 +231,17 @@ while active:
 _output()
 LOGGER.put(('z', 'hdlc::watch::main::close'))
 logger_thread.join()
+
+#  Thread(target=watch,
+#    kwargs={
+#      "idx": idx
+#    }
+#  ).start()
+
+# success
+# failure
+# cancelled
+# skipped
+#-
+# startup_failure
+# action_required
