@@ -27,33 +27,46 @@ from tabulate import tabulate
 from datetime import datetime as dt
 
 results = [(lambda key, idx : {
-  'workflow': key,
-  'run_id': idx,
-  'results': json_loads(check_output(['gh', 'run', 'view', idx, '--json', 'jobs', '-q', '.jobs | map( \
-    pick(.name, .conclusion, .startedAt, .completedAt, .databaseId) | \
-    select(.name | test("(dispatch|matrix|results)$") | not) )'
-  ], encoding='utf-8'))
-})(*(lambda l : l.split('='))(item)) for item in environ['GH_INPUT_IDS'].split()]
+  **json_loads(check_output(['gh', 'run', 'view', idx, '--json', 'attempt,conclusion,jobs', '-q', '''
+.jobs |= map(
+  pick(.name, .conclusion, .startedAt, .completedAt, .databaseId) |
+  select(.name | test("(dispatch|matrix|results|matrix\\\\.key)$") | not) )
+'''
+  ], encoding='utf-8')),
+    'workflow': key,
+    'run_id': idx,
+  }
+)(*item.split('=')) for item in environ['GH_INPUT_IDS'].split()]
 
 sym = {
   'success': '✔️',
   'failure': '❌',
   'cancelled': '✖️',
-  'skipped': '➖'
+  'skipped': '➖',
+  '' : ''
 }
+
+def _conclusion(conclusion):
+  return sym[conclusion] if conclusion in sym.keys() else f'❔'
 
 mdtables = []
 for wflow in results:
   run_url = f"https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{wflow['run_id']}"
   mdtables.extend([
-    ["", "", f"[{wflow['workflow']}]({run_url})", "", ""],
+    [
+      f"[{wflow['run_id']}]({run_url})",
+      _conclusion(wflow['conclusion']),
+      f"{wflow['workflow']}: {len(wflow['jobs'])} jobs",
+      "Attempt(s)",
+      wflow['attempt']
+    ],
     *[[
       (lambda d: f"[{d}]({run_url}/job/{d})")(job['databaseId']),
-      (lambda c: sym[c] if c in sym.keys() else '❔')(job['conclusion']),
+      _conclusion(job['conclusion']),
       job['name'].replace('|','\\|'),
       job['startedAt'],
-      dt.fromisoformat(job['completedAt']) - dt.fromisoformat(job['startedAt'])
-    ] for job in wflow['results']],
+      (dt.fromisoformat(job['completedAt']) - dt.fromisoformat(job['startedAt'])) if job['conclusion'] else '-'
+    ] for job in wflow['jobs']]
   ])
 
 with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as ghs:

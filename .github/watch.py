@@ -45,7 +45,7 @@ def _log():
 
 def _watch(task):
   try:
-    key, idx = task.split('=')
+    _, idx = task.split('=')
     conclusion = 'failure'
     attempt = 0
     while conclusion == 'failure' and attempt<RERUN:
@@ -58,8 +58,6 @@ def _watch(task):
       view = json_loads(check_output(['gh', 'run', 'view', idx, '--json', 'attempt,conclusion'], encoding='utf-8'))
       attempt = int(view['attempt'])
       conclusion = view['conclusion']
-    mdref=f"{key}: [{idx}](https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{idx})"
-    LOGGER.put(('s', f"- {mdref} | {conclusion} [{attempt}]" ))
   finally:
     SYNC.put(current_thread())
 
