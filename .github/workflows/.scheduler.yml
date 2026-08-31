@@ -86,22 +86,22 @@ jobs:
           }}
         HDLC_PUSH: >-
           >gnuplot
-          >impl
-          >prog
-          conda>
-          >formal
-          >magic-irsim
-          apicula
-          arachne-pnr
-          gtkwave
-          klayout
-          netgen
-          openfpgaloader
-          openroad
-          verible
-          vtr
-          xschem
-          xyce
+#          >impl
+#          >prog
+#          conda>
+#          >formal
+#          >magic-irsim
+#          apicula
+#          arachne-pnr
+#          gtkwave
+#          klayout
+#          netgen
+#          openfpgaloader
+#          openroad
+#          verible
+#          vtr
+#          xschem
+#          xyce
         HDLC_SCHEDULE: >-
           base>
 
