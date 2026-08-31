@@ -44,6 +44,7 @@ env:
   GH_REPO: ${{ github.repository }}
   GH_INPUT_RERUN: ${{ inputs.rerun }}
   GH_INPUT_MESSAGE: ${{ inputs.message }}
+  PYTHONUNBUFFERED: 1
 
 jobs:
 
@@ -54,8 +55,6 @@ jobs:
     steps:
     - name: 🧰 Checkout
       uses: actions/checkout@v7
-    - name: 🐍 Install Python dependencies
-      run: pip3 install tabulate
       # IMPORTANT:
       # If a Composite Action is used to wrap this script, the output is buffered/delayed!
       # See https://github.com/orgs/community/discussions/52284
@@ -63,26 +62,19 @@ jobs:
       id: watch
       run: ./.github/watch.py
       env:
-        PYTHONUNBUFFERED: 1
         GH_INPUT_IDS: ${{ inputs.ids }}
+
+  results:
+    if: always()
+    needs: watch
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🐍 Install Python dependencies
+      run: pip3 install tabulate
     - name: 📊 Collect and process results
-      if: always()
       uses: $/.github/self-script
       with:
         scriptfile: results.py
       env:
-        GH_INPUT_IDS: ${{ steps.watch.outputs.ids }}
-
-  timeout:
-    if: >-
-      always() &&
-      needs.watch.result == 'cancelled'
-    needs: watch
-    runs-on: ubuntu-latest
-    steps:
-    - name: ⏰ Check annotations and redispatch
-      uses: $/.github/self-script
-      with:
-        scriptfile: timeout.py
-      env:
         GH_INPUT_IDS: ${{ needs.watch.outputs.ids }}
+        GH_WATCH_RESULT: ${{ needs.watch.result }}

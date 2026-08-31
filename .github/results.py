@@ -21,10 +21,58 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from os import environ
-from subprocess import check_output
+from subprocess import DEVNULL, check_call, check_output, run
 from json import loads as json_loads
 from tabulate import tabulate
 from datetime import datetime as dt
+
+tasks = [task.split('>') for task in environ['GH_INPUT_IDS'].split()]
+
+if environ['GH_WATCH_RESULT'] == 'cancelled':
+
+  print("::group::⏰ Check annotations and redispatch or cancel")
+
+  watch_bdid=check_output([
+    'gh', 'run', 'view', environ['GITHUB_RUN_ID'],
+    '--json', 'jobs', '--jq', '.jobs[] | select(.name=="watch") | .databaseId'
+  ], encoding='utf-8').strip()
+
+  for note in json_loads(check_output(
+    ['gh', 'api', 'repos/{owner}/{repo}/check-runs/'f"{watch_bdid}/annotations"], encoding="utf-8"
+  )):
+    if (
+      note['annotation_level'] == 'failure' and
+      note['message'].startswith('The job has exceeded the maximum execution time of')
+    ):
+      run_url = check_output([
+        'gh', 'workflow', 'run', '.watch.yml',
+        '-r', environ['GITHUB_REF_NAME'],
+        '-f', f"ids={environ['GH_INPUT_IDS']}",
+        '-f', f"rerun={environ['GH_INPUT_RERUN']}",
+        '-f', f"message={environ['GH_INPUT_MESSAGE']}",
+      ], encoding='utf-8')
+      run_id = run_url.split('/')[-1]
+      with open(environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as ghs:
+        ghs.write(f'Timeout! New watch dispatched: [{run_id}]({run_url})\n')
+      break
+  else:
+    cancel = []
+    for t, task in enumerate(tasks):
+      if '!' in task[-1]:
+        continue
+      for k, key in enumerate(task):
+        if '=' in key and '!' not in key:
+          tasks[t][k] = f'X!{key}'
+          cancel.append((key, key.split('=')[1]))
+          break
+    for key, idx in cancel:
+      print(f"Cancel {key}")
+      run(["gh", "run", "cancel", idx, "--force"], check=False)
+    for key, idx in cancel:
+      print(f"Watching {key}...")
+      check_call(["gh", "run", "watch", idx, "-i", str(30)], stdout=DEVNULL)
+
+  print("::endgroup::")
 
 results = [(lambda key, idx : {
   **json_loads(check_output(['gh', 'run', 'view', idx, '--json', 'attempt,conclusion,jobs', '-q', '''
@@ -37,7 +85,7 @@ results = [(lambda key, idx : {
     'run_id': idx,
   }
 )(*key.split('=')) if '=' in key else {'workflow': key}
-for task in environ['GH_INPUT_IDS'].split() for key in task.split('>')]
+for task in tasks for key in task]
 
 sym = {
   'success': '✔️',
@@ -49,7 +97,7 @@ sym = {
 }
 
 def _conclusion(conclusion):
-  return sym[conclusion] if conclusion in sym.keys() else f'❔'
+  return sym.get(conclusion, '❔')
 
 mdtables = []
 for wflow in results:
@@ -85,4 +133,4 @@ with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as ghs:
     mdtables,
     headers=['']*5,
     tablefmt='github'
-  ))
+  )+'\n')
