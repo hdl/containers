@@ -22,6 +22,7 @@
 
 from os import environ
 from threading import Thread, current_thread
+from time import sleep
 from queue import Queue
 from subprocess import DEVNULL, TimeoutExpired, check_call, check_output
 from json import loads as json_loads
@@ -31,11 +32,15 @@ class _watchout(Enum):
   COMPLETED = 0
   CANCELLED = 1
   TIMEDOUT = 2
+  SCHEDULER = 3
 
 RERUN = int(environ['GH_INPUT_RERUN'])
 
 LOGGER = Queue()
 SYNC = Queue()
+SCHEDULER = {}
+
+INTERVAL = 60
 
 def _log():
   while True:
@@ -49,22 +54,60 @@ def _log():
       case _:
         raise Exception(f"Unknown log type <{cmd}>!")
 
-def _watch(key, idx):
+def _scheduler(keyidx, idx):
+  try:
+    view = {
+      'conclusion': 'failure',
+      'attempt': 0
+    }
+    while view['conclusion'] == 'failure' and view['attempt']<RERUN:
+      if view['attempt']>0:
+        LOGGER.put(('p', f"Rerun {keyidx} after attempt {view['attempt']}"))
+        check_call(["gh", "run", "rerun", idx, "--failed"])
+      view['status'] = 'queued'
+      while view['status'] != 'completed':
+        sleep(INTERVAL)
+        jobs_pick = 'map( pick(.name, .status, .conclusion) | select(.name | test("-results$")))'
+        jobs = json_loads(check_output([
+            'gh', 'api', '-X', 'GET', 'repos/{owner}/{repo}/actions/runs/'f'{idx}/jobs',
+            '-f', 'filter=all', '-f', 'per_page=100', '-q', f'.jobs | {jobs_pick}',
+        ], encoding='utf-8'))
+        view = json_loads(check_output([
+          'gh', 'run', 'view', idx, '--json', 'attempt,status,conclusion,jobs', '-q', f'.jobs |= {jobs_pick}'
+        ], encoding='utf-8'))
+        if not view['jobs']:
+          view['jobs'] = jobs
+        SCHEDULER.update({
+          job['name'].split(' / ')[1].removesuffix('-results'): job['conclusion']
+          for job in view['jobs'] if job['status'] == 'completed'
+        })
+  finally:
+    SYNC.put((current_thread(), _watchout.CANCELLED if view['conclusion'] == 'cancelled' else _watchout.COMPLETED))
+
+def _wait(keyidx, _):
+  try:
+    LOGGER.put(('p', f"Waiting {keyidx}..."))
+    if keyidx.split('=')[0].split(':')[0] not in SCHEDULER:
+      sleep(INTERVAL)
+  finally:
+    SYNC.put((current_thread(), _watchout.SCHEDULER))
+
+def _watch(keyidx, idx):
   timeout = False
   try:
     conclusion = 'failure'
     attempt = 0
     while conclusion == 'failure' and attempt<RERUN:
       if attempt>0:
-        LOGGER.put(('p', f"Rerun {key} after attempt {attempt}"))
+        LOGGER.put(('p', f"Rerun {keyidx} after attempt {attempt}"))
         check_call(["gh", "run", "rerun", idx, "--failed"])
-      LOGGER.put(('p', f"Watching {key}..."))
+      LOGGER.put(('p', f"Watching {keyidx}..."))
       try:
-        check_call(["gh", "run", "watch", idx, "-i", str(60)], stdout=DEVNULL, timeout=210)
+        check_call(["gh", "run", "watch", idx, "-i", str(INTERVAL)], stdout=DEVNULL, timeout=210)
       except TimeoutExpired:
         timeout = True
-        break
-      LOGGER.put(('p', f"Completed {key}"))
+        return
+      LOGGER.put(('p', f"Completed {keyidx}"))
       attempt, conclusion = json_loads(check_output(
         ['gh', 'run', 'view', idx, '--json', 'attempt,conclusion', '-q', '[.attempt, .conclusion]'],
         encoding='utf-8'
@@ -100,23 +143,33 @@ pending = [
 ]
 
 LOGGER.put(('p', '\n'.join(['Tasks:', *["  " * k + f"- {key.split('=')[0]}" +
-  (f": https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{key.split('=')[1]}" if '=' in key else "")
+  ((
+    f": https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{key.split('=')[1]}"
+    if key.split('=')[1] != 'scheduler' else ": scheduler"
+  ) if '=' in key else "")
   for task in pending
   for k, key in enumerate(task)
 ]])))
+
+if (lambda k: k if '!' not in k else k.split('!')[1])(pending[0][0].split('=')[0].split(':')[0]) == 'scheduler':
+  task = pending.pop(0)
+  scheduler_thread = Thread(target=_scheduler, args=(task[0], task[0].split('=')[1]))
+  scheduler_thread.start()
+  active[scheduler_thread] = (task, 0)
 
 def _startThread():
   if not pending:
     return
   while '!' in (task := pending.pop(0))[-1]:
     done.append(task)
-  for k, key in enumerate(task):
-    if '=' not in key:
-      task[k] = _dispatch(key)
+  for k, keyidx in enumerate(task):
+    if '=' not in keyidx:
+      task[k] = _dispatch(keyidx)
       break
-    elif '!' not in key:
+    elif '!' not in keyidx:
       break
-  thread = Thread(target=_watch, args=(task[k], task[k].split('=')[1],))
+  idx = task[k].split('=')[1]
+  thread = Thread(target=_wait if idx == 'scheduler' else _watch, args=(task[k], idx))
   thread.start()
   active[thread] = (task, k)
 
@@ -147,6 +200,19 @@ while active:
       else:
         LOGGER.put(('p', f"{task[k]}: completed"))
         done.append(task)
+    case _watchout.SCHEDULER:
+      key = task[k].split('=')[0].split(':')[0]
+      if key not in SCHEDULER:
+        pending.append(task)
+      else:
+        match SCHEDULER[key]:
+          case 'cancelled':
+            LOGGER.put(('p', f"{task[k]}: cancelled"))
+            done.append([*task[0:k], *[f"X!{keyidx}" for keyidx in task[k:]]])
+          case _:
+            LOGGER.put(('p', f"{task[k]}: finished"))
+            task[k] = f"!{task[k]}"
+            pending.append(task)
     case _:
       raise Exception(f"Unknown thread exit <{watchout}>!")
   _startThread()

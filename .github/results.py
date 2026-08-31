@@ -61,7 +61,7 @@ if environ['GH_WATCH_RESULT'] == 'cancelled':
       if '!' in task[-1]:
         continue
       for k, key in enumerate(task):
-        if '=' in key and '!' not in key:
+        if '=' in key and '!' not in key and key.split('=')[1] != 'scheduler':
           tasks[t][k] = f'X!{key}'
           cancel.append((key, key.split('=')[1]))
           break
@@ -75,12 +75,13 @@ if environ['GH_WATCH_RESULT'] == 'cancelled':
   print("::endgroup::")
 
 results = [(lambda key, idx : {
-  **json_loads(check_output(['gh', 'run', 'view', idx, '--json', 'attempt,conclusion,jobs', '-q', '''
+  **({} if idx == 'scheduler' else
+    json_loads(check_output(['gh', 'run', 'view', idx, '--json', 'attempt,conclusion,jobs', '-q', '''
 .jobs |= map(
   pick(.name, .conclusion, .startedAt, .completedAt, .databaseId) |
   select(.name | test("(dispatch|matrix|results|matrix\\\\.key)$") | not) )
 '''
-  ], encoding='utf-8')),
+  ], encoding='utf-8'))),
     'workflow': key,
     'run_id': idx,
   }
@@ -93,7 +94,8 @@ sym = {
   'cancelled': '✖️',
   'skipped': '➖',
   '' : '🎬',
-  'queued': '⌚'
+  'queued': '⌚',
+  'scheduler': '🧱'
 }
 
 def _conclusion(conclusion):
@@ -101,10 +103,14 @@ def _conclusion(conclusion):
 
 mdtables = []
 for wflow in results:
-  if 'run_id' not in wflow:
+  if 'run_id' not in wflow or wflow['run_id'] == 'scheduler':
     mdtables.append([
       "",
-      sym['cancelled' if 'X!' in wflow['workflow'] else 'queued'],
+      sym[
+        'cancelled' if 'X!' in wflow['workflow'] else
+        'queued' if 'run_id' not in wflow else
+        'scheduler'
+      ],
       (lambda w: w.split('!')[1] if '!' in w else w)(wflow['workflow']),
       "",
       ""

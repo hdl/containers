@@ -28,53 +28,64 @@ evname = environ["GITHUB_EVENT_NAME"]
 
 match evname:
   case "push":
-    keys_trigger = environ["HDLC_PUSH_TRIGGER"]
+    tasks_trigger = environ["HDLC_PUSH_TRIGGER"]
   case "schedule":
-    keys_trigger = environ["HDLC_SCHEDULE_TRIGGER"]
+    tasks_trigger = environ["HDLC_SCHEDULE_TRIGGER"]
   case "workflow_dispatch":
-    keys_trigger = environ["GH_INPUT_KEYS_TRIGGER"]
+    tasks_trigger = environ["GH_INPUT_KEYS_TRIGGER"]
   case _:
-    keys_trigger = ""
+    tasks_trigger = ""
     print(f"Empty dispatch key list for event name <{evname}>!")
 
 skip_dispatch = evname == 'pull_request'
 
 match evname:
   case "schedule":
-    keys_call = environ["HDLC_SCHEDULE_CALL"]
+    tasks_call = environ["HDLC_SCHEDULE_CALL"]
     skip_call = True
   case "workflow_dispatch":
-    keys_call = environ["GH_INPUT_KEYS_CALL"]
+    tasks_call = environ["GH_INPUT_KEYS_CALL"]
     skip_call = environ["GH_INPUT_SKIP-RELEASE"]
     skip_dispatch = skip_call
   case _:
-    keys_call = environ["HDLC_PUSH_CALL"]
+    tasks_call = environ["HDLC_PUSH_CALL"]
     skip_call = skip_dispatch
 
-keys_trigger = keys_trigger.split()
-keys_call = keys_call.split()
+tasks_trigger = tasks_trigger.split()
+tasks_call = tasks_call.split()
 
-if not (keys_trigger or keys_call):
-  raise Exception(f"Both lists of keys empty <dispatch:{keys_trigger}> <call:{keys_call}>!")
+if not (tasks_trigger or tasks_call):
+  raise Exception(f"Both lists of keys empty <dispatch:{tasks_trigger}> <call:{tasks_call}>!")
 
-if len(keys_trigger)+len(keys_call) != len(set([*keys_trigger, *keys_call])):
-  raise Exception(f"Same key(s) requested for both dispatch and call <dispatch:{keys_trigger}> <call:{keys_call}>!")
+if len(tasks_trigger)+len(tasks_call) != len(set([*tasks_trigger, *tasks_call])):
+  raise Exception(f"Same key(s) requested for both dispatch and call <dispatch:{tasks_trigger}> <call:{tasks_call}>!")
+
+for t, task in enumerate(tasks_call):
+  if '>' in task:
+    keys = task.split('>')
+    tasks_call[t] = keys[0]
+    tasks_trigger.append('>'.join([f"{keys[0]}=scheduler", *keys[1:]]))
 
 with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
   gho.write("cout=" + json_dumps({
-    "matrix": [{'key': call} for call in keys_call] if keys_call else 'skip',
+    "matrix": [
+      {'key': call.split(':')[0], 'skip-test': 'T' in call.split(':')[1]}
+      if ':' in call else
+      {'key': call, 'skip-test': False}
+      for call in tasks_call
+    ] if tasks_call else 'skip',
     "skip-release": skip_call
   }))
 
-keys_trigger = ['>'.join([
+tasks_trigger = ['>'.join([
   (f'{key}R' if ':' in key else f'{key}:R')
   if skip_dispatch else key
   for key in seq.split('>')
-]) for seq in keys_trigger]
+]) for seq in tasks_trigger]
 
 watchurl = check_output([
   "gh", "workflow", "run", ".watch.yml", "-r", environ['GITHUB_REF_NAME'],
-  "-f", f"ids={' '.join(['scheduler='+environ['GITHUB_RUN_ID'], *keys_trigger])}",
+  "-f", f"ids={' '.join(['scheduler='+environ['GITHUB_RUN_ID'], *tasks_trigger])}",
   "-f", f"rerun={environ['GH_INPUT_RERUN']}",
   "-f", f"message={environ['GITHUB_SHA'][0:8]} " + (
     evname if evname in ['schedule', 'workflow_dispatch']
@@ -86,9 +97,9 @@ with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as ghs:
   ghs.write('\n'.join([
     f"- Event: {evname}",
     f"- Watch: [{watchurl.split('/')[-1]}]({watchurl})",
-    f"- Dispatch (skip-release: {skip_dispatch}):" + (" none" * (not bool(keys_trigger))),
-    *[f'  - {trigger}' for trigger in keys_trigger],
-    f"- Call (skip-release: {skip_call}):" + (" none" * (not bool(keys_call))),
-    *[f'  - {call}' for call in keys_call],
+    f"- Dispatch (skip-release: {skip_dispatch}):" + (" none" * (not bool(tasks_trigger))),
+    *[f'  - {trigger}' for trigger in tasks_trigger],
+    f"- Call (skip-release: {skip_call}):" + (" none" * (not bool(tasks_call))),
+    *[f'  - {call}' for call in tasks_call],
     ""
   ]))
