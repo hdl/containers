@@ -25,6 +25,12 @@ from threading import Thread, current_thread
 from queue import Queue
 from subprocess import DEVNULL, TimeoutExpired, check_call, check_output
 from json import loads as json_loads
+from enum import Enum
+
+class _watchout(Enum):
+  COMPLETED = 0
+  CANCELLED = 1
+  TIMEDOUT = 2
 
 RERUN = int(environ['GH_INPUT_RERUN'])
 
@@ -56,7 +62,6 @@ def _watch(key, idx):
       try:
         check_call(["gh", "run", "watch", idx, "-i", str(60)], stdout=DEVNULL, timeout=210)
       except TimeoutExpired:
-        LOGGER.put(('p', f"Thread {key} timed out"))
         timeout = True
         break
       LOGGER.put(('p', f"Completed {key}"))
@@ -65,7 +70,11 @@ def _watch(key, idx):
         encoding='utf-8'
       ))
   finally:
-    SYNC.put((current_thread(), timeout))
+    SYNC.put((current_thread(),
+      _watchout.TIMEDOUT if timeout else
+      _watchout.CANCELLED if conclusion == 'cancelled' else
+      _watchout.COMPLETED
+    ))
 
 def _dispatch(key):
   fkey = f'{key}='
@@ -120,18 +129,26 @@ def _output():
 
 while active:
   _output()
-  thread, timeout = SYNC.get()
+  thread, watchout = SYNC.get()
   task, k = active.pop(thread)
   thread.join()
-  if timeout:
-    pending.append(task)
-  else:
-    task[k] = f"!{task[k]}"
-    LOGGER.put(('p', f"Thread {task[k]} finished"))
-    if k < len(task)-1:
+  match watchout:
+    case _watchout.TIMEDOUT:
+      LOGGER.put(('p', f"{task[k]}: timed out"))
       pending.append(task)
-    else:
-      done.append(task)
+    case _watchout.CANCELLED:
+      LOGGER.put(('p', f"{task[k]}: cancelled"))
+      done.append([*task[0:k], *[f"X!{key}" for key in task[k:]]])
+    case _watchout.COMPLETED:
+      task[k] = f"!{task[k]}"
+      if k < len(task)-1:
+        LOGGER.put(('p', f"{task[k]}: finished"))
+        pending.append(task)
+      else:
+        LOGGER.put(('p', f"{task[k]}: completed"))
+        done.append(task)
+    case _:
+      raise Exception(f"Unknown thread exit <{watchout}>!")
   _startThread()
   LOGGER.put(('p', '\n'.join([
     f"- {len(done)} done: {done}",

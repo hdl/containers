@@ -44,7 +44,8 @@ sym = {
   'failure': '❌',
   'cancelled': '✖️',
   'skipped': '➖',
-  '' : '🎬'
+  '' : '🎬',
+  'queued': '⌚'
 }
 
 def _conclusion(conclusion):
@@ -55,8 +56,8 @@ for wflow in results:
   if 'run_id' not in wflow:
     mdtables.append([
       "",
-      '⌚',
-      wflow['workflow'],
+      sym['cancelled' if 'X!' in wflow['workflow'] else 'queued'],
+      (lambda w: w.split('!')[1] if '!' in w else w)(wflow['workflow']),
       "",
       ""
     ])
