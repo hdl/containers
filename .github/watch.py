@@ -23,7 +23,7 @@
 from os import environ
 from threading import Thread, current_thread
 from queue import Queue
-from subprocess import DEVNULL, check_call, check_output
+from subprocess import DEVNULL, TimeoutExpired, check_call, check_output
 from json import loads as json_loads
 
 RERUN = int(environ['GH_INPUT_RERUN'])
@@ -44,6 +44,7 @@ def _log():
   print(f"Exiting function log")
 
 def _watch(task):
+  timeout = False
   try:
     _, idx = task.split('=')
     conclusion = 'failure'
@@ -53,13 +54,18 @@ def _watch(task):
         LOGGER.put(('p', f"Rerun {task} after attempt {attempt}"))
         check_call(["gh", "run", "rerun", idx, "--failed"])
       LOGGER.put(('p', f"Watching {task}..."))
-      check_call(["gh", "run", "watch", idx, "-i", str(300)], stdout=DEVNULL)
+      try:
+        check_call(["gh", "run", "watch", idx, "-i", str(60)], stdout=DEVNULL, timeout=210)
+      except TimeoutExpired:
+        LOGGER.put(('p', f"Thread {task} timed out"))
+        timeout = True
+        break
       LOGGER.put(('p', f"Completed {task}"))
       view = json_loads(check_output(['gh', 'run', 'view', idx, '--json', 'attempt,conclusion'], encoding='utf-8'))
       attempt = int(view['attempt'])
       conclusion = view['conclusion']
   finally:
-    SYNC.put(current_thread())
+    SYNC.put((current_thread(), timeout))
 
 logger_thread = Thread(target=_log)
 logger_thread.start()
@@ -109,11 +115,14 @@ for _ in range(min(3, len(pending))):
 done = []
 
 while active:
-  thread = SYNC.get()
+  thread, timeout = SYNC.get()
   task = active.pop(thread)
   thread.join()
-  done.append(task)
-  LOGGER.put(('p', f"Thread {task} finished"))
+  if timeout:
+    pending.append(task)
+  else:
+    done.append(task)
+    LOGGER.put(('p', f"Thread {task} finished"))
   _startThread()
   LOGGER.put(('p', '\n'.join([
     f"- {len(done)} done: {done}",
