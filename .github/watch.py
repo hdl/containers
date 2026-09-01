@@ -128,6 +128,12 @@ def _dispatch(key):
       "-f", f"skip-test={str('T' in skip)}",
       "-f", f"skip-release={str('R' in skip)}",
       "-f", f"message={environ['GH_INPUT_MESSAGE']}"
+    ] if key not in [
+      'formal',
+      'impl'
+    ] else [
+      "gh", "workflow", "run", f"{key}.yml", "-r", environ["GITHUB_REF_NAME"],
+      "-f", f"message={environ['GH_INPUT_MESSAGE']}"
     ], encoding="utf-8").split('/')[-1].strip()
   LOGGER.put(('p', f"Dispatched {fkey[0:-1]}: https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{idx}"))
   return fkey + idx

@@ -86,7 +86,8 @@ jobs:
             || github.event.head_commit.message
           }}
         HDLC_PUSH_TRIGGER: >-
-#
+          formal
+          impl
         HDLC_PUSH_CALL: >-
           boolector
           netgen
@@ -98,8 +99,8 @@ jobs:
           nextpnr-build:T>nextpnr-prjs>nextpnr
           sim>osvb>cosim>gnuplot
         HDLC_SCHEDULE_TRIGGER: >-
-#          formal
-#          impl
+          formal
+          impl
         HDLC_SCHEDULE_CALL: >-
           apicula
           arachne-pnr

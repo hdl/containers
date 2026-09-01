@@ -22,13 +22,16 @@
 # SPDX-License-Identifier: Apache-2.0
 
 name: 'impl'
+run-name: ${{ inputs.message }}
 
 on:
-  pull_request:
-  push:
-  schedule:
-    - cron: '0 0 * * 5'
   workflow_dispatch:
+    inputs:
+      message:
+        description: 'Message to show in the name of the run.'
+        required: false
+        default: "dispatched"
+        type: string
 
 env:
   DOCKER_BUILDKIT: 1
