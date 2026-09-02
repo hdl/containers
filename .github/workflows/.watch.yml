@@ -24,8 +24,8 @@ run-name: '👀 ${{ inputs.message }}'
 on:
   workflow_dispatch:
     inputs:
-      ids:
-        description: 'Space-separated list of key=run_id to watch.'
+      schedule:
+        description: 'JSON with pending dictionary, and inprogress and done lists.'
         required: true
         type: string
       rerun:
@@ -51,7 +51,7 @@ jobs:
   watch:
     runs-on: ubuntu-latest
     outputs:
-      ids: ${{ steps.watch.outputs.ids }}
+      schedule: ${{ steps.watch.outputs.schedule }}
     steps:
     - name: 🧰 Checkout
       uses: actions/checkout@v7
@@ -62,7 +62,7 @@ jobs:
       id: watch
       run: ./.github/watch.py
       env:
-        GH_INPUT_IDS: ${{ inputs.ids }}
+        GH_INPUT_SCHEDULE: ${{ inputs.schedule }}
 
   results:
     if: always()
@@ -76,5 +76,5 @@ jobs:
       with:
         scriptfile: results.py
       env:
-        GH_INPUT_IDS: ${{ needs.watch.outputs.ids }}
+        GH_INPUT_SCHEDULE: ${{ needs.watch.outputs.schedule }}
         GH_WATCH_RESULT: ${{ needs.watch.result }}

@@ -26,7 +26,9 @@ from json import loads as json_loads
 from tabulate import tabulate
 from datetime import datetime as dt
 
-tasks = [task.split('>') for task in environ['GH_INPUT_IDS'].split()]
+schedule = json_loads(environ['GH_INPUT_SCHEDULE'])
+pending, inprogress = (schedule[k] for k in ('pending', 'inprogress'))
+done = schedule.get('done', {})
 
 if environ['GH_WATCH_RESULT'] == 'cancelled':
 
@@ -47,7 +49,7 @@ if environ['GH_WATCH_RESULT'] == 'cancelled':
       run_url = check_output([
         'gh', 'workflow', 'run', '.watch.yml',
         '-r', environ['GITHUB_REF_NAME'],
-        '-f', f"ids={environ['GH_INPUT_IDS']}",
+        '-f', f"schedule={environ['GH_INPUT_SCHEDULE']}",
         '-f', f"rerun={environ['GH_INPUT_RERUN']}",
         '-f', f"message={environ['GH_INPUT_MESSAGE']}",
       ], encoding='utf-8')
@@ -56,37 +58,36 @@ if environ['GH_WATCH_RESULT'] == 'cancelled':
         ghs.write(f'Timeout! New watch dispatched: [{run_id}]({run_url})\n')
       break
   else:
-    cancel = []
-    for t, task in enumerate(tasks):
-      if '!' in task[-1]:
-        continue
-      for k, key in enumerate(task):
-        if '=' in key and '!' not in key and key.split('=')[1] != 'scheduler':
-          tasks[t][k] = f'X!{key}'
-          cancel.append((key, key.split('=')[1]))
-          break
-    for key, idx in cancel:
-      print(f"Cancel {key}")
-      run(["gh", "run", "cancel", idx, "--force"], check=False)
-    for key, idx in cancel:
-      print(f"Watching {key}...")
-      check_call(["gh", "run", "watch", idx, "-i", str(30)], stdout=DEVNULL)
+    for wflow in inprogress:
+      if wflow['idx'].split('!')[0] != 'scheduler':
+        print(f"Cancel {wflow['key']}")
+        run(["gh", "run", "cancel", wflow['idx'], "--force"], check=False)
+    for wflow in inprogress:
+      print(f"Watching {wflow['key']}...")
+      if wflow['idx'].split('!')[0] != 'scheduler':
+        check_call(["gh", "run", "watch", wflow['idx'], "-i", str(30)], stdout=DEVNULL)
+      done[wflow['key']] = f"{wflow['idx']}!"
+    inprogress = []
 
   print("::endgroup::")
 
-results = [(lambda key, idx : {
-  **({} if idx == 'scheduler' else
+results = []
+for wflow in [
+  *[(wflow, idx) for wflow, idx in done.items()],
+  *[(wflow['key'], wflow['idx']) for wflow in inprogress],
+  *[(wflow, '') for wflow in pending],
+]:
+  idx = wflow[1].split('!')[0]
+  results.append({**({} if idx == 'scheduler' or not idx else
     json_loads(check_output(['gh', 'run', 'view', idx, '--json', 'attempt,conclusion,jobs', '-q', '''
 .jobs |= map(
   pick(.name, .conclusion, .startedAt, .completedAt, .databaseId) |
   select(.name | test("(dispatch|matrix|results|matrix\\\\.key)$") | not) )
 '''
-  ], encoding='utf-8'))),
-    'workflow': key,
-    'run_id': idx,
-  }
-)(*key.split('=')) if '=' in key else {'workflow': key}
-for task in tasks for key in task]
+    ], encoding='utf-8'))),
+    'workflow': wflow[0],
+    'run_id': wflow[1],
+  })
 
 sym = {
   'success': '✔️',
@@ -103,25 +104,26 @@ def _conclusion(conclusion):
 
 mdtables = []
 for wflow in results:
-  if 'run_id' not in wflow or wflow['run_id'] == 'scheduler':
+  idx = wflow['run_id'].split('!')[0]
+  if idx == 'scheduler' or not idx:
     mdtables.append([
       "",
       sym[
-        'cancelled' if 'X!' in wflow['workflow'] else
-        'queued' if 'run_id' not in wflow else
+        'cancelled' if '!' in wflow['run_id'] else
+        'queued' if not idx else
         'scheduler'
       ],
-      (lambda w: w.split('!')[1] if '!' in w else w)(wflow['workflow']),
+      wflow['workflow'],
       "",
       ""
     ])
     continue
-  run_url = f"https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{wflow['run_id']}"
+  run_url = f"https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{idx}"
   mdtables.extend([
     [
       f"[{wflow['run_id']}]({run_url})",
       _conclusion(wflow['conclusion']),
-      f"{(lambda w: w.split('!')[1] if '!' in w else w)(wflow['workflow'])}: {len(wflow['jobs'])} jobs",
+      f"{wflow['workflow']}: {len(wflow['jobs'])} jobs",
       "Attempt(s)",
       wflow['attempt']
     ],

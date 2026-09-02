@@ -1,0 +1,106 @@
+strict digraph {
+
+rankdir=LR;
+
+node [shape=box, color=limegreen, fontcolor=limegreen];
+
+sim,
+osvb,
+cosim,
+gnuplot,
+prog,
+conda,
+"conda/f4pga/xc7/toolchain",
+"f4pga-xc7-devices",
+"conda/f4pga/xc7",
+"f4pga-eos-s3",
+"magic-irsim" [color=brown, fontcolor=brown];
+
+impl,
+formal [style="rounded", color=brown, fontcolor=brown];
+
+base
+-> apicula,
+   "arachne-pnr",
+   boolector,
+   cvc,
+   conda,
+   ghdl,
+   gtkwave,
+   icestorm,
+   irsim,
+   iverilog,
+   klayout,
+   magic,
+   netgen,
+   "nextpnr-build:T",
+   nvc,
+   openfpgaloader,
+   openroad,
+   pono,
+   prjoxide,
+   prjtrellis,
+   prog,
+   sby,
+   superprove,
+   verible,
+   verilator,
+   vtr,
+   xschem,
+   xyce,
+   yices2,
+   yosys,
+   z3;
+
+conda
+-> "conda/f4pga/xc7/toolchain"
+  -> "f4pga-xc7-devices"
+    -> "conda/f4pga/xc7";
+
+conda
+-> "f4pga-eos-s3";
+
+ghdl,
+yosys
+-> "ghdl-yosys-plugin";
+
+icestorm,
+prjoxide,
+prjtrellis
+-> "nextpnr-build:T"
+  -> "nextpnr-prjs"
+    -> "nextpnr";
+
+icestorm
+-> prog;
+
+magic,
+irsim
+  -> "magic-irsim";
+
+ghdl,
+iverilog,
+nvc,
+verilator
+-> sim
+  -> osvb
+    -> cosim
+      -> gnuplot;
+
+icestorm,
+prjoxide,
+prjtrellis,
+"ghdl-yosys-plugin",
+nextpnr
+-> impl;
+
+"ghdl-yosys-plugin",
+boolector,
+cvc,
+pono,
+sby,
+superprove,
+yices2,
+z3
+-> formal;
+}
