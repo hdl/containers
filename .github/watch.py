@@ -25,7 +25,7 @@ from threading import Thread, current_thread
 from time import sleep
 from queue import Queue
 from subprocess import DEVNULL, TimeoutExpired, check_call, check_output
-from json import loads as json_loads
+from json import loads as json_loads, dumps as json_dumps
 from enum import Enum
 
 class _watchout(Enum):
@@ -54,7 +54,7 @@ def _log():
       case _:
         raise Exception(f"Unknown log type <{cmd}>!")
 
-def _scheduler(keyidx, idx):
+def _scheduler(idx):
   try:
     view = {
       'conclusion': 'failure',
@@ -62,7 +62,7 @@ def _scheduler(keyidx, idx):
     }
     while view['conclusion'] == 'failure' and view['attempt']<RERUN:
       if view['attempt']>0:
-        LOGGER.put(('p', f"Rerun {keyidx} after attempt {view['attempt']}"))
+        LOGGER.put(('p', f"Rerun scheduler after attempt {view['attempt']}"))
         check_call(["gh", "run", "rerun", idx, "--failed"])
       view['status'] = 'queued'
       while view['status'] != 'completed':
@@ -84,30 +84,30 @@ def _scheduler(keyidx, idx):
   finally:
     SYNC.put((current_thread(), _watchout.CANCELLED if view['conclusion'] == 'cancelled' else _watchout.COMPLETED))
 
-def _wait(keyidx, _):
+def _wait(wflow, _):
   try:
-    LOGGER.put(('p', f"Waiting {keyidx}..."))
-    if keyidx.split('=')[0].split(':')[0] not in SCHEDULER:
+    LOGGER.put(('p', f"Waiting {wflow}..."))
+    if wflow not in SCHEDULER:
       sleep(INTERVAL)
   finally:
     SYNC.put((current_thread(), _watchout.SCHEDULER))
 
-def _watch(keyidx, idx):
+def _watch(wflow, idx):
   timeout = False
   try:
     conclusion = 'failure'
     attempt = 0
     while conclusion == 'failure' and attempt<RERUN:
       if attempt>0:
-        LOGGER.put(('p', f"Rerun {keyidx} after attempt {attempt}"))
+        LOGGER.put(('p', f"Rerun {wflow} after attempt {attempt}"))
         check_call(["gh", "run", "rerun", idx, "--failed"])
-      LOGGER.put(('p', f"Watching {keyidx}..."))
+      LOGGER.put(('p', f"Watching {wflow}..."))
       try:
         check_call(["gh", "run", "watch", idx, "-i", str(INTERVAL)], stdout=DEVNULL, timeout=210)
       except TimeoutExpired:
         timeout = True
         return
-      LOGGER.put(('p', f"Completed {keyidx}"))
+      LOGGER.put(('p', f"Completed {wflow}"))
       attempt, conclusion = json_loads(check_output(
         ['gh', 'run', 'view', idx, '--json', 'attempt,conclusion', '-q', '[.attempt, .conclusion]'],
         encoding='utf-8'
@@ -119,111 +119,111 @@ def _watch(keyidx, idx):
       _watchout.COMPLETED
     ))
 
-def _dispatch(key):
-  fkey = f'{key}='
-  key, skip = key.split(':') if ':' in key else (key, '')
+def _dispatch(wflow, data):
   idx = check_output([
       "gh", "workflow", "run", ".build-test-release.yml", "-r", environ["GITHUB_REF_NAME"],
-      "-f", f"key={key}",
-      "-f", f"skip-test={str('T' in skip)}",
-      "-f", f"skip-release={str('R' in skip)}",
+      "-f", f"key={wflow}",
+      "-f", f"skip-test={data['skip-test']}",
+      "-f", f"skip-release={data['skip-release']}",
       "-f", f"message={environ['GH_INPUT_MESSAGE']}"
-    ] if key not in [
+    ] if wflow not in [
       'formal',
       'impl'
     ] else [
-      "gh", "workflow", "run", f"{key}.yml", "-r", environ["GITHUB_REF_NAME"],
+      "gh", "workflow", "run", f"{wflow}.yml", "-r", environ["GITHUB_REF_NAME"],
       "-f", f"message={environ['GH_INPUT_MESSAGE']}"
     ], encoding="utf-8").split('/')[-1].strip()
-  LOGGER.put(('p', f"Dispatched {fkey[0:-1]}: https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{idx}"))
-  return fkey + idx
+  LOGGER.put(('p', f"Dispatched {wflow}: https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{idx}"))
+  del pending[wflow]
+  inprogress.append({'key': wflow, 'idx': idx, 'out': data['out']})
 
 logger_thread = Thread(target=_log)
 logger_thread.start()
 
+schedule = json_loads(environ['GH_INPUT_SCHEDULE'])
+pending, inprogress = (schedule[k] for k in ('pending', 'inprogress'))
+done = schedule.get('done', {})
 active = {}
-done = []
-pending = [
-  task if '=' in task[0] else [_dispatch(task[0]), *task[1:]]
-  for task in [task.split('>') for task in environ['GH_INPUT_IDS'].split()]
-]
 
-LOGGER.put(('p', '\n'.join(['Tasks:', *["  " * k + f"- {key.split('=')[0]}" +
-  ((
-    f": https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{key.split('=')[1]}"
-    if key.split('=')[1] != 'scheduler' else ": scheduler"
-  ) if '=' in key else "")
-  for task in pending
-  for k, key in enumerate(task)
-]])))
+for wflow, data in list(pending.items()):
+  if data['in'] == 0:
+    _dispatch(wflow, data)
 
-if (lambda k: k if '!' not in k else k.split('!')[1])(pending[0][0].split('=')[0].split(':')[0]) == 'scheduler':
-  task = pending.pop(0)
-  scheduler_thread = Thread(target=_scheduler, args=(task[0], task[0].split('=')[1]))
+#LOGGER.put(('p', '\n'.join(['Tasks:', *["  " * k + f"- {key.split('=')[0]}" +
+#  ((
+#    f": https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{key.split('=')[1]}"
+#    if key.split('=')[1] != 'scheduler' else ": scheduler"
+#  ) if '=' in key else "")
+#  for task in pending
+#  for k, key in enumerate(task)
+#]])))
+
+scheduler = next((wflow for wflow in inprogress if wflow['key'] == 'scheduler'), None)
+if scheduler:
+  scheduler_thread = Thread(target=_scheduler, args=(scheduler['idx'],))
   scheduler_thread.start()
-  active[scheduler_thread] = (task, 0)
+  active[scheduler_thread] = scheduler
+  inprogress.remove(scheduler)
 
 def _startThread():
-  if not pending:
-    return
-  while '!' in (task := pending.pop(0))[-1]:
-    done.append(task)
-  for k, keyidx in enumerate(task):
-    if '=' not in keyidx:
-      task[k] = _dispatch(keyidx)
-      break
-    elif '!' not in keyidx:
-      break
-  idx = task[k].split('=')[1]
-  thread = Thread(target=_wait if idx == 'scheduler' else _watch, args=(task[k], idx))
+  wflow = inprogress.pop(0)
+  thread = Thread(target=_wait if wflow['idx'] == 'scheduler' else _watch, args=(wflow['key'], wflow['idx']))
   thread.start()
-  active[thread] = (task, k)
+  active[thread] = wflow
 
-for _ in range(min(3, len(pending))):
+for _ in range(min(3, len(inprogress))):
   _startThread()
 
 def _output():
   with open(environ['GITHUB_OUTPUT'], 'w', encoding='utf-8') as gho:
-    gho.write(f"ids={' '.join(['>'.join(task) for task in [*done, *pending, *[task for task, _ in active.values()]]])}\n")
+    gho.write(f"schedule={json_dumps({'pending': pending, 'inprogress': [*inprogress, *active.values()], 'done': done})}\n")
+
+def _completed(wflow):
+  done[wflow['key']] = wflow['idx']
+  for node in wflow['out']:
+    pending[node]['in'] -= 1
+    if pending[node]['in'] == 0:
+      _dispatch(node, pending[node])
 
 while active:
   _output()
   thread, watchout = SYNC.get()
-  task, k = active.pop(thread)
+  wflow = active.pop(thread)
   thread.join()
+  key = wflow['key']
   match watchout:
     case _watchout.TIMEDOUT:
-      LOGGER.put(('p', f"{task[k]}: timed out"))
-      pending.append(task)
-    case _watchout.CANCELLED:
-      LOGGER.put(('p', f"{task[k]}: cancelled"))
-      done.append([*task[0:k], *[f"X!{key}" for key in task[k:]]])
-    case _watchout.COMPLETED:
-      task[k] = f"!{task[k]}"
-      if k < len(task)-1:
-        LOGGER.put(('p', f"{task[k]}: finished"))
-        pending.append(task)
-      else:
-        LOGGER.put(('p', f"{task[k]}: completed"))
-        done.append(task)
+      LOGGER.put(('p', f"{key}: timed out"))
+      inprogress.append(wflow)
+#    case _watchout.CANCELLED:
+#      LOGGER.put(('p', f"{key}: cancelled"))
+#      done[f"!{key}"] = wflow['idx']
+#      for node in wflow['out']:
+#        if node in pending:
+#          pending[f"!{node}"] = pending.pop(node)
+    case _watchout.COMPLETED | _watchout.CANCELLED:
+      LOGGER.put(('p', f"{key}: completed"))
+      _completed(wflow)
     case _watchout.SCHEDULER:
-      key = task[k].split('=')[0].split(':')[0]
       if key not in SCHEDULER:
-        pending.append(task)
+        inprogress.append(wflow)
       else:
         match SCHEDULER[key]:
           case 'cancelled':
-            LOGGER.put(('p', f"{task[k]}: cancelled"))
-            done.append([*task[0:k], *[f"X!{keyidx}" for keyidx in task[k:]]])
+            LOGGER.put(('p', f"{key}: cancelled"))
+            #done.append([*task[0:k], *[f"X!{keyidx}" for keyidx in task[k:]]])
           case _:
-            LOGGER.put(('p', f"{task[k]}: finished"))
-            task[k] = f"!{task[k]}"
-            pending.append(task)
+            LOGGER.put(('p', f"{key}: completed"))
+            #task[k] = f"!{task[k]}"
+            #pending.append(task)
+        _completed(wflow)
     case _:
       raise Exception(f"Unknown thread exit <{watchout}>!")
-  _startThread()
+  for _ in range(min(4-len(active), len(inprogress))):
+    _startThread()
   LOGGER.put(('p', '\n'.join([
     f"- {len(done)} done: {done}",
+    f"- {len(inprogress)} inprogress: {inprogress}",
     f"- {len(pending)} pending: {pending}",
     f"- {len(active)} active: {active}"
   ])))

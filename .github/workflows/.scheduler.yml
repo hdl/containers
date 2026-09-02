@@ -35,12 +35,8 @@ on:
     - cron: '17 0 * * 5'
   workflow_dispatch:
     inputs:
-      keys-trigger:
-        description: 'Space-separated list of keys to trigger workflow dispatches.'
-        required: false
-        type: string
-      keys-call:
-        description: 'Space-separated list of keys to call workflows.'
+      tasks:
+        description: 'Space-separated list of tasks to call and/or trigger workflows.'
         required: false
         type: string
       rerun:
@@ -69,14 +65,17 @@ jobs:
         gh api rate_limit
         gh run list --created "<$(date -d '2 days ago' '+%Y-%m-%d')" -L 500 --json databaseId -q '.[].databaseId' \
         | xargs -r -n1 -P4 gh run delete
+    - name: 🛠️ Setup
+      uses: $/.github/self-script
+      with:
+        scriptfile: dag.setup.sh
     - name: 🔔 Dispatch and generate call matrix
       id: dispatch
       uses: $/.github/self-script
       with:
         scriptfile: dispatch.py
       env:
-        GH_INPUT_KEYS_TRIGGER: ${{ inputs.keys-trigger }}
-        GH_INPUT_KEYS_CALL: ${{ inputs.keys-call }}
+        GH_INPUT_TASKS: ${{ inputs.tasks }}
         GH_INPUT_RERUN: ${{ inputs.rerun }}
         GH_INPUT_SKIP-RELEASE: ${{ inputs.skip-release }}
         GH_MESSAGE: >-
@@ -85,23 +84,24 @@ jobs:
             && format('#{0} {1}', github.event.pull_request.number, github.event.pull_request.title)
             || github.event.head_commit.message
           }}
-        HDLC_PUSH_TRIGGER: >-
+        HDLC_PUSH: >-
+          irsim>
+          ghdl>cosim
+          >nextpnr
+#          formal
+#          impl
+#          boolector
+#          netgen
+#          nvc
+#          irsim
+#          conda/f4pga/xc7/toolchain>f4pga-xc7-devices>conda/f4pga/xc7
+#          f4pga-eos-s3
+#          magic>magic-irsim
+#          nextpnr-build:T>nextpnr-prjs>nextpnr
+#          sim>osvb>cosim>gnuplot
+        HDLC_SCHEDULE: >-
           formal
           impl
-        HDLC_PUSH_CALL: >-
-          boolector
-          netgen
-          nvc
-          irsim
-          conda/f4pga/xc7/toolchain>f4pga-xc7-devices>conda/f4pga/xc7
-          f4pga-eos-s3
-          magic>magic-irsim
-          nextpnr-build:T>nextpnr-prjs>nextpnr
-          sim>osvb>cosim>gnuplot
-        HDLC_SCHEDULE_TRIGGER: >-
-          formal
-          impl
-        HDLC_SCHEDULE_CALL: >-
           apicula
           arachne-pnr
           base
