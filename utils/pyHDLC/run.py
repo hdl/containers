@@ -65,4 +65,4 @@ def GHASummary(content: List[str]):
         print("· Printing GHA summary skipped")
         return
     with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as ghs:
-        ghs.write(f"{'\n'.join(content)}\n")
+        ghs.write('\n'.join(content)+'\n')
