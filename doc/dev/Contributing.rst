@@ -7,20 +7,20 @@ As explained in :ref:`Tools and images <tools-and-images>` and in the :ref:`User
 multiple collections of images are provided.
 For each collection, a set of base images is provided, which are to be used for building and for runtime.
 These are defined in ``base.dockerfile``.
-See, for instance, :ghsrc:`debian-bookworm/base.dockerfile <debian-bookworm/base.dockerfile>`.
+See, for instance, :ghsrc:`debian/base.dockerfile <debian/base.dockerfile>`.
 All the images in the ecosystem are based on these:
 
 .. include:: ../shields/shields.build.gen.inc
 
-* |SHIELD:Image:build/base| Debian Bookworm, Debian Bullseye or Rocky Linux 8, with updated ``ca-certificates``,
+* |SHIELD:Image:build/base| Debian (Trixie, Bookworm or Bullseye) or Rocky Linux 8, with updated ``ca-certificates``,
   ``curl`` and Python 3.
 
 * |SHIELD:Image:build/build| based on ``base``, includes ``clang`` and ``make``.
 
 * |SHIELD:Image:build/dev| based on ``build``, includes ``cmake``, ``libboost-all-dev`` and ``python3-dev``.
 
-Then, for each project/tool there are dockerfiles (one for each collection), a GitHub Actions workflow, and one or more
-test scripts.
+Then, for each project/tool there are dockerfiles (for each collection), a GitHub Actions workflow node and expanded matrix,
+and one or more test scripts.
 Those are used for:
 
 * Tools are built using ``REGISTRY/[ARCHITECTURE/][COLLECTION/]build`` images.
@@ -31,8 +31,8 @@ Those are used for:
 
 * Ready-to-use images are tested before uploading.
 
-The :ref:`Package images <Development:package-images>` created in some dockerfiles/workflows are based on ``scratch``
-and contain pre-built assets.
+The :ref:`Package images <Development:package-images>` created in some tasks are based on ``scratch`` and contain
+pre-built assets.
 Therefore, they are not really useful *per se*, but meant to be used for building other.
 In fact, multiple tools are merged into ready-to-use images for common use cases (such as ``impl``,
 ``formal`` or ``prog``).
@@ -40,8 +40,7 @@ In fact, multiple tools are merged into ready-to-use images for common use cases
 .. IMPORTANT::
    Before working on adding or extending the support for a tool, please check the
    :gh:`issues <hdl/containers/issues>` and :gh:`pull requests <hdl/containers/pulls>`;
-   :gh:`open an issue <hdl/containers/issues/new>`
-   or `let us know through the chat <https://gitter.im/hdl/community>`__.
+   :gh:`open an issue <hdl/containers/issues/new>`.
    Someone might be working on that already!
 
 .. NOTE::
@@ -60,8 +59,8 @@ Nonetheless, all dockerfiles use two or three stages at least:
 
 * A global argument named ``REGISTRY`` defines the default registry path and collection to be used.
 
-* One stage, named ``build`` and based on either of ``$REGISTRY/build/{base|build|dev}`` is used to (optionally) install
-  build dependencies, and to actually build the tool.
+* One stage, named ``build`` and typically based on either of ``$REGISTRY/build/{base|build|dev}`` is used to
+  (optionally) install build dependencies, and to actually build the tool.
 
   * The tool/project is built using the standard ``PREFIX``, but installed to a custom location using ``DESTDIR``.
     See :ref:`Package images <Development:package-images>`.
@@ -129,7 +128,7 @@ In those cases, the dockerfile is named after the name of the main tool/image bu
 .. NOTE::
   Typically, stage ``pkg`` is used as a target to build a package image, and the dockerfile is used without a target in
   order to build the regular image for the tool.
-  However, some tools/groups require additional stages, and some other don't have the package or the regular stage.
+  However, some tools/groups require additional stages, and some others don't have the package or the regular stage.
 
 
 .. _Development:contributing:Dockerfiles:with-assets:
@@ -141,7 +140,7 @@ On the other hand, the dockerfiles to build tools with additional assets are nam
 subdir under the collection directory, named after the name of the main tool/image built there.
 Those are typically used along with a shell script named ``HDLC``.
 The structure of these dockerfiles is similar to the :ref:`Development:contributing:Dockerfiles:single-file`, however,
-BuilKit's ``--mount`` feature is used to source a helper script (``HDLC``) without creating additional stages/steps (see
+BuildKit's ``--mount`` feature is used to source a helper script (``HDLC``) without creating additional stages/steps (see
 :ref:`Development:contributing:BuildKit`).
 A similar strategy can be used to run or copy additional assets into the images.
 
@@ -216,26 +215,23 @@ BuildKit
 
 The usage of dockerfiles in this repository relies on the image build engine making an analysis and pruning of the stages.
 Furthermore, option ``--mount`` used in some of the dockerfiles requires `docs.docker.com: BuildKit <https://docs.docker.com/go/buildkit/>`__.
-Therefore, enabling BuildKit is required in order to build the images.
+Find further details about BuildKit's :gh:`here-documents <moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#here-documents>`
+and mount syntax in :gh:`moby/buildkit: frontend/dockerfile/docs/reference.md#run---mount <moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mount>`.
 
-Depending on the version of Docker on your host or CI service, BuildKit features might need to be enabled explicitly.
-As explained in `docs.docker.com: To enable BuildKit builds <https://docs.docker.com/develop/develop-images/build_enhancements/#to-enable-buildkit-builds>`__, either set the ``DOCKER_BUILDKIT=1`` environment variable, or set the daemon feature to
-``true`` in the JSON configuration file: (``{ "features": { "buildkit": true } }``).
-
-Find further details about BuildKit's mount syntax in :gh:`moby/buildkit: frontend/dockerfile/docs/syntax.md <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md>`.
-
-* :gh:`bind <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypebind-the-default-mount-type>`
-* :gh:`cache <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypecache>`
-* :gh:`tmpfs <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypetmpfs>`
-* :gh:`secret <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypesecret>`
-* :gh:`ssh <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypessh>`
-* :gh:`here-documents <moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#here-documents>`
+* :gh:`bind <moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mounttypebind>`
+* :gh:`cache <moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mounttypecache>`
+* :gh:`tmpfs <moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mounttypetmpfs>`
+* :gh:`secret <moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mounttypesecret>`
+* :gh:`ssh <moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mounttypessh>`
 
 .. NOTE::
-  In order to use those features, apart from using BuildKit ``# syntax=docker/dockerfile:1.3`` might need to be added as
-  the first line of the Dockerfile.
-  That depends on the version of Docker.
-  Recent versions should not require it.
+  Although recent versions should not require it, depending on the version of Docker on your host or CI service,
+  BuildKit features might need to be enabled explicitly:
+
+  * Either set the ``DOCKER_BUILDKIT=1`` environment variable, or set the daemon feature to ``true`` in the JSON
+    configuration file: (``{ "features": { "buildkit": true } }``).
+
+  * ``# syntax=docker/dockerfile:1.3`` might need to be added as the first line of the Dockerfile.
 
 .. _Development:contributing:checklist:
 
@@ -254,8 +250,8 @@ Step by step checklist
 
   * Some tools are to be added to existing images which include several tools (coloured :maroon:`BROWN` in the
     :ref:`Graphs <Development:graphs>`).
-    After creating the dockerfile where the corresponding package image is defined, add
-    ``COPY --from=$REGISTRY/pkg/TOOL_NAME`` statements to the dockerfiles of multi-tool images.
+    After creating the dockerfile where the corresponding package image is defined, add ``COPY --from=`` statements to
+    the dockerfiles of multi-tool images.
 
 2. Build and test the dockerfile(s) locally.
    Use helper scripts from subdir :ghsrc:`utils/`, as explained in :ref:`Development:utils`.
@@ -266,12 +262,11 @@ Step by step checklist
   * Be careful with the order.
     If you add a new tool and include it in one of the multi-tool images, the package image needs to be built first.
 
-3. Create or update workflow(s).
+3. See :ref:`Development:continuous-integration:structure`.
 
-  * Find details at :ref:`Development:continous-integration:structure`.
-
-      * If necessary, update the :ghsrc:`images.yml <utils/pyHDLC/images.yml>` to override the defaults or
-        :ghsrc:`jobs.yml <utils/pyHDLC/jobss.yml>` to define new job/task lists.
+  * If necessary, update :ghsrc:`images.yml <utils/pyHDLC/images.yml>` to override the defaults and/or
+    add a node to :ghsrc:`needs.dot <.github/needs.dot>` and update :ghsrc:`jobs.yml <utils/pyHDLC/jobs.yml>`
+    to define new job/task lists.
 
 4. Update the documentation.
 

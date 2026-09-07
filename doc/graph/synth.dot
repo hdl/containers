@@ -57,7 +57,7 @@ digraph G {
   { node [shape=cylinder, color=orange, fontcolor=orange]
     "scratch"
     "ghdl/pkg:bullseye-mcode"
-    "ghdl/pkg:bullseye-llvm-9";
+    "ghdl/pkg:bullseye-llvm-11";
   }
 
   { rank=same
@@ -65,7 +65,7 @@ digraph G {
     "build/build"
     "scratch"
     "ghdl/pkg:bullseye-mcode"
-    "ghdl/pkg:bullseye-llvm-9"
+    "ghdl/pkg:bullseye-llvm-11"
   }
 
   # Workflows
@@ -78,7 +78,7 @@ digraph G {
       "p_ghdl_build/base" [label="build/base"]
       "p_ghdl_scratch" [label="scratch"]
       "p_ghdl_bullseye" [label="ghdl/pkg:bullseye-mcode"]
-      "p_ghdl_bullseye-llvm" [label="ghdl/pkg:bullseye-llvm-9"]
+      "p_ghdl_bullseye-llvm" [label="ghdl/pkg:bullseye-llvm-11"]
     }
 
     d_ghdl -> { rank=same
@@ -159,7 +159,7 @@ digraph G {
 
   "scratch" -> "p_ghdl_scratch" -> d_ghdl;
   "ghdl/pkg:bullseye-mcode" -> "p_ghdl_bullseye" -> d_ghdl;
-  "ghdl/pkg:bullseye-llvm-9" -> "p_ghdl_bullseye-llvm" -> d_ghdl;
+  "ghdl/pkg:bullseye-llvm-11" -> "p_ghdl_bullseye-llvm" -> d_ghdl;
   "build/base" -> "p_ghdl_build/base" -> d_ghdl;
 
   "pkg/ghdl" -> "p_ghdl-yosys-plugin_pkg/ghdl" -> d_ghdlYosysPlugin;

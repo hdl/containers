@@ -7,7 +7,6 @@ HDL Containers
   |SHIELD:Code:Repository|
   |SHIELD:Code:License|
   |SHIELD:Documentation:License|
-  |SHIELD:Community:Chat|
 
 .. raw:: html
 

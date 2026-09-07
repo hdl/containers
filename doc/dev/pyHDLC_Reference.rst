@@ -9,7 +9,7 @@ Functions
 ---------
 
 .. automodule:: pyHDLC
-  :exclude-members: Config, ConfigDefaultImageItem, ConfigImages, ConfigJobs, ConfigJobsCustomItem, ConfigJobsCustomExcludeItem, Defaults
+  :exclude-members: ConfigDefaultImageItem, ConfigImages, ConfigJobs, ConfigJobsCustomItem, ConfigJobsCustomExcludeItem, Defaults
 
 .. _Development:utils:pyHDLC:Reference:Dataclasses:
 

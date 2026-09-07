@@ -122,7 +122,7 @@ def _watch(wflow: str, idx: str) -> None:
 
 def _dispatch(wflow: str, data: Dict[str, Any]) -> None:
   idx = check_output([
-      "gh", "workflow", "run", ".build-test-release.yml", "-r", environ["GITHUB_REF_NAME"],
+      "gh", "workflow", "run", "build-test-release.yml", "-r", environ["GITHUB_REF_NAME"],
       "-f", f"key={wflow}",
       "-f", f"skip-test={data['skip-test']}",
       "-f", f"skip-release={data['skip-release']}",

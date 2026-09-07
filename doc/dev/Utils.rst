@@ -18,7 +18,7 @@ before running ``setup.sh``:
 
 .. sourcecode:: shell
 
-  virtualenv venv
+  python3 -m venv venv
   source venv/bin/activate
   ./utils/setup.sh
 
@@ -34,7 +34,7 @@ before running ``setup.sh``:
 Smoke-tests
 ===========
 
-There is a test script in :ghsrc:`test/ <test/>` for each image in this ecosystem, according to the following
+There is a test script in :ghsrc:`test/ <test/>` for each runnable image in this ecosystem, according to the following
 convention:
 
 * Scripts for package images, ``/[ARCHITECTURE/][COLLECTION/]pkg/TOOL_NAME[/SUBNAME]``, are named
@@ -101,19 +101,19 @@ It can be downloaded as a tarball/zipfile, or used as a container:
 
 :ghsrc:`dockerDive <utils/bin/dockerDive>` is a wrapper around the wagoodman/dive container, which supports one
 or two arguments for specifying the image to be inspected.
-The default registry prefix is ``ghcr.io/hdl``, however, it can be overriden through envvar ``HDL_REGISTRY``.
+The default registry prefix is ``ghcr.io/hdl/amd64``, however, it can be overridden through envvar ``HDL_REGISTRY``.
 
-For instance, inspect image ``ghcr.io/hdl/debian/bullseye/ghdl``:
+For instance, inspect image ``ghcr.io/hdl/amd64/debian/bookworm/ghdl``:
 
 .. sourcecode:: bash
 
-   dockerDive debian/bullseye ghdl
+   dockerDive debian/bookworm ghdl
 
 or, inspect any image from any registry:
 
 .. sourcecode:: bash
 
-   HDL_REGISTRY=docker.io dockerDive python:slim-bookworm
+   HDL_REGISTRY=docker.io dockerDive python:slim-trixie
 
 
 .. _Development:configuration:
@@ -147,16 +147,16 @@ See the clarifications below:
 
 .. _Development:configuration:images:
 
-Imagess
--------
+Images
+------
 
-If the following conditions are met, images need not to be explicitly listed in the configuration file:
+If the following conditions are met, images do not need to be explicitly listed in the configuration file:
 
 * The dockerfile to be used matches the image name.
 * The default target is empty, or ``pkg`` if a package image is being built.
 * The ``argimg`` is empty.
 
-Otherwise, a dictionary is expected, with the fields that need to be overriden (``dockerfile``, ``target`` and/or
+Otherwise, a dictionary is expected, with the fields that need to be overridden (``dockerfile``, ``target`` and/or
 ``argimg``).
 
 .. _Development:configuration:jobs:
@@ -173,7 +173,7 @@ There are four kinds of job lists:
 
 In **default**, **pkgonly** and **runonly**, a dictionary of lists is expected per keyword; each key corresponding to a
 collection and the lists specifying the architectures.
-Conversely, in **custom** three fields are expected:
+Conversely, in **custom** two or three fields are expected:
 
 * **sys**: a dictionary of lists, such as the one expected in **default**, **pkgonly** and **runonly**.
 
@@ -233,5 +233,5 @@ Conversely, in **custom** three fields are expected:
         - { arch: nexus, prj: prjoxide   }
       sys: *SysDebianAmd64
       exclude:
-        - sys: { debian/buster: [amd64] }
+        - sys: { debian/bullseye: [amd64] }
           params: { arch: nexus, prj: prjoxide }

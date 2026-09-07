@@ -154,7 +154,7 @@ digraph G {
     "BASE IMAGE"
     "scratch"
     "ghdl/pkg:bullseye-mcode"
-    "ghdl/pkg:bullseye-llvm-9"
+    "ghdl/pkg:bullseye-llvm-11"
   }
 
   # Dependencies
@@ -164,7 +164,7 @@ digraph G {
   {
     "scratch"
     "ghdl/pkg:bullseye-mcode"
-    "ghdl/pkg:bullseye-llvm-9"
+    "ghdl/pkg:bullseye-llvm-11"
     "build/base"
     "build/build"
   } -> m_synth;

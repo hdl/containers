@@ -25,7 +25,7 @@ All of those are explained in the legend: :numref:`img-graph-legend`.
 .. IMPORTANT::
    These graphs represent a single collection of images (the *virtual* aggregation of others).
    In practice, some tools might be missing in some collections.
-   For instance, a tool might be available in Debian Buster based containers, but not in CentOS 7.
+   For instance, a tool might be available in Debian Trixie based containers, but not in Rocky Linux 8.
    That info is not tracked in the graphs yet.
    Please, see whether a dockerfile exists in the corresponding subdir.
 

@@ -16,12 +16,6 @@
    :target: Doc-License.html
    :class: shield
 
-.. |SHIELD:Community:Chat| image:: https://img.shields.io/gitter/room/hdl/community.svg?longCache=true&style=flat-square&logo=gitter&logoColor=fff&color=4db797&label=Chat
-   :alt: 'hdl/community on gitter.im'
-   :height: 22
-   :target: https://gitter.im/hdl/community
-   :class: shield
-
 .. |SHIELD:Registry:GHCR| image:: https://img.shields.io/badge/-ghcr.io/hdl-555555.svg?longCache=true&style=flat-square&logo=OpenContainersInitiative&logoColor=f2f1ef
    :alt: 'GitHub Container Registry'
    :height: 22

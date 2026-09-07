@@ -9,8 +9,6 @@
   -->
   <a title="CC-BY-4.0" href="https://hdl.github.io/containers/Doc-License.html"><img src="https://img.shields.io/badge/Doc-CC--BY%204.0-bf7600?longCache=true&style=flat-square&logo=CreativeCommons"></a><!--
   -->
-  <a title="hdl/community on gitter.im" href="https://gitter.im/hdl/community"><img src="https://img.shields.io/gitter/room/hdl/community.svg?longCache=true&style=flat-square&logo=gitter&logoColor=fff&color=4db797&label=Chat"></a><!--
-  -->
 </p>
 
 This repository contains scripts and GitHub Actions (GHA) YAML workflows for building, testing and deploying OCI images
