@@ -18,7 +18,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: .watch
+name: watch
 run-name: '👀 ${{ inputs.message }}'
 
 on:

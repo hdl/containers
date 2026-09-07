@@ -18,7 +18,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: .scheduler
+name: scheduler
 run-name: >-
   🧱 ${{ case(
     contains(fromJSON('["schedule", "workflow_dispatch"]'), github.event.name),
@@ -113,7 +113,7 @@ jobs:
       matrix:
         include: ${{ fromJSON(needs.dispatch.outputs.cout).matrix }}
     name: ${{ matrix.key }}
-    uses: $/.github/workflows/.build-test-release.yml
+    uses: $/.github/workflows/build-test-release.yml
     with:
       key: ${{ matrix.key }}
       skip-test: ${{ matrix.skip-test }}

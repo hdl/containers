@@ -163,7 +163,7 @@ with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
   }))
 
 watchurl = check_output([
-  "gh", "workflow", "run", ".watch.yml", "-r", environ['GITHUB_REF_NAME'],
+  "gh", "workflow", "run", "watch.yml", "-r", environ['GITHUB_REF_NAME'],
   "-f", f"schedule={json_dumps({'pending': pending, 'inprogress': inprogress})}",
   "-f", f"rerun={environ['GH_INPUT_RERUN']}",
   "-f", f"message={environ['GITHUB_SHA'][0:8]} " + (

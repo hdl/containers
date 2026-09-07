@@ -40,14 +40,37 @@ As shown in :numref:`img-ci`, the following wrappers are used:
   GitHub Actions are explained.
   See also `Workflow syntax for GitHub Actions <https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions>`__.
 
-* :ghsrc:`build-test-release <.github/build-test-release/action.yml>` is a local Composite Action with three steps,
-  including setup, pulling/building/testing and releasing.
-* :ghsrc:`.build-test-release <.github/workflows/.build-test-release.yml>` is a Reusable and Dispatchable Workflow with
-  two jobs.
-  The first job, named *matrix*, uses ``pyHDLC jobs`` to generate a list of tasks to be used in the second job, named
-  *jobs* (see `docs.github.com: Workflow syntax for GitHub Actions » jobs.<job_id>.outputs <https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idoutputs>`__).
-  Then, the Composite Action is used in each of the dynamically generated jobs.
-* :ghsrc:`trigger.sh <.github/trigger.sh>` is a shell script to trigger the dispatchable workflow using the REST API endpoint.
+* *build-test-release* is both:
+
+  * a local Composite Action :ghsrc:`build-test-release/action.yml <.github/build-test-release/action.yml>` with three
+    steps, including setup, pulling/building/testing and releasing.
+
+  * a local Reusable and Dispatchable Workflow :ghsrc:`workflows/build-test-release.yml <.github/workflows/build-test-release.yml>`
+    with two jobs.
+    The first job uses *generate-matrix* to get a list of tasks to be used in the second job named *jobs*
+    (see `docs.github.com: Workflow syntax for GitHub Actions » jobs.<job_id>.outputs <https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idoutputs>`__).
+    Then, the *build-test-release* Composite Action is used in each of the dynamically generated jobs.
+
+    * :ghsrc:`generate-matrix <.github/generate-matrix/action.yml>` uses ``pyHDLC jobs`` to generate
+
+    * :ghsrc:`summary.py <.github/summary.py>`
+
+.. graphviz:: ../../.github/needs.dot
+   :name: img-needs
+   :align: center
+   :caption: Workflow scheduling
+
+* :ghsrc:`scheduler <.github/workflows/scheduler.yml>`
+
+  * :ghsrc:`dispatch.py <.github/dispatch.py>`
+
+* :ghsrc:`watch <.github/workflows/watch.yml>`
+
+  * :ghsrc:`watch.py <.github/watch.py>`
+
+  * :ghsrc:`results.py <.github/results.py>`
+
+trigger the dispatchable workflow using the REST API endpoint.
 
 Workflows for each tool or group are triggered through scheduled (CRON) events, by pushes, by Pull Requests or manually.
 Those which need to use the reusable-dispatchable workflow once only can do so through the trigger script.

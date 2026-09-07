@@ -163,7 +163,7 @@ with (ROOT / "shields/shields.build.gen.inc").open("w", encoding="utf-8") as wfp
 # -- Generate CIStatus.inc ---------------------------------------------------------------------------------------------
 
 CIWorkflows = [
-    [".doc", ".scheduler", ".watch"],
+    ["doc", "scheduler", "watch"],
     ["formal", "impl"]
 ]
 

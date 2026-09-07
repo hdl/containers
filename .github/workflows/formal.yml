@@ -20,7 +20,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: 'formal'
+name: formal
 run-name: ${{ inputs.message }}
 
 on:
@@ -37,7 +37,7 @@ env:
 
 jobs:
 # TODO: Handle 'pull' in 'config.yml' (and command 'jobs').
-# Then, use the reusable workflow '.build-test-release.yml' here.
+# Then, use the reusable workflow 'build-test-release.yml' here.
 
   matrix:
     runs-on: ubuntu-latest

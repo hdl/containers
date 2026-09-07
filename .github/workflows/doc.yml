@@ -19,7 +19,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: .doc
+name: doc
 
 on:
   pull_request:

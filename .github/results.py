@@ -47,7 +47,7 @@ if environ['GH_WATCH_RESULT'] == 'cancelled':
       note['message'].startswith('The job has exceeded the maximum execution time of')
     ):
       run_url = check_output([
-        'gh', 'workflow', 'run', '.watch.yml',
+        'gh', 'workflow', 'run', 'watch.yml',
         '-r', environ['GITHUB_REF_NAME'],
         '-f', f"schedule={environ['GH_INPUT_SCHEDULE']}",
         '-f', f"rerun={environ['GH_INPUT_RERUN']}",

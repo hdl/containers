@@ -21,7 +21,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-name: 'impl'
+name: impl
 run-name: ${{ inputs.message }}
 
 on:
@@ -38,8 +38,8 @@ env:
 
 jobs:
 # TODO: Handle 'pull' in 'config.yml' (and command 'jobs').
-# TODO: Support 'skip-test' in the reusable workflow '.build-test-release.yml'.
-# Then, use the reusable workflow '.build-test-release.yml' here.
+# TODO: Support 'skip-test' in the reusable workflow 'build-test-release.yml'.
+# Then, use the reusable workflow 'build-test-release.yml' here.
 
   matrix:
     runs-on: ubuntu-latest
