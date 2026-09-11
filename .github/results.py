@@ -23,12 +23,15 @@
 from os import environ
 from subprocess import DEVNULL, check_call, check_output, run
 from json import loads as json_loads
-from tabulate import tabulate
+from tabulate import tabulate  # type: ignore[import-untyped]
 from datetime import datetime as dt
+from typing import Dict, List, Any
 
-schedule = json_loads(environ['GH_INPUT_SCHEDULE'])
+schedule: Dict[str, Any] = json_loads(environ['GH_INPUT_SCHEDULE'])
+pending: Dict[str, Dict[str, Any]]
+inprogress: List[Dict[str, Any]]
 pending, inprogress = (schedule[k] for k in ('pending', 'inprogress'))
-done = schedule.get('done', {})
+done: Dict[str, str] = schedule.get('done', {})
 
 if environ['GH_WATCH_RESULT'] == 'cancelled':
 
@@ -58,26 +61,26 @@ if environ['GH_WATCH_RESULT'] == 'cancelled':
         ghs.write(f'Timeout! New watch dispatched: [{run_id}]({run_url})\n')
       break
   else:
-    for wflow in inprogress:
-      if wflow['idx'].split('!')[0] != 'scheduler':
-        print(f"Cancel {wflow['key']}")
-        run(["gh", "run", "cancel", wflow['idx'], "--force"], check=False)
-    for wflow in inprogress:
-      print(f"Watching {wflow['key']}...")
-      if wflow['idx'].split('!')[0] != 'scheduler':
-        check_call(["gh", "run", "watch", wflow['idx'], "-i", str(30)], stdout=DEVNULL)
-      done[wflow['key']] = f"{wflow['idx']}!"
+    for task in inprogress:
+      if task['idx'].split('!')[0] != 'scheduler':
+        print(f"Cancel {task['key']}")
+        run(["gh", "run", "cancel", task['idx'], "--force"], check=False)
+    for task in inprogress:
+      print(f"Watching {task['key']}...")
+      if task['idx'].split('!')[0] != 'scheduler':
+        check_call(["gh", "run", "watch", task['idx'], "-i", str(30)], stdout=DEVNULL)
+      done[task['key']] = f"{task['idx']}!"
     inprogress = []
 
   print("::endgroup::")
 
-results = []
-for wflow in [
+results: List[Dict[str, Any]] = []
+for wflow_tuple in [
   *[(wflow, idx) for wflow, idx in done.items()],
-  *[(wflow['key'], wflow['idx']) for wflow in inprogress],
-  *[(wflow, '') for wflow in pending],
+  *[(task['key'], task['idx']) for task in inprogress],
+  *[(key, '') for key in pending],
 ]:
-  idx = wflow[1].split('!')[0]
+  idx = wflow_tuple[1].split('!')[0]
   results.append({**({} if idx == 'scheduler' or not idx else
     json_loads(check_output(['gh', 'run', 'view', idx, '--json', 'attempt,conclusion,jobs', '-q', '''
 .jobs |= map(
@@ -85,11 +88,11 @@ for wflow in [
   select(.name | test("(dispatch|matrix|results|matrix\\\\.key)$") | not) )
 '''
     ], encoding='utf-8'))),
-    'workflow': wflow[0],
-    'run_id': wflow[1],
+    'workflow': wflow_tuple[0],
+    'run_id': wflow_tuple[1],
   })
 
-sym = {
+sym: Dict[str, str] = {
   'success': '✔️',
   'failure': '❌',
   'cancelled': '✖️',
@@ -99,10 +102,10 @@ sym = {
   'scheduler': '🧱'
 }
 
-def _conclusion(conclusion):
+def _conclusion(conclusion: str) -> str:
   return sym.get(conclusion, '❔')
 
-mdtables = []
+mdtables: List[List[Any]] = []
 for wflow in results:
   idx = wflow['run_id'].split('!')[0]
   if idx == 'scheduler' or not idx:

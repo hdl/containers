@@ -22,15 +22,17 @@
 
 from os import environ
 from pathlib import Path
-import networkx as nx
+from typing import Dict, List, Any, Set
+import networkx as nx  # type: ignore[import-untyped]
 from json import dumps as json_dumps
 from subprocess import check_output
 
-ROOT = Path(__file__).parent
+ROOT: Path = Path(__file__).parent
 
-evname = environ["GITHUB_EVENT_NAME"]
-skip_release = evname == 'pull_request'
+evname: str = environ["GITHUB_EVENT_NAME"]
+skip_release: bool = evname == 'pull_request'
 
+input_tasks: List[str]
 match evname:
   case "push":
     input_tasks = environ["HDLC_PUSH"].split()
@@ -38,22 +40,22 @@ match evname:
     input_tasks = environ["HDLC_SCHEDULE"].split()
   case "workflow_dispatch":
     input_tasks = environ["GH_INPUT_TASKS"].split()
-    skip_release = environ["GH_INPUT_SKIP-RELEASE"]
+    skip_release = environ["GH_INPUT_SKIP-RELEASE"].lower() == 'true'
   case _:
-    input_tasks = ""
+    input_tasks = []
     raise Exception(f"Empty tasks list for event name <{evname}>!")
 
 if not input_tasks:
-  raise Exception(f"Empty list of tasks!")
+  raise Exception("Empty list of tasks!")
 
-skips = {}
+skips: Dict[str, str] = {}
 for t, task in enumerate(input_tasks):
   if ':' in task:
     task, skip = task.split(':')
     input_tasks[t] = task
     skips[task] = skip
 
-G = nx.nx_agraph.read_dot(ROOT/"needs.dot")
+G: Any = nx.nx_agraph.read_dot(ROOT/"needs.dot")
 
 if not nx.is_directed_acyclic_graph(G):
   raise RuntimeError("Dependency graph contains a cycle!")
@@ -64,7 +66,7 @@ if 'base' not in input_tasks:
 # F>: descendants of F and F
 # >T: ancestors of T and T
 # F>T: nodes which are both descendants of F and ancestors of T, and both F and T
-dnodes = set()
+dnodes: Set[str] = set()
 for key in input_tasks:
   if '>' not in key:
     dnodes.add(key)
@@ -77,11 +79,11 @@ for key in input_tasks:
   else:
     dnodes.update({nto} | nx.ancestors(G, nto))
 
-unknown = dnodes - set(G.nodes)
+unknown: Set[str] = dnodes - set(G.nodes)
 if unknown:
   raise ValueError(f"Unknown tasks: {sorted(unknown)}")
 
-D = G.subgraph(dnodes).copy()
+D: nx.DiGraph = G.subgraph(dnodes).copy()
 
 with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as ghs:
   ghs.write('\n'.join([
@@ -100,7 +102,7 @@ for node in dnodes:
 
 # Precompute the number of predecessors and the list of successors of each node to dynamically dispatch workflows using
 # Kahn's algorithm
-pending = {
+pending: Dict[str, Dict[str, Any]] = {
   node: {
     'out': list(D.successors(node)),
     'in': degree,
@@ -108,13 +110,13 @@ pending = {
     'skip-release': skip_release or ((node in skips) and ('R' in skips[node])),
    } for node, degree in dict(D.in_degree()).items()
 }
-inprogress = [{
+inprogress: List[Dict[str, Any]] = [{
   'key': 'scheduler',
   'idx': environ['GITHUB_RUN_ID'],
   'out': []
 }]
 
-call_wflow = []
+call_wflow: List[Dict[str, Any]] = []
 
 for wflow in [
   wflow for wflow, data in pending.items()
@@ -130,7 +132,7 @@ with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
     "skip-release": skip_release
   }))
 
-watchurl = check_output([
+watchurl: str = check_output([
   "gh", "workflow", "run", ".watch.yml", "-r", environ['GITHUB_REF_NAME'],
   "-f", f"schedule={json_dumps({'pending': pending, 'inprogress': inprogress})}",
   "-f", f"rerun={environ['GH_INPUT_RERUN']}",

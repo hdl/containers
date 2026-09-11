@@ -27,15 +27,16 @@ from pathlib import Path
 from json import loads as json_loads
 from yaml import load as yaml_load, Loader as yaml_Loader
 from tabulate import tabulate
+from typing import Dict, List, Any, Tuple
 
-ROOT = Path(__file__).resolve().parent
+ROOT: Path = Path(__file__).resolve().parent
 
 sys_path.insert(0, abspath("."))
 sys_path.insert(0, abspath("../utils/"))
 
 # -- Generate ToolsTable.inc -------------------------------------------------------------------------------------------
 
-imageShields = [
+imageShields: List[str] = [
     "sim",
     "sim/osvb",
     "sim/scipy-slim",
@@ -67,17 +68,17 @@ imageShields = [
     "conda/f4pga/eos-s3",
 ]
 
-tools = ROOT / "tools.yml"
+toolsPath: Path = ROOT / "tools.yml"
 
-if not tools.exists():
-    raise (Exception("Tools YAML file %s not found!" % str(tools)))
+if not toolsPath.exists():
+    raise (Exception("Tools YAML file %s not found!" % str(toolsPath)))
 
-with tools.open("r", encoding="utf-8") as stream:
-    tools = yaml_load(stream, Loader=yaml_Loader)
+with toolsPath.open("r", encoding="utf-8") as stream:
+    tools: Dict[str, Any] = yaml_load(stream, Loader=yaml_Loader)
 
 with (ROOT / "ToolsTable.inc").open("w", encoding="utf-8") as wfptr:
 
-    def table_row(tool, var):
+    def table_row(tool: str, var: Dict[str, Any]) -> Tuple[List[str], List[str], List[str]]:
         pkgImages = [f"pkg/{item}" for item in var["pkg"]] if "pkg" in var else []
         useImages = var["use"] if "use" in var else []
         imageShields.extend(pkgImages)
@@ -103,12 +104,12 @@ with (ROOT / "ToolsTable.inc").open("w", encoding="utf-8") as wfptr:
             [] if len(use) < 2 else use[1:],
         )
 
-    table = []
+    table: List[List[str]] = []
     for tool, var in tools.items():
         (row, pkg, use) = table_row(tool, var)
         table.append(row)
-        len_pkg = len(pkg)
-        len_use = len(use)
+        len_pkg: int = len(pkg)
+        len_use: int = len(use)
         if len_pkg > 0 or len_use > 0:
             for num in range(max(len_pkg, len_use)):
                 table.append(
@@ -135,10 +136,10 @@ with (ROOT / "ToolsTable.inc").open("w", encoding="utf-8") as wfptr:
 # -- Generate shields.tools.inc and shields.build.inc ------------------------------------------------------------------
 
 
-def OCIImageShield(image):
-    arr = image.replace("/", ":", 1).replace("/", "--").split(":")
-    attrs = f"longCache=true&style=flat-square&label={image}&logo=Docker&logoColor=fff"
-    name = f"{arr[0]}/{arr[1] if len(arr) > 1 else 'latest'}"
+def OCIImageShield(image: str) -> str:
+    arr: List[str] = image.replace("/", ":", 1).replace("/", "--").split(":")
+    attrs: str = f"longCache=true&style=flat-square&label={image}&logo=Docker&logoColor=fff"
+    name: str = f"{arr[0]}/{arr[1] if len(arr) > 1 else 'latest'}"
     return f"""
 .. |SHIELD:Image:{image}| image:: https://img.shields.io/docker/image-size/hdlc/{name}?{attrs}
    :alt: '{image} container image size'

@@ -21,11 +21,10 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import List
-from pathlib import Path
-from os import listdir
+from argparse import Namespace
+from typing import Any, Callable
 
-from pyAttributes.ArgParseAttributes import (
+from pyAttributes.ArgParseAttributes import (  # type: ignore[import-untyped]
     ArgParseMixin,
     ArgumentAttribute,
     Attribute,
@@ -46,7 +45,7 @@ from pyHDLC import (
 
 
 class WithRegistryAttributes(Attribute):
-    def __call__(self, func):
+    def __call__(self, func: Callable[..., Any]) -> Callable[..., Any]:
         for _item in [
             ArgumentAttribute(
                 dest="Image",
@@ -88,9 +87,9 @@ class WithRegistryAttributes(Attribute):
 
 
 class CLI(ArgParseMixin):
-    HeadLine = "hdl/containers (HDLC) command-line tool"
+    HeadLine: str = "hdl/containers (HDLC) command-line tool"
 
-    def __init__(self):
+    def __init__(self) -> None:
         import argparse
         import textwrap
 
@@ -110,7 +109,7 @@ class CLI(ArgParseMixin):
             add_help=False,
         )
 
-    def PrintHeadline(self):
+    def PrintHeadline(self) -> None:
         print("{line}".format(line="=" * 80))
         print("{headline: ^80s}".format(headline=self.HeadLine))
         print("{line}".format(line="=" * 80))
@@ -122,11 +121,11 @@ class CLI(ArgParseMixin):
         help="Print commands but do not execute them.",
         default=False,
     )
-    def Run(self):
+    def Run(self) -> None:
         ArgParseMixin.Run(self)
 
     @DefaultAttribute()
-    def HandleDefault(self, args):
+    def HandleDefault(self, args: Namespace) -> None:
         self.PrintHeadline()
         self.MainParser.print_help()
 
@@ -137,7 +136,7 @@ class CLI(ArgParseMixin):
         nargs="?",
         help="Print help page(s) for a command.",
     )
-    def HandleHelp(self, args):
+    def HandleHelp(self, args: Namespace) -> None:
         if args.Command == "help":
             print("This is a recursion ...")
             return
@@ -168,7 +167,7 @@ class CLI(ArgParseMixin):
         type=str,
         help="Identifier to extract jobs from the YAML configuration file.",
     )
-    def HandleJobs(self, args):
+    def HandleJobs(self, args: Namespace) -> None:
         GenerateJobList(
             name=args.Name,
             fmt=args.Format,
@@ -177,7 +176,7 @@ class CLI(ArgParseMixin):
 
     @CommandAttribute("pull", help="Pull images by name.", description="Pull container image(s) from registry.")
     @WithRegistryAttributes()
-    def HandlePull(self, args):
+    def HandlePull(self, args: Namespace) -> None:
         PullImage(
             image=args.Image,
             registry=args.Registry,
@@ -239,7 +238,7 @@ Build one or multiple images (and optionally test them) at once, reusing common 
         help="Test each image right after building it.",
         default=False,
     )
-    def HandleBuild(self, args):
+    def HandleBuild(self, args: Namespace) -> None:
         BuildImage(
             image=args.Image,
             registry=args.Registry,
@@ -266,7 +265,7 @@ Test container image(s).
 """,
     )
     @WithRegistryAttributes()
-    def HandleTest(self, args):
+    def HandleTest(self, args: Namespace) -> None:
         TestImage(
             image=args.Image,
             registry=args.Registry,
@@ -287,7 +286,7 @@ Test container image(s).
         type=str,
         help="List of additional registry/registries to push to. Supported placeholders: `#A` (architecture), `#C` (collection).",
     )
-    def HandlePush(self, args):
+    def HandlePush(self, args: Namespace) -> None:
         PushImage(
             image=args.Image,
             registry=args.Registry,
@@ -298,7 +297,7 @@ Test container image(s).
         )
 
 
-def main():
+def main() -> None:
     CLI().Run()
 
 

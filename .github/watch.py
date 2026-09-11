@@ -27,6 +27,7 @@ from queue import Queue
 from subprocess import DEVNULL, TimeoutExpired, check_call, check_output
 from json import loads as json_loads, dumps as json_dumps
 from enum import Enum
+from typing import Dict, List, Any, Tuple
 
 class _watchout(Enum):
   COMPLETED = 0
@@ -34,15 +35,15 @@ class _watchout(Enum):
   TIMEDOUT = 2
   SCHEDULER = 3
 
-RERUN = int(environ['GH_INPUT_RERUN'])
+RERUN: int = int(environ['GH_INPUT_RERUN'])
 
-LOGGER = Queue()
-SYNC = Queue()
-SCHEDULER = {}
+LOGGER: Queue[Tuple[str, str]] = Queue()
+SYNC: Queue[Tuple[Thread, _watchout]] = Queue()
+SCHEDULER: Dict[str, str] = {}
 
-INTERVAL = 60
+INTERVAL: int = 60
 
-def _log():
+def _log() -> None:
   while True:
     cmd, content = LOGGER.get()
     match cmd:
@@ -54,9 +55,9 @@ def _log():
       case _:
         raise Exception(f"Unknown log type <{cmd}>!")
 
-def _scheduler(idx):
+def _scheduler(idx: str) -> None:
   try:
-    view = {
+    view: Dict[str, Any] = {
       'conclusion': 'failure',
       'attempt': 0
     }
@@ -84,7 +85,7 @@ def _scheduler(idx):
   finally:
     SYNC.put((current_thread(), _watchout.CANCELLED if view['conclusion'] == 'cancelled' else _watchout.COMPLETED))
 
-def _wait(wflow, _):
+def _wait(wflow: str, _: str) -> None:
   try:
     LOGGER.put(('p', f"Waiting {wflow}..."))
     if wflow not in SCHEDULER:
@@ -92,7 +93,7 @@ def _wait(wflow, _):
   finally:
     SYNC.put((current_thread(), _watchout.SCHEDULER))
 
-def _watch(wflow, idx):
+def _watch(wflow: str, idx: str) -> None:
   timeout = False
   try:
     conclusion = 'failure'
@@ -119,7 +120,7 @@ def _watch(wflow, idx):
       _watchout.COMPLETED
     ))
 
-def _dispatch(wflow, data):
+def _dispatch(wflow: str, data: Dict[str, Any]) -> None:
   idx = check_output([
       "gh", "workflow", "run", ".build-test-release.yml", "-r", environ["GITHUB_REF_NAME"],
       "-f", f"key={wflow}",
@@ -140,23 +141,25 @@ def _dispatch(wflow, data):
 logger_thread = Thread(target=_log)
 logger_thread.start()
 
-schedule = json_loads(environ['GH_INPUT_SCHEDULE'])
+schedule: Dict[str, Any] = json_loads(environ['GH_INPUT_SCHEDULE'])
+pending: Dict[str, Dict[str, Any]]
+inprogress: List[Dict[str, Any]]
 pending, inprogress = (schedule[k] for k in ('pending', 'inprogress'))
-done = schedule.get('done', {})
-active = {}
+done: Dict[str, str] = schedule.get('done', {})
+active: Dict[Thread, Dict[str, Any]] = {}
 
 for wflow, data in list(pending.items()):
   if data['in'] == 0:
     _dispatch(wflow, data)
 
-scheduler = next((wflow for wflow in inprogress if wflow['key'] == 'scheduler'), None)
+scheduler: Dict[str, Any] | None = next((wflow for wflow in inprogress if wflow['key'] == 'scheduler'), None)
 if scheduler:
   scheduler_thread = Thread(target=_scheduler, args=(scheduler['idx'],))
   scheduler_thread.start()
   active[scheduler_thread] = scheduler
   inprogress.remove(scheduler)
 
-def _startThread():
+def _startThread() -> None:
   wflow = inprogress.pop(0)
   thread = Thread(target=_wait if wflow['idx'] == 'scheduler' else _watch, args=(wflow['key'], wflow['idx']))
   thread.start()
@@ -165,11 +168,11 @@ def _startThread():
 for _ in range(min(3, len(inprogress))):
   _startThread()
 
-def _output():
+def _output() -> None:
   with open(environ['GITHUB_OUTPUT'], 'w', encoding='utf-8') as gho:
     gho.write(f"schedule={json_dumps({'pending': pending, 'inprogress': [*inprogress, *active.values()], 'done': done})}\n")
 
-def _completed(wflow):
+def _completed(wflow: Dict[str, Any]) -> None:
   done[wflow['key']] = wflow['idx']
   for node in wflow['out']:
     if node in pending:
@@ -177,14 +180,14 @@ def _completed(wflow):
       if pending[node]['in'] == 0:
         _dispatch(node, pending[node])
 
-def _cancelled(outs):
+def _cancelled(outs: List[str]) -> None:
   for node in outs:
     if node in pending:
       _cancelled(pending[node]['out'])
       done[node] = '!'
       del pending[node]
 
-def _idxurl(idx):
+def _idxurl(idx: str) -> str:
   idx = idx.split('!')[0]
   return (
    f"https://github.com/{environ['GITHUB_REPOSITORY']}/actions/runs/{idx}"
@@ -204,32 +207,32 @@ while active:
     *[f"  - {key}: {data}" for key, data in pending.items()],
   ])))
   thread, watchout = SYNC.get()
-  wflow = active.pop(thread)
+  wthr = active.pop(thread)
   thread.join()
-  key = wflow['key']
+  key = wthr['key']
   match watchout:
     case _watchout.TIMEDOUT:
       LOGGER.put(('p', f"{key}: timed out"))
-      inprogress.append(wflow)
+      inprogress.append(wthr)
     case _watchout.CANCELLED:
       LOGGER.put(('p', f"{key}: cancelled"))
-      done[wflow['key']] = f"{wflow['idx']}!"
-      _cancelled(wflow['out'])
+      done[wthr['key']] = f"{wthr['idx']}!"
+      _cancelled(wthr['out'])
     case _watchout.COMPLETED:
       LOGGER.put(('p', f"{key}: completed"))
-      _completed(wflow)
+      _completed(wthr)
     case _watchout.SCHEDULER:
       if key not in SCHEDULER:
-        inprogress.append(wflow)
+        inprogress.append(wthr)
       else:
         match SCHEDULER[key]:
           case 'cancelled':
             LOGGER.put(('p', f"{key}: cancelled"))
-            done[wflow['key']] = f"{wflow['idx']}!"
-            _cancelled(wflow['out'])
+            done[wthr['key']] = f"{wthr['idx']}!"
+            _cancelled(wthr['out'])
           case _:
             LOGGER.put(('p', f"{key}: completed"))
-            _completed(wflow)
+            _completed(wthr)
     case _:
       raise Exception(f"Unknown thread exit <{watchout}>!")
   for _ in range(min(4-len(active), len(inprogress))):

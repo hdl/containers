@@ -24,11 +24,12 @@ from os import environ
 from pathlib import Path
 from shutil import copyfileobj
 from json import load as json_load, loads as json_loads
+from typing import Dict, List, Any
 
 
-def _summary(job, isfirst):
-  _status = job['status']
-  _pull = job['pull']
+def _summary(job: Dict[str, Any], isfirst: bool) -> List[str]:
+  _status: str = job['status']
+  _pull: List[str] = job['pull']
   return [
     f"<details>\n\n<summary>{_status} [{job['run_attempt']}]" +
     (isfirst * f" {job['architecture']}/{job['collection']} | {job['images']}")
@@ -43,7 +44,7 @@ def _summary(job, isfirst):
   + (_status != 'success') * ["\nSee partial job summary."]
 
 
-metadata = {}
+metadata: Dict[str, Dict[str, Any]] = {}
 for job in Path('.').glob('*.json'):
   with open(job, 'r', encoding='utf-8') as ptr:
     content = json_load(ptr)
@@ -51,7 +52,7 @@ for job in Path('.').glob('*.json'):
       metadata[job.stem] = content
 
 for job in json_loads(environ['GH_OUTPUT_MATRIX']):
-  attempts = [
+  attempts: List[Dict[str, Any]] = [
     {
       'idx': idx,
       **item,
@@ -70,11 +71,11 @@ for job in json_loads(environ['GH_OUTPUT_MATRIX']):
   for idx in [dic['idx'] for dic in attempts]:
     del metadata[idx]
 
-  isfirst = True
+  isfirst: bool = True
   with open(environ['GITHUB_STEP_SUMMARY'], 'a') as ghs:
-    for job in sorted(attempts, key=lambda dic: dic['run_attempt'], reverse=True):
-      ghs.write(f"{'\n'.join(_summary(job, isfirst))}\n")
-      with open(f"{job['idx']}.md", 'r') as rptr:
+    for job_attempt in sorted(attempts, key=lambda dic: dic['run_attempt'], reverse=True):
+      ghs.write(f"{'\n'.join(_summary(job_attempt, isfirst))}\n")
+      with open(f"{job_attempt['idx']}.md", 'r') as rptr:
         copyfileobj(rptr, ghs)
       if not isfirst:
         ghs.write('\n</details>\n')

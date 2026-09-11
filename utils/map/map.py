@@ -25,43 +25,44 @@ from typing import Dict, List, Tuple
 from pathlib import Path
 
 # https://github.com/asottile/dockerfile
-import dockerfile
-from graphviz import Digraph
+import dockerfile  # type: ignore[import-not-found]
+from graphviz import Digraph  # type: ignore[import-untyped]
 
 from pyHDLC import JOBS, _generateJobList, _NormaliseBuildParams
 
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT: Path = Path(__file__).resolve().parent.parent
 
 
 class Stage:
-    value: str = None
-    tag: str = None
+    value: str
+    tag: str | None = None
     depends: List[str]
 
-    def __init__(self):
+    def __init__(self, value: str) -> None:
+        self.value = value
         self.depends = []
 
-    def addDep(self, val: str):
+    def addDep(self, val: str) -> None:
         self.depends.append(val)
 
 
 class Dockerfile:
-    argimg: str = None
+    argimg: str | None = None
     stages: List[Stage]
-    artifacts: List[Tuple[str, str, str]]
+    artifacts: List[Tuple[str, str | None, str | None]]
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.stages = []
         self.artifacts = []
 
-    def addStage(self, stg: Stage):
+    def addStage(self, stg: Stage) -> None:
         self.stages.append(stg)
 
-    def addArtifact(self, art: Tuple[str, str, str]):
+    def addArtifact(self, art: Tuple[str, str | None, str | None]) -> None:
         self.artifacts.append(art)
 
-    def markOrigin(self, val: str):
+    def markOrigin(self, val: str) -> str:
         """
         Check if a name/id corresponds to another image, a stage or an external image.
         """
@@ -83,13 +84,13 @@ class CollectionGraph:
     pkgs: List[str]
     exts: List[str]
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.dfiles = []
         self.imgs = []
         self.pkgs = []
         self.exts = []
 
-    def addItem(self, item: str):
+    def addItem(self, item: str) -> str | None:
         if item.startswith("!R|"):
             _label = item[3:]
             if _label.startswith("pkg/"):
@@ -108,15 +109,15 @@ class CollectionGraph:
 class CollectionMap:
     data: Dict[str, Dockerfile]
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.data = {}
 
-    def AddDockerfile(self, name: str, dfile: Dockerfile):
+    def AddDockerfile(self, name: str, dfile: Dockerfile) -> None:
         if name in self.data:
             raise Exception(f"Dockerfile <{name}> exists already!")
         self.data[name] = dfile
 
-    def Report(self):
+    def Report(self) -> None:
         """
         Print report of the map data
         """
@@ -136,7 +137,7 @@ class CollectionMap:
                 for dep in stg.depends:
                     print("      +", dep)
 
-    def DotGraph(self):
+    def DotGraph(self) -> None:
         """
         Generate a graphviz dot diagram and render it to an SVG file
         """
@@ -156,7 +157,9 @@ class CollectionMap:
             arts = [art[0] for art in dfile.artifacts]
 
             for art in arts:
-                dot.edge(f"d_{key}", graph.addItem(art).replace(":", "--"), style="dotted")
+                _val = graph.addItem(art)
+                assert _val is not None
+                dot.edge(f"d_{key}", _val.replace(":", "--"), style="dotted")
 
             for stg in dfile.stages:
                 if (
@@ -166,7 +169,9 @@ class CollectionMap:
                     (stg.value in arts) # reusing images built with the same dockerfile
                 ):
                     continue
-                dot.edge(graph.addItem(stg.value).replace(":", "--"), f"d_{key}")
+                _val = graph.addItem(stg.value)
+                assert _val is not None
+                dot.edge(_val.replace(":", "--"), f"d_{key}")
 
             deps = [art[2] for art in dfile.artifacts if art[2] is not None]
             if dfile.argimg is not None:
@@ -187,10 +192,10 @@ class CollectionMap:
                     fontcolor=item[1],
                 )
 
-        for dfile in list(set(graph.dfiles)):
+        for dfname in list(set(graph.dfiles)):
             dot.node(
-                f"d_{dfile}",
-                label=dfile,
+                f"d_{dfname}",
+                label=dfname,
                 shape="note",
                 color="dodgerblue",
                 fontcolor="dodgerblue",
@@ -198,7 +203,7 @@ class CollectionMap:
 
         dot.render(cleanup=True)
 
-    def ParseDockerfile(self, dfilepath: Path, debug: bool = False):
+    def ParseDockerfile(self, dfilepath: Path, debug: bool = False) -> None:
         dfilename = Path(dfilepath.name).stem
         dkey = dfilename
         if dfilename == "Dockerfile":
@@ -210,7 +215,7 @@ class CollectionMap:
 
         dfile = Dockerfile()
 
-        stg = None
+        stg: Stage | None = None
 
         for item in dockerfile.parse_file(str(dfilepath)):
 
@@ -234,10 +239,8 @@ class CollectionMap:
                     # This was not the first stage in this dockerfile, save the previous one
                     dfile.addStage(stg)
 
-                stg = Stage()
-
                 _val = item.value[0]
-                stg.value = dfile.markOrigin(_val)
+                stg = Stage(dfile.markOrigin(_val))
                 if len(item.value) != 1:
                     # Second argument must be 'AS', between the image and the tag
                     if item.value[1].upper() != "AS":
@@ -248,6 +251,8 @@ class CollectionMap:
 
             if item.cmd.upper() == "COPY" and len(item.flags) > 0:
                 if "--from=" in item.flags[0].lower():
+                    if stg is None:
+                        raise Exception(f"COPY instruction before any stage in <{dfilename}>!")
                     stg.addDep(dfile.markOrigin(item.flags[0][7:]))
 
                 continue
@@ -255,6 +260,8 @@ class CollectionMap:
             if item.cmd.upper() == "RUN" and len(item.flags) > 0:
                 _val = item.flags[0]
                 if _val.startswith("--mount=type=cache"):
+                    if stg is None:
+                        raise Exception(f"RUN instruction before any stage in <{dfilename}>!")
                     stg.addDep(dfile.markOrigin(_val.split(",from=")[1].split(",")[0]))
 
                 continue
@@ -267,7 +274,7 @@ class CollectionMap:
         self.AddDockerfile(dkey, dfile)
 
 
-def GenerateMap(debug: bool = False):
+def GenerateMap(debug: bool = False) -> CollectionMap:
     """
     Parse all the dockerfiles in a collection and extract the stages and the dependencies (images) of each stage;
     cross-relate them with the declarations of default images; and build a map of all the images in the collection.
@@ -315,9 +322,7 @@ def GetImagesFromJobs(collection: str = "debian/bullseye", architecture: str = "
         image.split("#")[0]
         for sublist in [
             job["imgs"].split(" ")
-            for name in [
-                item for items in [JOBS.default, JOBS.pkgonly, JOBS.runonly, JOBS.custom] for item in items
-            ]
+            for name in [*JOBS.default.keys(), *JOBS.pkgonly.keys(), *JOBS.runonly.keys(), *JOBS.custom.keys()]
             for job in _generateJobList(name)
             if (job["os"] == collection) and (job["arch"] == architecture)
         ]

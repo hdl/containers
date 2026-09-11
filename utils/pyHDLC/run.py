@@ -19,7 +19,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-from typing import List, Optional
+from typing import List
 from sys import executable, platform, stdout as sys_stdout, stderr as sys_stderr
 from os import environ
 from subprocess import check_call, STDOUT
@@ -29,7 +29,7 @@ from shutil import which
 isGHA: bool = "GITHUB_ACTIONS" in environ
 
 
-def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] = None):
+def _exec(args: List[str], dry: bool = False, collapse: str | None = None) -> None:
     isGroup = isGHA and collapse is not None
 
     if isGroup:
@@ -51,16 +51,21 @@ def _exec(args: List[str], dry: Optional[bool] = False, collapse: Optional[str] 
         sys_stderr.flush()
 
 
-def _sh(args: List[str], dry: Optional[bool] = False):
-    shell: List[str] = [which("bash")] if platform == "win32" else []
-    _exec(shell + args, dry=dry)
+def _sh(args: List[str], dry: bool = False) -> None:
+    if platform != "win32":
+        _exec(args, dry=dry)
+        return
+    shell = which("bash")
+    if shell is None:
+        raise FileNotFoundError("bash not found in PATH (required on win32)")
+    _exec([shell, *args], dry=dry)
 
 
-def _py(args: List[str], dry: Optional[bool] = False):
+def _py(args: List[str], dry: bool = False) -> None:
     _exec([executable] + args, dry=dry)
 
 
-def GHASummary(content: List[str]):
+def GHASummary(content: List[str]) -> None:
     if not isGHA:
         print("· Printing GHA summary skipped")
         return

@@ -25,30 +25,30 @@
 from pathlib import Path
 from typing import List
 
-from setuptools import (
+from setuptools import (  # type: ignore[import-untyped]
     setup as setuptools_setup,
     find_namespace_packages as setuptools_find_namespace_packages
 )
 
 
-packagePath = Path(__file__).resolve().parent / 'pyHDLC'
-requirementsFile = packagePath / "requirements.txt"
+packagePath: Path = Path(__file__).resolve().parent / 'pyHDLC'
+requirementsFile: Path = packagePath / "requirements.txt"
 
 
 # Read requirements file and add them to package dependency list
 def get_requirements(file: Path) -> List[str]:
-    requirements = []
+    requirements: List[str] = []
     with file.open("r") as fh:
         for line in fh.read().splitlines():
             if line.startswith("#") or line == "":
                 continue
             elif line.startswith("-r"):
                 # Remove the first word/argument (-r)
-                filename = " ".join(line.split(" ")[1:])
+                filename: str = " ".join(line.split(" ")[1:])
                 requirements += get_requirements(file.parent / filename)
             elif line.startswith("https"):
                 # Convert 'URL#NAME' to 'NAME @ URL'
-                splitItems = line.split("#")
+                splitItems: List[str] = line.split("#")
                 requirements.append("{} @ {}".format(splitItems[1], splitItems[0]))
             else:
                 requirements.append(line)
@@ -65,7 +65,7 @@ setuptools_setup(
     url="https://github.com/hdl/containers",
     packages=setuptools_find_namespace_packages(exclude=[]),
     classifiers=[],
-    python_requires='>=3.6',
+    python_requires='>=3.10',
     install_requires=list(set(get_requirements(requirementsFile))),
     entry_points={
         "console_scripts": [
