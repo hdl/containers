@@ -86,7 +86,7 @@ ConfigJobsDict = Dict[str, ConfigJobsSysDict]
 @dataclass
 class ConfigJobsCustomExcludeItem(YamlDataClassConfig):
     """
-    An exclusion rule for a list of taks generated through a cross-product.
+    An exclusion rule for a list of tasks generated through a cross-product.
     """
 
     #: Collection(s) and architecture(s).
@@ -194,7 +194,7 @@ def _generateJobList(name: str) -> List[Dict[str, str]]:
                     for collection, architectures in exclude.sys.items()
                 ]
 
-                # TODO Merge this list generation into the for loops beloew.
+                # TODO Merge this list generation into the for loops below.
                 # I.e., filter during generation, instead of generating all the cases and then filtering.
                 systems = [
                     (collection, architectures.copy(), params)

@@ -63,7 +63,7 @@ class Dockerfile:
 
     def markOrigin(self, val: str):
         """
-        Check if a name/id corresponds to another image, an stage or an external image.
+        Check if a name/id corresponds to another image, a stage or an external image.
         """
         return (
             # Depends on another image in the collection
@@ -138,7 +138,7 @@ class CollectionMap:
 
     def DotGraph(self):
         """
-        Generate a graphviz dot diagram and render it to a SVG file
+        Generate a graphviz dot diagram and render it to an SVG file
         """
         dot = Digraph(
             comment="OCI images maintained in hdl/containers",

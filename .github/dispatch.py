@@ -63,7 +63,7 @@ if 'base' not in input_tasks:
 
 # F>: descendants of F and F
 # >T: ancestors of T and T
-# F>T: nodes which are both descendants of F and ascendants of T, and both F and T
+# F>T: nodes which are both descendants of F and ancestors of T, and both F and T
 dnodes = set()
 for key in input_tasks:
   if '>' not in key:

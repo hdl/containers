@@ -39,7 +39,7 @@ class CLI(ArgParseMixin):
         import argparse
         import textwrap
 
-        # Call constructor of the main interitance tree
+        # Call constructor of the main inheritance tree
         super().__init__()
         # Call constructor of the ArgParseMixin
         ArgParseMixin.__init__(

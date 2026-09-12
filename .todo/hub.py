@@ -100,7 +100,7 @@ def get_all_registry_info():
 
 def print_repos(repo_list):
     """
-    Print image repositories to stdout as a tables
+    Print image repositories to stdout as a table
     """
     print(tabulate(
         [[repo.name, repo.pulls, repo.description] for repo in repo_list],

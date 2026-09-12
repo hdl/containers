@@ -94,7 +94,7 @@ class CLI(ArgParseMixin):
         import argparse
         import textwrap
 
-        # Call constructor of the main interitance tree
+        # Call constructor of the main inheritance tree
         super().__init__()
         # Call constructor of the ArgParseMixin
         ArgParseMixin.__init__(
@@ -222,7 +222,7 @@ Build one or multiple images (and optionally test them) at once, reusing common 
         "-p",
         "--pkg",
         dest="Pkg",
-        help="Preprend 'pkg/' to Image and set Target to 'pkg' (if unset).",
+        help="Prepend 'pkg/' to Image and set Target to 'pkg' (if unset).",
         default=False,
     )
     @SwitchArgumentAttribute(
