@@ -153,26 +153,20 @@ class CollectionMap:
         for key, dfile in self.data.items():
             graph.dfiles.append(key)
 
-            for art in dfile.artifacts:
-                _val = art[0]
-                _val = graph.addItem(art[0])
-                if _val is None:
-                    raise Exception(f"Artifact <{_val}> should be a known image!")
-                dot.edge(f"d_{key}", _val.replace(":", "--"), style="dotted")
-
             arts = [art[0] for art in dfile.artifacts]
 
+            for art in arts:
+                dot.edge(f"d_{key}", graph.addItem(art).replace(":", "--"), style="dotted")
+
             for stg in dfile.stages:
-                if stg.value in arts:
-                    # For now, we ignore edges about reusing images in the same dockerfile
+                if (
+                    (stg.value == "!R|$IMAGE") or # We ignore the edges with '$IMAGE' as a source; we handle them below
+                    # For now, we also ignore
+                    stg.value.startswith('!I|') or # reusing stages in the same dockerfile
+                    (stg.value in arts) # reusing images built with the same dockerfile
+                ):
                     continue
-                if stg.value == "!R|$IMAGE":
-                    # We ignore the edges with '$IMAGE' as a source; we handle them below
-                    continue
-                _val = graph.addItem(stg.value)
-                if _val is None:
-                    continue
-                dot.edge(_val.replace(":", "--"), f"d_{key}")
+                dot.edge(graph.addItem(stg.value).replace(":", "--"), f"d_{key}")
 
             deps = [art[2] for art in dfile.artifacts if art[2] is not None]
             if dfile.argimg is not None:
