@@ -1,0 +1,441 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: icestorm IMAGES: ['pkg/icestorm', 'icestorm']
+=== BUILD pkg/icestorm ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/icestorm --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target pkg -f debian/icestorm.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from icestorm.dockerfile
+#1 transferring dockerfile: 1.62kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.1s
+
+#4 [build 1/5] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#4 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#4 CACHED
+
+#5 [build 2/5] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     pkg-config
+#5 1.284 Reading package lists...
+#5 1.935 Building dependency tree...
+#5 2.081 Reading state information...
+#5 2.213 The following additional packages will be installed:
+#5 2.213   libdpkg-perl libglib2.0-0
+#5 2.214 Suggested packages:
+#5 2.214   debian-keyring gnupg patch sensible-utils bzr dpkg-dev
+#5 2.214 Recommended packages:
+#5 2.214   libfile-fcntllock-perl liblocale-gettext-perl bzip2 xz-utils libglib2.0-data
+#5 2.214   shared-mime-info xdg-user-dirs
+#5 2.257 The following NEW packages will be installed:
+#5 2.257   libdpkg-perl libglib2.0-0 pkg-config
+#5 2.347 0 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+#5 2.347 Need to get 2997 kB of archives.
+#5 2.347 After this operation, 6977 kB of additional disk space will be used.
+#5 2.347 Get:1 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libdpkg-perl all 1.20.14 [1555 kB]
+#5 2.417 Get:2 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libglib2.0-0 amd64 2.66.8-1+deb11u8 [1377 kB]
+#5 2.543 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 pkg-config amd64 0.29.2-1 [65.1 kB]
+#5 2.686 debconf: delaying package configuration, since apt-utils is not installed
+#5 2.730 Fetched 2997 kB in 0s (10.7 MB/s)
+#5 2.762 Selecting previously unselected package libdpkg-perl.
+#5 2.762 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14728 files and directories currently installed.)
+#5 2.784 Preparing to unpack .../libdpkg-perl_1.20.14_all.deb ...
+#5 2.794 Unpacking libdpkg-perl (1.20.14) ...
+#5 2.977 Selecting previously unselected package libglib2.0-0:amd64.
+#5 2.979 Preparing to unpack .../libglib2.0-0_2.66.8-1+deb11u8_amd64.deb ...
+#5 2.999 Unpacking libglib2.0-0:amd64 (2.66.8-1+deb11u8) ...
+#5 3.359 Selecting previously unselected package pkg-config.
+#5 3.361 Preparing to unpack .../pkg-config_0.29.2-1_amd64.deb ...
+#5 3.373 Unpacking pkg-config (0.29.2-1) ...
+#5 3.548 Setting up libglib2.0-0:amd64 (2.66.8-1+deb11u8) ...
+#5 3.716 No schema files found: doing nothing.
+#5 3.728 Setting up libdpkg-perl (1.20.14) ...
+#5 3.754 Setting up pkg-config (0.29.2-1) ...
+#5 3.806 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#5 DONE 4.2s
+
+#6 [build 3/5] RUN mkdir /tmp/icestorm  && cd /tmp/icestorm  && curl -fsSL https://codeload.github.com/YosysHQ/icestorm/tar.gz/main | tar xzf - --strip-components=1  && ICEPROG=0 make -j $(nproc)  && ICEPROG=0 make DESTDIR=/opt/icestorm install
+#6 1.046 make -C icebox all
+#6 1.046 make -C icepack all
+#6 1.050 make[1]: Entering directory '/tmp/icestorm/icebox'
+#6 1.050 make -C icemulti all
+#6 1.050 make -C icepll all
+#6 1.050 make[1]: Entering directory '/tmp/icestorm/icepack'
+#6 1.050 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include   -c -o icepack.o icepack.cc
+#6 1.052 make[1]: Entering directory '/tmp/icestorm/icepll'
+#6 1.052 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include   -c -o icepll.o icepll.cc
+#6 1.052 make[1]: Entering directory '/tmp/icestorm/icemulti'
+#6 1.052 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include   -c -o icemulti.o icemulti.cc
+#6 1.057 python3 icebox_chipdb.py -3 > chipdb-384.new
+#6 2.452 clang++ -o icepll  icepll.o -lm -lstdc++
+#6 2.920 make[1]: Leaving directory '/tmp/icestorm/icepll'
+#6 2.930 make -C icebram all
+#6 2.941 make[1]: Entering directory '/tmp/icestorm/icebram'
+#6 2.941 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include   -c -o icebram.o icebram.cc
+#6 3.222 clang++ -o icemulti  icemulti.o -lm -lstdc++
+#6 3.653 make[1]: Leaving directory '/tmp/icestorm/icemulti'
+#6 3.654 make -C icetime all
+#6 3.738 make[1]: Entering directory '/tmp/icestorm/icetime'
+#6 3.738 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include -DPREFIX='"/usr/local"' -DCHIPDB_SUBDIR='"icebox"'   -c -o icetime.o icetime.cc
+#6 5.576 icebram.cc:221:6: warning: private field 'm_pos' is not used [-Wunused-private-field]
+#6 5.576         int m_pos[2];
+#6 5.576             ^
+#6 6.205 mv chipdb-384.new chipdb-384.txt
+#6 6.303 python3 icebox_chipdb.py > chipdb-1k.new
+#6 7.919 clang++ -o icepack  icepack.o -lm -lstdc++
+#6 8.104 ln -sf icepack iceunpack
+#6 8.108 make[1]: Leaving directory '/tmp/icestorm/icepack'
+#6 8.111 python3 icebox_chipdb.py -8 > chipdb-8k.new
+#6 9.280 1 warning generated.
+#6 9.305 clang++ -o icebram  icebram.o -lm -lstdc++
+#6 9.666 make[1]: Leaving directory '/tmp/icestorm/icebram'
+#6 9.667 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include -DPREFIX='"/usr/local"' -DCHIPDB_SUBDIR='"icebox"'   -c -o iceutil.o iceutil.cc
+#6 11.15 python3 timings.py lp384 > timings-lp384.cc
+#6 11.31 python3 timings.py lp1k > timings-lp1k.cc
+#6 11.44 python3 icebox_chipdb.py -5 > chipdb-5k.new
+#6 21.55 mv chipdb-1k.new chipdb-1k.txt
+#6 21.56 python3 icebox_chipdb.py -4 > chipdb-lm4k.new
+#6 40.30 python3 timings.py lp8k > timings-lp8k.cc
+#6 40.33 python3 timings.py hx1k > timings-hx1k.cc
+#6 40.39 python3 timings.py hx8k > timings-hx8k.cc
+#6 40.56 python3 timings.py up5k > timings-up5k.cc
+#6 40.67 python3 timings.py u4k > timings-u4k.cc
+#6 40.76 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include -DPREFIX='"/usr/local"' -DCHIPDB_SUBDIR='"icebox"'   -c -o timings-lp384.o timings-lp384.cc
+#6 41.44 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include -DPREFIX='"/usr/local"' -DCHIPDB_SUBDIR='"icebox"'   -c -o timings-lp1k.o timings-lp1k.cc
+#6 42.82 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include -DPREFIX='"/usr/local"' -DCHIPDB_SUBDIR='"icebox"'   -c -o timings-lp8k.o timings-lp8k.cc
+#6 44.06 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include -DPREFIX='"/usr/local"' -DCHIPDB_SUBDIR='"icebox"'   -c -o timings-hx1k.o timings-hx1k.cc
+#6 45.06 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include -DPREFIX='"/usr/local"' -DCHIPDB_SUBDIR='"icebox"'   -c -o timings-hx8k.o timings-hx8k.cc
+#6 45.99 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include -DPREFIX='"/usr/local"' -DCHIPDB_SUBDIR='"icebox"'   -c -o timings-up5k.o timings-up5k.cc
+#6 77.17 mv chipdb-lm4k.new chipdb-lm4k.txt
+#6 77.18 python3 icebox_chipdb.py -u > chipdb-u4k.new
+#6 94.07 mv chipdb-5k.new chipdb-5k.txt
+#6 94.07 clang++ -MD -MP -O2  -Wall -std=c++11 -I/usr/local/include -DPREFIX='"/usr/local"' -DCHIPDB_SUBDIR='"icebox"'   -c -o timings-u4k.o timings-u4k.cc
+#6 118.7 clang++ -o icetime  icetime.o iceutil.o timings-lp384.o timings-lp1k.o timings-lp8k.o timings-hx1k.o timings-hx8k.o timings-up5k.o timings-u4k.o -lm -lstdc++
+#6 119.2 make[1]: Leaving directory '/tmp/icestorm/icetime'
+#6 121.3 mv chipdb-8k.new chipdb-8k.txt
+#6 122.7 mv chipdb-u4k.new chipdb-u4k.txt
+#6 122.8 make[1]: Leaving directory '/tmp/icestorm/icebox'
+#6 122.8 for dir in icebox icepack icemulti icepll icebram icetime; do \
+#6 122.8 	make -C $dir install || exit; \
+#6 122.8 done
+#6 122.8 make[1]: Entering directory '/tmp/icestorm/icebox'
+#6 122.8 mkdir -p /opt/icestorm/usr/local/share/icebox
+#6 122.8 mkdir -p /opt/icestorm/usr/local/bin
+#6 122.8 cp chipdb-384.txt    /opt/icestorm/usr/local/share/icebox/
+#6 122.8 cp chipdb-1k.txt     /opt/icestorm/usr/local/share/icebox/
+#6 122.8 cp chipdb-8k.txt     /opt/icestorm/usr/local/share/icebox/
+#6 122.8 cp chipdb-5k.txt     /opt/icestorm/usr/local/share/icebox/
+#6 122.9 cp chipdb-u4k.txt    /opt/icestorm/usr/local/share/icebox/
+#6 122.9 cp chipdb-lm4k.txt   /opt/icestorm/usr/local/share/icebox/
+#6 122.9 cp icebox.py         /opt/icestorm/usr/local/bin/icebox.py
+#6 122.9 cp iceboxdb.py       /opt/icestorm/usr/local/bin/iceboxdb.py
+#6 122.9 cp icebox_chipdb.py  /opt/icestorm/usr/local/bin/icebox_chipdb
+#6 122.9 cp icebox_diff.py    /opt/icestorm/usr/local/bin/icebox_diff
+#6 122.9 cp icebox_explain.py /opt/icestorm/usr/local/bin/icebox_explain
+#6 122.9 cp icebox_asc2hlc.py /opt/icestorm/usr/local/bin/icebox_asc2hlc
+#6 122.9 cp icebox_hlc2asc.py /opt/icestorm/usr/local/bin/icebox_hlc2asc
+#6 122.9 cp icebox_colbuf.py  /opt/icestorm/usr/local/bin/icebox_colbuf
+#6 122.9 cp icebox_html.py    /opt/icestorm/usr/local/bin/icebox_html
+#6 122.9 cp icebox_maps.py    /opt/icestorm/usr/local/bin/icebox_maps
+#6 122.9 cp icebox_vlog.py    /opt/icestorm/usr/local/bin/icebox_vlog
+#6 122.9 cp icebox_stat.py    /opt/icestorm/usr/local/bin/icebox_stat
+#6 122.9 sed -i 's+import iceboxdb+import iceboxdb as iceboxdb+g' /opt/icestorm/usr/local/bin/icebox.py
+#6 122.9 sed -i 's+import icebox+import icebox as icebox+g' /opt/icestorm/usr/local/bin/icebox_chipdb
+#6 122.9 sed -i 's+import icebox+import icebox as icebox+g' /opt/icestorm/usr/local/bin/icebox_diff
+#6 122.9 sed -i 's+from icebox+from icebox+g' /opt/icestorm/usr/local/bin/icebox_diff
+#6 122.9 sed -i 's+import icebox+import icebox as icebox+g' /opt/icestorm/usr/local/bin/icebox_explain
+#6 122.9 sed -i 's+from icebox+from icebox+g' /opt/icestorm/usr/local/bin/icebox_explain
+#6 122.9 sed -i 's+import icebox+import icebox as icebox+g' /opt/icestorm/usr/local/bin/icebox_asc2hlc
+#6 122.9 sed -i 's+from icebox+from icebox+g' /opt/icestorm/usr/local/bin/icebox_asc2hlc
+#6 122.9 sed -i 's+import icebox+import icebox as icebox+g' /opt/icestorm/usr/local/bin/icebox_hlc2asc
+#6 122.9 sed -i 's+from icebox+from icebox+g' /opt/icestorm/usr/local/bin/icebox_hlc2asc
+#6 122.9 sed -i 's+import icebox+import icebox as icebox+g' /opt/icestorm/usr/local/bin/icebox_colbuf
+#6 122.9 sed -i 's+from icebox+from icebox+g' /opt/icestorm/usr/local/bin/icebox_colbuf
+#6 122.9 sed -i 's+import icebox+import icebox as icebox+g' /opt/icestorm/usr/local/bin/icebox_html
+#6 122.9 sed -i 's+from icebox+from icebox+g' /opt/icestorm/usr/local/bin/icebox_html
+#6 122.9 sed -i 's+import icebox+import icebox as icebox+g' /opt/icestorm/usr/local/bin/icebox_maps
+#6 122.9 sed -i 's+from icebox+from icebox+g' /opt/icestorm/usr/local/bin/icebox_maps
+#6 122.9 sed -i 's+import icebox+import icebox as icebox+g' /opt/icestorm/usr/local/bin/icebox_vlog
+#6 122.9 sed -i 's+from icebox+from icebox+g' /opt/icestorm/usr/local/bin/icebox_vlog
+#6 122.9 sed -i 's+/usr/local/share/icebox+/usr/local/share/icebox+g' /opt/icestorm/usr/local/bin/icebox_vlog
+#6 122.9 sed -i 's+import icebox+import icebox as icebox+g' /opt/icestorm/usr/local/bin/icebox_stat
+#6 122.9 sed -i 's+from icebox+from icebox+g' /opt/icestorm/usr/local/bin/icebox_stat
+#6 122.9 make[1]: Leaving directory '/tmp/icestorm/icebox'
+#6 123.0 make[1]: Entering directory '/tmp/icestorm/icepack'
+#6 123.0 mkdir -p /opt/icestorm/usr/local/bin
+#6 123.0 cp icepack /opt/icestorm/usr/local/bin/icepack
+#6 123.0 ln -sf icepack /opt/icestorm/usr/local/bin/iceunpack
+#6 123.0 make[1]: Leaving directory '/tmp/icestorm/icepack'
+#6 123.0 make[1]: Entering directory '/tmp/icestorm/icemulti'
+#6 123.0 mkdir -p /opt/icestorm/usr/local/bin
+#6 123.0 cp icemulti /opt/icestorm/usr/local/bin/icemulti
+#6 123.0 make[1]: Leaving directory '/tmp/icestorm/icemulti'
+#6 123.0 make[1]: Entering directory '/tmp/icestorm/icepll'
+#6 123.0 mkdir -p /opt/icestorm/usr/local/bin
+#6 123.0 cp icepll /opt/icestorm/usr/local/bin/icepll
+#6 123.0 make[1]: Leaving directory '/tmp/icestorm/icepll'
+#6 123.0 make[1]: Entering directory '/tmp/icestorm/icebram'
+#6 123.0 mkdir -p /opt/icestorm/usr/local/bin
+#6 123.0 cp icebram /opt/icestorm/usr/local/bin/icebram
+#6 123.0 make[1]: Leaving directory '/tmp/icestorm/icebram'
+#6 123.1 make[1]: Entering directory '/tmp/icestorm/icetime'
+#6 123.1 mkdir -p /opt/icestorm/usr/local/bin
+#6 123.1 mkdir -p /opt/icestorm/usr/local/share/icebox
+#6 123.1 cp icetime /opt/icestorm/usr/local/bin/icetime
+#6 123.1 cp ../icefuzz/timings_*.txt /opt/icestorm/usr/local/share/icebox/
+#6 123.1 make[1]: Leaving directory '/tmp/icestorm/icetime'
+#6 DONE 123.8s
+
+#7 [build 4/5] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     libftdi1-dev
+#7 1.461 Reading package lists...
+#7 2.096 Building dependency tree...
+#7 2.277 Reading state information...
+#7 2.445 The following additional packages will be installed:
+#7 2.446   libftdi1-2 libusb-1.0-0 libusb-1.0-0-dev
+#7 2.447 Recommended packages:
+#7 2.450   libftdi1-doc libusb-1.0-doc
+#7 2.516 The following NEW packages will be installed:
+#7 2.517   libftdi1-2 libftdi1-dev libusb-1.0-0 libusb-1.0-0-dev
+#7 3.250 0 upgraded, 4 newly installed, 0 to remove and 0 not upgraded.
+#7 3.250 Need to get 211 kB of archives.
+#7 3.250 After this operation, 707 kB of additional disk space will be used.
+#7 3.250 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libusb-1.0-0 amd64 2:1.0.24-3 [60.2 kB]
+#7 3.476 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libftdi1-2 amd64 1.5-5+b1 [31.7 kB]
+#7 3.521 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libusb-1.0-0-dev amd64 2:1.0.24-3 [80.4 kB]
+#7 3.688 Get:4 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libftdi1-dev amd64 1.5-5+b1 [39.0 kB]
+#7 3.948 debconf: delaying package configuration, since apt-utils is not installed
+#7 4.011 Fetched 211 kB in 1s (170 kB/s)
+#7 4.056 Selecting previously unselected package libusb-1.0-0:amd64.
+#7 4.056 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14927 files and directories currently installed.)
+#7 4.110 Preparing to unpack .../libusb-1.0-0_2%3a1.0.24-3_amd64.deb ...
+#7 4.110 Unpacking libusb-1.0-0:amd64 (2:1.0.24-3) ...
+#7 4.208 Selecting previously unselected package libftdi1-2:amd64.
+#7 4.208 Preparing to unpack .../libftdi1-2_1.5-5+b1_amd64.deb ...
+#7 4.219 Unpacking libftdi1-2:amd64 (1.5-5+b1) ...
+#7 4.276 Selecting previously unselected package libusb-1.0-0-dev:amd64.
+#7 4.276 Preparing to unpack .../libusb-1.0-0-dev_2%3a1.0.24-3_amd64.deb ...
+#7 4.289 Unpacking libusb-1.0-0-dev:amd64 (2:1.0.24-3) ...
+#7 4.356 Selecting previously unselected package libftdi1-dev.
+#7 4.357 Preparing to unpack .../libftdi1-dev_1.5-5+b1_amd64.deb ...
+#7 4.367 Unpacking libftdi1-dev (1.5-5+b1) ...
+#7 4.450 Setting up libusb-1.0-0:amd64 (2:1.0.24-3) ...
+#7 4.487 Setting up libusb-1.0-0-dev:amd64 (2:1.0.24-3) ...
+#7 4.514 Setting up libftdi1-2:amd64 (1.5-5+b1) ...
+#7 4.542 Setting up libftdi1-dev (1.5-5+b1) ...
+#7 4.569 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#7 DONE 4.7s
+
+#8 [build 5/5] RUN cd /tmp/icestorm/iceprog  && make -j $(nproc)  && make DESTDIR=/opt/iceprog install
+#8 0.317 clang -MD -MP -O2  -Wall -std=c99 -I/usr/local/include -I/usr/include/libftdi1 -I/usr/include/libusb-1.0   -c -o iceprog.o iceprog.c
+#8 0.323 clang -MD -MP -O2  -Wall -std=c99 -I/usr/local/include -I/usr/include/libftdi1 -I/usr/include/libusb-1.0   -c -o mpsse.o mpsse.c
+#8 0.408 mpsse.c:317:6: warning: 'ftdi_usb_purge_buffers' is deprecated [-Wdeprecated-declarations]
+#8 0.408         if (ftdi_usb_purge_buffers(&mpsse_ftdic)) {
+#8 0.408             ^
+#8 0.408 /usr/include/libftdi1/ftdi.h:566:9: note: 'ftdi_usb_purge_buffers' has been explicitly marked deprecated here
+#8 0.408     int DEPRECATED(ftdi_usb_purge_buffers(struct ftdi_context *ftdi));
+#8 0.408         ^
+#8 0.408 /usr/include/libftdi1/ftdi.h:247:42: note: expanded from macro 'DEPRECATED'
+#8 0.408 #define DEPRECATED(func) __attribute__ ((deprecated)) func
+#8 0.408                                          ^
+#8 0.485 1 warning generated.
+#8 0.608 clang -o iceprog  iceprog.o mpsse.o -lm -lstdc++ -lftdi1 -lusb-1.0
+#8 0.690 mkdir -p /opt/iceprog/usr/local/bin
+#8 0.695 cp iceprog /opt/iceprog/usr/local/bin/iceprog
+#8 DONE 0.7s
+
+#9 [pkg 1/2] COPY --from=build /opt/iceprog /iceprog
+#9 DONE 0.1s
+
+#10 [pkg 2/2] COPY --from=build /opt/icestorm /icestorm
+#10 DONE 0.4s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 8.7s done
+#11 preparing layers for inline cache
+#11 preparing layers for inline cache 0.0s done
+#11 exporting manifest sha256:e16cf02cccf0abc020d5fb6a757bd58330c0127bb7b64d5c071c7c493e9367d9 0.0s done
+#11 exporting config sha256:81fdb2c04e80b7664924eb9435474eee3cc05ec02c58c84ef2c8937001a97712 0.0s done
+#11 exporting attestation manifest sha256:e6cb4168ca550b5258643742e2053e1a245b50ec4f022af4b6ebaa5dfb74e4a4 0.0s done
+#11 exporting manifest list sha256:3fb9ec50ba53ce5dfc57b80ef63a21ed63c065ba64c98a4e45accfe95dc6c20d 0.0s done
+#11 naming to ghcr.io/hdl/amd64/debian/bullseye/pkg/icestorm:latest done
+#11 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/icestorm:latest
+#11 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/icestorm:latest 1.1s done
+#11 DONE 10.0s
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/testpkg:icestorm --build-arg IMAGE=ghcr.io/hdl/amd64/debian/bullseye/pkg/icestorm --build-arg PACKAGE=icestorm -f /home/umarcor/containers/utils/pyHDLC/testpkg.dockerfile .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from testpkg.dockerfile
+#1 transferring dockerfile: 975B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/icestorm:latest
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#5 resolve docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b 0.1s done
+#5 CACHED
+
+#6 [pkg 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/icestorm:latest@sha256:3fb9ec50ba53ce5dfc57b80ef63a21ed63c065ba64c98a4e45accfe95dc6c20d
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/icestorm:latest@sha256:3fb9ec50ba53ce5dfc57b80ef63a21ed63c065ba64c98a4e45accfe95dc6c20d 0.1s done
+#6 DONE 0.1s
+
+#7 [stage-1 2/3] COPY --from=pkg /icestorm /
+#7 DONE 0.6s
+
+#8 [stage-1 3/3] RUN apk add -U --no-cache file tree
+#8 1.081 (1/3) Installing libmagic (5.47-r2)
+#8 1.134 (2/3) Installing file (5.47-r2)
+#8 1.147 (3/3) Installing tree (2.3.2-r0)
+#8 1.162 Executing busybox-1.37.0-r31.trigger
+#8 1.192 OK: 18.4 MiB in 19 packages
+#8 DONE 1.3s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 9.1s done
+#9 preparing layers for inline cache
+#9 preparing layers for inline cache 0.0s done
+#9 exporting manifest sha256:57dd315a5a4d54aa3af5373fac2ae54d1f7ef3c2b2747d40d3efe39460de2a88 0.0s done
+#9 exporting config sha256:9a4a68066a06fcf7942951859b2c87784662d8cdbd4c1a60ce6cb43740b2eda3 0.0s done
+#9 exporting attestation manifest sha256:c2b7481a4e32ab81f8211ce87f64312222d7f23b08e8470aa00096ca4fb4891f
+#9 exporting attestation manifest sha256:c2b7481a4e32ab81f8211ce87f64312222d7f23b08e8470aa00096ca4fb4891f 0.0s done
+#9 exporting manifest list sha256:6301b749ea753729c1da201833d312671bf727cc73a80ea4ea1202e5168a9022 0.1s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/testpkg:icestorm done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:icestorm
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:icestorm 1.1s done
+#9 DONE 10.4s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/testpkg:icestorm //wrk/icestorm.pkg.sh
+/usr/local
+├── bin
+│   ├── icebox.py
+│   ├── icebox_asc2hlc
+│   ├── icebox_chipdb
+│   ├── icebox_colbuf
+│   ├── icebox_diff
+│   ├── icebox_explain
+│   ├── icebox_hlc2asc
+│   ├── icebox_html
+│   ├── icebox_maps
+│   ├── icebox_stat
+│   ├── icebox_vlog
+│   ├── iceboxdb.py
+│   ├── icebram
+│   ├── icemulti
+│   ├── icepack
+│   ├── icepll
+│   ├── icetime
+│   └── iceunpack -> icepack
+├── lib
+└── share
+    └── icebox
+        ├── chipdb-1k.txt
+        ├── chipdb-384.txt
+        ├── chipdb-5k.txt
+        ├── chipdb-8k.txt
+        ├── chipdb-lm4k.txt
+        ├── chipdb-u4k.txt
+        ├── timings_hx1k.txt
+        ├── timings_hx8k.txt
+        ├── timings_lp1k.txt
+        ├── timings_lp384.txt
+        ├── timings_lp8k.txt
+        ├── timings_u4k.txt
+        └── timings_up5k.txt
+
+5 directories, 31 files
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS pkg/icestorm ===
+=== BUILD icestorm ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/icestorm --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -f debian/icestorm.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from icestorm.dockerfile
+#1 transferring dockerfile: 1.62kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/base:latest
+#2 DONE 0.1s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#3 DONE 0.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context:
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [build 1/5] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#5 CACHED
+
+#6 [build 2/5] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     pkg-config
+#6 CACHED
+
+#7 [build 3/5] RUN mkdir /tmp/icestorm  && cd /tmp/icestorm  && curl -fsSL https://codeload.github.com/YosysHQ/icestorm/tar.gz/main | tar xzf - --strip-components=1  && ICEPROG=0 make -j $(nproc)  && ICEPROG=0 make DESTDIR=/opt/icestorm install
+#7 CACHED
+
+#8 [build 4/5] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     libftdi1-dev
+#8 CACHED
+
+#9 [build 5/5] RUN cd /tmp/icestorm/iceprog  && make -j $(nproc)  && make DESTDIR=/opt/iceprog install
+#9 CACHED
+
+#10 [stage-2 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#10 resolve ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e 0.1s done
+#10 CACHED
+
+#11 [stage-2 2/2] COPY --from=build /opt/icestorm /
+#11 DONE 0.5s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 9.0s done
+#12 preparing layers for inline cache
+#12 preparing layers for inline cache 0.0s done
+#12 exporting manifest sha256:a4dcab5a2a75912bff4ffda2f84f5126bd5f38cf65ee4ad1f68077480edcf32c 0.1s done
+#12 exporting config sha256:ae2a518ac9e1fcd6b03cbc537f3d3c1f096d1d9d33798ff69b2812fc03194dbb 0.0s done
+#12 exporting attestation manifest sha256:417e4e6583ae08fc7f4aef163c64d07e8bf2f91d4a531f00db93d2400a209a69 0.0s done
+#12 exporting manifest list sha256:4c684ee2dce2558360466126e8a07fe28c39236e55e8b90b56613159c5bdc95b 0.0s done
+#12 naming to ghcr.io/hdl/amd64/debian/bullseye/icestorm:latest
+#12 naming to ghcr.io/hdl/amd64/debian/bullseye/icestorm:latest done
+#12 unpacking to ghcr.io/hdl/amd64/debian/bullseye/icestorm:latest
+#12 unpacking to ghcr.io/hdl/amd64/debian/bullseye/icestorm:latest 1.1s done
+#12 DONE 10.3s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/icestorm
+Architecture: amd64 
+Size: 306957224
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/icestorm //wrk/icestorm.sh
+CC: 
+CXX: 
+· icebram help >> ./icestorm.log
+· icebram help: exit code 1 | [32mOK[0m
+· icemulti help >> ./icestorm.log
+· icemulti help: exit code 1 | [32mOK[0m
+· icepack help >> ./icestorm.log
+· icepack help: exit code 1 | [32mOK[0m
+· icepll help >> ./icestorm.log
+· icepll help: exit code 1 | [32mOK[0m
+· icetime help >> ./icestorm.log
+· icetime help: exit code 1 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS icestorm ===
+RESULT: PASS

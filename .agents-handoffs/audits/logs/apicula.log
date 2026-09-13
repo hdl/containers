@@ -1,0 +1,632 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: apicula IMAGES: ['pkg/apicula', 'apicula']
+=== BUILD pkg/apicula ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target pkg debian-bullseye/apicula
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.83kB done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1.2
+#2 DONE 1.2s
+
+#3 docker-image://docker.io/docker/dockerfile:1.2@sha256:e2a8561e419ab1ba6b2fe6cbdf49fd92b95912df1cf7d313c3e2230a333fdbcc
+#3 resolve docker.io/docker/dockerfile:1.2@sha256:e2a8561e419ab1ba6b2fe6cbdf49fd92b95912df1cf7d313c3e2230a333fdbcc 0.0s done
+#3 sha256:3cc8e449ce9f6e0752ede8f50a7334bf0c7b2d24d76da2ffae7aa6a729dd1da4 0B / 9.64MB 0.2s
+#3 sha256:3cc8e449ce9f6e0752ede8f50a7334bf0c7b2d24d76da2ffae7aa6a729dd1da4 9.64MB / 9.64MB 0.3s
+#3 sha256:3cc8e449ce9f6e0752ede8f50a7334bf0c7b2d24d76da2ffae7aa6a729dd1da4 9.64MB / 9.64MB 0.3s done
+#3 extracting sha256:3cc8e449ce9f6e0752ede8f50a7334bf0c7b2d24d76da2ffae7aa6a729dd1da4
+#3 extracting sha256:3cc8e449ce9f6e0752ede8f50a7334bf0c7b2d24d76da2ffae7aa6a729dd1da4 0.2s done
+#3 DONE 0.6s
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.83kB done
+#1 DONE 0.0s
+
+#4 [internal] load build definition from Dockerfile
+#4 DONE 0.0s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.1s
+
+#6 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 DONE 0.0s
+
+#8 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#8 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#8 ...
+
+#7 [internal] load build context
+#7 transferring context: 3.04kB done
+#7 DONE 0.1s
+
+#8 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#8 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.1s done
+#8 DONE 0.2s
+
+#9 [build 2/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC  && apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]}  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && update-ca-certificates  && rm -rf /var/lib/apt/lists/*
+#9 1.381 Reading package lists...
+#9 1.947 Building dependency tree...
+#9 2.081 Reading state information...
+#9 2.207 The following additional packages will be installed:
+#9 2.207   libexpat1-dev libjs-jquery libjs-sphinxdoc libjs-underscore libpython3-dev
+#9 2.207   libpython3.9 libpython3.9-dev python-pip-whl python3-distutils
+#9 2.207   python3-lib2to3 python3-pkg-resources python3.9-dev zlib1g-dev
+#9 2.208 Suggested packages:
+#9 2.208   python-setuptools-doc
+#9 2.208 Recommended packages:
+#9 2.208   javascript-common build-essential
+#9 2.351 The following NEW packages will be installed:
+#9 2.351   libexpat1-dev libjs-jquery libjs-sphinxdoc libjs-underscore libpython3-dev
+#9 2.351   libpython3.9 libpython3.9-dev python-pip-whl python3-dev python3-distutils
+#9 2.352   python3-lib2to3 python3-pip python3-pkg-resources python3-setuptools
+#9 2.352   python3-wheel python3.9-dev zlib1g-dev
+#9 3.041 0 upgraded, 17 newly installed, 0 to remove and 0 not upgraded.
+#9 3.041 Need to get 10.5 MB of archives.
+#9 3.041 After this operation, 37.7 MB of additional disk space will be used.
+#9 3.041 Get:1 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libexpat1-dev amd64 2.2.10-2+deb11u7 [143 kB]
+#9 3.065 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libjs-jquery all 3.5.1+dfsg+~3.5.5-7 [315 kB]
+#9 3.078 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libjs-underscore all 1.9.1~dfsg-3 [100 kB]
+#9 3.082 Get:4 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libjs-sphinxdoc all 3.4.3-2 [127 kB]
+#9 3.086 Get:5 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libpython3.9 amd64 3.9.2-1+deb11u7 [1694 kB]
+#9 3.117 Get:6 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libpython3.9-dev amd64 3.9.2-1+deb11u7 [4316 kB]
+#9 3.180 Get:7 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libpython3-dev amd64 3.9.2-3 [21.7 kB]
+#9 3.241 Get:8 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python-pip-whl all 20.3.4-4+deb11u2 [1952 kB]
+#9 3.259 Get:9 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 zlib1g-dev amd64 1:1.2.11.dfsg-2+deb11u2 [191 kB]
+#9 3.262 Get:10 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python3.9-dev amd64 3.9.2-1+deb11u7 [507 kB]
+#9 3.274 Get:11 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-lib2to3 all 3.9.2-1 [77.8 kB]
+#9 3.275 Get:12 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-distutils all 3.9.2-1 [143 kB]
+#9 3.276 Get:13 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-dev amd64 3.9.2-3 [24.8 kB]
+#9 3.276 Get:14 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python3-pkg-resources all 52.0.0-4+deb11u2 [190 kB]
+#9 3.277 Get:15 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python3-setuptools all 52.0.0-4+deb11u2 [367 kB]
+#9 3.284 Get:16 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-wheel all 0.34.2-1 [24.0 kB]
+#9 3.284 Get:17 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python3-pip all 20.3.4-4+deb11u2 [338 kB]
+#9 3.465 debconf: delaying package configuration, since apt-utils is not installed
+#9 3.509 Fetched 10.5 MB in 1s (11.3 MB/s)
+#9 3.537 Selecting previously unselected package libexpat1-dev:amd64.
+#9 3.537 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14728 files and directories currently installed.)
+#9 3.623 Preparing to unpack .../00-libexpat1-dev_2.2.10-2+deb11u7_amd64.deb ...
+#9 3.633 Unpacking libexpat1-dev:amd64 (2.2.10-2+deb11u7) ...
+#9 3.729 Selecting previously unselected package libjs-jquery.
+#9 3.731 Preparing to unpack .../01-libjs-jquery_3.5.1+dfsg+~3.5.5-7_all.deb ...
+#9 3.748 Unpacking libjs-jquery (3.5.1+dfsg+~3.5.5-7) ...
+#9 3.829 Selecting previously unselected package libjs-underscore.
+#9 3.832 Preparing to unpack .../02-libjs-underscore_1.9.1~dfsg-3_all.deb ...
+#9 3.842 Unpacking libjs-underscore (1.9.1~dfsg-3) ...
+#9 3.908 Selecting previously unselected package libjs-sphinxdoc.
+#9 3.910 Preparing to unpack .../03-libjs-sphinxdoc_3.4.3-2_all.deb ...
+#9 3.922 Unpacking libjs-sphinxdoc (3.4.3-2) ...
+#9 4.009 Selecting previously unselected package libpython3.9:amd64.
+#9 4.010 Preparing to unpack .../04-libpython3.9_3.9.2-1+deb11u7_amd64.deb ...
+#9 4.041 Unpacking libpython3.9:amd64 (3.9.2-1+deb11u7) ...
+#9 4.280 Selecting previously unselected package libpython3.9-dev:amd64.
+#9 4.280 Preparing to unpack .../05-libpython3.9-dev_3.9.2-1+deb11u7_amd64.deb ...
+#9 4.289 Unpacking libpython3.9-dev:amd64 (3.9.2-1+deb11u7) ...
+#9 4.802 Selecting previously unselected package libpython3-dev:amd64.
+#9 4.803 Preparing to unpack .../06-libpython3-dev_3.9.2-3_amd64.deb ...
+#9 4.815 Unpacking libpython3-dev:amd64 (3.9.2-3) ...
+#9 4.868 Selecting previously unselected package python-pip-whl.
+#9 4.869 Preparing to unpack .../07-python-pip-whl_20.3.4-4+deb11u2_all.deb ...
+#9 4.881 Unpacking python-pip-whl (20.3.4-4+deb11u2) ...
+#9 5.124 Selecting previously unselected package zlib1g-dev:amd64.
+#9 5.126 Preparing to unpack .../08-zlib1g-dev_1%3a1.2.11.dfsg-2+deb11u2_amd64.deb ...
+#9 5.134 Unpacking zlib1g-dev:amd64 (1:1.2.11.dfsg-2+deb11u2) ...
+#9 5.194 Selecting previously unselected package python3.9-dev.
+#9 5.196 Preparing to unpack .../09-python3.9-dev_3.9.2-1+deb11u7_amd64.deb ...
+#9 5.208 Unpacking python3.9-dev (3.9.2-1+deb11u7) ...
+#9 5.267 Selecting previously unselected package python3-lib2to3.
+#9 5.268 Preparing to unpack .../10-python3-lib2to3_3.9.2-1_all.deb ...
+#9 5.275 Unpacking python3-lib2to3 (3.9.2-1) ...
+#9 5.339 Selecting previously unselected package python3-distutils.
+#9 5.340 Preparing to unpack .../11-python3-distutils_3.9.2-1_all.deb ...
+#9 5.348 Unpacking python3-distutils (3.9.2-1) ...
+#9 5.407 Selecting previously unselected package python3-dev.
+#9 5.408 Preparing to unpack .../12-python3-dev_3.9.2-3_amd64.deb ...
+#9 5.416 Unpacking python3-dev (3.9.2-3) ...
+#9 5.475 Selecting previously unselected package python3-pkg-resources.
+#9 5.477 Preparing to unpack .../13-python3-pkg-resources_52.0.0-4+deb11u2_all.deb ...
+#9 5.484 Unpacking python3-pkg-resources (52.0.0-4+deb11u2) ...
+#9 5.559 Selecting previously unselected package python3-setuptools.
+#9 5.559 Preparing to unpack .../14-python3-setuptools_52.0.0-4+deb11u2_all.deb ...
+#9 5.567 Unpacking python3-setuptools (52.0.0-4+deb11u2) ...
+#9 5.659 Selecting previously unselected package python3-wheel.
+#9 5.661 Preparing to unpack .../15-python3-wheel_0.34.2-1_all.deb ...
+#9 5.668 Unpacking python3-wheel (0.34.2-1) ...
+#9 5.727 Selecting previously unselected package python3-pip.
+#9 5.728 Preparing to unpack .../16-python3-pip_20.3.4-4+deb11u2_all.deb ...
+#9 5.737 Unpacking python3-pip (20.3.4-4+deb11u2) ...
+#9 5.838 Setting up python3-pkg-resources (52.0.0-4+deb11u2) ...
+#9 6.065 Setting up python3-wheel (0.34.2-1) ...
+#9 6.228 Setting up libpython3.9:amd64 (3.9.2-1+deb11u7) ...
+#9 6.252 Setting up libexpat1-dev:amd64 (2.2.10-2+deb11u7) ...
+#9 6.279 Setting up zlib1g-dev:amd64 (1:1.2.11.dfsg-2+deb11u2) ...
+#9 6.303 Setting up python-pip-whl (20.3.4-4+deb11u2) ...
+#9 6.325 Setting up libjs-jquery (3.5.1+dfsg+~3.5.5-7) ...
+#9 6.357 Setting up python3-lib2to3 (3.9.2-1) ...
+#9 6.468 Setting up libjs-underscore (1.9.1~dfsg-3) ...
+#9 6.497 Setting up python3-distutils (3.9.2-1) ...
+#9 6.631 Setting up python3-setuptools (52.0.0-4+deb11u2) ...
+#9 6.978 Setting up libpython3.9-dev:amd64 (3.9.2-1+deb11u7) ...
+#9 7.003 Setting up python3-pip (20.3.4-4+deb11u2) ...
+#9 7.279 Setting up libjs-sphinxdoc (3.4.3-2) ...
+#9 7.303 Setting up python3.9-dev (3.9.2-1+deb11u7) ...
+#9 7.328 Setting up libpython3-dev:amd64 (3.9.2-3) ...
+#9 7.351 Setting up python3-dev (3.9.2-3) ...
+#9 7.376 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#9 7.454 Reading package lists...
+#9 8.015 Building dependency tree...
+#9 8.144 Reading state information...
+#9 8.169 Reading package lists...
+#9 8.723 Building dependency tree...
+#9 8.853 Reading state information...
+#9 8.993 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#9 8.996 Updating certificates in /etc/ssl/certs...
+#9 9.558 0 added, 0 removed; done.
+#9 9.558 Running hooks in /etc/ca-certificates/update.d...
+#9 9.559 done.
+#9 DONE 9.7s
+
+#10 [build 3/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+#10 0.464 Apycula-0.0.1a6/.github/
+#10 0.464 Apycula-0.0.1a6/.github/workflows/
+#10 0.464 Apycula-0.0.1a6/.github/workflows/chipdb.yml
+#10 0.464 Apycula-0.0.1a6/.gitignore
+#10 0.464 Apycula-0.0.1a6/Apycula.egg-info/
+#10 0.464 Apycula-0.0.1a6/Apycula.egg-info/PKG-INFO
+#10 0.464 Apycula-0.0.1a6/Apycula.egg-info/SOURCES.txt
+#10 0.464 Apycula-0.0.1a6/Apycula.egg-info/dependency_links.txt
+#10 0.464 Apycula-0.0.1a6/Apycula.egg-info/entry_points.txt
+#10 0.464 Apycula-0.0.1a6/Apycula.egg-info/requires.txt
+#10 0.464 Apycula-0.0.1a6/Apycula.egg-info/top_level.txt
+#10 0.464 Apycula-0.0.1a6/Dockerfile
+#10 0.464 Apycula-0.0.1a6/FUNDING.yml
+#10 0.464 Apycula-0.0.1a6/LICENSE
+#10 0.464 Apycula-0.0.1a6/Makefile
+#10 0.465 Apycula-0.0.1a6/PKG-INFO
+#10 0.465 Apycula-0.0.1a6/apycula/
+#10 0.465 Apycula-0.0.1a6/apycula/GW1N-1.pickle
+#10 0.509 Apycula-0.0.1a6/apycula/GW1N-4.pickle
+#10 0.659 Apycula-0.0.1a6/apycula/GW1N-9.pickle
+#10 0.830 Apycula-0.0.1a6/apycula/__init__.py
+#10 0.830 Apycula-0.0.1a6/apycula/bslib.py
+#10 0.830 Apycula-0.0.1a6/apycula/chipdb.py
+#10 0.830 Apycula-0.0.1a6/apycula/clock_fuzzer.py
+#10 0.830 Apycula-0.0.1a6/apycula/codegen.py
+#10 0.830 Apycula-0.0.1a6/apycula/dat19_h4x.py
+#10 0.831 Apycula-0.0.1a6/apycula/fuse_h4x.py
+#10 0.831 Apycula-0.0.1a6/apycula/gowin_bba.py
+#10 0.831 Apycula-0.0.1a6/apycula/gowin_pack.py
+#10 0.831 Apycula-0.0.1a6/apycula/gowin_unpack.py
+#10 0.831 Apycula-0.0.1a6/apycula/pindef.py
+#10 0.831 Apycula-0.0.1a6/apycula/tiled_fuzzer.py
+#10 0.831 Apycula-0.0.1a6/apycula/tm_h4x.py
+#10 0.831 Apycula-0.0.1a6/apycula/wirenames.py
+#10 0.831 Apycula-0.0.1a6/clock_experiments.ipynb
+#10 0.832 Apycula-0.0.1a6/doc/
+#10 0.832 Apycula-0.0.1a6/doc/architecture.md
+#10 0.832 Apycula-0.0.1a6/doc/commandstructure.md
+#10 0.832 Apycula-0.0.1a6/doc/fig/
+#10 0.832 Apycula-0.0.1a6/doc/fig/blinky.jpg
+#10 0.835 Apycula-0.0.1a6/doc/fig/clocks.png
+#10 0.835 Apycula-0.0.1a6/doc/fig/clu.png
+#10 0.835 Apycula-0.0.1a6/doc/fig/floorplanner.png
+#10 0.836 Apycula-0.0.1a6/doc/fig/fuse.png
+#10 0.836 Apycula-0.0.1a6/doc/fig/mux.png
+#10 0.836 Apycula-0.0.1a6/doc/fig/post_pnr.png
+#10 0.837 Apycula-0.0.1a6/doc/fig/post_syn.png
+#10 0.840 Apycula-0.0.1a6/doc/fig/tile.png
+#10 0.840 Apycula-0.0.1a6/doc/filestructure.md
+#10 0.841 Apycula-0.0.1a6/examples/
+#10 0.841 Apycula-0.0.1a6/examples/Makefile
+#10 0.841 Apycula-0.0.1a6/examples/attosoc/
+#10 0.841 Apycula-0.0.1a6/examples/attosoc/attosoc.v
+#10 0.841 Apycula-0.0.1a6/examples/attosoc/firmware.hex
+#10 0.841 Apycula-0.0.1a6/examples/attosoc/picorv32.v
+#10 0.841 Apycula-0.0.1a6/examples/blinky.v
+#10 0.841 Apycula-0.0.1a6/examples/runber.cst
+#10 0.841 Apycula-0.0.1a6/examples/tangnano.cst
+#10 0.841 Apycula-0.0.1a6/examples/tec0117.cst
+#10 0.842 Apycula-0.0.1a6/legacy/
+#10 0.842 Apycula-0.0.1a6/legacy/display.py
+#10 0.842 Apycula-0.0.1a6/legacy/empty/
+#10 0.842 Apycula-0.0.1a6/legacy/empty/device.cfg
+#10 0.842 Apycula-0.0.1a6/legacy/empty/empty.v
+#10 0.842 Apycula-0.0.1a6/legacy/empty/pnr.cfg
+#10 0.842 Apycula-0.0.1a6/legacy/empty/run.tcl
+#10 0.842 Apycula-0.0.1a6/legacy/example/
+#10 0.842 Apycula-0.0.1a6/legacy/example/example.cst
+#10 0.842 Apycula-0.0.1a6/legacy/example/example.v
+#10 0.842 Apycula-0.0.1a6/legacy/example/pnr.cfg
+#10 0.842 Apycula-0.0.1a6/legacy/example/run.tcl
+#10 0.842 Apycula-0.0.1a6/legacy/fuzzer.py
+#10 0.843 Apycula-0.0.1a6/legacy/generic/
+#10 0.843 Apycula-0.0.1a6/legacy/generic/attosoc/
+#10 0.843 Apycula-0.0.1a6/legacy/generic/attosoc/attosoc.v
+#10 0.843 Apycula-0.0.1a6/legacy/generic/attosoc/firmware.hex
+#10 0.843 Apycula-0.0.1a6/legacy/generic/attosoc/picorv32.v
+#10 0.843 Apycula-0.0.1a6/legacy/generic/attosoc/top.v
+#10 0.843 Apycula-0.0.1a6/legacy/generic/bitstream.py
+#10 0.844 Apycula-0.0.1a6/legacy/generic/blinky.v
+#10 0.844 Apycula-0.0.1a6/legacy/generic/blinkygw1n1.v
+#10 0.844 Apycula-0.0.1a6/legacy/generic/nanolcd/
+#10 0.844 Apycula-0.0.1a6/legacy/generic/nanolcd/TOP.v
+#10 0.844 Apycula-0.0.1a6/legacy/generic/nanolcd/VGAMod.v
+#10 0.844 Apycula-0.0.1a6/legacy/generic/simple.py
+#10 0.844 Apycula-0.0.1a6/legacy/generic/simple.sh
+#10 0.844 Apycula-0.0.1a6/legacy/generic/simple_timing.py
+#10 0.844 Apycula-0.0.1a6/legacy/generic/synth/
+#10 0.844 Apycula-0.0.1a6/legacy/generic/synth/cells_map.v
+#10 0.844 Apycula-0.0.1a6/legacy/generic/synth/prims.v
+#10 0.844 Apycula-0.0.1a6/legacy/generic/synth/synth_generic.tcl
+#10 0.844 Apycula-0.0.1a6/legacy/generic/write_fasm.py
+#10 0.844 Apycula-0.0.1a6/legacy/indices.py
+#10 0.844 Apycula-0.0.1a6/legacy/iob/
+#10 0.844 Apycula-0.0.1a6/legacy/iob/device.cfg
+#10 0.845 Apycula-0.0.1a6/legacy/iob/iob.cst.mk
+#10 0.845 Apycula-0.0.1a6/legacy/iob/iob.sdc
+#10 0.845 Apycula-0.0.1a6/legacy/iob/iob.v
+#10 0.845 Apycula-0.0.1a6/legacy/iob/pnr.cfg
+#10 0.845 Apycula-0.0.1a6/legacy/iob/run.tcl
+#10 0.845 Apycula-0.0.1a6/legacy/iob.sh
+#10 0.845 Apycula-0.0.1a6/legacy/json_display.py
+#10 0.845 Apycula-0.0.1a6/legacy/lut4/
+#10 0.845 Apycula-0.0.1a6/legacy/lut4/device.cfg
+#10 0.845 Apycula-0.0.1a6/legacy/lut4/lut4.cst.mk
+#10 0.845 Apycula-0.0.1a6/legacy/lut4/lut4.sdc
+#10 0.845 Apycula-0.0.1a6/legacy/lut4/lut4.v
+#10 0.845 Apycula-0.0.1a6/legacy/lut4/pnr.cfg
+#10 0.846 Apycula-0.0.1a6/legacy/lut4/run.tcl
+#10 0.846 Apycula-0.0.1a6/legacy/lut4.sh
+#10 0.846 Apycula-0.0.1a6/legacy/report.py
+#10 0.846 Apycula-0.0.1a6/readme.md
+#10 0.846 Apycula-0.0.1a6/setup.cfg
+#10 0.846 Apycula-0.0.1a6/setup.py
+#10 0.846 Apycula-0.0.1a6/test_clk.py
+#10 10.49 running bdist_wheel
+#10 10.50 running build
+#10 10.50 running build_py
+#10 10.50 creating build
+#10 10.50 creating build/lib
+#10 10.50 creating build/lib/apycula
+#10 10.50 copying apycula/pindef.py -> build/lib/apycula
+#10 10.50 copying apycula/gowin_bba.py -> build/lib/apycula
+#10 10.50 copying apycula/tm_h4x.py -> build/lib/apycula
+#10 10.50 copying apycula/wirenames.py -> build/lib/apycula
+#10 10.50 copying apycula/gowin_pack.py -> build/lib/apycula
+#10 10.50 copying apycula/__init__.py -> build/lib/apycula
+#10 10.50 copying apycula/dat19_h4x.py -> build/lib/apycula
+#10 10.50 copying apycula/bslib.py -> build/lib/apycula
+#10 10.50 copying apycula/tiled_fuzzer.py -> build/lib/apycula
+#10 10.50 copying apycula/codegen.py -> build/lib/apycula
+#10 10.50 copying apycula/gowin_unpack.py -> build/lib/apycula
+#10 10.50 copying apycula/clock_fuzzer.py -> build/lib/apycula
+#10 10.50 copying apycula/chipdb.py -> build/lib/apycula
+#10 10.50 copying apycula/fuse_h4x.py -> build/lib/apycula
+#10 10.50 copying apycula/GW1N-1.pickle -> build/lib/apycula
+#10 10.51 copying apycula/GW1N-4.pickle -> build/lib/apycula
+#10 10.53 copying apycula/GW1N-9.pickle -> build/lib/apycula
+#10 10.57 installing to build/bdist.linux-x86_64/wheel
+#10 10.57 running install
+#10 10.57 running install_lib
+#10 10.57 creating build/bdist.linux-x86_64
+#10 10.57 creating build/bdist.linux-x86_64/wheel
+#10 10.57 creating build/bdist.linux-x86_64/wheel/apycula
+#10 10.57 copying build/lib/apycula/pindef.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.57 copying build/lib/apycula/GW1N-4.pickle -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.61 copying build/lib/apycula/gowin_bba.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.61 copying build/lib/apycula/tm_h4x.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.61 copying build/lib/apycula/wirenames.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.61 copying build/lib/apycula/GW1N-9.pickle -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.69 copying build/lib/apycula/gowin_pack.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.69 copying build/lib/apycula/__init__.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.69 copying build/lib/apycula/dat19_h4x.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.69 copying build/lib/apycula/bslib.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.69 copying build/lib/apycula/tiled_fuzzer.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.69 copying build/lib/apycula/codegen.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.69 copying build/lib/apycula/gowin_unpack.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.69 copying build/lib/apycula/clock_fuzzer.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.69 copying build/lib/apycula/chipdb.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.69 copying build/lib/apycula/fuse_h4x.py -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.69 copying build/lib/apycula/GW1N-1.pickle -> build/bdist.linux-x86_64/wheel/apycula
+#10 10.69 running install_egg_info
+#10 10.74 running egg_info
+#10 10.74 writing Apycula.egg-info/PKG-INFO
+#10 10.74 writing dependency_links to Apycula.egg-info/dependency_links.txt
+#10 10.74 writing entry points to Apycula.egg-info/entry_points.txt
+#10 10.74 writing requirements to Apycula.egg-info/requires.txt
+#10 10.74 writing top-level names to Apycula.egg-info/top_level.txt
+#10 10.74 reading manifest file 'Apycula.egg-info/SOURCES.txt'
+#10 10.75 writing manifest file 'Apycula.egg-info/SOURCES.txt'
+#10 10.75 Copying Apycula.egg-info to build/bdist.linux-x86_64/wheel/Apycula-0.0.1a6.egg-info
+#10 10.75 running install_scripts
+#10 10.78 adding license file "LICENSE" (matched pattern "LICEN[CS]E*")
+#10 10.79 creating build/bdist.linux-x86_64/wheel/Apycula-0.0.1a6.dist-info/WHEEL
+#10 10.79 creating 'dist/Apycula-0.0.1a6-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
+#10 10.97 adding 'apycula/GW1N-1.pickle'
+#10 11.52 adding 'apycula/GW1N-4.pickle'
+#10 11.96 adding 'apycula/GW1N-9.pickle'
+#10 12.02 adding 'apycula/__init__.py'
+#10 12.02 adding 'apycula/bslib.py'
+#10 12.02 adding 'apycula/chipdb.py'
+#10 12.02 adding 'apycula/clock_fuzzer.py'
+#10 12.02 adding 'apycula/codegen.py'
+#10 12.03 adding 'apycula/dat19_h4x.py'
+#10 12.03 adding 'apycula/fuse_h4x.py'
+#10 12.03 adding 'apycula/gowin_bba.py'
+#10 12.03 adding 'apycula/gowin_pack.py'
+#10 12.03 adding 'apycula/gowin_unpack.py'
+#10 12.03 adding 'apycula/pindef.py'
+#10 12.03 adding 'apycula/tiled_fuzzer.py'
+#10 12.03 adding 'apycula/tm_h4x.py'
+#10 12.03 adding 'apycula/wirenames.py'
+#10 12.03 adding 'Apycula-0.0.1a6.dist-info/LICENSE'
+#10 12.03 adding 'Apycula-0.0.1a6.dist-info/METADATA'
+#10 12.03 adding 'Apycula-0.0.1a6.dist-info/WHEEL'
+#10 12.03 adding 'Apycula-0.0.1a6.dist-info/entry_points.txt'
+#10 12.03 adding 'Apycula-0.0.1a6.dist-info/top_level.txt'
+#10 12.03 adding 'Apycula-0.0.1a6.dist-info/RECORD'
+#10 12.03 removing build/bdist.linux-x86_64/wheel
+#10 DONE 12.2s
+
+#11 [pkg 1/1] COPY --from=build /tmp/apicula /apicula
+#11 DONE 0.1s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 0.4s done
+#12 preparing layers for inline cache 0.0s done
+#12 exporting manifest sha256:aea90e91fa9e241d4998ee671bf12dcefa9c595c56a357edf08aa453af452e20 0.0s done
+#12 exporting config sha256:1bbe6c9cef858bf7bea5b925781c756a7652837b7d3d2f9b043bb26275a7e22a 0.0s done
+#12 exporting attestation manifest sha256:81ace9d385ea66806b5e87c33dbb24df9401583b7adad84349d9d8a172e474e2
+#12 exporting attestation manifest sha256:81ace9d385ea66806b5e87c33dbb24df9401583b7adad84349d9d8a172e474e2 0.0s done
+#12 exporting manifest list sha256:36f17756a03408b8f22953ce95d93eef0e27d56d1f821a9f6bd966d908957d68 0.0s done
+#12 naming to ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula:latest done
+#12 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula:latest
+#12 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula:latest 0.3s done
+#12 DONE 0.9s
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/testpkg:apicula --build-arg IMAGE=ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula --build-arg PACKAGE=apicula -f /home/umarcor/containers/utils/pyHDLC/testpkg.dockerfile .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from testpkg.dockerfile
+#1 transferring dockerfile: 975B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+#1 DONE 0.1s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula:latest
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 1.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.1s
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#5 resolve docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b 0.1s done
+#5 DONE 0.1s
+
+#6 [pkg 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula:latest@sha256:36f17756a03408b8f22953ce95d93eef0e27d56d1f821a9f6bd966d908957d68
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula:latest@sha256:36f17756a03408b8f22953ce95d93eef0e27d56d1f821a9f6bd966d908957d68
+#6 ...
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#5 DONE 0.2s
+
+#6 [pkg 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula:latest@sha256:36f17756a03408b8f22953ce95d93eef0e27d56d1f821a9f6bd966d908957d68
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula:latest@sha256:36f17756a03408b8f22953ce95d93eef0e27d56d1f821a9f6bd966d908957d68 0.1s done
+#6 DONE 0.2s
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#5 sha256:55afa1ecc21d2bb5e5045f32dafee56272ffd89860bac26f6c32123439af26a4 0B / 3.85MB 0.2s
+#5 sha256:55afa1ecc21d2bb5e5045f32dafee56272ffd89860bac26f6c32123439af26a4 3.85MB / 3.85MB 0.2s done
+#5 extracting sha256:55afa1ecc21d2bb5e5045f32dafee56272ffd89860bac26f6c32123439af26a4
+#5 extracting sha256:55afa1ecc21d2bb5e5045f32dafee56272ffd89860bac26f6c32123439af26a4 0.2s done
+#5 DONE 0.7s
+
+#7 [stage-1 2/3] COPY --from=pkg /apicula /
+#7 DONE 0.1s
+
+#8 [stage-1 3/3] RUN apk add -U --no-cache file tree
+#8 1.297 (1/3) Installing libmagic (5.47-r2)
+#8 1.428 (2/3) Installing file (5.47-r2)
+#8 1.440 (3/3) Installing tree (2.3.2-r0)
+#8 1.459 Executing busybox-1.37.0-r31.trigger
+#8 1.465 OK: 18.4 MiB in 19 packages
+#8 DONE 1.6s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 0.7s done
+#9 preparing layers for inline cache
+#9 preparing layers for inline cache 0.0s done
+#9 exporting manifest sha256:a3970610040c330f2bb6202a071d0a4fee70f59e8d51cbd25b36fff79c7bc21b 0.0s done
+#9 exporting config sha256:1db9882092e75cd49f4fafd6ddd2778fbfba5758d5a8cf68aaf6a7398b2539de 0.0s done
+#9 exporting attestation manifest sha256:3b44dc761f8d6cd50c476ba5fe166620c8a41eb8ad87053e91c31c3c9ceb9c8c 0.0s done
+#9 exporting manifest list sha256:87a137c002a7123d141d472e32e2575d6b5f2c051fa2079aa00e635c1d36ef41 0.0s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/testpkg:apicula 0.0s done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:apicula
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:apicula 0.2s done
+#9 DONE 1.1s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/testpkg:apicula //wrk/apicula.pkg.sh
+/usr/local
+├── bin
+├── lib
+└── share
+
+4 directories, 0 files
+-rw-r--r--    1 root     root       2299761 Sep 15 04:23 /Apycula-0.0.1a6-py3-none-any.whl
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS pkg/apicula ===
+=== BUILD apicula ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/apicula --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye debian-bullseye/apicula
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.83kB done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1.2
+#2 DONE 0.4s
+
+#3 docker-image://docker.io/docker/dockerfile:1.2@sha256:e2a8561e419ab1ba6b2fe6cbdf49fd92b95912df1cf7d313c3e2230a333fdbcc
+#3 resolve docker.io/docker/dockerfile:1.2@sha256:e2a8561e419ab1ba6b2fe6cbdf49fd92b95912df1cf7d313c3e2230a333fdbcc 0.0s done
+#3 CACHED
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.83kB done
+#1 DONE 0.0s
+
+#4 [internal] load build definition from Dockerfile
+#4 DONE 0.0s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula:latest
+#6 DONE 0.1s
+
+#7 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/base:latest
+#7 DONE 0.1s
+
+#8 [pkg-apicula 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula@sha256:36f17756a03408b8f22953ce95d93eef0e27d56d1f821a9f6bd966d908957d68
+#8 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula@sha256:36f17756a03408b8f22953ce95d93eef0e27d56d1f821a9f6bd966d908957d68
+#8 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/apicula@sha256:36f17756a03408b8f22953ce95d93eef0e27d56d1f821a9f6bd966d908957d68 0.1s done
+#8 CACHED
+
+#9 [stage-3 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#9 resolve ghcr.io/hdl/amd64/debian/bullseye/build/base@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e 0.1s done
+#9 CACHED
+
+#10 [stage-3 2/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     python3-pip     python3-setuptools     python3-wheel
+#10 3.498 Reading package lists...
+#10 4.743 Building dependency tree...
+#10 5.017 Reading state information...
+#10 5.216 The following additional packages will be installed:
+#10 5.219   python-pip-whl python3-distutils python3-lib2to3 python3-pkg-resources
+#10 5.220 Suggested packages:
+#10 5.220   python-setuptools-doc
+#10 5.220 Recommended packages:
+#10 5.220   build-essential python3-dev
+#10 5.327 The following NEW packages will be installed:
+#10 5.327   python-pip-whl python3-distutils python3-lib2to3 python3-pip
+#10 5.327   python3-pkg-resources python3-setuptools python3-wheel
+#10 5.708 0 upgraded, 7 newly installed, 0 to remove and 0 not upgraded.
+#10 5.708 Need to get 3092 kB of archives.
+#10 5.708 After this operation, 6990 kB of additional disk space will be used.
+#10 5.708 Get:1 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python-pip-whl all 20.3.4-4+deb11u2 [1952 kB]
+#10 5.767 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-lib2to3 all 3.9.2-1 [77.8 kB]
+#10 5.768 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-distutils all 3.9.2-1 [143 kB]
+#10 5.768 Get:4 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python3-pkg-resources all 52.0.0-4+deb11u2 [190 kB]
+#10 5.771 Get:5 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python3-setuptools all 52.0.0-4+deb11u2 [367 kB]
+#10 5.773 Get:6 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-wheel all 0.34.2-1 [24.0 kB]
+#10 5.832 Get:7 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python3-pip all 20.3.4-4+deb11u2 [338 kB]
+#10 6.193 debconf: delaying package configuration, since apt-utils is not installed
+#10 6.259 Fetched 3092 kB in 0s (6205 kB/s)
+#10 6.355 Selecting previously unselected package python-pip-whl.
+#10 6.355 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7841 files and directories currently installed.)
+#10 6.361 Preparing to unpack .../0-python-pip-whl_20.3.4-4+deb11u2_all.deb ...
+#10 6.377 Unpacking python-pip-whl (20.3.4-4+deb11u2) ...
+#10 6.641 Selecting previously unselected package python3-lib2to3.
+#10 6.642 Preparing to unpack .../1-python3-lib2to3_3.9.2-1_all.deb ...
+#10 6.652 Unpacking python3-lib2to3 (3.9.2-1) ...
+#10 6.748 Selecting previously unselected package python3-distutils.
+#10 6.748 Preparing to unpack .../2-python3-distutils_3.9.2-1_all.deb ...
+#10 6.761 Unpacking python3-distutils (3.9.2-1) ...
+#10 6.893 Selecting previously unselected package python3-pkg-resources.
+#10 6.895 Preparing to unpack .../3-python3-pkg-resources_52.0.0-4+deb11u2_all.deb ...
+#10 6.903 Unpacking python3-pkg-resources (52.0.0-4+deb11u2) ...
+#10 7.008 Selecting previously unselected package python3-setuptools.
+#10 7.008 Preparing to unpack .../4-python3-setuptools_52.0.0-4+deb11u2_all.deb ...
+#10 7.016 Unpacking python3-setuptools (52.0.0-4+deb11u2) ...
+#10 7.140 Selecting previously unselected package python3-wheel.
+#10 7.140 Preparing to unpack .../5-python3-wheel_0.34.2-1_all.deb ...
+#10 7.149 Unpacking python3-wheel (0.34.2-1) ...
+#10 7.530 Selecting previously unselected package python3-pip.
+#10 7.531 Preparing to unpack .../6-python3-pip_20.3.4-4+deb11u2_all.deb ...
+#10 7.564 Unpacking python3-pip (20.3.4-4+deb11u2) ...
+#10 7.780 Setting up python3-pkg-resources (52.0.0-4+deb11u2) ...
+#10 8.387 Setting up python3-wheel (0.34.2-1) ...
+#10 8.622 Setting up python-pip-whl (20.3.4-4+deb11u2) ...
+#10 8.652 Setting up python3-lib2to3 (3.9.2-1) ...
+#10 8.994 Setting up python3-distutils (3.9.2-1) ...
+#10 9.214 Setting up python3-setuptools (52.0.0-4+deb11u2) ...
+#10 9.835 Setting up python3-pip (20.3.4-4+deb11u2) ...
+#10 DONE 10.4s
+
+#11 [stage-3 3/3] RUN --mount=type=cache,from=pkg-apicula,src=/apicula,target=/tmp/apicula/  pip3 install -U /tmp/apicula/*.whl --progress-bar off  && rm -rf ~/.cache
+#11 2.210 Processing /tmp/apicula/Apycula-0.0.1a6-py3-none-any.whl
+#11 2.665 Collecting openpyxl
+#11 2.728   Downloading openpyxl-3.1.5-py2.py3-none-any.whl (250 kB)
+#11 5.245 Collecting numpy
+#11 5.261   Downloading numpy-2.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (19.5 MB)
+#11 7.097 Collecting pandas
+#11 7.112   Downloading pandas-2.3.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.8 MB)
+#11 7.648 Collecting crcmod
+#11 7.666   Downloading crcmod-1.7.tar.gz (89 kB)
+#11 9.570 Collecting pillow
+#11 9.583   Downloading pillow-11.3.0-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.6 MB)
+#11 9.842 Collecting et-xmlfile
+#11 9.855   Downloading et_xmlfile-2.0.0-py3-none-any.whl (18 kB)
+#11 10.19 Collecting tzdata>=2022.7
+#11 10.20   Downloading tzdata-2026.4-py2.py3-none-any.whl (347 kB)
+#11 10.34 Collecting python-dateutil>=2.8.2
+#11 10.35   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+#11 10.66 Collecting pytz>=2020.1
+#11 10.68   Downloading pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
+#11 10.84 Collecting six>=1.5
+#11 10.85   Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#11 10.94 Building wheels for collected packages: crcmod
+#11 10.94   Building wheel for crcmod (setup.py): started
+#11 11.47   Building wheel for crcmod (setup.py): finished with status 'done'
+#11 11.48   Created wheel for crcmod: filename=crcmod-1.7-py3-none-any.whl size=18840 sha256=c5997a70aafc656419ae96746e9261746676ea5995291b97e8f7c8450c124e65
+#11 11.48   Stored in directory: /root/.cache/pip/wheels/4a/6c/a6/ffdd136310039bf226f2707a9a8e6857be7d70a3fc061f6b36
+#11 11.48 Successfully built crcmod
+#11 11.70 Installing collected packages: six, tzdata, pytz, python-dateutil, numpy, et-xmlfile, pillow, pandas, openpyxl, crcmod, Apycula
+#11 22.86 Successfully installed Apycula-0.0.1a6 crcmod-1.7 et-xmlfile-2.0.0 numpy-2.0.2 openpyxl-3.1.5 pandas-2.3.3 pillow-11.3.0 python-dateutil-2.9.0.post0 pytz-2026.3.post1 six-1.17.0 tzdata-2026.4
+#11 DONE 23.2s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 13.2s done
+#12 preparing layers for inline cache
+#12 preparing layers for inline cache 0.1s done
+#12 exporting manifest sha256:c5eedcf8f5481e603f3e92736e3c93b52bd07eab6abc26f2cb28f8fd7f356e5b
+#12 exporting manifest sha256:c5eedcf8f5481e603f3e92736e3c93b52bd07eab6abc26f2cb28f8fd7f356e5b 0.1s done
+#12 exporting config sha256:2451509f843ebf0b672ab47325fddeb83fc75436cacc552aca8297dca8fe138c 0.0s done
+#12 exporting attestation manifest sha256:e9a9721a84cf92b67aa2ed40a5a3656734b210ff997650feaed77fef22bb835d
+#12 exporting attestation manifest sha256:e9a9721a84cf92b67aa2ed40a5a3656734b210ff997650feaed77fef22bb835d 0.0s done
+#12 exporting manifest list sha256:1d14d0a5b61dabb07e4b06a64de79caefa38e20bbb870d953397acb9f85bf71b 0.0s done
+#12 naming to ghcr.io/hdl/amd64/debian/bullseye/apicula:latest
+#12 naming to ghcr.io/hdl/amd64/debian/bullseye/apicula:latest done
+#12 unpacking to ghcr.io/hdl/amd64/debian/bullseye/apicula:latest
+#12 unpacking to ghcr.io/hdl/amd64/debian/bullseye/apicula:latest 4.2s done
+#12 DONE 17.8s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/apicula
+Architecture: amd64 
+Size: 492147770
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/apicula //wrk/apicula.sh
+CC: 
+CXX: 
+· gowin_bba help >> ./apicula.log
+· gowin_bba help: exit code 0 | [32mOK[0m
+· gowin_pack help >> ./apicula.log
+· gowin_pack help: exit code 0 | [32mOK[0m
+· gowin_unpack help >> ./apicula.log
+· gowin_unpack help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS apicula ===
+RESULT: PASS

@@ -1,0 +1,669 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: impl-prjs IMAGES: ['impl/ice40', 'impl/icestorm', 'impl/ecp5', 'impl/prjtrellis', 'impl/nexus', 'impl/prjoxide']
+=== BUILD impl/ice40 ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/impl/ice40 --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target ice40 -f debian-bullseye/impl.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from impl.dockerfile
+#1 transferring dockerfile: 3.21kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest
+#2 ...
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ice40:latest
+#3 DONE 1.2s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest
+#2 DONE 1.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [pkg-nextpnr-ice40 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ice40:latest@sha256:38115eec635fe2a17bf6429c9966f5b31bcbdb7cce69b032e2c9d8041935dfc7
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ice40:latest@sha256:38115eec635fe2a17bf6429c9966f5b31bcbdb7cce69b032e2c9d8041935dfc7 0.1s done
+#5 ...
+
+#6 [ice40 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a 0.1s done
+#6 DONE 0.3s
+
+#5 [pkg-nextpnr-ice40 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ice40:latest@sha256:38115eec635fe2a17bf6429c9966f5b31bcbdb7cce69b032e2c9d8041935dfc7
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 0B / 89.31MB 0.2s
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 9.44MB / 89.31MB 0.6s
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 16.78MB / 89.31MB 0.9s
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 24.12MB / 89.31MB 1.2s
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 31.46MB / 89.31MB 1.4s
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 40.89MB / 89.31MB 1.7s
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 48.23MB / 89.31MB 2.0s
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 54.53MB / 89.31MB 2.4s
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 61.87MB / 89.31MB 2.6s
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 69.21MB / 89.31MB 3.5s
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 75.50MB / 89.31MB 3.8s
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 82.84MB / 89.31MB 3.9s
+#5 sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 89.31MB / 89.31MB 4.3s done
+#5 extracting sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4
+#5 extracting sha256:93b4de44c92c6f14b7834b19f968d9346dff2c8196423396dfb0555e83f4f0d4 2.4s done
+#5 DONE 6.8s
+
+#6 [ice40 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a
+#6 sha256:8d4617558fd02ae00f516f02a0c9ed274fea9576e53fa54551522dd056a8bc97 159.51MB / 159.51MB 6.5s done
+#6 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B 0.3s done
+#6 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 0.0s done
+#6 extracting sha256:8d4617558fd02ae00f516f02a0c9ed274fea9576e53fa54551522dd056a8bc97
+#6 extracting sha256:8d4617558fd02ae00f516f02a0c9ed274fea9576e53fa54551522dd056a8bc97 8.3s done
+#6 DONE 15.1s
+
+#7 [ice40 2/2] COPY --from=pkg-nextpnr-ice40 /nextpnr-ice40 /
+#7 DONE 4.3s
+
+#8 exporting to image
+#8 exporting layers
+#8 exporting layers 13.3s done
+#8 preparing layers for inline cache
+#8 preparing layers for inline cache 0.0s done
+#8 exporting manifest sha256:d0e854ea4736e075fb64bfcea88eb014d750eb48038b0ecbb7dc2829698569e5 0.0s done
+#8 exporting config sha256:ef2bb9c182c23cd080e47ba900fc1217819847ab573f4fee9df1890f0c59f5ae 0.0s done
+#8 exporting attestation manifest sha256:5c35959f664e4c1549d9f5a12ad39157f50dd4ed6c158d1f7b1ed0b05a80fe61
+#8 exporting attestation manifest sha256:5c35959f664e4c1549d9f5a12ad39157f50dd4ed6c158d1f7b1ed0b05a80fe61 0.0s done
+#8 exporting manifest list sha256:36d6a35e8770bed9f46c920936bc0426b4ce12f669f1f3b46c6804f61a84b1ed 0.0s done
+#8 naming to ghcr.io/hdl/amd64/debian/bullseye/impl/ice40:latest done
+#8 unpacking to ghcr.io/hdl/amd64/debian/bullseye/impl/ice40:latest
+#8 unpacking to ghcr.io/hdl/amd64/debian/bullseye/impl/ice40:latest 2.1s done
+#8 DONE 15.6s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/impl/ice40
+Architecture: amd64 
+Size: 2378813258
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/impl/ice40 //wrk/impl--ice40.sh
+CC: clang
+CXX: clang++
+CC: clang
+CXX: clang++
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-138-ga00b7833f) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ static elaboration, mcode JIT code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· yosys help >> ./yosys.log
+· yosys help: exit code 0 | [32mOK[0m
+· yosys-abc help >> ./yosys.log
+· yosys-abc help: exit code 1 | [32mOK[0m
+· yosys-config help >> ./yosys.log
+· yosys-config help: exit code 1 | [32mOK[0m
+· yosys-filterlib help >> ./yosys.log
+· yosys-filterlib help: exit code 1 | [32mOK[0m
+· yosys-smtbmc help >> ./yosys.log
+· yosys-smtbmc help: exit code 0 | [32mOK[0m
+Yosys 0.36+42 (git sha1 70d35314d, clang 11.0.1-2 -fPIC -Os)
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· nextpnr-ice40 help >> ./nextpnr-ice40.log
+· nextpnr-ice40 help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS impl/ice40 ===
+=== BUILD impl/icestorm ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/impl/icestorm --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target icestorm -f debian-bullseye/impl.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from impl.dockerfile
+#1 transferring dockerfile: 3.21kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/icestorm:latest
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ice40:latest
+#3 DONE 0.3s
+
+#4 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest
+#4 DONE 0.3s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [pkg-nextpnr-ice40 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ice40:latest@sha256:38115eec635fe2a17bf6429c9966f5b31bcbdb7cce69b032e2c9d8041935dfc7
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ice40:latest@sha256:38115eec635fe2a17bf6429c9966f5b31bcbdb7cce69b032e2c9d8041935dfc7 0.1s done
+#6 DONE 0.1s
+
+#7 [ice40 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a
+#7 resolve ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a 0.1s done
+#7 DONE 0.1s
+
+#8 [ice40 2/2] COPY --from=pkg-nextpnr-ice40 /nextpnr-ice40 /
+#8 CACHED
+
+#9 [pkg-icestorm 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/icestorm:latest@sha256:3fb9ec50ba53ce5dfc57b80ef63a21ed63c065ba64c98a4e45accfe95dc6c20d
+#9 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/icestorm:latest@sha256:3fb9ec50ba53ce5dfc57b80ef63a21ed63c065ba64c98a4e45accfe95dc6c20d 0.1s done
+#9 CACHED
+
+#10 [icestorm 1/1] COPY --from=pkg-icestorm /icestorm /
+#10 DONE 0.6s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 8.3s done
+#11 preparing layers for inline cache
+#11 preparing layers for inline cache 0.1s done
+#11 exporting manifest sha256:ea565ad4ee056cdaf2c95ae27308fa00e7378c56bafb8369395d31842bd427d6 0.0s done
+#11 exporting config sha256:f4c35aded7fbaf13d9e0a8deee6b8dea9409758e5f7e2f9145d287c4505e600b
+#11 exporting config sha256:f4c35aded7fbaf13d9e0a8deee6b8dea9409758e5f7e2f9145d287c4505e600b 0.0s done
+#11 exporting attestation manifest sha256:8834407565a7feab065bd89c7abe52b5183aff8b6cdae63d4a1d89988ae13abf 0.0s done
+#11 exporting manifest list sha256:88c3aab08c1005e456e239fc210a61215e42ed427cd7a095f0d290c95332fbef
+#11 exporting manifest list sha256:88c3aab08c1005e456e239fc210a61215e42ed427cd7a095f0d290c95332fbef 0.0s done
+#11 naming to ghcr.io/hdl/amd64/debian/bullseye/impl/icestorm:latest done
+#11 unpacking to ghcr.io/hdl/amd64/debian/bullseye/impl/icestorm:latest
+#11 unpacking to ghcr.io/hdl/amd64/debian/bullseye/impl/icestorm:latest 1.4s done
+#11 DONE 10.0s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/impl/icestorm
+Architecture: amd64 
+Size: 2511410408
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/impl/icestorm //wrk/impl--icestorm.sh
+CC: clang
+CXX: clang++
+CC: clang
+CXX: clang++
+CC: clang
+CXX: clang++
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-138-ga00b7833f) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ static elaboration, mcode JIT code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· yosys help >> ./yosys.log
+· yosys help: exit code 0 | [32mOK[0m
+· yosys-abc help >> ./yosys.log
+· yosys-abc help: exit code 1 | [32mOK[0m
+· yosys-config help >> ./yosys.log
+· yosys-config help: exit code 1 | [32mOK[0m
+· yosys-filterlib help >> ./yosys.log
+· yosys-filterlib help: exit code 1 | [32mOK[0m
+· yosys-smtbmc help >> ./yosys.log
+· yosys-smtbmc help: exit code 0 | [32mOK[0m
+Yosys 0.36+42 (git sha1 70d35314d, clang 11.0.1-2 -fPIC -Os)
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· nextpnr-ice40 help >> ./nextpnr-ice40.log
+· nextpnr-ice40 help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· icebram help >> ./icestorm.log
+· icebram help: exit code 1 | [32mOK[0m
+· icemulti help >> ./icestorm.log
+· icemulti help: exit code 1 | [32mOK[0m
+· icepack help >> ./icestorm.log
+· icepack help: exit code 1 | [32mOK[0m
+· icepll help >> ./icestorm.log
+· icepll help: exit code 1 | [32mOK[0m
+· icetime help >> ./icestorm.log
+· icetime help: exit code 1 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS impl/icestorm ===
+=== BUILD impl/ecp5 ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/impl/ecp5 --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target ecp5 -f debian-bullseye/impl.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from impl.dockerfile
+#1 transferring dockerfile: 3.21kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest
+#2 DONE 0.2s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ecp5:latest
+#3 DONE 1.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [ecp5 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a 0.0s done
+#5 CACHED
+
+#6 [pkg-nextpnr-ecp5 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ecp5:latest@sha256:819c937114637f302a7b23b52111149c9a5b53160ff31e2e61a00f5331f5753c
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ecp5:latest@sha256:819c937114637f302a7b23b52111149c9a5b53160ff31e2e61a00f5331f5753c 0.0s done
+#6 DONE 0.1s
+
+#6 [pkg-nextpnr-ecp5 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ecp5:latest@sha256:819c937114637f302a7b23b52111149c9a5b53160ff31e2e61a00f5331f5753c
+#6 sha256:03d106104dc829d41d554d45b130c9060570ec8933ebe1a13a10f34b2fcd80a9 0B / 42.80MB 0.2s
+#6 sha256:03d106104dc829d41d554d45b130c9060570ec8933ebe1a13a10f34b2fcd80a9 6.29MB / 42.80MB 0.5s
+#6 sha256:03d106104dc829d41d554d45b130c9060570ec8933ebe1a13a10f34b2fcd80a9 10.49MB / 42.80MB 0.6s
+#6 sha256:03d106104dc829d41d554d45b130c9060570ec8933ebe1a13a10f34b2fcd80a9 16.78MB / 42.80MB 0.9s
+#6 sha256:03d106104dc829d41d554d45b130c9060570ec8933ebe1a13a10f34b2fcd80a9 20.97MB / 42.80MB 1.1s
+#6 sha256:03d106104dc829d41d554d45b130c9060570ec8933ebe1a13a10f34b2fcd80a9 26.21MB / 42.80MB 1.4s
+#6 sha256:03d106104dc829d41d554d45b130c9060570ec8933ebe1a13a10f34b2fcd80a9 29.36MB / 42.80MB 1.5s
+#6 sha256:03d106104dc829d41d554d45b130c9060570ec8933ebe1a13a10f34b2fcd80a9 37.75MB / 42.80MB 1.8s
+#6 sha256:03d106104dc829d41d554d45b130c9060570ec8933ebe1a13a10f34b2fcd80a9 41.94MB / 42.80MB 2.0s
+#6 sha256:03d106104dc829d41d554d45b130c9060570ec8933ebe1a13a10f34b2fcd80a9 42.80MB / 42.80MB 2.2s done
+#6 extracting sha256:03d106104dc829d41d554d45b130c9060570ec8933ebe1a13a10f34b2fcd80a9
+#6 extracting sha256:03d106104dc829d41d554d45b130c9060570ec8933ebe1a13a10f34b2fcd80a9 1.8s done
+#6 DONE 4.1s
+
+#7 [ecp5 2/2] COPY --from=pkg-nextpnr-ecp5 /nextpnr-ecp5 /
+#7 DONE 1.0s
+
+#8 exporting to image
+#8 exporting layers
+#8 exporting layers 9.9s done
+#8 preparing layers for inline cache
+#8 preparing layers for inline cache 0.0s done
+#8 exporting manifest sha256:623856319e339d531c96325ca842efb6970d17b83674fde9c51c3dbed02ed6f1 0.0s done
+#8 exporting config sha256:f138ec188613d118bdac0deab78be4a56bb463f36731ebdccc9f074535f03345 0.0s done
+#8 exporting attestation manifest sha256:3c441be4510e1e9eb4af0ee9142f4959d46289f54298727bd85d2990a1e8ae62
+#8 exporting attestation manifest sha256:3c441be4510e1e9eb4af0ee9142f4959d46289f54298727bd85d2990a1e8ae62 0.0s done
+#8 exporting manifest list sha256:5820eb8a94f3731c05fd4fcd28e3cfe55def00ebbd1d592f4d86c52fc2281c8c 0.0s done
+#8 naming to ghcr.io/hdl/amd64/debian/bullseye/impl/ecp5:latest done
+#8 unpacking to ghcr.io/hdl/amd64/debian/bullseye/impl/ecp5:latest
+#8 unpacking to ghcr.io/hdl/amd64/debian/bullseye/impl/ecp5:latest 1.1s done
+#8 DONE 11.2s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/impl/ecp5
+Architecture: amd64 
+Size: 2226881363
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/impl/ecp5 //wrk/impl--ecp5.sh
+CC: clang
+CXX: clang++
+CC: clang
+CXX: clang++
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-138-ga00b7833f) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ static elaboration, mcode JIT code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· yosys help >> ./yosys.log
+· yosys help: exit code 0 | [32mOK[0m
+· yosys-abc help >> ./yosys.log
+· yosys-abc help: exit code 1 | [32mOK[0m
+· yosys-config help >> ./yosys.log
+· yosys-config help: exit code 1 | [32mOK[0m
+· yosys-filterlib help >> ./yosys.log
+· yosys-filterlib help: exit code 1 | [32mOK[0m
+· yosys-smtbmc help >> ./yosys.log
+· yosys-smtbmc help: exit code 0 | [32mOK[0m
+Yosys 0.36+42 (git sha1 70d35314d, clang 11.0.1-2 -fPIC -Os)
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· nextpnr-ecp5 help >> ./nextpnr-ecp5.log
+· nextpnr-ecp5 help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS impl/ecp5 ===
+=== BUILD impl/prjtrellis ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/impl/prjtrellis --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target prjtrellis -f debian-bullseye/impl.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from impl.dockerfile
+#1 transferring dockerfile: 3.21kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/prjtrellis:latest
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest
+#3 ...
+
+#4 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ecp5:latest
+#4 DONE 0.2s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest
+#3 DONE 0.4s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [pkg-nextpnr-ecp5 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ecp5:latest@sha256:819c937114637f302a7b23b52111149c9a5b53160ff31e2e61a00f5331f5753c
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ecp5:latest@sha256:819c937114637f302a7b23b52111149c9a5b53160ff31e2e61a00f5331f5753c 0.1s done
+#6 DONE 0.1s
+
+#7 [ecp5 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a
+#7 resolve ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a 0.1s done
+#7 DONE 0.1s
+
+#8 [ecp5 2/2] COPY --from=pkg-nextpnr-ecp5 /nextpnr-ecp5 /
+#8 CACHED
+
+#9 [pkg-prjtrellis 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/prjtrellis:latest@sha256:e0412c06c568d180036060b3cc8ff774544587dd749bb1960f975fcbcb45cb39
+#9 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/prjtrellis:latest@sha256:e0412c06c568d180036060b3cc8ff774544587dd749bb1960f975fcbcb45cb39 0.1s done
+#9 CACHED
+
+#10 [prjtrellis 1/1] COPY --from=pkg-prjtrellis /prjtrellis /
+#10 DONE 0.9s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 2.7s done
+#11 preparing layers for inline cache
+#11 preparing layers for inline cache 0.1s done
+#11 exporting manifest sha256:9e4c7a0a035cca528f04b85d9b91d2a8bc625e6b86b5879c85bd1a06c8cb3b12 0.0s done
+#11 exporting config sha256:f54834b2bca6652c9e31d303aa4615fa4a40370b30fa5746f71187d5bdbecfe8 0.0s done
+#11 exporting attestation manifest sha256:5682d2cd21ffada3836826b5f1c4f67231c7804c62b7957725356f1d54c06614 0.0s done
+#11 exporting manifest list sha256:a980815c52a7ecc2b0385c217b7bd218ecb22f80d397e5e5089b8ee1403a7848 0.0s done
+#11 naming to ghcr.io/hdl/amd64/debian/bullseye/impl/prjtrellis:latest done
+#11 unpacking to ghcr.io/hdl/amd64/debian/bullseye/impl/prjtrellis:latest
+#11 unpacking to ghcr.io/hdl/amd64/debian/bullseye/impl/prjtrellis:latest 0.7s done
+#11 DONE 3.5s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/impl/prjtrellis
+Architecture: amd64 
+Size: 2335183198
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/impl/prjtrellis //wrk/impl--prjtrellis.sh
+CC: clang
+CXX: clang++
+CC: clang
+CXX: clang++
+CC: clang
+CXX: clang++
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-138-ga00b7833f) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ static elaboration, mcode JIT code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· yosys help >> ./yosys.log
+· yosys help: exit code 0 | [32mOK[0m
+· yosys-abc help >> ./yosys.log
+· yosys-abc help: exit code 1 | [32mOK[0m
+· yosys-config help >> ./yosys.log
+· yosys-config help: exit code 1 | [32mOK[0m
+· yosys-filterlib help >> ./yosys.log
+· yosys-filterlib help: exit code 1 | [32mOK[0m
+· yosys-smtbmc help >> ./yosys.log
+· yosys-smtbmc help: exit code 0 | [32mOK[0m
+Yosys 0.36+42 (git sha1 70d35314d, clang 11.0.1-2 -fPIC -Os)
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· nextpnr-ecp5 help >> ./nextpnr-ecp5.log
+· nextpnr-ecp5 help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· ecpbram help >> ./prjtrellis.log
+· ecpbram help: exit code 0 | [32mOK[0m
+· ecpmulti help >> ./prjtrellis.log
+· ecpmulti help: exit code 0 | [32mOK[0m
+· ecppack help >> ./prjtrellis.log
+· ecppack help: exit code 0 | [32mOK[0m
+· ecppll help >> ./prjtrellis.log
+· ecppll help: exit code 0 | [32mOK[0m
+· ecpunpack help >> ./prjtrellis.log
+· ecpunpack help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS impl/prjtrellis ===
+=== BUILD impl/nexus ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/impl/nexus --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target nexus -f debian-bullseye/impl.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from impl.dockerfile
+#1 transferring dockerfile: 3.21kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/nexus:latest
+#2 ...
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest
+#3 DONE 0.2s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/nexus:latest
+#2 DONE 0.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [nexus 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a 0.0s done
+#5 CACHED
+
+#6 [pkg-nextpnr-nexus 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/nexus:latest@sha256:3cd771f6d10eda9e84f21d5a9fb69add75caacac4bef7690553212437fe93a7e
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/nexus:latest@sha256:3cd771f6d10eda9e84f21d5a9fb69add75caacac4bef7690553212437fe93a7e 0.0s done
+#6 sha256:bf572daff54b780d7fbced045f963d6b169510041b02d53682a15712235edbf4 10.49MB / 18.99MB 0.2s
+#6 sha256:bf572daff54b780d7fbced045f963d6b169510041b02d53682a15712235edbf4 11.53MB / 18.99MB 0.3s
+#6 sha256:bf572daff54b780d7fbced045f963d6b169510041b02d53682a15712235edbf4 18.99MB / 18.99MB 0.5s
+#6 sha256:bf572daff54b780d7fbced045f963d6b169510041b02d53682a15712235edbf4 18.99MB / 18.99MB 0.5s done
+#6 extracting sha256:bf572daff54b780d7fbced045f963d6b169510041b02d53682a15712235edbf4
+#6 extracting sha256:bf572daff54b780d7fbced045f963d6b169510041b02d53682a15712235edbf4 0.6s done
+#6 DONE 1.2s
+
+#7 [nexus 2/2] COPY --from=pkg-nextpnr-nexus /nextpnr-nexus /
+#7 DONE 1.2s
+
+#8 exporting to image
+#8 exporting layers
+#8 exporting layers 4.1s done
+#8 preparing layers for inline cache
+#8 preparing layers for inline cache 0.1s done
+#8 exporting manifest sha256:feaf1c70fc221f8c89ecd65c895c965acc3dd70a20805cdc6c54f80f07cb6b4c 0.0s done
+#8 exporting config sha256:c333372a4a38462fb75a0c595f344a084ccf698651fb1d363760f9eca96419c5 0.0s done
+#8 exporting attestation manifest sha256:c67b287613ff180a72a09b53d3c27fe2125ea9ff1b93439d7e63e1f803d96831 0.0s done
+#8 exporting manifest list sha256:19534fba89557d4897a13bc06d8c55adebab14fe53155272c957c7b5beabfe63 0.0s done
+#8 naming to ghcr.io/hdl/amd64/debian/bullseye/impl/nexus:latest
+#8 naming to ghcr.io/hdl/amd64/debian/bullseye/impl/nexus:latest done
+#8 unpacking to ghcr.io/hdl/amd64/debian/bullseye/impl/nexus:latest
+#8 unpacking to ghcr.io/hdl/amd64/debian/bullseye/impl/nexus:latest 0.7s done
+#8 DONE 5.1s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/impl/nexus
+Architecture: amd64 
+Size: 2110374938
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/impl/nexus //wrk/impl--nexus.sh
+CC: clang
+CXX: clang++
+CC: clang
+CXX: clang++
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-138-ga00b7833f) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ static elaboration, mcode JIT code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· yosys help >> ./yosys.log
+· yosys help: exit code 0 | [32mOK[0m
+· yosys-abc help >> ./yosys.log
+· yosys-abc help: exit code 1 | [32mOK[0m
+· yosys-config help >> ./yosys.log
+· yosys-config help: exit code 1 | [32mOK[0m
+· yosys-filterlib help >> ./yosys.log
+· yosys-filterlib help: exit code 1 | [32mOK[0m
+· yosys-smtbmc help >> ./yosys.log
+· yosys-smtbmc help: exit code 0 | [32mOK[0m
+Yosys 0.36+42 (git sha1 70d35314d, clang 11.0.1-2 -fPIC -Os)
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· nextpnr-nexus help >> ./nextpnr-nexus.log
+· nextpnr-nexus help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS impl/nexus ===
+=== BUILD impl/prjoxide ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/impl/prjoxide --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target prjoxide -f debian-bullseye/impl.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from impl.dockerfile
+#1 transferring dockerfile: 3.21kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/prjoxide:latest
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest
+#3 ...
+
+#4 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/nexus:latest
+#4 DONE 0.2s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest
+#3 DONE 0.2s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [pkg-nextpnr-nexus 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/nexus:latest@sha256:3cd771f6d10eda9e84f21d5a9fb69add75caacac4bef7690553212437fe93a7e
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/nexus:latest@sha256:3cd771f6d10eda9e84f21d5a9fb69add75caacac4bef7690553212437fe93a7e 0.1s done
+#6 DONE 0.1s
+
+#7 [nexus 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a
+#7 resolve ghcr.io/hdl/amd64/debian/bullseye/build/impl:latest@sha256:03af0c3ce8e0cea2a230af1de89a94cfb7701ea99f57b6e4d03d99b115c1b07a 0.1s done
+#7 DONE 0.1s
+
+#8 [nexus 2/2] COPY --from=pkg-nextpnr-nexus /nextpnr-nexus /
+#8 CACHED
+
+#9 [pkg-prjoxide 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/prjoxide:latest@sha256:77253b3c115488b139fc06d328c7232b9ff4b5a9337afe26f9408e6ec8266ab2
+#9 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/prjoxide:latest@sha256:77253b3c115488b139fc06d328c7232b9ff4b5a9337afe26f9408e6ec8266ab2 0.1s done
+#9 CACHED
+
+#10 [prjoxide 1/1] COPY --from=pkg-prjoxide /prjoxide /
+#10 DONE 0.2s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 0.7s done
+#11 preparing layers for inline cache
+#11 preparing layers for inline cache 0.1s done
+#11 exporting manifest sha256:67942331c5455c4dcc8069a88f75dcce4442097ec5189256c991ba5bc28f5600 0.0s done
+#11 exporting config sha256:fa683c4efbf85b1fc00286d47fd3660a2a7c4dbe6e3462d4e5b01ad1db21bd2a
+#11 exporting config sha256:fa683c4efbf85b1fc00286d47fd3660a2a7c4dbe6e3462d4e5b01ad1db21bd2a 0.0s done
+#11 exporting attestation manifest sha256:fd14a546906415494dc9285deeeae1b1d98bcd6fbb22d0670159b8ded2b5bcad 0.0s done
+#11 exporting manifest list sha256:dc09b841477a655882aeb0660d9d10688a9df4dfe3145266c771cd93b23ebd75 0.0s done
+#11 naming to ghcr.io/hdl/amd64/debian/bullseye/impl/prjoxide:latest
+#11 naming to ghcr.io/hdl/amd64/debian/bullseye/impl/prjoxide:latest done
+#11 unpacking to ghcr.io/hdl/amd64/debian/bullseye/impl/prjoxide:latest
+#11 unpacking to ghcr.io/hdl/amd64/debian/bullseye/impl/prjoxide:latest 0.2s done
+#11 DONE 1.2s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/impl/prjoxide
+Architecture: amd64 
+Size: 2135068687
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/impl/prjoxide //wrk/impl--prjoxide.sh
+CC: clang
+CXX: clang++
+CC: clang
+CXX: clang++
+CC: clang
+CXX: clang++
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-138-ga00b7833f) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ static elaboration, mcode JIT code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· yosys help >> ./yosys.log
+· yosys help: exit code 0 | [32mOK[0m
+· yosys-abc help >> ./yosys.log
+· yosys-abc help: exit code 1 | [32mOK[0m
+· yosys-config help >> ./yosys.log
+· yosys-config help: exit code 1 | [32mOK[0m
+· yosys-filterlib help >> ./yosys.log
+· yosys-filterlib help: exit code 1 | [32mOK[0m
+· yosys-smtbmc help >> ./yosys.log
+· yosys-smtbmc help: exit code 0 | [32mOK[0m
+Yosys 0.36+42 (git sha1 70d35314d, clang 11.0.1-2 -fPIC -Os)
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· nextpnr-nexus help >> ./nextpnr-nexus.log
+· nextpnr-nexus help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: clang
+CXX: clang++
+· prjoxide help >> ./prjoxide.log
+· prjoxide help: exit code 0 | [32mOK[0m
+prjoxide 0.1
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS impl/prjoxide ===
+RESULT: PASS

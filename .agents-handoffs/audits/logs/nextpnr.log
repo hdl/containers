@@ -1,0 +1,240 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: nextpnr IMAGES: ['pkg/nextpnr/generic', 'nextpnr/generic', 'nextpnr']
+=== BUILD pkg/nextpnr/generic ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/generic --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target pkg-generic -f debian-bullseye/nextpnr.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from nextpnr.dockerfile
+#1 transferring dockerfile: 4.36kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/build:latest
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [build-generic 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/build:latest@sha256:03e2f82c3a05ec22601466bd7d66a84814ff496c75c16a56981994ec8e6eab97
+#4 resolve ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/build:latest@sha256:03e2f82c3a05ec22601466bd7d66a84814ff496c75c16a56981994ec8e6eab97 0.0s done
+#4 CACHED
+
+#5 [build-generic 2/2] RUN cd /tmp/nextpnr/build  && cmake ..    -DARCH=generic    -DBUILD_GUI=OFF    -DBUILD_PYTHON=ON    -DUSE_OPENMP=ON  && make -j $(nproc)  && make DESTDIR=/opt/nextpnr install
+#5 0.208 CMake Error at CMakeLists.txt:5 (cmake_minimum_required):
+#5 0.208   CMake 3.25 or higher is required.  You are running version 3.18.4
+#5 0.208 
+#5 0.208 
+#5 0.209 -- Configuring incomplete, errors occurred!
+#5 ERROR: process "/bin/bash -c cd /tmp/nextpnr/build  && cmake ..    -DARCH=generic    -DBUILD_GUI=OFF    -DBUILD_PYTHON=ON    -DUSE_OPENMP=ON  && make -j $(nproc)  && make DESTDIR=/opt/nextpnr install" did not complete successfully: exit code: 1
+------
+ > [build-generic 2/2] RUN cd /tmp/nextpnr/build  && cmake ..    -DARCH=generic    -DBUILD_GUI=OFF    -DBUILD_PYTHON=ON    -DUSE_OPENMP=ON  && make -j $(nproc)  && make DESTDIR=/opt/nextpnr install:
+0.208 CMake Error at CMakeLists.txt:5 (cmake_minimum_required):
+0.208   CMake 3.25 or higher is required.  You are running version 3.18.4
+0.208 
+0.208 
+0.209 -- Configuring incomplete, errors occurred!
+------
+nextpnr.dockerfile:151
+--------------------
+ 150 |     
+ 151 | >>> RUN cd /tmp/nextpnr/build \
+ 152 | >>>  && cmake .. \
+ 153 | >>>    -DARCH=generic \
+ 154 | >>>    -DBUILD_GUI=OFF \
+ 155 | >>>    -DBUILD_PYTHON=ON \
+ 156 | >>>    -DUSE_OPENMP=ON \
+ 157 | >>>  && make -j $(nproc) \
+ 158 | >>>  && make DESTDIR=/opt/nextpnr install
+ 159 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -c cd /tmp/nextpnr/build  && cmake ..    -DARCH=generic    -DBUILD_GUI=OFF    -DBUILD_PYTHON=ON    -DUSE_OPENMP=ON  && make -j $(nproc)  && make DESTDIR=/opt/nextpnr install" did not complete successfully: exit code: 1
+=== FAIL pkg/nextpnr/generic (CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/generic', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '--target', 'pkg-generic', '-f', 'debian-bullseye/nextpnr.dockerfile', 'debian-bullseye']' returned non-zero exit status 1.) ===
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+  File "/home/umarcor/containers/utils/pyHDLC/__init__.py", line 456, in BuildImage
+    _exec(args=[
+    ~~~~~^^^^^^^
+        "docker", "build", *_commonCmd,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        str(contextPath)
+        ^^^^^^^^^^^^^^^^
+    ], dry=dry, collapse=f"🚧 Build {imageName}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/umarcor/containers/utils/pyHDLC/run.py", line 46, in _exec
+    check_call(args, stderr=STDOUT)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 419, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/generic', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '--target', 'pkg-generic', '-f', 'debian-bullseye/nextpnr.dockerfile', 'debian-bullseye']' returned non-zero exit status 1.
+=== BUILD nextpnr/generic ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/nextpnr/generic --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target generic -f debian-bullseye/nextpnr.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from nextpnr.dockerfile
+#1 transferring dockerfile: 4.36kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/build:latest
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/base:latest
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [generic 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/base:latest@sha256:f456f046dd56ece67de430a1bd6a6907780da580023612b55d98522e9aa39aa2
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/base:latest@sha256:f456f046dd56ece67de430a1bd6a6907780da580023612b55d98522e9aa39aa2 0.0s done
+#5 CACHED
+
+#6 [build-generic 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/build:latest@sha256:03e2f82c3a05ec22601466bd7d66a84814ff496c75c16a56981994ec8e6eab97
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/build:latest@sha256:03e2f82c3a05ec22601466bd7d66a84814ff496c75c16a56981994ec8e6eab97 0.0s done
+#6 CACHED
+
+#7 [build-generic 2/2] RUN cd /tmp/nextpnr/build  && cmake ..    -DARCH=generic    -DBUILD_GUI=OFF    -DBUILD_PYTHON=ON    -DUSE_OPENMP=ON  && make -j $(nproc)  && make DESTDIR=/opt/nextpnr install
+#7 0.170 CMake Error at CMakeLists.txt:5 (cmake_minimum_required):
+#7 0.170   CMake 3.25 or higher is required.  You are running version 3.18.4
+#7 0.170 
+#7 0.170 
+#7 0.170 -- Configuring incomplete, errors occurred!
+#7 ERROR: process "/bin/bash -c cd /tmp/nextpnr/build  && cmake ..    -DARCH=generic    -DBUILD_GUI=OFF    -DBUILD_PYTHON=ON    -DUSE_OPENMP=ON  && make -j $(nproc)  && make DESTDIR=/opt/nextpnr install" did not complete successfully: exit code: 1
+------
+ > [build-generic 2/2] RUN cd /tmp/nextpnr/build  && cmake ..    -DARCH=generic    -DBUILD_GUI=OFF    -DBUILD_PYTHON=ON    -DUSE_OPENMP=ON  && make -j $(nproc)  && make DESTDIR=/opt/nextpnr install:
+0.170 CMake Error at CMakeLists.txt:5 (cmake_minimum_required):
+0.170   CMake 3.25 or higher is required.  You are running version 3.18.4
+0.170 
+0.170 
+0.170 -- Configuring incomplete, errors occurred!
+------
+nextpnr.dockerfile:151
+--------------------
+ 150 |     
+ 151 | >>> RUN cd /tmp/nextpnr/build \
+ 152 | >>>  && cmake .. \
+ 153 | >>>    -DARCH=generic \
+ 154 | >>>    -DBUILD_GUI=OFF \
+ 155 | >>>    -DBUILD_PYTHON=ON \
+ 156 | >>>    -DUSE_OPENMP=ON \
+ 157 | >>>  && make -j $(nproc) \
+ 158 | >>>  && make DESTDIR=/opt/nextpnr install
+ 159 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -c cd /tmp/nextpnr/build  && cmake ..    -DARCH=generic    -DBUILD_GUI=OFF    -DBUILD_PYTHON=ON    -DUSE_OPENMP=ON  && make -j $(nproc)  && make DESTDIR=/opt/nextpnr install" did not complete successfully: exit code: 1
+=== FAIL nextpnr/generic (CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/nextpnr/generic', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '--target', 'generic', '-f', 'debian-bullseye/nextpnr.dockerfile', 'debian-bullseye']' returned non-zero exit status 1.) ===
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+  File "/home/umarcor/containers/utils/pyHDLC/__init__.py", line 456, in BuildImage
+    _exec(args=[
+    ~~~~~^^^^^^^
+        "docker", "build", *_commonCmd,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        str(contextPath)
+        ^^^^^^^^^^^^^^^^
+    ], dry=dry, collapse=f"🚧 Build {imageName}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/umarcor/containers/utils/pyHDLC/run.py", line 46, in _exec
+    check_call(args, stderr=STDOUT)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 419, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/nextpnr/generic', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '--target', 'generic', '-f', 'debian-bullseye/nextpnr.dockerfile', 'debian-bullseye']' returned non-zero exit status 1.
+=== BUILD nextpnr ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/nextpnr --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -f debian-bullseye/nextpnr.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from nextpnr.dockerfile
+#1 transferring dockerfile: 4.36kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/base:latest
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/build:latest
+#3 DONE 0.0s
+
+#4 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/nexus:latest
+#4 DONE 0.6s
+
+#5 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ecp5:latest
+#5 DONE 0.6s
+
+#6 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ice40:latest
+#6 DONE 0.6s
+
+#7 [internal] load .dockerignore
+#7 transferring context: 2B done
+#7 DONE 0.0s
+
+#8 [stage-23 1/5] FROM ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/base:latest@sha256:f456f046dd56ece67de430a1bd6a6907780da580023612b55d98522e9aa39aa2
+#8 resolve ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/base:latest@sha256:f456f046dd56ece67de430a1bd6a6907780da580023612b55d98522e9aa39aa2 0.0s done
+#8 CACHED
+
+#9 [build-generic 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/build:latest@sha256:03e2f82c3a05ec22601466bd7d66a84814ff496c75c16a56981994ec8e6eab97
+#9 resolve ghcr.io/hdl/amd64/debian/bullseye/build/nextpnr/build:latest@sha256:03e2f82c3a05ec22601466bd7d66a84814ff496c75c16a56981994ec8e6eab97 0.0s done
+#9 CACHED
+
+#10 [pkg-nextpnr-ice40 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ice40:latest@sha256:38115eec635fe2a17bf6429c9966f5b31bcbdb7cce69b032e2c9d8041935dfc7
+#10 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ice40:latest@sha256:38115eec635fe2a17bf6429c9966f5b31bcbdb7cce69b032e2c9d8041935dfc7 0.0s done
+#10 CACHED
+
+#11 [pkg-nextpnr-ecp5 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ecp5:latest@sha256:819c937114637f302a7b23b52111149c9a5b53160ff31e2e61a00f5331f5753c
+#11 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/ecp5:latest@sha256:819c937114637f302a7b23b52111149c9a5b53160ff31e2e61a00f5331f5753c 0.0s done
+#11 CACHED
+
+#12 [pkg-nextpnr-nexus 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/nexus:latest@sha256:3cd771f6d10eda9e84f21d5a9fb69add75caacac4bef7690553212437fe93a7e
+#12 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/nextpnr/nexus:latest@sha256:3cd771f6d10eda9e84f21d5a9fb69add75caacac4bef7690553212437fe93a7e 0.0s done
+#12 CACHED
+
+#13 [build-generic 2/2] RUN cd /tmp/nextpnr/build  && cmake ..    -DARCH=generic    -DBUILD_GUI=OFF    -DBUILD_PYTHON=ON    -DUSE_OPENMP=ON  && make -j $(nproc)  && make DESTDIR=/opt/nextpnr install
+#13 0.163 CMake Error at CMakeLists.txt:5 (cmake_minimum_required):
+#13 0.163   CMake 3.25 or higher is required.  You are running version 3.18.4
+#13 0.163 
+#13 0.163 
+#13 0.163 -- Configuring incomplete, errors occurred!
+#13 ERROR: process "/bin/bash -c cd /tmp/nextpnr/build  && cmake ..    -DARCH=generic    -DBUILD_GUI=OFF    -DBUILD_PYTHON=ON    -DUSE_OPENMP=ON  && make -j $(nproc)  && make DESTDIR=/opt/nextpnr install" did not complete successfully: exit code: 1
+------
+ > [build-generic 2/2] RUN cd /tmp/nextpnr/build  && cmake ..    -DARCH=generic    -DBUILD_GUI=OFF    -DBUILD_PYTHON=ON    -DUSE_OPENMP=ON  && make -j $(nproc)  && make DESTDIR=/opt/nextpnr install:
+0.163 CMake Error at CMakeLists.txt:5 (cmake_minimum_required):
+0.163   CMake 3.25 or higher is required.  You are running version 3.18.4
+0.163 
+0.163 
+0.163 -- Configuring incomplete, errors occurred!
+------
+nextpnr.dockerfile:151
+--------------------
+ 150 |     
+ 151 | >>> RUN cd /tmp/nextpnr/build \
+ 152 | >>>  && cmake .. \
+ 153 | >>>    -DARCH=generic \
+ 154 | >>>    -DBUILD_GUI=OFF \
+ 155 | >>>    -DBUILD_PYTHON=ON \
+ 156 | >>>    -DUSE_OPENMP=ON \
+ 157 | >>>  && make -j $(nproc) \
+ 158 | >>>  && make DESTDIR=/opt/nextpnr install
+ 159 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -c cd /tmp/nextpnr/build  && cmake ..    -DARCH=generic    -DBUILD_GUI=OFF    -DBUILD_PYTHON=ON    -DUSE_OPENMP=ON  && make -j $(nproc)  && make DESTDIR=/opt/nextpnr install" did not complete successfully: exit code: 1
+=== FAIL nextpnr (CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/nextpnr', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '-f', 'debian-bullseye/nextpnr.dockerfile', 'debian-bullseye']' returned non-zero exit status 1.) ===
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+  File "/home/umarcor/containers/utils/pyHDLC/__init__.py", line 456, in BuildImage
+    _exec(args=[
+    ~~~~~^^^^^^^
+        "docker", "build", *_commonCmd,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        str(contextPath)
+        ^^^^^^^^^^^^^^^^
+    ], dry=dry, collapse=f"🚧 Build {imageName}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/umarcor/containers/utils/pyHDLC/run.py", line 46, in _exec
+    check_call(args, stderr=STDOUT)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 419, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/nextpnr', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '-f', 'debian-bullseye/nextpnr.dockerfile', 'debian-bullseye']' returned non-zero exit status 1.
+RESULT: FAIL

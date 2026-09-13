@@ -1,0 +1,663 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: openfpgaloader IMAGES: ['pkg/openfpgaloader', 'openfpgaloader']
+=== BUILD pkg/openfpgaloader ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/openfpgaloader --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target pkg -f debian/openfpgaloader.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from openfpgaloader.dockerfile
+#1 transferring dockerfile: 2.23kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/dev:latest
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/dev:latest@sha256:f928b0f1453453ed46a5cbff1727df0cc724fae6bb0b7662f27bd19fe5c748ec
+#4 resolve ghcr.io/hdl/amd64/debian/bullseye/build/dev:latest@sha256:f928b0f1453453ed46a5cbff1727df0cc724fae6bb0b7662f27bd19fe5c748ec 0.0s done
+#4 DONE 0.1s
+
+#5 [build 2/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     cmake     libftdi1-2     libftdi1-dev     libhidapi-dev     libudev-dev     pkg-config     zlib1g-dev  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#5 1.161 Reading package lists...
+#5 1.719 Building dependency tree...
+#5 1.850 Reading state information...
+#5 1.977 cmake is already the newest version (3.18.4-2+deb11u1).
+#5 1.977 zlib1g-dev is already the newest version (1:1.2.11.dfsg-2+deb11u2).
+#5 1.977 zlib1g-dev set to manually installed.
+#5 1.977 The following additional packages will be installed:
+#5 1.977   libdpkg-perl libglib2.0-0 libhidapi-hidraw0 libhidapi-libusb0 libusb-1.0-0
+#5 1.977   libusb-1.0-0-dev
+#5 1.978 Suggested packages:
+#5 1.978   debian-keyring gnupg patch sensible-utils bzr dpkg-dev
+#5 1.978 Recommended packages:
+#5 1.978   libfile-fcntllock-perl liblocale-gettext-perl bzip2 xz-utils libftdi1-doc
+#5 1.978   libglib2.0-data shared-mime-info xdg-user-dirs libusb-1.0-doc
+#5 2.068 The following NEW packages will be installed:
+#5 2.069   libdpkg-perl libftdi1-2 libftdi1-dev libglib2.0-0 libhidapi-dev
+#5 2.069   libhidapi-hidraw0 libhidapi-libusb0 libudev-dev libusb-1.0-0
+#5 2.069   libusb-1.0-0-dev pkg-config
+#5 2.645 0 upgraded, 11 newly installed, 0 to remove and 0 not upgraded.
+#5 2.645 Need to get 3386 kB of archives.
+#5 2.645 After this operation, 8101 kB of additional disk space will be used.
+#5 2.645 Get:1 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libdpkg-perl all 1.20.14 [1555 kB]
+#5 2.708 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libusb-1.0-0 amd64 2:1.0.24-3 [60.2 kB]
+#5 2.714 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libftdi1-2 amd64 1.5-5+b1 [31.7 kB]
+#5 2.715 Get:4 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libusb-1.0-0-dev amd64 2:1.0.24-3 [80.4 kB]
+#5 2.715 Get:5 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libftdi1-dev amd64 1.5-5+b1 [39.0 kB]
+#5 2.717 Get:6 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libglib2.0-0 amd64 2.66.8-1+deb11u8 [1377 kB]
+#5 2.886 Get:7 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libhidapi-libusb0 amd64 0.10.1+dfsg-1 [14.8 kB]
+#5 3.029 Get:8 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libhidapi-hidraw0 amd64 0.10.1+dfsg-1 [12.3 kB]
+#5 3.141 Get:9 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libhidapi-dev amd64 0.10.1+dfsg-1 [26.6 kB]
+#5 3.186 Get:10 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libudev-dev amd64 247.3-7+deb11u8 [124 kB]
+#5 3.188 Get:11 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 pkg-config amd64 0.29.2-1 [65.1 kB]
+#5 3.343 debconf: delaying package configuration, since apt-utils is not installed
+#5 3.395 Fetched 3386 kB in 1s (3038 kB/s)
+#5 3.433 Selecting previously unselected package libdpkg-perl.
+#5 3.433 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 39056 files and directories currently installed.)
+#5 3.481 Preparing to unpack .../00-libdpkg-perl_1.20.14_all.deb ...
+#5 3.502 Unpacking libdpkg-perl (1.20.14) ...
+#5 3.682 Selecting previously unselected package libusb-1.0-0:amd64.
+#5 3.685 Preparing to unpack .../01-libusb-1.0-0_2%3a1.0.24-3_amd64.deb ...
+#5 3.707 Unpacking libusb-1.0-0:amd64 (2:1.0.24-3) ...
+#5 3.811 Selecting previously unselected package libftdi1-2:amd64.
+#5 3.814 Preparing to unpack .../02-libftdi1-2_1.5-5+b1_amd64.deb ...
+#5 3.829 Unpacking libftdi1-2:amd64 (1.5-5+b1) ...
+#5 3.902 Selecting previously unselected package libusb-1.0-0-dev:amd64.
+#5 3.905 Preparing to unpack .../03-libusb-1.0-0-dev_2%3a1.0.24-3_amd64.deb ...
+#5 3.919 Unpacking libusb-1.0-0-dev:amd64 (2:1.0.24-3) ...
+#5 3.997 Selecting previously unselected package libftdi1-dev.
+#5 3.999 Preparing to unpack .../04-libftdi1-dev_1.5-5+b1_amd64.deb ...
+#5 4.011 Unpacking libftdi1-dev (1.5-5+b1) ...
+#5 4.123 Selecting previously unselected package libglib2.0-0:amd64.
+#5 4.126 Preparing to unpack .../05-libglib2.0-0_2.66.8-1+deb11u8_amd64.deb ...
+#5 4.141 Unpacking libglib2.0-0:amd64 (2.66.8-1+deb11u8) ...
+#5 4.359 Selecting previously unselected package libhidapi-libusb0:amd64.
+#5 4.362 Preparing to unpack .../06-libhidapi-libusb0_0.10.1+dfsg-1_amd64.deb ...
+#5 4.373 Unpacking libhidapi-libusb0:amd64 (0.10.1+dfsg-1) ...
+#5 4.466 Selecting previously unselected package libhidapi-hidraw0:amd64.
+#5 4.469 Preparing to unpack .../07-libhidapi-hidraw0_0.10.1+dfsg-1_amd64.deb ...
+#5 4.480 Unpacking libhidapi-hidraw0:amd64 (0.10.1+dfsg-1) ...
+#5 4.588 Selecting previously unselected package libhidapi-dev:amd64.
+#5 4.591 Preparing to unpack .../08-libhidapi-dev_0.10.1+dfsg-1_amd64.deb ...
+#5 4.615 Unpacking libhidapi-dev:amd64 (0.10.1+dfsg-1) ...
+#5 4.747 Selecting previously unselected package libudev-dev:amd64.
+#5 4.748 Preparing to unpack .../09-libudev-dev_247.3-7+deb11u8_amd64.deb ...
+#5 4.780 Unpacking libudev-dev:amd64 (247.3-7+deb11u8) ...
+#5 4.939 Selecting previously unselected package pkg-config.
+#5 4.942 Preparing to unpack .../10-pkg-config_0.29.2-1_amd64.deb ...
+#5 4.953 Unpacking pkg-config (0.29.2-1) ...
+#5 5.066 Setting up libglib2.0-0:amd64 (2.66.8-1+deb11u8) ...
+#5 5.129 No schema files found: doing nothing.
+#5 5.144 Setting up libhidapi-hidraw0:amd64 (0.10.1+dfsg-1) ...
+#5 5.196 Setting up libudev-dev:amd64 (247.3-7+deb11u8) ...
+#5 5.232 Setting up libdpkg-perl (1.20.14) ...
+#5 5.277 Setting up libusb-1.0-0:amd64 (2:1.0.24-3) ...
+#5 5.317 Setting up libusb-1.0-0-dev:amd64 (2:1.0.24-3) ...
+#5 5.404 Setting up libftdi1-2:amd64 (1.5-5+b1) ...
+#5 5.469 Setting up libftdi1-dev (1.5-5+b1) ...
+#5 5.537 Setting up libhidapi-libusb0:amd64 (0.10.1+dfsg-1) ...
+#5 5.592 Setting up pkg-config (0.29.2-1) ...
+#5 5.667 Setting up libhidapi-dev:amd64 (0.10.1+dfsg-1) ...
+#5 5.708 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#5 5.954 Reading package lists...
+#5 6.520 Building dependency tree...
+#5 6.654 Reading state information...
+#5 6.687 Reading package lists...
+#5 7.253 Building dependency tree...
+#5 7.390 Reading state information...
+#5 7.533 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#5 DONE 7.7s
+
+#6 [build 3/3] RUN git clone --recurse-submodules https://github.com/trabucayre/openFPGALoader /tmp/openFPGALoader  && cd /tmp/openFPGALoader  && mkdir build  && cd build  && cmake ../  && cmake --build .  && make DESTDIR=/opt/openFPGALoader install  && mkdir -p /opt/openFPGALoader/etc/udev/rules.d  && cp ../99-openfpgaloader.rules /opt/openFPGALoader/etc/udev/rules.d/
+#6 0.287 Cloning into '/tmp/openFPGALoader'...
+#6 5.066 -- The CXX compiler identification is Clang 11.0.1
+#6 5.079 -- Detecting CXX compiler ABI info
+#6 5.693 -- Detecting CXX compiler ABI info - done
+#6 5.708 -- Check for working CXX compiler: /usr/bin/clang++ - skipped
+#6 5.709 -- Detecting CXX compile features
+#6 5.710 -- Detecting CXX compile features - done
+#6 5.737 -- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2") 
+#6 5.737 -- Checking for module 'libftdi1'
+#6 5.758 --   Found libftdi1, version 1.5
+#6 5.777 -- Checking for module 'libusb-1.0'
+#6 5.786 --   Found libusb-1.0, version 1.0.24
+#6 5.824 -- Checking for module 'hidapi-libusb'
+#6 5.844 --   Found hidapi-libusb, version 0.10.1
+#6 5.868 -- Checking for module 'zlib'
+#6 5.879 --   Found zlib, version 1.2.11
+#6 5.904 -- Checking for module 'libudev'
+#6 5.915 --   Found libudev, version 247
+#6 5.940 -- Checking for module 'libgpiod'
+#6 5.942 --   No package 'libgpiod' found
+#6 5.942 libgpiod not found, disabling gpiod support
+#6 5.943 CologneChip support enabled
+#6 5.943 Efinix support enabled
+#6 5.943 ICE40 support enabled
+#6 5.943 Lattice SSPI support enabled
+#6 5.943 Altera support enabled
+#6 5.943 Anlogic support enabled
+#6 5.943 Gowin support enabled
+#6 5.943 Xilinx support enabled
+#6 5.943 Lattice support enabled
+#6 5.943 Anlogic Cable support enabled
+#6 5.944 CH347 support enabled
+#6 5.944 cmsis_dap v1 support enabled
+#6 5.944 cmsis_dap v2 support enabled
+#6 5.944 DFU support enabled
+#6 5.944 dirtyJtag support enabled
+#6 5.944 ESP32S3 support enabled
+#6 5.944 Gowin GWU2X support enabled
+#6 5.944 JLink support enabled
+#6 5.944 Remote bitbang client support enabled
+#6 5.944 Xilinx Platform Cable USB (XPCU) support enabled
+#6 5.944 Xilinx Virtual Client support enabled
+#6 5.944 Xilinx Virtual Server support enabled
+#6 5.948 -- Configuring done
+#6 5.963 -- Generating done
+#6 5.965 -- Build files have been written to: /tmp/openFPGALoader/build
+#6 6.015 Scanning dependencies of target bit
+#6 6.037 [  1%] Building spiOverJtag_xc6slx100fgg484.bit.gz
+#6 6.085 [  3%] Building spiOverJtag_xc6slx45csg324.bit.gz
+#6 6.116 [  5%] Building spiOverJtag_10cl025256.rbf.gz
+#6 6.240 [  6%] Building spiOverJtag_5ce223.rbf.gz
+#6 6.551 [  8%] Building spiOverJtag_ep4ce2217.rbf.gz
+#6 6.674 [  8%] Built target bit
+#6 6.702 Scanning dependencies of target openFPGALoader
+#6 6.715 [ 10%] Building CXX object CMakeFiles/openFPGALoader.dir/src/common.cpp.o
+#6 7.247 [ 11%] Building CXX object CMakeFiles/openFPGALoader.dir/src/configBitstreamParser.cpp.o
+#6 7.999 [ 13%] Building CXX object CMakeFiles/openFPGALoader.dir/src/device.cpp.o
+#6 19.63 [ 15%] Building CXX object CMakeFiles/openFPGALoader.dir/src/display.cpp.o
+#6 20.07 [ 16%] Building CXX object CMakeFiles/openFPGALoader.dir/src/main.cpp.o
+#6 53.25 [ 18%] Building CXX object CMakeFiles/openFPGALoader.dir/src/progressBar.cpp.o
+#6 54.26 [ 20%] Building CXX object CMakeFiles/openFPGALoader.dir/src/rawParser.cpp.o
+#6 55.04 [ 21%] Building CXX object CMakeFiles/openFPGALoader.dir/src/jedParser.cpp.o
+#6 57.45 [ 23%] Building CXX object CMakeFiles/openFPGALoader.dir/src/mcsParser.cpp.o
+#6 60.47 [ 25%] Building CXX object CMakeFiles/openFPGALoader.dir/src/bpiFlash.cpp.o
+#6 80.21 [ 26%] Building CXX object CMakeFiles/openFPGALoader.dir/src/spiFlash.cpp.o
+#6 84.30 [ 28%] Building CXX object CMakeFiles/openFPGALoader.dir/src/flashInterface.cpp.o
+#6 86.20 [ 30%] Building CXX object CMakeFiles/openFPGALoader.dir/src/jtag.cpp.o
+#6 106.8 [ 31%] Building CXX object CMakeFiles/openFPGALoader.dir/src/ch552_jtag.cpp.o
+#6 108.1 [ 33%] Building CXX object CMakeFiles/openFPGALoader.dir/src/ftdiJtagBitbang.cpp.o
+#6 114.1 [ 35%] Building CXX object CMakeFiles/openFPGALoader.dir/src/ftdiJtagMPSSE.cpp.o
+#6 116.1 [ 36%] Building CXX object CMakeFiles/openFPGALoader.dir/src/ftdipp_mpsse.cpp.o
+#6 118.5 [ 38%] Building CXX object CMakeFiles/openFPGALoader.dir/src/ftdispi.cpp.o
+#6 126.1 [ 40%] Building CXX object CMakeFiles/openFPGALoader.dir/src/colognechip.cpp.o
+#6 148.1 [ 41%] Building CXX object CMakeFiles/openFPGALoader.dir/src/colognechipCfgParser.cpp.o
+#6 149.1 [ 43%] Building CXX object CMakeFiles/openFPGALoader.dir/src/efinix.cpp.o
+#6 167.7 [ 45%] Building CXX object CMakeFiles/openFPGALoader.dir/src/efinixHexParser.cpp.o
+#6 168.8 [ 46%] Building CXX object CMakeFiles/openFPGALoader.dir/src/ice40.cpp.o
+#6 185.1 [ 48%] Building CXX object CMakeFiles/openFPGALoader.dir/src/latticeSSPI.cpp.o
+#6 199.8 [ 50%] Building CXX object CMakeFiles/openFPGALoader.dir/src/altera.cpp.o
+#6 213.6 [ 51%] Building CXX object CMakeFiles/openFPGALoader.dir/src/pofParser.cpp.o
+#6 219.2 [ 53%] Building CXX object CMakeFiles/openFPGALoader.dir/src/anlogic.cpp.o
+#6 234.6 [ 55%] Building CXX object CMakeFiles/openFPGALoader.dir/src/anlogicBitParser.cpp.o
+#6 235.9 [ 56%] Building CXX object CMakeFiles/openFPGALoader.dir/src/gowin.cpp.o
+#6 252.0 [ 58%] Building CXX object CMakeFiles/openFPGALoader.dir/src/fsparser.cpp.o
+#6 253.5 [ 60%] Building CXX object CMakeFiles/openFPGALoader.dir/src/bitparser.cpp.o
+#6 254.6 [ 61%] Building CXX object CMakeFiles/openFPGALoader.dir/src/xilinx.cpp.o
+#6 274.3 [ 63%] Building CXX object CMakeFiles/openFPGALoader.dir/src/xilinxMapParser.cpp.o
+#6 275.3 [ 65%] Building CXX object CMakeFiles/openFPGALoader.dir/src/lattice.cpp.o
+#6 296.2 [ 66%] Building CXX object CMakeFiles/openFPGALoader.dir/src/feaparser.cpp.o
+#6 297.2 [ 68%] Building CXX object CMakeFiles/openFPGALoader.dir/src/latticeBitParser.cpp.o
+#6 307.5 [ 70%] Building CXX object CMakeFiles/openFPGALoader.dir/src/dfu.cpp.o
+#6 309.3 [ 71%] Building CXX object CMakeFiles/openFPGALoader.dir/src/dfuFileParser.cpp.o
+#6 310.5 [ 73%] Building CXX object CMakeFiles/openFPGALoader.dir/src/anlogicCable.cpp.o
+#6 311.2 [ 75%] Building CXX object CMakeFiles/openFPGALoader.dir/src/ch347jtag.cpp.o
+#6 312.1 [ 76%] Building CXX object CMakeFiles/openFPGALoader.dir/src/dirtyJtag.cpp.o
+#6 312.9 [ 78%] Building CXX object CMakeFiles/openFPGALoader.dir/src/esp_usb_jtag.cpp.o
+#6 313.8 [ 80%] Building CXX object CMakeFiles/openFPGALoader.dir/src/gwu2x_jtag.cpp.o
+#6 315.0 [ 81%] Building CXX object CMakeFiles/openFPGALoader.dir/src/jlink.cpp.o
+#6 315.9 [ 83%] Building CXX object CMakeFiles/openFPGALoader.dir/src/remoteBitbang_client.cpp.o
+#6 317.0 [ 85%] Building CXX object CMakeFiles/openFPGALoader.dir/src/svf_jtag.cpp.o
+#6 329.4 [ 86%] Building CXX object CMakeFiles/openFPGALoader.dir/src/xilinxPlatformCableUSB.cpp.o
+#6 330.2 [ 88%] Building CXX object CMakeFiles/openFPGALoader.dir/src/xvc_client.cpp.o
+#6 334.8 [ 90%] Building CXX object CMakeFiles/openFPGALoader.dir/src/xvc_server.cpp.o
+#6 346.7 [ 91%] Building CXX object CMakeFiles/openFPGALoader.dir/src/usbBlaster.cpp.o
+#6 348.0 [ 93%] Building CXX object CMakeFiles/openFPGALoader.dir/src/libusb_ll.cpp.o
+#6 349.3 [ 95%] Building CXX object CMakeFiles/openFPGALoader.dir/src/fx2_ll.cpp.o
+#6 350.1 [ 96%] Building CXX object CMakeFiles/openFPGALoader.dir/src/ihexParser.cpp.o
+#6 350.9 [ 98%] Building CXX object CMakeFiles/openFPGALoader.dir/src/cmsisDAP.cpp.o
+#6 352.7 [100%] Linking CXX executable openFPGALoader
+#6 352.9 [100%] Built target openFPGALoader
+#6 353.0 [  8%] Built target bit
+#6 353.1 [100%] Built target openFPGALoader
+#6 353.1 Install the project...
+#6 353.1 -- Install configuration: ""
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/bin/openFPGALoader
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_10cl006144.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_10cl016484.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_10cl055484.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_5ce215.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_5ce423.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_5ce523.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_5ce927.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_5sgsd5.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_efinix_t120f324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_efinix_t13f256.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_efinix_t8f81.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_efinix_ti180j484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_efinix_ti375n484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_efinix_ti60f225.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_ep4ce1017.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_ep4ce11523.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_ep4ce1523.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_ep4ce622.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc3s500evq100.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc6slx150tcsg484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc6slx150tfgg484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc6slx16csg324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc6slx16ftg256.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc6slx25csg324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc6slx25tcsg324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc6slx45tfgg484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc6slx9csg324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc6slx9tqg144.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc6vlx130tff784.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a100t.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a100tcsg324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a100tfgg484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a100tftg256.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a12t.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a12tcpg238.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a12tcsg325.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a15t.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a15tcpg236.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a15tcsg324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a15tcsg325.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a15tfgg484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a15tftg256.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a200t.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a200tfbg484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a200tfbg676.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a200tffg1156.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a200tsbg484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a25t.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a25tcpg238.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a25tcsg325.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a35t.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a35tcpg236.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a35tcsg324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a35tcsg325.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a35tfgg484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a35tftg256.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a50t.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a50tcpg236.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a50tcsg324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a50tcsg325.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a50tcsg325_1v35.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a50tfgg484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a50tftg256.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a75t.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a75tcsg324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a75tfgg484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a75tfgg676.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7a75tftg256.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7k160tffg676.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7k325tfbg900.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7k325tffg676.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7k325tffg900.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7k420tffg901.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7k70tfbg484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7k70tfbg676.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s100.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s100fgga484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s100fgga676.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s15.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s15cpga196.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s15csga225.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s15ftgb196.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s25.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s25csga225.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s25csga324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s25ftgb196.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s50.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s50csga324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s50fgga484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s50ftgb196.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s6.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s6cpga196.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s6csga225.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s6ftgb196.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s75.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s75fgga484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7s75fgga676.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc7vx330tffg1157.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xcau10p-ffvb676.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xcau15p-ffvb676.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xcku040-ffva1156.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xcku060-ffva1156.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xcku3p-ffva676.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xcku3p-ffvb676.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xcku5p-ffvb676.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xcvu37p-fsvh2892.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xcvu7p-flvb2104.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xcvu9p-flga2104.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xcvu9p-flgb2104.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/bpiOverJtag_xc7k480tffg1156.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc6slx100fgg484.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_xc6slx45csg324.bit.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_10cl025256.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_5ce223.rbf.gz
+#6 353.1 -- Installing: /opt/openFPGALoader/usr/local/share/openFPGALoader/spiOverJtag_ep4ce2217.rbf.gz
+#6 DONE 353.4s
+
+#7 [pkg 1/1] COPY --from=build /opt/openFPGALoader /openfpgaloader
+#7 DONE 0.1s
+
+#8 exporting to image
+#8 exporting layers
+#8 exporting layers 0.9s done
+#8 preparing layers for inline cache
+#8 preparing layers for inline cache 0.0s done
+#8 exporting manifest sha256:7e366baf0deaaac15e0e68bf888fb19fd14fcde236a6104a86892355e0967c6c 0.0s done
+#8 exporting config sha256:9d4e2b60b0584ab6049986548ecd68ebe22a007c9ab3116d3fd52a64447a7df8 0.0s done
+#8 exporting attestation manifest sha256:bb9c0fbbf4602905a1577ff0e2545044570b73baf6ca100e2f4b0396a1e1c192
+#8 exporting attestation manifest sha256:bb9c0fbbf4602905a1577ff0e2545044570b73baf6ca100e2f4b0396a1e1c192 0.0s done
+#8 exporting manifest list sha256:4bb9ef36d4b3dcb15e265d883775f435c57fee19fc0fe9348141a75d5636df6c 0.0s done
+#8 naming to ghcr.io/hdl/amd64/debian/bullseye/pkg/openfpgaloader:latest done
+#8 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/openfpgaloader:latest
+#8 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/openfpgaloader:latest 0.2s done
+#8 DONE 1.3s
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/testpkg:openfpgaloader --build-arg IMAGE=ghcr.io/hdl/amd64/debian/bullseye/pkg/openfpgaloader --build-arg PACKAGE=openfpgaloader -f /home/umarcor/containers/utils/pyHDLC/testpkg.dockerfile .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from testpkg.dockerfile
+#1 transferring dockerfile: 975B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/openfpgaloader:latest
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.6s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#5 resolve docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b 0.1s done
+#5 CACHED
+
+#6 [pkg 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/openfpgaloader:latest@sha256:4bb9ef36d4b3dcb15e265d883775f435c57fee19fc0fe9348141a75d5636df6c
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/openfpgaloader:latest@sha256:4bb9ef36d4b3dcb15e265d883775f435c57fee19fc0fe9348141a75d5636df6c 0.1s done
+#6 DONE 0.1s
+
+#7 [stage-1 2/3] COPY --from=pkg /openfpgaloader /
+#7 DONE 0.6s
+
+#8 [stage-1 3/3] RUN apk add -U --no-cache file tree
+#8 0.797 (1/3) Installing libmagic (5.47-r2)
+#8 0.843 (2/3) Installing file (5.47-r2)
+#8 0.857 (3/3) Installing tree (2.3.2-r0)
+#8 0.868 Executing busybox-1.37.0-r31.trigger
+#8 0.875 OK: 18.4 MiB in 19 packages
+#8 DONE 1.0s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 1.0s done
+#9 preparing layers for inline cache
+#9 preparing layers for inline cache 0.0s done
+#9 exporting manifest sha256:d204d0ac1df4bef92fc8b9bcc19daed211b24cbda846c5fd56c16e6272387e35 0.0s done
+#9 exporting config sha256:84ac47e6870973833dbcad92e0d39d7b80cc92dee4f5ed1f233a931f88121742 0.0s done
+#9 exporting attestation manifest sha256:c01ec37e901e8bb27e9c15a1fd39d015c6267beaa9404069ccf15dcce0d52d8d 0.0s done
+#9 exporting manifest list sha256:eb6a47f446466fce57042150fdf9204b76b9060c3542ec88d8431964c17f81cb
+#9 exporting manifest list sha256:eb6a47f446466fce57042150fdf9204b76b9060c3542ec88d8431964c17f81cb 0.0s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/testpkg:openfpgaloader done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:openfpgaloader
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:openfpgaloader 0.3s done
+#9 DONE 1.5s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/testpkg:openfpgaloader //wrk/openfpgaloader.pkg.sh
+/usr/local
+├── bin
+│   └── openFPGALoader
+├── lib
+└── share
+    └── openFPGALoader
+        ├── bpiOverJtag_xc7k480tffg1156.bit.gz
+        ├── spiOverJtag_10cl006144.rbf.gz
+        ├── spiOverJtag_10cl016484.rbf.gz
+        ├── spiOverJtag_10cl025256.rbf.gz
+        ├── spiOverJtag_10cl055484.rbf.gz
+        ├── spiOverJtag_5ce215.rbf.gz
+        ├── spiOverJtag_5ce223.rbf.gz
+        ├── spiOverJtag_5ce423.rbf.gz
+        ├── spiOverJtag_5ce523.rbf.gz
+        ├── spiOverJtag_5ce927.rbf.gz
+        ├── spiOverJtag_5sgsd5.rbf.gz
+        ├── spiOverJtag_efinix_t120f324.bit.gz
+        ├── spiOverJtag_efinix_t13f256.bit.gz
+        ├── spiOverJtag_efinix_t8f81.bit.gz
+        ├── spiOverJtag_efinix_ti180j484.bit.gz
+        ├── spiOverJtag_efinix_ti375n484.bit.gz
+        ├── spiOverJtag_efinix_ti60f225.bit.gz
+        ├── spiOverJtag_ep4ce1017.rbf.gz
+        ├── spiOverJtag_ep4ce11523.rbf.gz
+        ├── spiOverJtag_ep4ce1523.rbf.gz
+        ├── spiOverJtag_ep4ce2217.rbf.gz
+        ├── spiOverJtag_ep4ce622.rbf.gz
+        ├── spiOverJtag_xc3s500evq100.bit.gz
+        ├── spiOverJtag_xc6slx100fgg484.bit.gz
+        ├── spiOverJtag_xc6slx150tcsg484.bit.gz
+        ├── spiOverJtag_xc6slx150tfgg484.bit.gz
+        ├── spiOverJtag_xc6slx16csg324.bit.gz
+        ├── spiOverJtag_xc6slx16ftg256.bit.gz
+        ├── spiOverJtag_xc6slx25csg324.bit.gz
+        ├── spiOverJtag_xc6slx25tcsg324.bit.gz
+        ├── spiOverJtag_xc6slx45csg324.bit.gz
+        ├── spiOverJtag_xc6slx45tfgg484.bit.gz
+        ├── spiOverJtag_xc6slx9csg324.bit.gz
+        ├── spiOverJtag_xc6slx9tqg144.bit.gz
+        ├── spiOverJtag_xc6vlx130tff784.bit.gz
+        ├── spiOverJtag_xc7a100t.bit.gz
+        ├── spiOverJtag_xc7a100tcsg324.bit.gz
+        ├── spiOverJtag_xc7a100tfgg484.bit.gz
+        ├── spiOverJtag_xc7a100tftg256.bit.gz
+        ├── spiOverJtag_xc7a12t.bit.gz
+        ├── spiOverJtag_xc7a12tcpg238.bit.gz
+        ├── spiOverJtag_xc7a12tcsg325.bit.gz
+        ├── spiOverJtag_xc7a15t.bit.gz
+        ├── spiOverJtag_xc7a15tcpg236.bit.gz
+        ├── spiOverJtag_xc7a15tcsg324.bit.gz
+        ├── spiOverJtag_xc7a15tcsg325.bit.gz
+        ├── spiOverJtag_xc7a15tfgg484.bit.gz
+        ├── spiOverJtag_xc7a15tftg256.bit.gz
+        ├── spiOverJtag_xc7a200t.bit.gz
+        ├── spiOverJtag_xc7a200tfbg484.bit.gz
+        ├── spiOverJtag_xc7a200tfbg676.bit.gz
+        ├── spiOverJtag_xc7a200tffg1156.bit.gz
+        ├── spiOverJtag_xc7a200tsbg484.bit.gz
+        ├── spiOverJtag_xc7a25t.bit.gz
+        ├── spiOverJtag_xc7a25tcpg238.bit.gz
+        ├── spiOverJtag_xc7a25tcsg325.bit.gz
+        ├── spiOverJtag_xc7a35t.bit.gz
+        ├── spiOverJtag_xc7a35tcpg236.bit.gz
+        ├── spiOverJtag_xc7a35tcsg324.bit.gz
+        ├── spiOverJtag_xc7a35tcsg325.bit.gz
+        ├── spiOverJtag_xc7a35tfgg484.bit.gz
+        ├── spiOverJtag_xc7a35tftg256.bit.gz
+        ├── spiOverJtag_xc7a50t.bit.gz
+        ├── spiOverJtag_xc7a50tcpg236.bit.gz
+        ├── spiOverJtag_xc7a50tcsg324.bit.gz
+        ├── spiOverJtag_xc7a50tcsg325.bit.gz
+        ├── spiOverJtag_xc7a50tcsg325_1v35.bit.gz
+        ├── spiOverJtag_xc7a50tfgg484.bit.gz
+        ├── spiOverJtag_xc7a50tftg256.bit.gz
+        ├── spiOverJtag_xc7a75t.bit.gz
+        ├── spiOverJtag_xc7a75tcsg324.bit.gz
+        ├── spiOverJtag_xc7a75tfgg484.bit.gz
+        ├── spiOverJtag_xc7a75tfgg676.bit.gz
+        ├── spiOverJtag_xc7a75tftg256.bit.gz
+        ├── spiOverJtag_xc7k160tffg676.bit.gz
+        ├── spiOverJtag_xc7k325tfbg900.bit.gz
+        ├── spiOverJtag_xc7k325tffg676.bit.gz
+        ├── spiOverJtag_xc7k325tffg900.bit.gz
+        ├── spiOverJtag_xc7k420tffg901.bit.gz
+        ├── spiOverJtag_xc7k70tfbg484.bit.gz
+        ├── spiOverJtag_xc7k70tfbg676.bit.gz
+        ├── spiOverJtag_xc7s100.bit.gz
+        ├── spiOverJtag_xc7s100fgga484.bit.gz
+        ├── spiOverJtag_xc7s100fgga676.bit.gz
+        ├── spiOverJtag_xc7s15.bit.gz
+        ├── spiOverJtag_xc7s15cpga196.bit.gz
+        ├── spiOverJtag_xc7s15csga225.bit.gz
+        ├── spiOverJtag_xc7s15ftgb196.bit.gz
+        ├── spiOverJtag_xc7s25.bit.gz
+        ├── spiOverJtag_xc7s25csga225.bit.gz
+        ├── spiOverJtag_xc7s25csga324.bit.gz
+        ├── spiOverJtag_xc7s25ftgb196.bit.gz
+        ├── spiOverJtag_xc7s50.bit.gz
+        ├── spiOverJtag_xc7s50csga324.bit.gz
+        ├── spiOverJtag_xc7s50fgga484.bit.gz
+        ├── spiOverJtag_xc7s50ftgb196.bit.gz
+        ├── spiOverJtag_xc7s6.bit.gz
+        ├── spiOverJtag_xc7s6cpga196.bit.gz
+        ├── spiOverJtag_xc7s6csga225.bit.gz
+        ├── spiOverJtag_xc7s6ftgb196.bit.gz
+        ├── spiOverJtag_xc7s75.bit.gz
+        ├── spiOverJtag_xc7s75fgga484.bit.gz
+        ├── spiOverJtag_xc7s75fgga676.bit.gz
+        ├── spiOverJtag_xc7vx330tffg1157.bit.gz
+        ├── spiOverJtag_xcau10p-ffvb676.bit.gz
+        ├── spiOverJtag_xcau15p-ffvb676.bit.gz
+        ├── spiOverJtag_xcku040-ffva1156.bit.gz
+        ├── spiOverJtag_xcku060-ffva1156.bit.gz
+        ├── spiOverJtag_xcku3p-ffva676.bit.gz
+        ├── spiOverJtag_xcku3p-ffvb676.bit.gz
+        ├── spiOverJtag_xcku5p-ffvb676.bit.gz
+        ├── spiOverJtag_xcvu37p-fsvh2892.bit.gz
+        ├── spiOverJtag_xcvu7p-flvb2104.bit.gz
+        ├── spiOverJtag_xcvu9p-flga2104.bit.gz
+        └── spiOverJtag_xcvu9p-flgb2104.bit.gz
+
+5 directories, 116 files
+-rw-r--r--    1 root     root        2.9K Sep 15 04:40 /etc/udev/rules.d/99-openfpgaloader.rules
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS pkg/openfpgaloader ===
+=== BUILD openfpgaloader ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/openfpgaloader --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -f debian/openfpgaloader.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from openfpgaloader.dockerfile
+#1 transferring dockerfile: 2.23kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/dev:latest
+#2 DONE 0.1s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/base:latest
+#3 DONE 0.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/dev:latest@sha256:f928b0f1453453ed46a5cbff1727df0cc724fae6bb0b7662f27bd19fe5c748ec
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/build/dev:latest@sha256:f928b0f1453453ed46a5cbff1727df0cc724fae6bb0b7662f27bd19fe5c748ec 0.1s done
+#5 DONE 0.1s
+
+#6 [stage-2 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e 0.1s done
+#6 DONE 0.1s
+
+#7 [build 2/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     cmake     libftdi1-2     libftdi1-dev     libhidapi-dev     libudev-dev     pkg-config     zlib1g-dev  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [build 3/3] RUN git clone --recurse-submodules https://github.com/trabucayre/openFPGALoader /tmp/openFPGALoader  && cd /tmp/openFPGALoader  && mkdir build  && cd build  && cmake ../  && cmake --build .  && make DESTDIR=/opt/openFPGALoader install  && mkdir -p /opt/openFPGALoader/etc/udev/rules.d  && cp ../99-openfpgaloader.rules /opt/openFPGALoader/etc/udev/rules.d/
+#8 CACHED
+
+#6 [stage-2 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#6 CACHED
+
+#9 [stage-2 2/3] COPY --from=build /opt/openFPGALoader /
+#9 DONE 0.1s
+
+#10 [stage-2 3/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     libftdi1-2     libhidapi-libusb0     udev     zlib1g  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#10 3.079 Reading package lists...
+#10 3.853 Building dependency tree...
+#10 4.056 Reading state information...
+#10 4.281 zlib1g is already the newest version (1:1.2.11.dfsg-2+deb11u2).
+#10 4.281 zlib1g set to manually installed.
+#10 4.281 The following additional packages will be installed:
+#10 4.282   libkmod2 libusb-1.0-0
+#10 4.367 The following NEW packages will be installed:
+#10 4.369   libftdi1-2 libhidapi-libusb0 libkmod2 libusb-1.0-0 udev
+#10 4.612 0 upgraded, 5 newly installed, 0 to remove and 0 not upgraded.
+#10 4.612 Need to get 1627 kB of archives.
+#10 4.612 After this operation, 9620 kB of additional disk space will be used.
+#10 4.612 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libkmod2 amd64 28-1 [55.6 kB]
+#10 4.733 Get:2 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 udev amd64 247.3-7+deb11u8 [1465 kB]
+#10 4.983 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libusb-1.0-0 amd64 2:1.0.24-3 [60.2 kB]
+#10 4.990 Get:4 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libftdi1-2 amd64 1.5-5+b1 [31.7 kB]
+#10 4.991 Get:5 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libhidapi-libusb0 amd64 0.10.1+dfsg-1 [14.8 kB]
+#10 5.151 debconf: delaying package configuration, since apt-utils is not installed
+#10 5.193 Fetched 1627 kB in 1s (2666 kB/s)
+#10 5.230 Selecting previously unselected package libkmod2:amd64.
+#10 5.230 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7841 files and directories currently installed.)
+#10 5.245 Preparing to unpack .../libkmod2_28-1_amd64.deb ...
+#10 5.260 Unpacking libkmod2:amd64 (28-1) ...
+#10 5.524 Selecting previously unselected package udev.
+#10 5.524 Preparing to unpack .../udev_247.3-7+deb11u8_amd64.deb ...
+#10 5.596 Unpacking udev (247.3-7+deb11u8) ...
+#10 5.848 Selecting previously unselected package libusb-1.0-0:amd64.
+#10 5.848 Preparing to unpack .../libusb-1.0-0_2%3a1.0.24-3_amd64.deb ...
+#10 5.862 Unpacking libusb-1.0-0:amd64 (2:1.0.24-3) ...
+#10 5.926 Selecting previously unselected package libftdi1-2:amd64.
+#10 5.927 Preparing to unpack .../libftdi1-2_1.5-5+b1_amd64.deb ...
+#10 5.935 Unpacking libftdi1-2:amd64 (1.5-5+b1) ...
+#10 5.996 Selecting previously unselected package libhidapi-libusb0:amd64.
+#10 5.996 Preparing to unpack .../libhidapi-libusb0_0.10.1+dfsg-1_amd64.deb ...
+#10 6.008 Unpacking libhidapi-libusb0:amd64 (0.10.1+dfsg-1) ...
+#10 6.140 Setting up libusb-1.0-0:amd64 (2:1.0.24-3) ...
+#10 6.164 Setting up libkmod2:amd64 (28-1) ...
+#10 6.187 Setting up libftdi1-2:amd64 (1.5-5+b1) ...
+#10 6.215 Setting up udev (247.3-7+deb11u8) ...
+#10 6.994 invoke-rc.d: could not determine current runlevel
+#10 7.085 invoke-rc.d: policy-rc.d denied execution of start.
+#10 7.214 Setting up libhidapi-libusb0:amd64 (0.10.1+dfsg-1) ...
+#10 7.232 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#10 7.332 Reading package lists...
+#10 8.328 Building dependency tree...
+#10 8.521 Reading state information...
+#10 8.551 Reading package lists...
+#10 9.345 Building dependency tree...
+#10 9.555 Reading state information...
+#10 9.757 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#10 DONE 9.8s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 1.5s done
+#11 preparing layers for inline cache
+#11 preparing layers for inline cache 0.0s done
+#11 exporting manifest sha256:08ebc794236b0b1d46422a70805430af40811c1cb6d6a5e2865fdd0f4a33635e 0.0s done
+#11 exporting config sha256:6f7e7c61029b04012d3f8ca98de09e0f007f28454575cf0ab43d85485c7e4ce3 0.0s done
+#11 exporting attestation manifest sha256:aebb876fe93799f3c16e362aad49f4d3be9d0f769a381a09ac198f823dbd5034
+#11 exporting attestation manifest sha256:aebb876fe93799f3c16e362aad49f4d3be9d0f769a381a09ac198f823dbd5034 0.0s done
+#11 exporting manifest list sha256:f52bf8660000a9d0766e7be9d5acc0c15b3289f389954edbd204b6df7c3e785e 0.0s done
+#11 naming to ghcr.io/hdl/amd64/debian/bullseye/openfpgaloader:latest 0.0s done
+#11 unpacking to ghcr.io/hdl/amd64/debian/bullseye/openfpgaloader:latest
+#11 unpacking to ghcr.io/hdl/amd64/debian/bullseye/openfpgaloader:latest 0.6s done
+#11 DONE 2.3s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/openfpgaloader
+Architecture: amd64 
+Size: 220262101
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/openfpgaloader //wrk/openfpgaloader.sh
+CC: 
+CXX: 
+· openFPGALoader help >> ./openFPGALoader.log
+· openFPGALoader help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS openfpgaloader ===
+RESULT: PASS

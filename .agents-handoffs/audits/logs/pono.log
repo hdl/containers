@@ -1,0 +1,551 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: pono IMAGES: ['pkg/pono']
+=== BUILD pkg/pono ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/pono --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye debian-bullseye/pono
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.41kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#4 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 2.89kB done
+#5 DONE 0.0s
+
+#6 [build 2/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC  && mkdir -p /usr/share/man/man1/  && apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]}  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && update-ca-certificates  && rm -rf /var/lib/apt/lists/*
+#6 1.116 Reading package lists...
+#6 1.693 Building dependency tree...
+#6 1.835 Reading state information...
+#6 1.982 binutils is already the newest version (2.35.2-2).
+#6 1.982 binutils set to manually installed.
+#6 1.982 The following additional packages will be installed:
+#6 1.982   ca-certificates-java cmake-data fontconfig-config fonts-dejavu-core
+#6 1.982   java-common libarchive13 libasound2 libasound2-data libavahi-client3
+#6 1.982   libavahi-common-data libavahi-common3 libcups2 libdbus-1-3 libfl2
+#6 1.982   libfontconfig1 libfreetype6 libglib2.0-0 libgmpxx4ldbl libgraphite2-3
+#6 1.982   libharfbuzz0b libicu67 libjpeg62-turbo libjsoncpp24 liblcms2-2 libncurses6
+#6 1.982   libnspr4 libnss3 libpcsclite1 libpng16-16 libprocps8 librhash0 libsigsegv2
+#6 1.982   libuv1 libxml2 procps sensible-utils ucf
+#6 1.983 Suggested packages:
+#6 1.983   autoconf-archive gnu-standards autoconf-doc libtool gettext bison-doc
+#6 1.983   cmake-doc ninja-build build-essential flex-doc default-jre lrzip
+#6 1.983   libasound2-plugins alsa-utils cups-common gmp-doc libgmp10-doc libmpfr-dev
+#6 1.983   liblcms2-utils pcscd m4-doc libnss-mdns fonts-dejavu-extra
+#6 1.983   fonts-ipafont-gothic fonts-ipafont-mincho fonts-wqy-microhei
+#6 1.983   | fonts-wqy-zenhei fonts-indic ed diffutils-doc
+#6 1.983 Recommended packages:
+#6 1.983   automake | automaken gcc alsa-ucm-conf alsa-topology-conf dbus
+#6 1.983   libglib2.0-data shared-mime-info xdg-user-dirs libgpm2 psmisc
+#6 2.130 The following NEW packages will be installed:
+#6 2.131   autoconf bison ca-certificates-java cmake cmake-data flex fontconfig-config
+#6 2.131   fonts-dejavu-core java-common libarchive13 libasound2 libasound2-data
+#6 2.132   libavahi-client3 libavahi-common-data libavahi-common3 libbison-dev libcups2
+#6 2.132   libdbus-1-3 libfl-dev libfl2 libfontconfig1 libfreetype6 libglib2.0-0
+#6 2.132   libgmp-dev libgmpxx4ldbl libgraphite2-3 libharfbuzz0b libicu67
+#6 2.133   libjpeg62-turbo libjsoncpp24 liblcms2-2 libncurses6 libnspr4 libnss3
+#6 2.133   libpcsclite1 libpng16-16 libprocps8 librhash0 libsigsegv2 libuv1 libxml2 m4
+#6 2.134   openjdk-11-jre-headless patch procps python3-toml sensible-utils ucf
+#6 4.700 0 upgraded, 48 newly installed, 0 to remove and 0 not upgraded.
+#6 4.700 Need to get 68.8 MB of archives.
+#6 4.700 After this operation, 280 MB of additional disk space will be used.
+#6 4.700 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libsigsegv2 amd64 2.13-1 [34.8 kB]
+#6 4.704 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 m4 amd64 1.4.18-5 [204 kB]
+#6 4.726 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 flex amd64 2.6.4-8 [440 kB]
+#6 4.740 Get:4 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libncurses6 amd64 6.2+20201114-2+deb11u2 [102 kB]
+#6 4.742 Get:5 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libprocps8 amd64 2:3.3.17-5 [63.9 kB]
+#6 4.745 Get:6 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 procps amd64 2:3.3.17-5 [502 kB]
+#6 4.752 Get:7 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 sensible-utils all 0.0.14 [14.8 kB]
+#6 4.753 Get:8 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 ucf all 3.0043+deb11u2 [74.3 kB]
+#6 4.755 Get:9 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 autoconf all 2.69-14 [313 kB]
+#6 4.790 Get:10 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 bison amd64 2:3.7.5+dfsg-1 [1104 kB]
+#6 4.809 Get:11 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 ca-certificates-java all 20230710~deb12u1~deb11u1 [16.8 kB]
+#6 4.809 Get:12 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 cmake-data all 3.18.4-2+deb11u1 [1725 kB]
+#6 4.943 Get:13 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libicu67 amd64 67.1-7+deb11u1 [8624 kB]
+#6 5.340 Get:14 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libxml2 amd64 2.9.10+dfsg-6.7+deb11u10 [695 kB]
+#6 5.373 Get:15 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libarchive13 amd64 3.4.3-2+deb11u4 [345 kB]
+#6 5.380 Get:16 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libjsoncpp24 amd64 1.9.4-4 [78.9 kB]
+#6 5.380 Get:17 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 librhash0 amd64 1.4.1-2 [129 kB]
+#6 5.381 Get:18 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libuv1 amd64 1.40.0-2+deb11u1 [132 kB]
+#6 5.384 Get:19 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 cmake amd64 3.18.4-2+deb11u1 [5593 kB]
+#6 5.493 Get:20 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 fonts-dejavu-core all 2.37-2 [1069 kB]
+#6 5.510 Get:21 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 fontconfig-config all 2.13.1-4.2 [281 kB]
+#6 5.513 Get:22 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 java-common all 0.72 [14.5 kB]
+#6 5.514 Get:23 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libasound2-data all 1.2.4-1.1+deb11u1 [38.4 kB]
+#6 5.514 Get:24 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libasound2 amd64 1.2.4-1.1+deb11u1 [357 kB]
+#6 5.517 Get:25 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libavahi-common-data amd64 0.8-5+deb11u3 [124 kB]
+#6 5.518 Get:26 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libavahi-common3 amd64 0.8-5+deb11u3 [59.0 kB]
+#6 5.519 Get:27 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libdbus-1-3 amd64 1.12.28-0+deb11u1 [223 kB]
+#6 5.521 Get:28 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libavahi-client3 amd64 0.8-5+deb11u3 [62.7 kB]
+#6 5.685 Get:29 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libbison-dev amd64 2:3.7.5+dfsg-1 [640 kB]
+#6 5.995 Get:30 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libcups2 amd64 2.3.3op2-3+deb11u10 [351 kB]
+#6 6.011 Get:31 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libfl2 amd64 2.6.4-8 [103 kB]
+#6 6.013 Get:32 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libfl-dev amd64 2.6.4-8 [104 kB]
+#6 6.014 Get:33 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libpng16-16 amd64 1.6.37-3+deb11u4 [295 kB]
+#6 6.017 Get:34 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libfreetype6 amd64 2.10.4+dfsg-1+deb11u2 [418 kB]
+#6 6.021 Get:35 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libfontconfig1 amd64 2.13.1-4.2 [347 kB]
+#6 6.044 Get:36 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libglib2.0-0 amd64 2.66.8-1+deb11u8 [1377 kB]
+#6 6.057 Get:37 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgmpxx4ldbl amd64 2:6.2.1+dfsg-1+deb11u1 [338 kB]
+#6 6.060 Get:38 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgmp-dev amd64 2:6.2.1+dfsg-1+deb11u1 [643 kB]
+#6 6.068 Get:39 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgraphite2-3 amd64 1.3.14-1 [81.2 kB]
+#6 6.069 Get:40 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libharfbuzz0b amd64 2.7.4-1 [1471 kB]
+#6 6.095 Get:41 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libjpeg62-turbo amd64 1:2.0.6-4 [151 kB]
+#6 6.096 Get:42 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 liblcms2-2 amd64 2.12~rc1-2+deb11u1 [150 kB]
+#6 6.097 Get:43 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libnspr4 amd64 2:4.29-1 [112 kB]
+#6 6.229 Get:44 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libnss3 amd64 2:3.61-1+deb11u7 [1306 kB]
+#6 6.287 Get:45 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libpcsclite1 amd64 1.9.1-1 [60.2 kB]
+#6 6.288 Get:46 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 openjdk-11-jre-headless amd64 11.0.32+9-2~deb11u1 [38.3 MB]
+#6 8.455 Get:47 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 patch amd64 2.7.6-7 [128 kB]
+#6 8.457 Get:48 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-toml all 0.10.1-1 [15.9 kB]
+#6 8.600 debconf: delaying package configuration, since apt-utils is not installed
+#6 8.639 Fetched 68.8 MB in 6s (10.9 MB/s)
+#6 8.664 Selecting previously unselected package libsigsegv2:amd64.
+#6 8.664 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14728 files and directories currently installed.)
+#6 8.689 Preparing to unpack .../00-libsigsegv2_2.13-1_amd64.deb ...
+#6 8.699 Unpacking libsigsegv2:amd64 (2.13-1) ...
+#6 8.728 Selecting previously unselected package m4.
+#6 8.733 Preparing to unpack .../01-m4_1.4.18-5_amd64.deb ...
+#6 8.736 Unpacking m4 (1.4.18-5) ...
+#6 8.780 Selecting previously unselected package flex.
+#6 8.783 Preparing to unpack .../02-flex_2.6.4-8_amd64.deb ...
+#6 8.788 Unpacking flex (2.6.4-8) ...
+#6 8.849 Selecting previously unselected package libncurses6:amd64.
+#6 8.852 Preparing to unpack .../03-libncurses6_6.2+20201114-2+deb11u2_amd64.deb ...
+#6 8.853 Unpacking libncurses6:amd64 (6.2+20201114-2+deb11u2) ...
+#6 8.912 Selecting previously unselected package libprocps8:amd64.
+#6 8.912 Preparing to unpack .../04-libprocps8_2%3a3.3.17-5_amd64.deb ...
+#6 8.923 Unpacking libprocps8:amd64 (2:3.3.17-5) ...
+#6 8.943 Selecting previously unselected package procps.
+#6 8.946 Preparing to unpack .../05-procps_2%3a3.3.17-5_amd64.deb ...
+#6 8.953 Unpacking procps (2:3.3.17-5) ...
+#6 9.033 Selecting previously unselected package sensible-utils.
+#6 9.033 Preparing to unpack .../06-sensible-utils_0.0.14_all.deb ...
+#6 9.034 Unpacking sensible-utils (0.0.14) ...
+#6 9.066 Selecting previously unselected package ucf.
+#6 9.068 Preparing to unpack .../07-ucf_3.0043+deb11u2_all.deb ...
+#6 9.073 Moving old data out of the way
+#6 9.073 Unpacking ucf (3.0043+deb11u2) ...
+#6 9.106 Selecting previously unselected package autoconf.
+#6 9.106 Preparing to unpack .../08-autoconf_2.69-14_all.deb ...
+#6 9.110 Unpacking autoconf (2.69-14) ...
+#6 9.179 Selecting previously unselected package bison.
+#6 9.183 Preparing to unpack .../09-bison_2%3a3.7.5+dfsg-1_amd64.deb ...
+#6 9.186 Unpacking bison (2:3.7.5+dfsg-1) ...
+#6 9.393 Selecting previously unselected package ca-certificates-java.
+#6 9.394 Preparing to unpack .../10-ca-certificates-java_20230710~deb12u1~deb11u1_all.deb ...
+#6 9.404 Unpacking ca-certificates-java (20230710~deb12u1~deb11u1) ...
+#6 9.470 Selecting previously unselected package cmake-data.
+#6 9.474 Preparing to unpack .../11-cmake-data_3.18.4-2+deb11u1_all.deb ...
+#6 9.483 Unpacking cmake-data (3.18.4-2+deb11u1) ...
+#6 10.07 Selecting previously unselected package libicu67:amd64.
+#6 10.07 Preparing to unpack .../12-libicu67_67.1-7+deb11u1_amd64.deb ...
+#6 10.08 Unpacking libicu67:amd64 (67.1-7+deb11u1) ...
+#6 11.20 Selecting previously unselected package libxml2:amd64.
+#6 11.21 Preparing to unpack .../13-libxml2_2.9.10+dfsg-6.7+deb11u10_amd64.deb ...
+#6 11.22 Unpacking libxml2:amd64 (2.9.10+dfsg-6.7+deb11u10) ...
+#6 11.40 Selecting previously unselected package libarchive13:amd64.
+#6 11.40 Preparing to unpack .../14-libarchive13_3.4.3-2+deb11u4_amd64.deb ...
+#6 11.41 Unpacking libarchive13:amd64 (3.4.3-2+deb11u4) ...
+#6 11.53 Selecting previously unselected package libjsoncpp24:amd64.
+#6 11.53 Preparing to unpack .../15-libjsoncpp24_1.9.4-4_amd64.deb ...
+#6 11.54 Unpacking libjsoncpp24:amd64 (1.9.4-4) ...
+#6 11.61 Selecting previously unselected package librhash0:amd64.
+#6 11.61 Preparing to unpack .../16-librhash0_1.4.1-2_amd64.deb ...
+#6 11.63 Unpacking librhash0:amd64 (1.4.1-2) ...
+#6 11.70 Selecting previously unselected package libuv1:amd64.
+#6 11.71 Preparing to unpack .../17-libuv1_1.40.0-2+deb11u1_amd64.deb ...
+#6 11.72 Unpacking libuv1:amd64 (1.40.0-2+deb11u1) ...
+#6 11.79 Selecting previously unselected package cmake.
+#6 11.79 Preparing to unpack .../18-cmake_3.18.4-2+deb11u1_amd64.deb ...
+#6 11.81 Unpacking cmake (3.18.4-2+deb11u1) ...
+#6 12.70 Selecting previously unselected package fonts-dejavu-core.
+#6 12.71 Preparing to unpack .../19-fonts-dejavu-core_2.37-2_all.deb ...
+#6 12.71 Unpacking fonts-dejavu-core (2.37-2) ...
+#6 12.87 Selecting previously unselected package fontconfig-config.
+#6 12.88 Preparing to unpack .../20-fontconfig-config_2.13.1-4.2_all.deb ...
+#6 13.15 Unpacking fontconfig-config (2.13.1-4.2) ...
+#6 13.19 Selecting previously unselected package java-common.
+#6 13.19 Preparing to unpack .../21-java-common_0.72_all.deb ...
+#6 13.19 Unpacking java-common (0.72) ...
+#6 13.31 Selecting previously unselected package libasound2-data.
+#6 13.31 Preparing to unpack .../22-libasound2-data_1.2.4-1.1+deb11u1_all.deb ...
+#6 13.31 Unpacking libasound2-data (1.2.4-1.1+deb11u1) ...
+#6 13.35 Selecting previously unselected package libasound2:amd64.
+#6 13.36 Preparing to unpack .../23-libasound2_1.2.4-1.1+deb11u1_amd64.deb ...
+#6 13.36 Unpacking libasound2:amd64 (1.2.4-1.1+deb11u1) ...
+#6 13.42 Selecting previously unselected package libavahi-common-data:amd64.
+#6 13.42 Preparing to unpack .../24-libavahi-common-data_0.8-5+deb11u3_amd64.deb ...
+#6 13.43 Unpacking libavahi-common-data:amd64 (0.8-5+deb11u3) ...
+#6 13.47 Selecting previously unselected package libavahi-common3:amd64.
+#6 13.47 Preparing to unpack .../25-libavahi-common3_0.8-5+deb11u3_amd64.deb ...
+#6 13.47 Unpacking libavahi-common3:amd64 (0.8-5+deb11u3) ...
+#6 13.51 Selecting previously unselected package libdbus-1-3:amd64.
+#6 13.51 Preparing to unpack .../26-libdbus-1-3_1.12.28-0+deb11u1_amd64.deb ...
+#6 13.52 Unpacking libdbus-1-3:amd64 (1.12.28-0+deb11u1) ...
+#6 13.56 Selecting previously unselected package libavahi-client3:amd64.
+#6 13.57 Preparing to unpack .../27-libavahi-client3_0.8-5+deb11u3_amd64.deb ...
+#6 13.57 Unpacking libavahi-client3:amd64 (0.8-5+deb11u3) ...
+#6 13.60 Selecting previously unselected package libbison-dev:amd64.
+#6 13.60 Preparing to unpack .../28-libbison-dev_2%3a3.7.5+dfsg-1_amd64.deb ...
+#6 13.60 Unpacking libbison-dev:amd64 (2:3.7.5+dfsg-1) ...
+#6 13.66 Selecting previously unselected package libcups2:amd64.
+#6 13.66 Preparing to unpack .../29-libcups2_2.3.3op2-3+deb11u10_amd64.deb ...
+#6 13.66 Unpacking libcups2:amd64 (2.3.3op2-3+deb11u10) ...
+#6 13.72 Selecting previously unselected package libfl2:amd64.
+#6 13.72 Preparing to unpack .../30-libfl2_2.6.4-8_amd64.deb ...
+#6 13.73 Unpacking libfl2:amd64 (2.6.4-8) ...
+#6 13.76 Selecting previously unselected package libfl-dev:amd64.
+#6 13.76 Preparing to unpack .../31-libfl-dev_2.6.4-8_amd64.deb ...
+#6 13.76 Unpacking libfl-dev:amd64 (2.6.4-8) ...
+#6 13.80 Selecting previously unselected package libpng16-16:amd64.
+#6 13.80 Preparing to unpack .../32-libpng16-16_1.6.37-3+deb11u4_amd64.deb ...
+#6 13.81 Unpacking libpng16-16:amd64 (1.6.37-3+deb11u4) ...
+#6 13.86 Selecting previously unselected package libfreetype6:amd64.
+#6 13.86 Preparing to unpack .../33-libfreetype6_2.10.4+dfsg-1+deb11u2_amd64.deb ...
+#6 13.86 Unpacking libfreetype6:amd64 (2.10.4+dfsg-1+deb11u2) ...
+#6 13.93 Selecting previously unselected package libfontconfig1:amd64.
+#6 13.93 Preparing to unpack .../34-libfontconfig1_2.13.1-4.2_amd64.deb ...
+#6 13.94 Unpacking libfontconfig1:amd64 (2.13.1-4.2) ...
+#6 14.00 Selecting previously unselected package libglib2.0-0:amd64.
+#6 14.00 Preparing to unpack .../35-libglib2.0-0_2.66.8-1+deb11u8_amd64.deb ...
+#6 14.00 Unpacking libglib2.0-0:amd64 (2.66.8-1+deb11u8) ...
+#6 14.17 Selecting previously unselected package libgmpxx4ldbl:amd64.
+#6 14.18 Preparing to unpack .../36-libgmpxx4ldbl_2%3a6.2.1+dfsg-1+deb11u1_amd64.deb ...
+#6 14.19 Unpacking libgmpxx4ldbl:amd64 (2:6.2.1+dfsg-1+deb11u1) ...
+#6 14.31 Selecting previously unselected package libgmp-dev:amd64.
+#6 14.31 Preparing to unpack .../37-libgmp-dev_2%3a6.2.1+dfsg-1+deb11u1_amd64.deb ...
+#6 14.31 Unpacking libgmp-dev:amd64 (2:6.2.1+dfsg-1+deb11u1) ...
+#6 14.39 Selecting previously unselected package libgraphite2-3:amd64.
+#6 14.39 Preparing to unpack .../38-libgraphite2-3_1.3.14-1_amd64.deb ...
+#6 14.40 Unpacking libgraphite2-3:amd64 (1.3.14-1) ...
+#6 14.48 Selecting previously unselected package libharfbuzz0b:amd64.
+#6 14.48 Preparing to unpack .../39-libharfbuzz0b_2.7.4-1_amd64.deb ...
+#6 14.48 Unpacking libharfbuzz0b:amd64 (2.7.4-1) ...
+#6 14.58 Selecting previously unselected package libjpeg62-turbo:amd64.
+#6 14.58 Preparing to unpack .../40-libjpeg62-turbo_1%3a2.0.6-4_amd64.deb ...
+#6 14.58 Unpacking libjpeg62-turbo:amd64 (1:2.0.6-4) ...
+#6 14.63 Selecting previously unselected package liblcms2-2:amd64.
+#6 14.63 Preparing to unpack .../41-liblcms2-2_2.12~rc1-2+deb11u1_amd64.deb ...
+#6 14.64 Unpacking liblcms2-2:amd64 (2.12~rc1-2+deb11u1) ...
+#6 15.14 Selecting previously unselected package libnspr4:amd64.
+#6 15.14 Preparing to unpack .../42-libnspr4_2%3a4.29-1_amd64.deb ...
+#6 15.14 Unpacking libnspr4:amd64 (2:4.29-1) ...
+#6 15.19 Selecting previously unselected package libnss3:amd64.
+#6 15.19 Preparing to unpack .../43-libnss3_2%3a3.61-1+deb11u7_amd64.deb ...
+#6 15.19 Unpacking libnss3:amd64 (2:3.61-1+deb11u7) ...
+#6 15.37 Selecting previously unselected package libpcsclite1:amd64.
+#6 15.37 Preparing to unpack .../44-libpcsclite1_1.9.1-1_amd64.deb ...
+#6 15.38 Unpacking libpcsclite1:amd64 (1.9.1-1) ...
+#6 15.53 Selecting previously unselected package openjdk-11-jre-headless:amd64.
+#6 15.53 Preparing to unpack .../45-openjdk-11-jre-headless_11.0.32+9-2~deb11u1_amd64.deb ...
+#6 15.53 Unpacking openjdk-11-jre-headless:amd64 (11.0.32+9-2~deb11u1) ...
+#6 21.45 Selecting previously unselected package patch.
+#6 21.45 Preparing to unpack .../46-patch_2.7.6-7_amd64.deb ...
+#6 21.45 Unpacking patch (2.7.6-7) ...
+#6 21.45 Selecting previously unselected package python3-toml.
+#6 21.45 Preparing to unpack .../47-python3-toml_0.10.1-1_all.deb ...
+#6 21.45 Unpacking python3-toml (0.10.1-1) ...
+#6 21.50 Setting up libgraphite2-3:amd64 (1.3.14-1) ...
+#6 21.51 Setting up liblcms2-2:amd64 (2.12~rc1-2+deb11u1) ...
+#6 21.51 Setting up libbison-dev:amd64 (2:3.7.5+dfsg-1) ...
+#6 21.52 Setting up java-common (0.72) ...
+#6 21.53 Setting up libicu67:amd64 (67.1-7+deb11u1) ...
+#6 21.54 Setting up libglib2.0-0:amd64 (2.66.8-1+deb11u8) ...
+#6 21.69 No schema files found: doing nothing.
+#6 21.70 Setting up libasound2-data (1.2.4-1.1+deb11u1) ...
+#6 21.71 Setting up libgmpxx4ldbl:amd64 (2:6.2.1+dfsg-1+deb11u1) ...
+#6 21.71 Setting up libuv1:amd64 (1.40.0-2+deb11u1) ...
+#6 21.76 Setting up libjpeg62-turbo:amd64 (1:2.0.6-4) ...
+#6 21.76 Setting up libnspr4:amd64 (2:4.29-1) ...
+#6 21.76 Setting up libavahi-common-data:amd64 (0.8-5+deb11u3) ...
+#6 21.76 Setting up libncurses6:amd64 (6.2+20201114-2+deb11u2) ...
+#6 21.76 Setting up libdbus-1-3:amd64 (1.12.28-0+deb11u1) ...
+#6 21.77 Setting up libsigsegv2:amd64 (2.13-1) ...
+#6 21.77 Setting up libpng16-16:amd64 (1.6.37-3+deb11u4) ...
+#6 21.77 Setting up patch (2.7.6-7) ...
+#6 21.78 Setting up fonts-dejavu-core (2.37-2) ...
+#6 21.88 Setting up libfl2:amd64 (2.6.4-8) ...
+#6 21.88 Setting up libpcsclite1:amd64 (1.9.1-1) ...
+#6 21.89 Setting up python3-toml (0.10.1-1) ...
+#6 22.25 Setting up libjsoncpp24:amd64 (1.9.4-4) ...
+#6 22.25 Setting up sensible-utils (0.0.14) ...
+#6 22.26 Setting up librhash0:amd64 (1.4.1-2) ...
+#6 22.26 Setting up libasound2:amd64 (1.2.4-1.1+deb11u1) ...
+#6 22.27 Setting up cmake-data (3.18.4-2+deb11u1) ...
+#6 22.27 Setting up ca-certificates-java (20230710~deb12u1~deb11u1) ...
+#6 22.31 No JRE found. Skipping Java certificates setup.
+#6 22.31 Setting up libxml2:amd64 (2.9.10+dfsg-6.7+deb11u10) ...
+#6 22.32 Setting up libprocps8:amd64 (2:3.3.17-5) ...
+#6 22.32 Setting up libgmp-dev:amd64 (2:6.2.1+dfsg-1+deb11u1) ...
+#6 22.33 Setting up libarchive13:amd64 (3.4.3-2+deb11u4) ...
+#6 22.33 Setting up libavahi-common3:amd64 (0.8-5+deb11u3) ...
+#6 22.34 Setting up m4 (1.4.18-5) ...
+#6 22.34 Setting up libnss3:amd64 (2:3.61-1+deb11u7) ...
+#6 22.35 Setting up libfreetype6:amd64 (2.10.4+dfsg-1+deb11u2) ...
+#6 22.35 Setting up ucf (3.0043+deb11u2) ...
+#6 22.69 Setting up autoconf (2.69-14) ...
+#6 22.70 Setting up procps (2:3.3.17-5) ...
+#6 22.77 Setting up bison (2:3.7.5+dfsg-1) ...
+#6 22.80 update-alternatives: using /usr/bin/bison.yacc to provide /usr/bin/yacc (yacc) in auto mode
+#6 22.80 update-alternatives: warning: skip creation of /usr/share/man/man1/yacc.1.gz because associated file /usr/share/man/man1/bison.yacc.1.gz (of link group yacc) doesn't exist
+#6 22.82 Setting up cmake (3.18.4-2+deb11u1) ...
+#6 22.82 Setting up libharfbuzz0b:amd64 (2.7.4-1) ...
+#6 22.82 Setting up libavahi-client3:amd64 (0.8-5+deb11u3) ...
+#6 22.82 Setting up flex (2.6.4-8) ...
+#6 22.83 Setting up fontconfig-config (2.13.1-4.2) ...
+#6 23.29 Setting up libfl-dev:amd64 (2.6.4-8) ...
+#6 23.30 Setting up libcups2:amd64 (2.3.3op2-3+deb11u10) ...
+#6 23.32 Setting up libfontconfig1:amd64 (2.13.1-4.2) ...
+#6 23.32 Setting up openjdk-11-jre-headless:amd64 (11.0.32+9-2~deb11u1) ...
+#6 23.43 update-alternatives: using /usr/lib/jvm/java-11-openjdk-amd64/bin/java to provide /usr/bin/java (java) in auto mode
+#6 23.44 update-alternatives: using /usr/lib/jvm/java-11-openjdk-amd64/bin/jjs to provide /usr/bin/jjs (jjs) in auto mode
+#6 23.44 update-alternatives: using /usr/lib/jvm/java-11-openjdk-amd64/bin/keytool to provide /usr/bin/keytool (keytool) in auto mode
+#6 23.45 update-alternatives: using /usr/lib/jvm/java-11-openjdk-amd64/bin/rmid to provide /usr/bin/rmid (rmid) in auto mode
+#6 23.45 update-alternatives: using /usr/lib/jvm/java-11-openjdk-amd64/bin/rmiregistry to provide /usr/bin/rmiregistry (rmiregistry) in auto mode
+#6 23.46 update-alternatives: using /usr/lib/jvm/java-11-openjdk-amd64/bin/pack200 to provide /usr/bin/pack200 (pack200) in auto mode
+#6 23.46 update-alternatives: using /usr/lib/jvm/java-11-openjdk-amd64/bin/unpack200 to provide /usr/bin/unpack200 (unpack200) in auto mode
+#6 23.47 update-alternatives: using /usr/lib/jvm/java-11-openjdk-amd64/lib/jexec to provide /usr/bin/jexec (jexec) in auto mode
+#6 24.10 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#6 24.21 Processing triggers for ca-certificates-java (20230710~deb12u1~deb11u1) ...
+#6 24.94 Adding debian:ACCVRAIZ1.pem
+#6 24.94 Adding debian:AC_RAIZ_FNMT-RCM.pem
+#6 24.98 Adding debian:AC_RAIZ_FNMT-RCM_SERVIDORES_SEGUROS.pem
+#6 24.99 Adding debian:ANF_Secure_Server_Root_CA.pem
+#6 24.99 Adding debian:Actalis_Authentication_Root_CA.pem
+#6 25.00 Adding debian:AffirmTrust_Commercial.pem
+#6 25.00 Adding debian:AffirmTrust_Networking.pem
+#6 25.00 Adding debian:AffirmTrust_Premium.pem
+#6 25.00 Adding debian:AffirmTrust_Premium_ECC.pem
+#6 25.01 Adding debian:Amazon_Root_CA_1.pem
+#6 25.01 Adding debian:Amazon_Root_CA_2.pem
+#6 25.01 Adding debian:Amazon_Root_CA_3.pem
+#6 25.02 Adding debian:Amazon_Root_CA_4.pem
+#6 25.02 Adding debian:Atos_TrustedRoot_2011.pem
+#6 25.03 Adding debian:Atos_TrustedRoot_Root_CA_ECC_TLS_2021.pem
+#6 25.03 Adding debian:Atos_TrustedRoot_Root_CA_RSA_TLS_2021.pem
+#6 25.03 Adding debian:Autoridad_de_Certificacion_Firmaprofesional_CIF_A62634068.pem
+#6 25.04 Adding debian:BJCA_Global_Root_CA1.pem
+#6 25.05 Adding debian:BJCA_Global_Root_CA2.pem
+#6 25.05 Adding debian:Baltimore_CyberTrust_Root.pem
+#6 25.05 Adding debian:Buypass_Class_2_Root_CA.pem
+#6 25.05 Adding debian:Buypass_Class_3_Root_CA.pem
+#6 25.06 Adding debian:CA_Disig_Root_R2.pem
+#6 25.06 Adding debian:CFCA_EV_ROOT.pem
+#6 25.06 Adding debian:COMODO_Certification_Authority.pem
+#6 25.07 Adding debian:COMODO_ECC_Certification_Authority.pem
+#6 25.07 Adding debian:COMODO_RSA_Certification_Authority.pem
+#6 25.08 Adding debian:Certainly_Root_E1.pem
+#6 25.08 Adding debian:Certainly_Root_R1.pem
+#6 25.08 Adding debian:Certigna.pem
+#6 25.08 Adding debian:Certigna_Root_CA.pem
+#6 25.08 Adding debian:Certum_EC-384_CA.pem
+#6 25.10 Adding debian:Certum_Trusted_Network_CA.pem
+#6 25.10 Adding debian:Certum_Trusted_Network_CA_2.pem
+#6 25.10 Adding debian:Certum_Trusted_Root_CA.pem
+#6 25.10 Adding debian:CommScope_Public_Trust_ECC_Root-01.pem
+#6 25.11 Adding debian:CommScope_Public_Trust_ECC_Root-02.pem
+#6 25.11 Adding debian:CommScope_Public_Trust_RSA_Root-01.pem
+#6 25.12 Adding debian:CommScope_Public_Trust_RSA_Root-02.pem
+#6 25.12 Adding debian:Comodo_AAA_Services_root.pem
+#6 25.12 Adding debian:D-TRUST_BR_Root_CA_1_2020.pem
+#6 25.13 Adding debian:D-TRUST_BR_Root_CA_2_2023.pem
+#6 25.14 Adding debian:D-TRUST_EV_Root_CA_1_2020.pem
+#6 25.14 Adding debian:D-TRUST_EV_Root_CA_2_2023.pem
+#6 25.14 Adding debian:D-TRUST_Root_Class_3_CA_2_2009.pem
+#6 25.14 Adding debian:D-TRUST_Root_Class_3_CA_2_EV_2009.pem
+#6 25.14 Adding debian:DigiCert_Assured_ID_Root_CA.pem
+#6 25.14 Adding debian:DigiCert_Assured_ID_Root_G2.pem
+#6 25.14 Adding debian:DigiCert_Assured_ID_Root_G3.pem
+#6 25.15 Adding debian:DigiCert_Global_Root_CA.pem
+#6 25.16 Adding debian:DigiCert_Global_Root_G2.pem
+#6 25.16 Adding debian:DigiCert_Global_Root_G3.pem
+#6 25.16 Adding debian:DigiCert_High_Assurance_EV_Root_CA.pem
+#6 25.16 Adding debian:DigiCert_TLS_ECC_P384_Root_G5.pem
+#6 25.16 Adding debian:DigiCert_TLS_RSA4096_Root_G5.pem
+#6 25.16 Adding debian:DigiCert_Trusted_Root_G4.pem
+#6 25.16 Adding debian:Entrust.net_Premium_2048_Secure_Server_CA.pem
+#6 25.16 Adding debian:Entrust_Root_Certification_Authority.pem
+#6 25.17 Adding debian:Entrust_Root_Certification_Authority_-_EC1.pem
+#6 25.17 Adding debian:Entrust_Root_Certification_Authority_-_G2.pem
+#6 25.18 Adding debian:FIRMAPROFESIONAL_CA_ROOT-A_WEB.pem
+#6 25.18 Adding debian:GDCA_TrustAUTH_R5_ROOT.pem
+#6 25.19 Adding debian:GLOBALTRUST_2020.pem
+#6 25.19 Adding debian:GTS_Root_R1.pem
+#6 25.20 Adding debian:GTS_Root_R2.pem
+#6 25.20 Adding debian:GTS_Root_R3.pem
+#6 25.20 Adding debian:GTS_Root_R4.pem
+#6 25.20 Adding debian:GlobalSign_ECC_Root_CA_-_R4.pem
+#6 25.20 Adding debian:GlobalSign_ECC_Root_CA_-_R5.pem
+#6 25.21 Adding debian:GlobalSign_Root_CA.pem
+#6 25.21 Adding debian:GlobalSign_Root_CA_-_R3.pem
+#6 25.22 Adding debian:GlobalSign_Root_CA_-_R6.pem
+#6 25.22 Adding debian:GlobalSign_Root_E46.pem
+#6 25.22 Adding debian:GlobalSign_Root_R46.pem
+#6 25.23 Adding debian:Go_Daddy_Class_2_CA.pem
+#6 25.23 Adding debian:Go_Daddy_Root_Certificate_Authority_-_G2.pem
+#6 25.24 Adding debian:HARICA_TLS_ECC_Root_CA_2021.pem
+#6 25.24 Adding debian:HARICA_TLS_RSA_Root_CA_2021.pem
+#6 25.24 Adding debian:Hellenic_Academic_and_Research_Institutions_ECC_RootCA_2015.pem
+#6 25.26 Adding debian:Hellenic_Academic_and_Research_Institutions_RootCA_2015.pem
+#6 25.26 Adding debian:HiPKI_Root_CA_-_G1.pem
+#6 25.26 Adding debian:Hongkong_Post_Root_CA_3.pem
+#6 25.27 Adding debian:ISRG_Root_X1.pem
+#6 25.27 Adding debian:ISRG_Root_X2.pem
+#6 25.27 Adding debian:IdenTrust_Commercial_Root_CA_1.pem
+#6 25.28 Adding debian:IdenTrust_Public_Sector_Root_CA_1.pem
+#6 25.28 Adding debian:Izenpe.com.pem
+#6 25.29 Adding debian:Microsec_e-Szigno_Root_CA_2009.pem
+#6 25.29 Adding debian:Microsoft_ECC_Root_Certificate_Authority_2017.pem
+#6 25.30 Adding debian:Microsoft_RSA_Root_Certificate_Authority_2017.pem
+#6 25.30 Adding debian:NAVER_Global_Root_Certification_Authority.pem
+#6 25.31 Adding debian:NetLock_Arany_=Class_Gold=_Főtanúsítvány.pem
+#6 25.31 Adding debian:OISTE_WISeKey_Global_Root_GB_CA.pem
+#6 25.32 Adding debian:OISTE_WISeKey_Global_Root_GC_CA.pem
+#6 25.32 Adding debian:QuoVadis_Root_CA_1_G3.pem
+#6 25.33 Adding debian:QuoVadis_Root_CA_2.pem
+#6 25.33 Adding debian:QuoVadis_Root_CA_2_G3.pem
+#6 25.34 Adding debian:QuoVadis_Root_CA_3.pem
+#6 25.34 Adding debian:QuoVadis_Root_CA_3_G3.pem
+#6 25.35 Adding debian:SSL.com_EV_Root_Certification_Authority_ECC.pem
+#6 25.35 Adding debian:SSL.com_EV_Root_Certification_Authority_RSA_R2.pem
+#6 25.35 Adding debian:SSL.com_Root_Certification_Authority_ECC.pem
+#6 25.36 Adding debian:SSL.com_Root_Certification_Authority_RSA.pem
+#6 25.36 Adding debian:SSL.com_TLS_ECC_Root_CA_2022.pem
+#6 25.37 Adding debian:SSL.com_TLS_RSA_Root_CA_2022.pem
+#6 25.37 Adding debian:SZAFIR_ROOT_CA2.pem
+#6 25.37 Adding debian:Sectigo_Public_Server_Authentication_Root_E46.pem
+#6 25.37 Adding debian:Sectigo_Public_Server_Authentication_Root_R46.pem
+#6 25.38 Adding debian:SecureSign_Root_CA12.pem
+#6 25.38 Adding debian:SecureSign_Root_CA14.pem
+#6 25.39 Adding debian:SecureSign_Root_CA15.pem
+#6 25.39 Adding debian:SecureTrust_CA.pem
+#6 25.39 Adding debian:Secure_Global_CA.pem
+#6 25.39 Adding debian:Security_Communication_ECC_RootCA1.pem
+#6 25.40 Adding debian:Security_Communication_RootCA2.pem
+#6 25.40 Adding debian:Starfield_Class_2_CA.pem
+#6 25.41 Adding debian:Starfield_Root_Certificate_Authority_-_G2.pem
+#6 25.41 Adding debian:Starfield_Services_Root_Certificate_Authority_-_G2.pem
+#6 25.41 Adding debian:SwissSign_Gold_CA_-_G2.pem
+#6 25.42 Adding debian:T-TeleSec_GlobalRoot_Class_2.pem
+#6 25.42 Adding debian:T-TeleSec_GlobalRoot_Class_3.pem
+#6 25.43 Adding debian:TUBITAK_Kamu_SM_SSL_Kok_Sertifikasi_-_Surum_1.pem
+#6 25.43 Adding debian:TWCA_CYBER_Root_CA.pem
+#6 25.43 Adding debian:TWCA_Global_Root_CA.pem
+#6 25.44 Adding debian:TWCA_Root_Certification_Authority.pem
+#6 25.44 Adding debian:Telekom_Security_TLS_ECC_Root_2020.pem
+#6 25.45 Adding debian:Telekom_Security_TLS_RSA_Root_2023.pem
+#6 25.45 Adding debian:TeliaSonera_Root_CA_v1.pem
+#6 25.46 Adding debian:Telia_Root_CA_v2.pem
+#6 25.46 Adding debian:TrustAsia_Global_Root_CA_G3.pem
+#6 25.47 Adding debian:TrustAsia_Global_Root_CA_G4.pem
+#6 25.47 Adding debian:Trustwave_Global_Certification_Authority.pem
+#6 25.48 Adding debian:Trustwave_Global_ECC_P256_Certification_Authority.pem
+#6 25.48 Adding debian:Trustwave_Global_ECC_P384_Certification_Authority.pem
+#6 25.49 Adding debian:TunTrust_Root_CA.pem
+#6 25.49 Adding debian:UCA_Extended_Validation_Root.pem
+#6 25.49 Adding debian:UCA_Global_G2_Root.pem
+#6 25.50 Adding debian:USERTrust_ECC_Certification_Authority.pem
+#6 25.50 Adding debian:USERTrust_RSA_Certification_Authority.pem
+#6 25.51 Adding debian:XRamp_Global_CA_Root.pem
+#6 25.51 Adding debian:certSIGN_ROOT_CA.pem
+#6 25.51 Adding debian:certSIGN_Root_CA_G2.pem
+#6 25.51 Adding debian:e-Szigno_Root_CA_2017.pem
+#6 25.52 Adding debian:ePKI_Root_Certification_Authority.pem
+#6 25.52 Adding debian:emSign_ECC_Root_CA_-_C3.pem
+#6 25.52 Adding debian:emSign_ECC_Root_CA_-_G3.pem
+#6 25.52 Adding debian:emSign_Root_CA_-_C1.pem
+#6 25.52 Adding debian:emSign_Root_CA_-_G1.pem
+#6 25.52 Adding debian:vTrus_ECC_Root_CA.pem
+#6 25.53 Adding debian:vTrus_Root_CA.pem
+#6 25.58 done.
+#6 25.68 Reading package lists...
+#6 27.12 Building dependency tree...
+#6 27.42 Reading state information...
+#6 27.49 Reading package lists...
+#6 28.46 Building dependency tree...
+#6 28.62 Reading state information...
+#6 28.90 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#6 28.93 Updating certificates in /etc/ssl/certs...
+#6 29.61 0 added, 0 removed; done.
+#6 29.61 Running hooks in /etc/ca-certificates/update.d...
+#6 29.64 Processing triggers for ca-certificates-java (20230710~deb12u1~deb11u1) ...
+#6 29.74 done.
+#6 29.77 done.
+#6 DONE 30.2s
+
+#7 [build 3/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+#7 0.364 Cloning into '/tmp/pono'...
+#7 2.579 Cloning into 'smt-switch'...
+#7 4.372 Note: switching to '460b5fdc8a048cdc2196de5bb27be2c2c9e6f90a'.
+#7 4.372 
+#7 4.372 You are in 'detached HEAD' state. You can look around, make experimental
+#7 4.372 changes and commit them, and you can discard any commits you make in this
+#7 4.372 state without impacting any branches by switching back to a branch.
+#7 4.372 
+#7 4.372 If you want to create a new branch to retain commits you create, you may
+#7 4.372 do so (now or later) by using -c with the switch command. Example:
+#7 4.372 
+#7 4.372   git switch -c <new-branch-name>
+#7 4.372 
+#7 4.372 Or undo this operation with:
+#7 4.372 
+#7 4.372   git switch -
+#7 4.372 
+#7 4.372 Turn off this advice by setting config variable advice.detachedHead to false
+#7 4.372 
+#7 4.372 HEAD is now at 460b5fd Update version to 1.1.4 (#507)
+#7 4.418 /tmp/pono/deps/smt-switch/contrib/common-setup.sh: line 59: wget: command not found
+#7 ERROR: process "/bin/bash -c . /tmp/ctx/HDLC && build" did not complete successfully: exit code: 127
+------
+ > [build 3/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build:
+4.372   git switch -c <new-branch-name>
+4.372 
+4.372 Or undo this operation with:
+4.372 
+4.372   git switch -
+4.372 
+4.372 Turn off this advice by setting config variable advice.detachedHead to false
+4.372 
+4.372 HEAD is now at 460b5fd Update version to 1.1.4 (#507)
+4.418 /tmp/pono/deps/smt-switch/contrib/common-setup.sh: line 59: wget: command not found
+------
+Dockerfile:37
+--------------------
+  35 |      && rm -rf /var/lib/apt/lists/*
+  36 |     
+  37 | >>> RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+  38 |     
+  39 |     #---
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -c . /tmp/ctx/HDLC && build" did not complete successfully: exit code: 127
+=== FAIL pkg/pono (CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/pkg/pono', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', 'debian-bullseye/pono']' returned non-zero exit status 1.) ===
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+  File "/home/umarcor/containers/utils/pyHDLC/__init__.py", line 456, in BuildImage
+    _exec(args=[
+    ~~~~~^^^^^^^
+        "docker", "build", *_commonCmd,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        str(contextPath)
+        ^^^^^^^^^^^^^^^^
+    ], dry=dry, collapse=f"🚧 Build {imageName}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/umarcor/containers/utils/pyHDLC/run.py", line 46, in _exec
+    check_call(args, stderr=STDOUT)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 419, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/pkg/pono', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', 'debian-bullseye/pono']' returned non-zero exit status 1.
+RESULT: FAIL

@@ -1,0 +1,88 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: f4pga-eos-s3 IMAGES: ['conda/f4pga/eos-s3']
+=== BUILD conda/f4pga/eos-s3 ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/eos-s3 --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target eos-s3 debian-bullseye/f4pga
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile:
+#1 transferring dockerfile: 2.92kB done
+#1 DONE 0.3s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/conda:latest
+#2 DONE 2.6s
+
+#3 [internal] load .dockerignore
+#3 transferring context:
+#3 transferring context: 2B done
+#3 DONE 0.2s
+
+#4 [internal] load build context
+#4 transferring context: 4.77kB 0.0s done
+#4 DONE 0.1s
+
+#5 [eos-s3 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/conda:latest@sha256:59b6dbd411e31e8418d9a7a38c05fadd87b6703f7d633f73f366fcb3a0fb08c6
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/conda:latest@sha256:59b6dbd411e31e8418d9a7a38c05fadd87b6703f7d633f73f366fcb3a0fb08c6 0.1s done
+#5 CACHED
+
+#6 [eos-s3 2/2] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && env-and-toolchain eos-s3
+#6 17.68 
+#6 17.68 CondaToSNonInteractiveError: Terms of Service have not been accepted for the following channels. Please accept or remove them before proceeding:
+#6 17.68     - https://repo.anaconda.com/pkgs/main
+#6 17.68     - https://repo.anaconda.com/pkgs/r
+#6 17.68 
+#6 17.68 To accept these channels' Terms of Service, run the following commands:
+#6 17.68     conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+#6 17.68     conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+#6 17.68 
+#6 17.68 For information on safely removing channels from your conda configuration,
+#6 17.68 please see the official documentation:
+#6 17.68 
+#6 17.68     https://www.anaconda.com/docs/tools/working-with-conda/channels
+#6 17.68 
+#6 ERROR: process "/bin/bash -c . /tmp/ctx/HDLC && env-and-toolchain eos-s3" did not complete successfully: exit code: 1
+------
+ > [eos-s3 2/2] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && env-and-toolchain eos-s3:
+17.68 
+17.68 To accept these channels' Terms of Service, run the following commands:
+17.68     conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+17.68     conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+17.68 
+17.68 For information on safely removing channels from your conda configuration,
+17.68 please see the official documentation:
+17.68 
+17.68     https://www.anaconda.com/docs/tools/working-with-conda/channels
+17.68 
+------
+Dockerfile:77
+--------------------
+  75 |     
+  76 |     FROM $REGISTRY/conda AS eos-s3
+  77 | >>> RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && env-and-toolchain eos-s3
+  78 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -c . /tmp/ctx/HDLC && env-and-toolchain eos-s3" did not complete successfully: exit code: 1
+=== FAIL conda/f4pga/eos-s3 (CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/eos-s3', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '--target', 'eos-s3', 'debian-bullseye/f4pga']' returned non-zero exit status 1.) ===
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+  File "/home/umarcor/containers/utils/pyHDLC/__init__.py", line 456, in BuildImage
+    _exec(args=[
+    ~~~~~^^^^^^^
+        "docker", "build", *_commonCmd,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        str(contextPath)
+        ^^^^^^^^^^^^^^^^
+    ], dry=dry, collapse=f"🚧 Build {imageName}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/umarcor/containers/utils/pyHDLC/run.py", line 46, in _exec
+    check_call(args, stderr=STDOUT)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 419, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/eos-s3', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '--target', 'eos-s3', 'debian-bullseye/f4pga']' returned non-zero exit status 1.
+RESULT: FAIL

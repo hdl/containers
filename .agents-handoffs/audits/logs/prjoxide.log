@@ -1,0 +1,410 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: prjoxide IMAGES: ['pkg/prjoxide', 'prjoxide']
+=== BUILD pkg/prjoxide ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/prjoxide --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target pkg -f debian/prjoxide.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#1 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#1 CACHED
+
+#2 [internal] load build definition from prjoxide.dockerfile
+#2 transferring dockerfile: 1.30kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [build 2/3] RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+#5 0.288 info: downloading installer
+#5 0.772 info: profile set to default
+#5 0.772 info: default host tuple is x86_64-unknown-linux-gnu
+#5 0.772 info: syncing channel updates for stable-x86_64-unknown-linux-gnu
+#5 1.053 info: latest update on 2026-09-03 for version 1.98.1 (48a229cea 2026-09-01)
+#5 1.053 info: downloading 6 components
+#5 26.12 info: default toolchain set to stable-x86_64-unknown-linux-gnu
+#5 26.12 
+#5 26.13   stable-x86_64-unknown-linux-gnu installed - rustc 1.98.1 (48a229cea 2026-09-01)
+#5 26.13 
+#5 26.13 
+#5 26.13 Rust is installed now. Great!
+#5 26.13 
+#5 26.13 To get started you may need to restart your current shell.
+#5 26.13 This would reload your PATH environment variable to include
+#5 26.13 Cargo's bin directory ($HOME/.cargo/bin).
+#5 26.13 
+#5 26.13 To configure your current shell, you need to source the
+#5 26.13 corresponding env file under $HOME/.cargo.
+#5 26.13 
+#5 26.13 Consider running the right command for your shell (note the leading DOT):
+#5 26.13 . "$HOME/.cargo/env" # For sh/ash/dash/pdksh/bash
+#5 26.13 cargo:rerun-if-env-changed=CC_x86_64-unknown-linux-gnu
+#5 26.13 CC_x86_64-unknown-linux-gnu = None
+#5 26.13 cargo:rerun-if-env-changed=CC_x86_64_unknown_linux_gnu
+#5 26.13 CC_x86_64_unknown_linux_gnu = None
+#5 26.13 cargo:rerun-if-env-changed=HOST_CC
+#5 26.13 HOST_CC = None
+#5 26.13 cargo:rerun-if-env-changed=CC
+#5 26.13 CC = Some(clang)
+#5 26.13 cargo:rerun-if-env-changed=CC_KNOWN_WRAPPER_CUSTOM
+#5 26.13 CC_KNOWN_WRAPPER_CUSTOM = None
+#5 26.13 cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+#5 26.28 cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+#5 26.28 CRATE_CC_NO_DEFAULTS = None
+#5 26.28 cargo:rerun-if-env-changed=CFLAGS
+#5 26.28 CFLAGS = None
+#5 26.28 cargo:rerun-if-env-changed=HOST_CFLAGS
+#5 26.28 HOST_CFLAGS = None
+#5 26.28 cargo:rerun-if-env-changed=CFLAGS_x86_64_unknown_linux_gnu
+#5 26.28 CFLAGS_x86_64_unknown_linux_gnu = None
+#5 26.28 cargo:rerun-if-env-changed=CFLAGS_x86_64-unknown-linux-gnu
+#5 26.28 CFLAGS_x86_64-unknown-linux-gnu = None
+#5 DONE 26.9s
+
+#6 [build 3/3] RUN source "$HOME/.cargo/env"  && git clone --recurse-submodules https://github.com/gatecat/prjoxide /tmp/prjoxide  && cd /tmp/prjoxide/libprjoxide  && cargo install --path prjoxide --root /opt/prjoxide/usr/local
+#6 1.112 Cloning into '/tmp/prjoxide'...
+#6 2.392 Submodule '3rdparty/fpga-interchange-schema' (https://github.com/SymbiFlow/fpga-interchange-schema) registered for path '3rdparty/fpga-interchange-schema'
+#6 2.392 Submodule 'database' (https://github.com/gatecat/prjoxide-db) registered for path 'database'
+#6 2.392 Cloning into '/tmp/prjoxide/3rdparty/fpga-interchange-schema'...
+#6 3.469 Cloning into '/tmp/prjoxide/database'...
+#6 4.903 Submodule path '3rdparty/fpga-interchange-schema': checked out '78abf3f30770ccc6d0e1f5dbfeaef2666f55acf6'
+#6 5.134 Submodule path 'database': checked out '8d8174509356fa5bde12db614c230f7c425f9d2b'
+#6 5.340   Installing prjoxide v0.1.0 (/tmp/prjoxide/libprjoxide/prjoxide)
+#6 5.366     Updating crates.io index
+#6 8.086      Locking 61 packages to latest compatible versions
+#6 8.090       Adding clap v3.2.25 (available: v4.6.7)
+#6 8.093       Adding include_dir v0.6.2 (available: v0.7.4)
+#6 8.094       Adding itertools v0.8.2 (available: v0.15.0)
+#6 8.096       Adding multimap v0.8.3 (available: v0.10.1)
+#6 8.096       Adding num-bigint v0.4.8 (available: v0.5.1)
+#6 8.100       Adding pulldown-cmark v0.6.1 (available: v0.13.4)
+#6 8.102       Adding ron v0.5.1 (available: v0.12.2)
+#6 8.116  Downloading crates ...
+#6 8.239   Downloaded atty v0.2.14
+#6 8.269   Downloaded lazy_static v1.5.0
+#6 8.275   Downloaded heck v0.4.1
+#6 8.279   Downloaded itoa v1.0.18
+#6 8.283   Downloaded version_check v0.9.5
+#6 8.285   Downloaded multimap v0.8.3
+#6 8.289   Downloaded proc-macro-error-attr v1.0.4
+#6 8.293   Downloaded strsim v0.10.0
+#6 8.295   Downloaded proc-macro-hack v0.5.20+deprecated
+#6 8.308   Downloaded clap_lex v0.2.4
+#6 8.308   Downloaded glob v0.3.4
+#6 8.308   Downloaded clap_derive v3.2.25
+#6 8.308   Downloaded getopts v0.2.24
+#6 8.308   Downloaded num-integer v0.1.47
+#6 8.308   Downloaded unicase v2.9.0
+#6 8.380   Downloaded autocfg v1.5.1
+#6 8.385   Downloaded bitflags v1.3.2
+#6 8.391   Downloaded byteorder v1.5.0
+#6 8.391   Downloaded proc-macro-error v1.0.4
+#6 8.395   Downloaded quote v1.0.47
+#6 8.433   Downloaded termcolor v1.4.1
+#6 8.433   Downloaded zmij v1.0.23
+#6 8.433   Downloaded anyhow v1.0.104
+#6 8.433   Downloaded either v1.18.0
+#6 8.433   Downloaded once_cell v1.21.4
+#6 8.433   Downloaded os_str_bytes v6.6.1
+#6 8.433   Downloaded proc-macro2 v1.0.107
+#6 8.433   Downloaded serde_core v1.0.229
+#6 8.433   Downloaded textwrap v0.16.4
+#6 8.433   Downloaded unicode-ident v1.0.24
+#6 8.433   Downloaded aho-corasick v1.1.5
+#6 8.437   Downloaded base64 v0.10.1
+#6 8.441   Downloaded indexmap v1.9.3
+#6 8.445   Downloaded log v0.4.34
+#6 8.449   Downloaded num-traits v0.2.19
+#6 8.453   Downloaded serde v1.0.229
+#6 8.456   Downloaded serde_derive v1.0.229
+#6 8.464   Downloaded itertools v0.8.2
+#6 8.470   Downloaded memchr v2.8.3
+#6 8.478   Downloaded num-bigint v0.4.8
+#6 8.485   Downloaded hashbrown v0.12.3
+#6 8.489   Downloaded regex v1.13.1
+#6 8.496   Downloaded serde_json v1.0.151
+#6 8.506   Downloaded clap v3.2.25
+#6 8.523   Downloaded syn v1.0.109
+#6 8.538   Downloaded unicode-width v0.2.2
+#6 8.554   Downloaded syn v3.0.5
+#6 8.567   Downloaded regex-syntax v0.8.11
+#6 8.582   Downloaded libc v0.2.189
+#6 8.663   Downloaded regex-automata v0.4.18
+#6 8.735   Downloaded ron v0.5.1
+#6 8.752   Downloaded pulldown-cmark v0.6.1
+#6 8.766   Downloaded include_dir v0.6.2
+#6 8.771   Downloaded include_dir_impl v0.6.2
+#6 8.887    Compiling proc-macro2 v1.0.107
+#6 8.888    Compiling unicode-ident v1.0.24
+#6 8.891    Compiling quote v1.0.47
+#6 8.892    Compiling autocfg v1.5.1
+#6 9.067    Compiling version_check v0.9.5
+#6 9.660    Compiling syn v1.0.109
+#6 9.972    Compiling serde_core v1.0.229
+#6 9.979    Compiling proc-macro-error-attr v1.0.4
+#6 10.12    Compiling memchr v2.8.3
+#6 10.24    Compiling num-traits v0.2.19
+#6 10.63    Compiling proc-macro-error v1.0.4
+#6 11.58    Compiling syn v3.0.5
+#6 16.75    Compiling libc v0.2.189
+#6 18.18    Compiling serde v1.0.229
+#6 19.30    Compiling proc-macro-hack v0.5.20+deprecated
+#6 19.52    Compiling anyhow v1.0.104
+#6 20.90    Compiling indexmap v1.9.3
+#6 21.02    Compiling bitflags v1.3.2
+#6 21.07    Compiling zmij v1.0.23
+#6 22.24    Compiling serde_derive v1.0.229
+#6 25.33    Compiling aho-corasick v1.1.5
+#6 25.76    Compiling unicode-width v0.2.2
+#6 25.78    Compiling byteorder v1.5.0
+#6 26.27    Compiling pulldown-cmark v0.6.1
+#6 26.52    Compiling regex-syntax v0.8.11
+#6 27.24    Compiling hashbrown v0.12.3
+#6 30.02    Compiling serde_json v1.0.151
+#6 30.20    Compiling heck v0.4.1
+#6 30.60    Compiling os_str_bytes v6.6.1
+#6 31.82    Compiling clap_lex v0.2.4
+#6 32.54    Compiling clap_derive v3.2.25
+#6 36.37    Compiling regex-automata v0.4.18
+#6 38.91    Compiling getopts v0.2.24
+#6 43.84    Compiling base64 v0.10.1
+#6 44.79    Compiling include_dir_impl v0.6.2
+#6 46.38    Compiling atty v0.2.14
+#6 46.72    Compiling num-integer v0.1.47
+#6 50.02    Compiling once_cell v1.21.4
+#6 50.61    Compiling itoa v1.0.18
+#6 51.36    Compiling glob v0.3.4
+#6 53.66    Compiling unicase v2.9.0
+#6 54.20    Compiling textwrap v0.16.4
+#6 54.27    Compiling termcolor v1.4.1
+#6 54.98    Compiling either v1.18.0
+#6 55.18    Compiling strsim v0.10.0
+#6 57.42    Compiling prjoxide v0.1.0 (/tmp/prjoxide/libprjoxide/prjoxide)
+#6 57.66    Compiling clap v3.2.25
+#6 59.29    Compiling itertools v0.8.2
+#6 62.74    Compiling include_dir v0.6.2
+#6 77.68    Compiling num-bigint v0.4.8
+#6 81.51    Compiling regex v1.13.1
+#6 86.18    Compiling ron v0.5.1
+#6 86.92    Compiling multimap v0.8.3
+#6 87.21    Compiling lazy_static v1.5.0
+#6 87.29    Compiling log v0.4.34
+#6 92.23 warning: hiding a lifetime that's elided elsewhere is confusing
+#6 92.23  --> prjoxide/src/bba/bbafile.rs:9:21
+#6 92.23   |
+#6 92.23 9 |     pub fn new(out: &mut dyn Write) -> BBAWriter {
+#6 92.23   |                     ^^^^^^^^^^^^^^     ^^^^^^^^^ the same lifetime is hidden here
+#6 92.23   |                     |
+#6 92.23   |                     the lifetime is elided here
+#6 92.23   |
+#6 92.23   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+#6 92.23   = note: `#[warn(mismatched_lifetime_syntaxes)]` on by default
+#6 92.23 help: use `'_` for type paths
+#6 92.23   |
+#6 92.23 9 |     pub fn new(out: &mut dyn Write) -> BBAWriter<'_> {
+#6 92.23   |                                                 ++++
+#6 92.23 
+#6 92.24 warning: hiding a lifetime that's elided elsewhere is confusing
+#6 92.24   --> prjoxide/src/bba/idxset.rs:37:17
+#6 92.24    |
+#6 92.24 37 |     pub fn iter(&self) -> std::slice::Iter<T> {
+#6 92.24    |                 ^^^^^     ^^^^^^^^^^^^^^^^^^^ the same lifetime is hidden here
+#6 92.24    |                 |
+#6 92.24    |                 the lifetime is elided here
+#6 92.24    |
+#6 92.24    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+#6 92.24 help: use `'_` for type paths
+#6 92.24    |
+#6 92.24 37 |     pub fn iter(&self) -> std::slice::Iter<'_, T> {
+#6 92.24    |                                            +++
+#6 92.24 
+#6 92.24 warning: hiding a lifetime that's elided elsewhere is confusing
+#6 92.24   --> prjoxide/src/bba/idxset.rs:89:17
+#6 92.24    |
+#6 92.24 89 |     pub fn iter(&self) -> std::slice::Iter<(Key, Value)> {
+#6 92.24    |                 ^^^^^     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the same lifetime is hidden here
+#6 92.24    |                 |
+#6 92.24    |                 the lifetime is elided here
+#6 92.24    |
+#6 92.24    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+#6 92.24 help: use `'_` for type paths
+#6 92.24    |
+#6 92.24 89 |     pub fn iter(&self) -> std::slice::Iter<'_, (Key, Value)> {
+#6 92.24    |                                            +++
+#6 92.24 
+#6 92.24 warning: hiding a lifetime that's elided elsewhere is confusing
+#6 92.24   --> prjoxide/src/bba/idxset.rs:93:21
+#6 92.24    |
+#6 92.24 93 |     pub fn iter_mut(&mut self) -> std::slice::IterMut<(Key, Value)> {
+#6 92.24    |                     ^^^^^^^^^     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the same lifetime is hidden here
+#6 92.24    |                     |
+#6 92.24    |                     the lifetime is elided here
+#6 92.24    |
+#6 92.24    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+#6 92.24 help: use `'_` for type paths
+#6 92.24    |
+#6 92.24 93 |     pub fn iter_mut(&mut self) -> std::slice::IterMut<'_, (Key, Value)> {
+#6 92.24    |                                                       +++
+#6 92.24 
+#6 129.4 warning: `prjoxide` (lib) generated 4 warnings (run `cargo fix --lib -p prjoxide` to apply 4 suggestions)
+#6 134.0     Finished `release` profile [optimized] target(s) in 2m 08s
+#6 134.8   Installing /opt/prjoxide/usr/local/bin/prjoxide
+#6 134.8    Installed package `prjoxide v0.1.0 (/tmp/prjoxide/libprjoxide/prjoxide)` (executable `prjoxide`)
+#6 134.8 warning: be sure to add `/opt/prjoxide/usr/local/bin` to your PATH to be able to run the installed binaries
+#6 DONE 135.4s
+
+#7 [pkg 1/1] COPY --from=build /opt/prjoxide /prjoxide
+#7 DONE 0.1s
+
+#8 exporting to image
+#8 exporting layers
+#8 exporting layers 0.7s done
+#8 preparing layers for inline cache
+#8 preparing layers for inline cache 0.0s done
+#8 exporting manifest sha256:30f591906589efc7d01be5c61c4c91d7a5390c81bbe2329c1bf12576f6bfb23d 0.0s done
+#8 exporting config sha256:3a5a2cd8d6fc0101e1bb8f1a5a7563273f75b63b7cc172dba0a4bf659169a281 0.0s done
+#8 exporting attestation manifest sha256:8dae67a7ca6bba64e9a57a062ea965615faa0b2f2f0907dda10961d2c3be2075 0.0s done
+#8 exporting manifest list sha256:77253b3c115488b139fc06d328c7232b9ff4b5a9337afe26f9408e6ec8266ab2
+#8 exporting manifest list sha256:77253b3c115488b139fc06d328c7232b9ff4b5a9337afe26f9408e6ec8266ab2 0.0s done
+#8 naming to ghcr.io/hdl/amd64/debian/bullseye/pkg/prjoxide:latest done
+#8 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/prjoxide:latest
+#8 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/prjoxide:latest 0.2s done
+#8 DONE 1.1s
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/testpkg:prjoxide --build-arg IMAGE=ghcr.io/hdl/amd64/debian/bullseye/pkg/prjoxide --build-arg PACKAGE=prjoxide -f /home/umarcor/containers/utils/pyHDLC/testpkg.dockerfile .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from testpkg.dockerfile
+#1 transferring dockerfile: 975B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/prjoxide:latest
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [pkg 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/prjoxide:latest@sha256:77253b3c115488b139fc06d328c7232b9ff4b5a9337afe26f9408e6ec8266ab2
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/prjoxide:latest@sha256:77253b3c115488b139fc06d328c7232b9ff4b5a9337afe26f9408e6ec8266ab2 0.1s done
+#5 DONE 0.1s
+
+#6 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#6 resolve docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#6 resolve docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b 0.1s done
+#6 CACHED
+
+#5 [pkg 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/prjoxide:latest@sha256:77253b3c115488b139fc06d328c7232b9ff4b5a9337afe26f9408e6ec8266ab2
+#5 DONE 0.1s
+
+#7 [stage-1 2/3] COPY --from=pkg /prjoxide /
+#7 DONE 0.5s
+
+#8 [stage-1 3/3] RUN apk add -U --no-cache file tree
+#8 0.939 (1/3) Installing libmagic (5.47-r2)
+#8 0.983 (2/3) Installing file (5.47-r2)
+#8 0.994 (3/3) Installing tree (2.3.2-r0)
+#8 1.009 Executing busybox-1.37.0-r31.trigger
+#8 1.018 OK: 18.4 MiB in 19 packages
+#8 DONE 1.1s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 0.8s done
+#9 preparing layers for inline cache
+#9 preparing layers for inline cache 0.0s done
+#9 exporting manifest sha256:de58daea80c26d9701e90000fa622bc54fc860613742683656dccc98d7db36ac 0.0s done
+#9 exporting config sha256:4470b548e4d6e8b7acffb521232c5380e5cd713da63c541c322bb71c43bc3eb9 0.0s done
+#9 exporting attestation manifest sha256:1605ff77c60976d74dccc787ca446b126054c5b3d96d371941fc1b4873ec1f91
+#9 exporting attestation manifest sha256:1605ff77c60976d74dccc787ca446b126054c5b3d96d371941fc1b4873ec1f91 0.0s done
+#9 exporting manifest list sha256:5150812c6a7c5e18038f2e1b3978c0b47b586821b27ff5fd43737623e6983ed7 0.0s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/testpkg:prjoxide done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:prjoxide
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:prjoxide 0.3s done
+#9 DONE 1.2s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/testpkg:prjoxide //wrk/prjoxide.pkg.sh
+/usr/local
+├── bin
+│   └── prjoxide
+├── lib
+└── share
+
+4 directories, 1 file
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS pkg/prjoxide ===
+=== BUILD prjoxide ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/prjoxide --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -f debian/prjoxide.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from prjoxide.dockerfile
+#1 transferring dockerfile: 1.30kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/base:latest
+#2 DONE 0.1s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#3 DONE 0.1s
+
+#4 [run 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#4 resolve ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e 0.1s done
+#4 CACHED
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#6 DONE 0.0s
+
+#7 [build 2/3] RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+#7 CACHED
+
+#8 [build 3/3] RUN source "$HOME/.cargo/env"  && git clone --recurse-submodules https://github.com/gatecat/prjoxide /tmp/prjoxide  && cd /tmp/prjoxide/libprjoxide  && cargo install --path prjoxide --root /opt/prjoxide/usr/local
+#8 CACHED
+
+#9 [stage-2 2/2] COPY --from=build /opt/prjoxide /
+#9 DONE 0.2s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 0.7s done
+#10 preparing layers for inline cache
+#10 preparing layers for inline cache 0.0s done
+#10 exporting manifest sha256:95b446b70e070e8f82ddfba77362701bf7b806902a4612d24618e8bd84f4d319 0.0s done
+#10 exporting config sha256:ebcb2e2cd5bf97fb7f9428adce464dbd1c0c5fa7f86d2c0b53027fc63a72ef3d 0.0s done
+#10 exporting attestation manifest sha256:c5225f4248acd44624cf99fcfe147fccb3cdaff4ead3783ac99c28f312d59195
+#10 exporting attestation manifest sha256:c5225f4248acd44624cf99fcfe147fccb3cdaff4ead3783ac99c28f312d59195 0.1s done
+#10 exporting manifest list sha256:59ce5330698e7a39222fa16958fe0f42973e3544c132ab7eb94574f983bfe38b 0.1s done
+#10 naming to ghcr.io/hdl/amd64/debian/bullseye/prjoxide:latest
+#10 naming to ghcr.io/hdl/amd64/debian/bullseye/prjoxide:latest 0.0s done
+#10 unpacking to ghcr.io/hdl/amd64/debian/bullseye/prjoxide:latest
+#10 unpacking to ghcr.io/hdl/amd64/debian/bullseye/prjoxide:latest 0.2s done
+#10 DONE 1.3s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/prjoxide
+Architecture: amd64 
+Size: 199053419
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/prjoxide //wrk/prjoxide.sh
+CC: 
+CXX: 
+· prjoxide help >> ./prjoxide.log
+· prjoxide help: exit code 0 | [32mOK[0m
+prjoxide 0.1
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS prjoxide ===
+RESULT: PASS

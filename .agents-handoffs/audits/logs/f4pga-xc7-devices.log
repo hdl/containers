@@ -1,0 +1,317 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: f4pga-xc7-devices IMAGES: ['conda/f4pga/xc7/a50t', 'conda/f4pga/xc7/a100t', 'conda/f4pga/xc7/a200t', 'conda/f4pga/xc7/z010', 'conda/f4pga/xc7/z020']
+=== BUILD conda/f4pga/xc7/a50t ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a50t --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target a50t debian-bullseye/f4pga
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.92kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest
+#2 DONE 0.5s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 56B done
+#4 DONE 0.0s
+
+#5 [a50t 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest@sha256:d72ed1642bfd9731054e292479da91aa0ce6b233e524c62166822906aa24d5d1
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest@sha256:d72ed1642bfd9731054e292479da91aa0ce6b233e524c62166822906aa24d5d1 0.0s done
+#5 DONE 0.0s
+
+#6 [a50t 2/2] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && get-arch-defs-package xc7a50t_test
+#6 CACHED
+
+#7 exporting to image
+#7 exporting layers done
+#7 preparing layers for inline cache 0.0s done
+#7 exporting manifest sha256:da83b846af77a5341ba9093e461ff0fc8617cdd6e748150f7a79ad9084703237 done
+#7 exporting config sha256:14cdbc1116261729640bbc8ceb91c1ab79d704fc2d5a2c0d6746ccb983fb9739 done
+#7 exporting attestation manifest sha256:e1fb34a01e8b01511eb011b2b2e851ecdb143d6eb3c322ce17c2a2d564cdcbe9
+#7 exporting attestation manifest sha256:e1fb34a01e8b01511eb011b2b2e851ecdb143d6eb3c322ce17c2a2d564cdcbe9 0.0s done
+#7 exporting manifest list sha256:0fd30ffbe0c3928bab8eff7afc0500eedd7f7098eca62a8c414c337ba830ddf4 0.0s done
+#7 naming to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a50t:latest done
+#7 unpacking to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a50t:latest 0.0s done
+#7 DONE 0.1s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a50t
+Architecture: amd64 
+Size: 6348090766
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a50t //wrk/conda--f4pga--xc7--a50t.sh
+CC: 
+CXX: 
+CC: 
+CXX: 
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+total 2.7G
+drwxr-xr-x 5 root root 4.0K Apr 11  2023 .
+drwxr-xr-x 3 root root 4.0K Sep 15 15:22 ..
+-rw-r--r-- 1 root root 4.6M Apr 11  2023 arch.timing.xml
+-rw-r--r-- 1 root root  56M Apr 11  2023 rr_graph_xc7a50t_test.lookahead.bin
+-rw-r--r-- 1 root root 446K Apr 11  2023 rr_graph_xc7a50t_test.place_delay.bin
+-rw-r--r-- 1 root root 2.6G Apr 11  2023 rr_graph_xc7a50t_test.rr_graph.real.bin
+-rw-r--r-- 1 root root 788K Apr 11  2023 vpr_grid_map.csv
+drwxr-xr-x 2 root root 4.0K Apr 11  2023 xc7a35tcpg236-1
+drwxr-xr-x 2 root root 4.0K Apr 11  2023 xc7a35tcsg324-1
+drwxr-xr-x 2 root root 4.0K Apr 11  2023 xc7a50tcsg324-1
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS conda/f4pga/xc7/a50t ===
+=== BUILD conda/f4pga/xc7/a100t ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a100t --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target a100t debian-bullseye/f4pga
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.92kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 56B done
+#4 DONE 0.0s
+
+#5 [a100t 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest@sha256:d72ed1642bfd9731054e292479da91aa0ce6b233e524c62166822906aa24d5d1
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest@sha256:d72ed1642bfd9731054e292479da91aa0ce6b233e524c62166822906aa24d5d1 0.0s done
+#5 DONE 0.0s
+
+#6 [a100t 2/2] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && get-arch-defs-package xc7a100t_test
+#6 CACHED
+
+#7 exporting to image
+#7 exporting layers done
+#7 preparing layers for inline cache 0.0s done
+#7 exporting manifest sha256:48756c13817515674a7ff47f1f2b017aff2d7e413a27e719978e71d96741bdc0 0.0s done
+#7 exporting config sha256:357d4f64d1039690ea8835c378f4616ea8ba3d043a775df0f796cc9a596bb60f
+#7 exporting config sha256:357d4f64d1039690ea8835c378f4616ea8ba3d043a775df0f796cc9a596bb60f 0.0s done
+#7 exporting attestation manifest sha256:57ba3d5308a39543b174e12bd67ede3c285f3e275c6bff5cf83b49c6c901eb9a 0.0s done
+#7 exporting manifest list sha256:a226f640775e875a67e9eb9d612d07726c9f5c3fb39e91c7013a4a46147f6968 0.0s done
+#7 naming to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a100t:latest
+#7 naming to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a100t:latest done
+#7 unpacking to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a100t:latest 0.0s done
+#7 DONE 0.2s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a100t
+Architecture: amd64 
+Size: 8967739166
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a100t //wrk/conda--f4pga--xc7--a100t.sh
+CC: 
+CXX: 
+CC: 
+CXX: 
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+total 4.9G
+drwxr-xr-x 4 root root 4.0K Apr 11  2023 .
+drwxr-xr-x 3 root root 4.0K Sep 15 15:25 ..
+-rw-r--r-- 1 root root 5.3M Apr 11  2023 arch.timing.xml
+-rw-r--r-- 1 root root 100M Apr 11  2023 rr_graph_xc7a100t_test.lookahead.bin
+-rw-r--r-- 1 root root 757K Apr 11  2023 rr_graph_xc7a100t_test.place_delay.bin
+-rw-r--r-- 1 root root 4.8G Apr 11  2023 rr_graph_xc7a100t_test.rr_graph.real.bin
+-rw-r--r-- 1 root root 1.5M Apr 11  2023 vpr_grid_map.csv
+drwxr-xr-x 2 root root 4.0K Apr 11  2023 xc7a100tcsg324-1
+drwxr-xr-x 2 root root 4.0K Apr 11  2023 xc7a100tfgg484-2
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS conda/f4pga/xc7/a100t ===
+=== BUILD conda/f4pga/xc7/a200t ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a200t --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target a200t debian-bullseye/f4pga
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.92kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 56B done
+#4 DONE 0.0s
+
+#5 [a200t 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest@sha256:d72ed1642bfd9731054e292479da91aa0ce6b233e524c62166822906aa24d5d1
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest@sha256:d72ed1642bfd9731054e292479da91aa0ce6b233e524c62166822906aa24d5d1 0.0s done
+#5 CACHED
+
+#6 [a200t 2/2] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && get-arch-defs-package xc7a200t_test
+#6 DONE 159.9s
+
+#7 exporting to image
+#7 exporting layers
+#7 exporting layers 348.4s done
+#7 preparing layers for inline cache
+#7 preparing layers for inline cache 0.0s done
+#7 exporting manifest sha256:f28c1cc35495ff322c90f4e73eee3e1adc460255b3d98f1549827ce06af96810 0.0s done
+#7 exporting config sha256:4e63940c55ba05b59d065ef144fc262f6bd2b3853a563bbdb85ffbba7e1583a3 0.0s done
+#7 exporting attestation manifest sha256:945fceb2172c73c92ae53ff74bbae48d435b5610bf2d5a70aef0257c9ebe3b0e
+#7 exporting attestation manifest sha256:945fceb2172c73c92ae53ff74bbae48d435b5610bf2d5a70aef0257c9ebe3b0e 0.0s done
+#7 exporting manifest list sha256:c88291eb6450a8daff93d8228fa88754e5b8139e3362760f8fa90c92e8f9fbf3 0.0s done
+#7 naming to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a200t:latest done
+#7 unpacking to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a200t:latest
+#7 unpacking to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a200t:latest 129.9s done
+#7 DONE 479.3s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a200t
+Architecture: amd64 
+Size: 15661067194
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/a200t //wrk/conda--f4pga--xc7--a200t.sh
+CC: 
+CXX: 
+CC: 
+CXX: 
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+total 11G
+drwxr-xr-x 3 root root 4.0K Apr 11  2023 .
+drwxr-xr-x 3 root root 4.0K Sep 15 15:32 ..
+-rw-r--r-- 1 root root 8.2M Apr 11  2023 arch.timing.xml
+-rw-r--r-- 1 root root 227M Apr 11  2023 rr_graph_xc7a200t_test.lookahead.bin
+-rw-r--r-- 1 root root 1.7M Apr 11  2023 rr_graph_xc7a200t_test.place_delay.bin
+-rw-r--r-- 1 root root  11G Apr 11  2023 rr_graph_xc7a200t_test.rr_graph.real.bin
+-rw-r--r-- 1 root root 3.2M Apr 11  2023 vpr_grid_map.csv
+drwxr-xr-x 2 root root 4.0K Apr 11  2023 xc7a200tsbg484-1
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS conda/f4pga/xc7/a200t ===
+=== BUILD conda/f4pga/xc7/z010 ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/z010 --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target z010 debian-bullseye/f4pga
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.92kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest
+#2 DONE 0.6s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 56B done
+#4 DONE 0.0s
+
+#5 [z010 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest@sha256:d72ed1642bfd9731054e292479da91aa0ce6b233e524c62166822906aa24d5d1
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest@sha256:d72ed1642bfd9731054e292479da91aa0ce6b233e524c62166822906aa24d5d1 0.0s done
+#5 CACHED
+
+#6 [z010 2/2] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && get-arch-defs-package xc7z010_test
+#6 DONE 18.9s
+
+#7 exporting to image
+#7 exporting layers
+#7 exporting layers 49.2s done
+#7 preparing layers for inline cache
+#7 preparing layers for inline cache 0.0s done
+#7 exporting manifest sha256:80b863e21d4ff5a3ef665e4ab42b76adfbdb6ea9be5f3f5e8623d43213834ae3 0.0s done
+#7 exporting config sha256:4c5ae9ab147bae45116993d6b75f6f780dc3c52548e6a9c429a838581a02e845 0.0s done
+#7 exporting attestation manifest sha256:9a402026faad3191153a3f8e5fb5b810d6f90d123891d16a56db8a7e57f6fd65 0.0s done
+#7 exporting manifest list sha256:b705dc85065490d8b128a61238f9ac1f938487f4ec1e611d330241289f1ce510
+#7 exporting manifest list sha256:b705dc85065490d8b128a61238f9ac1f938487f4ec1e611d330241289f1ce510 0.0s done
+#7 naming to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/z010:latest done
+#7 unpacking to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/z010:latest
+#7 unpacking to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/z010:latest 10.6s done
+#7 DONE 60.0s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/z010
+Architecture: amd64 
+Size: 5012984986
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/z010 //wrk/conda--f4pga--xc7--z010.sh
+CC: 
+CXX: 
+CC: 
+CXX: 
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+total 1.5G
+drwxr-xr-x 3 root root 4.0K Apr 11  2023 .
+drwxr-xr-x 3 root root 4.0K Sep 15 15:43 ..
+-rw-r--r-- 1 root root 3.2M Apr 11  2023 arch.timing.xml
+-rw-r--r-- 1 root root  35M Apr 11  2023 rr_graph_xc7z010_test.lookahead.bin
+-rw-r--r-- 1 root root 333K Apr 11  2023 rr_graph_xc7z010_test.place_delay.bin
+-rw-r--r-- 1 root root 1.5G Apr 11  2023 rr_graph_xc7z010_test.rr_graph.real.bin
+-rw-r--r-- 1 root root 422K Apr 11  2023 vpr_grid_map.csv
+drwxr-xr-x 2 root root 4.0K Apr 11  2023 xc7z010clg400-1
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS conda/f4pga/xc7/z010 ===
+=== BUILD conda/f4pga/xc7/z020 ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/z020 --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target z020 debian-bullseye/f4pga
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.92kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest
+#2 DONE 0.6s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 56B done
+#4 DONE 0.0s
+
+#5 [z020 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest@sha256:d72ed1642bfd9731054e292479da91aa0ce6b233e524c62166822906aa24d5d1
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/toolchain:latest@sha256:d72ed1642bfd9731054e292479da91aa0ce6b233e524c62166822906aa24d5d1 0.0s done
+#5 CACHED
+
+#6 [z020 2/2] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && get-arch-defs-package xc7z020_test
+#6 DONE 52.3s
+
+#7 exporting to image
+#7 exporting layers
+#7 exporting layers 135.8s done
+#7 preparing layers for inline cache
+#7 preparing layers for inline cache 0.0s done
+#7 exporting manifest sha256:a43b955cfa62ba06aab5af273de9e4ac44a63ca904535e790954fc30fbd4abb5 0.0s done
+#7 exporting config sha256:06f66c28f7ea8d9934075ae717417de4105a4876a8d8dd994619ffdd5a61c56d 0.0s done
+#7 exporting attestation manifest sha256:1c5d97f06b602dcc34ef8576ea5d4590bba825d8f3462cef2b40708514fc982e 0.0s done
+#7 exporting manifest list sha256:a4894b083be54a32611d95c3cb710622f497c0b0086fddbba6a10e003d4e1be4
+#7 exporting manifest list sha256:a4894b083be54a32611d95c3cb710622f497c0b0086fddbba6a10e003d4e1be4 0.0s done
+#7 naming to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/z020:latest done
+#7 unpacking to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/z020:latest
+#7 unpacking to ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/z020:latest 28.5s done
+#7 DONE 165.3s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/z020
+Architecture: amd64 
+Size: 8082836092
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/conda/f4pga/xc7/z020 //wrk/conda--f4pga--xc7--z020.sh
+CC: 
+CXX: 
+CC: 
+CXX: 
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+total 4.1G
+drwxr-xr-x 3 root root 4.0K Apr 11  2023 .
+drwxr-xr-x 3 root root 4.0K Sep 15 15:44 ..
+-rw-r--r-- 1 root root 4.3M Apr 11  2023 arch.timing.xml
+-rw-r--r-- 1 root root  90M Apr 11  2023 rr_graph_xc7z020_test.lookahead.bin
+-rw-r--r-- 1 root root 719K Apr 11  2023 rr_graph_xc7z020_test.place_delay.bin
+-rw-r--r-- 1 root root 4.0G Apr 11  2023 rr_graph_xc7z020_test.rr_graph.real.bin
+-rw-r--r-- 1 root root 1.3M Apr 11  2023 vpr_grid_map.csv
+drwxr-xr-x 2 root root 4.0K Apr 11  2023 xc7z020clg400-1
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS conda/f4pga/xc7/z020 ===
+RESULT: PASS

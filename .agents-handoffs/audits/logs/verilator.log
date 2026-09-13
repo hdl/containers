@@ -1,0 +1,1288 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: verilator IMAGES: ['pkg/verilator', 'verilator']
+=== BUILD pkg/verilator ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/verilator --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target pkg -f debian/verilator.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#1 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#1 CACHED
+
+#2 [internal] load build definition from verilator.dockerfile
+#2 transferring dockerfile: 1.87kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [build 2/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     autoconf     bison     flex     help2man     libfl-dev  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#5 2.231 Reading package lists...
+#5 3.478 Building dependency tree...
+#5 3.684 Reading state information...
+#5 3.881 The following additional packages will be installed:
+#5 3.882   libfl2 liblocale-gettext-perl libsigsegv2 m4
+#5 3.886 Suggested packages:
+#5 3.887   autoconf-archive gnu-standards autoconf-doc libtool gettext bison-doc
+#5 3.887   build-essential flex-doc m4-doc
+#5 3.887 Recommended packages:
+#5 3.887   automake | automaken
+#5 3.991 The following NEW packages will be installed:
+#5 3.991   autoconf bison flex help2man libfl-dev libfl2 liblocale-gettext-perl
+#5 3.992   libsigsegv2 m4
+#5 4.540 0 upgraded, 9 newly installed, 0 to remove and 0 not upgraded.
+#5 4.540 Need to get 2513 kB of archives.
+#5 4.540 After this operation, 7413 kB of additional disk space will be used.
+#5 4.540 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libsigsegv2 amd64 2.13-1 [34.8 kB]
+#5 4.540 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 m4 amd64 1.4.18-5 [204 kB]
+#5 4.576 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 flex amd64 2.6.4-8 [440 kB]
+#5 4.596 Get:4 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 liblocale-gettext-perl amd64 1.07-4+b1 [19.0 kB]
+#5 4.596 Get:5 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 autoconf all 2.69-14 [313 kB]
+#5 4.597 Get:6 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 bison amd64 2:3.7.5+dfsg-1 [1104 kB]
+#5 4.727 Get:7 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 help2man amd64 1.48.1 [190 kB]
+#5 4.909 Get:8 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libfl2 amd64 2.6.4-8 [103 kB]
+#5 4.912 Get:9 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libfl-dev amd64 2.6.4-8 [104 kB]
+#5 5.184 debconf: delaying package configuration, since apt-utils is not installed
+#5 5.239 Fetched 2513 kB in 1s (2778 kB/s)
+#5 5.294 Selecting previously unselected package libsigsegv2:amd64.
+#5 5.294 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14728 files and directories currently installed.)
+#5 5.317 Preparing to unpack .../0-libsigsegv2_2.13-1_amd64.deb ...
+#5 5.322 Unpacking libsigsegv2:amd64 (2.13-1) ...
+#5 5.356 Selecting previously unselected package m4.
+#5 5.356 Preparing to unpack .../1-m4_1.4.18-5_amd64.deb ...
+#5 5.362 Unpacking m4 (1.4.18-5) ...
+#5 5.402 Selecting previously unselected package flex.
+#5 5.403 Preparing to unpack .../2-flex_2.6.4-8_amd64.deb ...
+#5 5.408 Unpacking flex (2.6.4-8) ...
+#5 5.475 Selecting previously unselected package liblocale-gettext-perl.
+#5 5.478 Preparing to unpack .../3-liblocale-gettext-perl_1.07-4+b1_amd64.deb ...
+#5 5.483 Unpacking liblocale-gettext-perl (1.07-4+b1) ...
+#5 5.507 Selecting previously unselected package autoconf.
+#5 5.507 Preparing to unpack .../4-autoconf_2.69-14_all.deb ...
+#5 5.513 Unpacking autoconf (2.69-14) ...
+#5 5.584 Selecting previously unselected package bison.
+#5 5.586 Preparing to unpack .../5-bison_2%3a3.7.5+dfsg-1_amd64.deb ...
+#5 5.601 Unpacking bison (2:3.7.5+dfsg-1) ...
+#5 5.757 Selecting previously unselected package help2man.
+#5 5.757 Preparing to unpack .../6-help2man_1.48.1_amd64.deb ...
+#5 5.761 Unpacking help2man (1.48.1) ...
+#5 5.827 Selecting previously unselected package libfl2:amd64.
+#5 5.828 Preparing to unpack .../7-libfl2_2.6.4-8_amd64.deb ...
+#5 5.832 Unpacking libfl2:amd64 (2.6.4-8) ...
+#5 5.881 Selecting previously unselected package libfl-dev:amd64.
+#5 5.882 Preparing to unpack .../8-libfl-dev_2.6.4-8_amd64.deb ...
+#5 5.901 Unpacking libfl-dev:amd64 (2.6.4-8) ...
+#5 6.034 Setting up libsigsegv2:amd64 (2.13-1) ...
+#5 6.043 Setting up libfl2:amd64 (2.6.4-8) ...
+#5 6.055 Setting up liblocale-gettext-perl (1.07-4+b1) ...
+#5 6.058 Setting up m4 (1.4.18-5) ...
+#5 6.064 Setting up help2man (1.48.1) ...
+#5 6.072 Setting up autoconf (2.69-14) ...
+#5 6.083 Setting up bison (2:3.7.5+dfsg-1) ...
+#5 6.099 update-alternatives: using /usr/bin/bison.yacc to provide /usr/bin/yacc (yacc) in auto mode
+#5 6.099 update-alternatives: warning: skip creation of /usr/share/man/man1/yacc.1.gz because associated file /usr/share/man/man1/bison.yacc.1.gz (of link group yacc) doesn't exist
+#5 6.106 Setting up flex (2.6.4-8) ...
+#5 6.116 Setting up libfl-dev:amd64 (2.6.4-8) ...
+#5 6.127 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#5 6.205 Reading package lists...
+#5 7.244 Building dependency tree...
+#5 7.444 Reading state information...
+#5 7.495 Reading package lists...
+#5 8.505 Building dependency tree...
+#5 8.679 Reading state information...
+#5 8.976 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#5 DONE 9.1s
+
+#6 [build 3/3] RUN git clone https://github.com/verilator/verilator  && cd verilator  && autoconf  && ./configure  && make -j$(nproc)  && make DESTDIR=/opt/verilator install  && git clone https://github.com/veripool/vcddiff  && make -C vcddiff CC=clang  && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff
+#6 0.266 Cloning into 'verilator'...
+#6 29.20 Updating files:  88% (9171/10398)Updating files:  89% (9255/10398)Updating files:  90% (9359/10398)Updating files:  91% (9463/10398)Updating files:  92% (9567/10398)Updating files:  93% (9671/10398)Updating files:  94% (9775/10398)Updating files:  95% (9879/10398)Updating files:  96% (9983/10398)Updating files:  97% (10087/10398)Updating files:  98% (10191/10398)Updating files:  99% (10295/10398)Updating files: 100% (10398/10398)Updating files: 100% (10398/10398), done.
+#6 30.21 configuring for Verilator 5.053 devel
+#6 30.22 checking whether to perform partial static linking of Verilator binary... yes
+#6 30.22 checking whether to use AddressSanitizer... no
+#6 30.22 checking whether to use tcmalloc... check
+#6 30.22 checking whether to use jemalloc... check
+#6 30.22 checking whether to build for gcov code coverage collection... no
+#6 30.22 checking whether to reduce debug info in the debug executable... no
+#6 30.22 checking whether to use hardcoded paths... yes
+#6 30.22 checking whether to show and stop on compilation warnings... no
+#6 30.22 checking whether to run long tests... no
+#6 30.22 checking for z3... no
+#6 30.22 checking for cvc5... no
+#6 30.22 checking for cvc4... no
+#6 30.22 checking for SMT solver... no
+#6 30.22 compiler CXX inbound is set to... clang++
+#6 30.22 checking for gcc... clang
+#6 30.48 checking whether the C compiler works... yes
+#6 30.65 checking for C compiler default output file name... a.out
+#6 30.65 checking for suffix of executables... 
+#6 30.85 checking whether we are cross compiling... no
+#6 31.01 checking for suffix of object files... o
+#6 31.09 checking whether we are using the GNU C compiler... yes
+#6 31.20 checking whether clang accepts -g... yes
+#6 31.28 checking for clang option to accept ISO C89... none needed
+#6 31.58 checking whether we are using the GNU C++ compiler... yes
+#6 31.62 checking whether clang++ accepts -g... yes
+#6 31.70 checking for a BSD-compatible install... /usr/bin/install -c
+#6 31.78 compiler version... clang++ --version = Debian clang version 11.0.1-2
+#6 31.78 checking that C++ compiler can compile simple program... yes
+#6 31.92 checking for ar... ar
+#6 31.92 checking for perl... perl
+#6 31.92 checking for python3... python3
+#6 31.93 python3 --version = Python 3.9.2
+#6 31.93 checking for flex... flex
+#6 31.93 flex --version = flex 2.6.4
+#6 31.93 checking for bison... bison
+#6 31.95 bison --version = bison (GNU Bison) 3.7.5
+#6 31.95 checking for ccache... no
+#6 31.95 checking how to run the C++ preprocessor... clang++ -E
+#6 32.25 checking for grep that handles long lines and -e... /bin/grep
+#6 32.25 checking for egrep... /bin/grep -E
+#6 32.26 checking for ANSI C header files... yes
+#6 32.79 checking for sys/types.h... yes
+#6 32.84 checking for sys/stat.h... yes
+#6 32.95 checking for stdlib.h... yes
+#6 33.15 checking for string.h... yes
+#6 33.15 checking for memory.h... yes
+#6 33.27 checking for strings.h... yes
+#6 33.42 checking for inttypes.h... yes
+#6 33.50 checking for stdint.h... yes
+#6 33.58 checking for unistd.h... yes
+#6 33.66 checking for size_t... yes
+#6 33.82 checking for size_t... (cached) yes
+#6 33.82 checking for inline... inline
+#6 34.10 checking whether clang++ accepts -pg... yes
+#6 34.35 checking whether clang++ accepts -std=gnu++17... yes
+#6 34.60 checking whether clang++ accepts -Wextra... yes
+#6 34.82 checking whether clang++ accepts -Wfloat-conversion... yes
+#6 35.06 checking whether clang++ accepts -Wlogical-op... no
+#6 35.18 checking whether clang++ accepts -Wthread-safety... yes
+#6 35.57 checking whether coroutines are supported by clang++... yes
+#6 36.11 checking whether coroutines are supported by clang++ with -fcoroutines-ts... yes
+#6 36.43 checking whether clang++ accepts -fsanitize=thread... yes
+#6 36.96 checking whether clang++ accepts -Qunused-arguments... yes
+#6 37.27 checking whether clang++ accepts -Wno-shadow... yes
+#6 37.54 checking whether clang++ accepts -Wno-unnecessary-virtual-specifier... no
+#6 37.73 checking whether clang++ accepts -Wno-unused-parameter... yes
+#6 38.01 checking whether clang++ accepts -Xclang -fno-pch-timestamp... yes
+#6 38.27 checking whether clang++ accepts -faligned-new... yes
+#6 38.58 checking whether clang++ accepts -fno-exceptions... yes
+#6 38.83 checking whether clang++ accepts -Wno-char-subscripts... yes
+#6 39.41 checking whether clang++ accepts -Wno-null-conversion... yes
+#6 39.67 checking whether clang++ accepts -Wno-parentheses-equality... yes
+#6 39.95 checking whether clang++ accepts -Wno-unused... yes
+#6 40.30 checking whether clang++ accepts -O0... yes
+#6 40.75 checking whether clang++ accepts -ggdb... yes
+#6 41.24 checking whether clang++ accepts -O3... yes
+#6 41.68 checking whether clang++ accepts -faligned-new... yes
+#6 41.97 checking whether clang++ accepts -fbracket-depth=4096... yes
+#6 42.43 checking whether clang++ accepts -fcf-protection=none... yes
+#6 42.88 checking whether clang++ accepts -Xclang -fno-pch-timestamp... yes
+#6 43.22 checking whether clang++ accepts -mno-cet... no
+#6 43.44 checking whether clang++ accepts -Qunused-arguments... yes
+#6 43.89 checking whether clang++ accepts -Wno-bool-operation... yes
+#6 44.34 checking whether clang++ accepts -Wno-c++11-narrowing... yes
+#6 44.83 checking whether clang++ accepts -Wno-constant-logical-operand... yes
+#6 45.23 checking whether clang++ accepts -Wno-int-in-bool-context... yes
+#6 45.47 checking whether clang++ accepts -Wno-non-pod-varargs... yes
+#6 45.73 checking whether clang++ accepts -Wno-parentheses-equality... yes
+#6 46.22 checking whether clang++ accepts -Wno-shadow... yes
+#6 46.49 checking whether clang++ accepts -Wno-sign-compare... yes
+#6 46.76 checking whether clang++ accepts -Wno-subobject-linkage... no
+#6 46.91 checking whether clang++ accepts -Wno-tautological-bitwise-compare... yes
+#6 47.46 checking whether clang++ accepts -Wno-tautological-compare... yes
+#6 47.92 checking whether clang++ accepts -Wno-uninitialized... yes
+#6 48.41 checking whether clang++ accepts -Wno-unnecessary-virtual-specifier... no
+#6 48.58 checking whether clang++ accepts -Wno-unused-but-set-parameter... no
+#6 48.72 checking whether clang++ accepts -Wno-unused-but-set-variable... no
+#6 48.92 checking whether clang++ accepts -Wno-unused-parameter... yes
+#6 49.26 checking whether clang++ accepts -Wno-unused-variable... yes
+#6 49.72 checking whether clang++ accepts -Wno-vla-cxx-extension... no
+#6 49.84 checking whether clang++ linker accepts -mt... no
+#6 49.89 checking whether clang++ linker accepts -pthread... yes
+#6 50.10 checking whether clang++ linker accepts -lpthread... yes
+#6 50.38 checking whether clang++ linker accepts -latomic... yes
+#6 50.71 checking whether clang++ linker accepts -rdynamic... yes
+#6 50.93 checking whether clang++ linker accepts -ldl... yes
+#6 51.13 checking whether clang++ linker accepts -fuse-ld=mold... no
+#6 51.19 checking whether clang++ linker accepts -fuse-ld=mold... no
+#6 51.25 checking whether clang++ linker accepts -static-libgcc... yes
+#6 51.41 checking whether clang++ linker accepts -static-libstdc++... yes
+#6 51.54 checking whether clang++ linker accepts -Xlinker -gc-sections... yes
+#6 51.84 checking whether clang++ linker accepts -lpthread... yes
+#6 52.05 checking whether clang++ linker accepts -latomic... yes
+#6 52.33 checking whether clang++ linker accepts -lbcrypt... no
+#6 52.53 checking whether clang++ linker accepts -lpsapi... no
+#6 52.73 checking whether clang++ linker accepts -Xlinker --whole-archive -l:libjemalloc.a -Xlinker --no-whole-archive... no
+#6 52.93 checking whether clang++ linker accepts -ljemalloc... no
+#6 53.12 checking whether clang++ linker accepts -Xlinker --whole-archive -l:libtcmalloc_minimal.a -Xlinker --no-whole-archive... no
+#6 53.40 checking whether clang++ linker accepts -ltcmalloc_minimal... no
+#6 53.50 checking whether clang++ supports C++14... yes
+#6 54.00 checking for clang++ precompile header include option... -include-pch
+#6 54.04 checking for struct stat.st_mtim.tv_nsec... yes
+#6 54.10 checking whether SystemC is found (in system path)... no
+#6 54.21 configure: creating ./config.status
+#6 54.31 config.status: creating Makefile
+#6 54.33 config.status: creating src/Makefile
+#6 54.36 config.status: creating src/Makefile_obj
+#6 54.38 config.status: creating include/verilated.mk
+#6 54.40 config.status: creating include/verilated_config.h
+#6 54.43 config.status: creating verilator.pc
+#6 54.44 config.status: creating verilator-config.cmake
+#6 54.46 config.status: creating verilator-config-version.cmake
+#6 54.48 config.status: creating src/config_package.h
+#6 54.49 
+#6 54.49 Now type 'make' (or sometimes 'gmake') to build Verilator.
+#6 54.49 
+#6 54.55 pod2man bin/verilator verilator.1
+#6 54.55 ------------------------------------------------------------
+#6 54.55 making verilator in src
+#6 54.55 pod2man bin/verilator_coverage verilator_coverage.1
+#6 54.55 make -C src 
+#6 54.55 make[1]: Entering directory '/verilator/src'
+#6 54.55 mkdir -p obj_dbg
+#6 54.55 python3 ./config_rev . >config_rev.h
+#6 54.57 mkdir -p obj_opt
+#6 54.64 help2man --no-info --no-discard-stderr --version-string=- \
+#6 54.64 	-n "Create Gantt chart of Verilator multi-threaded execution" bin/verilator_gantt -o verilator_gantt.1
+#6 54.76 help2man --no-info --no-discard-stderr --version-string=- \
+#6 54.76 	-n "Read gprof report created with Verilator --prof-cfuncs" bin/verilator_profcfunc -o verilator_profcfunc.1
+#6 55.42 config_rev using v5.052-86-g253f51f1d
+#6 55.43 make -C obj_dbg -j 1  TGT=../../bin/verilator_bin_dbg VL_DEBUG=1 -f ../Makefile_obj serial
+#6 55.43 make -C obj_dbg       TGT=../../bin/verilator_coverage_bin_dbg VL_DEBUG=1 VL_VLCOV=1 -f ../Makefile_obj serial_vlcov
+#6 55.44 make -C obj_opt -j 1  TGT=../../bin/verilator_bin -f ../Makefile_obj serial
+#6 55.44 make[2]: Entering directory '/verilator/src'
+#6 55.44 make[2]: warning: -j1 forced in submake: resetting jobserver mode.
+#6 55.44 make[2]: Entering directory '/verilator/src'
+#6 55.44 make[2]: warning: -j1 forced in submake: resetting jobserver mode.
+#6 55.46 make[2]: Entering directory '/verilator/src/obj_dbg'
+#6 55.46 python3 ../astgen -I .. --astdef V3AstNodeDType.h --astdef V3AstNodeExpr.h --astdef V3AstNodeOther.h --astdef V3AstNodeStmt.h --dfgdef V3DfgVertices.h --classes
+#6 55.46 python3 ../astgen -I .. --astdef V3AstNodeDType.h --astdef V3AstNodeExpr.h --astdef V3AstNodeOther.h --astdef V3AstNodeStmt.h --dfgdef V3DfgVertices.h --classes
+#6 55.46 python3 ../vlcovgen --srcdir ..
+#6 55.57 touch vlcovgen.d
+#6 55.57 make[2]: Leaving directory '/verilator/src/obj_dbg'
+#6 55.57 make -C obj_dbg       TGT=../../bin/verilator_coverage_bin_dbg VL_DEBUG=1 VL_VLCOV=1 -f ../Makefile_obj
+#6 55.57 make[2]: Entering directory '/verilator/src/obj_dbg'
+#6 55.57       Compile flags:  clang++ -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC="" -DDEFENV_SYSTEMC_ARCH="" -DDEFENV_SYSTEMC_INCLUDE="" -DDEFENV_SYSTEMC_LIBDIR="" -DDEFENV_VERILATOR_ROOT="/usr/local/share/verilator"
+#6 55.57 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../VlcMain.cpp -o VlcMain.o
+#6 61.20 If you get errors from verilog.y below, try upgrading bison to version 1.875 or newer.
+#6 61.21 python3 ../bisonpre --yacc bison -d -v -o V3ParseBison.c  ../verilog.y
+#6 61.89   edit ../verilog.y V3ParseBison_pretmp.y
+#6 61.89 Executing: bison -d -v --report=itemset --report=lookahead -b V3ParseBison_pretmp -o V3ParseBison_pretmp.c V3ParseBison_pretmp.y
+#6 62.47 If you get errors from verilog.y below, try upgrading bison to version 1.875 or newer.
+#6 62.48 python3 ../bisonpre --yacc bison -d -v -o V3ParseBison.c  ../verilog.y
+#6 62.94   edit ../verilog.y V3ParseBison_pretmp.y
+#6 62.94 Executing: bison -d -v --report=itemset --report=lookahead -b V3ParseBison_pretmp -o V3ParseBison_pretmp.c V3ParseBison_pretmp.y
+#6 73.31       Linking ../../bin/verilator_coverage_bin_dbg...
+#6 73.31 clang++ -static-libgcc -static-libstdc++ -Xlinker -gc-sections -o ../../bin/verilator_coverage_bin_dbg VlcMain.o   -lpthread -latomic -lm
+#6 74.27 make[2]: Leaving directory '/verilator/src/obj_dbg'
+#6 105.2   edit V3ParseBison_pretmp.output V3ParseBison.output
+#6 105.2   edit V3ParseBison_pretmp.c V3ParseBison.c
+#6 105.2   edit V3ParseBison_pretmp.h V3ParseBison.h
+#6 105.2 make[2]: Leaving directory '/verilator/src/obj_dbg'
+#6 105.2 make -C obj_dbg       TGT=../../bin/verilator_bin_dbg VL_DEBUG=1 -f ../Makefile_obj
+#6 105.2 make[2]: Entering directory '/verilator/src/obj_dbg'
+#6 105.2       Compile flags:  clang++ -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC="" -DDEFENV_SYSTEMC_ARCH="" -DDEFENV_SYSTEMC_INCLUDE="" -DDEFENV_SYSTEMC_LIBDIR="" -DDEFENV_VERILATOR_ROOT="/usr/local/share/verilator"
+#6 105.2 python3 ../astgen -I .. --astdef V3AstNodeDType.h --astdef V3AstNodeExpr.h --astdef V3AstNodeOther.h --astdef V3AstNodeStmt.h --dfgdef V3DfgVertices.h V3Const.cpp
+#6 105.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Error.cpp -o V3Error.o
+#6 105.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3FileLine.cpp -o V3FileLine.o
+#6 111.1 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Graph.cpp -o V3Graph.o
+#6 112.0   edit V3ParseBison_pretmp.output V3ParseBison.output
+#6 112.0   edit V3ParseBison_pretmp.c V3ParseBison.c
+#6 112.0   edit V3ParseBison_pretmp.h V3ParseBison.h
+#6 112.1 make[2]: Leaving directory '/verilator/src/obj_opt'
+#6 112.1 make -C obj_opt       TGT=../../bin/verilator_bin -f ../Makefile_obj
+#6 112.1 make[2]: Entering directory '/verilator/src/obj_opt'
+#6 112.1       Compile flags:  clang++ -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC="" -DDEFENV_SYSTEMC_ARCH="" -DDEFENV_SYSTEMC_INCLUDE="" -DDEFENV_SYSTEMC_LIBDIR="" -DDEFENV_VERILATOR_ROOT="/usr/local/share/verilator"
+#6 112.1 python3 ../astgen -I .. --astdef V3AstNodeDType.h --astdef V3AstNodeExpr.h --astdef V3AstNodeOther.h --astdef V3AstNodeStmt.h --dfgdef V3DfgVertices.h V3Const.cpp
+#6 118.8 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Error.cpp -o V3Error.o
+#6 120.8 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphAcyc.cpp -o V3GraphAcyc.o
+#6 122.5 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphAlg.cpp -o V3GraphAlg.o
+#6 124.8 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphPathChecker.cpp -o V3GraphPathChecker.o
+#6 128.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3FileLine.cpp -o V3FileLine.o
+#6 130.9 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphTest.cpp -o V3GraphTest.o
+#6 132.3 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Graph.cpp -o V3Graph.o
+#6 135.3 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphAcyc.cpp -o V3GraphAcyc.o
+#6 135.5 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Hash.cpp -o V3Hash.o
+#6 137.3 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3HashTable.cpp -o V3HashTable.o
+#6 139.7 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphAlg.cpp -o V3GraphAlg.o
+#6 141.9 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphPathChecker.cpp -o V3GraphPathChecker.o
+#6 145.9 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphTest.cpp -o V3GraphTest.o
+#6 147.7 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3OptionParser.cpp -o V3OptionParser.o
+#6 148.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Hash.cpp -o V3Hash.o
+#6 148.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Os.cpp -o V3Os.o
+#6 149.7 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3HashTable.cpp -o V3HashTable.o
+#6 150.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3OptionParser.cpp -o V3OptionParser.o
+#6 154.7 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Os.cpp -o V3Os.o
+#6 155.1 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -Wno-char-subscripts -Wno-null-conversion -Wno-parentheses-equality -Wno-unused -c ../V3ParseGrammar.cpp -o V3ParseGrammar.o
+#6 161.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -Wno-char-subscripts -Wno-null-conversion -Wno-parentheses-equality -Wno-unused -c ../V3ParseGrammar.cpp -o V3ParseGrammar.o
+#6 162.1 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -Wno-char-subscripts -Wno-null-conversion -Wno-parentheses-equality -Wno-unused -c ../V3ParseImp.cpp -o V3ParseImp.o
+#6 168.8 flex --version
+#6 168.8 flex 2.6.4
+#6 168.8 flex -d -oV3Lexer_pregen.yy.cpp ../verilog.l
+#6 169.0 flex --version
+#6 169.0 flex 2.6.4
+#6 169.0 flex -d -oV3PreLex_pregen.yy.cpp ../V3PreLex.l
+#6 169.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3PreShell.cpp -o V3PreShell.o
+#6 172.3 In file included from ../V3ParseGrammar.cpp:28:
+#6 172.3 V3ParseBison.c:55918:3: warning: unknown warning group '-Wfree-nonheap-object', ignored [-Wunknown-warning-option]
+#6 172.3   _Pragma ("GCC diagnostic ignored \"-Wfree-nonheap-object\"")
+#6 172.3   ^
+#6 172.3 <scratch space>:60:25: note: expanded from here
+#6 172.3  GCC diagnostic ignored "-Wfree-nonheap-object"
+#6 172.3                         ^
+#6 173.6 In file included from ../V3ParseGrammar.cpp:28:
+#6 173.6 V3ParseBison.c:55918:3: warning: unknown warning group '-Wfree-nonheap-object', ignored [-Wunknown-warning-option]
+#6 173.6   _Pragma ("GCC diagnostic ignored \"-Wfree-nonheap-object\"")
+#6 173.6   ^
+#6 173.6 <scratch space>:164:25: note: expanded from here
+#6 173.6  GCC diagnostic ignored "-Wfree-nonheap-object"
+#6 173.6                         ^
+#6 176.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3String.cpp -o V3String.o
+#6 179.2 1 warning generated.
+#6 179.3 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -Wno-char-subscripts -Wno-null-conversion -Wno-parentheses-equality -Wno-unused -c ../V3ParseImp.cpp -o V3ParseImp.o
+#6 185.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3ThreadPool.cpp -o V3ThreadPool.o
+#6 185.9 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Waiver.cpp -o V3Waiver.o
+#6 191.5 flex --version
+#6 191.5 flex 2.6.4
+#6 191.5 flex -d -oV3Lexer_pregen.yy.cpp ../verilog.l
+#6 191.6 flex --version
+#6 191.6 flex 2.6.4
+#6 191.6 flex -d -oV3PreLex_pregen.yy.cpp ../V3PreLex.l
+#6 191.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3PreShell.cpp -o V3PreShell.o
+#6 193.4 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../Verilator.cpp -o Verilator.o
+#6 198.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -x c++-header -c ../V3PchAstMT.h -o V3PchAstMT.h.gch
+#6 199.5 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3String.cpp -o V3String.o
+#6 206.4 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3ThreadPool.cpp -o V3ThreadPool.o
+#6 212.7 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Waiver.cpp -o V3Waiver.o
+#6 214.1 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -x c++-header -c ../V3PchAstNoMT.h -o V3PchAstNoMT.h.gch
+#6 214.4 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../Verilator.cpp -o Verilator.o
+#6 219.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -x c++-header -c ../V3PchAstMT.h -o V3PchAstMT.h.gch
+#6 228.9 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -x c++-header -c ../V3PchAstNoMT.h -o V3PchAstNoMT.h.gch
+#6 233.7 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c V3Const__gen.cpp -o V3Const__gen.o
+#6 233.8 python3 ../flexfix V3Lexer <V3Lexer_pregen.yy.cpp >V3Lexer.yy.cpp
+#6 234.4 python3 ../flexfix V3PreLex <V3PreLex_pregen.yy.cpp >V3PreLex.yy.cpp
+#6 234.8 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Ast.cpp -o V3Ast.o
+#6 242.8 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c V3Const__gen.cpp -o V3Const__gen.o
+#6 245.9 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3AstNodes.cpp -o V3AstNodes.o
+#6 266.1 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Broken.cpp -o V3Broken.o
+#6 271.8 1 warning generated.
+#6 271.9 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Control.cpp -o V3Control.o
+#6 274.8 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCBase.cpp -o V3EmitCBase.o
+#6 278.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCConstPool.cpp -o V3EmitCConstPool.o
+#6 281.7 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCFunc.cpp -o V3EmitCFunc.o
+#6 285.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCHeaders.cpp -o V3EmitCHeaders.o
+#6 289.3 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCImp.cpp -o V3EmitCImp.o
+#6 290.4 python3 ../flexfix V3Lexer <V3Lexer_pregen.yy.cpp >V3Lexer.yy.cpp
+#6 291.1 python3 ../flexfix V3PreLex <V3PreLex_pregen.yy.cpp >V3PreLex.yy.cpp
+#6 291.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Ast.cpp -o V3Ast.o
+#6 294.9 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3AstNodes.cpp -o V3AstNodes.o
+#6 302.4 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCInlines.cpp -o V3EmitCInlines.o
+#6 304.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Broken.cpp -o V3Broken.o
+#6 307.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCPch.cpp -o V3EmitCPch.o
+#6 309.6 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Control.cpp -o V3Control.o
+#6 309.9 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCBase.cpp -o V3EmitCBase.o
+#6 314.0 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitV.cpp -o V3EmitV.o
+#6 315.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCConstPool.cpp -o V3EmitCConstPool.o
+#6 320.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCFunc.cpp -o V3EmitCFunc.o
+#6 322.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3File.cpp -o V3File.o
+#6 325.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCHeaders.cpp -o V3EmitCHeaders.o
+#6 328.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCImp.cpp -o V3EmitCImp.o
+#6 329.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3FuncOpt.cpp -o V3FuncOpt.o
+#6 335.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Global.cpp -o V3Global.o
+#6 335.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCInlines.cpp -o V3EmitCInlines.o
+#6 339.1 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCPch.cpp -o V3EmitCPch.o
+#6 343.1 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Hasher.cpp -o V3Hasher.o
+#6 343.3 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitV.cpp -o V3EmitV.o
+#6 348.1 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3File.cpp -o V3File.o
+#6 353.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3FuncOpt.cpp -o V3FuncOpt.o
+#6 354.3 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Number.cpp -o V3Number.o
+#6 357.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Global.cpp -o V3Global.o
+#6 360.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Hasher.cpp -o V3Hasher.o
+#6 363.0 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Options.cpp -o V3Options.o
+#6 364.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Number.cpp -o V3Number.o
+#6 370.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Stats.cpp -o V3Stats.o
+#6 374.1 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3StatsReport.cpp -o V3StatsReport.o
+#6 375.1 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3VariableOrder.cpp -o V3VariableOrder.o
+#6 377.1 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Options.cpp -o V3Options.o
+#6 378.0 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Active.cpp -o V3Active.o
+#6 380.4 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3ActiveTop.cpp -o V3ActiveTop.o
+#6 383.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Assert.cpp -o V3Assert.o
+#6 383.7 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3AssertNfa.cpp -o V3AssertNfa.o
+#6 385.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3AssertPre.cpp -o V3AssertPre.o
+#6 390.6 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Stats.cpp -o V3Stats.o
+#6 394.4 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Begin.cpp -o V3Begin.o
+#6 394.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3StatsReport.cpp -o V3StatsReport.o
+#6 395.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3VariableOrder.cpp -o V3VariableOrder.o
+#6 399.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Branch.cpp -o V3Branch.o
+#6 401.3 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CCtors.cpp -o V3CCtors.o
+#6 403.1 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CUse.cpp -o V3CUse.o
+#6 403.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Active.cpp -o V3Active.o
+#6 403.7 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3ActiveTop.cpp -o V3ActiveTop.o
+#6 407.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Case.cpp -o V3Case.o
+#6 407.7 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Assert.cpp -o V3Assert.o
+#6 409.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Cast.cpp -o V3Cast.o
+#6 411.7 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3AssertNfa.cpp -o V3AssertNfa.o
+#6 413.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Cfg.cpp -o V3Cfg.o
+#6 413.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CfgBuilder.cpp -o V3CfgBuilder.o
+#6 417.8 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3AssertPre.cpp -o V3AssertPre.o
+#6 418.3 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CfgLiveVariables.cpp -o V3CfgLiveVariables.o
+#6 419.1 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Class.cpp -o V3Class.o
+#6 425.5 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3ClassGraph.cpp -o V3ClassGraph.o
+#6 425.9 In file included from ../V3ClassGraph.cpp:61:
+#6 425.9 ../V3ClassGraph.h:43:5: warning: explicitly defaulted default constructor is implicitly deleted [-Wdefaulted-function-deleted]
+#6 425.9     V3ClassGraph() = default;
+#6 425.9     ^
+#6 425.9 ../V3ClassGraph.h:41:9: note: default constructor of 'V3ClassGraph' is implicitly deleted because field 'm_emptySet' of const-qualified type 'const std::unordered_set<AstCFunc *>' would not be initialized
+#6 425.9         m_emptySet;  // Always empty set - used to return a reference to an empty set
+#6 425.9         ^
+#6 425.9 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Clean.cpp -o V3Clean.o
+#6 426.4 ../V3ClassGraph.cpp:196:24: error: call to implicitly-deleted default constructor of 'V3ClassGraph'
+#6 426.4         : m_graphp{new V3ClassGraph} {
+#6 426.4                        ^
+#6 426.4 ../V3ClassGraph.h:43:5: note: explicitly defaulted function was implicitly deleted here
+#6 426.4     V3ClassGraph() = default;
+#6 426.4     ^
+#6 426.4 ../V3ClassGraph.h:41:9: note: default constructor of 'V3ClassGraph' is implicitly deleted because field 'm_emptySet' of const-qualified type 'const std::unordered_set<AstCFunc *>' would not be initialized
+#6 426.4         m_emptySet;  // Always empty set - used to return a reference to an empty set
+#6 426.4         ^
+#6 427.5 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Clock.cpp -o V3Clock.o
+#6 429.4 1 warning and 1 error generated.
+#6 429.4 make[2]: *** [../Makefile_obj:446: V3ClassGraph.o] Error 1
+#6 429.4 make[2]: *** Waiting for unfinished jobs....
+#6 429.4 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Begin.cpp -o V3Begin.o
+#6 430.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Branch.cpp -o V3Branch.o
+#6 430.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CCtors.cpp -o V3CCtors.o
+#6 432.4 make[2]: Leaving directory '/verilator/src/obj_dbg'
+#6 432.4 make[1]: *** [Makefile:85: ../bin/verilator_bin_dbg] Error 2
+#6 432.4 make[1]: *** Waiting for unfinished jobs....
+#6 432.4 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CUse.cpp -o V3CUse.o
+#6 433.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Case.cpp -o V3Case.o
+#6 434.6 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Cast.cpp -o V3Cast.o
+#6 436.1 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Cfg.cpp -o V3Cfg.o
+#6 437.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CfgBuilder.cpp -o V3CfgBuilder.o
+#6 438.3 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CfgLiveVariables.cpp -o V3CfgLiveVariables.o
+#6 440.6 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Class.cpp -o V3Class.o
+#6 441.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3ClassGraph.cpp -o V3ClassGraph.o
+#6 441.3 In file included from ../V3ClassGraph.cpp:61:
+#6 441.3 ../V3ClassGraph.h:43:5: warning: explicitly defaulted default constructor is implicitly deleted [-Wdefaulted-function-deleted]
+#6 441.3     V3ClassGraph() = default;
+#6 441.3     ^
+#6 441.3 ../V3ClassGraph.h:41:9: note: default constructor of 'V3ClassGraph' is implicitly deleted because field 'm_emptySet' of const-qualified type 'const std::unordered_set<AstCFunc *>' would not be initialized
+#6 441.3         m_emptySet;  // Always empty set - used to return a reference to an empty set
+#6 441.3         ^
+#6 441.4 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Clean.cpp -o V3Clean.o
+#6 441.6 ../V3ClassGraph.cpp:196:24: error: call to implicitly-deleted default constructor of 'V3ClassGraph'
+#6 441.6         : m_graphp{new V3ClassGraph} {
+#6 441.6                        ^
+#6 441.6 ../V3ClassGraph.h:43:5: note: explicitly defaulted function was implicitly deleted here
+#6 441.6     V3ClassGraph() = default;
+#6 441.6     ^
+#6 441.6 ../V3ClassGraph.h:41:9: note: default constructor of 'V3ClassGraph' is implicitly deleted because field 'm_emptySet' of const-qualified type 'const std::unordered_set<AstCFunc *>' would not be initialized
+#6 441.6         m_emptySet;  // Always empty set - used to return a reference to an empty set
+#6 441.6         ^
+#6 443.3 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Clock.cpp -o V3Clock.o
+#6 443.5 1 warning and 1 error generated.
+#6 443.6 make[2]: *** [../Makefile_obj:446: V3ClassGraph.o] Error 1
+#6 443.6 make[2]: *** Waiting for unfinished jobs....
+#6 446.2 make[2]: Leaving directory '/verilator/src/obj_opt'
+#6 446.2 make[1]: *** [Makefile:79: ../bin/verilator_bin] Error 2
+#6 446.2 make[1]: Leaving directory '/verilator/src'
+#6 446.2 make: *** [Makefile:151: verilator_exe] Error 2
+#6 ERROR: process "/bin/bash -c git clone https://github.com/verilator/verilator  && cd verilator  && autoconf  && ./configure  && make -j$(nproc)  && make DESTDIR=/opt/verilator install  && git clone https://github.com/veripool/vcddiff  && make -C vcddiff CC=$CC  && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff" did not complete successfully: exit code: 2
+------
+ > [build 3/3] RUN git clone https://github.com/verilator/verilator  && cd verilator  && autoconf  && ./configure  && make -j$(nproc)  && make DESTDIR=/opt/verilator install  && git clone https://github.com/veripool/vcddiff  && make -C vcddiff CC=clang  && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff:
+441.6         m_emptySet;  // Always empty set - used to return a reference to an empty set
+441.6         ^
+443.3 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Clock.cpp -o V3Clock.o
+443.5 1 warning and 1 error generated.
+443.6 make[2]: *** [../Makefile_obj:446: V3ClassGraph.o] Error 1
+443.6 make[2]: *** Waiting for unfinished jobs....
+446.2 make[2]: Leaving directory '/verilator/src/obj_opt'
+446.2 make[1]: *** [Makefile:79: ../bin/verilator_bin] Error 2
+446.2 make[1]: Leaving directory '/verilator/src'
+446.2 make: *** [Makefile:151: verilator_exe] Error 2
+------
+verilator.dockerfile:39
+--------------------
+  38 |     
+  39 | >>> RUN git clone https://github.com/verilator/verilator \
+  40 | >>>  && cd verilator \
+  41 | >>>  && autoconf \
+  42 | >>>  && ./configure \
+  43 | >>>  && make -j$(nproc) \
+  44 | >>>  && make DESTDIR=/opt/verilator install \
+  45 | >>>  && git clone https://github.com/veripool/vcddiff \
+  46 | >>>  && make -C vcddiff CC=$CC \
+  47 | >>>  && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff
+  48 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -c git clone https://github.com/verilator/verilator  && cd verilator  && autoconf  && ./configure  && make -j$(nproc)  && make DESTDIR=/opt/verilator install  && git clone https://github.com/veripool/vcddiff  && make -C vcddiff CC=$CC  && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff" did not complete successfully: exit code: 2
+=== FAIL pkg/verilator (CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/pkg/verilator', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '--target', 'pkg', '-f', 'debian/verilator.dockerfile', 'debian']' returned non-zero exit status 1.) ===
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+  File "/home/umarcor/containers/utils/pyHDLC/__init__.py", line 456, in BuildImage
+    _exec(args=[
+    ~~~~~^^^^^^^
+        "docker", "build", *_commonCmd,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        str(contextPath)
+        ^^^^^^^^^^^^^^^^
+    ], dry=dry, collapse=f"🚧 Build {imageName}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/umarcor/containers/utils/pyHDLC/run.py", line 46, in _exec
+    check_call(args, stderr=STDOUT)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 419, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/pkg/verilator', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '--target', 'pkg', '-f', 'debian/verilator.dockerfile', 'debian']' returned non-zero exit status 1.
+=== BUILD verilator ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/verilator --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -f debian/verilator.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from verilator.dockerfile
+#1 transferring dockerfile: 1.87kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#2 DONE 0.1s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/base:latest
+#3 DONE 0.1s
+
+#4 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#4 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#4 CACHED
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [build 2/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     autoconf     bison     flex     help2man     libfl-dev  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#6 CACHED
+
+#7 [stage-2 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#7 resolve ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e 0.1s done
+#7 CACHED
+
+#8 [stage-2 2/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     clang     make     perl  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#8 3.536 Reading package lists...
+#8 4.355 Building dependency tree...
+#8 4.555 Reading state information...
+#8 4.735 The following additional packages will be installed:
+#8 4.736   binutils binutils-common binutils-x86-64-linux-gnu clang-11 lib32gcc-s1
+#8 4.736   lib32stdc++6 libasan6 libatomic1 libbinutils libbsd0 libc-dev-bin libc6-dev
+#8 4.736   libc6-i386 libclang-common-11-dev libclang-cpp11 libclang1-11 libcrypt-dev
+#8 4.736   libctf-nobfd0 libctf0 libedit2 libgc1 libgcc-10-dev libgdbm-compat4 libgdbm6
+#8 4.736   libgomp1 libitm1 libllvm11 liblsan0 libmd0 libnsl-dev libobjc-10-dev
+#8 4.736   libobjc4 libperl5.32 libquadmath0 libstdc++-10-dev libtirpc-dev libtsan0
+#8 4.737   libubsan1 libz3-4 linux-libc-dev perl-modules-5.32
+#8 4.738 Suggested packages:
+#8 4.738   binutils-doc clang-11-doc glibc-doc manpages-dev gdbm-l10n sensible-utils
+#8 4.738   libstdc++-10-doc make-doc perl-doc libterm-readline-gnu-perl
+#8 4.739   | libterm-readline-perl-perl libtap-harness-archive-perl
+#8 4.739 Recommended packages:
+#8 4.739   llvm-11-dev libomp-11-dev manpages manpages-dev libc-devtools netbase
+#8 5.024 The following NEW packages will be installed:
+#8 5.028   binutils binutils-common binutils-x86-64-linux-gnu clang clang-11
+#8 5.029   lib32gcc-s1 lib32stdc++6 libasan6 libatomic1 libbinutils libbsd0
+#8 5.029   libc-dev-bin libc6-dev libc6-i386 libclang-common-11-dev libclang-cpp11
+#8 5.029   libclang1-11 libcrypt-dev libctf-nobfd0 libctf0 libedit2 libgc1
+#8 5.030   libgcc-10-dev libgdbm-compat4 libgdbm6 libgomp1 libitm1 libllvm11 liblsan0
+#8 5.030   libmd0 libnsl-dev libobjc-10-dev libobjc4 libperl5.32 libquadmath0
+#8 5.031   libstdc++-10-dev libtirpc-dev libtsan0 libubsan1 libz3-4 linux-libc-dev make
+#8 5.031   perl perl-modules-5.32
+#8 7.527 0 upgraded, 44 newly installed, 0 to remove and 0 not upgraded.
+#8 7.527 Need to get 76.4 MB of archives.
+#8 7.527 After this operation, 416 MB of additional disk space will be used.
+#8 7.527 Get:1 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 perl-modules-5.32 all 5.32.1-4+deb11u5 [2823 kB]
+#8 7.613 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgdbm6 amd64 1.19-2 [64.9 kB]
+#8 7.615 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgdbm-compat4 amd64 1.19-2 [44.7 kB]
+#8 7.615 Get:4 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libperl5.32 amd64 5.32.1-4+deb11u5 [4102 kB]
+#8 7.688 Get:5 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 perl amd64 5.32.1-4+deb11u5 [294 kB]
+#8 7.691 Get:6 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 binutils-common amd64 2.35.2-2 [2220 kB]
+#8 7.730 Get:7 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libbinutils amd64 2.35.2-2 [570 kB]
+#8 7.737 Get:8 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libctf-nobfd0 amd64 2.35.2-2 [110 kB]
+#8 7.740 Get:9 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libctf0 amd64 2.35.2-2 [53.2 kB]
+#8 7.740 Get:10 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 binutils-x86-64-linux-gnu amd64 2.35.2-2 [1809 kB]
+#8 7.773 Get:11 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 binutils amd64 2.35.2-2 [61.2 kB]
+#8 7.773 Get:12 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libmd0 amd64 1.0.3-3 [28.0 kB]
+#8 7.773 Get:13 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libbsd0 amd64 0.11.3-1+deb11u1 [108 kB]
+#8 7.777 Get:14 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libedit2 amd64 3.1-20191231-2+b1 [96.7 kB]
+#8 7.777 Get:15 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libz3-4 amd64 4.8.10-1 [6949 kB]
+#8 7.906 Get:16 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libllvm11 amd64 1:11.0.1-2 [17.9 MB]
+#8 8.226 Get:17 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libclang-cpp11 amd64 1:11.0.1-2 [9632 kB]
+#8 8.386 Get:18 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgomp1 amd64 10.2.1-6 [99.9 kB]
+#8 8.390 Get:19 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libitm1 amd64 10.2.1-6 [25.8 kB]
+#8 8.390 Get:20 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libatomic1 amd64 10.2.1-6 [9008 B]
+#8 8.393 Get:21 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libasan6 amd64 10.2.1-6 [2065 kB]
+#8 8.431 Get:22 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 liblsan0 amd64 10.2.1-6 [828 kB]
+#8 8.437 Get:23 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libtsan0 amd64 10.2.1-6 [2000 kB]
+#8 8.458 Get:24 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libubsan1 amd64 10.2.1-6 [777 kB]
+#8 8.472 Get:25 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libquadmath0 amd64 10.2.1-6 [145 kB]
+#8 8.474 Get:26 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgcc-10-dev amd64 10.2.1-6 [2328 kB]
+#8 8.513 Get:27 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libc-dev-bin amd64 2.31-13+deb11u14 [277 kB]
+#8 8.515 Get:28 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 linux-libc-dev amd64 5.10.262-1 [1935 kB]
+#8 8.553 Get:29 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libcrypt-dev amd64 1:4.4.18-4 [104 kB]
+#8 8.553 Get:30 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libtirpc-dev amd64 1.3.1-1+deb11u1 [191 kB]
+#8 8.556 Get:31 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libnsl-dev amd64 1.3.0-2 [66.4 kB]
+#8 8.556 Get:32 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libc6-dev amd64 2.31-13+deb11u14 [2360 kB]
+#8 8.602 Get:33 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libstdc++-10-dev amd64 10.2.1-6 [1741 kB]
+#8 8.632 Get:34 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgc1 amd64 1:8.0.4-3 [239 kB]
+#8 8.636 Get:35 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libobjc4 amd64 10.2.1-6 [41.8 kB]
+#8 8.637 Get:36 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libobjc-10-dev amd64 10.2.1-6 [170 kB]
+#8 8.703 Get:37 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libc6-i386 amd64 2.31-13+deb11u14 [2617 kB]
+#8 9.123 Get:38 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 lib32gcc-s1 amd64 10.2.1-6 [49.4 kB]
+#8 9.125 Get:39 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 lib32stdc++6 amd64 10.2.1-6 [510 kB]
+#8 9.138 Get:40 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libclang-common-11-dev amd64 1:11.0.1-2 [4922 kB]
+#8 9.191 Get:41 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libclang1-11 amd64 1:11.0.1-2 [5521 kB]
+#8 9.242 Get:42 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 clang-11 amd64 1:11.0.1-2 [109 kB]
+#8 9.274 Get:43 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 clang amd64 1:11.0-51+nmu5 [8872 B]
+#8 9.276 Get:44 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 make amd64 4.3-4.1 [396 kB]
+#8 9.576 debconf: delaying package configuration, since apt-utils is not installed
+#8 9.634 Fetched 76.4 MB in 4s (18.0 MB/s)
+#8 9.681 Selecting previously unselected package perl-modules-5.32.
+#8 9.681 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7841 files and directories currently installed.)
+#8 9.710 Preparing to unpack .../00-perl-modules-5.32_5.32.1-4+deb11u5_all.deb ...
+#8 9.718 Unpacking perl-modules-5.32 (5.32.1-4+deb11u5) ...
+#8 ...
+
+#9 [build 3/3] RUN git clone https://github.com/verilator/verilator  && cd verilator  && autoconf  && ./configure  && make -j$(nproc)  && make DESTDIR=/opt/verilator install  && git clone https://github.com/veripool/vcddiff  && make -C vcddiff CC=clang  && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff
+#9 0.381 Cloning into 'verilator'...
+#9 ...
+
+#8 [stage-2 2/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     clang     make     perl  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#8 10.34 Selecting previously unselected package libgdbm6:amd64.
+#8 10.34 Preparing to unpack .../01-libgdbm6_1.19-2_amd64.deb ...
+#8 10.36 Unpacking libgdbm6:amd64 (1.19-2) ...
+#8 10.50 Selecting previously unselected package libgdbm-compat4:amd64.
+#8 10.50 Preparing to unpack .../02-libgdbm-compat4_1.19-2_amd64.deb ...
+#8 10.51 Unpacking libgdbm-compat4:amd64 (1.19-2) ...
+#8 10.71 Selecting previously unselected package libperl5.32:amd64.
+#8 10.71 Preparing to unpack .../03-libperl5.32_5.32.1-4+deb11u5_amd64.deb ...
+#8 10.72 Unpacking libperl5.32:amd64 (5.32.1-4+deb11u5) ...
+#8 11.52 Selecting previously unselected package perl.
+#8 11.52 Preparing to unpack .../04-perl_5.32.1-4+deb11u5_amd64.deb ...
+#8 11.59 Unpacking perl (5.32.1-4+deb11u5) ...
+#8 11.80 Selecting previously unselected package binutils-common:amd64.
+#8 11.81 Preparing to unpack .../05-binutils-common_2.35.2-2_amd64.deb ...
+#8 11.82 Unpacking binutils-common:amd64 (2.35.2-2) ...
+#8 12.20 Selecting previously unselected package libbinutils:amd64.
+#8 12.20 Preparing to unpack .../06-libbinutils_2.35.2-2_amd64.deb ...
+#8 12.21 Unpacking libbinutils:amd64 (2.35.2-2) ...
+#8 12.34 Selecting previously unselected package libctf-nobfd0:amd64.
+#8 12.34 Preparing to unpack .../07-libctf-nobfd0_2.35.2-2_amd64.deb ...
+#8 12.36 Unpacking libctf-nobfd0:amd64 (2.35.2-2) ...
+#8 12.43 Selecting previously unselected package libctf0:amd64.
+#8 12.43 Preparing to unpack .../08-libctf0_2.35.2-2_amd64.deb ...
+#8 12.44 Unpacking libctf0:amd64 (2.35.2-2) ...
+#8 12.55 Selecting previously unselected package binutils-x86-64-linux-gnu.
+#8 12.55 Preparing to unpack .../09-binutils-x86-64-linux-gnu_2.35.2-2_amd64.deb ...
+#8 12.55 Unpacking binutils-x86-64-linux-gnu (2.35.2-2) ...
+#8 12.87 Selecting previously unselected package binutils.
+#8 12.87 Preparing to unpack .../10-binutils_2.35.2-2_amd64.deb ...
+#8 12.88 Unpacking binutils (2.35.2-2) ...
+#8 12.97 Selecting previously unselected package libmd0:amd64.
+#8 12.98 Preparing to unpack .../11-libmd0_1.0.3-3_amd64.deb ...
+#8 12.99 Unpacking libmd0:amd64 (1.0.3-3) ...
+#8 13.29 Selecting previously unselected package libbsd0:amd64.
+#8 13.29 Preparing to unpack .../12-libbsd0_0.11.3-1+deb11u1_amd64.deb ...
+#8 13.30 Unpacking libbsd0:amd64 (0.11.3-1+deb11u1) ...
+#8 13.38 Selecting previously unselected package libedit2:amd64.
+#8 13.38 Preparing to unpack .../13-libedit2_3.1-20191231-2+b1_amd64.deb ...
+#8 13.40 Unpacking libedit2:amd64 (3.1-20191231-2+b1) ...
+#8 13.47 Selecting previously unselected package libz3-4:amd64.
+#8 13.47 Preparing to unpack .../14-libz3-4_4.8.10-1_amd64.deb ...
+#8 13.47 Unpacking libz3-4:amd64 (4.8.10-1) ...
+#8 15.33 Selecting previously unselected package libllvm11:amd64.
+#8 15.33 Preparing to unpack .../15-libllvm11_1%3a11.0.1-2_amd64.deb ...
+#8 15.35 Unpacking libllvm11:amd64 (1:11.0.1-2) ...
+#8 17.89 Selecting previously unselected package libclang-cpp11.
+#8 17.89 Preparing to unpack .../16-libclang-cpp11_1%3a11.0.1-2_amd64.deb ...
+#8 17.90 Unpacking libclang-cpp11 (1:11.0.1-2) ...
+#8 19.30 Selecting previously unselected package libgomp1:amd64.
+#8 19.30 Preparing to unpack .../17-libgomp1_10.2.1-6_amd64.deb ...
+#8 19.31 Unpacking libgomp1:amd64 (10.2.1-6) ...
+#8 19.39 Selecting previously unselected package libitm1:amd64.
+#8 19.39 Preparing to unpack .../18-libitm1_10.2.1-6_amd64.deb ...
+#8 19.40 Unpacking libitm1:amd64 (10.2.1-6) ...
+#8 19.54 Selecting previously unselected package libatomic1:amd64.
+#8 19.54 Preparing to unpack .../19-libatomic1_10.2.1-6_amd64.deb ...
+#8 19.56 Unpacking libatomic1:amd64 (10.2.1-6) ...
+#8 19.62 Selecting previously unselected package libasan6:amd64.
+#8 19.62 Preparing to unpack .../20-libasan6_10.2.1-6_amd64.deb ...
+#8 19.63 Unpacking libasan6:amd64 (10.2.1-6) ...
+#8 20.03 Selecting previously unselected package liblsan0:amd64.
+#8 20.03 Preparing to unpack .../21-liblsan0_10.2.1-6_amd64.deb ...
+#8 20.04 Unpacking liblsan0:amd64 (10.2.1-6) ...
+#8 20.23 Selecting previously unselected package libtsan0:amd64.
+#8 20.23 Preparing to unpack .../22-libtsan0_10.2.1-6_amd64.deb ...
+#8 20.24 Unpacking libtsan0:amd64 (10.2.1-6) ...
+#8 20.61 Selecting previously unselected package libubsan1:amd64.
+#8 20.61 Preparing to unpack .../23-libubsan1_10.2.1-6_amd64.deb ...
+#8 20.63 Unpacking libubsan1:amd64 (10.2.1-6) ...
+#8 20.94 Selecting previously unselected package libquadmath0:amd64.
+#8 20.94 Preparing to unpack .../24-libquadmath0_10.2.1-6_amd64.deb ...
+#8 20.95 Unpacking libquadmath0:amd64 (10.2.1-6) ...
+#8 21.02 Selecting previously unselected package libgcc-10-dev:amd64.
+#8 21.02 Preparing to unpack .../25-libgcc-10-dev_10.2.1-6_amd64.deb ...
+#8 21.03 Unpacking libgcc-10-dev:amd64 (10.2.1-6) ...
+#8 21.38 Selecting previously unselected package libc-dev-bin.
+#8 21.38 Preparing to unpack .../26-libc-dev-bin_2.31-13+deb11u14_amd64.deb ...
+#8 21.39 Unpacking libc-dev-bin (2.31-13+deb11u14) ...
+#8 21.45 Selecting previously unselected package linux-libc-dev:amd64.
+#8 21.45 Preparing to unpack .../27-linux-libc-dev_5.10.262-1_amd64.deb ...
+#8 21.48 Unpacking linux-libc-dev:amd64 (5.10.262-1) ...
+#8 21.78 Selecting previously unselected package libcrypt-dev:amd64.
+#8 21.78 Preparing to unpack .../28-libcrypt-dev_1%3a4.4.18-4_amd64.deb ...
+#8 21.79 Unpacking libcrypt-dev:amd64 (1:4.4.18-4) ...
+#8 21.85 Selecting previously unselected package libtirpc-dev:amd64.
+#8 21.86 Preparing to unpack .../29-libtirpc-dev_1.3.1-1+deb11u1_amd64.deb ...
+#8 21.87 Unpacking libtirpc-dev:amd64 (1.3.1-1+deb11u1) ...
+#8 21.95 Selecting previously unselected package libnsl-dev:amd64.
+#8 21.96 Preparing to unpack .../30-libnsl-dev_1.3.0-2_amd64.deb ...
+#8 21.97 Unpacking libnsl-dev:amd64 (1.3.0-2) ...
+#8 22.04 Selecting previously unselected package libc6-dev:amd64.
+#8 22.04 Preparing to unpack .../31-libc6-dev_2.31-13+deb11u14_amd64.deb ...
+#8 22.06 Unpacking libc6-dev:amd64 (2.31-13+deb11u14) ...
+#8 22.44 Selecting previously unselected package libstdc++-10-dev:amd64.
+#8 22.44 Preparing to unpack .../32-libstdc++-10-dev_10.2.1-6_amd64.deb ...
+#8 22.46 Unpacking libstdc++-10-dev:amd64 (10.2.1-6) ...
+#8 22.89 Selecting previously unselected package libgc1:amd64.
+#8 22.89 Preparing to unpack .../33-libgc1_1%3a8.0.4-3_amd64.deb ...
+#8 22.90 Unpacking libgc1:amd64 (1:8.0.4-3) ...
+#8 23.05 Selecting previously unselected package libobjc4:amd64.
+#8 23.05 Preparing to unpack .../34-libobjc4_10.2.1-6_amd64.deb ...
+#8 23.06 Unpacking libobjc4:amd64 (10.2.1-6) ...
+#8 23.22 Selecting previously unselected package libobjc-10-dev:amd64.
+#8 23.22 Preparing to unpack .../35-libobjc-10-dev_10.2.1-6_amd64.deb ...
+#8 23.22 Unpacking libobjc-10-dev:amd64 (10.2.1-6) ...
+#8 23.31 Selecting previously unselected package libc6-i386.
+#8 23.31 Preparing to unpack .../36-libc6-i386_2.31-13+deb11u14_amd64.deb ...
+#8 23.31 Unpacking libc6-i386 (2.31-13+deb11u14) ...
+#8 23.73 Selecting previously unselected package lib32gcc-s1.
+#8 23.73 Preparing to unpack .../37-lib32gcc-s1_10.2.1-6_amd64.deb ...
+#8 23.74 Unpacking lib32gcc-s1 (10.2.1-6) ...
+#8 23.82 Selecting previously unselected package lib32stdc++6.
+#8 23.83 Preparing to unpack .../38-lib32stdc++6_10.2.1-6_amd64.deb ...
+#8 23.84 Unpacking lib32stdc++6 (10.2.1-6) ...
+#8 23.94 Selecting previously unselected package libclang-common-11-dev.
+#8 23.94 Preparing to unpack .../39-libclang-common-11-dev_1%3a11.0.1-2_amd64.deb ...
+#8 23.95 Unpacking libclang-common-11-dev (1:11.0.1-2) ...
+#8 24.89 Selecting previously unselected package libclang1-11.
+#8 24.90 Preparing to unpack .../40-libclang1-11_1%3a11.0.1-2_amd64.deb ...
+#8 24.91 Unpacking libclang1-11 (1:11.0.1-2) ...
+#8 25.59 Selecting previously unselected package clang-11.
+#8 25.59 Preparing to unpack .../41-clang-11_1%3a11.0.1-2_amd64.deb ...
+#8 25.60 Unpacking clang-11 (1:11.0.1-2) ...
+#8 25.68 Selecting previously unselected package clang.
+#8 25.68 Preparing to unpack .../42-clang_1%3a11.0-51+nmu5_amd64.deb ...
+#8 25.69 Unpacking clang (1:11.0-51+nmu5) ...
+#8 25.74 Selecting previously unselected package make.
+#8 25.74 Preparing to unpack .../43-make_4.3-4.1_amd64.deb ...
+#8 25.76 Unpacking make (4.3-4.1) ...
+#8 25.88 Setting up perl-modules-5.32 (5.32.1-4+deb11u5) ...
+#8 26.09 Setting up binutils-common:amd64 (2.35.2-2) ...
+#8 26.43 Setting up linux-libc-dev:amd64 (5.10.262-1) ...
+#8 26.45 Setting up libctf-nobfd0:amd64 (2.35.2-2) ...
+#8 26.48 Setting up libgomp1:amd64 (10.2.1-6) ...
+#8 26.50 Setting up libasan6:amd64 (10.2.1-6) ...
+#8 26.53 Setting up libz3-4:amd64 (4.8.10-1) ...
+#8 26.55 Setting up libtirpc-dev:amd64 (1.3.1-1+deb11u1) ...
+#8 26.58 Setting up make (4.3-4.1) ...
+#8 26.60 Setting up libquadmath0:amd64 (10.2.1-6) ...
+#8 26.62 Setting up libatomic1:amd64 (10.2.1-6) ...
+#8 26.65 Setting up libgc1:amd64 (1:8.0.4-3) ...
+#8 26.67 Setting up libubsan1:amd64 (10.2.1-6) ...
+#8 26.70 Setting up libmd0:amd64 (1.0.3-3) ...
+#8 26.72 Setting up libnsl-dev:amd64 (1.3.0-2) ...
+#8 26.74 Setting up libcrypt-dev:amd64 (1:4.4.18-4) ...
+#8 26.76 Setting up libc6-i386 (2.31-13+deb11u14) ...
+#8 26.80 Setting up libbinutils:amd64 (2.35.2-2) ...
+#8 ...
+
+#9 [build 3/3] RUN git clone https://github.com/verilator/verilator  && cd verilator  && autoconf  && ./configure  && make -j$(nproc)  && make DESTDIR=/opt/verilator install  && git clone https://github.com/veripool/vcddiff  && make -C vcddiff CC=clang  && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff
+#9 26.80 configuring for Verilator 5.053 devel
+#9 26.80 checking whether to perform partial static linking of Verilator binary... yes
+#9 26.80 checking whether to use AddressSanitizer... no
+#9 26.80 checking whether to use tcmalloc... check
+#9 26.80 checking whether to use jemalloc... check
+#9 26.80 checking whether to build for gcov code coverage collection... no
+#9 26.80 checking whether to reduce debug info in the debug executable... no
+#9 26.80 checking whether to use hardcoded paths... yes
+#9 26.80 checking whether to show and stop on compilation warnings... no
+#9 26.80 checking whether to run long tests... no
+#9 26.80 checking for z3... no
+#9 26.80 checking for cvc5... no
+#9 26.80 checking for cvc4... no
+#9 26.80 checking for SMT solver... no
+#9 26.80 compiler CXX inbound is set to... clang++
+#9 26.80 checking for gcc... clang
+#9 26.93 checking whether the C compiler works... yes
+#9 27.00 checking for C compiler default output file name... a.out
+#9 27.00 checking for suffix of executables... 
+#9 27.07 checking whether we are cross compiling... no
+#9 27.16 checking for suffix of object files... o
+#9 27.19 checking whether we are using the GNU C compiler... yes
+#9 27.23 checking whether clang accepts -g... yes
+#9 27.27 checking for clang option to accept ISO C89... none needed
+#9 27.45 checking whether we are using the GNU C++ compiler... yes
+#9 27.49 checking whether clang++ accepts -g... yes
+#9 27.52 checking for a BSD-compatible install... /usr/bin/install -c
+#9 27.56 compiler version... clang++ --version = Debian clang version 11.0.1-2
+#9 27.56 checking that C++ compiler can compile simple program... yes
+#9 27.69 checking for ar... ar
+#9 27.69 checking for perl... perl
+#9 27.70 checking for python3... python3
+#9 27.70 python3 --version = Python 3.9.2
+#9 27.70 checking for flex... flex
+#9 27.71 flex --version = flex 2.6.4
+#9 27.71 checking for bison... bison
+#9 27.72 bison --version = bison (GNU Bison) 3.7.5
+#9 27.72 checking for ccache... no
+#9 27.72 checking how to run the C++ preprocessor... clang++ -E
+#9 27.88 checking for grep that handles long lines and -e... /bin/grep
+#9 27.88 checking for egrep... /bin/grep -E
+#9 27.89 checking for ANSI C header files... yes
+#9 28.13 checking for sys/types.h... yes
+#9 28.19 checking for sys/stat.h... yes
+#9 28.26 checking for stdlib.h... yes
+#9 28.33 checking for string.h... yes
+#9 28.40 checking for memory.h... yes
+#9 28.47 checking for strings.h... yes
+#9 28.55 checking for inttypes.h... yes
+#9 28.61 checking for stdint.h... yes
+#9 28.67 checking for unistd.h... yes
+#9 28.74 checking for size_t... yes
+#9 28.87 checking for size_t... (cached) yes
+#9 28.87 checking for inline... inline
+#9 29.07 checking whether clang++ accepts -pg... yes
+#9 29.33 checking whether clang++ accepts -std=gnu++17... yes
+#9 29.57 checking whether clang++ accepts -Wextra... yes
+#9 29.76 checking whether clang++ accepts -Wfloat-conversion... 
+#9 ...
+
+#8 [stage-2 2/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     clang     make     perl  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#8 26.82 Setting up libc-dev-bin (2.31-13+deb11u14) ...
+#8 26.85 Setting up libbsd0:amd64 (0.11.3-1+deb11u1) ...
+#8 26.87 Setting up liblsan0:amd64 (10.2.1-6) ...
+#8 26.90 Setting up libitm1:amd64 (10.2.1-6) ...
+#8 26.93 Setting up libgdbm6:amd64 (1.19-2) ...
+#8 26.95 Setting up libtsan0:amd64 (10.2.1-6) ...
+#8 26.97 Setting up libctf0:amd64 (2.35.2-2) ...
+#8 27.00 Setting up libgcc-10-dev:amd64 (10.2.1-6) ...
+#8 27.02 Setting up libedit2:amd64 (3.1-20191231-2+b1) ...
+#8 27.04 Setting up libobjc4:amd64 (10.2.1-6) ...
+#8 27.07 Setting up libllvm11:amd64 (1:11.0.1-2) ...
+#8 27.09 Setting up lib32gcc-s1 (10.2.1-6) ...
+#8 27.13 Setting up lib32stdc++6 (10.2.1-6) ...
+#8 27.15 Setting up libclang1-11 (1:11.0.1-2) ...
+#8 27.18 Setting up libgdbm-compat4:amd64 (1.19-2) ...
+#8 27.21 Setting up libperl5.32:amd64 (5.32.1-4+deb11u5) ...
+#8 27.23 Setting up libobjc-10-dev:amd64 (10.2.1-6) ...
+#8 27.25 Setting up libclang-common-11-dev (1:11.0.1-2) ...
+#8 27.28 Setting up libc6-dev:amd64 (2.31-13+deb11u14) ...
+#8 27.30 Setting up binutils-x86-64-linux-gnu (2.35.2-2) ...
+#8 27.33 Setting up libstdc++-10-dev:amd64 (10.2.1-6) ...
+#8 27.35 Setting up binutils (2.35.2-2) ...
+#8 27.38 Setting up libclang-cpp11 (1:11.0.1-2) ...
+#8 27.41 Setting up perl (5.32.1-4+deb11u5) ...
+#8 27.45 Setting up clang-11 (1:11.0.1-2) ...
+#8 27.47 Setting up clang (1:11.0-51+nmu5) ...
+#8 27.53 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#8 27.64 Reading package lists...
+#8 28.25 Building dependency tree...
+#8 28.50 Reading state information...
+#8 28.53 Reading package lists...
+#8 29.19 Building dependency tree...
+#8 29.36 Reading state information...
+#8 29.56 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#8 DONE 29.7s
+
+#9 [build 3/3] RUN git clone https://github.com/verilator/verilator  && cd verilator  && autoconf  && ./configure  && make -j$(nproc)  && make DESTDIR=/opt/verilator install  && git clone https://github.com/veripool/vcddiff  && make -C vcddiff CC=clang  && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff
+#9 29.76 checking whether clang++ accepts -Wfloat-conversion... yes
+#9 29.96 checking whether clang++ accepts -Wlogical-op... no
+#9 30.05 checking whether clang++ accepts -Wthread-safety... yes
+#9 30.24 checking whether coroutines are supported by clang++... yes
+#9 30.40 checking whether coroutines are supported by clang++ with -fcoroutines-ts... yes
+#9 30.55 checking whether clang++ accepts -fsanitize=thread... yes
+#9 30.87 checking whether clang++ accepts -Qunused-arguments... yes
+#9 31.05 checking whether clang++ accepts -Wno-shadow... yes
+#9 31.23 checking whether clang++ accepts -Wno-unnecessary-virtual-specifier... no
+#9 31.33 checking whether clang++ accepts -Wno-unused-parameter... yes
+#9 31.51 checking whether clang++ accepts -Xclang -fno-pch-timestamp... yes
+#9 31.69 checking whether clang++ accepts -faligned-new... yes
+#9 31.88 checking whether clang++ accepts -fno-exceptions... yes
+#9 32.05 checking whether clang++ accepts -Wno-char-subscripts... yes
+#9 32.24 checking whether clang++ accepts -Wno-null-conversion... yes
+#9 32.42 checking whether clang++ accepts -Wno-parentheses-equality... yes
+#9 32.62 checking whether clang++ accepts -Wno-unused... yes
+#9 32.82 checking whether clang++ accepts -O0... yes
+#9 33.04 checking whether clang++ accepts -ggdb... yes
+#9 33.23 checking whether clang++ accepts -O3... yes
+#9 33.42 checking whether clang++ accepts -faligned-new... yes
+#9 33.61 checking whether clang++ accepts -fbracket-depth=4096... yes
+#9 33.81 checking whether clang++ accepts -fcf-protection=none... yes
+#9 33.99 checking whether clang++ accepts -Xclang -fno-pch-timestamp... yes
+#9 34.18 checking whether clang++ accepts -mno-cet... no
+#9 34.25 checking whether clang++ accepts -Qunused-arguments... yes
+#9 34.47 checking whether clang++ accepts -Wno-bool-operation... yes
+#9 34.71 checking whether clang++ accepts -Wno-c++11-narrowing... yes
+#9 34.90 checking whether clang++ accepts -Wno-constant-logical-operand... yes
+#9 35.10 checking whether clang++ accepts -Wno-int-in-bool-context... yes
+#9 35.28 checking whether clang++ accepts -Wno-non-pod-varargs... yes
+#9 35.46 checking whether clang++ accepts -Wno-parentheses-equality... yes
+#9 35.66 checking whether clang++ accepts -Wno-shadow... yes
+#9 35.84 checking whether clang++ accepts -Wno-sign-compare... yes
+#9 36.03 checking whether clang++ accepts -Wno-subobject-linkage... no
+#9 36.12 checking whether clang++ accepts -Wno-tautological-bitwise-compare... yes
+#9 36.32 checking whether clang++ accepts -Wno-tautological-compare... yes
+#9 36.50 checking whether clang++ accepts -Wno-uninitialized... yes
+#9 36.69 checking whether clang++ accepts -Wno-unnecessary-virtual-specifier... no
+#9 36.79 checking whether clang++ accepts -Wno-unused-but-set-parameter... no
+#9 36.90 checking whether clang++ accepts -Wno-unused-but-set-variable... no
+#9 37.00 checking whether clang++ accepts -Wno-unused-parameter... yes
+#9 37.18 checking whether clang++ accepts -Wno-unused-variable... yes
+#9 37.36 checking whether clang++ accepts -Wno-vla-cxx-extension... no
+#9 37.45 checking whether clang++ linker accepts -mt... no
+#9 37.49 checking whether clang++ linker accepts -pthread... yes
+#9 37.60 checking whether clang++ linker accepts -lpthread... yes
+#9 37.72 checking whether clang++ linker accepts -latomic... yes
+#9 37.83 checking whether clang++ linker accepts -rdynamic... yes
+#9 37.94 checking whether clang++ linker accepts -ldl... yes
+#9 38.05 checking whether clang++ linker accepts -fuse-ld=mold... no
+#9 38.09 checking whether clang++ linker accepts -fuse-ld=mold... no
+#9 38.12 checking whether clang++ linker accepts -static-libgcc... yes
+#9 38.24 checking whether clang++ linker accepts -static-libstdc++... yes
+#9 38.32 checking whether clang++ linker accepts -Xlinker -gc-sections... yes
+#9 38.43 checking whether clang++ linker accepts -lpthread... yes
+#9 38.54 checking whether clang++ linker accepts -latomic... yes
+#9 38.66 checking whether clang++ linker accepts -lbcrypt... no
+#9 38.74 checking whether clang++ linker accepts -lpsapi... no
+#9 38.82 checking whether clang++ linker accepts -Xlinker --whole-archive -l:libjemalloc.a -Xlinker --no-whole-archive... no
+#9 38.91 checking whether clang++ linker accepts -ljemalloc... no
+#9 39.00 checking whether clang++ linker accepts -Xlinker --whole-archive -l:libtcmalloc_minimal.a -Xlinker --no-whole-archive... no
+#9 39.08 checking whether clang++ linker accepts -ltcmalloc_minimal... no
+#9 39.17 checking whether clang++ supports C++14... yes
+#9 39.52 checking for clang++ precompile header include option... -include-pch
+#9 39.54 checking for struct stat.st_mtim.tv_nsec... yes
+#9 39.58 checking whether SystemC is found (in system path)... no
+#9 39.66 configure: creating ./config.status
+#9 39.75 config.status: creating Makefile
+#9 39.76 config.status: creating src/Makefile
+#9 39.78 config.status: creating src/Makefile_obj
+#9 39.79 config.status: creating include/verilated.mk
+#9 39.81 config.status: creating include/verilated_config.h
+#9 39.83 config.status: creating verilator.pc
+#9 39.84 config.status: creating verilator-config.cmake
+#9 39.85 config.status: creating verilator-config-version.cmake
+#9 39.86 config.status: creating src/config_package.h
+#9 39.87 
+#9 39.87 Now type 'make' (or sometimes 'gmake') to build Verilator.
+#9 39.87 
+#9 39.90 pod2man bin/verilator verilator.1
+#9 39.90 ------------------------------------------------------------
+#9 39.90 pod2man bin/verilator_coverage verilator_coverage.1
+#9 39.90 making verilator in src
+#9 39.90 make -C src 
+#9 39.90 make[1]: Entering directory '/verilator/src'
+#9 39.91 mkdir -p obj_dbg
+#9 39.91 python3 ./config_rev . >config_rev.h
+#9 39.91 mkdir -p obj_opt
+#9 39.99 help2man --no-info --no-discard-stderr --version-string=- \
+#9 39.99 	-n "Create Gantt chart of Verilator multi-threaded execution" bin/verilator_gantt -o verilator_gantt.1
+#9 40.06 help2man --no-info --no-discard-stderr --version-string=- \
+#9 40.06 	-n "Read gprof report created with Verilator --prof-cfuncs" bin/verilator_profcfunc -o verilator_profcfunc.1
+#9 40.21 config_rev using v5.052-86-g253f51f1d
+#9 40.21 make -C obj_dbg -j 1  TGT=../../bin/verilator_bin_dbg VL_DEBUG=1 -f ../Makefile_obj serial
+#9 40.21 make -C obj_dbg       TGT=../../bin/verilator_coverage_bin_dbg VL_DEBUG=1 VL_VLCOV=1 -f ../Makefile_obj serial_vlcov
+#9 40.21 make -C obj_opt -j 1  TGT=../../bin/verilator_bin -f ../Makefile_obj serial
+#9 40.22 make[2]: Entering directory '/verilator/src'
+#9 40.22 make[2]: Entering directory '/verilator/src'
+#9 40.22 python3 ../astgen -I .. --astdef V3AstNodeDType.h --astdef V3AstNodeExpr.h --astdef V3AstNodeOther.h --astdef V3AstNodeStmt.h --dfgdef V3DfgVertices.h --classes
+#9 40.22 make[2]: warning: -j1 forced in submake: resetting jobserver mode.
+#9 40.22 make[2]: warning: -j1 forced in submake: resetting jobserver mode.
+#9 40.22 make[2]: Entering directory '/verilator/src/obj_dbg'
+#9 40.22 python3 ../vlcovgen --srcdir ..
+#9 40.22 python3 ../astgen -I .. --astdef V3AstNodeDType.h --astdef V3AstNodeExpr.h --astdef V3AstNodeOther.h --astdef V3AstNodeStmt.h --dfgdef V3DfgVertices.h --classes
+#9 40.28 touch vlcovgen.d
+#9 40.28 make[2]: Leaving directory '/verilator/src/obj_dbg'
+#9 40.28 make -C obj_dbg       TGT=../../bin/verilator_coverage_bin_dbg VL_DEBUG=1 VL_VLCOV=1 -f ../Makefile_obj
+#9 40.29 make[2]: Entering directory '/verilator/src/obj_dbg'
+#9 40.30 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../VlcMain.cpp -o VlcMain.o
+#9 40.30       Compile flags:  clang++ -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC="" -DDEFENV_SYSTEMC_ARCH="" -DDEFENV_SYSTEMC_INCLUDE="" -DDEFENV_SYSTEMC_LIBDIR="" -DDEFENV_VERILATOR_ROOT="/usr/local/share/verilator"
+#9 41.82 If you get errors from verilog.y below, try upgrading bison to version 1.875 or newer.
+#9 41.82 python3 ../bisonpre --yacc bison -d -v -o V3ParseBison.c  ../verilog.y
+#9 41.92 If you get errors from verilog.y below, try upgrading bison to version 1.875 or newer.
+#9 41.92 python3 ../bisonpre --yacc bison -d -v -o V3ParseBison.c  ../verilog.y
+#9 42.02   edit ../verilog.y V3ParseBison_pretmp.y
+#9 42.02 Executing: bison -d -v --report=itemset --report=lookahead -b V3ParseBison_pretmp -o V3ParseBison_pretmp.c V3ParseBison_pretmp.y
+#9 42.18   edit ../verilog.y V3ParseBison_pretmp.y
+#9 42.18 Executing: bison -d -v --report=itemset --report=lookahead -b V3ParseBison_pretmp -o V3ParseBison_pretmp.c V3ParseBison_pretmp.y
+#9 44.65       Linking ../../bin/verilator_coverage_bin_dbg...
+#9 44.65 clang++ -static-libgcc -static-libstdc++ -Xlinker -gc-sections -o ../../bin/verilator_coverage_bin_dbg VlcMain.o   -lpthread -latomic -lm
+#9 45.01 make[2]: Leaving directory '/verilator/src/obj_dbg'
+#9 57.71   edit V3ParseBison_pretmp.output V3ParseBison.output
+#9 57.71   edit V3ParseBison_pretmp.c V3ParseBison.c
+#9 57.71   edit V3ParseBison_pretmp.h V3ParseBison.h
+#9 57.72 make[2]: Leaving directory '/verilator/src/obj_opt'
+#9 57.72 make -C obj_opt       TGT=../../bin/verilator_bin -f ../Makefile_obj
+#9 57.73 make[2]: Entering directory '/verilator/src/obj_opt'
+#9 57.73 python3 ../astgen -I .. --astdef V3AstNodeDType.h --astdef V3AstNodeExpr.h --astdef V3AstNodeOther.h --astdef V3AstNodeStmt.h --dfgdef V3DfgVertices.h V3Const.cpp
+#9 57.73 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Error.cpp -o V3Error.o
+#9 57.73       Compile flags:  clang++ -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC="" -DDEFENV_SYSTEMC_ARCH="" -DDEFENV_SYSTEMC_INCLUDE="" -DDEFENV_SYSTEMC_LIBDIR="" -DDEFENV_VERILATOR_ROOT="/usr/local/share/verilator"
+#9 57.73 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3FileLine.cpp -o V3FileLine.o
+#9 58.08   edit V3ParseBison_pretmp.output V3ParseBison.output
+#9 58.08   edit V3ParseBison_pretmp.c V3ParseBison.c
+#9 58.08   edit V3ParseBison_pretmp.h V3ParseBison.h
+#9 58.09 make[2]: Leaving directory '/verilator/src/obj_dbg'
+#9 58.09 make -C obj_dbg       TGT=../../bin/verilator_bin_dbg VL_DEBUG=1 -f ../Makefile_obj
+#9 58.10 make[2]: Entering directory '/verilator/src/obj_dbg'
+#9 58.10       Compile flags:  clang++ -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC="" -DDEFENV_SYSTEMC_ARCH="" -DDEFENV_SYSTEMC_INCLUDE="" -DDEFENV_SYSTEMC_LIBDIR="" -DDEFENV_VERILATOR_ROOT="/usr/local/share/verilator"
+#9 58.10 python3 ../astgen -I .. --astdef V3AstNodeDType.h --astdef V3AstNodeExpr.h --astdef V3AstNodeOther.h --astdef V3AstNodeStmt.h --dfgdef V3DfgVertices.h V3Const.cpp
+#9 59.49 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Error.cpp -o V3Error.o
+#9 59.82 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Graph.cpp -o V3Graph.o
+#9 64.27 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphAcyc.cpp -o V3GraphAcyc.o
+#9 64.89 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3FileLine.cpp -o V3FileLine.o
+#9 64.96 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphAlg.cpp -o V3GraphAlg.o
+#9 67.61 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Graph.cpp -o V3Graph.o
+#9 67.73 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphAcyc.cpp -o V3GraphAcyc.o
+#9 68.54 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphPathChecker.cpp -o V3GraphPathChecker.o
+#9 70.84 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphAlg.cpp -o V3GraphAlg.o
+#9 70.91 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphPathChecker.cpp -o V3GraphPathChecker.o
+#9 71.19 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphTest.cpp -o V3GraphTest.o
+#9 73.29 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Hash.cpp -o V3Hash.o
+#9 73.37 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3GraphTest.cpp -o V3GraphTest.o
+#9 73.89 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Hash.cpp -o V3Hash.o
+#9 74.25 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3HashTable.cpp -o V3HashTable.o
+#9 74.34 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3HashTable.cpp -o V3HashTable.o
+#9 74.54 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3OptionParser.cpp -o V3OptionParser.o
+#9 76.23 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Os.cpp -o V3Os.o
+#9 78.16 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -Wno-char-subscripts -Wno-null-conversion -Wno-parentheses-equality -Wno-unused -c ../V3ParseGrammar.cpp -o V3ParseGrammar.o
+#9 79.34 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -Wno-char-subscripts -Wno-null-conversion -Wno-parentheses-equality -Wno-unused -c ../V3ParseImp.cpp -o V3ParseImp.o
+#9 79.91 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3OptionParser.cpp -o V3OptionParser.o
+#9 82.25 flex --version
+#9 82.25 flex 2.6.4
+#9 82.25 flex -d -oV3Lexer_pregen.yy.cpp ../verilog.l
+#9 82.33 flex --version
+#9 82.33 flex 2.6.4
+#9 82.33 flex -d -oV3PreLex_pregen.yy.cpp ../V3PreLex.l
+#9 82.34 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Os.cpp -o V3Os.o
+#9 83.07 In file included from ../V3ParseGrammar.cpp:28:
+#9 83.07 V3ParseBison.c:55918:3: warning: unknown warning group '-Wfree-nonheap-object', ignored [-Wunknown-warning-option]
+#9 83.07   _Pragma ("GCC diagnostic ignored \"-Wfree-nonheap-object\"")
+#9 83.07   ^
+#9 83.07 <scratch space>:164:25: note: expanded from here
+#9 83.07  GCC diagnostic ignored "-Wfree-nonheap-object"
+#9 83.07                         ^
+#9 84.25 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3PreShell.cpp -o V3PreShell.o
+#9 85.12 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -Wno-char-subscripts -Wno-null-conversion -Wno-parentheses-equality -Wno-unused -c ../V3ParseGrammar.cpp -o V3ParseGrammar.o
+#9 86.21 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -Wno-char-subscripts -Wno-null-conversion -Wno-parentheses-equality -Wno-unused -c ../V3ParseImp.cpp -o V3ParseImp.o
+#9 88.77 flex --version
+#9 88.77 flex 2.6.4
+#9 88.77 flex -d -oV3Lexer_pregen.yy.cpp ../verilog.l
+#9 88.84 flex --version
+#9 88.84 flex 2.6.4
+#9 88.84 flex -d -oV3PreLex_pregen.yy.cpp ../V3PreLex.l
+#9 88.86 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3PreShell.cpp -o V3PreShell.o
+#9 91.12 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3String.cpp -o V3String.o
+#9 91.79 In file included from ../V3ParseGrammar.cpp:28:
+#9 91.79 V3ParseBison.c:55918:3: warning: unknown warning group '-Wfree-nonheap-object', ignored [-Wunknown-warning-option]
+#9 91.80   _Pragma ("GCC diagnostic ignored \"-Wfree-nonheap-object\"")
+#9 91.80   ^
+#9 91.80 <scratch space>:60:25: note: expanded from here
+#9 91.80  GCC diagnostic ignored "-Wfree-nonheap-object"
+#9 91.80                         ^
+#9 93.11 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3ThreadPool.cpp -o V3ThreadPool.o
+#9 94.63 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Waiver.cpp -o V3Waiver.o
+#9 95.75 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../Verilator.cpp -o Verilator.o
+#9 95.79 1 warning generated.
+#9 95.83 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3String.cpp -o V3String.o
+#9 96.66 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3ThreadPool.cpp -o V3ThreadPool.o
+#9 98.49 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../V3Waiver.cpp -o V3Waiver.o
+#9 99.47 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c ../Verilator.cpp -o Verilator.o
+#9 101.0 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -x c++-header -c ../V3PchAstMT.h -o V3PchAstMT.h.gch
+#9 101.5 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -x c++-header -c ../V3PchAstNoMT.h -o V3PchAstNoMT.h.gch
+#9 105.9 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -x c++-header -c ../V3PchAstMT.h -o V3PchAstMT.h.gch
+#9 107.7 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c V3Const__gen.cpp -o V3Const__gen.o
+#9 107.9 python3 ../flexfix V3Lexer <V3Lexer_pregen.yy.cpp >V3Lexer.yy.cpp
+#9 108.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -x c++-header -c ../V3PchAstNoMT.h -o V3PchAstNoMT.h.gch
+#9 111.1 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -c V3Const__gen.cpp -o V3Const__gen.o
+#9 112.7 python3 ../flexfix V3PreLex <V3PreLex_pregen.yy.cpp >V3PreLex.yy.cpp
+#9 112.8 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Ast.cpp -o V3Ast.o
+#9 116.3 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3AstNodes.cpp -o V3AstNodes.o
+#9 120.5 1 warning generated.
+#9 120.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Broken.cpp -o V3Broken.o
+#9 122.9 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Control.cpp -o V3Control.o
+#9 123.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCBase.cpp -o V3EmitCBase.o
+#9 125.8 python3 ../flexfix V3Lexer <V3Lexer_pregen.yy.cpp >V3Lexer.yy.cpp
+#9 126.1 python3 ../flexfix V3PreLex <V3PreLex_pregen.yy.cpp >V3PreLex.yy.cpp
+#9 126.3 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Ast.cpp -o V3Ast.o
+#9 130.3 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3AstNodes.cpp -o V3AstNodes.o
+#9 131.8 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCConstPool.cpp -o V3EmitCConstPool.o
+#9 133.4 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCFunc.cpp -o V3EmitCFunc.o
+#9 135.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Broken.cpp -o V3Broken.o
+#9 136.5 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCHeaders.cpp -o V3EmitCHeaders.o
+#9 138.4 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCImp.cpp -o V3EmitCImp.o
+#9 139.5 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCInlines.cpp -o V3EmitCInlines.o
+#9 141.1 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Control.cpp -o V3Control.o
+#9 142.0 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCPch.cpp -o V3EmitCPch.o
+#9 142.3 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCBase.cpp -o V3EmitCBase.o
+#9 143.7 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitV.cpp -o V3EmitV.o
+#9 145.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCConstPool.cpp -o V3EmitCConstPool.o
+#9 147.4 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3File.cpp -o V3File.o
+#9 147.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCFunc.cpp -o V3EmitCFunc.o
+#9 148.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3FuncOpt.cpp -o V3FuncOpt.o
+#9 150.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Global.cpp -o V3Global.o
+#9 151.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Hasher.cpp -o V3Hasher.o
+#9 151.7 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCHeaders.cpp -o V3EmitCHeaders.o
+#9 153.4 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Number.cpp -o V3Number.o
+#9 155.7 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Options.cpp -o V3Options.o
+#9 157.0 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Stats.cpp -o V3Stats.o
+#9 157.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3StatsReport.cpp -o V3StatsReport.o
+#9 159.7 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCImp.cpp -o V3EmitCImp.o
+#9 160.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCInlines.cpp -o V3EmitCInlines.o
+#9 160.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3VariableOrder.cpp -o V3VariableOrder.o
+#9 161.4 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitCPch.cpp -o V3EmitCPch.o
+#9 163.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3EmitV.cpp -o V3EmitV.o
+#9 163.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3File.cpp -o V3File.o
+#9 164.2 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Active.cpp -o V3Active.o
+#9 166.5 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3ActiveTop.cpp -o V3ActiveTop.o
+#9 167.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Assert.cpp -o V3Assert.o
+#9 168.4 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3AssertNfa.cpp -o V3AssertNfa.o
+#9 168.9 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3FuncOpt.cpp -o V3FuncOpt.o
+#9 170.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Global.cpp -o V3Global.o
+#9 170.8 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3AssertPre.cpp -o V3AssertPre.o
+#9 172.0 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Begin.cpp -o V3Begin.o
+#9 173.6 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Hasher.cpp -o V3Hasher.o
+#9 174.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Number.cpp -o V3Number.o
+#9 174.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Options.cpp -o V3Options.o
+#9 175.7 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Branch.cpp -o V3Branch.o
+#9 177.0 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CCtors.cpp -o V3CCtors.o
+#9 178.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3Stats.cpp -o V3Stats.o
+#9 179.8 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CUse.cpp -o V3CUse.o
+#9 180.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Case.cpp -o V3Case.o
+#9 181.5 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Cast.cpp -o V3Cast.o
+#9 182.4 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Cfg.cpp -o V3Cfg.o
+#9 184.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3StatsReport.cpp -o V3StatsReport.o
+#9 184.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstMT.h.gch -c ../V3VariableOrder.cpp -o V3VariableOrder.o
+#9 185.6 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CfgBuilder.cpp -o V3CfgBuilder.o
+#9 187.1 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Active.cpp -o V3Active.o
+#9 187.8 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CfgLiveVariables.cpp -o V3CfgLiveVariables.o
+#9 188.1 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Class.cpp -o V3Class.o
+#9 188.8 clang++   -O0 -ggdb -DVL_DEBUG -D_GLIBCXX_DEBUG -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3ClassGraph.cpp -o V3ClassGraph.o
+#9 188.9 In file included from ../V3ClassGraph.cpp:61:
+#9 188.9 ../V3ClassGraph.h:43:5: warning: explicitly defaulted default constructor is implicitly deleted [-Wdefaulted-function-deleted]
+#9 189.0     V3ClassGraph() = default;
+#9 189.0     ^
+#9 189.0 ../V3ClassGraph.h:41:9: note: default constructor of 'V3ClassGraph' is implicitly deleted because field 'm_emptySet' of const-qualified type 'const std::unordered_set<AstCFunc *>' would not be initialized
+#9 189.0         m_emptySet;  // Always empty set - used to return a reference to an empty set
+#9 189.0         ^
+#9 189.1 ../V3ClassGraph.cpp:196:24: error: call to implicitly-deleted default constructor of 'V3ClassGraph'
+#9 189.1         : m_graphp{new V3ClassGraph} {
+#9 189.1                        ^
+#9 189.1 ../V3ClassGraph.h:43:5: note: explicitly defaulted function was implicitly deleted here
+#9 189.1     V3ClassGraph() = default;
+#9 189.1     ^
+#9 189.1 ../V3ClassGraph.h:41:9: note: default constructor of 'V3ClassGraph' is implicitly deleted because field 'm_emptySet' of const-qualified type 'const std::unordered_set<AstCFunc *>' would not be initialized
+#9 189.1         m_emptySet;  // Always empty set - used to return a reference to an empty set
+#9 189.1         ^
+#9 190.2 1 warning and 1 error generated.
+#9 190.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3ActiveTop.cpp -o V3ActiveTop.o
+#9 190.2 make[2]: *** [../Makefile_obj:446: V3ClassGraph.o] Error 1
+#9 190.2 make[2]: *** Waiting for unfinished jobs....
+#9 190.3 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Assert.cpp -o V3Assert.o
+#9 191.1 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3AssertNfa.cpp -o V3AssertNfa.o
+#9 192.2 make[2]: Leaving directory '/verilator/src/obj_dbg'
+#9 192.2 make[1]: *** [Makefile:85: ../bin/verilator_bin_dbg] Error 2
+#9 192.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3AssertPre.cpp -o V3AssertPre.o
+#9 192.2 make[1]: *** Waiting for unfinished jobs....
+#9 193.1 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Begin.cpp -o V3Begin.o
+#9 195.3 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Branch.cpp -o V3Branch.o
+#9 196.0 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CCtors.cpp -o V3CCtors.o
+#9 196.8 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CUse.cpp -o V3CUse.o
+#9 198.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Case.cpp -o V3Case.o
+#9 198.4 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Cast.cpp -o V3Cast.o
+#9 198.7 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Cfg.cpp -o V3Cfg.o
+#9 199.4 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CfgBuilder.cpp -o V3CfgBuilder.o
+#9 200.3 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3CfgLiveVariables.cpp -o V3CfgLiveVariables.o
+#9 201.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Class.cpp -o V3Class.o
+#9 201.4 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3ClassGraph.cpp -o V3ClassGraph.o
+#9 201.6 In file included from ../V3ClassGraph.cpp:61:
+#9 201.6 ../V3ClassGraph.h:43:5: warning: explicitly defaulted default constructor is implicitly deleted [-Wdefaulted-function-deleted]
+#9 201.6     V3ClassGraph() = default;
+#9 201.6     ^
+#9 201.6 ../V3ClassGraph.h:41:9: note: default constructor of 'V3ClassGraph' is implicitly deleted because field 'm_emptySet' of const-qualified type 'const std::unordered_set<AstCFunc *>' would not be initialized
+#9 201.6         m_emptySet;  // Always empty set - used to return a reference to an empty set
+#9 201.6         ^
+#9 201.8 ../V3ClassGraph.cpp:196:24: error: call to implicitly-deleted default constructor of 'V3ClassGraph'
+#9 201.8         : m_graphp{new V3ClassGraph} {
+#9 201.8                        ^
+#9 201.8 ../V3ClassGraph.h:43:5: note: explicitly defaulted function was implicitly deleted here
+#9 201.8     V3ClassGraph() = default;
+#9 201.8     ^
+#9 201.8 ../V3ClassGraph.h:41:9: note: default constructor of 'V3ClassGraph' is implicitly deleted because field 'm_emptySet' of const-qualified type 'const std::unordered_set<AstCFunc *>' would not be initialized
+#9 201.8         m_emptySet;  // Always empty set - used to return a reference to an empty set
+#9 201.8         ^
+#9 202.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Clean.cpp -o V3Clean.o
+#9 202.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Clock.cpp -o V3Clock.o
+#9 202.7 1 warning and 1 error generated.
+#9 202.8 make[2]: *** [../Makefile_obj:446: V3ClassGraph.o] Error 1
+#9 202.8 make[2]: *** Waiting for unfinished jobs....
+#9 204.1 make[2]: Leaving directory '/verilator/src/obj_opt'
+#9 204.1 make[1]: *** [Makefile:79: ../bin/verilator_bin] Error 2
+#9 204.1 make[1]: Leaving directory '/verilator/src'
+#9 204.1 make: *** [Makefile:151: verilator_exe] Error 2
+#9 ERROR: process "/bin/bash -c git clone https://github.com/verilator/verilator  && cd verilator  && autoconf  && ./configure  && make -j$(nproc)  && make DESTDIR=/opt/verilator install  && git clone https://github.com/veripool/vcddiff  && make -C vcddiff CC=$CC  && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff" did not complete successfully: exit code: 2
+------
+ > [build 3/3] RUN git clone https://github.com/verilator/verilator  && cd verilator  && autoconf  && ./configure  && make -j$(nproc)  && make DESTDIR=/opt/verilator install  && git clone https://github.com/veripool/vcddiff  && make -C vcddiff CC=clang  && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff:
+201.8         ^
+202.2 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Clean.cpp -o V3Clean.o
+202.5 clang++   -O3 -DVERILATOR_INTERNAL_ -MMD -I. -I.. -I.. -I../../include -I../../include -MP  -Qunused-arguments -Wno-shadow -Wno-unused-parameter -Xclang -fno-pch-timestamp -faligned-new -fno-exceptions -DDEFENV_SYSTEMC=\"\" -DDEFENV_SYSTEMC_ARCH=\"\" -DDEFENV_SYSTEMC_INCLUDE=\"\" -DDEFENV_SYSTEMC_LIBDIR=\"\" -DDEFENV_VERILATOR_ROOT=\"/usr/local/share/verilator\" -include-pch V3PchAstNoMT.h.gch -c ../V3Clock.cpp -o V3Clock.o
+202.7 1 warning and 1 error generated.
+202.8 make[2]: *** [../Makefile_obj:446: V3ClassGraph.o] Error 1
+202.8 make[2]: *** Waiting for unfinished jobs....
+204.1 make[2]: Leaving directory '/verilator/src/obj_opt'
+204.1 make[1]: *** [Makefile:79: ../bin/verilator_bin] Error 2
+204.1 make[1]: Leaving directory '/verilator/src'
+204.1 make: *** [Makefile:151: verilator_exe] Error 2
+------
+verilator.dockerfile:39
+--------------------
+  38 |     
+  39 | >>> RUN git clone https://github.com/verilator/verilator \
+  40 | >>>  && cd verilator \
+  41 | >>>  && autoconf \
+  42 | >>>  && ./configure \
+  43 | >>>  && make -j$(nproc) \
+  44 | >>>  && make DESTDIR=/opt/verilator install \
+  45 | >>>  && git clone https://github.com/veripool/vcddiff \
+  46 | >>>  && make -C vcddiff CC=$CC \
+  47 | >>>  && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff
+  48 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -c git clone https://github.com/verilator/verilator  && cd verilator  && autoconf  && ./configure  && make -j$(nproc)  && make DESTDIR=/opt/verilator install  && git clone https://github.com/veripool/vcddiff  && make -C vcddiff CC=$CC  && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff" did not complete successfully: exit code: 2
+=== FAIL verilator (CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/verilator', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '-f', 'debian/verilator.dockerfile', 'debian']' returned non-zero exit status 1.) ===
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+  File "/home/umarcor/containers/utils/pyHDLC/__init__.py", line 456, in BuildImage
+    _exec(args=[
+    ~~~~~^^^^^^^
+        "docker", "build", *_commonCmd,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        str(contextPath)
+        ^^^^^^^^^^^^^^^^
+    ], dry=dry, collapse=f"🚧 Build {imageName}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/umarcor/containers/utils/pyHDLC/run.py", line 46, in _exec
+    check_call(args, stderr=STDOUT)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 419, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/verilator', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '-f', 'debian/verilator.dockerfile', 'debian']' returned non-zero exit status 1.
+RESULT: FAIL

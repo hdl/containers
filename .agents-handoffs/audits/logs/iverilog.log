@@ -1,0 +1,1584 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: iverilog IMAGES: ['pkg/iverilog', 'iverilog']
+=== BUILD pkg/iverilog ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/iverilog --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target pkg -f debian/iverilog.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from iverilog.dockerfile
+#1 transferring dockerfile: 39B
+#1 transferring dockerfile: 1.72kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context:
+#3 transferring context: 2B done
+#3 DONE 0.1s
+
+#4 [build 1/5] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#4 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#4 CACHED
+
+#5 [build 2/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     autoconf     automake     bison     flex     gperf     libreadline-dev     zlib1g-dev  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#5 2.027 Reading package lists...
+#5 3.587 Building dependency tree...
+#5 3.941 Reading state information...
+#5 4.326 The following additional packages will be installed:
+#5 4.326   autotools-dev libncurses-dev libncurses6 libsigsegv2 m4
+#5 4.327 Suggested packages:
+#5 4.327   autoconf-archive gnu-standards autoconf-doc libtool gettext bison-doc
+#5 4.327   build-essential flex-doc ncurses-doc readline-doc m4-doc
+#5 4.327 Recommended packages:
+#5 4.327   libfl-dev libgpm2
+#5 4.442 The following NEW packages will be installed:
+#5 4.443   autoconf automake autotools-dev bison flex gperf libncurses-dev libncurses6
+#5 4.444   libreadline-dev libsigsegv2 m4 zlib1g-dev
+#5 4.723 0 upgraded, 12 newly installed, 0 to remove and 0 not upgraded.
+#5 4.723 Need to get 3921 kB of archives.
+#5 4.723 After this operation, 13.0 MB of additional disk space will be used.
+#5 4.723 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libsigsegv2 amd64 2.13-1 [34.8 kB]
+#5 4.736 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 m4 amd64 1.4.18-5 [204 kB]
+#5 4.753 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 flex amd64 2.6.4-8 [440 kB]
+#5 4.775 Get:4 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 autoconf all 2.69-14 [313 kB]
+#5 4.786 Get:5 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 autotools-dev all 20180224.1+nmu1 [77.1 kB]
+#5 4.786 Get:6 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 automake all 1:1.16.3-2 [814 kB]
+#5 4.803 Get:7 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 bison amd64 2:3.7.5+dfsg-1 [1104 kB]
+#5 4.964 Get:8 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 gperf amd64 3.1-1 [147 kB]
+#5 4.966 Get:9 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libncurses6 amd64 6.2+20201114-2+deb11u2 [102 kB]
+#5 4.967 Get:10 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libncurses-dev amd64 6.2+20201114-2+deb11u2 [344 kB]
+#5 4.979 Get:11 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libreadline-dev amd64 8.1-1 [148 kB]
+#5 4.979 Get:12 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 zlib1g-dev amd64 1:1.2.11.dfsg-2+deb11u2 [191 kB]
+#5 5.249 debconf: delaying package configuration, since apt-utils is not installed
+#5 5.386 Fetched 3921 kB in 1s (7411 kB/s)
+#5 5.471 Selecting previously unselected package libsigsegv2:amd64.
+#5 5.471 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14728 files and directories currently installed.)
+#5 5.703 Preparing to unpack .../00-libsigsegv2_2.13-1_amd64.deb ...
+#5 5.924 Unpacking libsigsegv2:amd64 (2.13-1) ...
+#5 5.991 Selecting previously unselected package m4.
+#5 5.993 Preparing to unpack .../01-m4_1.4.18-5_amd64.deb ...
+#5 6.000 Unpacking m4 (1.4.18-5) ...
+#5 6.091 Selecting previously unselected package flex.
+#5 6.091 Preparing to unpack .../02-flex_2.6.4-8_amd64.deb ...
+#5 6.100 Unpacking flex (2.6.4-8) ...
+#5 6.195 Selecting previously unselected package autoconf.
+#5 6.196 Preparing to unpack .../03-autoconf_2.69-14_all.deb ...
+#5 6.205 Unpacking autoconf (2.69-14) ...
+#5 6.300 Selecting previously unselected package autotools-dev.
+#5 6.302 Preparing to unpack .../04-autotools-dev_20180224.1+nmu1_all.deb ...
+#5 6.313 Unpacking autotools-dev (20180224.1+nmu1) ...
+#5 6.384 Selecting previously unselected package automake.
+#5 6.388 Preparing to unpack .../05-automake_1%3a1.16.3-2_all.deb ...
+#5 6.401 Unpacking automake (1:1.16.3-2) ...
+#5 6.547 Selecting previously unselected package bison.
+#5 6.547 Preparing to unpack .../06-bison_2%3a3.7.5+dfsg-1_amd64.deb ...
+#5 6.569 Unpacking bison (2:3.7.5+dfsg-1) ...
+#5 6.717 Selecting previously unselected package gperf.
+#5 6.717 Preparing to unpack .../07-gperf_3.1-1_amd64.deb ...
+#5 6.727 Unpacking gperf (3.1-1) ...
+#5 6.840 Selecting previously unselected package libncurses6:amd64.
+#5 6.842 Preparing to unpack .../08-libncurses6_6.2+20201114-2+deb11u2_amd64.deb ...
+#5 6.865 Unpacking libncurses6:amd64 (6.2+20201114-2+deb11u2) ...
+#5 6.924 Selecting previously unselected package libncurses-dev:amd64.
+#5 6.924 Preparing to unpack .../09-libncurses-dev_6.2+20201114-2+deb11u2_amd64.deb ...
+#5 6.928 Unpacking libncurses-dev:amd64 (6.2+20201114-2+deb11u2) ...
+#5 7.039 Selecting previously unselected package libreadline-dev:amd64.
+#5 7.039 Preparing to unpack .../10-libreadline-dev_8.1-1_amd64.deb ...
+#5 7.048 Unpacking libreadline-dev:amd64 (8.1-1) ...
+#5 7.135 Selecting previously unselected package zlib1g-dev:amd64.
+#5 7.135 Preparing to unpack .../11-zlib1g-dev_1%3a1.2.11.dfsg-2+deb11u2_amd64.deb ...
+#5 7.144 Unpacking zlib1g-dev:amd64 (1:1.2.11.dfsg-2+deb11u2) ...
+#5 7.271 Setting up gperf (3.1-1) ...
+#5 7.303 Setting up autotools-dev (20180224.1+nmu1) ...
+#5 7.343 Setting up libncurses6:amd64 (6.2+20201114-2+deb11u2) ...
+#5 7.387 Setting up libsigsegv2:amd64 (2.13-1) ...
+#5 7.460 Setting up zlib1g-dev:amd64 (1:1.2.11.dfsg-2+deb11u2) ...
+#5 7.460 Setting up libncurses-dev:amd64 (6.2+20201114-2+deb11u2) ...
+#5 7.481 Setting up m4 (1.4.18-5) ...
+#5 7.509 Setting up libreadline-dev:amd64 (8.1-1) ...
+#5 7.536 Setting up autoconf (2.69-14) ...
+#5 7.571 Setting up bison (2:3.7.5+dfsg-1) ...
+#5 7.610 update-alternatives: using /usr/bin/bison.yacc to provide /usr/bin/yacc (yacc) in auto mode
+#5 7.610 update-alternatives: warning: skip creation of /usr/share/man/man1/yacc.1.gz because associated file /usr/share/man/man1/bison.yacc.1.gz (of link group yacc) doesn't exist
+#5 7.627 Setting up automake (1:1.16.3-2) ...
+#5 7.707 update-alternatives: using /usr/bin/automake-1.16 to provide /usr/bin/automake (automake) in auto mode
+#5 7.707 update-alternatives: warning: skip creation of /usr/share/man/man1/automake.1.gz because associated file /usr/share/man/man1/automake-1.16.1.gz (of link group automake) doesn't exist
+#5 7.707 update-alternatives: warning: skip creation of /usr/share/man/man1/aclocal.1.gz because associated file /usr/share/man/man1/aclocal-1.16.1.gz (of link group automake) doesn't exist
+#5 7.707 Setting up flex (2.6.4-8) ...
+#5 7.737 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#5 8.198 Reading package lists...
+#5 9.247 Building dependency tree...
+#5 9.447 Reading state information...
+#5 9.481 Reading package lists...
+#5 10.67 Building dependency tree...
+#5 10.88 Reading state information...
+#5 11.39 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#5 DONE 11.4s
+
+#6 [build 3/3] RUN git clone https://github.com/steveicarus/iverilog  && cd iverilog  && autoconf  && ./configure  && make -j$(nproc) check  && make DESTDIR=/opt/iverilog install
+#6 0.370 Cloning into 'iverilog'...
+#6 14.70 ./configure: line 2760: 1=1: command not found
+#6 14.71 checking build system type... x86_64-pc-linux-gnu
+#6 14.81 checking host system type... x86_64-pc-linux-gnu
+#6 14.81 checking for gcc... clang
+#6 14.98 checking whether the C compiler works... yes
+#6 15.19 checking for C compiler default output file name... a.out
+#6 15.19 checking for suffix of executables... 
+#6 15.38 checking whether we are cross compiling... no
+#6 15.64 checking for suffix of object files... o
+#6 15.76 checking whether we are using the GNU C compiler... yes
+#6 15.87 checking whether clang accepts -g... yes
+#6 15.90 checking for clang option to accept ISO C89... none needed
+#6 15.97 checking how to run the C preprocessor... clang -E
+#6 16.19 checking for x86_64-pc-linux-gnu-gcc... no
+#6 16.19 checking for gcc... no
+#6 16.19 checking for x86_64-pc-linux-gnu-cc... no
+#6 16.19 checking for cc... cc
+#6 16.33 checking whether we are using the GNU C compiler... yes
+#6 16.42 checking whether cc accepts -g... yes
+#6 16.48 checking for cc option to accept ISO C89... none needed
+#6 16.77 checking whether the C compiler works... yes
+#6 17.00 checking for C compiler default output file name... a.out
+#6 17.00 checking for suffix of executables... 
+#6 17.16 checking whether we are cross compiling... no
+#6 17.35 checking for suffix of object files... o
+#6 17.42 checking how to run the C preprocessor... cc -E
+#6 17.65 checking for clang option to accept ISO C99... none needed
+#6 17.89 checking whether we are using the GNU C++ compiler... yes
+#6 17.96 checking whether clang++ accepts -g... yes
+#6 18.04 checking whether clang++ supports C++11 features with -std=c++11... yes
+#6 18.16 checking for ranlib... ranlib
+#6 18.16 checking for ld... ld
+#6 18.17 checking for ar... ar
+#6 18.17 checking for strip... strip
+#6 18.17 checking for windres... no
+#6 18.17 checking for gperf... gperf
+#6 18.17 checking for man... no
+#6 18.17 checking for ps2pdf... no
+#6 18.17 checking for groff... no
+#6 18.17 checking for git... git
+#6 18.18 checking for flex... flex
+#6 18.18 checking for bison... bison
+#6 18.18 checking for Microsoft Windows... no
+#6 18.18 checking for directory/file separator... /
+#6 18.18 checking for grep that handles long lines and -e... /bin/grep
+#6 18.18 checking for egrep... /bin/grep -E
+#6 18.18 checking for ANSI C header files... yes
+#6 18.64 checking for sys/types.h... yes
+#6 18.74 checking for sys/stat.h... yes
+#6 18.90 checking for stdlib.h... yes
+#6 19.37 checking for string.h... yes
+#6 19.42 checking for memory.h... yes
+#6 19.70 checking for strings.h... yes
+#6 19.80 checking for inttypes.h... yes
+#6 19.94 checking for stdint.h... yes
+#6 20.01 checking for unistd.h... yes
+#6 20.25 checking whether __SUNPRO_C is declared... no
+#6 20.31 checking if gcc supports -Wextra... yes
+#6 20.36 checking whether __SUNPRO_CC is declared... no
+#6 20.51 checking how to run the C++ preprocessor... clang++ -std=c++11 -E
+#6 20.68 checking getopt.h usability... yes
+#6 20.82 checking getopt.h presence... yes
+#6 20.89 checking for getopt.h... yes
+#6 20.92 checking for inttypes.h... (cached) yes
+#6 20.92 checking libiberty.h usability... no
+#6 20.99 checking libiberty.h presence... no
+#6 21.04 checking for libiberty.h... no
+#6 21.08 checking iosfwd usability... yes
+#6 21.18 checking iosfwd presence... yes
+#6 21.25 checking for iosfwd... yes
+#6 21.28 checking sys/wait.h usability... yes
+#6 21.47 checking sys/wait.h presence... yes
+#6 21.47 checking for sys/wait.h... yes
+#6 21.47 checking size of unsigned long long... 8
+#6 21.66 checking size of unsigned long... 8
+#6 21.90 checking size of unsigned... 4
+#6 22.12 checking size of void *... 8
+#6 22.51 checking for tputs in -ltermcap... yes
+#6 22.81 checking for readline in -lreadline... yes
+#6 22.91 checking for add_history in -lreadline... yes
+#6 23.08 checking readline/readline.h usability... yes
+#6 23.16 checking readline/readline.h presence... yes
+#6 23.22 checking for readline/readline.h... yes
+#6 23.26 checking readline/history.h usability... yes
+#6 23.36 checking readline/history.h presence... yes
+#6 23.40 checking for readline/history.h... yes
+#6 23.42 checking sys/resource.h usability... yes
+#6 23.52 checking sys/resource.h presence... yes
+#6 23.56 checking for sys/resource.h... yes
+#6 23.64 checking for pthread_create in -lpthread... yes
+#6 23.81 checking for gzwrite in -lz... yes
+#6 24.12 checking for gzwrite in -lz... (cached) yes
+#6 24.12 checking for BZ2_bzdopen in -lbz2... no
+#6 24.26 checking for BZ2_bzdopen in -lbz2... (cached) no
+#6 24.26 checking for size_t... yes
+#6 24.46 checking for working alloca.h... yes
+#6 24.79 checking for alloca... yes
+#6 24.96 checking for _LARGEFILE_SOURCE value needed for large files... no
+#6 25.08 configure: Building with libvvp support disabled
+#6 25.08 configure: Not using valgrind hooks
+#6 25.08 checking for sys/times... yes
+#6 25.37 checking dlfcn.h usability... yes
+#6 25.52 checking dlfcn.h presence... yes
+#6 25.58 checking for dlfcn.h... yes
+#6 25.59 checking for dlopen in -ldl... yes
+#6 25.75 checking for a BSD-compatible install... /usr/bin/install -c
+#6 26.02 checking whether byte ordering is bigendian... no
+#6 26.02 checking for extra libs needed... 
+#6 26.02 checking for flag to make position independent code... -fPIC
+#6 26.02 checking for realpath... yes
+#6 26.09 checking for fopen64... yes
+#6 26.29 checking for library containing lround... -lm
+#6 26.64 checking for library containing llround... none required
+#6 26.83 checking for library containing nan... none required
+#6 26.99 checking for library containing fmin... none required
+#6 27.25 checking for library containing fmax... none required
+#6 27.50 checking if uint64_t and unsigned long are identical... yes
+#6 27.61 checking for -rdynamic compiler flag... -rdynamic
+#6 27.61 checking for shared library link flag... -shared
+#6 27.61 checking for leading underscores... no
+#6 27.71 checking for trailing underscores... no
+#6 27.76 checking for sanity of prefix... ok
+#6 27.76 checking for sanity of exec_prefix... ok
+#6 27.77 checking for sanity of libdir... ok
+#6 27.79 configure: creating ./config.status
+#6 27.99 config.status: creating version_base.h
+#6 28.04 config.status: creating Makefile
+#6 28.06 config.status: creating cadpli/Makefile
+#6 28.07 config.status: creating driver-vpi/Makefile
+#6 28.11 config.status: creating driver-vpi/iverilog-vpi.man
+#6 28.15 config.status: creating driver-vpi/res.rc
+#6 28.17 config.status: creating driver/Makefile
+#6 28.20 config.status: creating driver/iverilog.man
+#6 28.20 config.status: creating ivlpp/Makefile
+#6 28.31 config.status: creating ivtest/Makefile
+#6 28.41 config.status: creating libveriuser/Makefile
+#6 28.51 config.status: creating tgt-blif/Makefile
+#6 28.54 config.status: creating tgt-fpga/Makefile
+#6 28.59 config.status: creating tgt-null/Makefile
+#6 28.64 config.status: creating tgt-pal/Makefile
+#6 28.69 config.status: creating tgt-pcb/Makefile
+#6 28.77 config.status: creating tgt-sizer/Makefile
+#6 28.83 config.status: creating tgt-stub/Makefile
+#6 28.93 config.status: creating tgt-verilog/Makefile
+#6 29.06 config.status: creating tgt-vhdl/Makefile
+#6 29.11 config.status: creating tgt-vlog95/Makefile
+#6 29.14 config.status: creating tgt-vvp/Makefile
+#6 29.23 config.status: creating vhdlpp/Makefile
+#6 29.26 config.status: creating vpi/Makefile
+#6 29.30 config.status: creating vvp/Makefile
+#6 29.36 config.status: creating vvp/libvvp.pc
+#6 29.39 config.status: creating vvp/vvp.man
+#6 29.41 config.status: creating config.h
+#6 29.44 config.status: creating _pli_types.h
+#6 29.47 config.status: creating vhdlpp/vhdlpp_config.h
+#6 29.49 config.status: creating vvp/config.h
+#6 29.55 config.status: creating vpi/vpi_config.h
+#6 29.63 config.status: creating libveriuser/config.h
+#6 29.70 config.status: creating tgt-vvp/vvp_config.h
+#6 29.79 config.status: creating tgt-vhdl/vhdl_config.h
+#6 29.82 config.status: creating tgt-pcb/pcb_config.h
+#6 29.98 mkdir dep
+#6 29.99 Using git-describe for VERSION_TAG
+#6 29.99 flex -s -t lexor.lex > lexor.cc
+#6 30.00 bison --verbose -Werror=conflicts-sr -Werror=conflicts-rr -t -p VL --defines=parse.h -o parse.cc parse.y
+#6 30.06 gperf -o -i 7 -C -k 1-4,6,9,$ -H keyword_hash -N check_identifier -t lexor_keyword.gperf > lexor_keyword.cc || (rm -f lexor_keyword.cc ; false)
+#6 30.14 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c link_const.cc -o link_const.o
+#6 30.41 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c load_module.cc -o load_module.o
+#6 30.62 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netlist.cc -o netlist.o
+#6 36.81 mv load_module.d dep/load_module.d
+#6 36.82 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netmisc.cc -o netmisc.o
+#6 37.71 mv link_const.d dep/link_const.d
+#6 37.72 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c nettypes.cc -o nettypes.o
+#6 38.60 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_analog.cc -o net_analog.o
+#6 39.40 mv nettypes.d dep/nettypes.d
+#6 39.40 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_assign.cc -o net_assign.o
+#6 43.22 mv net_analog.d dep/net_analog.d
+#6 43.25 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_design.cc -o net_design.o
+#6 45.22 mv net_assign.d dep/net_assign.d
+#6 45.23 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netclass.cc -o netclass.o
+#6 46.73 mv netmisc.d dep/netmisc.d
+#6 46.75 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netdarray.cc -o netdarray.o
+#6 48.86 mv netlist.d dep/netlist.d
+#6 48.86 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netenum.cc -o netenum.o
+#6 49.61 mv netdarray.d dep/netdarray.d
+#6 49.62 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netparray.cc -o netparray.o
+#6 51.48 mv netparray.d dep/netparray.d
+#6 51.52 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netqueue.cc -o netqueue.o
+#6 53.02 mv netqueue.d dep/netqueue.d
+#6 53.02 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netscalar.cc -o netscalar.o
+#6 54.96 mv netscalar.d dep/netscalar.d
+#6 55.00 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netstruct.cc -o netstruct.o
+#6 55.17 mv netclass.d dep/netclass.d
+#6 55.18 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c netvector.cc -o netvector.o
+#6 55.94 mv netenum.d dep/netenum.d
+#6 55.94 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_event.cc -o net_event.o
+#6 58.93 mv netvector.d dep/netvector.d
+#6 58.94 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_expr.cc -o net_expr.o
+#6 59.43 mv net_design.d dep/net_design.d
+#6 59.44 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_func.cc -o net_func.o
+#6 60.14 mv netstruct.d dep/netstruct.d
+#6 60.14 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_func_eval.cc -o net_func_eval.o
+#6 62.20 mv net_event.d dep/net_event.d
+#6 62.21 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_link.cc -o net_link.o
+#6 63.45 mv net_func.d dep/net_func.d
+#6 63.47 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_modulo.cc -o net_modulo.o
+#6 65.88 mv net_expr.d dep/net_expr.d
+#6 65.88 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_nex_input.cc -o net_nex_input.o
+#6 69.80 mv net_link.d dep/net_link.d
+#6 69.83 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_nex_output.cc -o net_nex_output.o
+#6 70.11 mv net_func_eval.d dep/net_func_eval.d
+#6 70.11 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_proc.cc -o net_proc.o
+#6 71.04 mv net_modulo.d dep/net_modulo.d
+#6 71.05 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_scope.cc -o net_scope.o
+#6 71.88 mv net_nex_input.d dep/net_nex_input.d
+#6 71.88 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_tran.cc -o net_tran.o
+#6 74.23 mv net_nex_output.d dep/net_nex_output.d
+#6 74.43 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c net_udp.cc -o net_udp.o
+#6 74.95 mv net_proc.d dep/net_proc.d
+#6 74.96 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c map_named_args.cc -o map_named_args.o
+#6 76.28 mv net_tran.d dep/net_tran.d
+#6 76.28 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pad_to_width.cc -o pad_to_width.o
+#6 80.42 mv net_udp.d dep/net_udp.d
+#6 80.42 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c parse.cc -o parse.o
+#6 82.95 mv pad_to_width.d dep/pad_to_width.d
+#6 82.95 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c parse_misc.cc -o parse_misc.o
+#6 83.03 mv map_named_args.d dep/map_named_args.d
+#6 83.03 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform.cc -o pform.o
+#6 88.98 mv parse_misc.d dep/parse_misc.d
+#6 88.98 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_analog.cc -o pform_analog.o
+#6 90.43 parse.ccmv net_scope.d dep/net_scope.d
+#6 90.45 :11393:18: warning: missing field 'lexical_pos' initializer [-Wmissing-field-initializers]
+#6 90.45   = { 1, 1, 1, 1 }
+#6 90.45                  ^
+#6 90.45 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_disciplines.cc -o pform_disciplines.o
+#6 93.71 mv pform_analog.d dep/pform_analog.d
+#6 93.71 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_dump.cc -o pform_dump.o
+#6 96.05 mv pform_disciplines.d dep/pform_disciplines.d
+#6 96.05 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_package.cc -o pform_package.o
+#6 97.81 pform_dump.cc:370:56: warning: expression with side effects will be evaluated despite being used as an operand to 'typeid' [-Wpotentially-evaluated-expression]
+#6 97.81       out << setw(indent) << "" << (type.get()? typeid(*type).name() : "<nil type>");
+#6 97.81                                                        ^
+#6 101.5 mv pform_package.d dep/pform_package.d
+#6 101.5 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_pclass.cc -o pform_pclass.o
+#6 103.3 1 warning generated.
+#6 103.3 mv pform_dump.d dep/pform_dump.d
+#6 103.3 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pform_types.cc -o pform_types.o
+#6 104.6 mv pform.d dep/pform.d
+#6 104.6 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c symbol_search.cc -o symbol_search.o
+#6 104.8 mv pform_pclass.d dep/pform_pclass.d
+#6 104.8 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sync.cc -o sync.o
+#6 105.6 mv pform_types.d dep/pform_types.d
+#6 105.6 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sys_funcs.cc -o sys_funcs.o
+#6 106.7 mv sync.d dep/sync.d
+#6 106.7 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c verinum.cc -o verinum.o
+#6 107.3 mv sys_funcs.d dep/sys_funcs.d
+#6 107.3 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c verireal.cc -o verireal.o
+#6 108.6 mv symbol_search.d dep/symbol_search.d
+#6 108.6 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vpi_modules.cc -o vpi_modules.o
+#6 108.8 mv verireal.d dep/verireal.d
+#6 108.8 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c target.cc -o target.o
+#6 109.0 1 warning generated.
+#6 109.0 mv parse.d dep/parse.d
+#6 109.0 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c Attrib.cc -o Attrib.o
+#6 109.7 mv Attrib.d dep/Attrib.d
+#6 109.7 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c HName.cc -o HName.o
+#6 110.3 mv verinum.d dep/verinum.d
+#6 110.3 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c Module.cc -o Module.o
+#6 110.8 mv HName.d dep/HName.d
+#6 110.8 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PClass.cc -o PClass.o
+#6 110.8 mv vpi_modules.d dep/vpi_modules.d
+#6 110.8 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PDelays.cc -o PDelays.o
+#6 111.3 mv target.d dep/target.d
+#6 111.3 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PEvent.cc -o PEvent.o
+#6 111.9 mv PEvent.d dep/PEvent.d
+#6 111.9 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PExpr.cc -o PExpr.o
+#6 112.8 mv PClass.d dep/PClass.d
+#6 112.8 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PFunction.cc -o PFunction.o
+#6 113.2 mv PDelays.d dep/PDelays.d
+#6 113.2 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PGate.cc -o PGate.o
+#6 113.9 mv Module.d dep/Module.d
+#6 113.9 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PGenerate.cc -o PGenerate.o
+#6 115.8 mv PFunction.d dep/PFunction.d
+#6 115.8 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PModport.cc -o PModport.o
+#6 116.1 mv PGate.d dep/PGate.d
+#6 116.1 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PNamedItem.cc -o PNamedItem.o
+#6 116.7 mv PNamedItem.d dep/PNamedItem.d
+#6 116.7 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PPackage.cc -o PPackage.o
+#6 117.2 mv PGenerate.d dep/PGenerate.d
+#6 117.2 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PScope.cc -o PScope.o
+#6 117.8 mv PExpr.d dep/PExpr.d
+#6 117.8 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PSpec.cc -o PSpec.o
+#6 117.9 mv PModport.d dep/PModport.d
+#6 117.9 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PTimingCheck.cc -o PTimingCheck.o
+#6 118.3 mv PPackage.d dep/PPackage.d
+#6 118.3 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PTask.cc -o PTask.o
+#6 118.4 mv PSpec.d dep/PSpec.d
+#6 118.4 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PUdp.cc -o PUdp.o
+#6 119.2 mv PUdp.d dep/PUdp.d
+#6 119.2 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c PWire.cc -o PWire.o
+#6 120.0 mv PScope.d dep/PScope.d
+#6 120.0 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c Statement.cc -o Statement.o
+#6 120.2 mv PTask.d dep/PTask.d
+#6 120.2 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c AStatement.cc -o AStatement.o
+#6 120.5 mv PTimingCheck.d dep/PTimingCheck.d
+#6 120.5 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c ./libmisc/LineInfo.cc -o LineInfo.o
+#6 121.0 mv LineInfo.d dep/LineInfo.d
+#6 121.0 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c ./libmisc/StringHeap.cc -o StringHeap.o
+#6 121.7 mv PWire.d dep/PWire.d
+#6 121.7 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c cprop.cc -o cprop.o
+#6 121.7 mv StringHeap.d dep/StringHeap.d
+#6 121.7 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c exposenodes.cc -o exposenodes.o
+#6 122.4 mv AStatement.d dep/AStatement.d
+#6 122.4 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c nodangle.cc -o nodangle.o
+#6 123.9 mv exposenodes.d dep/exposenodes.d
+#6 123.9 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c synth.cc -o synth.o
+#6 124.3 mv cprop.d dep/cprop.d
+#6 124.3 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c synth2.cc -o synth2.o
+#6 124.3 mv Statement.d dep/Statement.d
+#6 124.3 bison --verbose -Werror=conflicts-sr -Werror=conflicts-rr -t -p syn_ -o syn-rules.cc syn-rules.y
+#6 124.4 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c t-dll.cc -o t-dll.o
+#6 124.9 mv nodangle.d dep/nodangle.d
+#6 124.9 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c t-dll-api.cc -o t-dll-api.o
+#6 126.3 mv synth.d dep/synth.d
+#6 126.3 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c t-dll-expr.cc -o t-dll-expr.o
+#6 128.9 mv t-dll-expr.d dep/t-dll-expr.d
+#6 128.9 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c t-dll-proc.cc -o t-dll-proc.o
+#6 130.2 mv t-dll-api.d dep/t-dll-api.d
+#6 130.2 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c t-dll-analog.cc -o t-dll-analog.o
+#6 132.1 mv t-dll-proc.d dep/t-dll-proc.d
+#6 132.1 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c main.cc -o main.o
+#6 132.2 mv t-dll.d dep/t-dll.d
+#6 132.2 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c async.cc -o async.o
+#6 132.9 mv synth2.d dep/synth2.d
+#6 132.9 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c design_dump.cc -o design_dump.o
+#6 133.2 mv t-dll-analog.d dep/t-dll-analog.d
+#6 133.2 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c discipline.cc -o discipline.o
+#6 134.2 mv discipline.d dep/discipline.d
+#6 134.3 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c dup_expr.cc -o dup_expr.o
+#6 134.5 mv async.d dep/async.d
+#6 134.5 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elaborate.cc -o elaborate.o
+#6 136.3 mv dup_expr.d dep/dup_expr.d
+#6 136.3 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_expr.cc -o elab_expr.o
+#6 137.6 mv design_dump.d dep/design_dump.d
+#6 137.6 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elaborate_analog.cc -o elaborate_analog.o
+#6 138.2 mv main.d dep/main.d
+#6 138.2 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_lval.cc -o elab_lval.o
+#6 140.3 mv elaborate_analog.d dep/elaborate_analog.d
+#6 140.4 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_net.cc -o elab_net.o
+#6 145.2 mv elab_lval.d dep/elab_lval.d
+#6 145.2 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_scope.cc -o elab_scope.o
+#6 145.9 mv elab_net.d dep/elab_net.d
+#6 145.9 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_sig.cc -o elab_sig.o
+#6 150.8 mv elab_sig.d dep/elab_sig.d
+#6 150.8 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_sig_analog.cc -o elab_sig_analog.o
+#6 151.0 mv elab_scope.d dep/elab_scope.d
+#6 151.0 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c elab_type.cc -o elab_type.o
+#6 152.6 mv elab_sig_analog.d dep/elab_sig_analog.d
+#6 152.6 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c emit.cc -o emit.o
+#6 153.6 mv elaborate.d dep/elaborate.d
+#6 153.6 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c eval_attrib.cc -o eval_attrib.o
+#6 153.6 mv elab_expr.d dep/elab_expr.d
+#6 153.6 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c eval_tree.cc -o eval_tree.o
+#6 153.9 mv elab_type.d dep/elab_type.d
+#6 153.9 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expr_synth.cc -o expr_synth.o
+#6 154.9 mv emit.d dep/emit.d
+#6 154.9 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c functor.cc -o functor.o
+#6 155.4 mv eval_attrib.d dep/eval_attrib.d
+#6 155.4 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lexor.cc -o lexor.o
+#6 156.6 mv functor.d dep/functor.d
+#6 156.6 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lexor_keyword.cc -o lexor_keyword.o
+#6 157.1 <stdout>:2618:13: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+#6 157.1             if ( ! (yy_state_buf) )
+#6 157.1             ^
+#6 157.1 <stdout>:2616:9: note: previous statement is here
+#6 157.1         if ( ! (yy_state_buf) )
+#6 157.1         ^
+#6 157.1 <stdout>:4492:3: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+#6 157.1                 return yy_is_jam ? 0 : yy_current_state;
+#6 157.1                 ^
+#6 157.1 <stdout>:4489:2: note: previous statement is here
+#6 157.1         if ( ! yy_is_jam )
+#6 157.1         ^
+#6 157.2 mv expr_synth.d dep/expr_synth.d
+#6 157.2 clang++ -std=c++11 -DHAVE_CONFIG_H -I. -Ilibmisc  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c syn-rules.cc -o syn-rules.o
+#6 157.8 mv eval_tree.d dep/eval_tree.d
+#6 158.3 mv lexor_keyword.d dep/lexor_keyword.d
+#6 158.3 2 warnings generated.
+#6 158.3 mv lexor.d dep/lexor.d
+#6 158.7 mv syn-rules.d dep/syn-rules.d
+#6 158.7 clang++ -std=c++11 -rdynamic   -o ivl main.o async.o design_dump.o discipline.o dup_expr.o elaborate.o elab_expr.o elaborate_analog.o elab_lval.o elab_net.o elab_scope.o elab_sig.o elab_sig_analog.o elab_type.o emit.o eval_attrib.o eval_tree.o expr_synth.o functor.o lexor.o lexor_keyword.o link_const.o load_module.o netlist.o netmisc.o nettypes.o net_analog.o net_assign.o net_design.o netclass.o netdarray.o netenum.o netparray.o netqueue.o netscalar.o netstruct.o netvector.o net_event.o net_expr.o net_func.o net_func_eval.o net_link.o net_modulo.o net_nex_input.o net_nex_output.o net_proc.o net_scope.o net_tran.o net_udp.o map_named_args.o pad_to_width.o parse.o parse_misc.o pform.o pform_analog.o pform_disciplines.o pform_dump.o pform_package.o pform_pclass.o pform_types.o symbol_search.o sync.o sys_funcs.o verinum.o verireal.o vpi_modules.o target.o Attrib.o HName.o Module.o PClass.o PDelays.o PEvent.o PExpr.o PFunction.o PGate.o PGenerate.o PModport.o PNamedItem.o PPackage.o PScope.o PSpec.o PTimingCheck.o PTask.o PUdp.o PWire.o Statement.o AStatement.o LineInfo.o StringHeap.o cprop.o exposenodes.o nodangle.o synth.o synth2.o syn-rules.o t-dll.o t-dll-api.o t-dll-expr.o t-dll-proc.o t-dll-analog.o -ldl
+#6 159.3 make -C ivlpp all &&  make -C vhdlpp all &&  make -C vvp all &&  make -C vpi all &&  make -C tgt-null all &&  make -C tgt-stub all &&  make -C tgt-vvp all &&  make -C tgt-vhdl all &&  make -C tgt-vlog95 all &&  make -C tgt-pcb all &&  make -C tgt-blif all &&  make -C tgt-sizer all &&  make -C driver all &&  make -C ivtest all &&  make -C driver-vpi all &&  true
+#6 159.3 make[1]: Entering directory '/iverilog/ivlpp'
+#6 159.3 clang -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -I. -I..  -DHAVE_CONFIG_H  -c -o main.o main.c
+#6 159.3 flex -t lexor.lex > lexor.c
+#6 159.3 clang -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -I. -I..  -DHAVE_CONFIG_H  -c -o lexor.o lexor.c
+#6 159.4 <stdout>:1437:13: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+#6 159.4             if ( ! (yy_state_buf) )
+#6 159.4             ^
+#6 159.4 <stdout>:1435:9: note: previous statement is here
+#6 159.4         if ( ! (yy_state_buf) )
+#6 159.4         ^
+#6 159.4 <stdout>:2790:3: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+#6 159.4                 return yy_is_jam ? 0 : yy_current_state;
+#6 159.4                 ^
+#6 159.4 <stdout>:2787:2: note: previous statement is here
+#6 159.4         if ( ! yy_is_jam )
+#6 159.4         ^
+#6 160.3 2 warnings generated.
+#6 160.3 clang  main.o lexor.o -o ivlpp 
+#6 160.3 make[1]: Leaving directory '/iverilog/ivlpp'
+#6 160.3 make[1]: Entering directory '/iverilog/vhdlpp'
+#6 160.3 mkdir dep
+#6 160.3 flex -s -olexor.cc ./lexor.lex
+#6 160.3 bison --verbose -t --defines=parse.h -o parse.cc parse.y
+#6 160.3 gperf -o -i 7 --ignore-case -C -k 1-4,6,9,$ -H keyword_hash -N check_identifier -t ./lexor_keyword.gperf > lexor_keyword.cc || (rm -f lexor_keyword.cc ; false)
+#6 160.3 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c parse_misc.cc -o parse_misc.o
+#6 160.4 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c library.cc -o library.o
+#6 160.4 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vhdlreal.cc -o vhdlreal.o
+#6 160.8 mv vhdlreal.d dep/vhdlreal.d
+#6 160.8 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vhdlint.cc -o vhdlint.o
+#6 161.2 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c architec_emit.cc -o architec_emit.o
+#6 161.3 mv vhdlint.d dep/vhdlint.d
+#6 161.3 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c entity_emit.cc -o entity_emit.o
+#6 161.7 mv parse_misc.d dep/parse_misc.d
+#6 161.7 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expression_emit.cc -o expression_emit.o
+#6 163.0 mv entity_emit.d dep/entity_emit.d
+#6 163.0 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c package_emit.cc -o package_emit.o
+#6 163.1 mv architec_emit.d dep/architec_emit.d
+#6 163.1 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sequential_emit.cc -o sequential_emit.o
+#6 163.3 mv library.d dep/library.d
+#6 163.3 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c subprogram_emit.cc -o subprogram_emit.o
+#6 164.2 mv package_emit.d dep/package_emit.d
+#6 164.2 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vtype_emit.cc -o vtype_emit.o
+#6 164.4 mv expression_emit.d dep/expression_emit.d
+#6 164.4 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c debug.cc -o debug.o
+#6 164.7 mv subprogram_emit.d dep/subprogram_emit.d
+#6 164.7 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c architec_debug.cc -o architec_debug.o
+#6 165.0 mv sequential_emit.d dep/sequential_emit.d
+#6 165.0 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expression_debug.cc -o expression_debug.o
+#6 165.5 mv vtype_emit.d dep/vtype_emit.d
+#6 165.5 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sequential_debug.cc -o sequential_debug.o
+#6 166.1 mv architec_debug.d dep/architec_debug.d
+#6 166.1 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c ../libmisc/StringHeap.cc -o StringHeap.o
+#6 166.5 mv expression_debug.d dep/expression_debug.d
+#6 166.5 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c ../libmisc/LineInfo.cc -o LineInfo.o
+#6 166.5 mv debug.d dep/debug.d
+#6 166.5 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c main.cc -o main.o
+#6 166.6 mv StringHeap.d dep/StringHeap.d
+#6 166.6 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c architec.cc -o architec.o
+#6 166.8 mv sequential_debug.d dep/sequential_debug.d
+#6 166.8 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c compiler.cc -o compiler.o
+#6 167.0 mv LineInfo.d dep/LineInfo.d
+#6 167.0 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c entity.cc -o entity.o
+#6 167.4 mv compiler.d dep/compiler.d
+#6 167.4 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c std_funcs.cc -o std_funcs.o
+#6 167.8 mv main.d dep/main.d
+#6 167.8 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c std_types.cc -o std_types.o
+#6 168.6 mv entity.d dep/entity.d
+#6 168.6 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expression.cc -o expression.o
+#6 168.8 mv architec.d dep/architec.d
+#6 168.8 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c package.cc -o package.o
+#6 169.0 mv std_funcs.d dep/std_funcs.d
+#6 169.0 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c scope.cc -o scope.o
+#6 169.7 mv std_types.d dep/std_types.d
+#6 169.7 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sequential.cc -o sequential.o
+#6 170.1 mv package.d dep/package.d
+#6 170.2 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c subprogram.cc -o subprogram.o
+#6 171.0 mv sequential.d dep/sequential.d
+#6 171.0 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vsignal.cc -o vsignal.o
+#6 171.7 mv expression.d dep/expression.d
+#6 171.7 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vtype.cc -o vtype.o
+#6 171.8 mv scope.d dep/scope.d
+#6 171.8 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vtype_match.cc -o vtype_match.o
+#6 172.2 mv subprogram.d dep/subprogram.d
+#6 172.2 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c architec_elaborate.cc -o architec_elaborate.o
+#6 172.2 mv vsignal.d dep/vsignal.d
+#6 172.2 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c entity_elaborate.cc -o entity_elaborate.o
+#6 172.4 mv vtype_match.d dep/vtype_match.d
+#6 172.4 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expression_elaborate.cc -o expression_elaborate.o
+#6 172.8 mv vtype.d dep/vtype.d
+#6 172.8 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expression_evaluate.cc -o expression_evaluate.o
+#6 173.3 mv architec_elaborate.d dep/architec_elaborate.d
+#6 173.3 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sequential_elaborate.cc -o sequential_elaborate.o
+#6 173.4 mv entity_elaborate.d dep/entity_elaborate.d
+#6 173.4 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vtype_elaborate.cc -o vtype_elaborate.o
+#6 173.8 mv expression_evaluate.d dep/expression_evaluate.d
+#6 173.8 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c entity_stream.cc -o entity_stream.o
+#6 174.2 mv vtype_elaborate.d dep/vtype_elaborate.d
+#6 174.2 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expression_stream.cc -o expression_stream.o
+#6 174.3 mv sequential_elaborate.d dep/sequential_elaborate.d
+#6 174.3 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vtype_stream.cc -o vtype_stream.o
+#6 174.4 mv expression_elaborate.d dep/expression_elaborate.d
+#6 174.4 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lexor.cc -o lexor.o
+#6 174.4 mv entity_stream.d dep/entity_stream.d
+#6 174.4 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lexor_keyword.cc -o lexor_keyword.o
+#6 175.0 mv vtype_stream.d dep/vtype_stream.d
+#6 175.0 clang++ -std=c++11 -I. -I.. -I../libmisc  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c parse.cc -o parse.o
+#6 175.1 mv expression_stream.d dep/expression_stream.d
+#6 175.4 mv lexor_keyword.d dep/lexor_keyword.d
+#6 175.8 parse.y:2398:2: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+#6 175.8         (yyval.sequ_list) = tmp;
+#6 175.8         ^
+#6 175.8 parse.y:2396:5: note: previous statement is here
+#6 175.8     if((yyvsp[0].sequ))
+#6 175.8     ^
+#6 175.8 parse.y:2404:2: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+#6 175.8         (yyval.sequ_list) = tmp;
+#6 175.8         ^
+#6 175.8 parse.y:2402:5: note: previous statement is here
+#6 175.8     if((yyvsp[0].sequ))
+#6 175.8     ^
+#6 175.8 mv lexor.d dep/lexor.d
+#6 178.5 2 warnings generated.
+#6 178.5 mv parse.d dep/parse.d
+#6 178.5 clang++ -std=c++11 -o vhdlpp  main.o architec.o compiler.o entity.o std_funcs.o std_types.o expression.o package.o scope.o sequential.o subprogram.o vsignal.o vtype.o vtype_match.o architec_elaborate.o entity_elaborate.o expression_elaborate.o expression_evaluate.o sequential_elaborate.o vtype_elaborate.o entity_stream.o expression_stream.o vtype_stream.o lexor.o lexor_keyword.o parse.o parse_misc.o library.o vhdlreal.o vhdlint.o architec_emit.o entity_emit.o expression_emit.o package_emit.o sequential_emit.o subprogram_emit.o vtype_emit.o debug.o architec_debug.o expression_debug.o sequential_debug.o StringHeap.o LineInfo.o -lm -lz -lpthread -lreadline -ltermcap  
+#6 178.7 make[1]: Leaving directory '/iverilog/vhdlpp'
+#6 178.7 make[1]: Entering directory '/iverilog/vvp'
+#6 178.7 mkdir dep
+#6 178.7 bison --verbose -t --defines=parse.h -o parse.cc parse.y
+#6 178.7 flex -s -olexor.cc lexor.lex
+#6 178.7 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c arith.cc -o arith.o
+#6 178.7 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c array_common.cc -o array_common.o
+#6 178.7 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c array.cc -o array.o
+#6 179.1 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c bufif.cc -o bufif.o
+#6 179.2 mv array_common.d dep/array_common.d
+#6 179.2 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c compile.cc -o compile.o
+#6 179.6 mv bufif.d dep/bufif.d
+#6 179.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c concat.cc -o concat.o
+#6 180.0 mv arith.d dep/arith.d
+#6 180.0 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c dff.cc -o dff.o
+#6 180.4 mv compile.d dep/compile.d
+#6 180.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c class_type.cc -o class_type.o
+#6 180.4 mv concat.d dep/concat.d
+#6 180.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c enum_type.cc -o enum_type.o
+#6 180.6 mv array.d dep/array.d
+#6 180.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c extend.cc -o extend.o
+#6 180.8 mv dff.d dep/dff.d
+#6 180.8 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c file_line.cc -o file_line.o
+#6 181.2 mv enum_type.d dep/enum_type.d
+#6 181.2 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c latch.cc -o latch.o
+#6 181.4 mv file_line.d dep/file_line.d
+#6 181.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c npmos.cc -o npmos.o
+#6 181.5 mv extend.d dep/extend.d
+#6 181.5 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c part.cc -o part.o
+#6 181.8 mv class_type.d dep/class_type.d
+#6 181.8 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c permaheap.cc -o permaheap.o
+#6 181.8 mv permaheap.d dep/permaheap.d
+#6 181.8 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c reduce.cc -o reduce.o
+#6 181.9 mv npmos.d dep/npmos.d
+#6 181.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c resolv.cc -o resolv.o
+#6 181.9 mv latch.d dep/latch.d
+#6 181.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c sfunc.cc -o sfunc.o
+#6 182.6 mv part.d dep/part.d
+#6 182.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c stop.cc -o stop.o
+#6 182.7 mv reduce.d dep/reduce.d
+#6 182.7 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c substitute.cc -o substitute.o
+#6 182.8 mv sfunc.d dep/sfunc.d
+#6 182.8 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c symbols.cc -o symbols.o
+#6 182.8 mv resolv.d dep/resolv.d
+#6 182.8 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c ufunc.cc -o ufunc.o
+#6 183.2 mv symbols.d dep/symbols.d
+#6 183.2 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c codes.cc -o codes.o
+#6 183.4 mv stop.d dep/stop.d
+#6 183.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vthread.cc -o vthread.o
+#6 183.4 mv substitute.d dep/substitute.d
+#6 183.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c schedule.cc -o schedule.o
+#6 183.5 mv codes.d dep/codes.d
+#6 183.5 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c statistics.cc -o statistics.o
+#6 183.5 mv statistics.d dep/statistics.d
+#6 183.5 cc -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -fPIC -rdynamic   -fPIC -o draw_tt ./draw_tt.c
+#6 183.5 mv ufunc.d dep/ufunc.d
+#6 183.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c udp.cc -o udp.o
+#6 183.6 ./draw_tt > tables.cc
+#6 183.6 rm draw_tt
+#6 183.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vvp_island.cc -o vvp_island.o
+#6 184.4 mv vvp_island.d dep/vvp_island.d
+#6 184.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vvp_net.cc -o vvp_net.o
+#6 184.5 mv udp.d dep/udp.d
+#6 184.5 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vvp_net_sig.cc -o vvp_net_sig.o
+#6 184.8 mv schedule.d dep/schedule.d
+#6 184.8 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vvp_object.cc -o vvp_object.o
+#6 185.5 mv vvp_object.d dep/vvp_object.d
+#6 185.5 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vvp_cobject.cc -o vvp_cobject.o
+#6 186.2 mv vvp_net_sig.d dep/vvp_net_sig.d
+#6 186.2 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vvp_darray.cc -o vvp_darray.o
+#6 186.4 mv vvp_cobject.d dep/vvp_cobject.d
+#6 186.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c event.cc -o event.o
+#6 187.4 mv vvp_net.d dep/vvp_net.d
+#6 187.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c logic.cc -o logic.o
+#6 188.0 mv event.d dep/event.d
+#6 188.0 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c delay.cc -o delay.o
+#6 188.7 mv logic.d dep/logic.d
+#6 188.8 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c words.cc -o words.o
+#6 189.7 mv delay.d dep/delay.d
+#6 189.7 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c island_tran.cc -o island_tran.o
+#6 190.0 mv words.d dep/words.d
+#6 190.0 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_modules.cc -o vpi_modules.o
+#6 190.7 mv vpi_modules.d dep/vpi_modules.d
+#6 190.7 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_bit.cc -o vpi_bit.o
+#6 191.3 mv island_tran.d dep/island_tran.d
+#6 191.3 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_callback.cc -o vpi_callback.o
+#6 191.6 mv vpi_bit.d dep/vpi_bit.d
+#6 191.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_cobject.cc -o vpi_cobject.o
+#6 192.1 mv vpi_callback.d dep/vpi_callback.d
+#6 192.1 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_const.cc -o vpi_const.o
+#6 192.3 mv vpi_cobject.d dep/vpi_cobject.d
+#6 192.3 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_darray.cc -o vpi_darray.o
+#6 193.0 mv vthread.d dep/vthread.d
+#6 193.0 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_event.cc -o vpi_event.o
+#6 193.1 mv vpi_const.d dep/vpi_const.d
+#6 193.1 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_iter.cc -o vpi_iter.o
+#6 193.5 mv vpi_darray.d dep/vpi_darray.d
+#6 193.5 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_mcd.cc -o vpi_mcd.o
+#6 193.8 mv vpi_iter.d dep/vpi_iter.d
+#6 193.8 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_priv.cc -o vpi_priv.o
+#6 194.0 mv vpi_event.d dep/vpi_event.d
+#6 194.0 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_scope.cc -o vpi_scope.o
+#6 194.2 mv vpi_mcd.d dep/vpi_mcd.d
+#6 194.2 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_real.cc -o vpi_real.o
+#6 195.0 mv vpi_real.d dep/vpi_real.d
+#6 195.0 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_signal.cc -o vpi_signal.o
+#6 195.4 mv vpi_priv.d dep/vpi_priv.d
+#6 195.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_string.cc -o vpi_string.o
+#6 195.5 mv vpi_scope.d dep/vpi_scope.d
+#6 195.5 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_tasks.cc -o vpi_tasks.o
+#6 196.4 mv vpi_string.d dep/vpi_string.d
+#6 196.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_time.cc -o vpi_time.o
+#6 196.8 mv vpi_tasks.d dep/vpi_tasks.d
+#6 196.8 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpi_vthr_vector.cc -o vpi_vthr_vector.o
+#6 197.0 mv vpi_signal.d dep/vpi_signal.d
+#6 197.0 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpip_bin.cc -o vpip_bin.o
+#6 197.1 mv vpi_time.d dep/vpi_time.d
+#6 197.1 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpip_hex.cc -o vpip_hex.o
+#6 197.7 mv vpip_bin.d dep/vpip_bin.d
+#6 197.7 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpip_oct.cc -o vpip_oct.o
+#6 197.8 mv vpi_vthr_vector.d dep/vpi_vthr_vector.d
+#6 197.8 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpip_to_dec.cc -o vpip_to_dec.o
+#6 198.1 mv vpip_hex.d dep/vpip_hex.d
+#6 198.1 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vpip_format.cc -o vpip_format.o
+#6 198.2 mv vpip_oct.d dep/vpip_oct.d
+#6 198.2 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c vvp_vpi.cc -o vvp_vpi.o
+#6 198.3 mv vvp_vpi.d dep/vvp_vpi.d
+#6 198.3 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c main.cc -o main.o
+#6 198.6 mv vpip_to_dec.d dep/vpip_to_dec.d
+#6 198.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c lib_main.cc -o lib_main.o
+#6 198.8 mv vpip_format.d dep/vpip_format.d
+#6 198.8 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c parse.cc -o parse.o
+#6 198.9 mv main.d dep/main.d
+#6 198.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c parse_misc.cc -o parse_misc.o
+#6 199.5 mv lib_main.d dep/lib_main.d
+#6 199.5 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c lexor.cc -o lexor.o
+#6 199.6 mv vvp_darray.d dep/vvp_darray.d
+#6 199.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -DIVL_SUFFIX='""' -DMODULE_DIR1='"/usr/local/lib/ivl"'  -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -fPIC -MD -c tables.cc -o tables.o
+#6 199.7 mv tables.d dep/tables.d
+#6 199.7 mv parse_misc.d dep/parse_misc.d
+#6 200.1 mv parse.d dep/parse.d
+#6 200.5 mv lexor.d dep/lexor.d
+#6 200.5 clang++ -std=c++11 -rdynamic   -fPIC -o vvp main.o lib_main.o parse.o parse_misc.o lexor.o arith.o array_common.o array.o bufif.o compile.o concat.o dff.o class_type.o enum_type.o extend.o file_line.o latch.o npmos.o part.o permaheap.o reduce.o resolv.o sfunc.o stop.o substitute.o symbols.o ufunc.o codes.o vthread.o schedule.o statistics.o tables.o udp.o vvp_island.o vvp_net.o vvp_net_sig.o vvp_object.o vvp_cobject.o vvp_darray.o event.o logic.o delay.o words.o island_tran.o vpi_modules.o vpi_bit.o vpi_callback.o vpi_cobject.o vpi_const.o vpi_darray.o vpi_event.o vpi_iter.o vpi_mcd.o vpi_priv.o vpi_scope.o vpi_real.o vpi_signal.o vpi_string.o vpi_tasks.o vpi_time.o vpi_vthr_vector.o vpip_bin.o vpip_hex.o vpip_oct.o vpip_to_dec.o vpip_format.o vvp_vpi.o -L.  -lm -lz -lpthread -lreadline -ltermcap   -ldl
+#6 200.7 make[1]: Leaving directory '/iverilog/vvp'
+#6 200.7 make[1]: Entering directory '/iverilog/vpi'
+#6 200.7 mkdir dep
+#6 200.7 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -c libvpi.c
+#6 200.8 flex -t sys_readmem_lex.lex > sys_readmem_lex.c
+#6 200.8 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_scanf.c -o sys_scanf.o
+#6 200.8 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_sdf.c -o sys_sdf.o
+#6 200.8 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_time.c -o sys_time.o
+#6 200.8 rm -f libvpi.a
+#6 200.8 ar cqv libvpi.a libvpi.o
+#6 200.8 a - libvpi.o
+#6 200.8 ranlib libvpi.a
+#6 200.8 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_vcd.c -o sys_vcd.o
+#6 200.9 mv sys_time.d dep
+#6 200.9 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_vcdoff.c -o sys_vcdoff.o
+#6 200.9 mv sys_sdf.d dep
+#6 200.9 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vcd_priv.c -o vcd_priv.o
+#6 200.9 mv sys_vcdoff.d dep
+#6 200.9 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c mt19937int.c -o mt19937int.o
+#6 201.0 mv mt19937int.d dep
+#6 201.0 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_priv.c -o sys_priv.o
+#6 201.1 mv vcd_priv.d dep
+#6 201.1 bison --verbose -t -p sdf -d -o sdf_parse.c sdf_parse.y
+#6 201.1 mv sys_vcd.d dep
+#6 201.1 flex -t sdf_lexor.lex > sdf_lexor.c
+#6 201.1 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c stringheap.c -o stringheap.o
+#6 201.2 mv sys_priv.d dep
+#6 201.2 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vams_simparam.c -o vams_simparam.o
+#6 201.3 mv stringheap.d dep
+#6 201.3 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c table_mod.c -o table_mod.o
+#6 201.3 bison --verbose -t -p tblmod -d -o table_mod_parse.c table_mod_parse.y
+#6 201.3 flex -t table_mod_lexor.lex > table_mod_lexor.c
+#6 201.3 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_lxt2.c -o sys_lxt2.o
+#6 201.4 mv vams_simparam.d dep
+#6 201.4 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c lxt2_write.c -o lxt2_write.o
+#6 201.4 mv sys_scanf.d dep
+#6 201.5 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_fst.c -o sys_fst.o
+#6 201.6 mv table_mod.d dep
+#6 201.6 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c fstapi.c -o fstapi.o
+#6 201.6 mv sys_lxt2.d dep
+#6 201.6 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c fastlz.c -o fastlz.o
+#6 201.7 mv sys_fst.d dep
+#6 201.7 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c lz4.c -o lz4.o
+#6 202.0 mv fastlz.d dep
+#6 202.0 clang++ -std=c++11 -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vcd_priv2.cc -o vcd_priv2.o
+#6 202.5 mv lxt2_write.d dep
+#6 202.5 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c va_math.c -o va_math.o
+#6 202.6 mv va_math.d dep
+#6 202.6 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_clog2.c -o sys_clog2.o
+#6 202.8 mv sys_clog2.d dep
+#6 202.8 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c v2005_math.c -o v2005_math.o
+#6 203.0 mv v2005_math.d dep
+#6 203.0 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c v2009_table.c -o v2009_table.o
+#6 203.1 mv v2009_table.d dep
+#6 203.1 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c v2009_array.c -o v2009_array.o
+#6 203.2 mv vcd_priv2.d dep
+#6 203.2 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c v2009_bitvec.c -o v2009_bitvec.o
+#6 203.3 mv v2009_array.d dep
+#6 203.3 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c v2009_enum.c -o v2009_enum.o
+#6 203.3 mv v2009_bitvec.d dep
+#6 203.4 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c v2009_string.c -o v2009_string.o
+#6 203.5 mv v2009_enum.d dep
+#6 203.5 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vhdl_table.c -o vhdl_table.o
+#6 203.6 mv v2009_string.d dep
+#6 203.6 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vhdl_textio.c -o vhdl_textio.o
+#6 203.6 mv vhdl_table.d dep
+#6 203.6 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vpi_debug.c -o vpi_debug.o
+#6 203.7 mv vpi_debug.d dep
+#6 203.7 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_table.c -o sys_table.o
+#6 203.8 mv sys_table.d dep
+#6 203.8 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_convert.c -o sys_convert.o
+#6 203.9 mv vhdl_textio.d dep
+#6 203.9 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_countdrivers.c -o sys_countdrivers.o
+#6 203.9 mv sys_convert.d dep
+#6 203.9 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_darray.c -o sys_darray.o
+#6 204.0 mv sys_countdrivers.d dep
+#6 204.0 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_deposit.c -o sys_deposit.o
+#6 204.0 mv sys_darray.d dep
+#6 204.0 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_display.c -o sys_display.o
+#6 204.1 mv sys_deposit.d dep
+#6 204.1 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_fileio.c -o sys_fileio.o
+#6 204.3 mv sys_fileio.d dep
+#6 204.3 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_finish.c -o sys_finish.o
+#6 204.4 mv sys_finish.d dep
+#6 204.4 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_icarus.c -o sys_icarus.o
+#6 204.5 mv fstapi.d dep
+#6 204.5 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_plusargs.c -o sys_plusargs.o
+#6 204.5 mv sys_icarus.d dep
+#6 204.5 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_queue.c -o sys_queue.o
+#6 204.7 mv sys_plusargs.d dep
+#6 204.7 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_random.c -o sys_random.o
+#6 204.8 mv sys_queue.d dep
+#6 204.8 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_random_mti.c -o sys_random_mti.o
+#6 204.9 mv sys_random.d dep
+#6 204.9 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_readmem.c -o sys_readmem.o
+#6 204.9 mv sys_random_mti.d dep
+#6 204.9 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sys_readmem_lex.c -o sys_readmem_lex.o
+#6 205.0 mv sys_display.d dep
+#6 205.0 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sdf_parse.c -o sdf_parse.o
+#6 205.2 mv sys_readmem.d dep
+#6 205.2 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c sdf_lexor.c -o sdf_lexor.o
+#6 205.3 mv sys_readmem_lex.d dep
+#6 205.3 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c table_mod_parse.c -o table_mod_parse.o
+#6 205.3 mv sdf_parse.d dep
+#6 205.3 clang -I. -I.. -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64  -DHAVE_CONFIG_H -DICARUS_VPI_CONST=const -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c table_mod_lexor.c -o table_mod_lexor.o
+#6 205.6 mv sdf_lexor.d dep
+#6 205.6 clang -shared -o va_math.vpi va_math.o -L.  -lvpi 
+#6 205.6 mv table_mod_parse.d dep
+#6 205.6 clang -shared -o v2005_math.vpi sys_clog2.o v2005_math.o -L.  -lvpi 
+#6 205.6 mv table_mod_lexor.d dep
+#6 205.6 clang -shared -o v2009.vpi v2009_table.o v2009_array.o v2009_bitvec.o v2009_enum.o v2009_string.o sys_priv.o -L.  -lvpi -lm -lz -lpthread -lreadline -ltermcap 
+#6 205.6 clang -shared -o vhdl_sys.vpi vhdl_table.o sys_priv.o -L.  -lvpi -lm -lz -lpthread -lreadline -ltermcap 
+#6 205.7 clang -shared -o vhdl_textio.vpi vhdl_textio.o sys_priv.o -L.  -lvpi -lm -lz -lpthread -lreadline -ltermcap 
+#6 205.7 clang -shared -o vpi_debug.vpi vpi_debug.o -L.  -lvpi -lm -lz -lpthread -lreadline -ltermcap 
+#6 206.1 mv lz4.d dep
+#6 206.1 clang++ -std=c++11 -shared -o system.vpi sys_table.o sys_convert.o sys_countdrivers.o sys_darray.o sys_deposit.o sys_display.o sys_fileio.o sys_finish.o sys_icarus.o sys_plusargs.o sys_queue.o sys_random.o sys_random_mti.o sys_readmem.o sys_readmem_lex.o sys_scanf.o sys_sdf.o sys_time.o sys_vcd.o sys_vcdoff.o vcd_priv.o mt19937int.o sys_priv.o sdf_parse.o sdf_lexor.o stringheap.o vams_simparam.o table_mod.o table_mod_parse.o table_mod_lexor.o sys_lxt2.o lxt2_write.o sys_fst.o fstapi.o fastlz.o lz4.o vcd_priv2.o -L.  -lvpi -lm -lz -lpthread -lreadline -ltermcap 
+#6 206.2 make[1]: Leaving directory '/iverilog/vpi'
+#6 206.2 make[1]: Entering directory '/iverilog/tgt-null'
+#6 206.2 mkdir dep
+#6 206.2 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c null.c -o null.o
+#6 206.2 mv null.d dep
+#6 206.2 clang -shared  -o null.tgt null.o 
+#6 206.3 make[1]: Leaving directory '/iverilog/tgt-null'
+#6 206.3 make[1]: Entering directory '/iverilog/tgt-stub'
+#6 206.3 mkdir dep
+#6 206.3 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c stub.c -o stub.o
+#6 206.3 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c classes.c -o classes.o
+#6 206.3 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c constant.c -o constant.o
+#6 206.3 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c enumerate.c -o enumerate.o
+#6 206.4 mv enumerate.d dep
+#6 206.4 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c expression.c -o expression.o
+#6 206.4 mv classes.d dep
+#6 206.4 mv constant.d dep
+#6 206.4 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c statement.c -o statement.o
+#6 206.4 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c switches.c -o switches.o
+#6 206.5 mv switches.d dep
+#6 206.5 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c types.c -o types.o
+#6 206.6 mv types.d dep
+#6 206.6 mv expression.d dep
+#6 206.6 mv statement.d dep
+#6 207.0 mv stub.d dep
+#6 207.0 clang -shared  -o stub.tgt stub.o classes.o constant.o enumerate.o expression.o statement.o switches.o types.o 
+#6 207.1 make[1]: Leaving directory '/iverilog/tgt-stub'
+#6 207.1 make[1]: Entering directory '/iverilog/tgt-vvp'
+#6 207.1 mkdir dep
+#6 207.1 echo 'flag:VVP_EXECUTABLE=/usr/local/bin/vvp' | cat ./vvp.conf.in - > vvp.conf
+#6 207.1 echo 'flag:VVP_EXECUTABLE=/usr/local/bin/vvp' | cat ./vvp-s.conf.in - > vvp-s.conf
+#6 207.1 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vvp.c -o vvp.o
+#6 207.1 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_class.c -o draw_class.o
+#6 207.1 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_delay.c -o draw_delay.o
+#6 207.1 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_enum.c -o draw_enum.o
+#6 207.2 mv draw_enum.d dep
+#6 207.2 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_mux.c -o draw_mux.o
+#6 207.2 mv draw_class.d dep
+#6 207.2 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_net_input.c -o draw_net_input.o
+#6 207.2 mv vvp.d dep
+#6 207.2 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_substitute.c -o draw_substitute.o
+#6 207.3 mv draw_delay.d dep
+#6 207.3 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_switch.c -o draw_switch.o
+#6 207.3 mv draw_mux.d dep
+#6 207.3 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_ufunc.c -o draw_ufunc.o
+#6 207.3 mv draw_substitute.d dep
+#6 207.3 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c draw_vpi.c -o draw_vpi.o
+#6 207.4 mv draw_switch.d dep
+#6 207.4 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c eval_condit.c -o eval_condit.o
+#6 207.4 mv draw_ufunc.d dep
+#6 207.4 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c eval_expr.c -o eval_expr.o
+#6 207.6 mv eval_expr.d dep
+#6 207.6 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c eval_object.c -o eval_object.o
+#6 207.6 mv eval_condit.d dep
+#6 207.6 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c eval_real.c -o eval_real.o
+#6 207.6 mv draw_vpi.d dep
+#6 207.6 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c eval_string.c -o eval_string.o
+#6 207.6 mv draw_net_input.d dep
+#6 207.6 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c eval_vec4.c -o eval_vec4.o
+#6 207.9 mv eval_string.d dep
+#6 207.9 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c modpath.c -o modpath.o
+#6 207.9 mv eval_object.d dep
+#6 207.9 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c stmt_assign.c -o stmt_assign.o
+#6 208.0 mv eval_real.d dep
+#6 208.0 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vvp_process.c -o vvp_process.o
+#6 208.0 mv eval_vec4.d dep
+#6 208.0 mv modpath.d dep
+#6 208.0 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vvp_proc_loops.c -o vvp_proc_loops.o
+#6 208.0 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vvp_scope.c -o vvp_scope.o
+#6 208.2 mv vvp_proc_loops.d dep
+#6 208.4 mv stmt_assign.d dep
+#6 208.6 mv vvp_process.d dep
+#6 208.9 mv vvp_scope.d dep
+#6 208.9 clang -shared  -o vvp.tgt vvp.o draw_class.o draw_delay.o draw_enum.o draw_mux.o draw_net_input.o draw_substitute.o draw_switch.o draw_ufunc.o draw_vpi.o eval_condit.o eval_expr.o eval_object.o eval_real.o eval_string.o eval_vec4.o modpath.o stmt_assign.o vvp_process.o vvp_proc_loops.o vvp_scope.o 
+#6 208.9 make[1]: Leaving directory '/iverilog/tgt-vvp'
+#6 208.9 make[1]: Entering directory '/iverilog/tgt-vhdl'
+#6 208.9 mkdir dep
+#6 208.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vhdl.cc -o vhdl.o
+#6 208.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c state.cc -o state.o
+#6 208.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vhdl_element.cc -o vhdl_element.o
+#6 208.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vhdl_type.cc -o vhdl_type.o
+#6 209.7 mv vhdl.d dep
+#6 209.7 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c vhdl_syntax.cc -o vhdl_syntax.o
+#6 209.8 mv vhdl_type.d dep
+#6 209.8 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c scope.cc -o scope.o
+#6 209.9 mv vhdl_element.d dep
+#6 209.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c process.cc -o process.o
+#6 210.7 mv state.d dep
+#6 210.7 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c stmt.cc -o stmt.o
+#6 211.0 mv process.d dep
+#6 211.0 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c expr.cc -o expr.o
+#6 212.0 mv scope.d dep
+#6 212.0 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm.cc -o lpm.o
+#6 212.7 mv expr.d dep
+#6 212.7 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c support.cc -o support.o
+#6 213.0 mv lpm.d dep
+#6 213.0 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c cast.cc -o cast.o
+#6 213.3 mv vhdl_syntax.d dep
+#6 213.3 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c logic.cc -o logic.o
+#6 213.6 mv stmt.d dep
+#6 213.8 mv support.d dep
+#6 213.9 mv cast.d dep
+#6 214.2 mv logic.d dep
+#6 214.2 clang++ -std=c++11 -shared  -o vhdl.tgt vhdl.o state.o vhdl_element.o vhdl_type.o vhdl_syntax.o scope.o process.o stmt.o expr.o lpm.o support.o cast.o logic.o 
+#6 214.3 make[1]: Leaving directory '/iverilog/tgt-vhdl'
+#6 214.3 make[1]: Entering directory '/iverilog/tgt-vlog95'
+#6 214.3 mkdir dep
+#6 214.3 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c vlog95.c -o vlog95.o
+#6 214.3 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c event.c -o event.o
+#6 214.3 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c expr.c -o expr.o
+#6 214.3 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c logic_lpm.c -o logic_lpm.o
+#6 214.5 mv vlog95.d dep
+#6 214.5 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c misc.c -o misc.o
+#6 214.5 mv event.d dep
+#6 214.5 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c numbers.c -o numbers.o
+#6 214.9 mv numbers.d dep
+#6 214.9 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c scope.c -o scope.o
+#6 214.9 mv expr.d dep
+#6 214.9 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c stmt.c -o stmt.o
+#6 215.0 mv misc.d dep
+#6 215.1 clang -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c udp.c -o udp.o
+#6 215.3 mv udp.d dep
+#6 215.4 mv logic_lpm.d dep
+#6 215.4 mv scope.d dep
+#6 215.5 mv stmt.d dep
+#6 215.5 clang -shared  -o vlog95.tgt vlog95.o event.o expr.o logic_lpm.o misc.o numbers.o scope.o stmt.o udp.o -lm 
+#6 215.5 make[1]: Leaving directory '/iverilog/tgt-vlog95'
+#6 215.6 make[1]: Entering directory '/iverilog/tgt-pcb'
+#6 215.6 mkdir dep
+#6 215.6 bison --verbose -t -p fp --defines=fp.h -o fp.cc fp.y
+#6 215.6 flex -s -ofp_lex.cc ./fp.lex
+#6 215.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c pcb.cc -o pcb.o
+#6 215.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c scope.cc -o scope.o
+#6 215.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c show_netlist.cc -o show_netlist.o
+#6 215.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c show_pcb.cc -o show_pcb.o
+#6 216.1 mv pcb.d dep
+#6 216.1 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c footprint.cc -o footprint.o
+#6 216.3 mv show_netlist.d dep
+#6 216.3 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c fp.cc -o fp.o
+#6 216.3 mv show_pcb.d dep
+#6 216.3 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c fp_lex.cc -o fp_lex.o
+#6 217.0 mv fp_lex.d dep
+#6 217.0 mv scope.d dep
+#6 217.2 mv footprint.d dep
+#6 217.3 mv fp.d dep
+#6 217.3 clang++ -std=c++11 -shared  -o pcb.tgt pcb.o scope.o show_netlist.o show_pcb.o footprint.o fp.o fp_lex.o 
+#6 217.4 make[1]: Leaving directory '/iverilog/tgt-pcb'
+#6 217.4 make[1]: Entering directory '/iverilog/tgt-blif'
+#6 217.4 mkdir dep
+#6 217.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c blif.cc -o blif.o
+#6 217.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c constants.cc -o constants.o
+#6 217.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c logic_gate.cc -o logic_gate.o
+#6 217.4 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm.cc -o lpm.o
+#6 217.6 mv lpm.d dep
+#6 217.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_add.cc -o lpm_add.o
+#6 217.6 mv logic_gate.d dep
+#6 217.6 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_cmp_eq.cc -o lpm_cmp_eq.o
+#6 217.7 mv constants.d dep
+#6 217.7 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_cmp_gt.cc -o lpm_cmp_gt.o
+#6 217.9 mv lpm_add.d dep
+#6 217.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_ff.cc -o lpm_ff.o
+#6 217.9 mv lpm_cmp_eq.d dep
+#6 217.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_mux.cc -o lpm_mux.o
+#6 217.9 mv blif.d dep
+#6 217.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_part_vp.cc -o lpm_part_vp.o
+#6 218.1 mv lpm_cmp_gt.d dep
+#6 218.1 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_re_logic.cc -o lpm_re_logic.o
+#6 218.2 mv lpm_ff.d dep
+#6 218.2 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_shift.cc -o lpm_shift.o
+#6 218.2 mv lpm_mux.d dep
+#6 218.2 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c lpm_sign_ext.cc -o lpm_sign_ext.o
+#6 218.3 mv lpm_part_vp.d dep
+#6 218.3 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c nex_data.cc -o nex_data.o
+#6 218.3 mv lpm_re_logic.d dep
+#6 218.4 mv lpm_shift.d dep
+#6 218.5 mv lpm_sign_ext.d dep
+#6 218.8 mv nex_data.d dep
+#6 218.8 clang++ -std=c++11 -shared  -o blif.tgt blif.o constants.o logic_gate.o lpm.o lpm_add.o lpm_cmp_eq.o lpm_cmp_gt.o lpm_ff.o lpm_mux.o lpm_part_vp.o lpm_re_logic.o lpm_shift.o lpm_sign_ext.o nex_data.o 
+#6 218.9 make[1]: Leaving directory '/iverilog/tgt-blif'
+#6 218.9 make[1]: Entering directory '/iverilog/tgt-sizer'
+#6 218.9 mkdir dep
+#6 218.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c sizer.cc -o sizer.o
+#6 218.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c scan_lpms.cc -o scan_lpms.o
+#6 218.9 clang++ -std=c++11 -I. -I..  -DHAVE_CONFIG_H -fPIC -Wall -Wextra -Wshadow   -g -O2 -std=c++11 -MD -c scan_logs.cc -o scan_logs.o
+#6 219.2 mv scan_logs.d dep
+#6 219.4 mv scan_lpms.d dep
+#6 219.5 mv sizer.d dep
+#6 219.5 clang++ -std=c++11 -shared  -o sizer.tgt sizer.o scan_lpms.o scan_logs.o 
+#6 219.6 make[1]: Leaving directory '/iverilog/tgt-sizer'
+#6 219.6 make[1]: Entering directory '/iverilog/driver'
+#6 219.6 mkdir dep
+#6 219.6 flex -s -t cflexor.lex > cflexor.c
+#6 219.6 bison --verbose -t -p cf -d -o cfparse.c cfparse.y
+#6 219.6 clang -I. -I..  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c -DIVL_ROOT='"/usr/local/lib/ivl"' -DIVL_SUFFIX='""' -DIVL_INC='"/usr/local/include"' -DIVL_LIB='"/usr/local/lib"' -DDLLIB='"-ldl"' -DIVL_INCLUDE_INSTALL_DIR="\"/usr/local/include\"" ./main.c
+#6 219.6 clang -I. -I..  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c substit.c -o substit.o
+#6 219.7 mv substit.d dep
+#6 219.7 clang -I. -I..  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c cflexor.c -o cflexor.o
+#6 219.7 clang -I. -I..  -DHAVE_CONFIG_H -Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2 -MD -c cfparse.c -o cfparse.o
+#6 220.0 mv main.d dep
+#6 220.0 mv cfparse.d dep
+#6 220.2 mv cflexor.d dep
+#6 220.2 clang  main.o substit.o cflexor.o cfparse.o -o iverilog 
+#6 220.2 make[1]: Leaving directory '/iverilog/driver'
+#6 220.2 make[1]: Entering directory '/iverilog/ivtest'
+#6 220.2 make[1]: Nothing to be done for 'all'.
+#6 220.2 make[1]: Leaving directory '/iverilog/ivtest'
+#6 220.2 make[1]: Entering directory '/iverilog/driver-vpi'
+#6 220.2 sed -e 's;@SHARED@;-shared;' -e 's;@PIC@;-fPIC;' \
+#6 220.2     -e 's;@ENABLE_PLI1@;no;' \
+#6 220.2     -e 's;@SUFFIX@;;' \
+#6 220.2     -e 's;@IVCC@;clang;' \
+#6 220.2     -e 's;@IVCXX@;clang++ -std=c++11;' \
+#6 220.2     -e 's;@IVCFLAGS@;-Wall -Wextra -Wshadow -Wstrict-prototypes  -g -O2;' \
+#6 220.2     -e 's;@IVCXXFLAGS@;-Wall -Wextra -Wshadow   -g -O2 -std=c++11;' \
+#6 220.2     -e 's;@IVCTARGETFLAGS@;;' \
+#6 220.2     -e 's;@INCLUDEDIR@;/usr/local/include/iverilog;' \
+#6 220.2     -e 's;@LIBDIR@;/usr/local/lib;' iverilog-vpi.sh > iverilog-vpi
+#6 220.2 chmod +x iverilog-vpi
+#6 220.2 make[1]: Leaving directory '/iverilog/driver-vpi'
+#6 220.2 make -C ivlpp check &&  make -C vhdlpp check &&  make -C vvp check &&  make -C vpi check &&  make -C tgt-null check &&  make -C tgt-stub check &&  make -C tgt-vvp check &&  make -C tgt-vhdl check &&  make -C tgt-vlog95 check &&  make -C tgt-pcb check &&  make -C tgt-blif check &&  make -C tgt-sizer check &&  make -C driver check &&  make -C ivtest check &&  make -C driver-vpi check &&  true
+#6 220.2 make[1]: Entering directory '/iverilog/ivlpp'
+#6 220.2 make[1]: Nothing to be done for 'check'.
+#6 220.2 make[1]: Leaving directory '/iverilog/ivlpp'
+#6 220.3 make[1]: Entering directory '/iverilog/vhdlpp'
+#6 220.3 make[1]: Nothing to be done for 'check'.
+#6 220.3 make[1]: Leaving directory '/iverilog/vhdlpp'
+#6 220.3 make[1]: Entering directory '/iverilog/vvp'
+#6 220.3 LD_LIBRARY_PATH=/iverilog/vvp ./vvp -M../vpi ./examples/hello.vvp | grep 'Hello, World.'
+#6 220.3 Hello, World.
+#6 220.3 make[1]: Leaving directory '/iverilog/vvp'
+#6 220.3 make[1]: Entering directory '/iverilog/vpi'
+#6 220.3 make[1]: Nothing to be done for 'check'.
+#6 220.3 make[1]: Leaving directory '/iverilog/vpi'
+#6 220.3 make[1]: Entering directory '/iverilog/tgt-null'
+#6 220.3 make[1]: Nothing to be done for 'check'.
+#6 220.3 make[1]: Leaving directory '/iverilog/tgt-null'
+#6 220.3 make[1]: Entering directory '/iverilog/tgt-stub'
+#6 220.3 make[1]: Nothing to be done for 'check'.
+#6 220.3 make[1]: Leaving directory '/iverilog/tgt-stub'
+#6 220.3 make[1]: Entering directory '/iverilog/tgt-vvp'
+#6 220.3 make[1]: Nothing to be done for 'check'.
+#6 220.3 make[1]: Leaving directory '/iverilog/tgt-vvp'
+#6 220.4 make[1]: Entering directory '/iverilog/tgt-vhdl'
+#6 220.4 make[1]: Nothing to be done for 'check'.
+#6 220.4 make[1]: Leaving directory '/iverilog/tgt-vhdl'
+#6 220.4 make[1]: Entering directory '/iverilog/tgt-vlog95'
+#6 220.4 make[1]: Nothing to be done for 'check'.
+#6 220.4 make[1]: Leaving directory '/iverilog/tgt-vlog95'
+#6 220.4 make[1]: Entering directory '/iverilog/tgt-pcb'
+#6 220.4 make[1]: Nothing to be done for 'check'.
+#6 220.4 make[1]: Leaving directory '/iverilog/tgt-pcb'
+#6 220.4 make[1]: Entering directory '/iverilog/tgt-blif'
+#6 220.4 make[1]: Nothing to be done for 'check'.
+#6 220.4 make[1]: Leaving directory '/iverilog/tgt-blif'
+#6 220.4 make[1]: Entering directory '/iverilog/tgt-sizer'
+#6 220.4 make[1]: Nothing to be done for 'check'.
+#6 220.4 make[1]: Leaving directory '/iverilog/tgt-sizer'
+#6 220.4 make[1]: Entering directory '/iverilog/driver'
+#6 220.4 driver/iverilog: create a vvp file and then run it.
+#6 220.4 Hello World!
+#6 220.4 make[1]: Leaving directory '/iverilog/driver'
+#6 220.4 make[1]: Entering directory '/iverilog/ivtest'
+#6 220.4 make[1]: Nothing to be done for 'check'.
+#6 220.4 make[1]: Leaving directory '/iverilog/ivtest'
+#6 220.5 make[1]: Entering directory '/iverilog/driver-vpi'
+#6 220.5 make[1]: Nothing to be done for 'check'.
+#6 220.5 make[1]: Leaving directory '/iverilog/driver-vpi'
+#6 220.5 rm -f check.vvp
+#6 220.5 test -r check.conf || cp ./check.conf .
+#6 220.5 driver/iverilog -B. -BMvpi -BPivlpp -tcheck -ocheck.vvp ./examples/hello.vl && \
+#6 220.5 LD_LIBRARY_PATH=/iverilog/vvp vvp/vvp -M- -M./vpi ./check.vvp | grep 'Hello, World'
+#6 220.5 Hello, World
+#6 220.5 make -C ivlpp all &&  make -C vhdlpp all &&  make -C vvp all &&  make -C vpi all &&  make -C tgt-null all &&  make -C tgt-stub all &&  make -C tgt-vvp all &&  make -C tgt-vhdl all &&  make -C tgt-vlog95 all &&  make -C tgt-pcb all &&  make -C tgt-blif all &&  make -C tgt-sizer all &&  make -C driver all &&  make -C ivtest all &&  make -C driver-vpi all &&  true
+#6 220.5 make[1]: Entering directory '/iverilog/ivlpp'
+#6 220.5 make[1]: Nothing to be done for 'all'.
+#6 220.5 make[1]: Leaving directory '/iverilog/ivlpp'
+#6 220.6 make[1]: Entering directory '/iverilog/vhdlpp'
+#6 220.6 make[1]: Nothing to be done for 'all'.
+#6 220.6 make[1]: Leaving directory '/iverilog/vhdlpp'
+#6 220.6 make[1]: Entering directory '/iverilog/vvp'
+#6 220.6 make[1]: Nothing to be done for 'all'.
+#6 220.6 make[1]: Leaving directory '/iverilog/vvp'
+#6 220.6 make[1]: Entering directory '/iverilog/vpi'
+#6 220.6 make[1]: Nothing to be done for 'all'.
+#6 220.6 make[1]: Leaving directory '/iverilog/vpi'
+#6 220.6 make[1]: Entering directory '/iverilog/tgt-null'
+#6 220.6 make[1]: Nothing to be done for 'all'.
+#6 220.6 make[1]: Leaving directory '/iverilog/tgt-null'
+#6 220.6 make[1]: Entering directory '/iverilog/tgt-stub'
+#6 220.6 make[1]: Nothing to be done for 'all'.
+#6 220.6 make[1]: Leaving directory '/iverilog/tgt-stub'
+#6 220.7 make[1]: Entering directory '/iverilog/tgt-vvp'
+#6 220.7 make[1]: Nothing to be done for 'all'.
+#6 220.7 make[1]: Leaving directory '/iverilog/tgt-vvp'
+#6 220.7 make[1]: Entering directory '/iverilog/tgt-vhdl'
+#6 220.7 make[1]: Nothing to be done for 'all'.
+#6 220.7 make[1]: Leaving directory '/iverilog/tgt-vhdl'
+#6 220.7 make[1]: Entering directory '/iverilog/tgt-vlog95'
+#6 220.7 make[1]: Nothing to be done for 'all'.
+#6 220.7 make[1]: Leaving directory '/iverilog/tgt-vlog95'
+#6 220.7 make[1]: Entering directory '/iverilog/tgt-pcb'
+#6 220.7 make[1]: Nothing to be done for 'all'.
+#6 220.7 make[1]: Leaving directory '/iverilog/tgt-pcb'
+#6 220.7 make[1]: Entering directory '/iverilog/tgt-blif'
+#6 220.7 make[1]: Nothing to be done for 'all'.
+#6 220.7 make[1]: Leaving directory '/iverilog/tgt-blif'
+#6 220.7 make[1]: Entering directory '/iverilog/tgt-sizer'
+#6 220.7 make[1]: Nothing to be done for 'all'.
+#6 220.7 make[1]: Leaving directory '/iverilog/tgt-sizer'
+#6 220.7 make[1]: Entering directory '/iverilog/driver'
+#6 220.7 make[1]: Nothing to be done for 'all'.
+#6 220.7 make[1]: Leaving directory '/iverilog/driver'
+#6 220.7 make[1]: Entering directory '/iverilog/ivtest'
+#6 220.7 make[1]: Nothing to be done for 'all'.
+#6 220.7 make[1]: Leaving directory '/iverilog/ivtest'
+#6 220.7 make[1]: Entering directory '/iverilog/driver-vpi'
+#6 220.7 make[1]: Nothing to be done for 'all'.
+#6 220.7 make[1]: Leaving directory '/iverilog/driver-vpi'
+#6 220.7 ./mkinstalldirs "/opt/iverilog/usr/local/bin" \
+#6 220.7     "/opt/iverilog/usr/local/include/iverilog" \
+#6 220.7     "/opt/iverilog/usr/local/lib/ivl" \
+#6 220.7     "/opt/iverilog/usr/local/lib/ivl/include"
+#6 220.7 mkdir -p -- /opt/iverilog/usr/local/bin /opt/iverilog/usr/local/include/iverilog /opt/iverilog/usr/local/lib/ivl /opt/iverilog/usr/local/lib/ivl/include
+#6 220.7 /usr/bin/install -c ./ivl "/opt/iverilog/usr/local/lib/ivl/ivl"
+#6 220.8 /usr/bin/install -c -m 644 ./constants.vams "/opt/iverilog/usr/local/lib/ivl/include/constants.vams"
+#6 220.8 /usr/bin/install -c -m 644 ./disciplines.vams "/opt/iverilog/usr/local/lib/ivl/include/disciplines.vams"
+#6 220.8 /usr/bin/install -c -m 644 ./ivl_target.h "/opt/iverilog/usr/local/include/iverilog/ivl_target.h"
+#6 220.8 /usr/bin/install -c -m 644 ./_pli_types.h "/opt/iverilog/usr/local/include/iverilog/_pli_types.h"
+#6 220.8 /usr/bin/install -c -m 644 ./sv_vpi_user.h "/opt/iverilog/usr/local/include/iverilog/sv_vpi_user.h"
+#6 220.8 /usr/bin/install -c -m 644 ./vpi_user.h "/opt/iverilog/usr/local/include/iverilog/vpi_user.h"
+#6 220.8 /usr/bin/install -c -m 644 ./acc_user.h "/opt/iverilog/usr/local/include/iverilog/acc_user.h"
+#6 220.8 /usr/bin/install -c -m 644 ./veriuser.h "/opt/iverilog/usr/local/include/iverilog/veriuser.h"
+#6 220.8 make -C ivlpp install &&  make -C vhdlpp install &&  make -C vvp install &&  make -C vpi install &&  make -C tgt-null install &&  make -C tgt-stub install &&  make -C tgt-vvp install &&  make -C tgt-vhdl install &&  make -C tgt-vlog95 install &&  make -C tgt-pcb install &&  make -C tgt-blif install &&  make -C tgt-sizer install &&  make -C driver install &&  make -C ivtest install &&  make -C driver-vpi install &&  true
+#6 220.8 make[1]: Entering directory '/iverilog/ivlpp'
+#6 220.8 ./../mkinstalldirs "/opt/iverilog/usr/local/lib/ivl"
+#6 220.8 /usr/bin/install -c ./ivlpp "/opt/iverilog/usr/local/lib/ivl/ivlpp"
+#6 220.8 make[1]: Leaving directory '/iverilog/ivlpp'
+#6 220.8 make[1]: Entering directory '/iverilog/vhdlpp'
+#6 220.8 ./../mkinstalldirs "/opt/iverilog/usr/local/lib/ivl"
+#6 220.8 /usr/bin/install -c ./vhdlpp "/opt/iverilog/usr/local/lib/ivl/vhdlpp"
+#6 220.8 make[1]: Leaving directory '/iverilog/vhdlpp'
+#6 220.8 make[1]: Entering directory '/iverilog/vvp'
+#6 220.8 ./../mkinstalldirs "/opt/iverilog/usr/local/bin" \
+#6 220.8 	"/opt/iverilog/usr/local/include/iverilog" \
+#6 220.8 	"/opt/iverilog/usr/local/lib" \
+#6 220.8 	"/opt/iverilog/usr/local/share/doc/" \
+#6 220.8 	"/opt/iverilog/usr/local/share/man/man1"
+#6 220.8 mkdir -p -- /opt/iverilog/usr/local/share/doc/ /opt/iverilog/usr/local/share/man/man1
+#6 220.8 /usr/bin/install -c ./vvp "/opt/iverilog/usr/local/bin/vvp"
+#6 220.8 /usr/bin/install -c -d "/opt/iverilog/usr/local/lib/pkgconfig"
+#6 220.8 /usr/bin/install -c -m 644 libvvp.pc "/opt/iverilog/usr/local/lib/pkgconfig/libvvp.pc"
+#6 220.9 make[1]: Leaving directory '/iverilog/vvp'
+#6 220.9 make[1]: Entering directory '/iverilog/vpi'
+#6 220.9 ./../mkinstalldirs "/opt/iverilog/usr/local/lib" "/opt/iverilog/usr/local/lib/ivl"
+#6 220.9 /usr/bin/install -c -m 644 ./libvpi.a "/opt/iverilog/usr/local/lib/libvpi.a"
+#6 220.9 /usr/bin/install -c ./system.vpi "/opt/iverilog/usr/local/lib/ivl/system.vpi"
+#6 220.9 /usr/bin/install -c ./va_math.vpi "/opt/iverilog/usr/local/lib/ivl/va_math.vpi"
+#6 220.9 /usr/bin/install -c ./v2005_math.vpi "/opt/iverilog/usr/local/lib/ivl/v2005_math.vpi"
+#6 220.9 /usr/bin/install -c ./v2009.vpi "/opt/iverilog/usr/local/lib/ivl/v2009.vpi"
+#6 220.9 /usr/bin/install -c ./vhdl_sys.vpi "/opt/iverilog/usr/local/lib/ivl/vhdl_sys.vpi"
+#6 220.9 /usr/bin/install -c ./vhdl_textio.vpi "/opt/iverilog/usr/local/lib/ivl/vhdl_textio.vpi"
+#6 220.9 /usr/bin/install -c ./vpi_debug.vpi "/opt/iverilog/usr/local/lib/ivl/vpi_debug.vpi"
+#6 220.9 make[1]: Leaving directory '/iverilog/vpi'
+#6 220.9 make[1]: Entering directory '/iverilog/tgt-null'
+#6 220.9 ./../mkinstalldirs "/opt/iverilog/usr/local/bin" "/opt/iverilog/usr/local/lib/ivl"
+#6 220.9 /usr/bin/install -c ./null.tgt "/opt/iverilog/usr/local/lib/ivl/null.tgt"
+#6 220.9 /usr/bin/install -c -m 644 ./null.conf "/opt/iverilog/usr/local/lib/ivl/null.conf"
+#6 220.9 /usr/bin/install -c -m 644 ./null-s.conf "/opt/iverilog/usr/local/lib/ivl/null-s.conf"
+#6 220.9 make[1]: Leaving directory '/iverilog/tgt-null'
+#6 220.9 make[1]: Entering directory '/iverilog/tgt-stub'
+#6 220.9 ./../mkinstalldirs "/opt/iverilog/usr/local/lib/ivl"
+#6 220.9 /usr/bin/install -c ./stub.tgt "/opt/iverilog/usr/local/lib/ivl/stub.tgt"
+#6 220.9 /usr/bin/install -c -m 644 ./stub.conf "/opt/iverilog/usr/local/lib/ivl/stub.conf"
+#6 220.9 /usr/bin/install -c -m 644 ./stub-s.conf "/opt/iverilog/usr/local/lib/ivl/stub-s.conf"
+#6 220.9 make[1]: Leaving directory '/iverilog/tgt-stub'
+#6 220.9 make[1]: Entering directory '/iverilog/tgt-vvp'
+#6 220.9 ./../mkinstalldirs "/opt/iverilog/usr/local/lib/ivl"
+#6 220.9 /usr/bin/install -c ./vvp.tgt "/opt/iverilog/usr/local/lib/ivl/vvp.tgt"
+#6 220.9 /usr/bin/install -c -m 644 ./vvp.conf "/opt/iverilog/usr/local/lib/ivl/vvp.conf"
+#6 220.9 /usr/bin/install -c -m 644 ./vvp-s.conf "/opt/iverilog/usr/local/lib/ivl/vvp-s.conf"
+#6 220.9 make[1]: Leaving directory '/iverilog/tgt-vvp'
+#6 221.0 make[1]: Entering directory '/iverilog/tgt-vhdl'
+#6 221.0 ./../mkinstalldirs "/opt/iverilog/usr/local/lib/ivl"
+#6 221.0 /usr/bin/install -c ./vhdl.tgt "/opt/iverilog/usr/local/lib/ivl/vhdl.tgt"
+#6 221.0 /usr/bin/install -c -m 644 ./vhdl.conf "/opt/iverilog/usr/local/lib/ivl/vhdl.conf"
+#6 221.0 /usr/bin/install -c -m 644 ./vhdl-s.conf "/opt/iverilog/usr/local/lib/ivl/vhdl-s.conf"
+#6 221.0 make[1]: Leaving directory '/iverilog/tgt-vhdl'
+#6 221.0 make[1]: Entering directory '/iverilog/tgt-vlog95'
+#6 221.0 ./../mkinstalldirs "/opt/iverilog/usr/local/bin" "/opt/iverilog/usr/local/lib/ivl"
+#6 221.0 /usr/bin/install -c ./vlog95.tgt "/opt/iverilog/usr/local/lib/ivl/vlog95.tgt"
+#6 221.0 /usr/bin/install -c -m 644 ./vlog95.conf "/opt/iverilog/usr/local/lib/ivl/vlog95.conf"
+#6 221.0 /usr/bin/install -c -m 644 ./vlog95-s.conf "/opt/iverilog/usr/local/lib/ivl/vlog95-s.conf"
+#6 221.0 make[1]: Leaving directory '/iverilog/tgt-vlog95'
+#6 221.0 make[1]: Entering directory '/iverilog/tgt-pcb'
+#6 221.0 ./../mkinstalldirs "/opt/iverilog/usr/local/bin" "/opt/iverilog/usr/local/lib/ivl"
+#6 221.0 /usr/bin/install -c ./pcb.tgt "/opt/iverilog/usr/local/lib/ivl/pcb.tgt"
+#6 221.0 /usr/bin/install -c -m 644 ./pcb.conf "/opt/iverilog/usr/local/lib/ivl/pcb.conf"
+#6 221.0 /usr/bin/install -c -m 644 ./pcb-s.conf "/opt/iverilog/usr/local/lib/ivl/pcb-s.conf"
+#6 221.0 make[1]: Leaving directory '/iverilog/tgt-pcb'
+#6 221.0 make[1]: Entering directory '/iverilog/tgt-blif'
+#6 221.0 ./../mkinstalldirs "/opt/iverilog/usr/local/bin" "/opt/iverilog/usr/local/lib/ivl"
+#6 221.0 /usr/bin/install -c ./blif.tgt "/opt/iverilog/usr/local/lib/ivl/blif.tgt"
+#6 221.0 /usr/bin/install -c -m 644 ./blif.conf "/opt/iverilog/usr/local/lib/ivl/blif.conf"
+#6 221.0 /usr/bin/install -c -m 644 ./blif-s.conf "/opt/iverilog/usr/local/lib/ivl/blif-s.conf"
+#6 221.0 make[1]: Leaving directory '/iverilog/tgt-blif'
+#6 221.0 make[1]: Entering directory '/iverilog/tgt-sizer'
+#6 221.0 ./../mkinstalldirs "/opt/iverilog/usr/local/bin" "/opt/iverilog/usr/local/lib/ivl"
+#6 221.0 /usr/bin/install -c ./sizer.tgt "/opt/iverilog/usr/local/lib/ivl/sizer.tgt"
+#6 221.1 /usr/bin/install -c -m 644 ./sizer.conf "/opt/iverilog/usr/local/lib/ivl/sizer.conf"
+#6 221.1 /usr/bin/install -c -m 644 ./sizer-s.conf "/opt/iverilog/usr/local/lib/ivl/sizer-s.conf"
+#6 221.1 make[1]: Leaving directory '/iverilog/tgt-sizer'
+#6 221.1 make[1]: Entering directory '/iverilog/driver'
+#6 221.1 ./../mkinstalldirs \
+#6 221.1     "/opt/iverilog/usr/local/bin" \
+#6 221.1     "/opt/iverilog/usr/local/share/doc/" \
+#6 221.1     "/opt/iverilog/usr/local/share/man/man1"
+#6 221.1 /usr/bin/install -c ./iverilog "/opt/iverilog/usr/local/bin/iverilog"
+#6 221.1 make[1]: Leaving directory '/iverilog/driver'
+#6 221.1 make[1]: Entering directory '/iverilog/ivtest'
+#6 221.1 make[1]: Nothing to be done for 'install'.
+#6 221.1 make[1]: Leaving directory '/iverilog/ivtest'
+#6 221.1 make[1]: Entering directory '/iverilog/driver-vpi'
+#6 221.1 ./../mkinstalldirs \
+#6 221.1     "/opt/iverilog/usr/local/bin" \
+#6 221.1     "/opt/iverilog/usr/local/share/doc/" \
+#6 221.1     "/opt/iverilog/usr/local/share/man/man1"
+#6 221.1 /usr/bin/install -c ./iverilog-vpi "/opt/iverilog/usr/local/bin/iverilog-vpi"
+#6 221.1 make[1]: Leaving directory '/iverilog/driver-vpi'
+#6 DONE 221.4s
+
+#7 [pkg 1/1] COPY --from=build /opt/iverilog /iverilog
+#7 DONE 0.1s
+
+#8 exporting to image
+#8 exporting layers
+#8 exporting layers 2.4s done
+#8 preparing layers for inline cache
+#8 preparing layers for inline cache 0.0s done
+#8 exporting manifest sha256:823a45556e851e65d11913b7ba1cfa0a4b2ade0712b4ff279eb1a78704385f8a 0.0s done
+#8 exporting config sha256:a6cee4a34bc2ca6cd2f3c85cf9781de5ae9a1f2d512b01dc449109f6c5c35443 0.0s done
+#8 exporting attestation manifest sha256:7c14411dcb75dfebf6f98819c4e2ed76a5f9ffc586269cd757d4cbbcd9d2afcc 0.0s done
+#8 exporting manifest list sha256:63aa4182605bba9b874df92d5a9d5a1337ed330371b8286e0788cf9845bc513e 0.0s done
+#8 naming to ghcr.io/hdl/amd64/debian/bullseye/pkg/iverilog:latest done
+#8 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/iverilog:latest
+#8 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/iverilog:latest 0.4s done
+#8 DONE 3.0s
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/testpkg:iverilog --build-arg IMAGE=ghcr.io/hdl/amd64/debian/bullseye/pkg/iverilog --build-arg PACKAGE=iverilog -f /home/umarcor/containers/utils/pyHDLC/testpkg.dockerfile .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from testpkg.dockerfile
+#1 transferring dockerfile: 975B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/iverilog:latest
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#5 resolve docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b 0.1s done
+#5 CACHED
+
+#6 [pkg 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/iverilog:latest@sha256:63aa4182605bba9b874df92d5a9d5a1337ed330371b8286e0788cf9845bc513e
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/iverilog:latest@sha256:63aa4182605bba9b874df92d5a9d5a1337ed330371b8286e0788cf9845bc513e 0.1s done
+#6 DONE 0.1s
+
+#7 [stage-1 2/3] COPY --from=pkg /iverilog /
+#7 DONE 0.6s
+
+#8 [stage-1 3/3] RUN apk add -U --no-cache file tree
+#8 0.753 (1/3) Installing libmagic (5.47-r2)
+#8 0.789 (2/3) Installing file (5.47-r2)
+#8 0.802 (3/3) Installing tree (2.3.2-r0)
+#8 0.817 Executing busybox-1.37.0-r31.trigger
+#8 0.822 OK: 18.4 MiB in 19 packages
+#8 DONE 0.9s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 2.5s done
+#9 preparing layers for inline cache
+#9 preparing layers for inline cache 0.0s done
+#9 exporting manifest sha256:644a9b1ada1c31354639979e72be4d455f6224a729be67f99859dc30a1020bd8 0.0s done
+#9 exporting config sha256:f4049c33c1ff797b9a1fb9b33c7a73ed9d843eba107cfcda13860eb77baf6be6 0.0s done
+#9 exporting attestation manifest sha256:02ffafe79d5310625a72b704a33d37e49f2910b4d54a4ba6527a96426d65a289 0.0s done
+#9 exporting manifest list sha256:55abf08e3d9a0b9dcb1e56d1dd1bc09b9cd88aad089ee6f150dc4d25eeaa7bdd
+#9 exporting manifest list sha256:55abf08e3d9a0b9dcb1e56d1dd1bc09b9cd88aad089ee6f150dc4d25eeaa7bdd 0.0s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/testpkg:iverilog done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:iverilog
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:iverilog 0.6s done
+#9 DONE 3.2s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/testpkg:iverilog //wrk/iverilog.pkg.sh
+/usr/local
+├── bin
+│   ├── iverilog
+│   ├── iverilog-vpi
+│   └── vvp
+├── include
+│   └── iverilog
+│       ├── _pli_types.h
+│       ├── acc_user.h
+│       ├── ivl_target.h
+│       ├── sv_vpi_user.h
+│       ├── veriuser.h
+│       └── vpi_user.h
+├── lib
+│   ├── ivl
+│   │   ├── blif-s.conf
+│   │   ├── blif.conf
+│   │   ├── blif.tgt
+│   │   ├── include
+│   │   │   ├── constants.vams
+│   │   │   └── disciplines.vams
+│   │   ├── ivl
+│   │   ├── ivlpp
+│   │   ├── null-s.conf
+│   │   ├── null.conf
+│   │   ├── null.tgt
+│   │   ├── pcb-s.conf
+│   │   ├── pcb.conf
+│   │   ├── pcb.tgt
+│   │   ├── sizer-s.conf
+│   │   ├── sizer.conf
+│   │   ├── sizer.tgt
+│   │   ├── stub-s.conf
+│   │   ├── stub.conf
+│   │   ├── stub.tgt
+│   │   ├── system.vpi
+│   │   ├── v2005_math.vpi
+│   │   ├── v2009.vpi
+│   │   ├── va_math.vpi
+│   │   ├── vhdl-s.conf
+│   │   ├── vhdl.conf
+│   │   ├── vhdl.tgt
+│   │   ├── vhdl_sys.vpi
+│   │   ├── vhdl_textio.vpi
+│   │   ├── vhdlpp
+│   │   ├── vlog95-s.conf
+│   │   ├── vlog95.conf
+│   │   ├── vlog95.tgt
+│   │   ├── vpi_debug.vpi
+│   │   ├── vvp-s.conf
+│   │   ├── vvp.conf
+│   │   └── vvp.tgt
+│   ├── libvpi.a
+│   └── pkgconfig
+│       └── libvvp.pc
+└── share
+    ├── doc
+    └── man
+        └── man1
+
+12 directories, 47 files
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS pkg/iverilog ===
+=== BUILD iverilog ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/iverilog --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -f debian/iverilog.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from iverilog.dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from iverilog.dockerfile
+#1 transferring dockerfile: 1.72kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#2 DONE 0.1s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/base:latest
+#3 DONE 0.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [stage-2 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e 0.1s done
+#5 CACHED
+
+#6 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.1s done
+#6 DONE 0.1s
+
+#7 [build 2/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     autoconf     automake     bison     flex     gperf     libreadline-dev     zlib1g-dev  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [build 3/3] RUN git clone https://github.com/steveicarus/iverilog  && cd iverilog  && autoconf  && ./configure  && make -j$(nproc) check  && make DESTDIR=/opt/iverilog install
+#8 CACHED
+
+#9 [stage-2 2/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     perl  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#9 2.271 Reading package lists...
+#9 2.822 Building dependency tree...
+#9 2.952 Reading state information...
+#9 3.077 The following additional packages will be installed:
+#9 3.077   libgdbm-compat4 libgdbm6 libperl5.32 perl-modules-5.32
+#9 3.077 Suggested packages:
+#9 3.077   gdbm-l10n sensible-utils perl-doc libterm-readline-gnu-perl
+#9 3.077   | libterm-readline-perl-perl make libtap-harness-archive-perl
+#9 3.077 Recommended packages:
+#9 3.077   netbase
+#9 3.111 The following NEW packages will be installed:
+#9 3.114   libgdbm-compat4 libgdbm6 libperl5.32 perl perl-modules-5.32
+#9 3.231 0 upgraded, 5 newly installed, 0 to remove and 0 not upgraded.
+#9 3.231 Need to get 7329 kB of archives.
+#9 3.231 After this operation, 47.3 MB of additional disk space will be used.
+#9 3.231 Get:1 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 perl-modules-5.32 all 5.32.1-4+deb11u5 [2823 kB]
+#9 3.369 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgdbm6 amd64 1.19-2 [64.9 kB]
+#9 3.369 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgdbm-compat4 amd64 1.19-2 [44.7 kB]
+#9 3.369 Get:4 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libperl5.32 amd64 5.32.1-4+deb11u5 [4102 kB]
+#9 3.387 Get:5 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 perl amd64 5.32.1-4+deb11u5 [294 kB]
+#9 3.512 debconf: delaying package configuration, since apt-utils is not installed
+#9 3.552 Fetched 7329 kB in 0s (27.2 MB/s)
+#9 3.579 Selecting previously unselected package perl-modules-5.32.
+#9 3.579 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7841 files and directories currently installed.)
+#9 3.589 Preparing to unpack .../perl-modules-5.32_5.32.1-4+deb11u5_all.deb ...
+#9 3.596 Unpacking perl-modules-5.32 (5.32.1-4+deb11u5) ...
+#9 3.991 Selecting previously unselected package libgdbm6:amd64.
+#9 3.993 Preparing to unpack .../libgdbm6_1.19-2_amd64.deb ...
+#9 4.008 Unpacking libgdbm6:amd64 (1.19-2) ...
+#9 4.069 Selecting previously unselected package libgdbm-compat4:amd64.
+#9 4.071 Preparing to unpack .../libgdbm-compat4_1.19-2_amd64.deb ...
+#9 4.078 Unpacking libgdbm-compat4:amd64 (1.19-2) ...
+#9 4.285 Selecting previously unselected package libperl5.32:amd64.
+#9 4.285 Preparing to unpack .../libperl5.32_5.32.1-4+deb11u5_amd64.deb ...
+#9 4.293 Unpacking libperl5.32:amd64 (5.32.1-4+deb11u5) ...
+#9 4.872 Selecting previously unselected package perl.
+#9 4.873 Preparing to unpack .../perl_5.32.1-4+deb11u5_amd64.deb ...
+#9 4.887 Unpacking perl (5.32.1-4+deb11u5) ...
+#9 4.982 Setting up perl-modules-5.32 (5.32.1-4+deb11u5) ...
+#9 5.007 Setting up libgdbm6:amd64 (1.19-2) ...
+#9 5.032 Setting up libgdbm-compat4:amd64 (1.19-2) ...
+#9 5.058 Setting up libperl5.32:amd64 (5.32.1-4+deb11u5) ...
+#9 5.082 Setting up perl (5.32.1-4+deb11u5) ...
+#9 5.123 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#9 5.193 Reading package lists...
+#9 5.747 Building dependency tree...
+#9 5.875 Reading state information...
+#9 5.900 Reading package lists...
+#9 6.454 Building dependency tree...
+#9 6.584 Reading state information...
+#9 6.723 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#9 DONE 6.8s
+
+#10 [stage-2 3/3] COPY --from=build /opt/iverilog /
+#10 DONE 0.3s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 2.5s done
+#11 preparing layers for inline cache
+#11 preparing layers for inline cache 0.0s done
+#11 exporting manifest sha256:85dce5d1a0990f8aa9d5369cc7cb53fbf8ef408545ade00840e32aec3de29cf3 0.0s done
+#11 exporting config sha256:19f94ea1cf2917fe872a1a39a4123af567b9b5b806daa677f48dafa3555e537d 0.0s done
+#11 exporting attestation manifest sha256:e0ab55c62acc7d45f89f8927718b602d606808891198f36c69bae45cbfa6e360
+#11 exporting attestation manifest sha256:e0ab55c62acc7d45f89f8927718b602d606808891198f36c69bae45cbfa6e360 0.0s done
+#11 exporting manifest list sha256:b41d45b004a23b6f2e6baf79d285f3e353a47e14307cb0d2d7f5d477e334fdcb 0.0s done
+#11 naming to ghcr.io/hdl/amd64/debian/bullseye/iverilog:latest done
+#11 unpacking to ghcr.io/hdl/amd64/debian/bullseye/iverilog:latest
+#11 unpacking to ghcr.io/hdl/amd64/debian/bullseye/iverilog:latest 0.8s done
+#11 DONE 3.5s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/iverilog
+Architecture: amd64 
+Size: 307007087
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/iverilog //wrk/iverilog.sh
+CC: 
+CXX: 
+· iverilog help >> ./iverilog.log
+· iverilog help: exit code 1 | [32mOK[0m
+· iverilog-vpi help >> ./iverilog.log
+· iverilog-vpi help: exit code 0 | [32mOK[0m
+· vvp help >> ./iverilog.log
+· vvp help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS iverilog ===
+RESULT: PASS

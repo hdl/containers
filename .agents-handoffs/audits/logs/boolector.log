@@ -1,0 +1,843 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: boolector IMAGES: ['pkg/boolector']
+=== BUILD pkg/boolector ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/boolector --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye debian/boolector
+#0 building with "default" instance using docker driver
+
+#1 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#1 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.1s done
+#1 DONE 0.2s
+
+#2 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#2 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.1s done
+#2 DONE 0.1s
+
+#3 [internal] load build definition from Dockerfile
+#3 transferring dockerfile: 1.39kB done
+#3 DONE 0.0s
+
+#4 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#4 DONE 0.0s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 56B done
+#6 DONE 0.0s
+
+#7 [build 2/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC  && apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]}  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && update-ca-certificates  && rm -rf /var/lib/apt/lists/*
+#7 2.033 Reading package lists...
+#7 2.908 Building dependency tree...
+#7 3.152 Reading state information...
+#7 3.448 binutils is already the newest version (2.35.2-2).
+#7 3.448 binutils set to manually installed.
+#7 3.448 The following additional packages will be installed:
+#7 3.448   cmake-data libarchive13 libicu67 libjsoncpp24 libncurses6 libprocps8
+#7 3.448   librhash0 libsigsegv2 libuv1 libxml2 m4 procps
+#7 3.448 Suggested packages:
+#7 3.448   autoconf-archive gnu-standards autoconf-doc libtool gettext cmake-doc
+#7 3.448   ninja-build lrzip m4-doc
+#7 3.448 Recommended packages:
+#7 3.448   automake | automaken gcc libgpm2 psmisc
+#7 3.577 The following NEW packages will be installed:
+#7 3.578   autoconf cmake cmake-data libarchive13 libicu67 libjsoncpp24 libncurses6
+#7 3.583   libprocps8 librhash0 libsigsegv2 libuv1 libxml2 m4 procps
+#7 4.350 0 upgraded, 14 newly installed, 0 to remove and 0 not upgraded.
+#7 4.350 Need to get 18.5 MB of archives.
+#7 4.350 After this operation, 74.6 MB of additional disk space will be used.
+#7 4.350 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libncurses6 amd64 6.2+20201114-2+deb11u2 [102 kB]
+#7 4.369 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libprocps8 amd64 2:3.3.17-5 [63.9 kB]
+#7 4.376 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 procps amd64 2:3.3.17-5 [502 kB]
+#7 4.399 Get:4 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libsigsegv2 amd64 2.13-1 [34.8 kB]
+#7 4.400 Get:5 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 m4 amd64 1.4.18-5 [204 kB]
+#7 4.437 Get:6 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 autoconf all 2.69-14 [313 kB]
+#7 4.442 Get:7 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 cmake-data all 3.18.4-2+deb11u1 [1725 kB]
+#7 4.463 Get:8 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libicu67 amd64 67.1-7+deb11u1 [8624 kB]
+#7 4.602 Get:9 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libxml2 amd64 2.9.10+dfsg-6.7+deb11u10 [695 kB]
+#7 4.607 Get:10 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libarchive13 amd64 3.4.3-2+deb11u4 [345 kB]
+#7 4.676 Get:11 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libjsoncpp24 amd64 1.9.4-4 [78.9 kB]
+#7 4.676 Get:12 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 librhash0 amd64 1.4.1-2 [129 kB]
+#7 4.676 Get:13 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libuv1 amd64 1.40.0-2+deb11u1 [132 kB]
+#7 4.927 Get:14 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 cmake amd64 3.18.4-2+deb11u1 [5593 kB]
+#7 5.200 debconf: delaying package configuration, since apt-utils is not installed
+#7 5.286 Fetched 18.5 MB in 1s (13.0 MB/s)
+#7 5.395 Selecting previously unselected package libncurses6:amd64.
+#7 5.395 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14728 files and directories currently installed.)
+#7 5.479 Preparing to unpack .../00-libncurses6_6.2+20201114-2+deb11u2_amd64.deb ...
+#7 5.479 Unpacking libncurses6:amd64 (6.2+20201114-2+deb11u2) ...
+#7 5.627 Selecting previously unselected package libprocps8:amd64.
+#7 5.628 Preparing to unpack .../01-libprocps8_2%3a3.3.17-5_amd64.deb ...
+#7 5.642 Unpacking libprocps8:amd64 (2:3.3.17-5) ...
+#7 5.730 Selecting previously unselected package procps.
+#7 5.732 Preparing to unpack .../02-procps_2%3a3.3.17-5_amd64.deb ...
+#7 5.746 Unpacking procps (2:3.3.17-5) ...
+#7 5.935 Selecting previously unselected package libsigsegv2:amd64.
+#7 5.937 Preparing to unpack .../03-libsigsegv2_2.13-1_amd64.deb ...
+#7 5.951 Unpacking libsigsegv2:amd64 (2.13-1) ...
+#7 6.012 Selecting previously unselected package m4.
+#7 6.014 Preparing to unpack .../04-m4_1.4.18-5_amd64.deb ...
+#7 6.023 Unpacking m4 (1.4.18-5) ...
+#7 6.102 Selecting previously unselected package autoconf.
+#7 6.103 Preparing to unpack .../05-autoconf_2.69-14_all.deb ...
+#7 6.114 Unpacking autoconf (2.69-14) ...
+#7 6.326 Selecting previously unselected package cmake-data.
+#7 6.326 Preparing to unpack .../06-cmake-data_3.18.4-2+deb11u1_all.deb ...
+#7 6.326 Unpacking cmake-data (3.18.4-2+deb11u1) ...
+#7 6.857 Selecting previously unselected package libicu67:amd64.
+#7 6.858 Preparing to unpack .../07-libicu67_67.1-7+deb11u1_amd64.deb ...
+#7 6.869 Unpacking libicu67:amd64 (67.1-7+deb11u1) ...
+#7 7.969 Selecting previously unselected package libxml2:amd64.
+#7 7.972 Preparing to unpack .../08-libxml2_2.9.10+dfsg-6.7+deb11u10_amd64.deb ...
+#7 7.987 Unpacking libxml2:amd64 (2.9.10+dfsg-6.7+deb11u10) ...
+#7 8.324 Selecting previously unselected package libarchive13:amd64.
+#7 8.324 Preparing to unpack .../09-libarchive13_3.4.3-2+deb11u4_amd64.deb ...
+#7 8.358 Unpacking libarchive13:amd64 (3.4.3-2+deb11u4) ...
+#7 8.504 Selecting previously unselected package libjsoncpp24:amd64.
+#7 8.504 Preparing to unpack .../10-libjsoncpp24_1.9.4-4_amd64.deb ...
+#7 8.504 Unpacking libjsoncpp24:amd64 (1.9.4-4) ...
+#7 8.576 Selecting previously unselected package librhash0:amd64.
+#7 8.577 Preparing to unpack .../11-librhash0_1.4.1-2_amd64.deb ...
+#7 8.585 Unpacking librhash0:amd64 (1.4.1-2) ...
+#7 8.735 Selecting previously unselected package libuv1:amd64.
+#7 8.737 Preparing to unpack .../12-libuv1_1.40.0-2+deb11u1_amd64.deb ...
+#7 8.749 Unpacking libuv1:amd64 (1.40.0-2+deb11u1) ...
+#7 8.881 Selecting previously unselected package cmake.
+#7 8.883 Preparing to unpack .../13-cmake_3.18.4-2+deb11u1_amd64.deb ...
+#7 8.897 Unpacking cmake (3.18.4-2+deb11u1) ...
+#7 9.742 Setting up libicu67:amd64 (67.1-7+deb11u1) ...
+#7 9.771 Setting up libuv1:amd64 (1.40.0-2+deb11u1) ...
+#7 9.801 Setting up libncurses6:amd64 (6.2+20201114-2+deb11u2) ...
+#7 9.831 Setting up libsigsegv2:amd64 (2.13-1) ...
+#7 9.855 Setting up libjsoncpp24:amd64 (1.9.4-4) ...
+#7 9.907 Setting up librhash0:amd64 (1.4.1-2) ...
+#7 9.942 Setting up cmake-data (3.18.4-2+deb11u1) ...
+#7 9.996 Setting up libxml2:amd64 (2.9.10+dfsg-6.7+deb11u10) ...
+#7 10.03 Setting up libprocps8:amd64 (2:3.3.17-5) ...
+#7 10.06 Setting up libarchive13:amd64 (3.4.3-2+deb11u4) ...
+#7 10.10 Setting up m4 (1.4.18-5) ...
+#7 10.13 Setting up autoconf (2.69-14) ...
+#7 10.17 Setting up procps (2:3.3.17-5) ...
+#7 10.29 Setting up cmake (3.18.4-2+deb11u1) ...
+#7 10.32 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#7 10.72 Reading package lists...
+#7 11.48 Building dependency tree...
+#7 11.67 Reading state information...
+#7 11.70 Reading package lists...
+#7 12.46 Building dependency tree...
+#7 12.62 Reading state information...
+#7 12.84 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#7 12.85 Updating certificates in /etc/ssl/certs...
+#7 14.09 0 added, 0 removed; done.
+#7 14.09 Running hooks in /etc/ca-certificates/update.d...
+#7 14.10 done.
+#7 DONE 14.2s
+
+#8 [build 3/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+#8 0.528 Cloning into '/tmp/boolector'...
+#8 8.362   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#8 8.378                                  Dload  Upload   Total   Spent    Left  Speed
+#8 8.391   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#8 8.862   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#8 9.284 100 87405    0 87405    0     0  94799      0 --:--:-- --:--:-- --:--:-- 94799
+#8 9.316 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/
+#8 9.317 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/.clang-format
+#8 9.317 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/.github/
+#8 9.317 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/.github/workflows/
+#8 9.317 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/.github/workflows/ci.yml
+#8 9.318 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/.gitignore
+#8 9.318 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/AUTHORS
+#8 9.319 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/CMakeLists.txt
+#8 9.319 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/LICENSE.txt
+#8 9.319 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/README.md
+#8 9.320 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/VERSION
+#8 9.320 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/configure.sh
+#8 9.320 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/
+#8 9.320 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/.gitignore
+#8 9.320 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/btorsim/
+#8 9.320 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/btorsim/count2.btor2
+#8 9.320 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/btorsim/count4.btor2
+#8 9.320 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/btorsim/factorial4even.btor2
+#8 9.320 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/btorsim/noninitstate.btor2
+#8 9.321 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/btorsim/ponylink-slaveTXlen-sat.btor2
+#8 9.324 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/btorsim/recount4.btor2
+#8 9.324 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/btorsim/run-examples.sh
+#8 9.324 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/btorsim/twocount2.btor2
+#8 9.324 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/btorsim/twocount2c.btor2
+#8 9.324 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/examples/btorsim/twocount32.btor2
+#8 9.325 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/mksrcrelease.sh
+#8 9.325 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/setup-deps.sh
+#8 9.325 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/
+#8 9.325 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/CMakeLists.txt
+#8 9.325 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btor2aiger.cpp
+#8 9.325 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btor2parser/
+#8 9.325 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btor2parser/btor2parser.c
+#8 9.325 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btor2parser/btor2parser.h
+#8 9.325 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/
+#8 9.325 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsim.cpp
+#8 9.326 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsimam.cpp
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsimam.h
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsimbv.c
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsimbv.h
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsimhelpers.cpp
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsimhelpers.h
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsimrng.c
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsimrng.h
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsimstate.cpp
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsimstate.h
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsimvcd.cpp
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsim/btorsimvcd.h
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/btorsplit.cpp
+#8 9.327 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/catbtor.c
+#8 9.328 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/util/
+#8 9.328 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/util/btor2mem.h
+#8 9.328 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/src/util/btor2stack.h
+#8 9.328 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/
+#8 9.329 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/run-coverage-tests.sh
+#8 9.329 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/runtests.sh
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/.gitignore
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/aa.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/aa.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/addnlafterfirstarg.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/addnlafterfirstarg.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/addnospaceafterfirstarg.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/addnospaceafterfirstarg.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/allop2s.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/allop2s.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/andargmismatch.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/andargmismatch.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/andlenospace.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/andlenospace.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/andonesone.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/andonesone.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/andoutmismatch.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/andoutmismatch.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/andtrailspace.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/andtrailspace.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/argidlarger.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/argidlarger.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/array.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/array.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/arrayasbv.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/arrayasbv.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/arraynospaceaftersort.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/arraynospaceaftersort.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/empty.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/empty.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/emptytag.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/emptytag.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/gap.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/gap.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/ii.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/ii.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/implies2ndargundef.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/implies2ndargundef.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/input.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/input.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/inputemptysym.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/inputemptysym.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/inputeofinsym.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/inputeofinsym.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/inputsymspace.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/inputsymspace.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/invalidargid.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/invalidargid.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/invalidid.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/invalidid.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/invalidid0.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/invalidid0.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/invalidtag.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/invalidtag.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/ll.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/ll.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/maxid.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/maxid.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/maxlen.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/maxlen.out
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/mm.in
+#8 9.331 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/mm.out
+#8 9.332 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nlnlnl.in
+#8 9.332 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nlnlnl.out
+#8 9.332 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nn.in
+#8 9.332 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nn.out
+#8 9.332 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nondigitid.in
+#8 9.332 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nondigitid.out
+#8 9.332 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nondigitlen.in
+#8 9.332 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nondigitlen.out
+#8 9.332 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nonewlinecomment.in
+#8 9.332 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nonewlinecomment.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nor2ndargnospace.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nor2ndargnospace.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nospaceafterid.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/nospaceafterid.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/onesnospace.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/onesnospace.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/oo.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/oo.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/samearg.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/samearg.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortarray.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortarray.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortarrayargs1.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortarrayargs1.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortarrayargs2.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortarrayargs2.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortarrayargs3.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortarrayargs3.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortarrayargs4.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortarrayargs4.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortarraywarrayarg.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortarraywarrayarg.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortasarg.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortasarg.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortbitvec.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortbitvec.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortbvnobw.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortbvnobw.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortnotag.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/sortnotag.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/space.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/space.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/ss.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/ss.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/state.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/state.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/statenospace.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/statenospace.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/tab.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/tab.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/tagnospace.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/tagnospace.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/undefinedargid.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/undefinedargid.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/unordered.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/unordered.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/uu.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/uu.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/vv.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/vv.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/xx.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/xx.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/zero1.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/zero1.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/zero32.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/zero32.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/zeroid.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/zeroid.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/zerolen.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/zerolen.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/zerowitharg.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/zerowitharg.out
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/zz.in
+#8 9.335 btor2tools-037f1fa88fb439dca6f648ad48a3463256d69d8b/test/tests/zz.out
+#8 9.574 -- The C compiler identification is Clang 11.0.1
+#8 9.770 -- The CXX compiler identification is Clang 11.0.1
+#8 9.798 -- Detecting C compiler ABI info
+#8 9.957 -- Detecting C compiler ABI info - done
+#8 9.967 -- Check for working C compiler: /usr/bin/clang - skipped
+#8 9.968 -- Detecting C compile features
+#8 9.969 -- Detecting C compile features - done
+#8 9.976 -- Detecting CXX compiler ABI info
+#8 10.30 -- Detecting CXX compiler ABI info - done
+#8 10.33 -- Check for working CXX compiler: /usr/bin/clang++ - skipped
+#8 10.34 -- Detecting CXX compile features
+#8 10.35 -- Detecting CXX compile features - done
+#8 10.37 -- Performing Test HAVE_FLAG_W
+#8 10.59 -- Performing Test HAVE_FLAG_W - Success
+#8 10.59 -- Configuring with C flag '-W'
+#8 10.59 -- Configuring with CXX flag '-W'
+#8 10.59 -- Performing Test HAVE_FLAG_Wall
+#8 10.89 -- Performing Test HAVE_FLAG_Wall - Success
+#8 10.89 -- Configuring with C flag '-Wall'
+#8 10.89 -- Configuring with CXX flag '-Wall'
+#8 10.89 -- Performing Test HAVE_FLAG_Wextra
+#8 11.32 -- Performing Test HAVE_FLAG_Wextra - Success
+#8 11.32 -- Configuring with C flag '-Wextra'
+#8 11.33 -- Configuring with CXX flag '-Wextra'
+#8 11.33 -- Performing Test HAVE_FLAG_Wredundant_decls
+#8 11.79 -- Performing Test HAVE_FLAG_Wredundant_decls - Success
+#8 11.79 -- Configuring with C flag '-Wredundant-decls'
+#8 11.79 -- Configuring with CXX flag '-Wredundant-decls'
+#8 11.79 -- Performing Test HAVE_FLAG_std_gnu99
+#8 11.95 -- Performing Test HAVE_FLAG_std_gnu99 - Success
+#8 11.95 -- Configuring with C flag '-std=gnu99'
+#8 11.95 -- Configuring with CXX flag '-std=gnu++11'
+#8 11.95 -- Performing Test HAVE_FLAG_O3
+#8 12.17 -- Performing Test HAVE_FLAG_O3 - Success
+#8 12.17 -- Configuring with C flag '-O3'
+#8 12.17 -- Configuring with CXX flag '-O3'
+#8 12.17 -- Performing Test HAVE_FLAG_DNDEBUG
+#8 12.28 -- Performing Test HAVE_FLAG_DNDEBUG - Success
+#8 12.28 -- Configuring with C flag '-DNDEBUG'
+#8 12.28 -- Configuring with CXX flag '-DNDEBUG'
+#8 12.29 -- Configuring done
+#8 12.31 -- Generating done
+#8 12.32 -- Build files have been written to: /tmp/boolector/deps/btor2tools/build
+#8 12.34 /tmp/boolector/deps/btor2tools/build /tmp/boolector/deps/btor2tools
+#8 12.98 Scanning dependencies of target btor2parser
+#8 12.98 Scanning dependencies of target btorsplit
+#8 12.98 [  7%] Building C object src/CMakeFiles/btor2parser.dir/btor2parser/btor2parser.c.o
+#8 12.98 [ 14%] Building CXX object src/CMakeFiles/btorsplit.dir/btorsplit.cpp.o
+#8 15.28 [ 21%] Linking C static library ../lib/libbtor2parser.a
+#8 15.55 [ 21%] Built target btor2parser
+#8 15.58 Scanning dependencies of target btorsim
+#8 15.59 Scanning dependencies of target catbtor
+#8 15.60 [ 28%] Building CXX object src/CMakeFiles/btorsim.dir/btorsim/btorsimam.cpp.o
+#8 15.60 [ 35%] Building C object src/CMakeFiles/catbtor.dir/catbtor.c.o
+#8 15.63 [ 42%] Building CXX object src/CMakeFiles/btorsim.dir/btorsim/btorsimstate.cpp.o
+#8 15.79 [ 50%] Linking C executable ../bin/catbtor
+#8 16.09 [ 50%] Built target catbtor
+#8 16.13 [ 57%] Building CXX object src/CMakeFiles/btorsim.dir/btorsim/btorsimvcd.cpp.o
+#8 17.01 [ 64%] Linking CXX executable ../bin/btorsplit
+#8 17.36 [ 71%] Building CXX object src/CMakeFiles/btorsim.dir/btorsim/btorsimhelpers.cpp.o
+#8 17.47 [ 71%] Built target btorsplit
+#8 17.54 [ 78%] Building CXX object src/CMakeFiles/btorsim.dir/btorsim/btorsim.cpp.o
+#8 17.72 [ 85%] Building C object src/CMakeFiles/btorsim.dir/btorsim/btorsimbv.c.o
+#8 17.94 [ 92%] Building C object src/CMakeFiles/btorsim.dir/btorsim/btorsimrng.c.o
+#8 18.98 /tmp/boolector/deps/btor2tools/src/btorsim/btorsim.cpp:1876:13: warning: unused variable 'state' [-Wunused-variable]
+#8 18.98   for (auto state : states)
+#8 18.98             ^
+#8 20.80 1 warning generated.
+#8 20.81 [100%] Linking CXX executable ../bin/btorsim
+#8 20.97 [100%] Built target btorsim
+#8 21.00 /tmp/boolector/deps/btor2tools
+#8 21.02   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#8 21.02                                  Dload  Upload   Total   Spent    Left  Speed
+#8 21.02   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#8 21.39   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  239k    0  239k    0     0   323k      0 --:--:-- --:--:-- --:--:--  650k
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/.gitignore
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/COPYING
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/README
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/VERSION
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/blimc.c
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/configure.sh
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/getgitid
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/ilingeling.c
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lglbnr.c
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lglconst.h
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lglddtrace.c
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lgldimacs.c
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lgldimacs.h
+#8 21.77 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lglib.c
+#8 21.78 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lglib.h
+#8 21.79 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lglmain.c
+#8 21.79 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lglmbt.c
+#8 21.79 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lgloptl.h
+#8 21.79 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lglopts.c
+#8 21.79 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lglopts.h
+#8 21.79 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/lgluntrace.c
+#8 21.79 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/makefile.in
+#8 21.79 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/mkconfig.sh
+#8 21.79 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/plingeling.c
+#8 21.79 lingeling-7d5db72420b95ab356c98ca7f7a4681ed2c59c70/treengeling.c
+#8 21.79 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA
+#8 21.80 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -c lglib.c
+#8 21.85 rm -f lglcflags.h
+#8 21.85 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -c lgldimacs.c
+#8 21.85 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -c lglopts.c
+#8 21.85 echo '#define LGL_CC "Debian clang version 11.0.1-2"' >> lglcflags.h
+#8 21.86 echo '#define LGL_CFLAGS "-W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA"' >> lglcflags.h
+#8 21.87 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -c lglmain.c
+#8 22.16 lglib.c:3055:49: warning: unused parameter 'red' [-Wunused-parameter]
+#8 22.17 static void lgldrupligaddclsaux (LGL * lgl, int red, const int * c) {
+#8 22.17                                                 ^
+#8 22.50 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -c plingeling.c
+#8 23.20 lglib.c:22694:29: warning: unused parameter 'lgl' [-Wunused-parameter]
+#8 23.20 static int lglocsaux (LGL * lgl, int hitlim) {
+#8 23.20                             ^
+#8 23.20 lglib.c:22694:38: warning: unused parameter 'hitlim' [-Wunused-parameter]
+#8 23.21 static int lglocsaux (LGL * lgl, int hitlim) {
+#8 23.21                                      ^
+#8 23.28 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -c ilingeling.c
+#8 23.76 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -c treengeling.c
+#8 24.11 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -c lglmbt.c
+#8 24.28 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -c lgluntrace.c
+#8 24.29 lglmbt.c:733:20: warning: taking the absolute value of unsigned type 'unsigned int' has no effect [-Wabsolute-value]
+#8 24.30         prev = env.seed = abs (env.seed) >> 1;
+#8 24.30                           ^
+#8 24.30 lglmbt.c:733:20: note: remove the call to 'abs' since unsigned values cannot be negative
+#8 24.30         prev = env.seed = abs (env.seed) >> 1;
+#8 24.31                           ^~~~
+#8 24.81 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -c lglddtrace.c
+#8 25.96 1 warning generated.
+#8 26.00 rm -f lglcfg.h
+#8 26.00 ./mkconfig.sh > lglcfg.h
+#8 26.22 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -c lglbnr.c
+#8 52.56 3 warnings generated.
+#8 52.58 ar rc liblgl.a lglib.o lglbnr.o lgldimacs.o lglopts.o 
+#8 52.59 ranlib liblgl.a
+#8 52.59 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -o lingeling lglmain.o -L. -llgl -lm
+#8 52.59 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -pthread -o plingeling plingeling.o -L. -llgl -lm
+#8 52.60 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -pthread -o ilingeling ilingeling.o -L. -llgl -lm
+#8 52.60 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -pthread -o treengeling treengeling.o -L. -llgl -lm
+#8 52.76 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -o lglmbt lglmbt.o -L. -llgl -lm
+#8 52.78 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -o lgluntrace lgluntrace.o -L. -llgl -lm
+#8 52.79 clang -W -Wall -O3 -fPIC -DNLGLOG -DNDEBUG -DNCHKSOL -DNLGLDRUPLIG -DNLGLYALSAT -DNLGLFILES -DNLGLDEMA -o lglddtrace lglddtrace.o -L. -llgl -lm
+#8 53.41 -- The C compiler identification is Clang 11.0.1
+#8 53.55 -- The CXX compiler identification is Clang 11.0.1
+#8 53.56 -- Detecting C compiler ABI info
+#8 53.68 -- Detecting C compiler ABI info - done
+#8 53.69 -- Check for working C compiler: /usr/bin/clang - skipped
+#8 53.69 -- Detecting C compile features
+#8 53.70 -- Detecting C compile features - done
+#8 53.70 -- Detecting CXX compiler ABI info
+#8 53.96 -- Detecting CXX compiler ABI info - done
+#8 53.99 -- Check for working CXX compiler: /usr/bin/clang++ - skipped
+#8 53.99 -- Detecting CXX compile features
+#8 54.00 -- Detecting CXX compile features - done
+#8 54.00 -- LIB directory is '/tmp/boolector/build/lib'
+#8 54.00 -- BIN directory is '/tmp/boolector/build/bin'
+#8 54.00 -- Performing Test HAVE_FLAG_std_gnu99
+#8 54.14 -- Performing Test HAVE_FLAG_std_gnu99 - Success
+#8 54.14 -- Configuring with C flag '-std=gnu99'
+#8 54.14 -- Configuring with CXX flag '-std=gnu++11'
+#8 54.14 -- Performing Test HAVE_FLAG_W
+#8 54.33 -- Performing Test HAVE_FLAG_W - Success
+#8 54.34 -- Configuring with C flag '-W'
+#8 54.34 -- Configuring with CXX flag '-W'
+#8 54.34 -- Performing Test HAVE_FLAG_Wall
+#8 54.47 -- Performing Test HAVE_FLAG_Wall - Success
+#8 54.47 -- Configuring with C flag '-Wall'
+#8 54.47 -- Configuring with CXX flag '-Wall'
+#8 54.47 -- Performing Test HAVE_FLAG_Wextra
+#8 54.71 -- Performing Test HAVE_FLAG_Wextra - Success
+#8 54.71 -- Configuring with C flag '-Wextra'
+#8 54.71 -- Configuring with CXX flag '-Wextra'
+#8 54.71 -- Performing Test HAVE_FLAG_Wredundant_decls
+#8 54.93 -- Performing Test HAVE_FLAG_Wredundant_decls - Success
+#8 54.93 -- Configuring with C flag '-Wredundant-decls'
+#8 54.93 -- Configuring with CXX flag '-Wredundant-decls'
+#8 54.93 -- No build type set, options are: Debug;Release
+#8 54.93 -- Building Release build
+#8 54.93 -- Performing Test HAVE_FLAG_O3
+#8 55.13 -- Performing Test HAVE_FLAG_O3 - Success
+#8 55.13 -- Configuring with C flag '-O3'
+#8 55.13 -- Configuring with CXX flag '-O3'
+#8 55.13 -- Performing Test HAVE_SIGNALS
+#8 55.29 -- Performing Test HAVE_SIGNALS - Success
+#8 55.29 -- Performing Test HAVE_TIME_UTILS
+#8 55.45 -- Performing Test HAVE_TIME_UTILS - Success
+#8 55.46 -- Performing Test HAVE_NO_EXPORT_DYNAMIC
+#8 55.60 -- Performing Test HAVE_NO_EXPORT_DYNAMIC - Success
+#8 55.60 -- Found Btor2Tools: /tmp/boolector/deps/install/include  
+#8 55.60 -- Found Btor2Tools library: /tmp/boolector/deps/install/lib/libbtor2parser.a
+#8 55.60 -- Looking for pthread.h
+#8 55.73 -- Looking for pthread.h - found
+#8 55.73 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+#8 55.85 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+#8 55.85 -- Check if compiler accepts -pthread
+#8 55.99 -- Check if compiler accepts -pthread - yes
+#8 55.99 -- Found Threads: TRUE  
+#8 55.99 -- Found Lingeling: /tmp/boolector/deps/install/include  
+#8 55.99 -- Found Lingeling library: /tmp/boolector/deps/install/lib/liblgl.a
+#8 56.00 -- Could NOT find CaDiCaL (missing: CaDiCaL_INCLUDE_DIR CaDiCaL_LIBRARIES) 
+#8 56.00 -- Could NOT find CryptoMiniSat (missing: CryptoMiniSat_INCLUDE_DIR CryptoMiniSat_LIBRARIES) 
+#8 56.00 -- Could NOT find PicoSAT (missing: PicoSAT_INCLUDE_DIR PicoSAT_LIBRARIES) 
+#8 56.00 -- Could NOT find MiniSat (missing: MiniSat_INCLUDE_DIR MiniSat_LIBRARIES) 
+#8 56.01 -- Found Git: /usr/bin/git (found version "2.30.2") 
+#8 56.13 -- [34mBuild type: [32mRelease[m
+#8 56.13 -- [34mShared build: [32mno[m
+#8 56.13 -- [34mASAN support: [32mno[m
+#8 56.13 -- [34mUBSAN support: [32mno[m
+#8 56.13 -- [34mAssertions enabled: [32mno[m
+#8 56.13 -- [34mTesting: [32mno[m
+#8 56.13 -- [34mgcov support: [32mno[m
+#8 56.13 -- [34mgprof support: [32mno[m
+#8 56.13 -- [34mLogging support: [32mno[m
+#8 56.13 -- [34mPython bindings: [32mno[m
+#8 56.13 -- [34mTime statistics: [32mno[m
+#8 56.13 -- [34mCaDiCaL: [32mno[m
+#8 56.13 -- [34mCryptoMiniSat: [32mno[m
+#8 56.13 -- [34mLingeling: [32myes[m
+#8 56.13 -- [34mMiniSat: [32mno[m
+#8 56.13 -- [34mPicoSAT: [32mno[m
+#8 56.13 -- [34mGMP: [32mno[m
+#8 56.13 -- Configuring done
+#8 56.21 -- Generating done
+#8 56.22 -- Build files have been written to: /tmp/boolector/build
+#8 56.22 make: Entering directory '/tmp/boolector/build'
+#8 56.25 make[1]: Entering directory '/tmp/boolector/build'
+#8 56.25 make[2]: Entering directory '/tmp/boolector/build'
+#8 56.30 Scanning dependencies of target boolector
+#8 56.30 make[2]: Leaving directory '/tmp/boolector/build'
+#8 56.30 make[2]: Entering directory '/tmp/boolector/build'
+#8 56.31 [  1%] Building C object src/CMakeFiles/boolector.dir/boolector.c.o
+#8 56.32 [  3%] Building C object src/CMakeFiles/boolector.dir/aigprop.c.o
+#8 56.32 [  3%] Building C object src/CMakeFiles/boolector.dir/boolectormc.c.o
+#8 56.32 [  5%] Building C object src/CMakeFiles/boolector.dir/btorabort.c.o
+#8 56.47 [  7%] Building C object src/CMakeFiles/boolector.dir/btoraig.c.o
+#8 56.59 [  7%] Building C object src/CMakeFiles/boolector.dir/btoraigvec.c.o
+#8 57.17 [  8%] Building C object src/CMakeFiles/boolector.dir/btorass.c.o
+#8 57.38 [  8%] Building C object src/CMakeFiles/boolector.dir/btorbeta.c.o
+#8 57.40 [ 10%] Building C object src/CMakeFiles/boolector.dir/btorbv.c.o
+#8 57.52 [ 12%] Building C object src/CMakeFiles/boolector.dir/btorchkclone.c.o
+#8 57.59 [ 12%] Building C object src/CMakeFiles/boolector.dir/btorchkmodel.c.o
+#8 57.87 [ 14%] Building C object src/CMakeFiles/boolector.dir/btorchkfailed.c.o
+#8 57.87 [ 14%] Building C object src/CMakeFiles/boolector.dir/btorclone.c.o
+#8 58.08 [ 15%] Building C object src/CMakeFiles/boolector.dir/btorcore.c.o
+#8 58.63 [ 17%] Building C object src/CMakeFiles/boolector.dir/btordbg.c.o
+#8 58.72 [ 17%] Building C object src/CMakeFiles/boolector.dir/btordcr.c.o
+#8 58.86 [ 19%] Building C object src/CMakeFiles/boolector.dir/btorlsutils.c.o
+#8 58.89 [ 21%] Building C object src/CMakeFiles/boolector.dir/btorexp.c.o
+#8 59.06 [ 21%] Building C object src/CMakeFiles/boolector.dir/btormc.c.o
+#8 59.11 [ 22%] Building C object src/CMakeFiles/boolector.dir/btormodel.c.o
+#8 59.17 [ 22%] Building C object src/CMakeFiles/boolector.dir/btormsg.c.o
+#8 59.40 [ 24%] Building C object src/CMakeFiles/boolector.dir/btornode.c.o
+#8 59.45 [ 26%] Building C object src/CMakeFiles/boolector.dir/btoropt.c.o
+#8 59.74 [ 26%] Building C object src/CMakeFiles/boolector.dir/btorparse.c.o
+#8 59.85 [ 28%] Building C object src/CMakeFiles/boolector.dir/btorprintmodel.c.o
+#8 59.91 [ 28%] Building C object src/CMakeFiles/boolector.dir/btorproputils.c.o
+#8 60.12 [ 29%] Building C object src/CMakeFiles/boolector.dir/btorrewrite.c.o
+#8 60.12 [ 31%] Building C object src/CMakeFiles/boolector.dir/btorrwcache.c.o
+#8 60.20 [ 31%] Building C object src/CMakeFiles/boolector.dir/btorsat.c.o
+#8 60.35 [ 33%] Building C object src/CMakeFiles/boolector.dir/btorslsutils.c.o
+#8 60.36 /tmp/boolector/src/btorrewrite.c:3266:1: warning: unused function 'applies_push_ite_and' [-Wunused-function]
+#8 60.36 applies_push_ite_and (Btor *btor, BtorNode *e0, BtorNode *e1)
+#8 60.36 ^
+#8 60.36 /tmp/boolector/src/btorrewrite.c:3277:1: warning: unused function 'apply_push_ite_and' [-Wunused-function]
+#8 60.36 apply_push_ite_and (Btor *btor, BtorNode *e0, BtorNode *e1)
+#8 60.36 ^
+#8 60.36 /tmp/boolector/src/btorrewrite.c:3650:1: warning: unused function 'applies_sll_add' [-Wunused-function]
+#8 60.36 applies_sll_add (Btor *btor, BtorNode *e0, BtorNode *e1)
+#8 60.36 ^
+#8 60.36 /tmp/boolector/src/btorrewrite.c:3660:1: warning: unused function 'apply_sll_add' [-Wunused-function]
+#8 60.36 apply_sll_add (Btor *btor, BtorNode *e0, BtorNode *e1)
+#8 60.36 ^
+#8 60.36 /tmp/boolector/src/btorrewrite.c:4617:1: warning: unused function 'applies_same_srl' [-Wunused-function]
+#8 60.36 applies_same_srl (Btor *btor, BtorNode *e0, BtorNode *e1)
+#8 60.36 ^
+#8 60.36 /tmp/boolector/src/btorrewrite.c:4624:1: warning: unused function 'apply_same_srl' [-Wunused-function]
+#8 60.36 apply_same_srl (Btor *btor, BtorNode *e0, BtorNode *e1)
+#8 60.36 ^
+#8 60.45 [ 35%] Building C object src/CMakeFiles/boolector.dir/btorslvaigprop.c.o
+#8 60.50 [ 35%] Building C object src/CMakeFiles/boolector.dir/btorslvfun.c.o
+#8 60.66 [ 36%] Building C object src/CMakeFiles/boolector.dir/btorslvprop.c.o
+#8 60.81 [ 36%] Building C object src/CMakeFiles/boolector.dir/btorslvquant.c.o
+#8 60.95 [ 38%] Building C object src/CMakeFiles/boolector.dir/btorslvsls.c.o
+#8 61.87 [ 40%] Building C object src/CMakeFiles/boolector.dir/btorsort.c.o
+#8 61.91 [ 40%] Building C object src/CMakeFiles/boolector.dir/btorsubst.c.o
+#8 62.35 [ 42%] Building C object src/CMakeFiles/boolector.dir/btorsynth.c.o
+#8 62.49 [ 43%] Building C object src/CMakeFiles/boolector.dir/btortrapi.c.o
+#8 62.56 6 warnings generated.
+#8 62.60 [ 43%] Building C object src/CMakeFiles/boolector.dir/dumper/btordumpaig.c.o
+#8 62.63 [ 45%] Building C object src/CMakeFiles/boolector.dir/dumper/btordumpbtor.c.o
+#8 62.66 [ 45%] Building C object src/CMakeFiles/boolector.dir/dumper/btordumpsmt.c.o
+#8 63.16 [ 47%] Building C object src/CMakeFiles/boolector.dir/parser/btorbtor.c.o
+#8 63.39 [ 49%] Building C object src/CMakeFiles/boolector.dir/parser/btorbtor2.c.o
+#8 63.41 [ 49%] Building C object src/CMakeFiles/boolector.dir/parser/btorsmt.c.o
+#8 63.61 [ 50%] Building C object src/CMakeFiles/boolector.dir/parser/btorsmt2.c.o
+#8 64.58 [ 50%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorpputils.c.o
+#8 64.80 [ 52%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorack.c.o
+#8 65.02 [ 54%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorder.c.o
+#8 65.07 [ 54%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorelimapplies.c.o
+#8 65.20 [ 56%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorelimslices.c.o
+#8 65.23 [ 57%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorembed.c.o
+#8 65.33 [ 57%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorextract.c.o
+#8 65.37 [ 59%] Building C object src/CMakeFiles/boolector.dir/preprocess/btormerge.c.o
+#8 65.43 [ 59%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorminiscope.c.o
+#8 65.49 /tmp/boolector/src/preprocess/btorextract.c:476:1: warning: unused function 'is_copy_pattern' [-Wunused-function]
+#8 65.49 is_copy_pattern (BtorNode *index,
+#8 65.49 ^
+#8 65.63 [ 61%] Building C object src/CMakeFiles/boolector.dir/preprocess/btornormadd.c.o
+#8 65.72 [ 63%] Building C object src/CMakeFiles/boolector.dir/preprocess/btornormquant.c.o
+#8 65.94 [ 63%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorpreprocess.c.o
+#8 66.15 [ 64%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorskel.c.o
+#8 66.29 [ 64%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorskolemize.c.o
+#8 66.39 [ 66%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorunconstrained.c.o
+#8 66.39 1 warning generated.
+#8 66.43 [ 66%] Building C object src/CMakeFiles/boolector.dir/sat/btorcadical.c.o
+#8 66.43 [ 68%] Building C object src/CMakeFiles/boolector.dir/preprocess/btorvarsubst.c.o
+#8 66.58 [ 70%] Building CXX object src/CMakeFiles/boolector.dir/sat/btorcms.cc.o
+#8 66.58 [ 71%] Building C object src/CMakeFiles/boolector.dir/sat/btorlgl.c.o
+#8 66.66 [ 71%] Building CXX object src/CMakeFiles/boolector.dir/sat/btorminisat.cc.o
+#8 66.67 [ 73%] Building C object src/CMakeFiles/boolector.dir/sat/btorpicosat.c.o
+#8 66.74 [ 73%] Building C object src/CMakeFiles/boolector.dir/utils/boolectornodemap.c.o
+#8 66.74 [ 75%] Building C object src/CMakeFiles/boolector.dir/utils/btoraigmap.c.o
+#8 66.76 [ 77%] Building C object src/CMakeFiles/boolector.dir/utils/btorhashint.c.o
+#8 66.80 [ 77%] Building C object src/CMakeFiles/boolector.dir/utils/btorhashptr.c.o
+#8 66.92 [ 78%] Building C object src/CMakeFiles/boolector.dir/utils/btormem.c.o
+#8 66.98 [ 80%] Building C object src/CMakeFiles/boolector.dir/utils/btornodeiter.c.o
+#8 67.07 [ 80%] Building C object src/CMakeFiles/boolector.dir/utils/btornodemap.c.o
+#8 67.11 [ 82%] Building C object src/CMakeFiles/boolector.dir/utils/btoroptparse.c.o
+#8 67.14 [ 82%] Building C object src/CMakeFiles/boolector.dir/utils/btorpartgen.c.o
+#8 67.24 [ 84%] Building C object src/CMakeFiles/boolector.dir/utils/btorrng.c.o
+#8 67.24 [ 85%] Building C object src/CMakeFiles/boolector.dir/utils/btorunionfind.c.o
+#8 67.28 [ 85%] Building C object src/CMakeFiles/boolector.dir/utils/btorutil.c.o
+#8 67.50 [ 87%] Linking CXX static library ../lib/libboolector.a
+#8 67.54 make[2]: Leaving directory '/tmp/boolector/build'
+#8 67.55 [ 87%] Built target boolector
+#8 67.56 make[2]: Entering directory '/tmp/boolector/build'
+#8 67.56 make[2]: Entering directory '/tmp/boolector/build'
+#8 67.56 make[2]: Entering directory '/tmp/boolector/build'
+#8 67.56 make[2]: Entering directory '/tmp/boolector/build'
+#8 67.57 Scanning dependencies of target btoruntrace
+#8 67.57 make[2]: Leaving directory '/tmp/boolector/build'
+#8 67.57 make[2]: Entering directory '/tmp/boolector/build'
+#8 67.58 Scanning dependencies of target btorimc
+#8 67.58 make[2]: Leaving directory '/tmp/boolector/build'
+#8 67.58 make[2]: Entering directory '/tmp/boolector/build'
+#8 67.58 Scanning dependencies of target btormbt
+#8 67.58 [ 89%] Building C object src/CMakeFiles/btoruntrace.dir/btoruntrace.c.o
+#8 67.58 Scanning dependencies of target btormc
+#8 67.58 make[2]: Leaving directory '/tmp/boolector/build'
+#8 67.59 make[2]: Entering directory '/tmp/boolector/build'
+#8 67.59 make[2]: Leaving directory '/tmp/boolector/build'
+#8 67.59 make[2]: Entering directory '/tmp/boolector/build'
+#8 67.59 [ 89%] Building CXX object src/CMakeFiles/btorimc.dir/btoribv.cc.o
+#8 67.60 [ 89%] Building C object src/CMakeFiles/btormbt.dir/btormbt.c.o
+#8 67.61 [ 89%] Building C object src/CMakeFiles/btormc.dir/btormcmain.c.o
+#8 68.14 [ 91%] Linking CXX executable ../bin/btormc
+#8 68.49 make[2]: Leaving directory '/tmp/boolector/build'
+#8 68.51 [ 91%] Built target btormc
+#8 68.53 [ 92%] Building CXX object src/CMakeFiles/btorimc.dir/btorimc.cc.o
+#8 69.17 [ 94%] Linking CXX executable ../bin/btormbt
+#8 69.36 [ 94%] Linking CXX executable ../bin/btoruntrace
+#8 69.40 make[2]: Leaving directory '/tmp/boolector/build'
+#8 69.41 [ 94%] Built target btormbt
+#8 69.42 make[2]: Entering directory '/tmp/boolector/build'
+#8 69.44 Scanning dependencies of target boolector-bin
+#8 69.44 make[2]: Leaving directory '/tmp/boolector/build'
+#8 69.44 make[2]: Entering directory '/tmp/boolector/build'
+#8 69.47 [ 94%] Building C object src/CMakeFiles/boolector-bin.dir/boolectormain.c.o
+#8 69.52 make[2]: Leaving directory '/tmp/boolector/build'
+#8 69.53 [ 94%] Built target btoruntrace
+#8 69.54 [ 96%] Building C object src/CMakeFiles/boolector-bin.dir/btormain.c.o
+#8 70.11 [ 98%] Linking CXX executable ../bin/boolector
+#8 70.24 make[2]: Leaving directory '/tmp/boolector/build'
+#8 70.26 [ 98%] Built target boolector-bin
+#8 74.46 [100%] Linking CXX executable ../bin/btorimc
+#8 74.74 make[2]: Leaving directory '/tmp/boolector/build'
+#8 74.75 [100%] Built target btorimc
+#8 74.75 make[1]: Leaving directory '/tmp/boolector/build'
+#8 74.76 make: Leaving directory '/tmp/boolector/build'
+#8 DONE 74.9s
+
+#9 [stage-2 1/1] COPY --from=build /opt/boolector /boolector
+#9 DONE 0.1s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 1.1s done
+#10 preparing layers for inline cache
+#10 preparing layers for inline cache 0.0s done
+#10 exporting manifest sha256:b175a50977d82249d55c1ff3c59de9d2a9504d8fee1fdf40015702bb1ec97ea1 0.0s done
+#10 exporting config sha256:3a68f45da2d2a8aa2976d17a161c55e86fb693d38bb55558b28b52b850944590 0.0s done
+#10 exporting attestation manifest sha256:bfa49706eb4319e11f57c3342352ced4a66af53a65cd80247d3a541aa5f917bc
+#10 exporting attestation manifest sha256:bfa49706eb4319e11f57c3342352ced4a66af53a65cd80247d3a541aa5f917bc 0.0s done
+#10 exporting manifest list sha256:f7e25d5b2225057a212e58597bd276574a3b4ab93bd4c4d9efb6d966f441eb94 0.0s done
+#10 naming to ghcr.io/hdl/amd64/debian/bullseye/pkg/boolector:latest 0.0s done
+#10 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/boolector:latest
+#10 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/boolector:latest 0.2s done
+#10 DONE 1.5s
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 --target version --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -o dist debian/boolector
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.39kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#4 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 56B done
+#5 DONE 0.0s
+
+#6 [build 2/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC  && apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]}  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && update-ca-certificates  && rm -rf /var/lib/apt/lists/*
+#6 CACHED
+
+#7 [build 3/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+#7 CACHED
+
+#8 [version 1/1] COPY --from=build /tmp/hdlc.boolector.version /
+#8 CACHED
+
+#9 exporting to client directory
+#9 copying files 64B done
+#9 DONE 0.0s
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/testpkg:boolector --build-arg IMAGE=ghcr.io/hdl/amd64/debian/bullseye/pkg/boolector --build-arg PACKAGE=boolector -f /home/umarcor/containers/utils/pyHDLC/testpkg.dockerfile .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from testpkg.dockerfile
+#1 transferring dockerfile: 975B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/boolector:latest
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#5 resolve docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b 0.1s done
+#5 CACHED
+
+#6 [pkg 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/boolector:latest@sha256:f7e25d5b2225057a212e58597bd276574a3b4ab93bd4c4d9efb6d966f441eb94
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/boolector:latest@sha256:f7e25d5b2225057a212e58597bd276574a3b4ab93bd4c4d9efb6d966f441eb94 0.1s done
+#6 DONE 0.1s
+
+#7 [stage-1 2/3] COPY --from=pkg /boolector /
+#7 DONE 0.1s
+
+#8 [stage-1 3/3] RUN apk add -U --no-cache file tree
+#8 0.707 (1/3) Installing libmagic (5.47-r2)
+#8 0.745 (2/3) Installing file (5.47-r2)
+#8 0.758 (3/3) Installing tree (2.3.2-r0)
+#8 0.770 Executing busybox-1.37.0-r31.trigger
+#8 0.777 OK: 18.4 MiB in 19 packages
+#8 DONE 0.8s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 1.2s done
+#9 preparing layers for inline cache
+#9 preparing layers for inline cache 0.0s done
+#9 exporting manifest sha256:f6224ad943eba771cde606cf710bea3d261c63ec2c2043d8e99df3266946ef96 0.0s done
+#9 exporting config sha256:824295fef0bd3bc0e9100bd50473d8b6948b26fd2029f7547dd872419e580a89 0.0s done
+#9 exporting attestation manifest sha256:e792e712ffdc5b5d29b126a8826569c169d5ba55a529975e3b8adc65e639434f
+#9 exporting attestation manifest sha256:e792e712ffdc5b5d29b126a8826569c169d5ba55a529975e3b8adc65e639434f 0.1s done
+#9 exporting manifest list sha256:8836083eb0a0a51dad2ad5de1ecb7bd0f8f3c7eebc22f83cd0ee88a21c95c650 0.0s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/testpkg:boolector done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:boolector
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:boolector 0.3s done
+#9 DONE 1.7s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/testpkg:boolector //wrk/boolector.pkg.sh
+/usr/local
+├── bin
+│   ├── boolector
+│   ├── btorimc
+│   ├── btormbt
+│   ├── btormc
+│   ├── btorsim
+│   ├── btorsplit
+│   ├── btoruntrace
+│   └── catbtor
+├── lib
+│   └── libboolector.a
+└── share
+
+4 directories, 9 files
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS pkg/boolector ===
+RESULT: PASS

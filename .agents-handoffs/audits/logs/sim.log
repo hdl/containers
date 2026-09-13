@@ -1,0 +1,435 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: sim IMAGES: ['sim']
+=== BUILD sim ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/sim --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -f debian-bullseye/sim.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from sim.dockerfile
+#1 transferring dockerfile: 1.46kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/iverilog:latest
+#2 DONE 0.1s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/verilator:latest
+#3 ...
+
+#4 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc:latest
+#4 DONE 0.1s
+
+#5 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/ghdl/llvm:latest
+#5 DONE 0.1s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/verilator:latest
+#3 DONE 1.2s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.1s
+
+#7 [pkg-verilator 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/verilator:latest@sha256:4e4d6ece9ac854de84d3238c6368547e4937d2b63e9ef5508f25fb3b9c8b7983
+#7 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/verilator:latest@sha256:4e4d6ece9ac854de84d3238c6368547e4937d2b63e9ef5508f25fb3b9c8b7983 0.1s done
+#7 ...
+
+#8 [pkg-nvc 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc:latest@sha256:aab08f229a1cbf961e712c4ba2a30d6608490cc4442e2f4289f6d964e6f2abe3
+#8 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc:latest@sha256:aab08f229a1cbf961e712c4ba2a30d6608490cc4442e2f4289f6d964e6f2abe3 0.1s done
+#8 CACHED
+
+#9 [pkg-iverilog 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/iverilog:latest@sha256:63aa4182605bba9b874df92d5a9d5a1337ed330371b8286e0788cf9845bc513e
+#9 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/iverilog:latest@sha256:63aa4182605bba9b874df92d5a9d5a1337ed330371b8286e0788cf9845bc513e 0.1s done
+#9 DONE 0.1s
+
+#7 [pkg-verilator 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/verilator:latest@sha256:4e4d6ece9ac854de84d3238c6368547e4937d2b63e9ef5508f25fb3b9c8b7983
+#7 ...
+
+#10 [base 1/5] FROM ghcr.io/hdl/amd64/debian/bullseye/ghdl/llvm:latest@sha256:7c8d30ac72deda6f011e022315d8d86bfabc78b246df7dccce2696e477449588
+#10 resolve ghcr.io/hdl/amd64/debian/bullseye/ghdl/llvm:latest@sha256:7c8d30ac72deda6f011e022315d8d86bfabc78b246df7dccce2696e477449588 0.1s done
+#10 DONE 0.3s
+
+#7 [pkg-verilator 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/verilator:latest@sha256:4e4d6ece9ac854de84d3238c6368547e4937d2b63e9ef5508f25fb3b9c8b7983
+#7 sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0 0B / 52.05MB 0.2s
+#7 sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0 7.34MB / 52.05MB 0.5s
+#7 sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0 10.49MB / 52.05MB 0.6s
+#7 sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0 14.68MB / 52.05MB 0.8s
+#7 sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0 18.87MB / 52.05MB 0.9s
+#7 sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0 26.21MB / 52.05MB 1.2s
+#7 sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0 31.46MB / 52.05MB 1.4s
+#7 sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0 39.85MB / 52.05MB 1.7s
+#7 ...
+
+#11 [base 2/5] COPY --from=pkg-nvc /nvc /
+#11 DONE 1.7s
+
+#9 [pkg-iverilog 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/iverilog:latest@sha256:63aa4182605bba9b874df92d5a9d5a1337ed330371b8286e0788cf9845bc513e
+#9 CACHED
+
+#7 [pkg-verilator 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/verilator:latest@sha256:4e4d6ece9ac854de84d3238c6368547e4937d2b63e9ef5508f25fb3b9c8b7983
+#7 sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0 47.19MB / 52.05MB 2.0s
+#7 sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0 52.05MB / 52.05MB 2.1s
+#7 sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0 52.05MB / 52.05MB 3.0s done
+#7 extracting sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0
+#7 extracting sha256:226edc35d1f557dc8fd2da50cb39fc1f519adf9435bb62db70b010d8481b4cd0 2.2s done
+#7 DONE 5.4s
+
+#12 [base 3/5] COPY --from=pkg-verilator /verilator /
+#12 DONE 1.4s
+
+#13 [base 4/5] COPY --from=pkg-iverilog /iverilog /
+#13 DONE 0.8s
+
+#14 [base 5/5] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     binutils     libdw1     libzstd1     make     perl     python3-pip     tcl  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#14 3.155 Reading package lists...
+#14 3.770 Building dependency tree...
+#14 3.908 Reading state information...
+#14 4.037 binutils is already the newest version (2.35.2-2).
+#14 4.037 binutils set to manually installed.
+#14 4.037 libzstd1 is already the newest version (1.4.8+dfsg-2.1).
+#14 4.037 libzstd1 set to manually installed.
+#14 4.037 The following additional packages will be installed:
+#14 4.038   libelf1 libgdbm-compat4 libgdbm6 libperl5.32 libtcl8.6 perl-modules-5.32
+#14 4.038   python-pip-whl python3-distutils python3-lib2to3 python3-pkg-resources
+#14 4.038   python3-setuptools python3-wheel tcl8.6
+#14 4.039 Suggested packages:
+#14 4.040   gdbm-l10n sensible-utils make-doc perl-doc libterm-readline-gnu-perl
+#14 4.040   | libterm-readline-perl-perl libtap-harness-archive-perl
+#14 4.040   python-setuptools-doc tcl-tclreadline
+#14 4.040 Recommended packages:
+#14 4.040   netbase build-essential python3-dev
+#14 4.184 The following NEW packages will be installed:
+#14 4.185   libdw1 libelf1 libgdbm-compat4 libgdbm6 libperl5.32 libtcl8.6 make perl
+#14 4.185   perl-modules-5.32 python-pip-whl python3-distutils python3-lib2to3
+#14 4.186   python3-pip python3-pkg-resources python3-setuptools python3-wheel tcl
+#14 4.186   tcl8.6
+#14 4.693 0 upgraded, 18 newly installed, 0 to remove and 0 not upgraded.
+#14 4.693 Need to get 12.4 MB of archives.
+#14 4.693 After this operation, 62.1 MB of additional disk space will be used.
+#14 4.693 Get:1 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 perl-modules-5.32 all 5.32.1-4+deb11u5 [2823 kB]
+#14 4.779 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgdbm6 amd64 1.19-2 [64.9 kB]
+#14 4.793 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgdbm-compat4 amd64 1.19-2 [44.7 kB]
+#14 4.793 Get:4 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libperl5.32 amd64 5.32.1-4+deb11u5 [4102 kB]
+#14 4.829 Get:5 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 perl amd64 5.32.1-4+deb11u5 [294 kB]
+#14 4.832 Get:6 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libelf1 amd64 0.183-1 [165 kB]
+#14 4.961 Get:7 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libdw1 amd64 0.183-1 [234 kB]
+#14 5.038 Get:8 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libtcl8.6 amd64 8.6.11+dfsg-1 [1018 kB]
+#14 5.045 Get:9 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 make amd64 4.3-4.1 [396 kB]
+#14 5.047 Get:10 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python-pip-whl all 20.3.4-4+deb11u2 [1952 kB]
+#14 5.055 Get:11 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-lib2to3 all 3.9.2-1 [77.8 kB]
+#14 5.109 Get:12 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-distutils all 3.9.2-1 [143 kB]
+#14 5.199 Get:13 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python3-pkg-resources all 52.0.0-4+deb11u2 [190 kB]
+#14 5.199 Get:14 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python3-setuptools all 52.0.0-4+deb11u2 [367 kB]
+#14 5.204 Get:15 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-wheel all 0.34.2-1 [24.0 kB]
+#14 5.205 Get:16 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python3-pip all 20.3.4-4+deb11u2 [338 kB]
+#14 5.208 Get:17 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 tcl8.6 amd64 8.6.11+dfsg-1 [124 kB]
+#14 5.209 Get:18 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 tcl amd64 8.6.11+1 [5788 B]
+#14 5.455 debconf: delaying package configuration, since apt-utils is not installed
+#14 5.514 Fetched 12.4 MB in 1s (12.2 MB/s)
+#14 5.553 Selecting previously unselected package perl-modules-5.32.
+#14 5.553 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 10229 files and directories currently installed.)
+#14 5.588 Preparing to unpack .../00-perl-modules-5.32_5.32.1-4+deb11u5_all.deb ...
+#14 5.599 Unpacking perl-modules-5.32 (5.32.1-4+deb11u5) ...
+#14 6.097 Selecting previously unselected package libgdbm6:amd64.
+#14 6.099 Preparing to unpack .../01-libgdbm6_1.19-2_amd64.deb ...
+#14 6.121 Unpacking libgdbm6:amd64 (1.19-2) ...
+#14 6.222 Selecting previously unselected package libgdbm-compat4:amd64.
+#14 6.222 Preparing to unpack .../02-libgdbm-compat4_1.19-2_amd64.deb ...
+#14 6.236 Unpacking libgdbm-compat4:amd64 (1.19-2) ...
+#14 6.325 Selecting previously unselected package libperl5.32:amd64.
+#14 6.327 Preparing to unpack .../03-libperl5.32_5.32.1-4+deb11u5_amd64.deb ...
+#14 6.339 Unpacking libperl5.32:amd64 (5.32.1-4+deb11u5) ...
+#14 7.694 Selecting previously unselected package perl.
+#14 7.694 Preparing to unpack .../04-perl_5.32.1-4+deb11u5_amd64.deb ...
+#14 7.709 Unpacking perl (5.32.1-4+deb11u5) ...
+#14 7.829 Selecting previously unselected package libelf1:amd64.
+#14 7.831 Preparing to unpack .../05-libelf1_0.183-1_amd64.deb ...
+#14 7.839 Unpacking libelf1:amd64 (0.183-1) ...
+#14 8.423 Selecting previously unselected package libdw1:amd64.
+#14 8.425 Preparing to unpack .../06-libdw1_0.183-1_amd64.deb ...
+#14 8.438 Unpacking libdw1:amd64 (0.183-1) ...
+#14 8.567 Selecting previously unselected package libtcl8.6:amd64.
+#14 8.569 Preparing to unpack .../07-libtcl8.6_8.6.11+dfsg-1_amd64.deb ...
+#14 8.591 Unpacking libtcl8.6:amd64 (8.6.11+dfsg-1) ...
+#14 8.776 Selecting previously unselected package make.
+#14 8.780 Preparing to unpack .../08-make_4.3-4.1_amd64.deb ...
+#14 8.794 Unpacking make (4.3-4.1) ...
+#14 8.924 Selecting previously unselected package python-pip-whl.
+#14 8.925 Preparing to unpack .../09-python-pip-whl_20.3.4-4+deb11u2_all.deb ...
+#14 8.941 Unpacking python-pip-whl (20.3.4-4+deb11u2) ...
+#14 9.175 Selecting previously unselected package python3-lib2to3.
+#14 9.177 Preparing to unpack .../10-python3-lib2to3_3.9.2-1_all.deb ...
+#14 9.189 Unpacking python3-lib2to3 (3.9.2-1) ...
+#14 9.285 Selecting previously unselected package python3-distutils.
+#14 9.287 Preparing to unpack .../11-python3-distutils_3.9.2-1_all.deb ...
+#14 9.297 Unpacking python3-distutils (3.9.2-1) ...
+#14 9.399 Selecting previously unselected package python3-pkg-resources.
+#14 9.402 Preparing to unpack .../12-python3-pkg-resources_52.0.0-4+deb11u2_all.deb ...
+#14 9.409 Unpacking python3-pkg-resources (52.0.0-4+deb11u2) ...
+#14 9.522 Selecting previously unselected package python3-setuptools.
+#14 9.524 Preparing to unpack .../13-python3-setuptools_52.0.0-4+deb11u2_all.deb ...
+#14 9.537 Unpacking python3-setuptools (52.0.0-4+deb11u2) ...
+#14 9.638 Selecting previously unselected package python3-wheel.
+#14 9.639 Preparing to unpack .../14-python3-wheel_0.34.2-1_all.deb ...
+#14 9.652 Unpacking python3-wheel (0.34.2-1) ...
+#14 9.729 Selecting previously unselected package python3-pip.
+#14 9.731 Preparing to unpack .../15-python3-pip_20.3.4-4+deb11u2_all.deb ...
+#14 9.744 Unpacking python3-pip (20.3.4-4+deb11u2) ...
+#14 9.868 Selecting previously unselected package tcl8.6.
+#14 9.870 Preparing to unpack .../16-tcl8.6_8.6.11+dfsg-1_amd64.deb ...
+#14 9.881 Unpacking tcl8.6 (8.6.11+dfsg-1) ...
+#14 9.968 Selecting previously unselected package tcl.
+#14 9.969 Preparing to unpack .../17-tcl_8.6.11+1_amd64.deb ...
+#14 9.984 Unpacking tcl (8.6.11+1) ...
+#14 10.08 Setting up python3-pkg-resources (52.0.0-4+deb11u2) ...
+#14 10.32 Setting up perl-modules-5.32 (5.32.1-4+deb11u5) ...
+#14 10.36 Setting up python3-wheel (0.34.2-1) ...
+#14 10.54 Setting up make (4.3-4.1) ...
+#14 10.57 Setting up libtcl8.6:amd64 (8.6.11+dfsg-1) ...
+#14 10.60 Setting up python-pip-whl (20.3.4-4+deb11u2) ...
+#14 10.63 Setting up python3-lib2to3 (3.9.2-1) ...
+#14 10.75 Setting up libelf1:amd64 (0.183-1) ...
+#14 10.79 Setting up libgdbm6:amd64 (1.19-2) ...
+#14 10.81 Setting up python3-distutils (3.9.2-1) ...
+#14 10.97 Setting up libdw1:amd64 (0.183-1) ...
+#14 11.01 Setting up tcl8.6 (8.6.11+dfsg-1) ...
+#14 11.05 Setting up python3-setuptools (52.0.0-4+deb11u2) ...
+#14 11.42 Setting up libgdbm-compat4:amd64 (1.19-2) ...
+#14 11.44 Setting up python3-pip (20.3.4-4+deb11u2) ...
+#14 11.76 Setting up libperl5.32:amd64 (5.32.1-4+deb11u5) ...
+#14 11.80 Setting up tcl (8.6.11+1) ...
+#14 11.84 Setting up perl (5.32.1-4+deb11u5) ...
+#14 11.88 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#14 12.00 Reading package lists...
+#14 12.57 Building dependency tree...
+#14 12.69 Reading state information...
+#14 12.71 Reading package lists...
+#14 13.29 Building dependency tree...
+#14 13.42 Reading state information...
+#14 13.56 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#14 DONE 14.1s
+
+#15 exporting to image
+#15 exporting layers
+#15 exporting layers 10.8s done
+#15 preparing layers for inline cache
+#15 preparing layers for inline cache 0.1s done
+#15 exporting manifest sha256:935f5419b1ca63ee12ce48c7844ed8ff0d23912100c2748392e6209ea6ebb4ce 0.0s done
+#15 exporting config sha256:8c4c0d3046898801cb0085d5465b94d9aabef2fe97cc6082a129280e054f1527 0.0s done
+#15 exporting attestation manifest sha256:13b1f46f151bc5a858cacedc1d7e79745d1887d2a2bd31dd4105576a5cfd8a49
+#15 exporting attestation manifest sha256:13b1f46f151bc5a858cacedc1d7e79745d1887d2a2bd31dd4105576a5cfd8a49 0.0s done
+#15 exporting manifest list sha256:1fc3deb7da0d92f5dc591e1c022220460e9803f22c9f8e6705a1ec4596a4ee1c 0.0s done
+#15 naming to ghcr.io/hdl/amd64/debian/bullseye/sim:latest done
+#15 unpacking to ghcr.io/hdl/amd64/debian/bullseye/sim:latest
+#15 unpacking to ghcr.io/hdl/amd64/debian/bullseye/sim:latest 3.0s done
+#15 DONE 14.1s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/sim
+Architecture: amd64 
+Size: 1034510693
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/sim //wrk/sim.sh
+CC: 
+CXX: 
+/usr/bin/tclsh
+CC: 
+CXX: 
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-141-g9567e46f7) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ llvm 11.0.1 code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+/usr/local/bin/nvc
+Usage: nvc [OPTION]... COMMAND [OPTION]...
+
+Global options are placed before COMMAND, and command-specific options are placed afterwards. Multiple commands can be given and will be performed in order.
+
+Commands:
+ -a [OPTION]... FILE...       Analyse FILEs into work 
+                              library
+ -e [OPTION]... TOP...        Elaborate design unit TOP
+ -r [OPTION]... TOP           Execute previously 
+                              elaborated TOP
+ --cover-export FILE...       Export coverage database to 
+                              external format
+ --cover-report FILE...       Generate HTML report from 
+                              coverage database
+ --cover-merge FILE...        Merge multiple coverage 
+                              databases
+ --init                       Initialise work library 
+                              directory
+ --install PKG                Install third-party packages
+ --list                       Print all units in the 
+                              library
+ --preprocess FILE...         Expand FILEs with Verilog 
+                              preprocessor
+ --print-deps [UNIT]...       Print dependencies in 
+                              Makefile format
+
+Global options:
+ -h, --help         Display this message and exit
+ -H SIZE            Set the maximum heap size to SIZE bytes
+     --ieee-warnings={on,off,off-at-0} 
+                    Enable or disable warnings from IEEE 
+                    packages
+     --ignore-time  Skip source file timestamp check
+     --load=PLUGIN  Load VHPI plugin at startup
+ -L PATH            Add PATH to library search paths
+ -M SIZE            Limit design unit heap space to SIZE 
+                    bytes
+     --map=LIB:PATH Map library LIB to PATH
+     --messages={full,compact} 
+                    Diagnostic message style, compact is 
+                    less verbose
+     --seed=N       Seed for random number generation
+     --std={1993,..,2019} 
+                    VHDL standard revision to use
+     --stderr={note,warning,error,failure,none} 
+                    Print messages of this severity level 
+                    or higher to stderr
+ -v, --version      Display version and copyright 
+                    information
+     --vhpi-debug   Report VHPI errors as diagnostic 
+                    messages
+     --vhpi-trace   Trace VHPI calls and events
+     --work=NAME    Use NAME as the work library
+
+Analysis options:
+     --bootstrap    Allow compilation of STANDARD package
+     --check-synthesis 
+                    Warn on common synthesis mistakes
+ -D, --define NAME=VALUE 
+                    Set preprocessor symbol NAME to VALUE
+     --error-limit=NUM 
+                    Stop after NUM errors
+ -f, --files=LIST   Read files to analyse from LIST
+ -I DIR             Add DIR to list of Verilog include 
+                    directories
+     --keywords=VERSION 
+                    Use keywords from specified Verilog 
+                    version
+     --no-save      Do not save analysed design units
+     --preserve-case 
+                    Preserve the original case of VHDL 
+                    identifiers
+     --psl          Enable parsing of PSL directives in 
+                    comments
+     --relative=DIR Store paths relative to DIR
+     --relaxed      Disable certain pedantic rule checks
+     --single-unit  Treat all Verilog files as a single 
+                    compilation unit
+ -Werror            Treat all analysis warnings as errors
+
+Elaboration options:
+     --cover[={statement,branch,expression,toggle,...}] 
+                    Enable code coverage collection
+     --cover-file=FILE 
+                    Set the file name of the coverage 
+                    database
+     --cover-spec=FILE 
+                    Fine-grained coverage collection 
+                    specification, see the manual for 
+                    details
+ -g NAME=VALUE      Set top level generic NAME to VALUE
+ -j, --jit          Enable just-in-time compilation during 
+                    simulation
+ -O0, -O1, -O2, -O3 Set optimisation level (default is -O2)
+     --no-collapse  Do not collapse multiple signals into 
+                    one
+     --no-save      Do not save the elaborated design to 
+                    disk
+     --stats        Print statistics about instantiated 
+                    design units
+ -V, --verbose      Print resource usage at each step
+
+Run options:
+     --dump-arrays[=N] 
+                    Include nested arrays with up to N 
+                    elements in waveform dump
+     --exclude=GLOB Exclude signals matching GLOB from 
+                    waveform dump
+     --exit-severity={note,warning,error,failure} 
+                    Exit after an assertion failure of 
+                    this severity
+     --format={fst,vcd} 
+                    Waveform dump format
+     --include=GLOB Include signals matching GLOB in 
+                    waveform dump
+     --shuffle      Run processes in random order
+     --stats        Print time and memory usage at end of 
+                    run
+     --stop-delta=N Stop after N delta cycles (default 
+                    10000)
+     --stop-time=T  Stop after simulation time T (e.g. 5ns)
+     --trace        Trace simulation events
+ -w, --wave[=FILE]  Write waveform dump to FILE
+
+Coverage report options:
+ -o, --output=dir   Output directory for HTML report
+     --exclude-file=FILE 
+                    Apply exclude file when generating 
+                    report, see manual for syntax
+     --dont-print={covered,uncovered,excluded} 
+                    Exclude specified items from coverage 
+                    report
+     --item-limit=LIMIT 
+                    Display at most LIMIT items in a 
+                    single report file (default 5000)
+     --per-file     Create source file code coverage 
+                    report.
+
+Coverage merge options:
+     --merge-mode={union,intersect} 
+                    Merge hierarchies by union or 
+                    intersection, default is union
+ -o, --output=FILE  Output database file name
+
+Coverage export options:
+     --format=FMT   File format (must be 'cobertura')
+ -o, --output=FILE  Output file name
+     --relative=PATH 
+                    Report file names relative to PATH
+
+Install options:
+     --dest=DIR     Compile libraries into directory DIR
+
+Library search paths:
+  /root/.nvc/lib
+  /usr/local/lib/nvc
+
+The full manual can be read with man 1 nvc and contains detailed explanations of the commands and options above as well as examples.
+
+Report bugs at https://github.com/nickg/nvc/issues
+nvc 1.23-devel (1.22.0.r103.g34670eaec) (Using LLVM 11.0.1)
+Copyright (C) 2011-2026  Nick Gasson
+This program comes with ABSOLUTELY NO WARRANTY. This is free software, and
+you are welcome to redistribute it under certain conditions. See the GNU
+General Public Licence for details.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+· verilator help >> ./verilator.log
+· verilator help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+· iverilog help >> ./iverilog.log
+· iverilog help: exit code 1 | [32mOK[0m
+· iverilog-vpi help >> ./iverilog.log
+· iverilog-vpi help: exit code 0 | [32mOK[0m
+· vvp help >> ./iverilog.log
+· vvp help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS sim ===
+RESULT: PASS

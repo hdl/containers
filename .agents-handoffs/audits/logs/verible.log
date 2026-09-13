@@ -1,0 +1,209 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: verible IMAGES: ['pkg/verible', 'verible']
+=== BUILD pkg/verible ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/verible --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target pkg -f debian/verible.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#1 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#1 CACHED
+
+#2 [internal] load build definition from verible.dockerfile
+#2 transferring dockerfile: 1.69kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [build 2/3] RUN apt-get update -qq     && apt-get -y install --no-install-recommends gpg     && curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /usr/share/keyrings/bazel-archive-keyring.gpg     && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list     && apt-get update -qq     && apt-get -y install --no-install-recommends bazel     && rm -rf /var/lib/apt/lists/*
+#5 1.113 Reading package lists...
+#5 1.691 Building dependency tree...
+#5 1.821 Reading state information...
+#5 1.952 The following additional packages will be installed:
+#5 1.953   gpgconf libassuan0
+#5 1.953 Recommended packages:
+#5 1.953   gnupg
+#5 1.983 The following NEW packages will be installed:
+#5 1.985   gpg gpgconf libassuan0
+#5 2.072 0 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+#5 2.072 Need to get 1527 kB of archives.
+#5 2.072 After this operation, 2511 kB of additional disk space will be used.
+#5 2.072 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libassuan0 amd64 2.5.3-7.1 [50.5 kB]
+#5 2.085 Get:2 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 gpgconf amd64 2.2.27-2+deb11u3 [548 kB]
+#5 2.126 Get:3 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 gpg amd64 2.2.27-2+deb11u3 [928 kB]
+#5 2.280 debconf: delaying package configuration, since apt-utils is not installed
+#5 2.313 Fetched 1527 kB in 0s (10.3 MB/s)
+#5 2.328 Selecting previously unselected package libassuan0:amd64.
+#5 2.328 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14728 files and directories currently installed.)
+#5 2.343 Preparing to unpack .../libassuan0_2.5.3-7.1_amd64.deb ...
+#5 2.346 Unpacking libassuan0:amd64 (2.5.3-7.1) ...
+#5 2.365 Selecting previously unselected package gpgconf.
+#5 2.368 Preparing to unpack .../gpgconf_2.2.27-2+deb11u3_amd64.deb ...
+#5 2.369 Unpacking gpgconf (2.2.27-2+deb11u3) ...
+#5 2.409 Selecting previously unselected package gpg.
+#5 2.409 Preparing to unpack .../gpg_2.2.27-2+deb11u3_amd64.deb ...
+#5 2.410 Unpacking gpg (2.2.27-2+deb11u3) ...
+#5 2.493 Setting up libassuan0:amd64 (2.5.3-7.1) ...
+#5 2.498 Setting up gpgconf (2.2.27-2+deb11u3) ...
+#5 2.502 Setting up gpg (2.2.27-2+deb11u3) ...
+#5 2.508 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#5 2.911 curl: (22) The requested URL returned error: 404 
+#5 2.913 gpg: no valid OpenPGP data found.
+#5 ERROR: process "/bin/bash -c apt-get update -qq     && apt-get -y install --no-install-recommends gpg     && curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /usr/share/keyrings/bazel-archive-keyring.gpg     && echo \"deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8\" | tee /etc/apt/sources.list.d/bazel.list     && apt-get update -qq     && apt-get -y install --no-install-recommends bazel     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 2
+------
+ > [build 2/3] RUN apt-get update -qq     && apt-get -y install --no-install-recommends gpg     && curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /usr/share/keyrings/bazel-archive-keyring.gpg     && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list     && apt-get update -qq     && apt-get -y install --no-install-recommends bazel     && rm -rf /var/lib/apt/lists/*:
+2.369 Unpacking gpgconf (2.2.27-2+deb11u3) ...
+2.409 Selecting previously unselected package gpg.
+2.409 Preparing to unpack .../gpg_2.2.27-2+deb11u3_amd64.deb ...
+2.410 Unpacking gpg (2.2.27-2+deb11u3) ...
+2.493 Setting up libassuan0:amd64 (2.5.3-7.1) ...
+2.498 Setting up gpgconf (2.2.27-2+deb11u3) ...
+2.502 Setting up gpg (2.2.27-2+deb11u3) ...
+2.508 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+2.911 curl: (22) The requested URL returned error: 404 
+2.913 gpg: no valid OpenPGP data found.
+------
+verible.dockerfile:29
+--------------------
+  28 |     
+  29 | >>> RUN apt-get update -qq \
+  30 | >>>     && apt-get -y install --no-install-recommends gpg \
+  31 | >>>     && curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /usr/share/keyrings/bazel-archive-keyring.gpg \
+  32 | >>>     && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
+  33 | >>>     && apt-get update -qq \
+  34 | >>>     && apt-get -y install --no-install-recommends bazel \
+  35 | >>>     && rm -rf /var/lib/apt/lists/*
+  36 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -c apt-get update -qq     && apt-get -y install --no-install-recommends gpg     && curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /usr/share/keyrings/bazel-archive-keyring.gpg     && echo \"deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8\" | tee /etc/apt/sources.list.d/bazel.list     && apt-get update -qq     && apt-get -y install --no-install-recommends bazel     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 2
+=== FAIL pkg/verible (CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/pkg/verible', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '--target', 'pkg', '-f', 'debian/verible.dockerfile', 'debian']' returned non-zero exit status 1.) ===
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+  File "/home/umarcor/containers/utils/pyHDLC/__init__.py", line 456, in BuildImage
+    _exec(args=[
+    ~~~~~^^^^^^^
+        "docker", "build", *_commonCmd,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        str(contextPath)
+        ^^^^^^^^^^^^^^^^
+    ], dry=dry, collapse=f"🚧 Build {imageName}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/umarcor/containers/utils/pyHDLC/run.py", line 46, in _exec
+    check_call(args, stderr=STDOUT)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 419, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/pkg/verible', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '--target', 'pkg', '-f', 'debian/verible.dockerfile', 'debian']' returned non-zero exit status 1.
+=== BUILD verible ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/verible --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -f debian/verible.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#1 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#1 CACHED
+
+#2 [internal] load build definition from verible.dockerfile
+#2 transferring dockerfile: 1.69kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#3 DONE 0.0s
+
+#4 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/base:latest
+#4 DONE 0.0s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [stage-2 1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e 0.0s done
+#6 CACHED
+
+#7 [build 2/3] RUN apt-get update -qq     && apt-get -y install --no-install-recommends gpg     && curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /usr/share/keyrings/bazel-archive-keyring.gpg     && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list     && apt-get update -qq     && apt-get -y install --no-install-recommends bazel     && rm -rf /var/lib/apt/lists/*
+#7 1.187 Reading package lists...
+#7 1.829 Building dependency tree...
+#7 1.969 Reading state information...
+#7 2.098 The following additional packages will be installed:
+#7 2.098   gpgconf libassuan0
+#7 2.099 Recommended packages:
+#7 2.099   gnupg
+#7 2.128 The following NEW packages will be installed:
+#7 2.129   gpg gpgconf libassuan0
+#7 2.205 0 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+#7 2.205 Need to get 1527 kB of archives.
+#7 2.205 After this operation, 2511 kB of additional disk space will be used.
+#7 2.205 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libassuan0 amd64 2.5.3-7.1 [50.5 kB]
+#7 2.217 Get:2 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 gpgconf amd64 2.2.27-2+deb11u3 [548 kB]
+#7 2.245 Get:3 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 gpg amd64 2.2.27-2+deb11u3 [928 kB]
+#7 2.379 debconf: delaying package configuration, since apt-utils is not installed
+#7 2.410 Fetched 1527 kB in 0s (11.9 MB/s)
+#7 2.428 Selecting previously unselected package libassuan0:amd64.
+#7 2.428 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14728 files and directories currently installed.)
+#7 2.436 Preparing to unpack .../libassuan0_2.5.3-7.1_amd64.deb ...
+#7 2.439 Unpacking libassuan0:amd64 (2.5.3-7.1) ...
+#7 2.461 Selecting previously unselected package gpgconf.
+#7 2.463 Preparing to unpack .../gpgconf_2.2.27-2+deb11u3_amd64.deb ...
+#7 2.464 Unpacking gpgconf (2.2.27-2+deb11u3) ...
+#7 2.500 Selecting previously unselected package gpg.
+#7 2.501 Preparing to unpack .../gpg_2.2.27-2+deb11u3_amd64.deb ...
+#7 2.503 Unpacking gpg (2.2.27-2+deb11u3) ...
+#7 2.578 Setting up libassuan0:amd64 (2.5.3-7.1) ...
+#7 2.582 Setting up gpgconf (2.2.27-2+deb11u3) ...
+#7 2.586 Setting up gpg (2.2.27-2+deb11u3) ...
+#7 2.592 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#7 2.931 curl: (22) The requested URL returned error: 404 
+#7 2.931 gpg: no valid OpenPGP data found.
+#7 ERROR: process "/bin/bash -c apt-get update -qq     && apt-get -y install --no-install-recommends gpg     && curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /usr/share/keyrings/bazel-archive-keyring.gpg     && echo \"deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8\" | tee /etc/apt/sources.list.d/bazel.list     && apt-get update -qq     && apt-get -y install --no-install-recommends bazel     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 2
+------
+ > [build 2/3] RUN apt-get update -qq     && apt-get -y install --no-install-recommends gpg     && curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /usr/share/keyrings/bazel-archive-keyring.gpg     && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list     && apt-get update -qq     && apt-get -y install --no-install-recommends bazel     && rm -rf /var/lib/apt/lists/*:
+2.464 Unpacking gpgconf (2.2.27-2+deb11u3) ...
+2.500 Selecting previously unselected package gpg.
+2.501 Preparing to unpack .../gpg_2.2.27-2+deb11u3_amd64.deb ...
+2.503 Unpacking gpg (2.2.27-2+deb11u3) ...
+2.578 Setting up libassuan0:amd64 (2.5.3-7.1) ...
+2.582 Setting up gpgconf (2.2.27-2+deb11u3) ...
+2.586 Setting up gpg (2.2.27-2+deb11u3) ...
+2.592 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+2.931 curl: (22) The requested URL returned error: 404 
+2.931 gpg: no valid OpenPGP data found.
+------
+verible.dockerfile:29
+--------------------
+  28 |     
+  29 | >>> RUN apt-get update -qq \
+  30 | >>>     && apt-get -y install --no-install-recommends gpg \
+  31 | >>>     && curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /usr/share/keyrings/bazel-archive-keyring.gpg \
+  32 | >>>     && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
+  33 | >>>     && apt-get update -qq \
+  34 | >>>     && apt-get -y install --no-install-recommends bazel \
+  35 | >>>     && rm -rf /var/lib/apt/lists/*
+  36 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -c apt-get update -qq     && apt-get -y install --no-install-recommends gpg     && curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /usr/share/keyrings/bazel-archive-keyring.gpg     && echo \"deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8\" | tee /etc/apt/sources.list.d/bazel.list     && apt-get update -qq     && apt-get -y install --no-install-recommends bazel     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 2
+=== FAIL verible (CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/verible', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '-f', 'debian/verible.dockerfile', 'debian']' returned non-zero exit status 1.) ===
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+  File "/home/umarcor/containers/utils/pyHDLC/__init__.py", line 456, in BuildImage
+    _exec(args=[
+    ~~~~~^^^^^^^
+        "docker", "build", *_commonCmd,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        str(contextPath)
+        ^^^^^^^^^^^^^^^^
+    ], dry=dry, collapse=f"🚧 Build {imageName}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/umarcor/containers/utils/pyHDLC/run.py", line 46, in _exec
+    check_call(args, stderr=STDOUT)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 419, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/verible', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', '-f', 'debian/verible.dockerfile', 'debian']' returned non-zero exit status 1.
+RESULT: FAIL

@@ -1,0 +1,102 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: conda IMAGES: ['conda']
+=== BUILD conda ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/conda --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -f debian-bullseye/conda.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from conda.dockerfile
+#1 transferring dockerfile: 1.59kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/base:latest
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#4 resolve ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e 0.0s done
+#4 DONE 0.0s
+
+#4 [1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#4 CACHED
+
+#5 [2/3] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     xz-utils  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#5 2.223 Reading package lists...
+#5 2.786 Building dependency tree...
+#5 2.912 Reading state information...
+#5 3.052 The following NEW packages will be installed:
+#5 3.052   xz-utils
+#5 3.121 0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+#5 3.121 Need to get 221 kB of archives.
+#5 3.121 After this operation, 628 kB of additional disk space will be used.
+#5 3.121 Get:1 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 xz-utils amd64 5.2.5-2.1~deb11u2 [221 kB]
+#5 3.263 debconf: delaying package configuration, since apt-utils is not installed
+#5 3.298 Fetched 221 kB in 0s (2310 kB/s)
+#5 3.328 Selecting previously unselected package xz-utils.
+#5 3.328 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7841 files and directories currently installed.)
+#5 3.335 Preparing to unpack .../xz-utils_5.2.5-2.1~deb11u2_amd64.deb ...
+#5 3.343 Unpacking xz-utils (5.2.5-2.1~deb11u2) ...
+#5 3.426 Setting up xz-utils (5.2.5-2.1~deb11u2) ...
+#5 3.445 update-alternatives: using /usr/bin/xz to provide /usr/bin/lzma (lzma) in auto mode
+#5 3.445 update-alternatives: warning: skip creation of /usr/share/man/man1/lzma.1.gz because associated file /usr/share/man/man1/xz.1.gz (of link group lzma) doesn't exist
+#5 3.445 update-alternatives: warning: skip creation of /usr/share/man/man1/unlzma.1.gz because associated file /usr/share/man/man1/unxz.1.gz (of link group lzma) doesn't exist
+#5 3.445 update-alternatives: warning: skip creation of /usr/share/man/man1/lzcat.1.gz because associated file /usr/share/man/man1/xzcat.1.gz (of link group lzma) doesn't exist
+#5 3.445 update-alternatives: warning: skip creation of /usr/share/man/man1/lzmore.1.gz because associated file /usr/share/man/man1/xzmore.1.gz (of link group lzma) doesn't exist
+#5 3.445 update-alternatives: warning: skip creation of /usr/share/man/man1/lzless.1.gz because associated file /usr/share/man/man1/xzless.1.gz (of link group lzma) doesn't exist
+#5 3.445 update-alternatives: warning: skip creation of /usr/share/man/man1/lzdiff.1.gz because associated file /usr/share/man/man1/xzdiff.1.gz (of link group lzma) doesn't exist
+#5 3.445 update-alternatives: warning: skip creation of /usr/share/man/man1/lzcmp.1.gz because associated file /usr/share/man/man1/xzcmp.1.gz (of link group lzma) doesn't exist
+#5 3.445 update-alternatives: warning: skip creation of /usr/share/man/man1/lzgrep.1.gz because associated file /usr/share/man/man1/xzgrep.1.gz (of link group lzma) doesn't exist
+#5 3.445 update-alternatives: warning: skip creation of /usr/share/man/man1/lzegrep.1.gz because associated file /usr/share/man/man1/xzegrep.1.gz (of link group lzma) doesn't exist
+#5 3.445 update-alternatives: warning: skip creation of /usr/share/man/man1/lzfgrep.1.gz because associated file /usr/share/man/man1/xzfgrep.1.gz (of link group lzma) doesn't exist
+#5 3.499 Reading package lists...
+#5 4.041 Building dependency tree...
+#5 4.165 Reading state information...
+#5 4.189 Reading package lists...
+#5 4.745 Building dependency tree...
+#5 4.874 Reading state information...
+#5 5.010 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#5 DONE 5.0s
+
+#6 [3/3] RUN curl -fsSL "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-$(arch | sed s/arm64/aarch64/ | sed s/amd64/x86_64/).sh" > conda_installer.sh  && chmod +x conda_installer.sh  && ./conda_installer.sh -u -b -p "/usr/local"  && rm conda_installer.sh  && find "/usr/local" -follow -type f -name '*.a' -delete  && find "/usr/local" -follow -type f -name '*.js.map' -delete  && conda clean -afy  && echo 'source /usr/local/etc/profile.d/conda.sh' >> ~/.bashrc
+#6 2.294 PREFIX=/usr/local
+#6 2.739 Unpacking bootstrapper...
+#6 2.825 Unpacking payload...
+#6 16.16 
+#6 16.16 Installing base environment...
+#6 16.16 
+#6 18.73 Preparing transaction: ...working... done
+#6 19.59 Executing transaction: ...working... done
+#6 31.68 installation finished.
+#6 34.57 Will remove 1 package cache(s).
+#6 DONE 35.2s
+
+#7 exporting to image
+#7 exporting layers
+#7 exporting layers 38.9s done
+#7 preparing layers for inline cache
+#7 preparing layers for inline cache 0.0s done
+#7 exporting manifest sha256:c82eb99e138f5f4808d2d199db75a513d9cbd0f6b757a20502d11dde028195e1 0.0s done
+#7 exporting config sha256:5c7768ba1211d6d00f994d373dbb64cc297a2a89444e3a8f5fbc59c37c5db3fd 0.1s done
+#7 exporting attestation manifest sha256:6086fd44cf193d64b3a6cd947281459ea27ff6ebe9cffd68814f1d2b2a7b9495
+#7 exporting attestation manifest sha256:6086fd44cf193d64b3a6cd947281459ea27ff6ebe9cffd68814f1d2b2a7b9495 0.1s done
+#7 exporting manifest list sha256:59b6dbd411e31e8418d9a7a38c05fadd87b6703f7d633f73f366fcb3a0fb08c6
+#7 exporting manifest list sha256:59b6dbd411e31e8418d9a7a38c05fadd87b6703f7d633f73f366fcb3a0fb08c6 0.1s done
+#7 naming to ghcr.io/hdl/amd64/debian/bullseye/conda:latest 0.0s done
+#7 unpacking to ghcr.io/hdl/amd64/debian/bullseye/conda:latest
+#7 unpacking to ghcr.io/hdl/amd64/debian/bullseye/conda:latest 11.1s done
+#7 DONE 50.7s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/conda
+Architecture: amd64 
+Size: 958335684
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/conda //wrk/conda.sh
+CC: 
+CXX: 
+/usr/local/bin/conda
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS conda ===
+RESULT: PASS

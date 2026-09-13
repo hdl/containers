@@ -1,0 +1,1423 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: nvc IMAGES: ['pkg/nvc', 'nvc']
+=== BUILD pkg/nvc ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target pkg debian-bullseye/nvc
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.64kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#2 DONE 0.0s
+
+#3 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#3 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#3 CACHED
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.1s
+
+#5 [internal] load build context
+#5 transferring context: 2.87kB done
+#5 DONE 0.1s
+
+#6 [build 2/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC  && apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]}  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && update-ca-certificates  && rm -rf /var/lib/apt/lists/*
+#6 1.204 Reading package lists...
+#6 1.784 Building dependency tree...
+#6 1.916 Reading state information...
+#6 2.054 The following additional packages will be installed:
+#6 2.054   autotools-dev bzip2 dpkg-dev libdpkg-perl libdw1 libelf-dev libelf1
+#6 2.054   libglib2.0-0 liblzma-dev libncurses-dev libncurses6 libpfm4 libsigsegv2
+#6 2.054   libsubunit-dev libsubunit0 libtcl8.6 libtinfo-dev libyaml-0-2 libz3-dev llvm
+#6 2.054   llvm-11 llvm-11-dev llvm-11-runtime llvm-11-tools llvm-runtime m4 patch
+#6 2.054   python3-pkg-resources python3-pygments python3-yaml tcl tcl8.6 tcl8.6-dev
+#6 2.054   xz-utils
+#6 2.056 Suggested packages:
+#6 2.056   autoconf-archive gnu-standards autoconf-doc libtool gettext bison-doc
+#6 2.056   bzip2-doc debian-keyring build-essential flex-doc gnupg sensible-utils bzr
+#6 2.056   liblzma-doc ncurses-doc llvm-11-doc m4-doc ed diffutils-doc
+#6 2.056   python3-setuptools python-pygments-doc ttf-bitstream-vera tcl-doc
+#6 2.056   tcl-tclreadline tcl8.6-doc
+#6 2.056 Recommended packages:
+#6 2.056   build-essential fakeroot gnupg libalgorithm-merge-perl libfl-dev
+#6 2.056   libfile-fcntllock-perl liblocale-gettext-perl libglib2.0-data
+#6 2.056   shared-mime-info xdg-user-dirs libgpm2 binfmt-support
+#6 2.404 The following NEW packages will be installed:
+#6 2.404   autoconf automake autotools-dev bison bzip2 check dpkg-dev flex libdpkg-perl
+#6 2.404   libdw-dev libdw1 libelf-dev libelf1 libffi-dev libglib2.0-0 liblzma-dev
+#6 2.404   libncurses-dev libncurses6 libpfm4 libsigsegv2 libsubunit-dev libsubunit0
+#6 2.405   libtcl8.6 libtinfo-dev libyaml-0-2 libz3-dev libzstd-dev llvm llvm-11
+#6 2.405   llvm-11-dev llvm-11-runtime llvm-11-tools llvm-dev llvm-runtime m4 patch
+#6 2.405   pkg-config python3-pkg-resources python3-pygments python3-yaml tcl tcl-dev
+#6 2.405   tcl8.6 tcl8.6-dev xz-utils zlib1g-dev
+#6 5.164 0 upgraded, 46 newly installed, 0 to remove and 0 not upgraded.
+#6 5.164 Need to get 51.6 MB of archives.
+#6 5.164 After this operation, 301 MB of additional disk space will be used.
+#6 5.164 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libsigsegv2 amd64 2.13-1 [34.8 kB]
+#6 5.173 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 m4 amd64 1.4.18-5 [204 kB]
+#6 5.192 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 flex amd64 2.6.4-8 [440 kB]
+#6 5.212 Get:4 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 bzip2 amd64 1.0.8-4 [49.3 kB]
+#6 5.214 Get:5 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 xz-utils amd64 5.2.5-2.1~deb11u2 [221 kB]
+#6 5.217 Get:6 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 autoconf all 2.69-14 [313 kB]
+#6 5.223 Get:7 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 autotools-dev all 20180224.1+nmu1 [77.1 kB]
+#6 5.223 Get:8 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 automake all 1:1.16.3-2 [814 kB]
+#6 5.237 Get:9 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 bison amd64 2:3.7.5+dfsg-1 [1104 kB]
+#6 5.370 Get:10 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libsubunit0 amd64 1.4.0-3 [9724 B]
+#6 5.521 Get:11 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libsubunit-dev amd64 1.4.0-3 [10.7 kB]
+#6 5.673 Get:12 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 check amd64 0.15.2-2 [115 kB]
+#6 5.804 Get:13 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libdpkg-perl all 1.20.14 [1555 kB]
+#6 5.830 Get:14 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 patch amd64 2.7.6-7 [128 kB]
+#6 5.831 Get:15 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 dpkg-dev all 1.20.14 [2317 kB]
+#6 5.951 Get:16 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libelf1 amd64 0.183-1 [165 kB]
+#6 5.955 Get:17 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 zlib1g-dev amd64 1:1.2.11.dfsg-2+deb11u2 [191 kB]
+#6 6.128 Get:18 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libelf-dev amd64 0.183-1 [75.6 kB]
+#6 6.131 Get:19 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libdw1 amd64 0.183-1 [234 kB]
+#6 6.167 Get:20 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 liblzma-dev amd64 5.2.5-2.1~deb11u2 [230 kB]
+#6 6.358 Get:21 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libdw-dev amd64 0.183-1 [311 kB]
+#6 6.363 Get:22 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libffi-dev amd64 3.3-6 [56.5 kB]
+#6 6.364 Get:23 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libglib2.0-0 amd64 2.66.8-1+deb11u8 [1377 kB]
+#6 6.399 Get:24 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libncurses6 amd64 6.2+20201114-2+deb11u2 [102 kB]
+#6 6.400 Get:25 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libncurses-dev amd64 6.2+20201114-2+deb11u2 [344 kB]
+#6 6.409 Get:26 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libpfm4 amd64 4.11.1+git32-gd0b85fb-1 [286 kB]
+#6 6.409 Get:27 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libtcl8.6 amd64 8.6.11+dfsg-1 [1018 kB]
+#6 6.431 Get:28 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libtinfo-dev amd64 6.2+20201114-2+deb11u2 [940 B]
+#6 6.431 Get:29 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libyaml-0-2 amd64 0.2.2-1 [49.6 kB]
+#6 6.561 Get:30 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libz3-dev amd64 4.8.10-1 [90.8 kB]
+#6 6.721 Get:31 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libzstd-dev amd64 1.4.8+dfsg-2.1 [382 kB]
+#6 6.728 Get:32 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 llvm-11-runtime amd64 1:11.0.1-2 [212 kB]
+#6 6.730 Get:33 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 llvm-runtime amd64 1:11.0-51+nmu5 [8532 B]
+#6 6.795 Get:34 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 llvm-11 amd64 1:11.0.1-2 [8463 kB]
+#6 7.219 Get:35 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 llvm amd64 1:11.0-51+nmu5 [10.7 kB]
+#6 7.220 Get:36 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 python3-pkg-resources all 52.0.0-4+deb11u2 [190 kB]
+#6 7.223 Get:37 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-pygments all 2.7.1+dfsg-2.1 [657 kB]
+#6 7.347 Get:38 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-yaml amd64 5.3.1-5 [138 kB]
+#6 7.561 Get:39 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 llvm-11-tools amd64 1:11.0.1-2 [373 kB]
+#6 7.908 Get:40 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 llvm-11-dev amd64 1:11.0.1-2 [28.0 MB]
+#6 8.652 Get:41 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 llvm-dev amd64 1:11.0-51+nmu5 [8788 B]
+#6 8.652 Get:42 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 pkg-config amd64 0.29.2-1 [65.1 kB]
+#6 8.653 Get:43 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 tcl8.6 amd64 8.6.11+dfsg-1 [124 kB]
+#6 8.654 Get:44 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 tcl amd64 8.6.11+1 [5788 B]
+#6 8.655 Get:45 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 tcl8.6-dev amd64 8.6.11+dfsg-1 [1018 kB]
+#6 8.664 Get:46 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 tcl-dev amd64 8.6.11+1 [8360 B]
+#6 8.801 debconf: delaying package configuration, since apt-utils is not installed
+#6 8.844 Fetched 51.6 MB in 6s (8247 kB/s)
+#6 8.899 Selecting previously unselected package libsigsegv2:amd64.
+#6 8.899 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14728 files and directories currently installed.)
+#6 8.908 Preparing to unpack .../00-libsigsegv2_2.13-1_amd64.deb ...
+#6 8.953 Unpacking libsigsegv2:amd64 (2.13-1) ...
+#6 9.041 Selecting previously unselected package m4.
+#6 9.043 Preparing to unpack .../01-m4_1.4.18-5_amd64.deb ...
+#6 9.056 Unpacking m4 (1.4.18-5) ...
+#6 9.159 Selecting previously unselected package flex.
+#6 9.161 Preparing to unpack .../02-flex_2.6.4-8_amd64.deb ...
+#6 9.178 Unpacking flex (2.6.4-8) ...
+#6 9.287 Selecting previously unselected package bzip2.
+#6 9.288 Preparing to unpack .../03-bzip2_1.0.8-4_amd64.deb ...
+#6 9.297 Unpacking bzip2 (1.0.8-4) ...
+#6 9.386 Selecting previously unselected package xz-utils.
+#6 9.388 Preparing to unpack .../04-xz-utils_5.2.5-2.1~deb11u2_amd64.deb ...
+#6 9.397 Unpacking xz-utils (5.2.5-2.1~deb11u2) ...
+#6 9.502 Selecting previously unselected package autoconf.
+#6 9.502 Preparing to unpack .../05-autoconf_2.69-14_all.deb ...
+#6 9.519 Unpacking autoconf (2.69-14) ...
+#6 9.615 Selecting previously unselected package autotools-dev.
+#6 9.616 Preparing to unpack .../06-autotools-dev_20180224.1+nmu1_all.deb ...
+#6 9.629 Unpacking autotools-dev (20180224.1+nmu1) ...
+#6 9.728 Selecting previously unselected package automake.
+#6 9.728 Preparing to unpack .../07-automake_1%3a1.16.3-2_all.deb ...
+#6 9.741 Unpacking automake (1:1.16.3-2) ...
+#6 9.902 Selecting previously unselected package bison.
+#6 9.904 Preparing to unpack .../08-bison_2%3a3.7.5+dfsg-1_amd64.deb ...
+#6 9.920 Unpacking bison (2:3.7.5+dfsg-1) ...
+#6 10.14 Selecting previously unselected package libsubunit0:amd64.
+#6 10.14 Preparing to unpack .../09-libsubunit0_1.4.0-3_amd64.deb ...
+#6 10.16 Unpacking libsubunit0:amd64 (1.4.0-3) ...
+#6 10.24 Selecting previously unselected package libsubunit-dev:amd64.
+#6 10.24 Preparing to unpack .../10-libsubunit-dev_1.4.0-3_amd64.deb ...
+#6 10.25 Unpacking libsubunit-dev:amd64 (1.4.0-3) ...
+#6 10.35 Selecting previously unselected package check:amd64.
+#6 10.35 Preparing to unpack .../11-check_0.15.2-2_amd64.deb ...
+#6 10.36 Unpacking check:amd64 (0.15.2-2) ...
+#6 10.46 Selecting previously unselected package libdpkg-perl.
+#6 10.46 Preparing to unpack .../12-libdpkg-perl_1.20.14_all.deb ...
+#6 10.48 Unpacking libdpkg-perl (1.20.14) ...
+#6 10.60 Selecting previously unselected package patch.
+#6 10.60 Preparing to unpack .../13-patch_2.7.6-7_amd64.deb ...
+#6 10.62 Unpacking patch (2.7.6-7) ...
+#6 10.72 Selecting previously unselected package dpkg-dev.
+#6 10.72 Preparing to unpack .../14-dpkg-dev_1.20.14_all.deb ...
+#6 10.74 Unpacking dpkg-dev (1.20.14) ...
+#6 10.94 Selecting previously unselected package libelf1:amd64.
+#6 10.94 Preparing to unpack .../15-libelf1_0.183-1_amd64.deb ...
+#6 10.95 Unpacking libelf1:amd64 (0.183-1) ...
+#6 11.04 Selecting previously unselected package zlib1g-dev:amd64.
+#6 11.04 Preparing to unpack .../16-zlib1g-dev_1%3a1.2.11.dfsg-2+deb11u2_amd64.deb ...
+#6 11.06 Unpacking zlib1g-dev:amd64 (1:1.2.11.dfsg-2+deb11u2) ...
+#6 11.23 Selecting previously unselected package libelf-dev:amd64.
+#6 11.24 Preparing to unpack .../17-libelf-dev_0.183-1_amd64.deb ...
+#6 11.27 Unpacking libelf-dev:amd64 (0.183-1) ...
+#6 11.41 Selecting previously unselected package libdw1:amd64.
+#6 11.41 Preparing to unpack .../18-libdw1_0.183-1_amd64.deb ...
+#6 11.43 Unpacking libdw1:amd64 (0.183-1) ...
+#6 11.52 Selecting previously unselected package liblzma-dev:amd64.
+#6 11.52 Preparing to unpack .../19-liblzma-dev_5.2.5-2.1~deb11u2_amd64.deb ...
+#6 11.53 Unpacking liblzma-dev:amd64 (5.2.5-2.1~deb11u2) ...
+#6 11.63 Selecting previously unselected package libdw-dev:amd64.
+#6 11.63 Preparing to unpack .../20-libdw-dev_0.183-1_amd64.deb ...
+#6 11.64 Unpacking libdw-dev:amd64 (0.183-1) ...
+#6 11.75 Selecting previously unselected package libffi-dev:amd64.
+#6 11.75 Preparing to unpack .../21-libffi-dev_3.3-6_amd64.deb ...
+#6 11.77 Unpacking libffi-dev:amd64 (3.3-6) ...
+#6 11.88 Selecting previously unselected package libglib2.0-0:amd64.
+#6 11.88 Preparing to unpack .../22-libglib2.0-0_2.66.8-1+deb11u8_amd64.deb ...
+#6 11.89 Unpacking libglib2.0-0:amd64 (2.66.8-1+deb11u8) ...
+#6 12.15 Selecting previously unselected package libncurses6:amd64.
+#6 12.15 Preparing to unpack .../23-libncurses6_6.2+20201114-2+deb11u2_amd64.deb ...
+#6 12.16 Unpacking libncurses6:amd64 (6.2+20201114-2+deb11u2) ...
+#6 12.23 Selecting previously unselected package libncurses-dev:amd64.
+#6 12.23 Preparing to unpack .../24-libncurses-dev_6.2+20201114-2+deb11u2_amd64.deb ...
+#6 12.25 Unpacking libncurses-dev:amd64 (6.2+20201114-2+deb11u2) ...
+#6 12.43 Selecting previously unselected package libpfm4:amd64.
+#6 12.43 Preparing to unpack .../25-libpfm4_4.11.1+git32-gd0b85fb-1_amd64.deb ...
+#6 12.45 Unpacking libpfm4:amd64 (4.11.1+git32-gd0b85fb-1) ...
+#6 12.62 Selecting previously unselected package libtcl8.6:amd64.
+#6 12.63 Preparing to unpack .../26-libtcl8.6_8.6.11+dfsg-1_amd64.deb ...
+#6 12.64 Unpacking libtcl8.6:amd64 (8.6.11+dfsg-1) ...
+#6 12.82 Selecting previously unselected package libtinfo-dev:amd64.
+#6 12.82 Preparing to unpack .../27-libtinfo-dev_6.2+20201114-2+deb11u2_amd64.deb ...
+#6 12.84 Unpacking libtinfo-dev:amd64 (6.2+20201114-2+deb11u2) ...
+#6 12.94 Selecting previously unselected package libyaml-0-2:amd64.
+#6 12.94 Preparing to unpack .../28-libyaml-0-2_0.2.2-1_amd64.deb ...
+#6 12.96 Unpacking libyaml-0-2:amd64 (0.2.2-1) ...
+#6 13.06 Selecting previously unselected package libz3-dev:amd64.
+#6 13.06 Preparing to unpack .../29-libz3-dev_4.8.10-1_amd64.deb ...
+#6 13.11 Unpacking libz3-dev:amd64 (4.8.10-1) ...
+#6 13.22 Selecting previously unselected package libzstd-dev:amd64.
+#6 13.22 Preparing to unpack .../30-libzstd-dev_1.4.8+dfsg-2.1_amd64.deb ...
+#6 13.23 Unpacking libzstd-dev:amd64 (1.4.8+dfsg-2.1) ...
+#6 13.41 Selecting previously unselected package llvm-11-runtime.
+#6 13.41 Preparing to unpack .../31-llvm-11-runtime_1%3a11.0.1-2_amd64.deb ...
+#6 13.43 Unpacking llvm-11-runtime (1:11.0.1-2) ...
+#6 13.54 Selecting previously unselected package llvm-runtime.
+#6 13.54 Preparing to unpack .../32-llvm-runtime_1%3a11.0-51+nmu5_amd64.deb ...
+#6 13.55 Unpacking llvm-runtime (1:11.0-51+nmu5) ...
+#6 13.63 Selecting previously unselected package llvm-11.
+#6 13.64 Preparing to unpack .../33-llvm-11_1%3a11.0.1-2_amd64.deb ...
+#6 13.65 Unpacking llvm-11 (1:11.0.1-2) ...
+#6 14.53 Selecting previously unselected package llvm.
+#6 14.53 Preparing to unpack .../34-llvm_1%3a11.0-51+nmu5_amd64.deb ...
+#6 14.55 Unpacking llvm (1:11.0-51+nmu5) ...
+#6 14.65 Selecting previously unselected package python3-pkg-resources.
+#6 14.65 Preparing to unpack .../35-python3-pkg-resources_52.0.0-4+deb11u2_all.deb ...
+#6 14.66 Unpacking python3-pkg-resources (52.0.0-4+deb11u2) ...
+#6 14.77 Selecting previously unselected package python3-pygments.
+#6 14.78 Preparing to unpack .../36-python3-pygments_2.7.1+dfsg-2.1_all.deb ...
+#6 14.79 Unpacking python3-pygments (2.7.1+dfsg-2.1) ...
+#6 15.01 Selecting previously unselected package python3-yaml.
+#6 15.01 Preparing to unpack .../37-python3-yaml_5.3.1-5_amd64.deb ...
+#6 15.02 Unpacking python3-yaml (5.3.1-5) ...
+#6 15.15 Selecting previously unselected package llvm-11-tools.
+#6 15.15 Preparing to unpack .../38-llvm-11-tools_1%3a11.0.1-2_amd64.deb ...
+#6 15.16 Unpacking llvm-11-tools (1:11.0.1-2) ...
+#6 15.78 Selecting previously unselected package llvm-11-dev.
+#6 15.78 Preparing to unpack .../39-llvm-11-dev_1%3a11.0.1-2_amd64.deb ...
+#6 15.81 Unpacking llvm-11-dev (1:11.0.1-2) ...
+#6 21.98 Selecting previously unselected package llvm-dev.
+#6 21.98 Preparing to unpack .../40-llvm-dev_1%3a11.0-51+nmu5_amd64.deb ...
+#6 22.00 Unpacking llvm-dev (1:11.0-51+nmu5) ...
+#6 22.09 Selecting previously unselected package pkg-config.
+#6 22.51 Preparing to unpack .../41-pkg-config_0.29.2-1_amd64.deb ...
+#6 22.57 Unpacking pkg-config (0.29.2-1) ...
+#6 22.69 Selecting previously unselected package tcl8.6.
+#6 22.69 Preparing to unpack .../42-tcl8.6_8.6.11+dfsg-1_amd64.deb ...
+#6 22.71 Unpacking tcl8.6 (8.6.11+dfsg-1) ...
+#6 22.82 Selecting previously unselected package tcl.
+#6 22.82 Preparing to unpack .../43-tcl_8.6.11+1_amd64.deb ...
+#6 22.84 Unpacking tcl (8.6.11+1) ...
+#6 22.93 Selecting previously unselected package tcl8.6-dev:amd64.
+#6 22.93 Preparing to unpack .../44-tcl8.6-dev_8.6.11+dfsg-1_amd64.deb ...
+#6 22.94 Unpacking tcl8.6-dev:amd64 (8.6.11+dfsg-1) ...
+#6 23.12 Selecting previously unselected package tcl-dev:amd64.
+#6 23.12 Preparing to unpack .../45-tcl-dev_8.6.11+1_amd64.deb ...
+#6 23.14 Unpacking tcl-dev:amd64 (8.6.11+1) ...
+#6 23.25 Setting up python3-pkg-resources (52.0.0-4+deb11u2) ...
+#6 23.53 Setting up libz3-dev:amd64 (4.8.10-1) ...
+#6 23.57 Setting up llvm-11-runtime (1:11.0.1-2) ...
+#6 23.61 Setting up libzstd-dev:amd64 (1.4.8+dfsg-2.1) ...
+#6 23.65 Setting up libyaml-0-2:amd64 (0.2.2-1) ...
+#6 23.69 Setting up libglib2.0-0:amd64 (2.66.8-1+deb11u8) ...
+#6 23.74 No schema files found: doing nothing.
+#6 23.75 Setting up python3-yaml (5.3.1-5) ...
+#6 23.94 Setting up bzip2 (1.0.8-4) ...
+#6 23.98 Setting up libffi-dev:amd64 (3.3-6) ...
+#6 24.03 Setting up libsubunit0:amd64 (1.4.0-3) ...
+#6 24.07 Setting up autotools-dev (20180224.1+nmu1) ...
+#6 24.11 Setting up python3-pygments (2.7.1+dfsg-2.1) ...
+#6 24.68 Setting up libpfm4:amd64 (4.11.1+git32-gd0b85fb-1) ...
+#6 24.73 Setting up libncurses6:amd64 (6.2+20201114-2+deb11u2) ...
+#6 24.77 Setting up llvm-runtime (1:11.0-51+nmu5) ...
+#6 24.81 Setting up libsigsegv2:amd64 (2.13-1) ...
+#6 24.85 Setting up xz-utils (5.2.5-2.1~deb11u2) ...
+#6 24.89 update-alternatives: using /usr/bin/xz to provide /usr/bin/lzma (lzma) in auto mode
+#6 24.89 update-alternatives: warning: skip creation of /usr/share/man/man1/lzma.1.gz because associated file /usr/share/man/man1/xz.1.gz (of link group lzma) doesn't exist
+#6 24.89 update-alternatives: warning: skip creation of /usr/share/man/man1/unlzma.1.gz because associated file /usr/share/man/man1/unxz.1.gz (of link group lzma) doesn't exist
+#6 24.89 update-alternatives: warning: skip creation of /usr/share/man/man1/lzcat.1.gz because associated file /usr/share/man/man1/xzcat.1.gz (of link group lzma) doesn't exist
+#6 24.89 update-alternatives: warning: skip creation of /usr/share/man/man1/lzmore.1.gz because associated file /usr/share/man/man1/xzmore.1.gz (of link group lzma) doesn't exist
+#6 24.89 update-alternatives: warning: skip creation of /usr/share/man/man1/lzless.1.gz because associated file /usr/share/man/man1/xzless.1.gz (of link group lzma) doesn't exist
+#6 24.89 update-alternatives: warning: skip creation of /usr/share/man/man1/lzdiff.1.gz because associated file /usr/share/man/man1/xzdiff.1.gz (of link group lzma) doesn't exist
+#6 24.89 update-alternatives: warning: skip creation of /usr/share/man/man1/lzcmp.1.gz because associated file /usr/share/man/man1/xzcmp.1.gz (of link group lzma) doesn't exist
+#6 24.89 update-alternatives: warning: skip creation of /usr/share/man/man1/lzgrep.1.gz because associated file /usr/share/man/man1/xzgrep.1.gz (of link group lzma) doesn't exist
+#6 24.89 update-alternatives: warning: skip creation of /usr/share/man/man1/lzegrep.1.gz because associated file /usr/share/man/man1/xzegrep.1.gz (of link group lzma) doesn't exist
+#6 24.89 update-alternatives: warning: skip creation of /usr/share/man/man1/lzfgrep.1.gz because associated file /usr/share/man/man1/xzfgrep.1.gz (of link group lzma) doesn't exist
+#6 24.91 Setting up patch (2.7.6-7) ...
+#6 24.96 Setting up libtcl8.6:amd64 (8.6.11+dfsg-1) ...
+#6 25.00 Setting up libdpkg-perl (1.20.14) ...
+#6 25.05 Setting up liblzma-dev:amd64 (5.2.5-2.1~deb11u2) ...
+#6 25.09 Setting up zlib1g-dev:amd64 (1:1.2.11.dfsg-2+deb11u2) ...
+#6 25.13 Setting up libelf1:amd64 (0.183-1) ...
+#6 25.18 Setting up libdw1:amd64 (0.183-1) ...
+#6 25.23 Setting up tcl8.6 (8.6.11+dfsg-1) ...
+#6 25.28 Setting up libncurses-dev:amd64 (6.2+20201114-2+deb11u2) ...
+#6 25.32 Setting up llvm-11-tools (1:11.0.1-2) ...
+#6 25.36 Setting up libsubunit-dev:amd64 (1.4.0-3) ...
+#6 25.41 Setting up m4 (1.4.18-5) ...
+#6 25.45 Setting up llvm-11 (1:11.0.1-2) ...
+#6 25.49 Setting up dpkg-dev (1.20.14) ...
+#6 25.56 Setting up check:amd64 (0.15.2-2) ...
+#6 25.61 Setting up libelf-dev:amd64 (0.183-1) ...
+#6 25.65 Setting up pkg-config (0.29.2-1) ...
+#6 25.72 Setting up llvm (1:11.0-51+nmu5) ...
+#6 25.77 Setting up autoconf (2.69-14) ...
+#6 25.83 Setting up tcl (8.6.11+1) ...
+#6 25.89 Setting up bison (2:3.7.5+dfsg-1) ...
+#6 25.92 update-alternatives: using /usr/bin/bison.yacc to provide /usr/bin/yacc (yacc) in auto mode
+#6 25.92 update-alternatives: warning: skip creation of /usr/share/man/man1/yacc.1.gz because associated file /usr/share/man/man1/bison.yacc.1.gz (of link group yacc) doesn't exist
+#6 25.94 Setting up automake (1:1.16.3-2) ...
+#6 25.97 update-alternatives: using /usr/bin/automake-1.16 to provide /usr/bin/automake (automake) in auto mode
+#6 25.97 update-alternatives: warning: skip creation of /usr/share/man/man1/automake.1.gz because associated file /usr/share/man/man1/automake-1.16.1.gz (of link group automake) doesn't exist
+#6 25.97 update-alternatives: warning: skip creation of /usr/share/man/man1/aclocal.1.gz because associated file /usr/share/man/man1/aclocal-1.16.1.gz (of link group automake) doesn't exist
+#6 25.99 Setting up libtinfo-dev:amd64 (6.2+20201114-2+deb11u2) ...
+#6 26.03 Setting up flex (2.6.4-8) ...
+#6 26.09 Setting up llvm-11-dev (1:11.0.1-2) ...
+#6 26.13 Setting up tcl8.6-dev:amd64 (8.6.11+dfsg-1) ...
+#6 26.18 Setting up libdw-dev:amd64 (0.183-1) ...
+#6 26.22 Setting up tcl-dev:amd64 (8.6.11+1) ...
+#6 26.27 Setting up llvm-dev (1:11.0-51+nmu5) ...
+#6 26.31 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#6 26.48 Reading package lists...
+#6 27.04 Building dependency tree...
+#6 27.18 Reading state information...
+#6 27.20 Reading package lists...
+#6 27.77 Building dependency tree...
+#6 27.91 Reading state information...
+#6 28.05 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#6 28.05 Updating certificates in /etc/ssl/certs...
+#6 28.89 0 added, 0 removed; done.
+#6 28.89 Running hooks in /etc/ca-certificates/update.d...
+#6 28.90 done.
+#6 DONE 29.1s
+
+#7 [build 3/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+#7 0.280 Cloning into '/tmp/nvc'...
+#7 14.84 configure.ac:26: installing './compile'
+#7 14.84 configure.ac:7: installing './config.guess'
+#7 14.84 configure.ac:7: installing './config.sub'
+#7 14.84 configure.ac:10: installing './install-sh'
+#7 14.85 configure.ac:10: installing './missing'
+#7 15.10 Makefile.am: installing './depcomp'
+#7 15.23 configure.ac: installing './ylwrap'
+#7 15.49 checking build system type... x86_64-pc-linux-gnu
+#7 15.67 checking host system type... x86_64-pc-linux-gnu
+#7 15.67 checking target system type... x86_64-pc-linux-gnu
+#7 15.67 checking for a BSD-compatible install... /usr/bin/install -c
+#7 15.69 checking whether build environment is sane... yes
+#7 15.69 checking for a thread-safe mkdir -p... /bin/mkdir -p
+#7 15.70 checking for gawk... no
+#7 15.70 checking for mawk... mawk
+#7 15.70 checking whether make sets $(MAKE)... yes
+#7 15.71 checking whether make supports nested variables... yes
+#7 15.72 checking whether make supports nested variables... (cached) yes
+#7 15.72 checking whether to enable maintainer-specific portions of Makefiles... yes
+#7 15.72 checking whether make supports the include directive... yes (GNU style)
+#7 15.72 checking for gcc... clang
+#7 15.82 checking whether the C compiler works... yes
+#7 15.91 checking for C compiler default output file name... a.out
+#7 15.92 checking for suffix of executables... 
+#7 16.02 checking whether we are cross compiling... no
+#7 16.21 checking for suffix of object files... o
+#7 16.25 checking whether we are using the GNU C compiler... yes
+#7 16.31 checking whether clang accepts -g... yes
+#7 16.35 checking for clang option to accept ISO C89... none needed
+#7 16.42 checking whether clang understands -c and -o together... yes
+#7 16.50 checking dependency style of clang... gcc3
+#7 16.58 checking how to run the C preprocessor... clang -E
+#7 16.94 checking for grep that handles long lines and -e... /bin/grep
+#7 16.94 checking for egrep... /bin/grep -E
+#7 16.94 checking for ANSI C header files... yes
+#7 17.49 checking for sys/types.h... yes
+#7 17.57 checking for sys/stat.h... yes
+#7 17.65 checking for stdlib.h... yes
+#7 17.72 checking for string.h... yes
+#7 17.84 checking for memory.h... yes
+#7 17.90 checking for strings.h... yes
+#7 17.98 checking for inttypes.h... yes
+#7 18.08 checking for stdint.h... yes
+#7 18.24 checking for unistd.h... yes
+#7 18.31 checking minix/config.h usability... no
+#7 18.40 checking minix/config.h presence... no
+#7 18.43 checking for minix/config.h... no
+#7 18.43 checking whether it is safe to define __EXTENSIONS__... yes
+#7 18.49 checking for gcc... (cached) clang
+#7 18.63 checking whether we are using the GNU C compiler... (cached) yes
+#7 18.63 checking whether clang accepts -g... (cached) yes
+#7 18.63 checking for clang option to accept ISO C89... (cached) none needed
+#7 18.63 checking whether clang understands -c and -o together... (cached) yes
+#7 18.63 checking dependency style of clang... (cached) gcc3
+#7 18.85 checking whether we are using the GNU C++ compiler... yes
+#7 18.88 checking whether clang++ accepts -g... yes
+#7 18.93 checking dependency style of clang++... gcc3
+#7 19.02 checking for flex... flex
+#7 19.04 checking lex output file root... lex.yy
+#7 19.04 checking lex library... none needed
+#7 21.22 checking whether yytext is a pointer... no
+#7 21.91 checking for inline... inline
+#7 21.96 checking for C/C++ restrict keyword... __restrict
+#7 22.04 checking sys/ptrace.h usability... yes
+#7 22.07 checking sys/ptrace.h presence... yes
+#7 22.11 checking for sys/ptrace.h... yes
+#7 22.12 checking sys/prctl.h usability... yes
+#7 22.21 checking sys/prctl.h presence... yes
+#7 22.25 checking for sys/prctl.h... yes
+#7 22.26 checking for tcgetwinsize... no
+#7 22.35 checking for memmem... yes
+#7 22.47 checking for strcasestr... yes
+#7 22.62 checking for getline... yes
+#7 22.73 checking for fseeko... yes
+#7 22.87 checking for ftello... yes
+#7 22.96 checking for fpurge... no
+#7 23.06 checking for __fpurge... yes
+#7 23.15 checking for strchrnul... yes
+#7 23.23 checking for strndup... yes
+#7 23.32 checking for gettid... yes
+#7 23.40 checking for popen... yes
+#7 23.53 checking for struct stat.st_mtimespec.tv_nsec... no
+#7 23.65 checking for struct stat.st_mtim.tv_nsec... yes
+#7 23.71 checking ucontext.h usability... yes
+#7 23.76 checking ucontext.h presence... yes
+#7 23.80 checking for ucontext.h... yes
+#7 23.80 checking sys/ucontext.h usability... yes
+#7 23.85 checking sys/ucontext.h presence... yes
+#7 23.88 checking for sys/ucontext.h... yes
+#7 23.88 checking stdio_ext.h usability... yes
+#7 23.95 checking stdio_ext.h presence... yes
+#7 23.99 checking for stdio_ext.h... yes
+#7 23.99 checking for getcontext... yes
+#7 24.08 checking whether the linker accepts -fuse-ld=mold... no
+#7 24.12 checking if the linker accepts -Wl,--dynamic-list... yes
+#7 24.23 checking whether the C compiler accepts -fPIC... yes
+#7 24.27 checking whether the C compiler accepts -mavx2... yes
+#7 24.31 checking whether the C compiler accepts -msse4.1... yes
+#7 24.35 checking whether the C compiler accepts -msha... yes
+#7 24.39 checking whether the C compiler accepts -mpopcnt... yes
+#7 24.43 checking for __attribute__((returns_nonnull))... yes
+#7 24.51 checking for __builtin_setjmp... yes
+#7 24.60 checking if flex is the lexer generator... yes
+#7 24.60 checking for library containing dlopen... -ldl
+#7 24.82 checking for a sed that does not truncate output... /bin/sed
+#7 24.83 checking whether clang is Clang... yes
+#7 24.87 checking whether pthreads work with "-pthread" and "-lpthread"... yes
+#7 24.99 checking whether Clang needs flag to prevent "argument unused" warning when linking with -pthread... no
+#7 25.23 checking for joinable pthread attribute... PTHREAD_CREATE_JOINABLE
+#7 25.41 checking whether more special flags are required for pthreads... no
+#7 25.41 checking for PTHREAD_PRIO_INHERIT... yes
+#7 25.56 checking for sh... /bin/sh
+#7 25.56 checking for diff... /usr/bin/diff
+#7 25.56 checking for xmllint... no
+#7 25.56 checking for library containing pow... -lm
+#7 25.78 checking for pkg-config... /usr/bin/pkg-config
+#7 25.78 checking pkg-config is at least version 0.9.0... yes
+#7 25.78 checking for zlib >= 1.0.0... yes
+#7 26.10 checking for LLVM (engine passes ipo linker native)... yes
+#7 26.78 checking for check >= 0.9.4... yes
+#7 26.93 checking for capstone >= 4.0... no
+#7 26.95 checking for libffi >= 3.0... yes
+#7 26.98 checking for libzstd >= 1.4... yes
+#7 27.01 checking unwind.h usability... yes
+#7 27.10 checking unwind.h presence... yes
+#7 27.15 checking for unwind.h... yes
+#7 27.15 checking for library containing _Unwind_Backtrace... none required
+#7 27.26 checking for libdw >= 0.159... yes
+#7 27.30 checking whether the thread-local storage support is from emutls... no
+#7 27.36 checking whether the C compiler accepts -flto=auto... no
+#7 27.41 checking whether the linker accepts ... yes
+#7 27.56 checking for C compiler vendor... clang
+#7 27.77 checking for llvm-ar... llvm-ar
+#7 27.78 checking for llvm-ranlib... llvm-ranlib
+#7 27.78 checking for gawk... (cached) mawk
+#7 27.78 checking if make is GNU Make... yes
+#7 27.85 checking for mandoc... no
+#7 27.89 checking that generated files are newer than configure... done
+#7 27.89 configure: creating ./config.status
+#7 28.08 config.status: creating Makefile
+#7 28.11 config.status: creating config.h
+#7 28.12 config.status: executing depfiles commands
+#7 29.77   GEN      src/cov/cov-style.h
+#7 29.77   GEN      src/gitsha.h
+#7 29.85   LEX      src/lexer.c
+#7 30.04   CCLD     lib/siginit.so
+#7 30.04   CC       src/nvc.o
+#7 30.05   CC       src/lib.o
+#7 30.06   CC       src/util.o
+#7 30.66   CC       src/ident.o
+#7 31.65   CC       src/parse.o
+#7 32.68   CC       src/lexer.o
+#7 33.09 src/lexer.c:3341:13: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+#7 33.09             if ( ! (yy_state_buf) )
+#7 33.09             ^
+#7 33.09 src/lexer.c:3339:9: note: previous statement is here
+#7 33.09         if ( ! (yy_state_buf) )
+#7 33.09         ^
+#7 33.48 src/lexer.c:6828:3: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]
+#7 33.48                 return yy_is_jam ? 0 : yy_current_state;
+#7 33.48                 ^
+#7 33.48 src/lexer.c:6825:2: note: previous statement is here
+#7 33.48         if ( ! yy_is_jam )
+#7 33.48         ^
+#7 33.49   CC       src/tree.o
+#7 35.42   CC       src/type.o
+#7 36.22   CC       src/sem.o
+#7 37.55   CC       src/elab.o
+#7 40.51 2 warnings generated.
+#7 40.53   CC       src/simp.o
+#7 40.54   CC       src/dump.o
+#7 42.21   CC       src/common.o
+#7 42.41   CC       src/fbuf.o
+#7 44.55   CC       src/hash.o
+#7 44.96   CC       src/bounds.o
+#7 45.75   CC       src/make.o
+#7 45.88   CC       src/object.o
+#7 46.18   CC       src/lower.o
+#7 46.70   CC       src/vcode.o
+#7 49.04   CC       src/names.o
+#7 50.30   CC       src/debug.o
+#7 51.09   CC       src/eval.o
+#7 51.51   CC       src/option.o
+#7 51.77   CC       src/diag.o
+#7 53.12   CC       src/scan.o
+#7 53.82   CC       src/mask.o
+#7 54.38   CC       src/thread.o
+#7 55.39   CC       src/driver.o
+#7 56.07   CC       src/printf.o
+#7 56.48   CC       src/reheat.o
+#7 56.67   CC       src/cov/cov-data.o
+#7 57.09   CC       src/cov/cov-export.o
+#7 57.75   CC       src/cov/cov-report.o
+#7 57.90   CC       src/cov/cov-exclude.o
+#7 58.27   CC       src/cov/cov-html.o
+#7 58.45 ../src/cov/cov-html.c:1374:10: warning: unused variable 'subdir' [-Wunused-variable]
+#7 58.45    char *subdir LOCAL = xasprintf("%s/hier", path);
+#7 58.45          ^
+#7 58.55   CC       src/jit/jit-core.o
+#7 58.85   CC       src/jit/jit-irgen.o
+#7 59.60 1 warning generated.
+#7 59.63   CC       src/jit/jit-dump.o
+#7 60.04   CC       src/jit/jit-interp.o
+#7 60.05   CC       src/jit/jit-exits.o
+#7 60.10   CC       src/jit/jit-optim.o
+#7 61.39   CC       src/jit/jit-ffi.o
+#7 61.95   CC       src/jit/jit-code.o
+#7 61.97   CC       src/jit/jit-layout.o
+#7 62.61   CC       src/jit/jit-intrin.o
+#7 62.69   CC       src/jit/jit-tramp.o
+#7 62.83   CC       src/jit/jit-x86.o
+#7 63.22   CC       src/jit/jit-llvm.o
+#7 66.40   CC       src/mir/mir-unit.o
+#7 67.01   CC       src/mir/mir-node.o
+#7 67.02   CC       src/mir/mir-type.o
+#7 67.41   CC       src/mir/mir-dump.o
+#7 68.64   CC       src/mir/mir-optim.o
+#7 70.71   CC       src/mir/mir-vcode.o
+#7 70.93   CC       src/psl/psl-node.o
+#7 71.27   CC       src/psl/psl-sem.o
+#7 71.45   CC       src/psl/psl-lower.o
+#7 71.85   CC       src/psl/psl-dump.o
+#7 72.21   CC       src/psl/psl-fsm.o
+#7 72.21   CC       src/rt/heap.o
+#7 72.22   CC       src/rt/cover.o
+#7 72.43   CC       src/rt/wave.o
+#7 72.96   CC       src/rt/mspace.o
+#7 73.67   CC       src/rt/stdenv.o
+#7 73.94   CC       src/rt/standard.o
+#7 74.49   CC       src/rt/simpkg.o
+#7 74.50   CC       src/rt/model.o
+#7 74.65   CC       src/rt/fileio.o
+#7 74.98   CC       src/rt/printer.o
+#7 75.08   CC       src/rt/reflect.o
+#7 75.51   CC       src/rt/assert.o
+#7 75.77   CC       src/rt/ename.o
+#7 76.46   CC       src/rt/copy.o
+#7 76.47   CC       src/rt/random.o
+#7 76.62   CC       src/sdf/sdf-parse.o
+#7 77.28   CC       src/sdf/sdf-util.o
+#7 77.75   CC       src/vhdl/vhdl-predef.o
+#7 78.05   CC       src/vhdl/vhdl-lower.o
+#7 78.83   CC       src/vhdl/vhdl-util.o
+#7 79.29   CC       src/vhdl/vhdl-inst.o
+#7 79.52   CC       src/vhdl/vhdl-cover.o
+#7 80.27   CC       src/vhpi/vhpi_sens.o
+#7 80.45   CC       src/vhpi/vhpi-str.o
+#7 80.67   CC       src/vhpi/vhpi-model.o
+#7 80.84   CC       src/vhpi/vhpi-util.o
+#7 81.00   CC       src/vlog/vlog-node.o
+#7 81.94   CC       src/vlog/vlog-dump.o
+#7 82.79   CC       src/vlog/vlog-lower.o
+#7 84.48   CC       src/vlog/vlog-number.o
+#7 88.91   CC       src/vlog/vlog-trans.o
+#7 89.16   CC       src/vlog/vlog-simp.o
+#7 89.29   CC       src/vlog/vlog-util.o
+#7 89.65   CC       src/vlog/vlog-sem.o
+#7 89.69   CC       src/vlog/vlog-parse.o
+#7 89.70   CC       src/vlog/vlog-udp.o
+#7 89.87   CC       src/vlog/vlog-inst.o
+#7 90.02   CC       src/vlog/vlog-symtab.o
+#7 90.16   CC       src/vlog/vlog-pp.o
+#7 90.44   CC       src/vlog/vlog-fold.o
+#7 91.11   CC       src/vpi/vpi-model.o
+#7 91.24   CC       src/vpi/vpi-str.o
+#7 91.40   CC       src/vpi/vpi-util.o
+#7 91.57   CC       src/vpi/vpi-systf.o
+#7 92.46   CC       thirdparty/fstapi.o
+#7 92.55   CC       thirdparty/lz4.o
+#7 93.41   CC       thirdparty/fastlz.o
+#7 94.79   CC       thirdparty/cpustate.o
+#7 94.99   CC       thirdparty/sha1.o
+#7 98.36   CC       thirdparty/svrand.o
+#7 99.90   AR       lib/libnvc.a
+#7 102.4   AR       lib/libthirdparty.a
+#7 102.5   GEN      bin/nvc
+#7 103.3   NVC      lib/std/STD.STANDARD
+#7 103.3   NVC      lib/std.19/STD.STANDARD
+#7 103.3   NVC      lib/std.08/STD.STANDARD
+#7 103.3   NVC      lib/std.08/STD.TEXTIO
+#7 103.3   NVC      lib/ieee.08/IEEE.NUMERIC_BIT_UNSIGNED
+#7 103.3   NVC      lib/nvc.08/NVC.SIM_PKG
+#7 103.3   NVC      lib/ieee.08/IEEE.MATH_REAL
+#7 103.4   NVC      lib/ieee.08/IEEE.FIXED_FLOAT_TYPES
+#7 103.4   NVC      lib/std.19/STD.TEXTIO
+#7 103.4   NVC      lib/ieee.19/IEEE.NUMERIC_BIT_UNSIGNED
+#7 103.5   NVC      lib/nvc.19/NVC.SIM_PKG
+#7 103.5   NVC      lib/ieee.19/IEEE.MATH_REAL
+#7 103.5   NVC      lib/nvc/NVC.POLYFILL
+#7 103.5   NVC      lib/ieee.19/IEEE.FIXED_FLOAT_TYPES
+#7 103.5   NVC      lib/nvc/NVC.TEXT_UTIL
+#7 103.5   NVC      lib/nvc/NVC.COVER_PKG
+#7 103.6   NVC      lib/nvc/NVC.RANDOM
+#7 103.6   NVC      lib/nvc.08/NVC.SIM_PKG-body
+#7 103.6   NVC      lib/nvc.08/NVC.POLYFILL
+#7 103.6   NVC      lib/nvc.08/NVC.TEXT_UTIL
+#7 103.6   NVC      lib/nvc.08/NVC.COVER_PKG
+#7 103.6   NVC      lib/nvc.08/NVC.RANDOM
+#7 103.6   NVC      lib/nvc.19/NVC.SIM_PKG-body
+#7 103.7   NVC      lib/nvc.19/NVC.POLYFILL
+#7 103.7   NVC      lib/nvc.19/NVC.TEXT_UTIL
+#7 103.7   NVC      lib/nvc.19/NVC.COVER_PKG
+#7 103.7   NVC      lib/nvc.19/NVC.RANDOM
+#7 103.7   NVC      lib/std/STD.STANDARD-body
+#7 103.7   NVC      lib/std/STD.TEXTIO
+#7 103.8   NVC      lib/std.08/STD.STANDARD-body
+#7 103.8   NVC      lib/std.08/STD.ENV
+#7 103.8   NVC      lib/std.08/STD.TEXTIO-body
+#7 103.8   NVC      lib/std.19/STD.STANDARD-body
+#7 103.8   NVC      lib/std.19/STD.ENV
+#7 103.8   NVC      lib/std.19/STD.REFLECTION
+#7 103.9   NVC      lib/ieee/IEEE.STD_LOGIC_1164
+#7 103.9   NVC      lib/ieee/IEEE.NUMERIC_BIT
+#7 103.9   NVC      lib/ieee/IEEE.NUMERIC_STD
+#7 103.9   NVC      lib/ieee/IEEE.STD_LOGIC_1164-body
+#7 103.9   NVC      lib/nvc/NVC.SIM_PKG
+#7 103.9   NVC      lib/ieee/IEEE.MATH_REAL
+#7 103.9   NVC      lib/ieee.08/IEEE.STD_LOGIC_1164
+#7 103.9   NVC      lib/ieee.08/IEEE.NUMERIC_BIT
+#7 103.9   NVC      lib/ieee.08/IEEE.MATH_REAL-body
+#7 104.0   NVC      lib/ieee.08/IEEE.MATH_COMPLEX
+#7 104.1   NVC      lib/ieee.19/IEEE.STD_LOGIC_1164
+#7 104.1   NVC      lib/ieee.19/IEEE.NUMERIC_BIT
+#7 104.1   NVC      lib/ieee.19/IEEE.MATH_REAL-body
+#7 104.1   NVC      lib/ieee.19/IEEE.MATH_COMPLEX
+#7 104.2   NVC      lib/nvc/NVC.SIM_PKG-body
+#7 104.2   NVC      lib/nvc/NVC.POLYFILL-body
+#7 104.2   NVC      lib/nvc/NVC.TEXT_UTIL-body
+#7 104.2   NVC      lib/nvc/NVC.PSL_SUPPORT
+#7 104.3   NVC      lib/nvc/NVC.VERILOG
+#7 104.3   NVC      lib/nvc/NVC.COVER_PKG-body
+#7 104.3   NVC      lib/nvc/NVC.RANDOM-body
+#7 104.3   NVC      lib/nvc.08/NVC.TEXT_UTIL-body
+#7 104.3   NVC      lib/nvc.08/NVC.PSL_SUPPORT
+#7 104.4   NVC      lib/nvc.08/NVC.VERILOG
+#7 104.4   NVC      lib/nvc.08/NVC.COVER_PKG-body
+#7 104.4   NVC      lib/nvc.08/NVC.RANDOM-body
+#7 104.5   NVC      lib/nvc.19/NVC.PSL_SUPPORT
+#7 104.5   NVC      lib/nvc.19/NVC.TEXT_UTIL-body
+#7 104.5   NVC      lib/nvc.19/NVC.VERILOG
+#7 104.5   NVC      lib/nvc.19/NVC.COVER_PKG-body
+#7 104.5   NVC      lib/nvc.19/NVC.RANDOM-body
+#7 104.6   NVC      lib/std/STD.TEXTIO-body
+#7 104.6   NVC      lib/std.08/STD.ENV-body
+#7 104.6   NVC      lib/std.19/STD.TEXTIO-body
+#7 104.7   NVC      lib/std.19/STD.ENV-body
+#7 104.7   NVC      lib/std.19/STD.REFLECTION-body
+#7 104.7   NVC      lib/ieee/IEEE.STD_LOGIC_ARITH
+#7 104.7   NVC      lib/ieee/IEEE.STD_LOGIC_TEXTIO
+#7 104.8   NVC      lib/ieee/IEEE.STD_LOGIC_MISC
+#7 104.9   NVC      lib/ieee.08/IEEE.STD_LOGIC_ARITH
+#7 104.9   NVC      lib/ieee.08/IEEE.STD_LOGIC_MISC
+#7 105.1   NVC      lib/ieee.19/IEEE.STD_LOGIC_ARITH
+#7 105.1   NVC      lib/ieee/IEEE.VITAL_TIMING
+#7 105.1   NVC      lib/ieee.19/IEEE.STD_LOGIC_MISC
+#7 105.1   NVC      lib/ieee.08/IEEE.VITAL_TIMING
+#7 105.3   NVC      lib/ieee.19/IEEE.VITAL_TIMING
+#7 105.3   NVC      lib/ieee/IEEE.NUMERIC_STD-body
+#7 105.3   NVC      lib/ieee/IEEE.NUMERIC_BIT-body
+#7 105.3   NVC      lib/ieee/IEEE.MATH_REAL-body
+#7 105.4   NVC      lib/ieee/IEEE.MATH_COMPLEX
+#7 105.4   NVC      lib/ieee.08/IEEE.NUMERIC_STD
+#7 105.5   NVC      lib/ieee.08/IEEE.NUMERIC_STD_UNSIGNED
+#7 105.5   NVC      lib/ieee.08/IEEE.STD_LOGIC_1164-body
+#7 105.6   NVC      lib/ieee.08/IEEE.NUMERIC_BIT-body
+#7 105.6   NVC      lib/ieee.08/IEEE.NUMERIC_BIT_UNSIGNED-body
+#7 105.8   NVC      lib/ieee.08/IEEE.STD_LOGIC_TEXTIO
+#7 105.8   NVC      lib/ieee.08/IEEE.MATH_COMPLEX-body
+#7 105.8   NVC      lib/ieee.08/IEEE.FIXED_GENERIC_PKG
+#7 106.1   NVC      lib/ieee.08/IEEE.IEEE_STD_CONTEXT
+#7 106.1   NVC      lib/ieee.08/IEEE.IEEE_BIT_CONTEXT
+#7 106.3   NVC      lib/ieee.19/IEEE.NUMERIC_STD_UNSIGNED
+#7 106.3   NVC      lib/ieee.19/IEEE.STD_LOGIC_1164-body
+#7 106.3   NVC      lib/ieee.19/IEEE.NUMERIC_STD
+#7 106.3   NVC      lib/ieee.19/IEEE.NUMERIC_BIT-body
+#7 106.3   NVC      lib/ieee.19/IEEE.NUMERIC_BIT_UNSIGNED-body
+#7 106.3   NVC      lib/ieee.19/IEEE.STD_LOGIC_TEXTIO
+#7 106.4   NVC      lib/ieee.19/IEEE.MATH_COMPLEX-body
+#7 106.4   NVC      lib/ieee.19/IEEE.FIXED_GENERIC_PKG
+#7 106.4   NVC      lib/ieee.19/IEEE.IEEE_STD_CONTEXT
+#7 106.4   NVC      lib/ieee.19/IEEE.IEEE_BIT_CONTEXT
+#7 106.5   NVC      lib/nvc/NVC.PSL_SUPPORT-body
+#7 106.5   NVC      lib/nvc/NVC.VERILOG-body
+#7 106.5   NVC      lib/nvc.08/NVC.PSL_SUPPORT-body
+#7 106.5   NVC      lib/nvc.08/NVC.VERILOG-body
+#7 106.5   NVC      lib/nvc.19/NVC.PSL_SUPPORT-body
+#7 106.6   NVC      lib/nvc.19/NVC.VERILOG-body
+#7 106.6   NVC      lib/ieee/IEEE.STD_LOGIC_SIGNED
+#7 106.6   NVC      lib/ieee/IEEE.STD_LOGIC_UNSIGNED
+#7 106.6   NVC      lib/ieee.08/IEEE.STD_LOGIC_SIGNED
+#7 106.6   NVC      lib/ieee.08/IEEE.STD_LOGIC_UNSIGNED
+#7 106.6   NVC      lib/ieee.19/IEEE.STD_LOGIC_SIGNED
+#7 106.7   NVC      lib/ieee.19/IEEE.STD_LOGIC_UNSIGNED
+#7 106.7   NVC      lib/ieee/IEEE.VITAL_TIMING-body
+#7 106.7   NVC      lib/ieee/IEEE.VITAL_PRIMITIVES
+#7 106.7   NVC      lib/ieee.08/IEEE.VITAL_TIMING-body
+#7 106.8   NVC      lib/ieee.08/IEEE.VITAL_PRIMITIVES
+#7 106.8   NVC      lib/ieee.19/IEEE.VITAL_TIMING-body
+#7 106.8   NVC      lib/ieee.19/IEEE.VITAL_PRIMITIVES
+#7 106.8   NVC      lib/ieee/IEEE.MATH_COMPLEX-body
+#7 106.8   NVC      lib/ieee.08/IEEE.NUMERIC_STD-body
+#7 106.9   NVC      lib/ieee.08/IEEE.NUMERIC_STD_UNSIGNED-body
+#7 106.9   NVC      lib/ieee.08/IEEE.FIXED_GENERIC_PKG-body
+#7 106.9   NVC      lib/ieee.08/IEEE.FLOAT_GENERIC_PKG
+#7 106.9   NVC      lib/ieee.19/IEEE.NUMERIC_STD-body
+#7 107.0   NVC      lib/ieee.19/IEEE.NUMERIC_STD_UNSIGNED-body
+#7 107.0   NVC      lib/ieee.19/IEEE.FIXED_GENERIC_PKG-body
+#7 107.1   NVC      lib/ieee.19/IEEE.FLOAT_GENERIC_PKG
+#7 107.3   NVC      lib/ieee/IEEE.VITAL_PRIMITIVES-body
+#7 107.3   NVC      lib/ieee/IEEE.VITAL_MEMORY
+#7 107.3   NVC      lib/ieee.08/IEEE.VITAL_PRIMITIVES-body
+#7 107.4   NVC      lib/ieee.08/IEEE.VITAL_MEMORY
+#7 107.5   NVC      lib/ieee.19/IEEE.VITAL_PRIMITIVES-body
+#7 107.5   NVC      lib/ieee.19/IEEE.VITAL_MEMORY
+#7 107.6   NVC      lib/ieee.08/IEEE.FIXED_PKG
+#7 107.6   NVC      lib/ieee.08/IEEE.FLOAT_GENERIC_PKG-body
+#7 107.6   NVC      lib/ieee.19/IEEE.FLOAT_GENERIC_PKG-body
+#7 107.6   NVC      lib/ieee.19/IEEE.FIXED_PKG
+#7 107.7   NVC      lib/ieee/IEEE.VITAL_MEMORY-body
+#7 107.7   NVC      lib/ieee.08/IEEE.VITAL_MEMORY-body
+#7 107.8   NVC      lib/ieee.19/IEEE.VITAL_MEMORY-body
+#7 107.9   NVC      lib/ieee.08/IEEE.FLOAT_PKG
+#7 107.9   NVC      lib/ieee.19/IEEE.FLOAT_PKG
+#7 108.3  /bin/mkdir -p '/opt/nvc/usr/local/bin'
+#7 108.3   /usr/bin/install -c bin/nvc '/opt/nvc/usr/local/bin'
+#7 108.4  /bin/mkdir -p '/opt/nvc/usr/local/libexec/nvc'
+#7 108.4  /usr/bin/install -c ../contrib/functions.sh ../contrib/install-osvvm.sh ../contrib/install-osvvm.tcl ../contrib/install-uvvm.sh ../contrib/install-vivado.sh ../contrib/install-quartus.sh ../contrib/install-ise.sh ../contrib/install-icecube2.sh ../contrib/install-libero.sh ../contrib/install-vunit.sh ../contrib/install-xpm_vhdl.sh ../contrib/install-fmf.sh '/opt/nvc/usr/local/libexec/nvc'
+#7 108.4  /bin/mkdir -p '/opt/nvc/usr/local/share/bash-completion/completions'
+#7 108.4  /usr/bin/install -c -m 644 ../contrib/nvc.bash '/opt/nvc/usr/local/share/bash-completion/completions'
+#7 108.4  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/ieee'
+#7 108.4  /usr/bin/install -c -m 644 lib/ieee/_NVC_LIB lib/ieee/_index lib/ieee/IEEE.STD_LOGIC_1164 lib/ieee/IEEE.NUMERIC_BIT lib/ieee/IEEE.NUMERIC_STD lib/ieee/IEEE.STD_LOGIC_1164-body lib/ieee/IEEE.NUMERIC_STD-body lib/ieee/IEEE.NUMERIC_BIT-body lib/ieee/IEEE.MATH_REAL lib/ieee/IEEE.MATH_REAL-body lib/ieee/IEEE.MATH_COMPLEX lib/ieee/IEEE.MATH_COMPLEX-body '/opt/nvc/usr/local/lib/nvc/ieee'
+#7 108.4  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/ieee.08'
+#7 108.4  /usr/bin/install -c -m 644 lib/ieee.08/_NVC_LIB lib/ieee.08/_index lib/ieee.08/IEEE.STD_LOGIC_1164 lib/ieee.08/IEEE.NUMERIC_BIT lib/ieee.08/IEEE.NUMERIC_BIT_UNSIGNED lib/ieee.08/IEEE.NUMERIC_STD lib/ieee.08/IEEE.NUMERIC_STD_UNSIGNED lib/ieee.08/IEEE.STD_LOGIC_1164-body lib/ieee.08/IEEE.NUMERIC_STD-body lib/ieee.08/IEEE.NUMERIC_STD_UNSIGNED-body lib/ieee.08/IEEE.NUMERIC_BIT-body lib/ieee.08/IEEE.NUMERIC_BIT_UNSIGNED-body lib/ieee.08/IEEE.STD_LOGIC_TEXTIO lib/ieee.08/IEEE.MATH_REAL lib/ieee.08/IEEE.MATH_REAL-body lib/ieee.08/IEEE.MATH_COMPLEX lib/ieee.08/IEEE.MATH_COMPLEX-body lib/ieee.08/IEEE.FIXED_FLOAT_TYPES lib/ieee.08/IEEE.FIXED_GENERIC_PKG lib/ieee.08/IEEE.FIXED_GENERIC_PKG-body lib/ieee.08/IEEE.FIXED_PKG lib/ieee.08/IEEE.FLOAT_GENERIC_PKG lib/ieee.08/IEEE.FLOAT_GENERIC_PKG-body lib/ieee.08/IEEE.FLOAT_PKG lib/ieee.08/IEEE.IEEE_STD_CONTEXT lib/ieee.08/IEEE.IEEE_BIT_CONTEXT '/opt/nvc/usr/local/lib/nvc/ieee.08'
+#7 108.4  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/ieee.19'
+#7 108.4  /usr/bin/install -c -m 644 lib/ieee.19/_NVC_LIB lib/ieee.19/_index lib/ieee.19/IEEE.STD_LOGIC_1164 lib/ieee.19/IEEE.NUMERIC_BIT lib/ieee.19/IEEE.NUMERIC_BIT_UNSIGNED lib/ieee.19/IEEE.NUMERIC_STD lib/ieee.19/IEEE.NUMERIC_STD_UNSIGNED lib/ieee.19/IEEE.STD_LOGIC_1164-body lib/ieee.19/IEEE.NUMERIC_STD-body lib/ieee.19/IEEE.NUMERIC_STD_UNSIGNED-body lib/ieee.19/IEEE.NUMERIC_BIT-body lib/ieee.19/IEEE.NUMERIC_BIT_UNSIGNED-body lib/ieee.19/IEEE.STD_LOGIC_TEXTIO lib/ieee.19/IEEE.MATH_REAL lib/ieee.19/IEEE.MATH_REAL-body lib/ieee.19/IEEE.MATH_COMPLEX lib/ieee.19/IEEE.MATH_COMPLEX-body lib/ieee.19/IEEE.FIXED_FLOAT_TYPES lib/ieee.19/IEEE.FIXED_GENERIC_PKG lib/ieee.19/IEEE.FIXED_GENERIC_PKG-body lib/ieee.19/IEEE.FIXED_PKG lib/ieee.19/IEEE.FLOAT_GENERIC_PKG lib/ieee.19/IEEE.FLOAT_GENERIC_PKG-body lib/ieee.19/IEEE.FLOAT_PKG lib/ieee.19/IEEE.IEEE_STD_CONTEXT lib/ieee.19/IEEE.IEEE_BIT_CONTEXT '/opt/nvc/usr/local/lib/nvc/ieee.19'
+#7 108.4  /bin/mkdir -p '/opt/nvc/usr/local/include'
+#7 108.4  /usr/bin/install -c -m 644 ../src/vhpi/vhpi_user.h ../src/vhpi/vhpi_ext_nvc.h '/opt/nvc/usr/local/include'
+#7 108.4  /bin/mkdir -p '/opt/nvc/usr/local/share/man/man1'
+#7 108.4  /usr/bin/install -c -m 644 ../nvc.1 '/opt/nvc/usr/local/share/man/man1'
+#7 108.4  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/nvc'
+#7 108.4  /usr/bin/install -c -m 644 lib/nvc/_NVC_LIB lib/nvc/_index lib/nvc/NVC.SIM_PKG lib/nvc/NVC.SIM_PKG-body lib/nvc/NVC.POLYFILL lib/nvc/NVC.POLYFILL-body lib/nvc/NVC.TEXT_UTIL lib/nvc/NVC.TEXT_UTIL-body lib/nvc/NVC.PSL_SUPPORT lib/nvc/NVC.PSL_SUPPORT-body lib/nvc/NVC.VERILOG lib/nvc/NVC.VERILOG-body lib/nvc/NVC.COVER_PKG lib/nvc/NVC.COVER_PKG-body lib/nvc/NVC.RANDOM lib/nvc/NVC.RANDOM-body '/opt/nvc/usr/local/lib/nvc/nvc'
+#7 108.4  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/nvc.08'
+#7 108.5  /usr/bin/install -c -m 644 lib/nvc.08/_NVC_LIB lib/nvc.08/_index lib/nvc.08/NVC.SIM_PKG lib/nvc.08/NVC.SIM_PKG-body lib/nvc.08/NVC.POLYFILL lib/nvc.08/NVC.TEXT_UTIL lib/nvc.08/NVC.TEXT_UTIL-body lib/nvc.08/NVC.PSL_SUPPORT lib/nvc.08/NVC.PSL_SUPPORT-body lib/nvc.08/NVC.VERILOG lib/nvc.08/NVC.VERILOG-body lib/nvc.08/NVC.COVER_PKG lib/nvc.08/NVC.COVER_PKG-body lib/nvc.08/NVC.RANDOM lib/nvc.08/NVC.RANDOM-body '/opt/nvc/usr/local/lib/nvc/nvc.08'
+#7 108.5  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/nvc.19'
+#7 108.5  /usr/bin/install -c -m 644 lib/nvc.19/_NVC_LIB lib/nvc.19/_index lib/nvc.19/NVC.SIM_PKG lib/nvc.19/NVC.SIM_PKG-body lib/nvc.19/NVC.POLYFILL lib/nvc.19/NVC.TEXT_UTIL lib/nvc.19/NVC.TEXT_UTIL-body lib/nvc.19/NVC.PSL_SUPPORT lib/nvc.19/NVC.PSL_SUPPORT-body lib/nvc.19/NVC.VERILOG lib/nvc.19/NVC.VERILOG-body lib/nvc.19/NVC.COVER_PKG lib/nvc.19/NVC.COVER_PKG-body lib/nvc.19/NVC.RANDOM lib/nvc.19/NVC.RANDOM-body '/opt/nvc/usr/local/lib/nvc/nvc.19'
+#7 108.5  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/std'
+#7 108.5  /usr/bin/install -c -m 644 lib/std/_NVC_LIB lib/std/_index lib/std/STD.STANDARD lib/std/STD.STANDARD-body lib/std/STD.TEXTIO lib/std/STD.TEXTIO-body '/opt/nvc/usr/local/lib/nvc/std'
+#7 108.5  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/std.08'
+#7 108.5  /usr/bin/install -c -m 644 lib/std.08/_NVC_LIB lib/std.08/_index lib/std.08/STD.STANDARD lib/std.08/STD.STANDARD-body lib/std.08/STD.TEXTIO lib/std.08/STD.TEXTIO-body lib/std.08/STD.ENV lib/std.08/STD.ENV-body '/opt/nvc/usr/local/lib/nvc/std.08'
+#7 108.5  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/std.19'
+#7 108.6  /usr/bin/install -c -m 644 lib/std.19/_NVC_LIB lib/std.19/_index lib/std.19/STD.STANDARD lib/std.19/STD.STANDARD-body lib/std.19/STD.TEXTIO lib/std.19/STD.TEXTIO-body lib/std.19/STD.ENV lib/std.19/STD.ENV-body lib/std.19/STD.REFLECTION lib/std.19/STD.REFLECTION-body '/opt/nvc/usr/local/lib/nvc/std.19'
+#7 108.6  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/ieee'
+#7 108.6  /usr/bin/install -c -m 644 lib/ieee/IEEE.STD_LOGIC_ARITH lib/ieee/IEEE.STD_LOGIC_ARITH-body lib/ieee/IEEE.STD_LOGIC_SIGNED lib/ieee/IEEE.STD_LOGIC_SIGNED-body lib/ieee/IEEE.STD_LOGIC_UNSIGNED lib/ieee/IEEE.STD_LOGIC_UNSIGNED-body lib/ieee/IEEE.STD_LOGIC_TEXTIO lib/ieee/IEEE.STD_LOGIC_TEXTIO-body lib/ieee/IEEE.STD_LOGIC_MISC lib/ieee/IEEE.STD_LOGIC_MISC-body '/opt/nvc/usr/local/lib/nvc/ieee'
+#7 108.6  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/ieee.08'
+#7 108.6  /usr/bin/install -c -m 644 lib/ieee.08/IEEE.STD_LOGIC_ARITH lib/ieee.08/IEEE.STD_LOGIC_ARITH-body lib/ieee.08/IEEE.STD_LOGIC_SIGNED lib/ieee.08/IEEE.STD_LOGIC_SIGNED-body lib/ieee.08/IEEE.STD_LOGIC_UNSIGNED lib/ieee.08/IEEE.STD_LOGIC_UNSIGNED-body lib/ieee.08/IEEE.STD_LOGIC_MISC lib/ieee.08/IEEE.STD_LOGIC_MISC-body '/opt/nvc/usr/local/lib/nvc/ieee.08'
+#7 108.6  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/ieee.19'
+#7 108.6  /usr/bin/install -c -m 644 lib/ieee.19/IEEE.STD_LOGIC_ARITH lib/ieee.19/IEEE.STD_LOGIC_ARITH-body lib/ieee.19/IEEE.STD_LOGIC_SIGNED lib/ieee.19/IEEE.STD_LOGIC_SIGNED-body lib/ieee.19/IEEE.STD_LOGIC_UNSIGNED lib/ieee.19/IEEE.STD_LOGIC_UNSIGNED-body lib/ieee.19/IEEE.STD_LOGIC_MISC lib/ieee.19/IEEE.STD_LOGIC_MISC-body '/opt/nvc/usr/local/lib/nvc/ieee.19'
+#7 108.6  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/ieee'
+#7 108.6  /usr/bin/install -c -m 644 lib/ieee/IEEE.VITAL_TIMING lib/ieee/IEEE.VITAL_TIMING-body lib/ieee/IEEE.VITAL_PRIMITIVES lib/ieee/IEEE.VITAL_PRIMITIVES-body lib/ieee/IEEE.VITAL_MEMORY lib/ieee/IEEE.VITAL_MEMORY-body '/opt/nvc/usr/local/lib/nvc/ieee'
+#7 108.6  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/ieee.08'
+#7 108.7  /usr/bin/install -c -m 644 lib/ieee.08/IEEE.VITAL_TIMING lib/ieee.08/IEEE.VITAL_TIMING-body lib/ieee.08/IEEE.VITAL_PRIMITIVES lib/ieee.08/IEEE.VITAL_PRIMITIVES-body lib/ieee.08/IEEE.VITAL_MEMORY lib/ieee.08/IEEE.VITAL_MEMORY-body '/opt/nvc/usr/local/lib/nvc/ieee.08'
+#7 108.7  /bin/mkdir -p '/opt/nvc/usr/local/lib/nvc/ieee.19'
+#7 108.7  /usr/bin/install -c -m 644 lib/ieee.19/IEEE.VITAL_TIMING lib/ieee.19/IEEE.VITAL_TIMING-body lib/ieee.19/IEEE.VITAL_PRIMITIVES lib/ieee.19/IEEE.VITAL_PRIMITIVES-body lib/ieee.19/IEEE.VITAL_MEMORY lib/ieee.19/IEEE.VITAL_MEMORY-body '/opt/nvc/usr/local/lib/nvc/ieee.19'
+#7 DONE 109.9s
+
+#8 [pkg 1/1] COPY --from=build /opt/nvc /nvc
+#8 DONE 0.1s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 2.0s done
+#9 preparing layers for inline cache
+#9 preparing layers for inline cache 0.0s done
+#9 exporting manifest sha256:345e98e64965ac515275627943762d48305f938c4f95cb2bcef176fe12385688 0.0s done
+#9 exporting config sha256:78bd637c10519ec0b0470db1e2fc6024b95b2285d0cc2931741d00f3502e7124 0.0s done
+#9 exporting attestation manifest sha256:8cd02da73c271574d17579bc910d0de2685bf3c00531e40ac4b1d3bf1eda8b46
+#9 exporting attestation manifest sha256:8cd02da73c271574d17579bc910d0de2685bf3c00531e40ac4b1d3bf1eda8b46 0.1s done
+#9 exporting manifest list sha256:aab08f229a1cbf961e712c4ba2a30d6608490cc4442e2f4289f6d964e6f2abe3 0.1s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc:latest
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc:latest done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc:latest
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc:latest 0.2s done
+#9 DONE 2.5s
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/testpkg:nvc --build-arg IMAGE=ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc --build-arg PACKAGE=nvc -f /home/umarcor/containers/utils/pyHDLC/testpkg.dockerfile .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from testpkg.dockerfile
+#1 transferring dockerfile: 975B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc:latest
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#5 resolve docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b 0.1s done
+#5 DONE 0.1s
+
+#6 [pkg 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc:latest@sha256:aab08f229a1cbf961e712c4ba2a30d6608490cc4442e2f4289f6d964e6f2abe3
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc:latest@sha256:aab08f229a1cbf961e712c4ba2a30d6608490cc4442e2f4289f6d964e6f2abe3
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/nvc:latest@sha256:aab08f229a1cbf961e712c4ba2a30d6608490cc4442e2f4289f6d964e6f2abe3 0.1s done
+#6 DONE 0.1s
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#5 CACHED
+
+#7 [stage-1 2/3] COPY --from=pkg /nvc /
+#7 DONE 0.4s
+
+#8 [stage-1 3/3] RUN apk add -U --no-cache file tree
+#8 1.112 (1/3) Installing libmagic (5.47-r2)
+#8 1.187 (2/3) Installing file (5.47-r2)
+#8 1.202 (3/3) Installing tree (2.3.2-r0)
+#8 1.214 Executing busybox-1.37.0-r31.trigger
+#8 1.220 OK: 18.4 MiB in 19 packages
+#8 DONE 1.6s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 1.7s done
+#9 preparing layers for inline cache
+#9 preparing layers for inline cache 0.0s done
+#9 exporting manifest sha256:9c8e330583dcbad71d1c4fc0038d3a4da6915b429e50cb164efbeb9716d9d112 0.0s done
+#9 exporting config sha256:ef1e9b34911a4796594d4e40b6a6bb984a43b3a01c4ab5590de8f5f8ad85e03a 0.0s done
+#9 exporting attestation manifest sha256:8ca26c31ac455ebf30c4745d6024e9f9310957915bcabd2104bc90d80db9077d 0.0s done
+#9 exporting manifest list sha256:9bdcbe013c8827827ab3de99193087dc4aaf9c337c5ac0efa8dbe0847c738d05 0.0s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/testpkg:nvc done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:nvc
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:nvc 0.4s done
+#9 DONE 2.4s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/testpkg:nvc //wrk/nvc.pkg.sh
+/usr/local
+├── bin
+│   └── nvc
+├── include
+│   ├── vhpi_ext_nvc.h
+│   └── vhpi_user.h
+├── lib
+│   └── nvc
+│       ├── ieee
+│       │   ├── IEEE.MATH_COMPLEX
+│       │   ├── IEEE.MATH_COMPLEX-body
+│       │   ├── IEEE.MATH_REAL
+│       │   ├── IEEE.MATH_REAL-body
+│       │   ├── IEEE.NUMERIC_BIT
+│       │   ├── IEEE.NUMERIC_BIT-body
+│       │   ├── IEEE.NUMERIC_STD
+│       │   ├── IEEE.NUMERIC_STD-body
+│       │   ├── IEEE.STD_LOGIC_1164
+│       │   ├── IEEE.STD_LOGIC_1164-body
+│       │   ├── IEEE.STD_LOGIC_ARITH
+│       │   ├── IEEE.STD_LOGIC_ARITH-body
+│       │   ├── IEEE.STD_LOGIC_MISC
+│       │   ├── IEEE.STD_LOGIC_MISC-body
+│       │   ├── IEEE.STD_LOGIC_SIGNED
+│       │   ├── IEEE.STD_LOGIC_SIGNED-body
+│       │   ├── IEEE.STD_LOGIC_TEXTIO
+│       │   ├── IEEE.STD_LOGIC_TEXTIO-body
+│       │   ├── IEEE.STD_LOGIC_UNSIGNED
+│       │   ├── IEEE.STD_LOGIC_UNSIGNED-body
+│       │   ├── IEEE.VITAL_MEMORY
+│       │   ├── IEEE.VITAL_MEMORY-body
+│       │   ├── IEEE.VITAL_PRIMITIVES
+│       │   ├── IEEE.VITAL_PRIMITIVES-body
+│       │   ├── IEEE.VITAL_TIMING
+│       │   ├── IEEE.VITAL_TIMING-body
+│       │   ├── _NVC_LIB
+│       │   └── _index
+│       ├── ieee.08
+│       │   ├── IEEE.FIXED_FLOAT_TYPES
+│       │   ├── IEEE.FIXED_GENERIC_PKG
+│       │   ├── IEEE.FIXED_GENERIC_PKG-body
+│       │   ├── IEEE.FIXED_PKG
+│       │   ├── IEEE.FLOAT_GENERIC_PKG
+│       │   ├── IEEE.FLOAT_GENERIC_PKG-body
+│       │   ├── IEEE.FLOAT_PKG
+│       │   ├── IEEE.IEEE_BIT_CONTEXT
+│       │   ├── IEEE.IEEE_STD_CONTEXT
+│       │   ├── IEEE.MATH_COMPLEX
+│       │   ├── IEEE.MATH_COMPLEX-body
+│       │   ├── IEEE.MATH_REAL
+│       │   ├── IEEE.MATH_REAL-body
+│       │   ├── IEEE.NUMERIC_BIT
+│       │   ├── IEEE.NUMERIC_BIT-body
+│       │   ├── IEEE.NUMERIC_BIT_UNSIGNED
+│       │   ├── IEEE.NUMERIC_BIT_UNSIGNED-body
+│       │   ├── IEEE.NUMERIC_STD
+│       │   ├── IEEE.NUMERIC_STD-body
+│       │   ├── IEEE.NUMERIC_STD_UNSIGNED
+│       │   ├── IEEE.NUMERIC_STD_UNSIGNED-body
+│       │   ├── IEEE.STD_LOGIC_1164
+│       │   ├── IEEE.STD_LOGIC_1164-body
+│       │   ├── IEEE.STD_LOGIC_ARITH
+│       │   ├── IEEE.STD_LOGIC_ARITH-body
+│       │   ├── IEEE.STD_LOGIC_MISC
+│       │   ├── IEEE.STD_LOGIC_MISC-body
+│       │   ├── IEEE.STD_LOGIC_SIGNED
+│       │   ├── IEEE.STD_LOGIC_SIGNED-body
+│       │   ├── IEEE.STD_LOGIC_TEXTIO
+│       │   ├── IEEE.STD_LOGIC_UNSIGNED
+│       │   ├── IEEE.STD_LOGIC_UNSIGNED-body
+│       │   ├── IEEE.VITAL_MEMORY
+│       │   ├── IEEE.VITAL_MEMORY-body
+│       │   ├── IEEE.VITAL_PRIMITIVES
+│       │   ├── IEEE.VITAL_PRIMITIVES-body
+│       │   ├── IEEE.VITAL_TIMING
+│       │   ├── IEEE.VITAL_TIMING-body
+│       │   ├── _NVC_LIB
+│       │   └── _index
+│       ├── ieee.19
+│       │   ├── IEEE.FIXED_FLOAT_TYPES
+│       │   ├── IEEE.FIXED_GENERIC_PKG
+│       │   ├── IEEE.FIXED_GENERIC_PKG-body
+│       │   ├── IEEE.FIXED_PKG
+│       │   ├── IEEE.FLOAT_GENERIC_PKG
+│       │   ├── IEEE.FLOAT_GENERIC_PKG-body
+│       │   ├── IEEE.FLOAT_PKG
+│       │   ├── IEEE.IEEE_BIT_CONTEXT
+│       │   ├── IEEE.IEEE_STD_CONTEXT
+│       │   ├── IEEE.MATH_COMPLEX
+│       │   ├── IEEE.MATH_COMPLEX-body
+│       │   ├── IEEE.MATH_REAL
+│       │   ├── IEEE.MATH_REAL-body
+│       │   ├── IEEE.NUMERIC_BIT
+│       │   ├── IEEE.NUMERIC_BIT-body
+│       │   ├── IEEE.NUMERIC_BIT_UNSIGNED
+│       │   ├── IEEE.NUMERIC_BIT_UNSIGNED-body
+│       │   ├── IEEE.NUMERIC_STD
+│       │   ├── IEEE.NUMERIC_STD-body
+│       │   ├── IEEE.NUMERIC_STD_UNSIGNED
+│       │   ├── IEEE.NUMERIC_STD_UNSIGNED-body
+│       │   ├── IEEE.STD_LOGIC_1164
+│       │   ├── IEEE.STD_LOGIC_1164-body
+│       │   ├── IEEE.STD_LOGIC_ARITH
+│       │   ├── IEEE.STD_LOGIC_ARITH-body
+│       │   ├── IEEE.STD_LOGIC_MISC
+│       │   ├── IEEE.STD_LOGIC_MISC-body
+│       │   ├── IEEE.STD_LOGIC_SIGNED
+│       │   ├── IEEE.STD_LOGIC_SIGNED-body
+│       │   ├── IEEE.STD_LOGIC_TEXTIO
+│       │   ├── IEEE.STD_LOGIC_UNSIGNED
+│       │   ├── IEEE.STD_LOGIC_UNSIGNED-body
+│       │   ├── IEEE.VITAL_MEMORY
+│       │   ├── IEEE.VITAL_MEMORY-body
+│       │   ├── IEEE.VITAL_PRIMITIVES
+│       │   ├── IEEE.VITAL_PRIMITIVES-body
+│       │   ├── IEEE.VITAL_TIMING
+│       │   ├── IEEE.VITAL_TIMING-body
+│       │   ├── _NVC_LIB
+│       │   └── _index
+│       ├── nvc
+│       │   ├── NVC.COVER_PKG
+│       │   ├── NVC.COVER_PKG-body
+│       │   ├── NVC.POLYFILL
+│       │   ├── NVC.POLYFILL-body
+│       │   ├── NVC.PSL_SUPPORT
+│       │   ├── NVC.PSL_SUPPORT-body
+│       │   ├── NVC.RANDOM
+│       │   ├── NVC.RANDOM-body
+│       │   ├── NVC.SIM_PKG
+│       │   ├── NVC.SIM_PKG-body
+│       │   ├── NVC.TEXT_UTIL
+│       │   ├── NVC.TEXT_UTIL-body
+│       │   ├── NVC.VERILOG
+│       │   ├── NVC.VERILOG-body
+│       │   ├── _NVC_LIB
+│       │   └── _index
+│       ├── nvc.08
+│       │   ├── NVC.COVER_PKG
+│       │   ├── NVC.COVER_PKG-body
+│       │   ├── NVC.POLYFILL
+│       │   ├── NVC.PSL_SUPPORT
+│       │   ├── NVC.PSL_SUPPORT-body
+│       │   ├── NVC.RANDOM
+│       │   ├── NVC.RANDOM-body
+│       │   ├── NVC.SIM_PKG
+│       │   ├── NVC.SIM_PKG-body
+│       │   ├── NVC.TEXT_UTIL
+│       │   ├── NVC.TEXT_UTIL-body
+│       │   ├── NVC.VERILOG
+│       │   ├── NVC.VERILOG-body
+│       │   ├── _NVC_LIB
+│       │   └── _index
+│       ├── nvc.19
+│       │   ├── NVC.COVER_PKG
+│       │   ├── NVC.COVER_PKG-body
+│       │   ├── NVC.POLYFILL
+│       │   ├── NVC.PSL_SUPPORT
+│       │   ├── NVC.PSL_SUPPORT-body
+│       │   ├── NVC.RANDOM
+│       │   ├── NVC.RANDOM-body
+│       │   ├── NVC.SIM_PKG
+│       │   ├── NVC.SIM_PKG-body
+│       │   ├── NVC.TEXT_UTIL
+│       │   ├── NVC.TEXT_UTIL-body
+│       │   ├── NVC.VERILOG
+│       │   ├── NVC.VERILOG-body
+│       │   ├── _NVC_LIB
+│       │   └── _index
+│       ├── siginit.so
+│       ├── std
+│       │   ├── STD.STANDARD
+│       │   ├── STD.STANDARD-body
+│       │   ├── STD.TEXTIO
+│       │   ├── STD.TEXTIO-body
+│       │   ├── _NVC_LIB
+│       │   └── _index
+│       ├── std.08
+│       │   ├── STD.ENV
+│       │   ├── STD.ENV-body
+│       │   ├── STD.STANDARD
+│       │   ├── STD.STANDARD-body
+│       │   ├── STD.TEXTIO
+│       │   ├── STD.TEXTIO-body
+│       │   ├── _NVC_LIB
+│       │   └── _index
+│       └── std.19
+│           ├── STD.ENV
+│           ├── STD.ENV-body
+│           ├── STD.REFLECTION
+│           ├── STD.REFLECTION-body
+│           ├── STD.STANDARD
+│           ├── STD.STANDARD-body
+│           ├── STD.TEXTIO
+│           ├── STD.TEXTIO-body
+│           ├── _NVC_LIB
+│           └── _index
+├── libexec
+│   └── nvc
+│       ├── functions.sh
+│       ├── install-fmf.sh
+│       ├── install-icecube2.sh
+│       ├── install-ise.sh
+│       ├── install-libero.sh
+│       ├── install-osvvm.sh
+│       ├── install-osvvm.tcl
+│       ├── install-quartus.sh
+│       ├── install-uvvm.sh
+│       ├── install-vivado.sh
+│       ├── install-vunit.sh
+│       └── install-xpm_vhdl.sh
+└── share
+    ├── bash-completion
+    │   └── completions
+    │       └── nvc.bash
+    └── man
+        └── man1
+            └── nvc.1
+
+21 directories, 196 files
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS pkg/nvc ===
+=== BUILD nvc ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/nvc --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye debian-bullseye/nvc
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.64kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/base:latest
+#2 DONE 0.1s
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#3 DONE 0.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context:
+#4 transferring context: 2B 0.1s done
+#4 DONE 0.1s
+
+#5 [build 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#5 CACHED
+
+#6 [magic 1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e 0.0s done
+#6 CACHED
+
+#7 [internal] load build context
+#7 transferring context: 56B done
+#7 DONE 0.0s
+
+#8 [build 2/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC  && apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]}  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && update-ca-certificates  && rm -rf /var/lib/apt/lists/*
+#8 CACHED
+
+#9 [build 3/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+#9 CACHED
+
+#10 [stage-2 2/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC  && apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]}  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#10 5.769 Reading package lists...
+#10 6.683 Building dependency tree...
+#10 6.881 Reading state information...
+#10 7.072 libzstd1 is already the newest version (1.4.8+dfsg-2.1).
+#10 7.072 libzstd1 set to manually installed.
+#10 7.072 The following additional packages will be installed:
+#10 7.073   binutils-common binutils-x86-64-linux-gnu libbinutils libbsd0 libctf-nobfd0
+#10 7.073   libctf0 libedit2 libelf1 libmd0 libz3-4
+#10 7.075 Suggested packages:
+#10 7.075   binutils-doc tcl8.6 make-doc
+#10 7.197 The following NEW packages will be installed:
+#10 7.200   binutils binutils-common binutils-x86-64-linux-gnu libbinutils libbsd0
+#10 7.201   libctf-nobfd0 libctf0 libdw1 libedit2 libelf1 libllvm11 libmd0 libtcl8.6
+#10 7.201   libz3-4 make
+#10 7.348 0 upgraded, 15 newly installed, 0 to remove and 0 not upgraded.
+#10 7.348 Need to get 31.7 MB of archives.
+#10 7.348 After this operation, 142 MB of additional disk space will be used.
+#10 7.348 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 binutils-common amd64 2.35.2-2 [2220 kB]
+#10 7.426 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libbinutils amd64 2.35.2-2 [570 kB]
+#10 7.438 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libctf-nobfd0 amd64 2.35.2-2 [110 kB]
+#10 7.439 Get:4 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libctf0 amd64 2.35.2-2 [53.2 kB]
+#10 7.439 Get:5 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 binutils-x86-64-linux-gnu amd64 2.35.2-2 [1809 kB]
+#10 7.468 Get:6 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 binutils amd64 2.35.2-2 [61.2 kB]
+#10 7.468 Get:7 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libmd0 amd64 1.0.3-3 [28.0 kB]
+#10 7.468 Get:8 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libbsd0 amd64 0.11.3-1+deb11u1 [108 kB]
+#10 7.468 Get:9 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libelf1 amd64 0.183-1 [165 kB]
+#10 7.468 Get:10 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libdw1 amd64 0.183-1 [234 kB]
+#10 7.468 Get:11 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libedit2 amd64 3.1-20191231-2+b1 [96.7 kB]
+#10 7.470 Get:12 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libz3-4 amd64 4.8.10-1 [6949 kB]
+#10 7.547 Get:13 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libllvm11 amd64 1:11.0.1-2 [17.9 MB]
+#10 7.723 Get:14 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libtcl8.6 amd64 8.6.11+dfsg-1 [1018 kB]
+#10 7.733 Get:15 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 make amd64 4.3-4.1 [396 kB]
+#10 7.990 debconf: delaying package configuration, since apt-utils is not installed
+#10 8.063 Fetched 31.7 MB in 1s (60.7 MB/s)
+#10 8.164 Selecting previously unselected package binutils-common:amd64.
+#10 8.164 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7841 files and directories currently installed.)
+#10 8.178 Preparing to unpack .../00-binutils-common_2.35.2-2_amd64.deb ...
+#10 8.189 Unpacking binutils-common:amd64 (2.35.2-2) ...
+#10 8.477 Selecting previously unselected package libbinutils:amd64.
+#10 8.477 Preparing to unpack .../01-libbinutils_2.35.2-2_amd64.deb ...
+#10 8.493 Unpacking libbinutils:amd64 (2.35.2-2) ...
+#10 8.692 Selecting previously unselected package libctf-nobfd0:amd64.
+#10 8.693 Preparing to unpack .../02-libctf-nobfd0_2.35.2-2_amd64.deb ...
+#10 8.704 Unpacking libctf-nobfd0:amd64 (2.35.2-2) ...
+#10 8.792 Selecting previously unselected package libctf0:amd64.
+#10 8.793 Preparing to unpack .../03-libctf0_2.35.2-2_amd64.deb ...
+#10 8.818 Unpacking libctf0:amd64 (2.35.2-2) ...
+#10 8.868 Selecting previously unselected package binutils-x86-64-linux-gnu.
+#10 8.868 Preparing to unpack .../04-binutils-x86-64-linux-gnu_2.35.2-2_amd64.deb ...
+#10 8.879 Unpacking binutils-x86-64-linux-gnu (2.35.2-2) ...
+#10 9.247 Selecting previously unselected package binutils.
+#10 9.248 Preparing to unpack .../05-binutils_2.35.2-2_amd64.deb ...
+#10 9.258 Unpacking binutils (2.35.2-2) ...
+#10 9.362 Selecting previously unselected package libmd0:amd64.
+#10 9.362 Preparing to unpack .../06-libmd0_1.0.3-3_amd64.deb ...
+#10 9.383 Unpacking libmd0:amd64 (1.0.3-3) ...
+#10 9.446 Selecting previously unselected package libbsd0:amd64.
+#10 9.446 Preparing to unpack .../07-libbsd0_0.11.3-1+deb11u1_amd64.deb ...
+#10 9.466 Unpacking libbsd0:amd64 (0.11.3-1+deb11u1) ...
+#10 9.526 Selecting previously unselected package libelf1:amd64.
+#10 9.526 Preparing to unpack .../08-libelf1_0.183-1_amd64.deb ...
+#10 9.531 Unpacking libelf1:amd64 (0.183-1) ...
+#10 9.716 Selecting previously unselected package libdw1:amd64.
+#10 9.716 Preparing to unpack .../09-libdw1_0.183-1_amd64.deb ...
+#10 9.728 Unpacking libdw1:amd64 (0.183-1) ...
+#10 9.885 Selecting previously unselected package libedit2:amd64.
+#10 9.885 Preparing to unpack .../10-libedit2_3.1-20191231-2+b1_amd64.deb ...
+#10 9.885 Unpacking libedit2:amd64 (3.1-20191231-2+b1) ...
+#10 9.979 Selecting previously unselected package libz3-4:amd64.
+#10 9.979 Preparing to unpack .../11-libz3-4_4.8.10-1_amd64.deb ...
+#10 10.30 Unpacking libz3-4:amd64 (4.8.10-1) ...
+#10 10.82 Selecting previously unselected package libllvm11:amd64.
+#10 10.82 Preparing to unpack .../12-libllvm11_1%3a11.0.1-2_amd64.deb ...
+#10 10.83 Unpacking libllvm11:amd64 (1:11.0.1-2) ...
+#10 14.36 Selecting previously unselected package libtcl8.6:amd64.
+#10 14.36 Preparing to unpack .../13-libtcl8.6_8.6.11+dfsg-1_amd64.deb ...
+#10 14.37 Unpacking libtcl8.6:amd64 (8.6.11+dfsg-1) ...
+#10 14.88 Selecting previously unselected package make.
+#10 14.89 Preparing to unpack .../14-make_4.3-4.1_amd64.deb ...
+#10 14.90 Unpacking make (4.3-4.1) ...
+#10 15.04 Setting up binutils-common:amd64 (2.35.2-2) ...
+#10 15.07 Setting up libctf-nobfd0:amd64 (2.35.2-2) ...
+#10 15.09 Setting up libz3-4:amd64 (4.8.10-1) ...
+#10 15.12 Setting up make (4.3-4.1) ...
+#10 15.15 Setting up libtcl8.6:amd64 (8.6.11+dfsg-1) ...
+#10 15.17 Setting up libmd0:amd64 (1.0.3-3) ...
+#10 15.19 Setting up libbinutils:amd64 (2.35.2-2) ...
+#10 15.22 Setting up libbsd0:amd64 (0.11.3-1+deb11u1) ...
+#10 15.27 Setting up libelf1:amd64 (0.183-1) ...
+#10 15.32 Setting up libctf0:amd64 (2.35.2-2) ...
+#10 15.34 Setting up libdw1:amd64 (0.183-1) ...
+#10 15.37 Setting up libedit2:amd64 (3.1-20191231-2+b1) ...
+#10 15.40 Setting up libllvm11:amd64 (1:11.0.1-2) ...
+#10 15.42 Setting up binutils-x86-64-linux-gnu (2.35.2-2) ...
+#10 15.44 Setting up binutils (2.35.2-2) ...
+#10 15.47 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#10 15.55 Reading package lists...
+#10 16.42 Building dependency tree...
+#10 16.73 Reading state information...
+#10 16.75 Reading package lists...
+#10 17.53 Building dependency tree...
+#10 17.70 Reading state information...
+#10 17.88 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#10 DONE 17.9s
+
+#11 [stage-2 3/3] COPY --from=build /opt/nvc /
+#11 DONE 0.3s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 9.0s done
+#12 preparing layers for inline cache
+#12 preparing layers for inline cache 0.1s done
+#12 exporting manifest sha256:a5ccb42ab78e6c8d556fe926cc136c170f9f8e1f5428b9c2a6982fd417778c0f 0.0s done
+#12 exporting config sha256:2167e1543cbd784ec819b9f8e5cea794ad4426af6b5787fcb354b040b8bfe65e 0.0s done
+#12 exporting attestation manifest sha256:735bdff33355aba7779b483dccc6288f0b02d715bd215984b5f4f2915112e359 0.0s done
+#12 exporting manifest list sha256:ce84f0e7d8a00eff4d3a03a65bebd1c7e0958bc79761056d8b6ebb3b7d3b6edc 0.0s done
+#12 naming to ghcr.io/hdl/amd64/debian/bullseye/nvc:latest done
+#12 unpacking to ghcr.io/hdl/amd64/debian/bullseye/nvc:latest
+#12 unpacking to ghcr.io/hdl/amd64/debian/bullseye/nvc:latest 1.8s done
+#12 DONE 11.1s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/nvc
+Architecture: amd64 
+Size: 368157580
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/nvc //wrk/nvc.sh
+CC: 
+CXX: 
+/usr/local/bin/nvc
+Usage: nvc [OPTION]... COMMAND [OPTION]...
+
+Global options are placed before COMMAND, and command-specific options are placed afterwards. Multiple commands can be given and will be performed in order.
+
+Commands:
+ -a [OPTION]... FILE...       Analyse FILEs into work 
+                              library
+ -e [OPTION]... TOP...        Elaborate design unit TOP
+ -r [OPTION]... TOP           Execute previously 
+                              elaborated TOP
+ --cover-export FILE...       Export coverage database to 
+                              external format
+ --cover-report FILE...       Generate HTML report from 
+                              coverage database
+ --cover-merge FILE...        Merge multiple coverage 
+                              databases
+ --init                       Initialise work library 
+                              directory
+ --install PKG                Install third-party packages
+ --list                       Print all units in the 
+                              library
+ --preprocess FILE...         Expand FILEs with Verilog 
+                              preprocessor
+ --print-deps [UNIT]...       Print dependencies in 
+                              Makefile format
+
+Global options:
+ -h, --help         Display this message and exit
+ -H SIZE            Set the maximum heap size to SIZE bytes
+     --ieee-warnings={on,off,off-at-0} 
+                    Enable or disable warnings from IEEE 
+                    packages
+     --ignore-time  Skip source file timestamp check
+     --load=PLUGIN  Load VHPI plugin at startup
+ -L PATH            Add PATH to library search paths
+ -M SIZE            Limit design unit heap space to SIZE 
+                    bytes
+     --map=LIB:PATH Map library LIB to PATH
+     --messages={full,compact} 
+                    Diagnostic message style, compact is 
+                    less verbose
+     --seed=N       Seed for random number generation
+     --std={1993,..,2019} 
+                    VHDL standard revision to use
+     --stderr={note,warning,error,failure,none} 
+                    Print messages of this severity level 
+                    or higher to stderr
+ -v, --version      Display version and copyright 
+                    information
+     --vhpi-debug   Report VHPI errors as diagnostic 
+                    messages
+     --vhpi-trace   Trace VHPI calls and events
+     --work=NAME    Use NAME as the work library
+
+Analysis options:
+     --bootstrap    Allow compilation of STANDARD package
+     --check-synthesis 
+                    Warn on common synthesis mistakes
+ -D, --define NAME=VALUE 
+                    Set preprocessor symbol NAME to VALUE
+     --error-limit=NUM 
+                    Stop after NUM errors
+ -f, --files=LIST   Read files to analyse from LIST
+ -I DIR             Add DIR to list of Verilog include 
+                    directories
+     --keywords=VERSION 
+                    Use keywords from specified Verilog 
+                    version
+     --no-save      Do not save analysed design units
+     --preserve-case 
+                    Preserve the original case of VHDL 
+                    identifiers
+     --psl          Enable parsing of PSL directives in 
+                    comments
+     --relative=DIR Store paths relative to DIR
+     --relaxed      Disable certain pedantic rule checks
+     --single-unit  Treat all Verilog files as a single 
+                    compilation unit
+ -Werror            Treat all analysis warnings as errors
+
+Elaboration options:
+     --cover[={statement,branch,expression,toggle,...}] 
+                    Enable code coverage collection
+     --cover-file=FILE 
+                    Set the file name of the coverage 
+                    database
+     --cover-spec=FILE 
+                    Fine-grained coverage collection 
+                    specification, see the manual for 
+                    details
+ -g NAME=VALUE      Set top level generic NAME to VALUE
+ -j, --jit          Enable just-in-time compilation during 
+                    simulation
+ -O0, -O1, -O2, -O3 Set optimisation level (default is -O2)
+     --no-collapse  Do not collapse multiple signals into 
+                    one
+     --no-save      Do not save the elaborated design to 
+                    disk
+     --stats        Print statistics about instantiated 
+                    design units
+ -V, --verbose      Print resource usage at each step
+
+Run options:
+     --dump-arrays[=N] 
+                    Include nested arrays with up to N 
+                    elements in waveform dump
+     --exclude=GLOB Exclude signals matching GLOB from 
+                    waveform dump
+     --exit-severity={note,warning,error,failure} 
+                    Exit after an assertion failure of 
+                    this severity
+     --format={fst,vcd} 
+                    Waveform dump format
+     --include=GLOB Include signals matching GLOB in 
+                    waveform dump
+     --shuffle      Run processes in random order
+     --stats        Print time and memory usage at end of 
+                    run
+     --stop-delta=N Stop after N delta cycles (default 
+                    10000)
+     --stop-time=T  Stop after simulation time T (e.g. 5ns)
+     --trace        Trace simulation events
+ -w, --wave[=FILE]  Write waveform dump to FILE
+
+Coverage report options:
+ -o, --output=dir   Output directory for HTML report
+     --exclude-file=FILE 
+                    Apply exclude file when generating 
+                    report, see manual for syntax
+     --dont-print={covered,uncovered,excluded} 
+                    Exclude specified items from coverage 
+                    report
+     --item-limit=LIMIT 
+                    Display at most LIMIT items in a 
+                    single report file (default 5000)
+     --per-file     Create source file code coverage 
+                    report.
+
+Coverage merge options:
+     --merge-mode={union,intersect} 
+                    Merge hierarchies by union or 
+                    intersection, default is union
+ -o, --output=FILE  Output database file name
+
+Coverage export options:
+     --format=FMT   File format (must be 'cobertura')
+ -o, --output=FILE  Output file name
+     --relative=PATH 
+                    Report file names relative to PATH
+
+Install options:
+     --dest=DIR     Compile libraries into directory DIR
+
+Library search paths:
+  /root/.nvc/lib
+  /usr/local/lib/nvc
+
+The full manual can be read with man 1 nvc and contains detailed explanations of the commands and options above as well as examples.
+
+Report bugs at https://github.com/nickg/nvc/issues
+nvc 1.23-devel (1.22.0.r103.g34670eaec) (Using LLVM 11.0.1)
+Copyright (C) 2011-2026  Nick Gasson
+This program comes with ABSOLUTELY NO WARRANTY. This is free software, and
+you are welcome to redistribute it under certain conditions. See the GNU
+General Public Licence for details.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS nvc ===
+RESULT: PASS

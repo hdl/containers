@@ -1,0 +1,1059 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: cosim IMAGES: ['sim/scipy-slim', 'sim/scipy', 'sim/octave-slim', 'sim/octave']
+=== BUILD sim/scipy-slim ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/sim/scipy-slim --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -f debian/scipy.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from scipy.dockerfile
+#1 transferring dockerfile: 1.07kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/sim:latest
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/sim:latest@sha256:1fc3deb7da0d92f5dc591e1c022220460e9803f22c9f8e6705a1ec4596a4ee1c
+#4 resolve ghcr.io/hdl/amd64/debian/bullseye/sim:latest@sha256:1fc3deb7da0d92f5dc591e1c022220460e9803f22c9f8e6705a1ec4596a4ee1c 0.0s done
+#4 DONE 0.0s
+
+#5 [2/2] RUN apt update -qq  && apt install -y imagemagick libssl-dev  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*  && python3 -m pip install matplotlib numpy --progress-bar off
+#5 CACHED
+
+#6 exporting to image
+#6 exporting layers done
+#6 preparing layers for inline cache 0.0s done
+#6 exporting manifest sha256:59e2834929e64a648ce2b523f98e7c8ab24547bef82eb3ad7fe5aab290c0c256
+#6 exporting manifest sha256:59e2834929e64a648ce2b523f98e7c8ab24547bef82eb3ad7fe5aab290c0c256 done
+#6 exporting config sha256:911747ea11a90da901d74f775640897c544f3361acda52007c97ada216ec1fb0 0.0s done
+#6 exporting attestation manifest sha256:81e0be3360ec35ad4712e361e2e313c36d5b37713321859f1fa7a44b0e3553f8 0.0s done
+#6 exporting manifest list sha256:224380fbf41393d0e2805b565f6dc6818290892a0b89f02114c122d6bf1b5576 done
+#6 naming to ghcr.io/hdl/amd64/debian/bullseye/sim/scipy-slim:latest done
+#6 unpacking to ghcr.io/hdl/amd64/debian/bullseye/sim/scipy-slim:latest 0.0s done
+#6 DONE 0.2s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/sim/scipy-slim
+Architecture: amd64 
+Size: 1585412536
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/sim/scipy-slim //wrk/sim--scipy-slim.sh
+CC: 
+CXX: 
+CC: 
+CXX: 
+/usr/bin/tclsh
+CC: 
+CXX: 
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-141-g9567e46f7) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ llvm 11.0.1 code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+/usr/local/bin/nvc
+Usage: nvc [OPTION]... COMMAND [OPTION]...
+
+Global options are placed before COMMAND, and command-specific options are placed afterwards. Multiple commands can be given and will be performed in order.
+
+Commands:
+ -a [OPTION]... FILE...       Analyse FILEs into work 
+                              library
+ -e [OPTION]... TOP...        Elaborate design unit TOP
+ -r [OPTION]... TOP           Execute previously 
+                              elaborated TOP
+ --cover-export FILE...       Export coverage database to 
+                              external format
+ --cover-report FILE...       Generate HTML report from 
+                              coverage database
+ --cover-merge FILE...        Merge multiple coverage 
+                              databases
+ --init                       Initialise work library 
+                              directory
+ --install PKG                Install third-party packages
+ --list                       Print all units in the 
+                              library
+ --preprocess FILE...         Expand FILEs with Verilog 
+                              preprocessor
+ --print-deps [UNIT]...       Print dependencies in 
+                              Makefile format
+
+Global options:
+ -h, --help         Display this message and exit
+ -H SIZE            Set the maximum heap size to SIZE bytes
+     --ieee-warnings={on,off,off-at-0} 
+                    Enable or disable warnings from IEEE 
+                    packages
+     --ignore-time  Skip source file timestamp check
+     --load=PLUGIN  Load VHPI plugin at startup
+ -L PATH            Add PATH to library search paths
+ -M SIZE            Limit design unit heap space to SIZE 
+                    bytes
+     --map=LIB:PATH Map library LIB to PATH
+     --messages={full,compact} 
+                    Diagnostic message style, compact is 
+                    less verbose
+     --seed=N       Seed for random number generation
+     --std={1993,..,2019} 
+                    VHDL standard revision to use
+     --stderr={note,warning,error,failure,none} 
+                    Print messages of this severity level 
+                    or higher to stderr
+ -v, --version      Display version and copyright 
+                    information
+     --vhpi-debug   Report VHPI errors as diagnostic 
+                    messages
+     --vhpi-trace   Trace VHPI calls and events
+     --work=NAME    Use NAME as the work library
+
+Analysis options:
+     --bootstrap    Allow compilation of STANDARD package
+     --check-synthesis 
+                    Warn on common synthesis mistakes
+ -D, --define NAME=VALUE 
+                    Set preprocessor symbol NAME to VALUE
+     --error-limit=NUM 
+                    Stop after NUM errors
+ -f, --files=LIST   Read files to analyse from LIST
+ -I DIR             Add DIR to list of Verilog include 
+                    directories
+     --keywords=VERSION 
+                    Use keywords from specified Verilog 
+                    version
+     --no-save      Do not save analysed design units
+     --preserve-case 
+                    Preserve the original case of VHDL 
+                    identifiers
+     --psl          Enable parsing of PSL directives in 
+                    comments
+     --relative=DIR Store paths relative to DIR
+     --relaxed      Disable certain pedantic rule checks
+     --single-unit  Treat all Verilog files as a single 
+                    compilation unit
+ -Werror            Treat all analysis warnings as errors
+
+Elaboration options:
+     --cover[={statement,branch,expression,toggle,...}] 
+                    Enable code coverage collection
+     --cover-file=FILE 
+                    Set the file name of the coverage 
+                    database
+     --cover-spec=FILE 
+                    Fine-grained coverage collection 
+                    specification, see the manual for 
+                    details
+ -g NAME=VALUE      Set top level generic NAME to VALUE
+ -j, --jit          Enable just-in-time compilation during 
+                    simulation
+ -O0, -O1, -O2, -O3 Set optimisation level (default is -O2)
+     --no-collapse  Do not collapse multiple signals into 
+                    one
+     --no-save      Do not save the elaborated design to 
+                    disk
+     --stats        Print statistics about instantiated 
+                    design units
+ -V, --verbose      Print resource usage at each step
+
+Run options:
+     --dump-arrays[=N] 
+                    Include nested arrays with up to N 
+                    elements in waveform dump
+     --exclude=GLOB Exclude signals matching GLOB from 
+                    waveform dump
+     --exit-severity={note,warning,error,failure} 
+                    Exit after an assertion failure of 
+                    this severity
+     --format={fst,vcd} 
+                    Waveform dump format
+     --include=GLOB Include signals matching GLOB in 
+                    waveform dump
+     --shuffle      Run processes in random order
+     --stats        Print time and memory usage at end of 
+                    run
+     --stop-delta=N Stop after N delta cycles (default 
+                    10000)
+     --stop-time=T  Stop after simulation time T (e.g. 5ns)
+     --trace        Trace simulation events
+ -w, --wave[=FILE]  Write waveform dump to FILE
+
+Coverage report options:
+ -o, --output=dir   Output directory for HTML report
+     --exclude-file=FILE 
+                    Apply exclude file when generating 
+                    report, see manual for syntax
+     --dont-print={covered,uncovered,excluded} 
+                    Exclude specified items from coverage 
+                    report
+     --item-limit=LIMIT 
+                    Display at most LIMIT items in a 
+                    single report file (default 5000)
+     --per-file     Create source file code coverage 
+                    report.
+
+Coverage merge options:
+     --merge-mode={union,intersect} 
+                    Merge hierarchies by union or 
+                    intersection, default is union
+ -o, --output=FILE  Output database file name
+
+Coverage export options:
+     --format=FMT   File format (must be 'cobertura')
+ -o, --output=FILE  Output file name
+     --relative=PATH 
+                    Report file names relative to PATH
+
+Install options:
+     --dest=DIR     Compile libraries into directory DIR
+
+Library search paths:
+  /root/.nvc/lib
+  /usr/local/lib/nvc
+
+The full manual can be read with man 1 nvc and contains detailed explanations of the commands and options above as well as examples.
+
+Report bugs at https://github.com/nickg/nvc/issues
+nvc 1.23-devel (1.22.0.r103.g34670eaec) (Using LLVM 11.0.1)
+Copyright (C) 2011-2026  Nick Gasson
+This program comes with ABSOLUTELY NO WARRANTY. This is free software, and
+you are welcome to redistribute it under certain conditions. See the GNU
+General Public Licence for details.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+· verilator help >> ./verilator.log
+· verilator help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+· iverilog help >> ./iverilog.log
+· iverilog help: exit code 1 | [32mOK[0m
+· iverilog-vpi help >> ./iverilog.log
+· iverilog-vpi help: exit code 0 | [32mOK[0m
+· vvp help >> ./iverilog.log
+· vvp help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS sim/scipy-slim ===
+=== BUILD sim/scipy ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/sim/scipy --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --build-arg IMAGE=sim/scipy-slim -f debian-bullseye/osvb.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from osvb.dockerfile
+#1 transferring dockerfile: 2.38kB done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1.2
+#2 DONE 0.7s
+
+#3 docker-image://docker.io/docker/dockerfile:1.2@sha256:e2a8561e419ab1ba6b2fe6cbdf49fd92b95912df1cf7d313c3e2230a333fdbcc
+#3 resolve docker.io/docker/dockerfile:1.2@sha256:e2a8561e419ab1ba6b2fe6cbdf49fd92b95912df1cf7d313c3e2230a333fdbcc 0.0s done
+#3 CACHED
+
+#1 [internal] load build definition from osvb.dockerfile
+#1 transferring dockerfile: 2.38kB done
+#1 DONE 0.0s
+
+#4 [internal] load build definition from osvb.dockerfile
+#4 DONE 0.0s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/sim/scipy-slim:latest
+#6 DONE 0.0s
+
+#7 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/osvb:latest
+#7 DONE 0.8s
+
+#8 [pkg-osvb 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/osvb@sha256:c81bb874e6db9f0f6dc3da9f6f7525350e0a135a6c16e3c67e3962daf608a805
+#8 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/osvb@sha256:c81bb874e6db9f0f6dc3da9f6f7525350e0a135a6c16e3c67e3962daf608a805 0.0s done
+#8 DONE 0.0s
+
+#9 [stage-3 1/4] FROM ghcr.io/hdl/amd64/debian/bullseye/sim/scipy-slim@sha256:224380fbf41393d0e2805b565f6dc6818290892a0b89f02114c122d6bf1b5576
+#9 resolve ghcr.io/hdl/amd64/debian/bullseye/sim/scipy-slim@sha256:224380fbf41393d0e2805b565f6dc6818290892a0b89f02114c122d6bf1b5576 0.0s done
+#9 DONE 0.0s
+
+#10 [stage-3 2/4] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     libpython3.9-dev  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#10 CACHED
+
+#11 [stage-3 3/4] RUN --mount=type=cache,from=pkg-osvb,src=/osvb/,target=/tmp/osvb/  pip3 install -U /tmp/osvb/*.whl pytest --progress-bar off  && rm -rf ~/.cache  && mkdir /opt/osvb  && cp -vr /tmp/osvb/osvvmlibs/ /opt/osvb/osvvmlibs/
+#11 CACHED
+
+#12 [stage-3 4/4] RUN $(dirname $(which ghdl))/../lib/ghdl/vendors/compile-osvvm.sh    --osvvm    --source /opt/osvb/osvvmlibs/osvvm    --output /opt/osvb/ghdl-osvvm
+#12 CACHED
+
+#13 exporting to image
+#13 exporting layers done
+#13 preparing layers for inline cache 0.1s done
+#13 exporting manifest sha256:193a5b11a0c1828d359d63c641997ee29acf7995644f37f4e1fd8122a78b8d9c 0.0s done
+#13 exporting config sha256:8405246df17931c029d1fd10289db453fc63be3d77cb9346d7913d8662d46dd4 done
+#13 exporting attestation manifest sha256:288fbd87a9a36102bd5591e3e037d65a933bd645ee6ca4fd9d3ff267a6de7e8a done
+#13 exporting manifest list sha256:8e7701af3133b8547922017e2d1524ec20847e55a948c29c3ea2e54c14291ac4 done
+#13 naming to ghcr.io/hdl/amd64/debian/bullseye/sim/scipy:latest done
+#13 unpacking to ghcr.io/hdl/amd64/debian/bullseye/sim/scipy:latest 0.0s done
+#13 DONE 0.2s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/sim/scipy
+Architecture: amd64 
+Size: 1879600947
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/sim/scipy //wrk/sim--scipy.sh
+CC: 
+CXX: 
+CC: 
+CXX: 
+CC: 
+CXX: 
+/usr/bin/tclsh
+CC: 
+CXX: 
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-141-g9567e46f7) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ llvm 11.0.1 code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+/usr/local/bin/nvc
+Usage: nvc [OPTION]... COMMAND [OPTION]...
+
+Global options are placed before COMMAND, and command-specific options are placed afterwards. Multiple commands can be given and will be performed in order.
+
+Commands:
+ -a [OPTION]... FILE...       Analyse FILEs into work 
+                              library
+ -e [OPTION]... TOP...        Elaborate design unit TOP
+ -r [OPTION]... TOP           Execute previously 
+                              elaborated TOP
+ --cover-export FILE...       Export coverage database to 
+                              external format
+ --cover-report FILE...       Generate HTML report from 
+                              coverage database
+ --cover-merge FILE...        Merge multiple coverage 
+                              databases
+ --init                       Initialise work library 
+                              directory
+ --install PKG                Install third-party packages
+ --list                       Print all units in the 
+                              library
+ --preprocess FILE...         Expand FILEs with Verilog 
+                              preprocessor
+ --print-deps [UNIT]...       Print dependencies in 
+                              Makefile format
+
+Global options:
+ -h, --help         Display this message and exit
+ -H SIZE            Set the maximum heap size to SIZE bytes
+     --ieee-warnings={on,off,off-at-0} 
+                    Enable or disable warnings from IEEE 
+                    packages
+     --ignore-time  Skip source file timestamp check
+     --load=PLUGIN  Load VHPI plugin at startup
+ -L PATH            Add PATH to library search paths
+ -M SIZE            Limit design unit heap space to SIZE 
+                    bytes
+     --map=LIB:PATH Map library LIB to PATH
+     --messages={full,compact} 
+                    Diagnostic message style, compact is 
+                    less verbose
+     --seed=N       Seed for random number generation
+     --std={1993,..,2019} 
+                    VHDL standard revision to use
+     --stderr={note,warning,error,failure,none} 
+                    Print messages of this severity level 
+                    or higher to stderr
+ -v, --version      Display version and copyright 
+                    information
+     --vhpi-debug   Report VHPI errors as diagnostic 
+                    messages
+     --vhpi-trace   Trace VHPI calls and events
+     --work=NAME    Use NAME as the work library
+
+Analysis options:
+     --bootstrap    Allow compilation of STANDARD package
+     --check-synthesis 
+                    Warn on common synthesis mistakes
+ -D, --define NAME=VALUE 
+                    Set preprocessor symbol NAME to VALUE
+     --error-limit=NUM 
+                    Stop after NUM errors
+ -f, --files=LIST   Read files to analyse from LIST
+ -I DIR             Add DIR to list of Verilog include 
+                    directories
+     --keywords=VERSION 
+                    Use keywords from specified Verilog 
+                    version
+     --no-save      Do not save analysed design units
+     --preserve-case 
+                    Preserve the original case of VHDL 
+                    identifiers
+     --psl          Enable parsing of PSL directives in 
+                    comments
+     --relative=DIR Store paths relative to DIR
+     --relaxed      Disable certain pedantic rule checks
+     --single-unit  Treat all Verilog files as a single 
+                    compilation unit
+ -Werror            Treat all analysis warnings as errors
+
+Elaboration options:
+     --cover[={statement,branch,expression,toggle,...}] 
+                    Enable code coverage collection
+     --cover-file=FILE 
+                    Set the file name of the coverage 
+                    database
+     --cover-spec=FILE 
+                    Fine-grained coverage collection 
+                    specification, see the manual for 
+                    details
+ -g NAME=VALUE      Set top level generic NAME to VALUE
+ -j, --jit          Enable just-in-time compilation during 
+                    simulation
+ -O0, -O1, -O2, -O3 Set optimisation level (default is -O2)
+     --no-collapse  Do not collapse multiple signals into 
+                    one
+     --no-save      Do not save the elaborated design to 
+                    disk
+     --stats        Print statistics about instantiated 
+                    design units
+ -V, --verbose      Print resource usage at each step
+
+Run options:
+     --dump-arrays[=N] 
+                    Include nested arrays with up to N 
+                    elements in waveform dump
+     --exclude=GLOB Exclude signals matching GLOB from 
+                    waveform dump
+     --exit-severity={note,warning,error,failure} 
+                    Exit after an assertion failure of 
+                    this severity
+     --format={fst,vcd} 
+                    Waveform dump format
+     --include=GLOB Include signals matching GLOB in 
+                    waveform dump
+     --shuffle      Run processes in random order
+     --stats        Print time and memory usage at end of 
+                    run
+     --stop-delta=N Stop after N delta cycles (default 
+                    10000)
+     --stop-time=T  Stop after simulation time T (e.g. 5ns)
+     --trace        Trace simulation events
+ -w, --wave[=FILE]  Write waveform dump to FILE
+
+Coverage report options:
+ -o, --output=dir   Output directory for HTML report
+     --exclude-file=FILE 
+                    Apply exclude file when generating 
+                    report, see manual for syntax
+     --dont-print={covered,uncovered,excluded} 
+                    Exclude specified items from coverage 
+                    report
+     --item-limit=LIMIT 
+                    Display at most LIMIT items in a 
+                    single report file (default 5000)
+     --per-file     Create source file code coverage 
+                    report.
+
+Coverage merge options:
+     --merge-mode={union,intersect} 
+                    Merge hierarchies by union or 
+                    intersection, default is union
+ -o, --output=FILE  Output database file name
+
+Coverage export options:
+     --format=FMT   File format (must be 'cobertura')
+ -o, --output=FILE  Output file name
+     --relative=PATH 
+                    Report file names relative to PATH
+
+Install options:
+     --dest=DIR     Compile libraries into directory DIR
+
+Library search paths:
+  /root/.nvc/lib
+  /usr/local/lib/nvc
+
+The full manual can be read with man 1 nvc and contains detailed explanations of the commands and options above as well as examples.
+
+Report bugs at https://github.com/nickg/nvc/issues
+nvc 1.23-devel (1.22.0.r103.g34670eaec) (Using LLVM 11.0.1)
+Copyright (C) 2011-2026  Nick Gasson
+This program comes with ABSOLUTELY NO WARRANTY. This is free software, and
+you are welcome to redistribute it under certain conditions. See the GNU
+General Public Licence for details.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+· verilator help >> ./verilator.log
+· verilator help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+· iverilog help >> ./iverilog.log
+· iverilog help: exit code 1 | [32mOK[0m
+· iverilog-vpi help >> ./iverilog.log
+· iverilog-vpi help: exit code 0 | [32mOK[0m
+· vvp help >> ./iverilog.log
+· vvp help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+vunit-hdl           5.0.0.dev3
+cocotb              2.0.0.dev0+8d6c1a63
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS sim/scipy ===
+=== BUILD sim/octave-slim ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/sim/octave-slim --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -f debian/octave.dockerfile debian
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from octave.dockerfile
+#1 transferring dockerfile: 1.06kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/sim:latest
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/2] FROM ghcr.io/hdl/amd64/debian/bullseye/sim:latest@sha256:1fc3deb7da0d92f5dc591e1c022220460e9803f22c9f8e6705a1ec4596a4ee1c
+#4 resolve ghcr.io/hdl/amd64/debian/bullseye/sim:latest@sha256:1fc3deb7da0d92f5dc591e1c022220460e9803f22c9f8e6705a1ec4596a4ee1c 0.0s done
+#4 DONE 0.0s
+
+#5 [2/2] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends   octave  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#5 CACHED
+
+#6 exporting to image
+#6 exporting layers done
+#6 preparing layers for inline cache 0.0s done
+#6 exporting manifest sha256:ffc516dec8add938aed179aa62a18b68726639b24f21648de3f250c88029d2e1 done
+#6 exporting config sha256:3bc556d0549aa98b75b06548f8e6a2f483d72097a4aab44235c3d8ebfdeaccb6 done
+#6 exporting attestation manifest sha256:68d87d4e16254f13b2ed9555fcad6b9a9fc91fa9f8050957a210b4323405e3c2 done
+#6 exporting manifest list sha256:511b989f41769a4a84727abaa6112bf0868e374dd313b0d3ef44ac7475d7e85c done
+#6 naming to ghcr.io/hdl/amd64/debian/bullseye/sim/octave-slim:latest done
+#6 unpacking to ghcr.io/hdl/amd64/debian/bullseye/sim/octave-slim:latest 0.0s done
+#6 DONE 0.1s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/sim/octave-slim
+Architecture: amd64 
+Size: 1388974117
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/sim/octave-slim //wrk/sim--octave-slim.sh
+CC: 
+CXX: 
+CC: 
+CXX: 
+/usr/bin/tclsh
+CC: 
+CXX: 
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-141-g9567e46f7) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ llvm 11.0.1 code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+/usr/local/bin/nvc
+Usage: nvc [OPTION]... COMMAND [OPTION]...
+
+Global options are placed before COMMAND, and command-specific options are placed afterwards. Multiple commands can be given and will be performed in order.
+
+Commands:
+ -a [OPTION]... FILE...       Analyse FILEs into work 
+                              library
+ -e [OPTION]... TOP...        Elaborate design unit TOP
+ -r [OPTION]... TOP           Execute previously 
+                              elaborated TOP
+ --cover-export FILE...       Export coverage database to 
+                              external format
+ --cover-report FILE...       Generate HTML report from 
+                              coverage database
+ --cover-merge FILE...        Merge multiple coverage 
+                              databases
+ --init                       Initialise work library 
+                              directory
+ --install PKG                Install third-party packages
+ --list                       Print all units in the 
+                              library
+ --preprocess FILE...         Expand FILEs with Verilog 
+                              preprocessor
+ --print-deps [UNIT]...       Print dependencies in 
+                              Makefile format
+
+Global options:
+ -h, --help         Display this message and exit
+ -H SIZE            Set the maximum heap size to SIZE bytes
+     --ieee-warnings={on,off,off-at-0} 
+                    Enable or disable warnings from IEEE 
+                    packages
+     --ignore-time  Skip source file timestamp check
+     --load=PLUGIN  Load VHPI plugin at startup
+ -L PATH            Add PATH to library search paths
+ -M SIZE            Limit design unit heap space to SIZE 
+                    bytes
+     --map=LIB:PATH Map library LIB to PATH
+     --messages={full,compact} 
+                    Diagnostic message style, compact is 
+                    less verbose
+     --seed=N       Seed for random number generation
+     --std={1993,..,2019} 
+                    VHDL standard revision to use
+     --stderr={note,warning,error,failure,none} 
+                    Print messages of this severity level 
+                    or higher to stderr
+ -v, --version      Display version and copyright 
+                    information
+     --vhpi-debug   Report VHPI errors as diagnostic 
+                    messages
+     --vhpi-trace   Trace VHPI calls and events
+     --work=NAME    Use NAME as the work library
+
+Analysis options:
+     --bootstrap    Allow compilation of STANDARD package
+     --check-synthesis 
+                    Warn on common synthesis mistakes
+ -D, --define NAME=VALUE 
+                    Set preprocessor symbol NAME to VALUE
+     --error-limit=NUM 
+                    Stop after NUM errors
+ -f, --files=LIST   Read files to analyse from LIST
+ -I DIR             Add DIR to list of Verilog include 
+                    directories
+     --keywords=VERSION 
+                    Use keywords from specified Verilog 
+                    version
+     --no-save      Do not save analysed design units
+     --preserve-case 
+                    Preserve the original case of VHDL 
+                    identifiers
+     --psl          Enable parsing of PSL directives in 
+                    comments
+     --relative=DIR Store paths relative to DIR
+     --relaxed      Disable certain pedantic rule checks
+     --single-unit  Treat all Verilog files as a single 
+                    compilation unit
+ -Werror            Treat all analysis warnings as errors
+
+Elaboration options:
+     --cover[={statement,branch,expression,toggle,...}] 
+                    Enable code coverage collection
+     --cover-file=FILE 
+                    Set the file name of the coverage 
+                    database
+     --cover-spec=FILE 
+                    Fine-grained coverage collection 
+                    specification, see the manual for 
+                    details
+ -g NAME=VALUE      Set top level generic NAME to VALUE
+ -j, --jit          Enable just-in-time compilation during 
+                    simulation
+ -O0, -O1, -O2, -O3 Set optimisation level (default is -O2)
+     --no-collapse  Do not collapse multiple signals into 
+                    one
+     --no-save      Do not save the elaborated design to 
+                    disk
+     --stats        Print statistics about instantiated 
+                    design units
+ -V, --verbose      Print resource usage at each step
+
+Run options:
+     --dump-arrays[=N] 
+                    Include nested arrays with up to N 
+                    elements in waveform dump
+     --exclude=GLOB Exclude signals matching GLOB from 
+                    waveform dump
+     --exit-severity={note,warning,error,failure} 
+                    Exit after an assertion failure of 
+                    this severity
+     --format={fst,vcd} 
+                    Waveform dump format
+     --include=GLOB Include signals matching GLOB in 
+                    waveform dump
+     --shuffle      Run processes in random order
+     --stats        Print time and memory usage at end of 
+                    run
+     --stop-delta=N Stop after N delta cycles (default 
+                    10000)
+     --stop-time=T  Stop after simulation time T (e.g. 5ns)
+     --trace        Trace simulation events
+ -w, --wave[=FILE]  Write waveform dump to FILE
+
+Coverage report options:
+ -o, --output=dir   Output directory for HTML report
+     --exclude-file=FILE 
+                    Apply exclude file when generating 
+                    report, see manual for syntax
+     --dont-print={covered,uncovered,excluded} 
+                    Exclude specified items from coverage 
+                    report
+     --item-limit=LIMIT 
+                    Display at most LIMIT items in a 
+                    single report file (default 5000)
+     --per-file     Create source file code coverage 
+                    report.
+
+Coverage merge options:
+     --merge-mode={union,intersect} 
+                    Merge hierarchies by union or 
+                    intersection, default is union
+ -o, --output=FILE  Output database file name
+
+Coverage export options:
+     --format=FMT   File format (must be 'cobertura')
+ -o, --output=FILE  Output file name
+     --relative=PATH 
+                    Report file names relative to PATH
+
+Install options:
+     --dest=DIR     Compile libraries into directory DIR
+
+Library search paths:
+  /root/.nvc/lib
+  /usr/local/lib/nvc
+
+The full manual can be read with man 1 nvc and contains detailed explanations of the commands and options above as well as examples.
+
+Report bugs at https://github.com/nickg/nvc/issues
+nvc 1.23-devel (1.22.0.r103.g34670eaec) (Using LLVM 11.0.1)
+Copyright (C) 2011-2026  Nick Gasson
+This program comes with ABSOLUTELY NO WARRANTY. This is free software, and
+you are welcome to redistribute it under certain conditions. See the GNU
+General Public Licence for details.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+· verilator help >> ./verilator.log
+· verilator help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+· iverilog help >> ./iverilog.log
+· iverilog help: exit code 1 | [32mOK[0m
+· iverilog-vpi help >> ./iverilog.log
+· iverilog-vpi help: exit code 0 | [32mOK[0m
+· vvp help >> ./iverilog.log
+· vvp help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS sim/octave-slim ===
+=== BUILD sim/octave ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/sim/octave --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --build-arg IMAGE=sim/octave-slim -f debian-bullseye/osvb.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from osvb.dockerfile
+#1 transferring dockerfile: 2.38kB done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1.2
+#2 DONE 0.2s
+
+#3 docker-image://docker.io/docker/dockerfile:1.2@sha256:e2a8561e419ab1ba6b2fe6cbdf49fd92b95912df1cf7d313c3e2230a333fdbcc
+#3 resolve docker.io/docker/dockerfile:1.2@sha256:e2a8561e419ab1ba6b2fe6cbdf49fd92b95912df1cf7d313c3e2230a333fdbcc 0.0s done
+#3 CACHED
+
+#1 [internal] load build definition from osvb.dockerfile
+#1 transferring dockerfile: 2.38kB done
+#1 DONE 0.0s
+
+#4 [internal] load build definition from osvb.dockerfile
+#4 DONE 0.0s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/sim/octave-slim:latest
+#6 DONE 0.0s
+
+#7 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/osvb:latest
+#7 DONE 0.2s
+
+#8 [pkg-osvb 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/osvb@sha256:c81bb874e6db9f0f6dc3da9f6f7525350e0a135a6c16e3c67e3962daf608a805
+#8 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/osvb@sha256:c81bb874e6db9f0f6dc3da9f6f7525350e0a135a6c16e3c67e3962daf608a805 done
+#8 DONE 0.0s
+
+#9 [stage-3 1/4] FROM ghcr.io/hdl/amd64/debian/bullseye/sim/octave-slim@sha256:511b989f41769a4a84727abaa6112bf0868e374dd313b0d3ef44ac7475d7e85c
+#9 resolve ghcr.io/hdl/amd64/debian/bullseye/sim/octave-slim@sha256:511b989f41769a4a84727abaa6112bf0868e374dd313b0d3ef44ac7475d7e85c 0.0s done
+#9 DONE 0.0s
+
+#10 [stage-3 2/4] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     libpython3.9-dev  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists/*
+#10 CACHED
+
+#11 [stage-3 3/4] RUN --mount=type=cache,from=pkg-osvb,src=/osvb/,target=/tmp/osvb/  pip3 install -U /tmp/osvb/*.whl pytest --progress-bar off  && rm -rf ~/.cache  && mkdir /opt/osvb  && cp -vr /tmp/osvb/osvvmlibs/ /opt/osvb/osvvmlibs/
+#11 CACHED
+
+#12 [stage-3 4/4] RUN $(dirname $(which ghdl))/../lib/ghdl/vendors/compile-osvvm.sh    --osvvm    --source /opt/osvb/osvvmlibs/osvvm    --output /opt/osvb/ghdl-osvvm
+#12 CACHED
+
+#13 exporting to image
+#13 exporting layers done
+#13 preparing layers for inline cache 0.1s done
+#13 exporting manifest sha256:6a9a48d1aec55fe8ee793813ffc7fe8f5b34b02fe9e25edc1d206d7f010be205 0.0s done
+#13 exporting config sha256:ec139168107522bf722dfa5b7738839065f2cf6758224a7c4b6fa77d757d60c1 done
+#13 exporting attestation manifest sha256:71c9d06ea8fc6ab6d82d484a3d5053128ced0540070cb80e455293bec7155c23 done
+#13 exporting manifest list sha256:242d9f2c8d2d47b310b59d4da547b27476f7cc640a1594335c24de8a151e115a done
+#13 naming to ghcr.io/hdl/amd64/debian/bullseye/sim/octave:latest done
+#13 unpacking to ghcr.io/hdl/amd64/debian/bullseye/sim/octave:latest 0.0s done
+#13 DONE 0.2s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/sim/octave
+Architecture: amd64 
+Size: 1684617019
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/sim/octave //wrk/sim--octave.sh
+CC: 
+CXX: 
+CC: 
+CXX: 
+CC: 
+CXX: 
+/usr/bin/tclsh
+CC: 
+CXX: 
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-141-g9567e46f7) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ llvm 11.0.1 code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+/usr/local/bin/nvc
+Usage: nvc [OPTION]... COMMAND [OPTION]...
+
+Global options are placed before COMMAND, and command-specific options are placed afterwards. Multiple commands can be given and will be performed in order.
+
+Commands:
+ -a [OPTION]... FILE...       Analyse FILEs into work 
+                              library
+ -e [OPTION]... TOP...        Elaborate design unit TOP
+ -r [OPTION]... TOP           Execute previously 
+                              elaborated TOP
+ --cover-export FILE...       Export coverage database to 
+                              external format
+ --cover-report FILE...       Generate HTML report from 
+                              coverage database
+ --cover-merge FILE...        Merge multiple coverage 
+                              databases
+ --init                       Initialise work library 
+                              directory
+ --install PKG                Install third-party packages
+ --list                       Print all units in the 
+                              library
+ --preprocess FILE...         Expand FILEs with Verilog 
+                              preprocessor
+ --print-deps [UNIT]...       Print dependencies in 
+                              Makefile format
+
+Global options:
+ -h, --help         Display this message and exit
+ -H SIZE            Set the maximum heap size to SIZE bytes
+     --ieee-warnings={on,off,off-at-0} 
+                    Enable or disable warnings from IEEE 
+                    packages
+     --ignore-time  Skip source file timestamp check
+     --load=PLUGIN  Load VHPI plugin at startup
+ -L PATH            Add PATH to library search paths
+ -M SIZE            Limit design unit heap space to SIZE 
+                    bytes
+     --map=LIB:PATH Map library LIB to PATH
+     --messages={full,compact} 
+                    Diagnostic message style, compact is 
+                    less verbose
+     --seed=N       Seed for random number generation
+     --std={1993,..,2019} 
+                    VHDL standard revision to use
+     --stderr={note,warning,error,failure,none} 
+                    Print messages of this severity level 
+                    or higher to stderr
+ -v, --version      Display version and copyright 
+                    information
+     --vhpi-debug   Report VHPI errors as diagnostic 
+                    messages
+     --vhpi-trace   Trace VHPI calls and events
+     --work=NAME    Use NAME as the work library
+
+Analysis options:
+     --bootstrap    Allow compilation of STANDARD package
+     --check-synthesis 
+                    Warn on common synthesis mistakes
+ -D, --define NAME=VALUE 
+                    Set preprocessor symbol NAME to VALUE
+     --error-limit=NUM 
+                    Stop after NUM errors
+ -f, --files=LIST   Read files to analyse from LIST
+ -I DIR             Add DIR to list of Verilog include 
+                    directories
+     --keywords=VERSION 
+                    Use keywords from specified Verilog 
+                    version
+     --no-save      Do not save analysed design units
+     --preserve-case 
+                    Preserve the original case of VHDL 
+                    identifiers
+     --psl          Enable parsing of PSL directives in 
+                    comments
+     --relative=DIR Store paths relative to DIR
+     --relaxed      Disable certain pedantic rule checks
+     --single-unit  Treat all Verilog files as a single 
+                    compilation unit
+ -Werror            Treat all analysis warnings as errors
+
+Elaboration options:
+     --cover[={statement,branch,expression,toggle,...}] 
+                    Enable code coverage collection
+     --cover-file=FILE 
+                    Set the file name of the coverage 
+                    database
+     --cover-spec=FILE 
+                    Fine-grained coverage collection 
+                    specification, see the manual for 
+                    details
+ -g NAME=VALUE      Set top level generic NAME to VALUE
+ -j, --jit          Enable just-in-time compilation during 
+                    simulation
+ -O0, -O1, -O2, -O3 Set optimisation level (default is -O2)
+     --no-collapse  Do not collapse multiple signals into 
+                    one
+     --no-save      Do not save the elaborated design to 
+                    disk
+     --stats        Print statistics about instantiated 
+                    design units
+ -V, --verbose      Print resource usage at each step
+
+Run options:
+     --dump-arrays[=N] 
+                    Include nested arrays with up to N 
+                    elements in waveform dump
+     --exclude=GLOB Exclude signals matching GLOB from 
+                    waveform dump
+     --exit-severity={note,warning,error,failure} 
+                    Exit after an assertion failure of 
+                    this severity
+     --format={fst,vcd} 
+                    Waveform dump format
+     --include=GLOB Include signals matching GLOB in 
+                    waveform dump
+     --shuffle      Run processes in random order
+     --stats        Print time and memory usage at end of 
+                    run
+     --stop-delta=N Stop after N delta cycles (default 
+                    10000)
+     --stop-time=T  Stop after simulation time T (e.g. 5ns)
+     --trace        Trace simulation events
+ -w, --wave[=FILE]  Write waveform dump to FILE
+
+Coverage report options:
+ -o, --output=dir   Output directory for HTML report
+     --exclude-file=FILE 
+                    Apply exclude file when generating 
+                    report, see manual for syntax
+     --dont-print={covered,uncovered,excluded} 
+                    Exclude specified items from coverage 
+                    report
+     --item-limit=LIMIT 
+                    Display at most LIMIT items in a 
+                    single report file (default 5000)
+     --per-file     Create source file code coverage 
+                    report.
+
+Coverage merge options:
+     --merge-mode={union,intersect} 
+                    Merge hierarchies by union or 
+                    intersection, default is union
+ -o, --output=FILE  Output database file name
+
+Coverage export options:
+     --format=FMT   File format (must be 'cobertura')
+ -o, --output=FILE  Output file name
+     --relative=PATH 
+                    Report file names relative to PATH
+
+Install options:
+     --dest=DIR     Compile libraries into directory DIR
+
+Library search paths:
+  /root/.nvc/lib
+  /usr/local/lib/nvc
+
+The full manual can be read with man 1 nvc and contains detailed explanations of the commands and options above as well as examples.
+
+Report bugs at https://github.com/nickg/nvc/issues
+nvc 1.23-devel (1.22.0.r103.g34670eaec) (Using LLVM 11.0.1)
+Copyright (C) 2011-2026  Nick Gasson
+This program comes with ABSOLUTELY NO WARRANTY. This is free software, and
+you are welcome to redistribute it under certain conditions. See the GNU
+General Public Licence for details.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+· verilator help >> ./verilator.log
+· verilator help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+CC: 
+CXX: 
+· iverilog help >> ./iverilog.log
+· iverilog help: exit code 1 | [32mOK[0m
+· iverilog-vpi help >> ./iverilog.log
+· iverilog-vpi help: exit code 0 | [32mOK[0m
+· vvp help >> ./iverilog.log
+· vvp help: exit code 0 | [32mOK[0m
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+vunit-hdl         5.0.0.dev3
+cocotb            2.0.0.dev0+8d6c1a63
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS sim/octave ===
+RESULT: PASS

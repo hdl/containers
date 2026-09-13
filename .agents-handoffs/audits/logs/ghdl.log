@@ -1,0 +1,986 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: ghdl IMAGES: ['pkg/ghdl', 'pkg/ghdl/llvm#ghdl', 'ghdl', 'ghdl/llvm']
+=== BUILD pkg/ghdl ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target pkg-mcode -f debian-bullseye/ghdl.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from ghdl.dockerfile
+#1 transferring dockerfile: 1.88kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/ghdl/pkg:bullseye-mcode
+#2 DONE 6.6s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.1s
+
+#4 [build-mcode 1/1] FROM docker.io/ghdl/pkg:bullseye-mcode@sha256:6197c5f641e33895d0668387ea5f42a24d60c6866e7630e0b52609b83bfdcbfd
+#4 resolve docker.io/ghdl/pkg:bullseye-mcode@sha256:6197c5f641e33895d0668387ea5f42a24d60c6866e7630e0b52609b83bfdcbfd
+#4 resolve docker.io/ghdl/pkg:bullseye-mcode@sha256:6197c5f641e33895d0668387ea5f42a24d60c6866e7630e0b52609b83bfdcbfd 0.0s done
+#4 sha256:d7b6a34b6cac7a12e706d330c881cc2a90ad080cd89d07dbd54ec83b1758d5b6 0B / 9.28MB 0.2s
+#4 sha256:d7b6a34b6cac7a12e706d330c881cc2a90ad080cd89d07dbd54ec83b1758d5b6 2.10MB / 9.28MB 1.1s
+#4 sha256:d7b6a34b6cac7a12e706d330c881cc2a90ad080cd89d07dbd54ec83b1758d5b6 8.39MB / 9.28MB 1.2s
+#4 sha256:d7b6a34b6cac7a12e706d330c881cc2a90ad080cd89d07dbd54ec83b1758d5b6 9.28MB / 9.28MB 1.2s done
+#4 extracting sha256:d7b6a34b6cac7a12e706d330c881cc2a90ad080cd89d07dbd54ec83b1758d5b6
+#4 extracting sha256:d7b6a34b6cac7a12e706d330c881cc2a90ad080cd89d07dbd54ec83b1758d5b6 0.4s done
+#4 DONE 1.7s
+
+#5 [pkg-mcode 1/1] COPY --from=build-mcode / /ghdl/usr/local/
+#5 DONE 0.1s
+
+#6 exporting to image
+#6 exporting layers
+#6 exporting layers 2.1s done
+#6 preparing layers for inline cache
+#6 preparing layers for inline cache 0.0s done
+#6 exporting manifest sha256:c73802430218334c5feae820de136824a41d1bcdcda9c764020ebd0928fce8e0 0.0s done
+#6 exporting config sha256:77f0ccc18fc4a5ee7a0353056a7e5860b4d297c6ee97599dbee8f49373f19d26 0.1s done
+#6 exporting attestation manifest sha256:4b131db866e20fac9964eddbb602c5ba963fe7577b05bc98e7faad859b2fe927 0.0s done
+#6 exporting manifest list sha256:30c818edbc27bf81103bcb07ab11a7645fcf50d5ff9f4e3ad18a7dc4b6a0dd8b 0.0s done
+#6 naming to ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl:latest
+#6 naming to ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl:latest done
+#6 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl:latest
+#6 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl:latest 0.5s done
+#6 DONE 2.8s
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/testpkg:ghdl --build-arg IMAGE=ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl --build-arg PACKAGE=ghdl -f /home/umarcor/containers/utils/pyHDLC/testpkg.dockerfile .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from testpkg.dockerfile
+#1 transferring dockerfile: 975B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl:latest
+#2 DONE 0.2s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.5s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#5 resolve docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b 0.1s done
+#5 CACHED
+
+#6 [pkg 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl:latest@sha256:30c818edbc27bf81103bcb07ab11a7645fcf50d5ff9f4e3ad18a7dc4b6a0dd8b
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl:latest@sha256:30c818edbc27bf81103bcb07ab11a7645fcf50d5ff9f4e3ad18a7dc4b6a0dd8b 0.1s done
+#6 DONE 0.1s
+
+#7 [stage-1 2/3] COPY --from=pkg /ghdl /
+#7 DONE 0.4s
+
+#8 [stage-1 3/3] RUN apk add -U --no-cache file tree
+#8 1.020 (1/3) Installing libmagic (5.47-r2)
+#8 1.071 (2/3) Installing file (5.47-r2)
+#8 1.084 (3/3) Installing tree (2.3.2-r0)
+#8 1.100 Executing busybox-1.37.0-r31.trigger
+#8 1.145 OK: 18.4 MiB in 19 packages
+#8 DONE 1.4s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 2.5s done
+#9 preparing layers for inline cache 0.0s done
+#9 exporting manifest sha256:c103826f34370719574fc48c40c2abc8f9ef05275e921950d4f961f6dca9b322 0.0s done
+#9 exporting config sha256:417e5fdabc793407159fe416e7d280e126698bd439143899b31000720f861927 0.0s done
+#9 exporting attestation manifest sha256:573dfb889bc94c44c99c8230ae3bf00c5b5a33c3924b5009bb37625f64753948 0.1s done
+#9 exporting manifest list sha256:e9ca79d01c50eccbe6ec2c1fe5f89d36281c0c94b50517ae12012479ee008728 0.0s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/testpkg:ghdl
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/testpkg:ghdl done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:ghdl
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:ghdl 0.6s done
+#9 DONE 3.4s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/testpkg:ghdl //wrk/ghdl.pkg.sh
+/usr/local
+├── bin
+│   ├── ghdl
+│   └── ghwdump
+├── include
+│   └── ghdl
+│       ├── libghw.h
+│       ├── synth.h
+│       ├── synth_gates.h
+│       ├── vhpi_user.h
+│       └── vpi_user.h
+├── lib
+│   ├── ghdl
+│   │   ├── ansi_color.sh
+│   │   ├── ieee
+│   │   │   ├── v08
+│   │   │   │   └── ieee-obj08.cf
+│   │   │   ├── v87
+│   │   │   │   └── ieee-obj87.cf
+│   │   │   └── v93
+│   │   │       └── ieee-obj93.cf
+│   │   ├── src
+│   │   │   ├── ieee
+│   │   │   │   ├── math_complex-body.vhdl
+│   │   │   │   ├── math_complex.vhdl
+│   │   │   │   ├── math_real-body.vhdl
+│   │   │   │   ├── math_real.vhdl
+│   │   │   │   ├── v87
+│   │   │   │   │   ├── numeric_bit-body.vhdl
+│   │   │   │   │   ├── numeric_bit.vhdl
+│   │   │   │   │   ├── numeric_std-body.vhdl
+│   │   │   │   │   ├── numeric_std.vhdl
+│   │   │   │   │   ├── std_logic_1164-body.vhdl
+│   │   │   │   │   └── std_logic_1164.vhdl
+│   │   │   │   └── v93
+│   │   │   │       ├── numeric_bit-body.vhdl
+│   │   │   │       ├── numeric_bit.vhdl
+│   │   │   │       ├── numeric_std-body.vhdl
+│   │   │   │       ├── numeric_std.vhdl
+│   │   │   │       ├── std_logic_1164-body.vhdl
+│   │   │   │       └── std_logic_1164.vhdl
+│   │   │   ├── ieee2008
+│   │   │   │   ├── LICENSE
+│   │   │   │   ├── fixed_float_types.vhdl
+│   │   │   │   ├── fixed_generic_pkg-body.vhdl
+│   │   │   │   ├── fixed_generic_pkg.vhdl
+│   │   │   │   ├── fixed_pkg.vhdl
+│   │   │   │   ├── float_generic_pkg-body.vhdl
+│   │   │   │   ├── float_generic_pkg.vhdl
+│   │   │   │   ├── float_pkg.vhdl
+│   │   │   │   ├── ieee_bit_context.vhdl
+│   │   │   │   ├── ieee_std_context.vhdl
+│   │   │   │   ├── math_complex-body.vhdl
+│   │   │   │   ├── math_complex.vhdl
+│   │   │   │   ├── math_real-body.vhdl
+│   │   │   │   ├── math_real.vhdl
+│   │   │   │   ├── numeric_bit-body.vhdl
+│   │   │   │   ├── numeric_bit.vhdl
+│   │   │   │   ├── numeric_bit_unsigned-body.vhdl
+│   │   │   │   ├── numeric_bit_unsigned.vhdl
+│   │   │   │   ├── numeric_std-body.vhdl
+│   │   │   │   ├── numeric_std.vhdl
+│   │   │   │   ├── numeric_std_unsigned-body.vhdl
+│   │   │   │   ├── numeric_std_unsigned.vhdl
+│   │   │   │   ├── std_logic_1164-body.vhdl
+│   │   │   │   ├── std_logic_1164.vhdl
+│   │   │   │   └── std_logic_textio.vhdl
+│   │   │   ├── std
+│   │   │   │   ├── env-body.vhdl
+│   │   │   │   ├── env.vhdl
+│   │   │   │   ├── v08
+│   │   │   │   │   ├── standard.vhdl
+│   │   │   │   │   ├── textio-body.vhdl
+│   │   │   │   │   └── textio.vhdl
+│   │   │   │   ├── v87
+│   │   │   │   │   ├── standard.vhdl
+│   │   │   │   │   ├── textio-body.vhdl
+│   │   │   │   │   └── textio.vhdl
+│   │   │   │   └── v93
+│   │   │   │       ├── standard.vhdl
+│   │   │   │       ├── textio-body.vhdl
+│   │   │   │       └── textio.vhdl
+│   │   │   ├── synopsys
+│   │   │   │   ├── std_logic_arith.vhdl
+│   │   │   │   ├── std_logic_misc-body.vhdl
+│   │   │   │   ├── std_logic_misc.vhdl
+│   │   │   │   ├── std_logic_signed.vhdl
+│   │   │   │   ├── std_logic_textio.vhdl
+│   │   │   │   ├── std_logic_unsigned.vhdl
+│   │   │   │   └── v08
+│   │   │   │       ├── std_logic_misc-body.vhdl
+│   │   │   │       └── std_logic_misc.vhdl
+│   │   │   ├── upf
+│   │   │   │   ├── upf-body.vhdl
+│   │   │   │   └── upf.vhdl
+│   │   │   ├── vital2000
+│   │   │   │   ├── memory_b.vhdl
+│   │   │   │   ├── memory_p.vhdl
+│   │   │   │   ├── prmtvs_b.vhdl
+│   │   │   │   ├── prmtvs_p.vhdl
+│   │   │   │   ├── timing_b.vhdl
+│   │   │   │   └── timing_p.vhdl
+│   │   │   └── vital95
+│   │   │       ├── vital_primitives-body.vhdl
+│   │   │       ├── vital_primitives.vhdl
+│   │   │       ├── vital_timing-body.vhdl
+│   │   │       └── vital_timing.vhdl
+│   │   ├── std
+│   │   │   ├── v08
+│   │   │   │   └── std-obj08.cf
+│   │   │   ├── v87
+│   │   │   │   └── std-obj87.cf
+│   │   │   └── v93
+│   │   │       └── std-obj93.cf
+│   │   └── vendors
+│   │       ├── README.md
+│   │       ├── compile-altera.ps1
+│   │       ├── compile-altera.sh
+│   │       ├── compile-intel.ps1
+│   │       ├── compile-intel.sh
+│   │       ├── compile-lattice.ps1
+│   │       ├── compile-lattice.sh
+│   │       ├── compile-osvvm.ps1
+│   │       ├── compile-osvvm.sh
+│   │       ├── compile-uvvm.ps1
+│   │       ├── compile-uvvm.sh
+│   │       ├── compile-xilinx-ise.ps1
+│   │       ├── compile-xilinx-ise.sh
+│   │       ├── compile-xilinx-vivado.ps1
+│   │       ├── compile-xilinx-vivado.sh
+│   │       ├── config.psm1
+│   │       ├── config.sh
+│   │       ├── filter.analyze.sh
+│   │       ├── shared.psm1
+│   │       └── shared.sh
+│   ├── libghdl-5_0_0_dev.so
+│   ├── libghdl.a
+│   ├── libghdl.link
+│   ├── libghdlvpi.so
+│   └── libghw.so
+└── share
+
+30 directories, 111 files
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS pkg/ghdl ===
+=== BUILD pkg/ghdl/llvm#ghdl ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl/llvm --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target pkg-llvm -f debian-bullseye/ghdl.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from ghdl.dockerfile
+#1 transferring dockerfile: 1.88kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/ghdl/pkg:bullseye-llvm-11
+#2 DONE 1.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [build-llvm 1/1] FROM docker.io/ghdl/pkg:bullseye-llvm-11@sha256:a33756653b0ec2b8bc198fb0b73c3ca87266cac16c9824d6114886662ac487b0
+#4 resolve docker.io/ghdl/pkg:bullseye-llvm-11@sha256:a33756653b0ec2b8bc198fb0b73c3ca87266cac16c9824d6114886662ac487b0 0.0s done
+#4 DONE 0.1s
+
+#4 [build-llvm 1/1] FROM docker.io/ghdl/pkg:bullseye-llvm-11@sha256:a33756653b0ec2b8bc198fb0b73c3ca87266cac16c9824d6114886662ac487b0
+#4 sha256:4322075bcdd8aa2ec498fbb7db65e9bcd364df254dacf66356906dabd740cebd 0B / 13.13MB 0.2s
+#4 sha256:4322075bcdd8aa2ec498fbb7db65e9bcd364df254dacf66356906dabd740cebd 3.15MB / 13.13MB 1.1s
+#4 sha256:4322075bcdd8aa2ec498fbb7db65e9bcd364df254dacf66356906dabd740cebd 9.44MB / 13.13MB 1.2s
+#4 sha256:4322075bcdd8aa2ec498fbb7db65e9bcd364df254dacf66356906dabd740cebd 13.13MB / 13.13MB 1.4s
+#4 sha256:4322075bcdd8aa2ec498fbb7db65e9bcd364df254dacf66356906dabd740cebd 13.13MB / 13.13MB 1.4s done
+#4 extracting sha256:4322075bcdd8aa2ec498fbb7db65e9bcd364df254dacf66356906dabd740cebd
+#4 extracting sha256:4322075bcdd8aa2ec498fbb7db65e9bcd364df254dacf66356906dabd740cebd 0.5s done
+#4 DONE 2.0s
+
+#5 [pkg-llvm 1/1] COPY --from=build-llvm / /ghdl/usr/local/
+#5 DONE 0.1s
+
+#6 exporting to image
+#6 exporting layers
+#6 exporting layers 2.9s done
+#6 preparing layers for inline cache
+#6 preparing layers for inline cache 0.0s done
+#6 exporting manifest sha256:2c433498f9207f12d59d2629ca6696bfeeccd321ecb6805ba5b7a6859dc8b6e8 0.0s done
+#6 exporting config sha256:b95d753aaa1a425cce51084efaceb11f8498d3058d0a69287a756a459f57051b
+#6 exporting config sha256:b95d753aaa1a425cce51084efaceb11f8498d3058d0a69287a756a459f57051b 0.3s done
+#6 exporting attestation manifest sha256:b8e4f50517c63d6cabe762cfe7bff1de1e321ac742446f16c58c71a99cfe9607 0.1s done
+#6 exporting manifest list sha256:c171b74bbc2e807ef9ce2b1c8fd6729f778d109287a7d81f52224f2e4201321f 0.0s done
+#6 naming to ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl/llvm:latest done
+#6 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl/llvm:latest
+#6 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl/llvm:latest 0.8s done
+#6 DONE 4.1s
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/testpkg:ghdl--llvm --build-arg IMAGE=ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl/llvm --build-arg PACKAGE=ghdl -f /home/umarcor/containers/utils/pyHDLC/testpkg.dockerfile .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from testpkg.dockerfile
+#1 transferring dockerfile: 975B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl/llvm:latest
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.2s
+
+#4 [internal] load .dockerignore
+#4 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [pkg 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl/llvm:latest@sha256:c171b74bbc2e807ef9ce2b1c8fd6729f778d109287a7d81f52224f2e4201321f
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/ghdl/llvm:latest@sha256:c171b74bbc2e807ef9ce2b1c8fd6729f778d109287a7d81f52224f2e4201321f 0.1s done
+#5 DONE 0.1s
+
+#6 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#6 resolve docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b 0.1s done
+#6 DONE 0.1s
+
+#6 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#6 CACHED
+
+#7 [stage-1 2/3] COPY --from=pkg /ghdl /
+#7 DONE 0.9s
+
+#8 [stage-1 3/3] RUN apk add -U --no-cache file tree
+#8 1.351 (1/3) Installing libmagic (5.47-r2)
+#8 1.412 (2/3) Installing file (5.47-r2)
+#8 1.427 (3/3) Installing tree (2.3.2-r0)
+#8 1.442 Executing busybox-1.37.0-r31.trigger
+#8 1.457 OK: 18.4 MiB in 19 packages
+#8 DONE 1.5s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 3.7s done
+#9 preparing layers for inline cache
+#9 preparing layers for inline cache 0.0s done
+#9 exporting manifest sha256:a90512c06fda407033a20e9fd38f7de04bb55eb4ddb71f8181cefd4ef8b48793 0.0s done
+#9 exporting config sha256:043ae32aa48e2818b60a615fd5b3586d0165bbdbb7769f8e828f5a592d1079e3 0.0s done
+#9 exporting attestation manifest sha256:0225e04b08af31c991bce81741713ef323cbe029d75a358d52eb1b47c3fc77b3 0.0s done
+#9 exporting manifest list sha256:feeebdeafdec1b5263d61b4153396835b501edec959f18fa7bf06097c24bc990
+#9 exporting manifest list sha256:feeebdeafdec1b5263d61b4153396835b501edec959f18fa7bf06097c24bc990 0.0s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/testpkg:ghdl--llvm 0.0s done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:ghdl--llvm
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:ghdl--llvm 1.2s done
+#9 DONE 5.3s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/testpkg:ghdl--llvm //wrk/ghdl--llvm.pkg.sh
+/usr/local
+├── bin
+│   ├── ghdl
+│   ├── ghdl1-llvm
+│   └── ghwdump
+├── include
+│   └── ghdl
+│       ├── libghw.h
+│       ├── synth.h
+│       ├── synth_gates.h
+│       ├── vhpi_user.h
+│       └── vpi_user.h
+├── lib
+│   ├── ghdl
+│   │   ├── ansi_color.sh
+│   │   ├── grt-exec.lst
+│   │   ├── grt-shared.lst
+│   │   ├── grt.lst
+│   │   ├── grt.ver
+│   │   ├── ieee
+│   │   │   ├── v08
+│   │   │   │   ├── fixed_float_types.o
+│   │   │   │   ├── fixed_generic_pkg-body.o
+│   │   │   │   ├── fixed_generic_pkg.o
+│   │   │   │   ├── fixed_pkg.o
+│   │   │   │   ├── float_generic_pkg-body.o
+│   │   │   │   ├── float_generic_pkg.o
+│   │   │   │   ├── float_pkg.o
+│   │   │   │   ├── ieee-obj08.cf
+│   │   │   │   ├── ieee_bit_context.o
+│   │   │   │   ├── ieee_std_context.o
+│   │   │   │   ├── math_complex-body.o
+│   │   │   │   ├── math_complex.o
+│   │   │   │   ├── math_real-body.o
+│   │   │   │   ├── math_real.o
+│   │   │   │   ├── memory_b.o
+│   │   │   │   ├── memory_p.o
+│   │   │   │   ├── numeric_bit-body.o
+│   │   │   │   ├── numeric_bit.o
+│   │   │   │   ├── numeric_bit_unsigned-body.o
+│   │   │   │   ├── numeric_bit_unsigned.o
+│   │   │   │   ├── numeric_std-body.o
+│   │   │   │   ├── numeric_std.o
+│   │   │   │   ├── numeric_std_unsigned-body.o
+│   │   │   │   ├── numeric_std_unsigned.o
+│   │   │   │   ├── prmtvs_b.o
+│   │   │   │   ├── prmtvs_p.o
+│   │   │   │   ├── std_logic_1164-body.o
+│   │   │   │   ├── std_logic_1164.o
+│   │   │   │   ├── std_logic_arith.o
+│   │   │   │   ├── std_logic_misc-body.o
+│   │   │   │   ├── std_logic_misc.o
+│   │   │   │   ├── std_logic_signed.o
+│   │   │   │   ├── std_logic_textio.o
+│   │   │   │   ├── std_logic_unsigned.o
+│   │   │   │   ├── timing_b.o
+│   │   │   │   ├── timing_p.o
+│   │   │   │   ├── upf-body.o
+│   │   │   │   └── upf.o
+│   │   │   ├── v87
+│   │   │   │   ├── ieee-obj87.cf
+│   │   │   │   ├── numeric_bit-body.o
+│   │   │   │   ├── numeric_bit.o
+│   │   │   │   ├── numeric_std-body.o
+│   │   │   │   ├── numeric_std.o
+│   │   │   │   ├── std_logic_1164-body.o
+│   │   │   │   ├── std_logic_1164.o
+│   │   │   │   ├── std_logic_arith.o
+│   │   │   │   ├── std_logic_misc-body.o
+│   │   │   │   ├── std_logic_misc.o
+│   │   │   │   ├── std_logic_signed.o
+│   │   │   │   ├── std_logic_textio.o
+│   │   │   │   ├── std_logic_unsigned.o
+│   │   │   │   ├── upf-body.o
+│   │   │   │   ├── upf.o
+│   │   │   │   ├── vital_primitives-body.o
+│   │   │   │   ├── vital_primitives.o
+│   │   │   │   ├── vital_timing-body.o
+│   │   │   │   └── vital_timing.o
+│   │   │   └── v93
+│   │   │       ├── ieee-obj93.cf
+│   │   │       ├── math_complex-body.o
+│   │   │       ├── math_complex.o
+│   │   │       ├── math_real-body.o
+│   │   │       ├── math_real.o
+│   │   │       ├── memory_b.o
+│   │   │       ├── memory_p.o
+│   │   │       ├── numeric_bit-body.o
+│   │   │       ├── numeric_bit.o
+│   │   │       ├── numeric_std-body.o
+│   │   │       ├── numeric_std.o
+│   │   │       ├── prmtvs_b.o
+│   │   │       ├── prmtvs_p.o
+│   │   │       ├── std_logic_1164-body.o
+│   │   │       ├── std_logic_1164.o
+│   │   │       ├── std_logic_arith.o
+│   │   │       ├── std_logic_misc-body.o
+│   │   │       ├── std_logic_misc.o
+│   │   │       ├── std_logic_signed.o
+│   │   │       ├── std_logic_textio.o
+│   │   │       ├── std_logic_unsigned.o
+│   │   │       ├── timing_b.o
+│   │   │       ├── timing_p.o
+│   │   │       ├── upf-body.o
+│   │   │       └── upf.o
+│   │   ├── libgrt.a
+│   │   ├── src
+│   │   │   ├── ieee
+│   │   │   │   ├── math_complex-body.vhdl
+│   │   │   │   ├── math_complex.vhdl
+│   │   │   │   ├── math_real-body.vhdl
+│   │   │   │   ├── math_real.vhdl
+│   │   │   │   ├── v87
+│   │   │   │   │   ├── numeric_bit-body.vhdl
+│   │   │   │   │   ├── numeric_bit.vhdl
+│   │   │   │   │   ├── numeric_std-body.vhdl
+│   │   │   │   │   ├── numeric_std.vhdl
+│   │   │   │   │   ├── std_logic_1164-body.vhdl
+│   │   │   │   │   └── std_logic_1164.vhdl
+│   │   │   │   └── v93
+│   │   │   │       ├── numeric_bit-body.vhdl
+│   │   │   │       ├── numeric_bit.vhdl
+│   │   │   │       ├── numeric_std-body.vhdl
+│   │   │   │       ├── numeric_std.vhdl
+│   │   │   │       ├── std_logic_1164-body.vhdl
+│   │   │   │       └── std_logic_1164.vhdl
+│   │   │   ├── ieee2008
+│   │   │   │   ├── LICENSE
+│   │   │   │   ├── fixed_float_types.vhdl
+│   │   │   │   ├── fixed_generic_pkg-body.vhdl
+│   │   │   │   ├── fixed_generic_pkg.vhdl
+│   │   │   │   ├── fixed_pkg.vhdl
+│   │   │   │   ├── float_generic_pkg-body.vhdl
+│   │   │   │   ├── float_generic_pkg.vhdl
+│   │   │   │   ├── float_pkg.vhdl
+│   │   │   │   ├── ieee_bit_context.vhdl
+│   │   │   │   ├── ieee_std_context.vhdl
+│   │   │   │   ├── math_complex-body.vhdl
+│   │   │   │   ├── math_complex.vhdl
+│   │   │   │   ├── math_real-body.vhdl
+│   │   │   │   ├── math_real.vhdl
+│   │   │   │   ├── numeric_bit-body.vhdl
+│   │   │   │   ├── numeric_bit.vhdl
+│   │   │   │   ├── numeric_bit_unsigned-body.vhdl
+│   │   │   │   ├── numeric_bit_unsigned.vhdl
+│   │   │   │   ├── numeric_std-body.vhdl
+│   │   │   │   ├── numeric_std.vhdl
+│   │   │   │   ├── numeric_std_unsigned-body.vhdl
+│   │   │   │   ├── numeric_std_unsigned.vhdl
+│   │   │   │   ├── std_logic_1164-body.vhdl
+│   │   │   │   ├── std_logic_1164.vhdl
+│   │   │   │   └── std_logic_textio.vhdl
+│   │   │   ├── std
+│   │   │   │   ├── env-body.vhdl
+│   │   │   │   ├── env.vhdl
+│   │   │   │   ├── v08
+│   │   │   │   │   ├── standard.vhdl
+│   │   │   │   │   ├── textio-body.vhdl
+│   │   │   │   │   └── textio.vhdl
+│   │   │   │   ├── v87
+│   │   │   │   │   ├── standard.vhdl
+│   │   │   │   │   ├── textio-body.vhdl
+│   │   │   │   │   └── textio.vhdl
+│   │   │   │   └── v93
+│   │   │   │       ├── standard.vhdl
+│   │   │   │       ├── textio-body.vhdl
+│   │   │   │       └── textio.vhdl
+│   │   │   ├── synopsys
+│   │   │   │   ├── std_logic_arith.vhdl
+│   │   │   │   ├── std_logic_misc-body.vhdl
+│   │   │   │   ├── std_logic_misc.vhdl
+│   │   │   │   ├── std_logic_signed.vhdl
+│   │   │   │   ├── std_logic_textio.vhdl
+│   │   │   │   ├── std_logic_unsigned.vhdl
+│   │   │   │   └── v08
+│   │   │   │       ├── std_logic_misc-body.vhdl
+│   │   │   │       └── std_logic_misc.vhdl
+│   │   │   ├── upf
+│   │   │   │   ├── upf-body.vhdl
+│   │   │   │   └── upf.vhdl
+│   │   │   ├── vital2000
+│   │   │   │   ├── memory_b.vhdl
+│   │   │   │   ├── memory_p.vhdl
+│   │   │   │   ├── prmtvs_b.vhdl
+│   │   │   │   ├── prmtvs_p.vhdl
+│   │   │   │   ├── timing_b.vhdl
+│   │   │   │   └── timing_p.vhdl
+│   │   │   └── vital95
+│   │   │       ├── vital_primitives-body.vhdl
+│   │   │       ├── vital_primitives.vhdl
+│   │   │       ├── vital_timing-body.vhdl
+│   │   │       └── vital_timing.vhdl
+│   │   ├── std
+│   │   │   ├── v08
+│   │   │   │   ├── env-body.o
+│   │   │   │   ├── env.o
+│   │   │   │   ├── std-obj08.cf
+│   │   │   │   ├── std_standard.o
+│   │   │   │   ├── textio-body.o
+│   │   │   │   └── textio.o
+│   │   │   ├── v87
+│   │   │   │   ├── std-obj87.cf
+│   │   │   │   ├── std_standard.o
+│   │   │   │   ├── textio-body.o
+│   │   │   │   └── textio.o
+│   │   │   └── v93
+│   │   │       ├── std-obj93.cf
+│   │   │       ├── std_standard.o
+│   │   │       ├── textio-body.o
+│   │   │       └── textio.o
+│   │   └── vendors
+│   │       ├── README.md
+│   │       ├── compile-altera.ps1
+│   │       ├── compile-altera.sh
+│   │       ├── compile-intel.ps1
+│   │       ├── compile-intel.sh
+│   │       ├── compile-lattice.ps1
+│   │       ├── compile-lattice.sh
+│   │       ├── compile-osvvm.ps1
+│   │       ├── compile-osvvm.sh
+│   │       ├── compile-uvvm.ps1
+│   │       ├── compile-uvvm.sh
+│   │       ├── compile-xilinx-ise.ps1
+│   │       ├── compile-xilinx-ise.sh
+│   │       ├── compile-xilinx-vivado.ps1
+│   │       ├── compile-xilinx-vivado.sh
+│   │       ├── config.psm1
+│   │       ├── config.sh
+│   │       ├── filter.analyze.sh
+│   │       ├── shared.psm1
+│   │       └── shared.sh
+│   ├── libghdl-5_0_0_dev.so
+│   ├── libghdl.a
+│   ├── libghdl.link
+│   ├── libghdlvpi.so
+│   └── libghw.so
+└── share
+
+30 directories, 207 files
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS pkg/ghdl/llvm#ghdl ===
+=== BUILD ghdl ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/ghdl --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target mcode -f debian-bullseye/ghdl.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from ghdl.dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from ghdl.dockerfile
+#1 transferring dockerfile: 1.88kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/base:latest
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/ghdl/pkg:bullseye-mcode
+#3 DONE 0.2s
+
+#4 [1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#4 resolve ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e 0.0s done
+#4 CACHED
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [build-mcode 1/1] FROM docker.io/ghdl/pkg:bullseye-mcode@sha256:6197c5f641e33895d0668387ea5f42a24d60c6866e7630e0b52609b83bfdcbfd
+#6 resolve docker.io/ghdl/pkg:bullseye-mcode@sha256:6197c5f641e33895d0668387ea5f42a24d60c6866e7630e0b52609b83bfdcbfd 0.1s done
+#6 DONE 0.2s
+
+#7 [base 2/2] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     libgnat-9  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists
+#7 ...
+
+#6 [build-mcode 1/1] FROM docker.io/ghdl/pkg:bullseye-mcode@sha256:6197c5f641e33895d0668387ea5f42a24d60c6866e7630e0b52609b83bfdcbfd
+#6 CACHED
+
+#7 [base 2/2] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     libgnat-9  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists
+#7 4.720 Reading package lists...
+#7 5.737 Building dependency tree...
+#7 6.041 Reading state information...
+#7 6.418 The following NEW packages will be installed:
+#7 6.418   libgnat-9
+#7 6.755 0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+#7 6.755 Need to get 1022 kB of archives.
+#7 6.755 After this operation, 3879 kB of additional disk space will be used.
+#7 6.755 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgnat-9 amd64 9.3.0-22 [1022 kB]
+#7 7.144 debconf: delaying package configuration, since apt-utils is not installed
+#7 7.275 Fetched 1022 kB in 1s (1861 kB/s)
+#7 7.544 Selecting previously unselected package libgnat-9:amd64.
+#7 7.544 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7841 files and directories currently installed.)
+#7 7.544 Preparing to unpack .../libgnat-9_9.3.0-22_amd64.deb ...
+#7 7.556 Unpacking libgnat-9:amd64 (9.3.0-22) ...
+#7 7.743 Setting up libgnat-9:amd64 (9.3.0-22) ...
+#7 7.778 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#7 7.927 Reading package lists...
+#7 8.808 Building dependency tree...
+#7 8.997 Reading state information...
+#7 9.051 Reading package lists...
+#7 10.20 Building dependency tree...
+#7 10.54 Reading state information...
+#7 10.85 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#7 DONE 11.1s
+
+#8 [mcode 1/1] COPY --from=build-mcode / /usr/local/
+#8 DONE 0.4s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 3.6s done
+#9 preparing layers for inline cache
+#9 preparing layers for inline cache 0.4s done
+#9 exporting manifest sha256:fbaa288cf156d87e66e02e1950d1c94760eedd84f5f4b1551a4e87ab704a7dee
+#9 exporting manifest sha256:fbaa288cf156d87e66e02e1950d1c94760eedd84f5f4b1551a4e87ab704a7dee 0.1s done
+#9 exporting config sha256:e19315465953e33e6ae8211f05a8de4461096905b0865cb3eee21c166a310c7f
+#9 exporting config sha256:e19315465953e33e6ae8211f05a8de4461096905b0865cb3eee21c166a310c7f 0.1s done
+#9 exporting attestation manifest sha256:5999241b606359695ad39bd72cf0e9b4f586bb5be15b6b48ba9232ea154faba8
+#9 exporting attestation manifest sha256:5999241b606359695ad39bd72cf0e9b4f586bb5be15b6b48ba9232ea154faba8 0.1s done
+#9 exporting manifest list sha256:b11ee3a5d3a9df6d3329eeaefa36cf237778393ef5cc08d4c8bd2b886457e788
+#9 exporting manifest list sha256:b11ee3a5d3a9df6d3329eeaefa36cf237778393ef5cc08d4c8bd2b886457e788 0.1s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/ghdl:latest done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/ghdl:latest
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/ghdl:latest 0.6s done
+#9 DONE 5.6s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/ghdl
+Architecture: amd64 
+Size: 224101205
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/ghdl //wrk/ghdl.sh
+CC: 
+CXX: 
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-141-g9567e46f7) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ static elaboration, mcode JIT code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS ghdl ===
+=== BUILD ghdl/llvm ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/ghdl/llvm --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye --target llvm -f debian-bullseye/ghdl.dockerfile debian-bullseye
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from ghdl.dockerfile
+#1 transferring dockerfile: 1.88kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/ghdl/pkg:bullseye-llvm-11
+#2 ...
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/base:latest
+#3 DONE 0.3s
+
+#2 [internal] load metadata for docker.io/ghdl/pkg:bullseye-llvm-11
+#2 DONE 0.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/3] FROM ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e
+#5 resolve ghcr.io/hdl/amd64/debian/bullseye/build/base:latest@sha256:23a040c6ba6e1adeeffdcc0dfbe22f4e89fb5830b965914555ebefba78a9c89e 0.0s done
+#5 CACHED
+
+#6 [build-llvm 1/1] FROM docker.io/ghdl/pkg:bullseye-llvm-11@sha256:a33756653b0ec2b8bc198fb0b73c3ca87266cac16c9824d6114886662ac487b0
+#6 resolve docker.io/ghdl/pkg:bullseye-llvm-11@sha256:a33756653b0ec2b8bc198fb0b73c3ca87266cac16c9824d6114886662ac487b0
+#6 resolve docker.io/ghdl/pkg:bullseye-llvm-11@sha256:a33756653b0ec2b8bc198fb0b73c3ca87266cac16c9824d6114886662ac487b0 0.2s done
+#6 DONE 0.2s
+
+#6 [build-llvm 1/1] FROM docker.io/ghdl/pkg:bullseye-llvm-11@sha256:a33756653b0ec2b8bc198fb0b73c3ca87266cac16c9824d6114886662ac487b0
+#6 CACHED
+
+#7 [base 2/2] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     libgnat-9  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists
+#7 CACHED
+
+#8 [llvm 1/2] COPY --from=build-llvm / /usr/local/
+#8 DONE 0.4s
+
+#9 [llvm 2/2] RUN apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends     gcc     libllvm11     zlib1g-dev  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && rm -rf /var/lib/apt/lists
+#9 4.434 Reading package lists...
+#9 6.140 Building dependency tree...
+#9 6.365 Reading state information...
+#9 6.542 The following additional packages will be installed:
+#9 6.542   binutils binutils-common binutils-x86-64-linux-gnu cpp cpp-10 gcc-10
+#9 6.542   libasan6 libatomic1 libbinutils libbsd0 libc-dev-bin libc6-dev libcc1-0
+#9 6.543   libcrypt-dev libctf-nobfd0 libctf0 libedit2 libgcc-10-dev libgomp1 libisl23
+#9 6.543   libitm1 liblsan0 libmd0 libmpc3 libmpfr6 libnsl-dev libquadmath0
+#9 6.543   libtirpc-dev libtsan0 libubsan1 libz3-4 linux-libc-dev
+#9 6.544 Suggested packages:
+#9 6.545   binutils-doc cpp-doc gcc-10-locales gcc-multilib make manpages-dev autoconf
+#9 6.545   automake libtool flex bison gdb gcc-doc gcc-10-multilib gcc-10-doc glibc-doc
+#9 6.545 Recommended packages:
+#9 6.545   manpages manpages-dev libc-devtools
+#9 6.794 The following NEW packages will be installed:
+#9 6.798   binutils binutils-common binutils-x86-64-linux-gnu cpp cpp-10 gcc gcc-10
+#9 6.798   libasan6 libatomic1 libbinutils libbsd0 libc-dev-bin libc6-dev libcc1-0
+#9 6.798   libcrypt-dev libctf-nobfd0 libctf0 libedit2 libgcc-10-dev libgomp1 libisl23
+#9 6.798   libitm1 libllvm11 liblsan0 libmd0 libmpc3 libmpfr6 libnsl-dev libquadmath0
+#9 6.799   libtirpc-dev libtsan0 libubsan1 libz3-4 linux-libc-dev zlib1g-dev
+#9 9.043 0 upgraded, 35 newly installed, 0 to remove and 0 not upgraded.
+#9 9.043 Need to get 71.6 MB of archives.
+#9 9.043 After this operation, 283 MB of additional disk space will be used.
+#9 9.043 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 binutils-common amd64 2.35.2-2 [2220 kB]
+#9 9.149 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libbinutils amd64 2.35.2-2 [570 kB]
+#9 9.158 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libctf-nobfd0 amd64 2.35.2-2 [110 kB]
+#9 9.162 Get:4 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libctf0 amd64 2.35.2-2 [53.2 kB]
+#9 9.163 Get:5 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 binutils-x86-64-linux-gnu amd64 2.35.2-2 [1809 kB]
+#9 9.296 Get:6 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 binutils amd64 2.35.2-2 [61.2 kB]
+#9 9.297 Get:7 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libisl23 amd64 0.23-1 [676 kB]
+#9 9.313 Get:8 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libmpfr6 amd64 4.1.0-3 [2012 kB]
+#9 9.329 Get:9 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libmpc3 amd64 1.2.0-1 [45.0 kB]
+#9 9.329 Get:10 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 cpp-10 amd64 10.2.1-6 [8528 kB]
+#9 9.552 Get:11 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 cpp amd64 4:10.2.1-1 [19.7 kB]
+#9 9.552 Get:12 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libcc1-0 amd64 10.2.1-6 [47.0 kB]
+#9 9.555 Get:13 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgomp1 amd64 10.2.1-6 [99.9 kB]
+#9 9.555 Get:14 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libitm1 amd64 10.2.1-6 [25.8 kB]
+#9 9.555 Get:15 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libatomic1 amd64 10.2.1-6 [9008 B]
+#9 9.555 Get:16 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libasan6 amd64 10.2.1-6 [2065 kB]
+#9 9.567 Get:17 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 liblsan0 amd64 10.2.1-6 [828 kB]
+#9 9.573 Get:18 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libtsan0 amd64 10.2.1-6 [2000 kB]
+#9 9.779 Get:19 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libubsan1 amd64 10.2.1-6 [777 kB]
+#9 9.789 Get:20 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libquadmath0 amd64 10.2.1-6 [145 kB]
+#9 9.793 Get:21 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgcc-10-dev amd64 10.2.1-6 [2328 kB]
+#9 9.826 Get:22 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 gcc-10 amd64 10.2.1-6 [17.0 MB]
+#9 10.12 Get:23 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 gcc amd64 4:10.2.1-1 [5192 B]
+#9 10.12 Get:24 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libmd0 amd64 1.0.3-3 [28.0 kB]
+#9 10.12 Get:25 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libbsd0 amd64 0.11.3-1+deb11u1 [108 kB]
+#9 10.12 Get:26 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libc-dev-bin amd64 2.31-13+deb11u14 [277 kB]
+#9 10.12 Get:27 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 linux-libc-dev amd64 5.10.262-1 [1935 kB]
+#9 10.16 Get:28 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libcrypt-dev amd64 1:4.4.18-4 [104 kB]
+#9 10.16 Get:29 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libtirpc-dev amd64 1.3.1-1+deb11u1 [191 kB]
+#9 10.19 Get:30 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libnsl-dev amd64 1.3.0-2 [66.4 kB]
+#9 10.19 Get:31 http://snapshot.debian.org/archive/debian-security/20260824T000000Z bullseye-security/main amd64 libc6-dev amd64 2.31-13+deb11u14 [2360 kB]
+#9 10.22 Get:32 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libedit2 amd64 3.1-20191231-2+b1 [96.7 kB]
+#9 10.22 Get:33 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libz3-4 amd64 4.8.10-1 [6949 kB]
+#9 10.34 Get:34 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libllvm11 amd64 1:11.0.1-2 [17.9 MB]
+#9 10.59 Get:35 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 zlib1g-dev amd64 1:1.2.11.dfsg-2+deb11u2 [191 kB]
+#9 10.96 debconf: delaying package configuration, since apt-utils is not installed
+#9 11.10 Fetched 71.6 MB in 4s (19.0 MB/s)
+#9 11.15 Selecting previously unselected package binutils-common:amd64.
+#9 11.15 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7845 files and directories currently installed.)
+#9 11.17 Preparing to unpack .../00-binutils-common_2.35.2-2_amd64.deb ...
+#9 11.20 Unpacking binutils-common:amd64 (2.35.2-2) ...
+#9 11.53 Selecting previously unselected package libbinutils:amd64.
+#9 11.54 Preparing to unpack .../01-libbinutils_2.35.2-2_amd64.deb ...
+#9 11.55 Unpacking libbinutils:amd64 (2.35.2-2) ...
+#9 11.73 Selecting previously unselected package libctf-nobfd0:amd64.
+#9 11.73 Preparing to unpack .../02-libctf-nobfd0_2.35.2-2_amd64.deb ...
+#9 11.80 Unpacking libctf-nobfd0:amd64 (2.35.2-2) ...
+#9 11.98 Selecting previously unselected package libctf0:amd64.
+#9 11.98 Preparing to unpack .../03-libctf0_2.35.2-2_amd64.deb ...
+#9 11.99 Unpacking libctf0:amd64 (2.35.2-2) ...
+#9 12.08 Selecting previously unselected package binutils-x86-64-linux-gnu.
+#9 12.08 Preparing to unpack .../04-binutils-x86-64-linux-gnu_2.35.2-2_amd64.deb ...
+#9 12.09 Unpacking binutils-x86-64-linux-gnu (2.35.2-2) ...
+#9 12.42 Selecting previously unselected package binutils.
+#9 12.42 Preparing to unpack .../05-binutils_2.35.2-2_amd64.deb ...
+#9 12.43 Unpacking binutils (2.35.2-2) ...
+#9 12.55 Selecting previously unselected package libisl23:amd64.
+#9 12.56 Preparing to unpack .../06-libisl23_0.23-1_amd64.deb ...
+#9 12.57 Unpacking libisl23:amd64 (0.23-1) ...
+#9 12.79 Selecting previously unselected package libmpfr6:amd64.
+#9 12.79 Preparing to unpack .../07-libmpfr6_4.1.0-3_amd64.deb ...
+#9 12.80 Unpacking libmpfr6:amd64 (4.1.0-3) ...
+#9 13.00 Selecting previously unselected package libmpc3:amd64.
+#9 13.00 Preparing to unpack .../08-libmpc3_1.2.0-1_amd64.deb ...
+#9 13.01 Unpacking libmpc3:amd64 (1.2.0-1) ...
+#9 13.15 Selecting previously unselected package cpp-10.
+#9 13.15 Preparing to unpack .../09-cpp-10_10.2.1-6_amd64.deb ...
+#9 13.15 Unpacking cpp-10 (10.2.1-6) ...
+#9 14.24 Selecting previously unselected package cpp.
+#9 14.24 Preparing to unpack .../10-cpp_4%3a10.2.1-1_amd64.deb ...
+#9 14.24 Unpacking cpp (4:10.2.1-1) ...
+#9 14.40 Selecting previously unselected package libcc1-0:amd64.
+#9 14.40 Preparing to unpack .../11-libcc1-0_10.2.1-6_amd64.deb ...
+#9 14.42 Unpacking libcc1-0:amd64 (10.2.1-6) ...
+#9 14.50 Selecting previously unselected package libgomp1:amd64.
+#9 14.50 Preparing to unpack .../12-libgomp1_10.2.1-6_amd64.deb ...
+#9 14.54 Unpacking libgomp1:amd64 (10.2.1-6) ...
+#9 14.78 Selecting previously unselected package libitm1:amd64.
+#9 14.78 Preparing to unpack .../13-libitm1_10.2.1-6_amd64.deb ...
+#9 14.84 Unpacking libitm1:amd64 (10.2.1-6) ...
+#9 15.24 Selecting previously unselected package libatomic1:amd64.
+#9 15.24 Preparing to unpack .../14-libatomic1_10.2.1-6_amd64.deb ...
+#9 15.25 Unpacking libatomic1:amd64 (10.2.1-6) ...
+#9 15.33 Selecting previously unselected package libasan6:amd64.
+#9 15.33 Preparing to unpack .../15-libasan6_10.2.1-6_amd64.deb ...
+#9 15.34 Unpacking libasan6:amd64 (10.2.1-6) ...
+#9 15.65 Selecting previously unselected package liblsan0:amd64.
+#9 15.65 Preparing to unpack .../16-liblsan0_10.2.1-6_amd64.deb ...
+#9 15.67 Unpacking liblsan0:amd64 (10.2.1-6) ...
+#9 15.84 Selecting previously unselected package libtsan0:amd64.
+#9 15.84 Preparing to unpack .../17-libtsan0_10.2.1-6_amd64.deb ...
+#9 15.84 Unpacking libtsan0:amd64 (10.2.1-6) ...
+#9 16.16 Selecting previously unselected package libubsan1:amd64.
+#9 16.16 Preparing to unpack .../18-libubsan1_10.2.1-6_amd64.deb ...
+#9 16.17 Unpacking libubsan1:amd64 (10.2.1-6) ...
+#9 16.46 Selecting previously unselected package libquadmath0:amd64.
+#9 16.46 Preparing to unpack .../19-libquadmath0_10.2.1-6_amd64.deb ...
+#9 16.48 Unpacking libquadmath0:amd64 (10.2.1-6) ...
+#9 16.58 Selecting previously unselected package libgcc-10-dev:amd64.
+#9 16.58 Preparing to unpack .../20-libgcc-10-dev_10.2.1-6_amd64.deb ...
+#9 16.59 Unpacking libgcc-10-dev:amd64 (10.2.1-6) ...
+#9 16.91 Selecting previously unselected package gcc-10.
+#9 16.91 Preparing to unpack .../21-gcc-10_10.2.1-6_amd64.deb ...
+#9 16.93 Unpacking gcc-10 (10.2.1-6) ...
+#9 20.25 Selecting previously unselected package gcc.
+#9 20.25 Preparing to unpack .../22-gcc_4%3a10.2.1-1_amd64.deb ...
+#9 20.26 Unpacking gcc (4:10.2.1-1) ...
+#9 20.48 Selecting previously unselected package libmd0:amd64.
+#9 20.48 Preparing to unpack .../23-libmd0_1.0.3-3_amd64.deb ...
+#9 20.49 Unpacking libmd0:amd64 (1.0.3-3) ...
+#9 20.69 Selecting previously unselected package libbsd0:amd64.
+#9 20.69 Preparing to unpack .../24-libbsd0_0.11.3-1+deb11u1_amd64.deb ...
+#9 20.70 Unpacking libbsd0:amd64 (0.11.3-1+deb11u1) ...
+#9 20.78 Selecting previously unselected package libc-dev-bin.
+#9 20.78 Preparing to unpack .../25-libc-dev-bin_2.31-13+deb11u14_amd64.deb ...
+#9 20.80 Unpacking libc-dev-bin (2.31-13+deb11u14) ...
+#9 20.93 Selecting previously unselected package linux-libc-dev:amd64.
+#9 20.93 Preparing to unpack .../26-linux-libc-dev_5.10.262-1_amd64.deb ...
+#9 20.93 Unpacking linux-libc-dev:amd64 (5.10.262-1) ...
+#9 21.76 Selecting previously unselected package libcrypt-dev:amd64.
+#9 21.76 Preparing to unpack .../27-libcrypt-dev_1%3a4.4.18-4_amd64.deb ...
+#9 21.78 Unpacking libcrypt-dev:amd64 (1:4.4.18-4) ...
+#9 21.93 Selecting previously unselected package libtirpc-dev:amd64.
+#9 21.93 Preparing to unpack .../28-libtirpc-dev_1.3.1-1+deb11u1_amd64.deb ...
+#9 21.95 Unpacking libtirpc-dev:amd64 (1.3.1-1+deb11u1) ...
+#9 22.06 Selecting previously unselected package libnsl-dev:amd64.
+#9 22.06 Preparing to unpack .../29-libnsl-dev_1.3.0-2_amd64.deb ...
+#9 22.07 Unpacking libnsl-dev:amd64 (1.3.0-2) ...
+#9 22.17 Selecting previously unselected package libc6-dev:amd64.
+#9 22.17 Preparing to unpack .../30-libc6-dev_2.31-13+deb11u14_amd64.deb ...
+#9 22.18 Unpacking libc6-dev:amd64 (2.31-13+deb11u14) ...
+#9 22.60 Selecting previously unselected package libedit2:amd64.
+#9 22.60 Preparing to unpack .../31-libedit2_3.1-20191231-2+b1_amd64.deb ...
+#9 22.62 Unpacking libedit2:amd64 (3.1-20191231-2+b1) ...
+#9 22.73 Selecting previously unselected package libz3-4:amd64.
+#9 22.73 Preparing to unpack .../32-libz3-4_4.8.10-1_amd64.deb ...
+#9 22.74 Unpacking libz3-4:amd64 (4.8.10-1) ...
+#9 23.58 Selecting previously unselected package libllvm11:amd64.
+#9 23.59 Preparing to unpack .../33-libllvm11_1%3a11.0.1-2_amd64.deb ...
+#9 23.60 Unpacking libllvm11:amd64 (1:11.0.1-2) ...
+#9 27.26 Selecting previously unselected package zlib1g-dev:amd64.
+#9 27.26 Preparing to unpack .../34-zlib1g-dev_1%3a1.2.11.dfsg-2+deb11u2_amd64.deb ...
+#9 27.27 Unpacking zlib1g-dev:amd64 (1:1.2.11.dfsg-2+deb11u2) ...
+#9 27.40 Setting up binutils-common:amd64 (2.35.2-2) ...
+#9 27.43 Setting up linux-libc-dev:amd64 (5.10.262-1) ...
+#9 27.47 Setting up libctf-nobfd0:amd64 (2.35.2-2) ...
+#9 27.50 Setting up libgomp1:amd64 (10.2.1-6) ...
+#9 27.54 Setting up libasan6:amd64 (10.2.1-6) ...
+#9 27.58 Setting up libz3-4:amd64 (4.8.10-1) ...
+#9 27.63 Setting up libtirpc-dev:amd64 (1.3.1-1+deb11u1) ...
+#9 27.68 Setting up libmpfr6:amd64 (4.1.0-3) ...
+#9 27.72 Setting up libquadmath0:amd64 (10.2.1-6) ...
+#9 27.76 Setting up libmpc3:amd64 (1.2.0-1) ...
+#9 27.92 Setting up libatomic1:amd64 (10.2.1-6) ...
+#9 27.97 Setting up libubsan1:amd64 (10.2.1-6) ...
+#9 28.00 Setting up libmd0:amd64 (1.0.3-3) ...
+#9 28.02 Setting up libnsl-dev:amd64 (1.3.0-2) ...
+#9 28.04 Setting up libcrypt-dev:amd64 (1:4.4.18-4) ...
+#9 28.07 Setting up libbinutils:amd64 (2.35.2-2) ...
+#9 28.16 Setting up libisl23:amd64 (0.23-1) ...
+#9 28.21 Setting up libc-dev-bin (2.31-13+deb11u14) ...
+#9 28.26 Setting up libbsd0:amd64 (0.11.3-1+deb11u1) ...
+#9 28.29 Setting up libcc1-0:amd64 (10.2.1-6) ...
+#9 28.32 Setting up liblsan0:amd64 (10.2.1-6) ...
+#9 28.35 Setting up cpp-10 (10.2.1-6) ...
+#9 28.37 Setting up libitm1:amd64 (10.2.1-6) ...
+#9 28.40 Setting up libtsan0:amd64 (10.2.1-6) ...
+#9 28.43 Setting up libctf0:amd64 (2.35.2-2) ...
+#9 28.47 Setting up libgcc-10-dev:amd64 (10.2.1-6) ...
+#9 28.51 Setting up libedit2:amd64 (3.1-20191231-2+b1) ...
+#9 28.54 Setting up libllvm11:amd64 (1:11.0.1-2) ...
+#9 28.57 Setting up cpp (4:10.2.1-1) ...
+#9 28.62 Setting up libc6-dev:amd64 (2.31-13+deb11u14) ...
+#9 28.66 Setting up binutils-x86-64-linux-gnu (2.35.2-2) ...
+#9 28.72 Setting up binutils (2.35.2-2) ...
+#9 28.76 Setting up gcc-10 (10.2.1-6) ...
+#9 28.83 Setting up zlib1g-dev:amd64 (1:1.2.11.dfsg-2+deb11u2) ...
+#9 28.87 Setting up gcc (4:10.2.1-1) ...
+#9 28.94 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#9 29.21 Reading package lists...
+#9 30.08 Building dependency tree...
+#9 30.30 Reading state information...
+#9 30.57 Reading package lists...
+#9 31.49 Building dependency tree...
+#9 31.71 Reading state information...
+#9 31.95 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#9 DONE 32.1s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 19.4s done
+#10 preparing layers for inline cache
+#10 preparing layers for inline cache 0.0s done
+#10 exporting manifest sha256:0898dd867c79bfca38c750cabea065f1a1678f66b2e7dc13252e83fdaa68e7e2 0.0s done
+#10 exporting config sha256:de252ee1aa0f7f36b4660481993ca8fcd59d53fe3aca8a0765373589b37cec7a 0.0s done
+#10 exporting attestation manifest sha256:c900a162294f1425e958897c4f142e8e2adcb3d77ea6de010db7e3074612c6ba 0.0s done
+#10 exporting manifest list sha256:7c8d30ac72deda6f011e022315d8d86bfabc78b246df7dccce2696e477449588 0.0s done
+#10 naming to ghcr.io/hdl/amd64/debian/bullseye/ghdl/llvm:latest done
+#10 unpacking to ghcr.io/hdl/amd64/debian/bullseye/ghdl/llvm:latest
+#10 unpacking to ghcr.io/hdl/amd64/debian/bullseye/ghdl/llvm:latest 4.3s done
+#10 DONE 24.0s
+· docker inspect --format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }} ghcr.io/hdl/amd64/debian/bullseye/ghdl/llvm
+Architecture: amd64 
+Size: 609982654
+
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/ghdl/llvm //wrk/ghdl--llvm.sh
+CC: 
+CXX: 
+· ghdl help >> ./ghdl.log
+· ghdl help: exit code 0 | [32mOK[0m
+GHDL 5.0.0-dev (v4.1.0-141-g9567e46f7) [Dunoon edition]
+ Compiled with GNAT Version: 9.3.0
+ llvm 11.0.1 code generator
+Written by Tristan Gingold.
+
+Copyright (C) 2003 - 2024 Tristan Gingold.
+GHDL is free software, covered by the GNU General Public License.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS ghdl/llvm ===
+RESULT: PASS

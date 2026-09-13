@@ -1,0 +1,13 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+Traceback (most recent call last):
+  File "<stdin>", line 6, in <module>
+  File "/home/umarcor/containers/work/audit_lib.py", line 7, in job_images
+    GenerateJobList(task, fmt='gha', dry=True)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/umarcor/containers/utils/pyHDLC/__init__.py", line 269, in GenerateJobList
+    jobs: List[Dict[str, str]] = _generateJobList(name)
+                                 ~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/umarcor/containers/utils/pyHDLC/__init__.py", line 239, in _generateJobList
+    raise Exception(f"Unknown job {name}")
+Exception: Unknown job conda/f4pga/eos-s3

@@ -1,0 +1,973 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: yices2 IMAGES: ['pkg/yices2']
+=== BUILD pkg/yices2 ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/yices2 --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye debian/yices2
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.38kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#2 DONE 0.0s
+
+#3 [build 1/7] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#3 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#3 CACHED
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.1s
+
+#5 [internal] load build context
+#5 transferring context: 2.53kB done
+#5 DONE 0.1s
+
+#6 [build 2/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC  && apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]}  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && update-ca-certificates  && rm -rf /var/lib/apt/lists/*
+#6 1.372 Reading package lists...
+#6 1.968 Building dependency tree...
+#6 2.108 Reading state information...
+#6 2.239 binutils is already the newest version (2.35.2-2).
+#6 2.239 binutils set to manually installed.
+#6 2.239 The following additional packages will be installed:
+#6 2.240   libgmpxx4ldbl libsigsegv2 m4
+#6 2.240 Suggested packages:
+#6 2.240   autoconf-archive gnu-standards autoconf-doc libtool gettext gmp-doc
+#6 2.240   libgmp10-doc libmpfr-dev m4-doc
+#6 2.240 Recommended packages:
+#6 2.240   automake | automaken
+#6 2.293 The following NEW packages will be installed:
+#6 2.294   autoconf gperf libgmp-dev libgmpxx4ldbl libsigsegv2 m4
+#6 2.561 0 upgraded, 6 newly installed, 0 to remove and 0 not upgraded.
+#6 2.561 Need to get 1679 kB of archives.
+#6 2.561 After this operation, 4948 kB of additional disk space will be used.
+#6 2.561 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libsigsegv2 amd64 2.13-1 [34.8 kB]
+#6 2.570 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 m4 amd64 1.4.18-5 [204 kB]
+#6 2.592 Get:3 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 autoconf all 2.69-14 [313 kB]
+#6 2.602 Get:4 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 gperf amd64 3.1-1 [147 kB]
+#6 2.604 Get:5 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgmpxx4ldbl amd64 2:6.2.1+dfsg-1+deb11u1 [338 kB]
+#6 2.613 Get:6 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 libgmp-dev amd64 2:6.2.1+dfsg-1+deb11u1 [643 kB]
+#6 2.789 debconf: delaying package configuration, since apt-utils is not installed
+#6 2.825 Fetched 1679 kB in 0s (5264 kB/s)
+#6 2.860 Selecting previously unselected package libsigsegv2:amd64.
+#6 2.860 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14728 files and directories currently installed.)
+#6 2.876 Preparing to unpack .../0-libsigsegv2_2.13-1_amd64.deb ...
+#6 2.889 Unpacking libsigsegv2:amd64 (2.13-1) ...
+#6 2.940 Selecting previously unselected package m4.
+#6 2.940 Preparing to unpack .../1-m4_1.4.18-5_amd64.deb ...
+#6 2.946 Unpacking m4 (1.4.18-5) ...
+#6 3.010 Selecting previously unselected package autoconf.
+#6 3.012 Preparing to unpack .../2-autoconf_2.69-14_all.deb ...
+#6 3.019 Unpacking autoconf (2.69-14) ...
+#6 3.094 Selecting previously unselected package gperf.
+#6 3.096 Preparing to unpack .../3-gperf_3.1-1_amd64.deb ...
+#6 3.103 Unpacking gperf (3.1-1) ...
+#6 3.169 Selecting previously unselected package libgmpxx4ldbl:amd64.
+#6 3.170 Preparing to unpack .../4-libgmpxx4ldbl_2%3a6.2.1+dfsg-1+deb11u1_amd64.deb ...
+#6 3.179 Unpacking libgmpxx4ldbl:amd64 (2:6.2.1+dfsg-1+deb11u1) ...
+#6 3.242 Selecting previously unselected package libgmp-dev:amd64.
+#6 3.244 Preparing to unpack .../5-libgmp-dev_2%3a6.2.1+dfsg-1+deb11u1_amd64.deb ...
+#6 3.251 Unpacking libgmp-dev:amd64 (2:6.2.1+dfsg-1+deb11u1) ...
+#6 3.348 Setting up gperf (3.1-1) ...
+#6 3.370 Setting up libgmpxx4ldbl:amd64 (2:6.2.1+dfsg-1+deb11u1) ...
+#6 3.394 Setting up libsigsegv2:amd64 (2.13-1) ...
+#6 3.420 Setting up libgmp-dev:amd64 (2:6.2.1+dfsg-1+deb11u1) ...
+#6 3.444 Setting up m4 (1.4.18-5) ...
+#6 3.467 Setting up autoconf (2.69-14) ...
+#6 3.496 Processing triggers for libc-bin (2.31-13+deb11u14) ...
+#6 3.593 Reading package lists...
+#6 4.348 Building dependency tree...
+#6 4.513 Reading state information...
+#6 4.541 Reading package lists...
+#6 5.222 Building dependency tree...
+#6 5.360 Reading state information...
+#6 5.509 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#6 5.515 Updating certificates in /etc/ssl/certs...
+#6 6.075 0 added, 0 removed; done.
+#6 6.075 Running hooks in /etc/ca-certificates/update.d...
+#6 6.077 done.
+#6 DONE 6.2s
+
+#7 [build 3/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+#7 0.242 Cloning into '/tmp/yices2'...
+#7 6.507 checking build system type... x86_64-pc-linux-gnu
+#7 6.560 checking whether make sets $(MAKE)... yes
+#7 6.568 checking for a sed that does not truncate output... /bin/sed
+#7 6.574 checking whether ln -s works... yes
+#7 6.574 checking for a thread-safe mkdir -p... /bin/mkdir -p
+#7 6.576 checking for a BSD-compatible install... /usr/bin/install -c
+#7 6.586 checking for gcc... clang
+#7 6.698 checking whether the C compiler works... yes
+#7 6.779 checking for C compiler default output file name... a.out
+#7 6.780 checking for suffix of executables... 
+#7 6.852 checking whether we are cross compiling... no
+#7 6.928 checking for suffix of object files... o
+#7 6.965 checking whether we are using the GNU C compiler... yes
+#7 6.999 checking whether clang accepts -g... yes
+#7 7.033 checking for clang option to accept ISO C89... none needed
+#7 7.093 checking for ranlib... ranlib
+#7 7.094 checking for grep that handles long lines and -e... /bin/grep
+#7 7.096 checking for egrep... /bin/grep -E
+#7 7.098 checking for ld... ld
+#7 7.099 checking for ar... ar
+#7 7.100 checking for strip... strip
+#7 7.100 checking for gperf... gperf
+#7 7.101 checking gperf version... 3.1
+#7 7.105 checking whether clang accepts option -fno-stack-protector... yes
+#7 7.134 checking how to run the C preprocessor... clang -E
+#7 7.269 checking for ANSI C header files... yes
+#7 7.488 checking for sys/types.h... yes
+#7 7.543 checking for sys/stat.h... yes
+#7 7.597 checking for stdlib.h... yes
+#7 7.655 checking for string.h... yes
+#7 7.715 checking for memory.h... yes
+#7 7.777 checking for strings.h... yes
+#7 7.842 checking for inttypes.h... yes
+#7 7.907 checking for stdint.h... yes
+#7 7.971 checking for unistd.h... yes
+#7 8.029 checking whether byte ordering is bigendian... no
+#7 8.172 configure: Trying to find a usable libgmp.a
+#7 8.178 configure: Searching in  /usr/local/lib/x86_64-linux-gnu /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu64 /usr/local/lib64 /lib64 /usr/lib64 /usr/local/lib /lib /usr/lib /usr/x86_64-linux-gnu/lib64 /usr/x86_64-linux-gnu/lib /usr/local/lib /usr/lib /lib
+#7 8.178 checking for libgmp.a in /usr/local/lib/x86_64-linux-gnu... no
+#7 8.179 checking for libgmp.a in /lib/x86_64-linux-gnu... no
+#7 8.179 checking for libgmp.a in /usr/lib/x86_64-linux-gnu... found
+#7 8.179 checking whether /usr/lib/x86_64-linux-gnu/libgmp.a is usable... yes
+#7 8.308 checking for main in -lm... yes
+#7 8.393 checking for __gmpz_cmp in -lgmp... yes
+#7 8.507 configure: creating ./config.status
+#7 8.643 config.status: creating make.include
+#7 8.659 configure: Moving make.include to configs/make.include.x86_64-pc-linux-gnu
+#7 8.844 Mode:     release
+#7 8.844 Platform: x86_64-pc-linux-gnu
+#7 8.847 make[1]: Entering directory '/tmp/yices2'
+#7 8.847 /bin/mkdir -p build/x86_64-pc-linux-gnu-release
+#7 8.848 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mt
+#7 8.849 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/io
+#7 8.850 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/terms
+#7 8.851 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/utils
+#7 8.852 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/solvers
+#7 8.864 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall
+#7 8.865 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/solvers/funs
+#7 8.866 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/solvers/bv
+#7 8.867 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/solvers/egraph
+#7 8.868 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl
+#7 8.869 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/solvers/simplex
+#7 8.869 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/solvers/quant
+#7 8.870 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/parser_utils
+#7 8.871 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/model
+#7 8.872 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/api
+#7 8.874 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/frontend
+#7 8.874 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/frontend/common
+#7 8.875 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/frontend/smt1
+#7 8.880 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/frontend/yices
+#7 8.880 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/frontend/smt2
+#7 8.880 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/context
+#7 8.881 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/exists_forall
+#7 8.885 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mcsat
+#7 8.885 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mcsat/eq
+#7 8.888 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mcsat/weq
+#7 8.889 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mcsat/uf
+#7 8.893 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mcsat/bool
+#7 8.896 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mcsat/ite
+#7 8.896 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mcsat/na
+#7 8.897 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mcsat/ff
+#7 8.899 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mcsat/bv
+#7 8.903 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mcsat/bv/explain
+#7 8.906 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mcsat/utils
+#7 8.907 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/obj/mcsat/l2o
+#7 8.908 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/lib
+#7 8.910 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/bin
+#7 8.912 ./utils/make_source_version ./src/api/yices_version_template.txt src/api/yices_release_version.c 2.7.0 release x86_64-pc-linux-gnu
+#7 8.924 /bin/mkdir -p build/x86_64-pc-linux-gnu-release/dist
+#7 8.927 === Preparing binary distribution ===
+#7 8.937 make[2]: Entering directory '/tmp/yices2/src'
+#7 8.938 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/api/yices_release_version.d
+#7 8.938 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_smtcomp.d
+#7 8.938 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_smt2.d
+#7 8.942 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_smt.d
+#7 9.006 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_sat_new.d
+#7 9.013 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_sat.d
+#7 9.037 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices.d
+#7 9.085 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/union_find.d
+#7 9.106 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/timeout.d
+#7 9.127 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/string_hash_map.d
+#7 9.127 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/pair_hash_sets.d
+#7 9.127 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/memsize.d
+#7 9.174 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/command_line.d
+#7 9.196 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/arith_buffers.d
+#7 9.212 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/simplex_prop_table.d
+#7 9.216 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/simplex_printer.d
+#7 9.263 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/int_constraint_printer.d
+#7 9.269 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/dsolver_printer.d
+#7 9.278 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/fun_solver_printer.d
+#7 9.294 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/rdl_fw_printer.d
+#7 9.360 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/idl_fw_printer.d
+#7 9.426 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_printer.d
+#7 9.457 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/smt_core_printer.d
+#7 9.511 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/sat_solver.d
+#7 9.762 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/gates_printer.d
+#7 9.762 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/clause_pool.d
+#7 9.762 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvsolver_printer.d
+#7 9.762 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/small_bvsets.d
+#7 9.778 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/rb_bvsets.d
+#7 9.794 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/large_bvsets.d
+#7 9.806 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_reval.d
+#7 9.817 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_help.d
+#7 9.828 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/labeled_assertions.d
+#7 9.838 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/arith_solver_codes.d
+#7 9.881 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_type_printer.d
+#7 9.882 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_term_stack.d
+#7 9.884 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_symbol_printer.d
+#7 9.977 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_parser.d
+#7 9.978 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_model_printer.d
+#7 9.996 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_printer.d
+#7 9.997 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_expressions.d
+#7 10.04 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_commands.d
+#7 10.06 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/parenthesized_expr.d
+#7 10.08 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt1/smt_term_stack.d
+#7 10.10 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt1/smt_parser.d
+#7 10.11 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt1/smt_lexer.d
+#7 10.11 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/tables.d
+#7 10.14 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/parameters.d
+#7 10.14 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/named_term_stacks.d
+#7 10.28 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/bug_report.d
+#7 10.32 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/assumption_table.d
+#7 10.32 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/assumptions_and_core.d
+#7 10.32 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/internalization_printer.d
+#7 10.35 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/dump_context.d
+#7 10.40 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/context_printer.d
+#7 10.47 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/context_parameters.d
+#7 10.47 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/mcsat/options.d
+#7 10.65 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/mcsat/no_mcsat.d
+#7 10.65 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_learner.d
+#7 10.65 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/vector_hash_map.d
+#7 10.65 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/use_vectors.d
+#7 10.65 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_rbtrees.d
+#7 10.65 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_array_sort2.d
+#7 10.65 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_array_sort.d
+#7 10.65 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/tuple_hash_map.d
+#7 10.68 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/tag_map.d
+#7 10.68 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/symbol_tables.d
+#7 10.71 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/string_utils.d
+#7 10.75 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/string_buffers.d
+#7 10.76 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/stable_sort.d
+#7 10.76 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/sparse_arrays.d
+#7 10.77 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/simple_int_stack.d
+#7 10.80 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/simple_cache.d
+#7 10.83 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/resize_arrays.d
+#7 10.83 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/refcount_strings.d
+#7 10.84 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/refcount_int_arrays.d
+#7 10.85 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_vectors.d
+#7 10.88 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_stack.d
+#7 10.91 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_sets2.d
+#7 10.92 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_sets.d
+#7 10.93 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_queues.d
+#7 10.94 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_partitions.d
+#7 10.98 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_heap.d
+#7 10.98 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_hash_map.d
+#7 10.99 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_hash_classes.d
+#7 11.03 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_array_sort.d
+#7 11.09 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_array_sort2.d
+#7 11.10 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/pointer_vectors.d
+#7 11.10 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/pair_hash_map2.d
+#7 11.16 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/pair_hash_map.d
+#7 11.16 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/object_stores.d
+#7 11.17 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/object_stack.d
+#7 11.18 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/memalloc.d
+#7 11.20 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/mark_vectors.d
+#7 11.21 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_vectors.d
+#7 11.23 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_stack.d
+#7 11.24 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_queues.d
+#7 11.27 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_powers.d
+#7 11.29 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_partitions.d
+#7 11.30 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_heap.d
+#7 11.31 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_heap2.d
+#7 11.36 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_tables.d
+#7 11.38 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_sets.d
+#7 11.38 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_mmap.d
+#7 11.42 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_map.d
+#7 11.44 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_map2.d
+#7 11.44 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_harray_store.d
+#7 11.44 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_classes.d
+#7 11.50 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_bv_sets.d
+#7 11.50 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_bags.d
+#7 11.52 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_array_sort.d
+#7 11.60 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_array_sort2.d
+#7 11.61 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/int_array_hsets.d
+#7 11.62 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/indexed_table.d
+#7 11.64 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/index_vectors.d
+#7 11.66 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/hash_functions.d
+#7 11.66 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/generic_heap.d
+#7 11.69 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/gcd.d
+#7 11.71 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/error.d
+#7 11.75 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/dep_tables.d
+#7 11.77 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/cputime.d
+#7 11.85 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/csets.d
+#7 11.86 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/cache.d
+#7 11.86 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/backtrack_int_hash_map.d
+#7 11.86 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/backtrack_arrays.d
+#7 11.92 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/utils/arena.d
+#7 11.94 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/variable_renaming.d
+#7 11.94 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/types.d
+#7 11.96 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/term_utils.d
+#7 12.02 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/term_substitution.d
+#7 12.07 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/term_sets.d
+#7 12.09 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/terms.d
+#7 12.10 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/term_manager.d
+#7 12.20 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/term_explorer.d
+#7 12.20 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/subst_context.d
+#7 12.24 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/subst_cache.d
+#7 12.30 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/renaming_context.d
+#7 12.34 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/rba_buffer_terms.d
+#7 12.36 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/rationals.d
+#7 12.37 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/rational_hash_maps.d
+#7 12.44 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/pprod_table.d
+#7 12.48 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/power_products.d
+#7 12.49 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/polynomials.d
+#7 12.49 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/poly_buffer_terms.d
+#7 12.56 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/poly_buffer.d
+#7 12.56 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/mpq_stores.d
+#7 12.83 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/mpq_aux.d
+#7 12.83 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/ite_stack.d
+#7 12.83 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/int_rational_hash_maps.d
+#7 12.83 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/full_subst.d
+#7 13.12 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/free_var_collector.d
+#7 13.12 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/extended_rationals.d
+#7 13.12 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/elim_subst.d
+#7 13.21 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/conditionals.d
+#7 13.23 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bv_slices.d
+#7 13.31 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bv_polynomials.d
+#7 13.44 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bvpoly_buffers.d
+#7 13.47 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bvlogic_buffers.d
+#7 13.48 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bvfactor_buffers.d
+#7 13.52 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bv_constants.d
+#7 13.54 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith_buffer_terms.d
+#7 13.58 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith_buffers.d
+#7 13.63 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith64_buffer_terms.d
+#7 13.67 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith64_buffers.d
+#7 13.72 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bv64_polynomials.d
+#7 13.76 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bv64_constants.d
+#7 13.78 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bv64_interval_abstraction.d
+#7 13.83 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bit_term_conversion.d
+#7 13.86 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/bit_expr.d
+#7 13.88 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/terms/balanced_arith_buffers.d
+#7 13.91 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_solver.d
+#7 13.94 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_ematching.d
+#7 14.02 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_execute.d
+#7 14.03 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_compile.d
+#7 14.03 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_instance.d
+#7 14.04 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_instr_stack.d
+#7 14.15 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_instr.d
+#7 14.15 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/term_learner.d
+#7 14.23 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/cnstr_learner.d
+#7 14.24 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_cnstr.d
+#7 14.25 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_pattern.d
+#7 14.26 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ef_problem.d
+#7 14.38 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ef_parameters.d
+#7 14.44 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_parameters.d
+#7 14.58 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/simplex.d
+#7 14.65 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/offset_equalities.d
+#7 14.67 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/matrices.d
+#7 14.74 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/integrality_constraints.d
+#7 14.74 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/gomory_cuts.d
+#7 14.78 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/diophantine_systems.d
+#7 14.83 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/arith_vartable.d
+#7 14.85 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/arith_atomtable.d
+#7 14.87 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/stratification.d
+#7 14.93 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/fun_solver.d
+#7 14.94 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/fun_level.d
+#7 14.95 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/rdl_floyd_warshall.d
+#7 15.06 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/idl_floyd_warshall.d
+#7 15.06 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/dl_vartable.d
+#7 15.07 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/mcsat_satellite.d
+#7 15.08 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/theory_explanations.d
+#7 15.16 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_utils.d
+#7 15.17 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_explanations.d
+#7 15.23 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph.d
+#7 15.38 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_assertion_queues.d
+#7 15.45 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/diseq_stacks.d
+#7 15.47 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/composites.d
+#7 15.52 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/wide_truth_tables.d
+#7 15.54 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/truth_tables.d
+#7 15.56 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/smt_core.d
+#7 15.60 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_sat_solver.d
+#7 15.64 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_gate_hash_map2.d
+#7 15.69 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_gate_hash_map.d
+#7 15.69 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_gates.d
+#7 15.70 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/gates_manager.d
+#7 15.75 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/gates_hash_table.d
+#7 15.84 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/delegate.d
+#7 15.85 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/merge_table.d
+#7 15.86 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/remap_table.d
+#7 15.92 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/dimacs_printer.d
+#7 15.98 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv_vartable.d
+#7 16.03 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvsolver.d
+#7 16.07 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvpoly_dag.d
+#7 16.12 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvpoly_compiler.d
+#7 16.17 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv_intervals.d
+#7 16.18 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvexp_table.d
+#7 16.30 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvconst_hmap.d
+#7 16.33 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv_atomtable.d
+#7 16.34 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv64_intervals.d
+#7 16.34 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bit_blaster.d
+#7 16.42 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/term_stack_error.d
+#7 16.43 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/term_stack2.d
+#7 16.46 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/parser.d
+#7 16.53 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/lexer.d
+#7 16.64 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/mt/yices_locks.d
+#7 16.72 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/val_to_term.d
+#7 16.74 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/term_to_val.d
+#7 16.76 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/projection_preprocess.d
+#7 16.78 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/projection.d
+#7 16.91 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/presburger.d
+#7 16.92 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/models.d
+#7 17.05 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/model_support.d
+#7 17.05 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/model_queries.d
+#7 17.15 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/model_eval.d
+#7 17.16 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/map_to_model.d
+#7 17.26 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/literal_collector.d
+#7 17.28 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/generalization.d
+#7 17.32 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/fun_trees.d
+#7 17.35 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/fun_maps.d
+#7 17.39 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/fresh_value_maker.d
+#7 17.41 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/concrete_values.d
+#7 17.44 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/arith_projection.d
+#7 17.49 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/model/abstract_values.d
+#7 17.50 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/io/writer.d
+#7 17.59 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/io/yices_pp.d
+#7 17.59 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/io/type_printer.d
+#7 17.61 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/io/tracer.d
+#7 17.70 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/io/term_printer.d
+#7 17.72 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/io/simple_printf.d
+#7 17.75 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/io/reader.d
+#7 17.80 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/io/pretty_printer.d
+#7 17.80 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/io/model_printer.d
+#7 17.86 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/io/concrete_value_printer.d
+#7 17.87 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_parser.d
+#7 17.89 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_lexer.d
+#7 17.89 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_lexer.d
+#7 17.93 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/attribute_values.d
+#7 17.94 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/efsolver.d
+#7 17.96 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_skolemize.d
+#7 17.96 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_values.d
+#7 18.00 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_analyze.d
+#7 18.04 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_client.d
+#7 18.05 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/quant_context.d
+#7 18.08 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/quant_context_utils.d
+#7 18.11 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/symmetry_breaking.d
+#7 18.17 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/shared_terms.d
+#7 18.17 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/pseudo_subst.d
+#7 18.19 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/ite_flattener.d
+#7 18.26 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/internalization_table.d
+#7 18.28 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/eq_learner.d
+#7 18.28 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/eq_abstraction.d
+#7 18.29 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/divmod_table.d
+#7 18.37 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/context_utils.d
+#7 18.38 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/context_statistics.d
+#7 18.38 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/context_simplifier.d
+#7 18.38 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/context_solver.d
+#7 18.48 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/context.d
+#7 18.50 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/conditional_definitions.d
+#7 18.53 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/common_conjuncts.d
+#7 18.54 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/context/assumption_stack.d
+#7 18.59 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/api/yval.d
+#7 18.61 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/api/yices_error_report.d
+#7 18.62 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/api/yices_error.d
+#7 18.62 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/api/yices_api.d
+#7 18.63 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/api/smt_logic_codes.d
+#7 18.71 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/api/search_parameters.d
+#7 18.74 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/api/context_config.d
+#7 18.83 gperf -C -L ANSI-C -W smt_kw --output-file=frontend/smt1/smt_hash_keywords.h \
+#7 18.83 --lookup-function-name=in_smt_kw frontend/smt1/smt_keywords.txt
+#7 18.86 gperf -C -L ANSI-C -W yices_kw --output-file=frontend/yices/yices_hash_keywords.h \
+#7 18.86 --lookup-function-name=in_yices_kw frontend/yices/yices_keywords.txt
+#7 18.86 gperf -C -L ANSI-C -W smt2_tk -H hash_tk -E --output-file=frontend/smt2/smt2_hash_tokens.h \
+#7 18.86 --lookup-function-name=in_smt2_tk frontend/smt2/smt2_tokens.txt
+#7 18.86 gperf -C -L ANSI-C -W smt2_kw -H hash_kw -E --output-file=frontend/smt2/smt2_hash_keywords.h \
+#7 18.86 --lookup-function-name=in_smt2_kw frontend/smt2/smt2_keywords.txt
+#7 18.86 gperf -C -L ANSI-C -W smt2_sym -H hash_sym -E --output-file=frontend/smt2/smt2_hash_symbols.h \
+#7 18.86 --lookup-function-name=in_smt2_sym frontend/smt2/smt2_symbols.txt
+#7 18.87 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt1/smt_lexer.d
+#7 18.87 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_lexer.d
+#7 18.89 Building dependency file ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_lexer.d
+#7 19.14 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/yices.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices.o
+#7 19.14 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c api/context_config.c -o ../build/x86_64-pc-linux-gnu-release/obj/api/context_config.o
+#7 19.14 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c api/search_parameters.c -o ../build/x86_64-pc-linux-gnu-release/obj/api/search_parameters.o
+#7 19.14 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c api/smt_logic_codes.c -o ../build/x86_64-pc-linux-gnu-release/obj/api/smt_logic_codes.o
+#7 19.23 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c api/yices_api.c -o ../build/x86_64-pc-linux-gnu-release/obj/api/yices_api.o
+#7 19.50 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c api/yices_error.c -o ../build/x86_64-pc-linux-gnu-release/obj/api/yices_error.o
+#7 19.50 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c api/yices_error_report.c -o ../build/x86_64-pc-linux-gnu-release/obj/api/yices_error_report.o
+#7 19.54 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c api/yval.c -o ../build/x86_64-pc-linux-gnu-release/obj/api/yval.o
+#7 19.70 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/assumption_stack.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/assumption_stack.o
+#7 19.72 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/common_conjuncts.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/common_conjuncts.o
+#7 19.93 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/conditional_definitions.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/conditional_definitions.o
+#7 20.03 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/context.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/context.o
+#7 20.37 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/context_simplifier.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/context_simplifier.o
+#7 20.79 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/context_solver.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/context_solver.o
+#7 21.78 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/context_statistics.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/context_statistics.o
+#7 22.08 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/context_utils.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/context_utils.o
+#7 22.82 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/divmod_table.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/divmod_table.o
+#7 23.20 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/eq_abstraction.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/eq_abstraction.o
+#7 23.40 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/eq_learner.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/eq_learner.o
+#7 23.97 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/internalization_table.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/internalization_table.o
+#7 24.40 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/ite_flattener.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/ite_flattener.o
+#7 24.48 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/pseudo_subst.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/pseudo_subst.o
+#7 24.69 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/shared_terms.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/shared_terms.o
+#7 24.73 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/symmetry_breaking.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/symmetry_breaking.o
+#7 24.76 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/quant_context_utils.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/quant_context_utils.o
+#7 25.09 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/quant_context.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/quant_context.o
+#7 25.55 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c exists_forall/ef_client.c -o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_client.o
+#7 26.27 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c exists_forall/ef_analyze.c -o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_analyze.o
+#7 26.28 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c exists_forall/ef_values.c -o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_values.o
+#7 26.59 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c exists_forall/ef_skolemize.c -o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_skolemize.o
+#7 26.89 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c exists_forall/efsolver.c -o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/efsolver.o
+#7 27.11 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt2/attribute_values.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/attribute_values.o
+#7 27.23 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt2/smt2_lexer.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_lexer.o
+#7 27.47 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/yices/yices_lexer.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_lexer.o
+#7 27.92 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/yices/yices_parser.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_parser.o
+#7 27.98 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c io/concrete_value_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/io/concrete_value_printer.o
+#7 28.03 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c io/model_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/io/model_printer.o
+#7 28.21 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c io/pretty_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/io/pretty_printer.o
+#7 28.33 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c io/reader.c -o ../build/x86_64-pc-linux-gnu-release/obj/io/reader.o
+#7 28.41 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c io/simple_printf.c -o ../build/x86_64-pc-linux-gnu-release/obj/io/simple_printf.o
+#7 28.47 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c io/term_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/io/term_printer.o
+#7 28.59 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c io/tracer.c -o ../build/x86_64-pc-linux-gnu-release/obj/io/tracer.o
+#7 29.00 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c io/type_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/io/type_printer.o
+#7 29.08 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c io/yices_pp.c -o ../build/x86_64-pc-linux-gnu-release/obj/io/yices_pp.o
+#7 29.16 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c io/writer.c -o ../build/x86_64-pc-linux-gnu-release/obj/io/writer.o
+#7 29.52 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/abstract_values.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/abstract_values.o
+#7 29.59 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/arith_projection.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/arith_projection.o
+#7 29.93 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/concrete_values.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/concrete_values.o
+#7 30.58 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/fresh_value_maker.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/fresh_value_maker.o
+#7 30.62 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/fun_maps.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/fun_maps.o
+#7 30.97 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/fun_trees.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/fun_trees.o
+#7 31.12 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/generalization.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/generalization.o
+#7 31.50 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/literal_collector.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/literal_collector.o
+#7 31.52 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/map_to_model.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/map_to_model.o
+#7 32.12 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/model_eval.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/model_eval.o
+#7 32.17 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/model_queries.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/model_queries.o
+#7 32.29 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/model_support.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/model_support.o
+#7 32.33 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/models.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/models.o
+#7 32.48 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/presburger.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/presburger.o
+#7 32.70 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/projection.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/projection.o
+#7 32.83 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/projection_preprocess.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/projection_preprocess.o
+#7 32.84 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/term_to_val.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/term_to_val.o
+#7 33.20 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/val_to_term.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/val_to_term.o
+#7 33.36 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c mt/yices_locks.c -o ../build/x86_64-pc-linux-gnu-release/obj/mt/yices_locks.o
+#7 33.86 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c parser_utils/lexer.c -o ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/lexer.o
+#7 34.00 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c parser_utils/parser.c -o ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/parser.o
+#7 34.35 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c parser_utils/term_stack2.c -o ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/term_stack2.o
+#7 34.42 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c parser_utils/term_stack_error.c -o ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/term_stack_error.o
+#7 34.66 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/bit_blaster.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bit_blaster.o
+#7 34.72 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/bv64_intervals.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv64_intervals.o
+#7 34.80 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/bv_atomtable.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv_atomtable.o
+#7 34.98 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/bvconst_hmap.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvconst_hmap.o
+#7 35.29 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/bvexp_table.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvexp_table.o
+#7 35.96 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/bv_intervals.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv_intervals.o
+#7 36.53 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/bvpoly_compiler.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvpoly_compiler.o
+#7 36.69 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/bvpoly_dag.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvpoly_dag.o
+#7 38.88 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/bvsolver.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvsolver.o
+#7 41.68 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/bv_vartable.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv_vartable.o
+#7 41.92 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/dimacs_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/dimacs_printer.o
+#7 42.63 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/merge_table.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/merge_table.o
+#7 42.84 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/remap_table.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/remap_table.o
+#7 43.01 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/delegate.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/delegate.o
+#7 43.55 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/gates_hash_table.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/gates_hash_table.o
+#7 43.57 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/gates_manager.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/gates_manager.o
+#7 43.95 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/new_gates.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_gates.o
+#7 44.18 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/new_gate_hash_map.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_gate_hash_map.o
+#7 44.26 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/new_gate_hash_map2.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_gate_hash_map2.o
+#7 44.29 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/new_sat_solver.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_sat_solver.o
+#7 44.57 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/smt_core.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/smt_core.o
+#7 44.78 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/truth_tables.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/truth_tables.o
+#7 45.11 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/wide_truth_tables.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/wide_truth_tables.o
+#7 45.55 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/egraph/composites.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/composites.o
+#7 46.29 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/egraph/diseq_stacks.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/diseq_stacks.o
+#7 46.46 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/egraph/egraph_assertion_queues.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_assertion_queues.o
+#7 46.93 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/egraph/egraph.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph.o
+#7 47.04 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/egraph/egraph_explanations.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_explanations.o
+#7 48.60 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/egraph/egraph_utils.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_utils.o
+#7 48.97 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/egraph/theory_explanations.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/theory_explanations.o
+#7 49.34 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/mcsat_satellite.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/mcsat_satellite.o
+#7 51.44 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/floyd_warshall/dl_vartable.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/dl_vartable.o
+#7 51.95 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/floyd_warshall/idl_floyd_warshall.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/idl_floyd_warshall.o
+#7 52.03 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/floyd_warshall/rdl_floyd_warshall.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/rdl_floyd_warshall.o
+#7 52.63 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/funs/fun_level.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/fun_level.o
+#7 53.02 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/funs/fun_solver.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/fun_solver.o
+#7 53.57 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/funs/stratification.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/stratification.o
+#7 53.84 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/simplex/arith_atomtable.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/arith_atomtable.o
+#7 54.14 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/simplex/arith_vartable.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/arith_vartable.o
+#7 54.63 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/simplex/diophantine_systems.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/diophantine_systems.o
+#7 54.67 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/simplex/gomory_cuts.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/gomory_cuts.o
+#7 54.97 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/simplex/integrality_constraints.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/integrality_constraints.o
+#7 55.63 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/simplex/matrices.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/matrices.o
+#7 56.73 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/simplex/offset_equalities.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/offset_equalities.o
+#7 57.08 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/simplex/simplex.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/simplex.o
+#7 57.43 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/quant_parameters.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_parameters.o
+#7 57.57 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/ef_parameters.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ef_parameters.o
+#7 57.72 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/ef_problem.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ef_problem.o
+#7 58.46 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/quant_pattern.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_pattern.o
+#7 58.69 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/quant_cnstr.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_cnstr.o
+#7 59.14 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/cnstr_learner.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/cnstr_learner.o
+#7 59.26 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/term_learner.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/term_learner.o
+#7 59.48 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/ematch_instr.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_instr.o
+#7 59.58 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/ematch_instr_stack.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_instr_stack.o
+#7 59.79 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/ematch_instance.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_instance.o
+#7 59.80 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/ematch_compile.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_compile.o
+#7 60.00 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/ematch_execute.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_execute.o
+#7 60.19 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/quant_ematching.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_ematching.o
+#7 60.53 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/quant/quant_solver.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_solver.o
+#7 60.70 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/balanced_arith_buffers.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/balanced_arith_buffers.o
+#7 61.15 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bit_expr.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bit_expr.o
+#7 61.75 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bit_term_conversion.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bit_term_conversion.o
+#7 61.98 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bv64_interval_abstraction.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv64_interval_abstraction.o
+#7 62.42 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bv64_constants.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv64_constants.o
+#7 62.68 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bv64_polynomials.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv64_polynomials.o
+#7 62.87 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bvarith64_buffers.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith64_buffers.o
+#7 62.99 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bvarith64_buffer_terms.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith64_buffer_terms.o
+#7 63.12 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bvarith_buffers.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith_buffers.o
+#7 63.39 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bvarith_buffer_terms.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith_buffer_terms.o
+#7 63.71 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bv_constants.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv_constants.o
+#7 64.09 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bvfactor_buffers.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvfactor_buffers.o
+#7 64.46 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bvlogic_buffers.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvlogic_buffers.o
+#7 64.48 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bvpoly_buffers.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvpoly_buffers.o
+#7 65.43 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bv_polynomials.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv_polynomials.o
+#7 65.62 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/bv_slices.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv_slices.o
+#7 65.71 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/conditionals.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/conditionals.o
+#7 65.93 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/elim_subst.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/elim_subst.o
+#7 66.12 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/extended_rationals.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/extended_rationals.o
+#7 66.14 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/free_var_collector.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/free_var_collector.o
+#7 66.28 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/full_subst.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/full_subst.o
+#7 66.39 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/int_rational_hash_maps.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/int_rational_hash_maps.o
+#7 66.66 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/ite_stack.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/ite_stack.o
+#7 66.79 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/mpq_aux.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/mpq_aux.o
+#7 66.89 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/mpq_stores.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/mpq_stores.o
+#7 66.96 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/poly_buffer.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/poly_buffer.o
+#7 67.11 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/poly_buffer_terms.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/poly_buffer_terms.o
+#7 67.24 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/polynomials.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/polynomials.o
+#7 67.31 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/power_products.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/power_products.o
+#7 67.46 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/pprod_table.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/pprod_table.o
+#7 67.71 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/rational_hash_maps.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/rational_hash_maps.o
+#7 67.79 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/rationals.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/rationals.o
+#7 67.81 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/rba_buffer_terms.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/rba_buffer_terms.o
+#7 68.12 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/renaming_context.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/renaming_context.o
+#7 68.44 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/subst_cache.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/subst_cache.o
+#7 68.67 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/subst_context.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/subst_context.o
+#7 68.74 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/term_explorer.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_explorer.o
+#7 68.89 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/term_manager.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_manager.o
+#7 69.11 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/terms.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/terms.o
+#7 69.25 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/term_sets.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_sets.o
+#7 69.25 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/term_substitution.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_substitution.o
+#7 69.95 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/term_utils.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_utils.o
+#7 70.37 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/types.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/types.o
+#7 71.06 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/variable_renaming.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/variable_renaming.o
+#7 71.33 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/arena.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/arena.o
+#7 71.54 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/backtrack_arrays.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/backtrack_arrays.o
+#7 71.82 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/backtrack_int_hash_map.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/backtrack_int_hash_map.o
+#7 72.03 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/cache.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/cache.o
+#7 72.16 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/csets.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/csets.o
+#7 72.22 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/cputime.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/cputime.o
+#7 72.34 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/dep_tables.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/dep_tables.o
+#7 72.45 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/error.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/error.o
+#7 72.51 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/gcd.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/gcd.o
+#7 72.54 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/generic_heap.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/generic_heap.o
+#7 72.60 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/hash_functions.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/hash_functions.o
+#7 72.67 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/index_vectors.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/index_vectors.o
+#7 72.72 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/indexed_table.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/indexed_table.o
+#7 72.88 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_array_hsets.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_array_hsets.o
+#7 72.89 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_array_sort2.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_array_sort2.o
+#7 72.89 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_array_sort.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_array_sort.o
+#7 73.13 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_bags.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_bags.o
+#7 73.13 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_bv_sets.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_bv_sets.o
+#7 73.35 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_harray_store.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_harray_store.o
+#7 73.37 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_hash_classes.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_classes.o
+#7 73.50 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_hash_map2.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_map2.o
+#7 73.52 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_hash_map.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_map.o
+#7 73.62 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_hash_mmap.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_mmap.o
+#7 73.81 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_hash_sets.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_sets.o
+#7 73.87 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_hash_tables.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_tables.o
+#7 73.90 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_heap2.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_heap2.o
+#7 74.03 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_heap.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_heap.o
+#7 74.10 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_partitions.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_partitions.o
+#7 74.13 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_powers.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_powers.o
+#7 74.23 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_queues.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_queues.o
+#7 74.25 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_stack.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_stack.o
+#7 74.26 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/int_vectors.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_vectors.o
+#7 74.38 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/mark_vectors.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/mark_vectors.o
+#7 74.43 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/memalloc.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/memalloc.o
+#7 74.44 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/object_stack.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/object_stack.o
+#7 74.51 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/object_stores.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/object_stores.o
+#7 74.51 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/pair_hash_map.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/pair_hash_map.o
+#7 74.60 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/pair_hash_map2.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/pair_hash_map2.o
+#7 74.65 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/pointer_vectors.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/pointer_vectors.o
+#7 74.66 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/ptr_array_sort2.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_array_sort2.o
+#7 74.71 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/ptr_array_sort.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_array_sort.o
+#7 74.78 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/ptr_hash_classes.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_hash_classes.o
+#7 74.88 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/ptr_hash_map.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_hash_map.o
+#7 74.94 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/ptr_heap.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_heap.o
+#7 74.96 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/ptr_partitions.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_partitions.o
+#7 75.03 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/ptr_queues.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_queues.o
+#7 75.13 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/ptr_sets.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_sets.o
+#7 75.18 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/ptr_sets2.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_sets2.o
+#7 75.33 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/ptr_stack.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_stack.o
+#7 75.37 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/ptr_vectors.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_vectors.o
+#7 75.45 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/refcount_int_arrays.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/refcount_int_arrays.o
+#7 75.47 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/refcount_strings.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/refcount_strings.o
+#7 75.50 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/resize_arrays.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/resize_arrays.o
+#7 75.56 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/simple_cache.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/simple_cache.o
+#7 75.57 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/simple_int_stack.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/simple_int_stack.o
+#7 75.58 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/sparse_arrays.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/sparse_arrays.o
+#7 75.70 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/stable_sort.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/stable_sort.o
+#7 75.77 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/string_buffers.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/string_buffers.o
+#7 75.78 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/string_utils.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/string_utils.o
+#7 76.02 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/symbol_tables.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/symbol_tables.o
+#7 76.17 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/tag_map.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/tag_map.o
+#7 76.17 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/tuple_hash_map.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/tuple_hash_map.o
+#7 76.30 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/uint_array_sort.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_array_sort.o
+#7 76.42 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/uint_array_sort2.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_array_sort2.o
+#7 76.42 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/uint_rbtrees.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_rbtrees.o
+#7 76.48 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/use_vectors.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/use_vectors.o
+#7 76.68 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/vector_hash_map.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/vector_hash_map.o
+#7 76.70 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/uint_learner.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_learner.o
+#7 76.78 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c mcsat/no_mcsat.c -o ../build/x86_64-pc-linux-gnu-release/obj/mcsat/no_mcsat.o
+#7 76.80 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c mcsat/options.c -o ../build/x86_64-pc-linux-gnu-release/obj/mcsat/options.o
+#7 76.88 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/context_parameters.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/context_parameters.o
+#7 76.91 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/context_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/context_printer.o
+#7 76.99 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/dump_context.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/dump_context.o
+#7 77.08 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c context/internalization_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/context/internalization_printer.o
+#7 77.30 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/common/assumptions_and_core.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/assumptions_and_core.o
+#7 77.62 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/common/assumption_table.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/assumption_table.o
+#7 77.69 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/common/bug_report.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/bug_report.o
+#7 77.84 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/common/named_term_stacks.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/named_term_stacks.o
+#7 77.97 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/common/parameters.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/parameters.o
+#7 77.99 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/common/tables.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/tables.o
+#7 78.05 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt1/smt_lexer.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt1/smt_lexer.o
+#7 78.26 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt1/smt_parser.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt1/smt_parser.o
+#7 78.30 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt1/smt_term_stack.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt1/smt_term_stack.o
+#7 78.50 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt2/parenthesized_expr.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/parenthesized_expr.o
+#7 78.77 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt2/smt2_commands.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_commands.o
+#7 78.78 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt2/smt2_expressions.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_expressions.o
+#7 78.88 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt2/smt2_model_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_model_printer.o
+#7 79.41 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt2/smt2_parser.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_parser.o
+#7 79.68 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt2/smt2_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_printer.o
+#7 79.89 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt2/smt2_symbol_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_symbol_printer.o
+#7 80.18 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt2/smt2_term_stack.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_term_stack.o
+#7 80.36 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/smt2/smt2_type_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_type_printer.o
+#7 80.43 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/yices/arith_solver_codes.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/arith_solver_codes.o
+#7 80.56 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/yices/labeled_assertions.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/labeled_assertions.o
+#7 80.64 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/yices/yices_help.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_help.o
+#7 81.00 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/yices/yices_reval.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_reval.o
+#7 81.02 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/large_bvsets.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/large_bvsets.o
+#7 81.31 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/rb_bvsets.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/rb_bvsets.o
+#7 81.59 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c model/small_bvsets.c -o ../build/x86_64-pc-linux-gnu-release/obj/model/small_bvsets.o
+#7 81.85 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/bv/bvsolver_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvsolver_printer.o
+#7 81.94 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/clause_pool.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/clause_pool.o
+#7 82.69 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/gates_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/gates_printer.o
+#7 83.44 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/sat_solver.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/sat_solver.o
+#7 83.62 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/cdcl/smt_core_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/smt_core_printer.o
+#7 84.49 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/egraph/egraph_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_printer.o
+#7 84.54 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/floyd_warshall/idl_fw_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/idl_fw_printer.o
+#7 86.14 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/floyd_warshall/rdl_fw_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/rdl_fw_printer.o
+#7 86.49 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/funs/fun_solver_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/fun_solver_printer.o
+#7 86.92 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/simplex/dsolver_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/dsolver_printer.o
+#7 86.94 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/simplex/int_constraint_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/int_constraint_printer.o
+#7 87.07 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/simplex/simplex_printer.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/simplex_printer.o
+#7 87.64 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c solvers/simplex/simplex_prop_table.c -o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/simplex_prop_table.o
+#7 87.89 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c terms/arith_buffers.c -o ../build/x86_64-pc-linux-gnu-release/obj/terms/arith_buffers.o
+#7 88.33 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/command_line.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/command_line.o
+#7 88.66 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/memsize.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/memsize.o
+#7 89.18 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/pair_hash_sets.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/pair_hash_sets.o
+#7 89.25 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/string_hash_map.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/string_hash_map.o
+#7 89.37 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/timeout.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/timeout.o
+#7 89.43 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c utils/union_find.c -o ../build/x86_64-pc-linux-gnu-release/obj/utils/union_find.o
+#7 89.67 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c api/yices_release_version.c -o ../build/x86_64-pc-linux-gnu-release/obj/api/yices_version.o
+#7 89.74 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/yices_sat.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_sat.o
+#7 89.76 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/yices_sat_new.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_sat_new.o
+#7 89.79 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/yices_smt.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_smt.o
+#7 89.95 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/yices_smt2.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_smt2.o
+#7 90.33 clang -I. -Iinclude  -DLINUX -U_FORTIFY_SOURCE -DNDEBUG -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector -fPIC -c frontend/yices_smtcomp.c -o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_smtcomp.o
+#7 90.95 clang -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector  -shared -o ../build/x86_64-pc-linux-gnu-release/lib/libyices.so.2.7.0 \
+#7 90.95 -Wl,-soname,libyices.so.2.7 -Wl,--no-undefined \
+#7 90.95 ../build/x86_64-pc-linux-gnu-release/obj/api/context_config.o ../build/x86_64-pc-linux-gnu-release/obj/api/search_parameters.o ../build/x86_64-pc-linux-gnu-release/obj/api/smt_logic_codes.o ../build/x86_64-pc-linux-gnu-release/obj/api/yices_api.o ../build/x86_64-pc-linux-gnu-release/obj/api/yices_error.o ../build/x86_64-pc-linux-gnu-release/obj/api/yices_error_report.o ../build/x86_64-pc-linux-gnu-release/obj/api/yval.o ../build/x86_64-pc-linux-gnu-release/obj/context/assumption_stack.o ../build/x86_64-pc-linux-gnu-release/obj/context/common_conjuncts.o ../build/x86_64-pc-linux-gnu-release/obj/context/conditional_definitions.o ../build/x86_64-pc-linux-gnu-release/obj/context/context.o ../build/x86_64-pc-linux-gnu-release/obj/context/context_simplifier.o ../build/x86_64-pc-linux-gnu-release/obj/context/context_solver.o ../build/x86_64-pc-linux-gnu-release/obj/context/context_statistics.o ../build/x86_64-pc-linux-gnu-release/obj/context/context_utils.o ../build/x86_64-pc-linux-gnu-release/obj/context/divmod_table.o ../build/x86_64-pc-linux-gnu-release/obj/context/eq_abstraction.o ../build/x86_64-pc-linux-gnu-release/obj/context/eq_learner.o ../build/x86_64-pc-linux-gnu-release/obj/context/internalization_table.o ../build/x86_64-pc-linux-gnu-release/obj/context/ite_flattener.o ../build/x86_64-pc-linux-gnu-release/obj/context/pseudo_subst.o ../build/x86_64-pc-linux-gnu-release/obj/context/shared_terms.o ../build/x86_64-pc-linux-gnu-release/obj/context/symmetry_breaking.o ../build/x86_64-pc-linux-gnu-release/obj/context/quant_context_utils.o ../build/x86_64-pc-linux-gnu-release/obj/context/quant_context.o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_client.o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_analyze.o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_values.o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_skolemize.o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/efsolver.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/attribute_values.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_lexer.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_lexer.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_parser.o ../build/x86_64-pc-linux-gnu-release/obj/io/concrete_value_printer.o ../build/x86_64-pc-linux-gnu-release/obj/io/model_printer.o ../build/x86_64-pc-linux-gnu-release/obj/io/pretty_printer.o ../build/x86_64-pc-linux-gnu-release/obj/io/reader.o ../build/x86_64-pc-linux-gnu-release/obj/io/simple_printf.o ../build/x86_64-pc-linux-gnu-release/obj/io/term_printer.o ../build/x86_64-pc-linux-gnu-release/obj/io/tracer.o ../build/x86_64-pc-linux-gnu-release/obj/io/type_printer.o ../build/x86_64-pc-linux-gnu-release/obj/io/yices_pp.o ../build/x86_64-pc-linux-gnu-release/obj/io/writer.o ../build/x86_64-pc-linux-gnu-release/obj/model/abstract_values.o ../build/x86_64-pc-linux-gnu-release/obj/model/arith_projection.o ../build/x86_64-pc-linux-gnu-release/obj/model/concrete_values.o ../build/x86_64-pc-linux-gnu-release/obj/model/fresh_value_maker.o ../build/x86_64-pc-linux-gnu-release/obj/model/fun_maps.o ../build/x86_64-pc-linux-gnu-release/obj/model/fun_trees.o ../build/x86_64-pc-linux-gnu-release/obj/model/generalization.o ../build/x86_64-pc-linux-gnu-release/obj/model/literal_collector.o ../build/x86_64-pc-linux-gnu-release/obj/model/map_to_model.o ../build/x86_64-pc-linux-gnu-release/obj/model/model_eval.o ../build/x86_64-pc-linux-gnu-release/obj/model/model_queries.o ../build/x86_64-pc-linux-gnu-release/obj/model/model_support.o ../build/x86_64-pc-linux-gnu-release/obj/model/models.o ../build/x86_64-pc-linux-gnu-release/obj/model/presburger.o ../build/x86_64-pc-linux-gnu-release/obj/model/projection.o ../build/x86_64-pc-linux-gnu-release/obj/model/projection_preprocess.o ../build/x86_64-pc-linux-gnu-release/obj/model/term_to_val.o ../build/x86_64-pc-linux-gnu-release/obj/model/val_to_term.o ../build/x86_64-pc-linux-gnu-release/obj/mt/yices_locks.o ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/lexer.o ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/parser.o ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/term_stack2.o ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/term_stack_error.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bit_blaster.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv64_intervals.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv_atomtable.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvconst_hmap.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvexp_table.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv_intervals.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvpoly_compiler.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvpoly_dag.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvsolver.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv_vartable.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/dimacs_printer.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/merge_table.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/remap_table.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/delegate.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/gates_hash_table.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/gates_manager.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_gates.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_gate_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_gate_hash_map2.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_sat_solver.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/smt_core.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/truth_tables.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/wide_truth_tables.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/composites.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/diseq_stacks.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_assertion_queues.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_explanations.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_utils.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/theory_explanations.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/mcsat_satellite.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/dl_vartable.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/idl_floyd_warshall.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/rdl_floyd_warshall.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/fun_level.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/fun_solver.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/stratification.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/arith_atomtable.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/arith_vartable.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/diophantine_systems.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/gomory_cuts.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/integrality_constraints.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/matrices.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/offset_equalities.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/simplex.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_parameters.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ef_parameters.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ef_problem.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_pattern.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_cnstr.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/cnstr_learner.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/term_learner.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_instr.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_instr_stack.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_instance.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_compile.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_execute.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_ematching.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_solver.o ../build/x86_64-pc-linux-gnu-release/obj/terms/balanced_arith_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bit_expr.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bit_term_conversion.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv64_interval_abstraction.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv64_constants.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv64_polynomials.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith64_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith64_buffer_terms.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith_buffer_terms.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv_constants.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvfactor_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvlogic_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvpoly_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv_polynomials.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv_slices.o ../build/x86_64-pc-linux-gnu-release/obj/terms/conditionals.o ../build/x86_64-pc-linux-gnu-release/obj/terms/elim_subst.o ../build/x86_64-pc-linux-gnu-release/obj/terms/extended_rationals.o ../build/x86_64-pc-linux-gnu-release/obj/terms/free_var_collector.o ../build/x86_64-pc-linux-gnu-release/obj/terms/full_subst.o ../build/x86_64-pc-linux-gnu-release/obj/terms/int_rational_hash_maps.o ../build/x86_64-pc-linux-gnu-release/obj/terms/ite_stack.o ../build/x86_64-pc-linux-gnu-release/obj/terms/mpq_aux.o ../build/x86_64-pc-linux-gnu-release/obj/terms/mpq_stores.o ../build/x86_64-pc-linux-gnu-release/obj/terms/poly_buffer.o ../build/x86_64-pc-linux-gnu-release/obj/terms/poly_buffer_terms.o ../build/x86_64-pc-linux-gnu-release/obj/terms/polynomials.o ../build/x86_64-pc-linux-gnu-release/obj/terms/power_products.o ../build/x86_64-pc-linux-gnu-release/obj/terms/pprod_table.o ../build/x86_64-pc-linux-gnu-release/obj/terms/rational_hash_maps.o ../build/x86_64-pc-linux-gnu-release/obj/terms/rationals.o ../build/x86_64-pc-linux-gnu-release/obj/terms/rba_buffer_terms.o ../build/x86_64-pc-linux-gnu-release/obj/terms/renaming_context.o ../build/x86_64-pc-linux-gnu-release/obj/terms/subst_cache.o ../build/x86_64-pc-linux-gnu-release/obj/terms/subst_context.o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_explorer.o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_manager.o ../build/x86_64-pc-linux-gnu-release/obj/terms/terms.o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_sets.o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_substitution.o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_utils.o ../build/x86_64-pc-linux-gnu-release/obj/terms/types.o ../build/x86_64-pc-linux-gnu-release/obj/terms/variable_renaming.o ../build/x86_64-pc-linux-gnu-release/obj/utils/arena.o ../build/x86_64-pc-linux-gnu-release/obj/utils/backtrack_arrays.o ../build/x86_64-pc-linux-gnu-release/obj/utils/backtrack_int_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/cache.o ../build/x86_64-pc-linux-gnu-release/obj/utils/csets.o ../build/x86_64-pc-linux-gnu-release/obj/utils/cputime.o ../build/x86_64-pc-linux-gnu-release/obj/utils/dep_tables.o ../build/x86_64-pc-linux-gnu-release/obj/utils/error.o ../build/x86_64-pc-linux-gnu-release/obj/utils/gcd.o ../build/x86_64-pc-linux-gnu-release/obj/utils/generic_heap.o ../build/x86_64-pc-linux-gnu-release/obj/utils/hash_functions.o ../build/x86_64-pc-linux-gnu-release/obj/utils/index_vectors.o ../build/x86_64-pc-linux-gnu-release/obj/utils/indexed_table.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_array_hsets.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_array_sort2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_array_sort.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_bags.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_bv_sets.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_harray_store.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_classes.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_map2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_mmap.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_sets.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_tables.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_heap2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_heap.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_partitions.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_powers.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_queues.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_stack.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_vectors.o ../build/x86_64-pc-linux-gnu-release/obj/utils/mark_vectors.o ../build/x86_64-pc-linux-gnu-release/obj/utils/memalloc.o ../build/x86_64-pc-linux-gnu-release/obj/utils/object_stack.o ../build/x86_64-pc-linux-gnu-release/obj/utils/object_stores.o ../build/x86_64-pc-linux-gnu-release/obj/utils/pair_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/pair_hash_map2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/pointer_vectors.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_array_sort2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_array_sort.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_hash_classes.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_heap.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_partitions.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_queues.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_sets.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_sets2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_stack.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_vectors.o ../build/x86_64-pc-linux-gnu-release/obj/utils/refcount_int_arrays.o ../build/x86_64-pc-linux-gnu-release/obj/utils/refcount_strings.o ../build/x86_64-pc-linux-gnu-release/obj/utils/resize_arrays.o ../build/x86_64-pc-linux-gnu-release/obj/utils/simple_cache.o ../build/x86_64-pc-linux-gnu-release/obj/utils/simple_int_stack.o ../build/x86_64-pc-linux-gnu-release/obj/utils/sparse_arrays.o ../build/x86_64-pc-linux-gnu-release/obj/utils/stable_sort.o ../build/x86_64-pc-linux-gnu-release/obj/utils/string_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/utils/string_utils.o ../build/x86_64-pc-linux-gnu-release/obj/utils/symbol_tables.o ../build/x86_64-pc-linux-gnu-release/obj/utils/tag_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/tuple_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_array_sort.o ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_array_sort2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_rbtrees.o ../build/x86_64-pc-linux-gnu-release/obj/utils/use_vectors.o ../build/x86_64-pc-linux-gnu-release/obj/utils/vector_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_learner.o ../build/x86_64-pc-linux-gnu-release/obj/mcsat/no_mcsat.o ../build/x86_64-pc-linux-gnu-release/obj/mcsat/options.o ../build/x86_64-pc-linux-gnu-release/obj/api/yices_version.o -lgmp -lm  -lc
+#7 91.07 ar cr ../build/x86_64-pc-linux-gnu-release/lib/libyices.a ../build/x86_64-pc-linux-gnu-release/obj/api/context_config.o ../build/x86_64-pc-linux-gnu-release/obj/api/search_parameters.o ../build/x86_64-pc-linux-gnu-release/obj/api/smt_logic_codes.o ../build/x86_64-pc-linux-gnu-release/obj/api/yices_api.o ../build/x86_64-pc-linux-gnu-release/obj/api/yices_error.o ../build/x86_64-pc-linux-gnu-release/obj/api/yices_error_report.o ../build/x86_64-pc-linux-gnu-release/obj/api/yval.o ../build/x86_64-pc-linux-gnu-release/obj/context/assumption_stack.o ../build/x86_64-pc-linux-gnu-release/obj/context/common_conjuncts.o ../build/x86_64-pc-linux-gnu-release/obj/context/conditional_definitions.o ../build/x86_64-pc-linux-gnu-release/obj/context/context.o ../build/x86_64-pc-linux-gnu-release/obj/context/context_simplifier.o ../build/x86_64-pc-linux-gnu-release/obj/context/context_solver.o ../build/x86_64-pc-linux-gnu-release/obj/context/context_statistics.o ../build/x86_64-pc-linux-gnu-release/obj/context/context_utils.o ../build/x86_64-pc-linux-gnu-release/obj/context/divmod_table.o ../build/x86_64-pc-linux-gnu-release/obj/context/eq_abstraction.o ../build/x86_64-pc-linux-gnu-release/obj/context/eq_learner.o ../build/x86_64-pc-linux-gnu-release/obj/context/internalization_table.o ../build/x86_64-pc-linux-gnu-release/obj/context/ite_flattener.o ../build/x86_64-pc-linux-gnu-release/obj/context/pseudo_subst.o ../build/x86_64-pc-linux-gnu-release/obj/context/shared_terms.o ../build/x86_64-pc-linux-gnu-release/obj/context/symmetry_breaking.o ../build/x86_64-pc-linux-gnu-release/obj/context/quant_context_utils.o ../build/x86_64-pc-linux-gnu-release/obj/context/quant_context.o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_client.o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_analyze.o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_values.o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/ef_skolemize.o ../build/x86_64-pc-linux-gnu-release/obj/exists_forall/efsolver.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/attribute_values.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_lexer.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_lexer.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_parser.o ../build/x86_64-pc-linux-gnu-release/obj/io/concrete_value_printer.o ../build/x86_64-pc-linux-gnu-release/obj/io/model_printer.o ../build/x86_64-pc-linux-gnu-release/obj/io/pretty_printer.o ../build/x86_64-pc-linux-gnu-release/obj/io/reader.o ../build/x86_64-pc-linux-gnu-release/obj/io/simple_printf.o ../build/x86_64-pc-linux-gnu-release/obj/io/term_printer.o ../build/x86_64-pc-linux-gnu-release/obj/io/tracer.o ../build/x86_64-pc-linux-gnu-release/obj/io/type_printer.o ../build/x86_64-pc-linux-gnu-release/obj/io/yices_pp.o ../build/x86_64-pc-linux-gnu-release/obj/io/writer.o ../build/x86_64-pc-linux-gnu-release/obj/model/abstract_values.o ../build/x86_64-pc-linux-gnu-release/obj/model/arith_projection.o ../build/x86_64-pc-linux-gnu-release/obj/model/concrete_values.o ../build/x86_64-pc-linux-gnu-release/obj/model/fresh_value_maker.o ../build/x86_64-pc-linux-gnu-release/obj/model/fun_maps.o ../build/x86_64-pc-linux-gnu-release/obj/model/fun_trees.o ../build/x86_64-pc-linux-gnu-release/obj/model/generalization.o ../build/x86_64-pc-linux-gnu-release/obj/model/literal_collector.o ../build/x86_64-pc-linux-gnu-release/obj/model/map_to_model.o ../build/x86_64-pc-linux-gnu-release/obj/model/model_eval.o ../build/x86_64-pc-linux-gnu-release/obj/model/model_queries.o ../build/x86_64-pc-linux-gnu-release/obj/model/model_support.o ../build/x86_64-pc-linux-gnu-release/obj/model/models.o ../build/x86_64-pc-linux-gnu-release/obj/model/presburger.o ../build/x86_64-pc-linux-gnu-release/obj/model/projection.o ../build/x86_64-pc-linux-gnu-release/obj/model/projection_preprocess.o ../build/x86_64-pc-linux-gnu-release/obj/model/term_to_val.o ../build/x86_64-pc-linux-gnu-release/obj/model/val_to_term.o ../build/x86_64-pc-linux-gnu-release/obj/mt/yices_locks.o ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/lexer.o ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/parser.o ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/term_stack2.o ../build/x86_64-pc-linux-gnu-release/obj/parser_utils/term_stack_error.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bit_blaster.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv64_intervals.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv_atomtable.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvconst_hmap.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvexp_table.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv_intervals.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvpoly_compiler.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvpoly_dag.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvsolver.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bv_vartable.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/dimacs_printer.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/merge_table.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/remap_table.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/delegate.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/gates_hash_table.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/gates_manager.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_gates.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_gate_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_gate_hash_map2.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/new_sat_solver.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/smt_core.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/truth_tables.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/wide_truth_tables.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/composites.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/diseq_stacks.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_assertion_queues.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_explanations.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_utils.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/theory_explanations.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/mcsat_satellite.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/dl_vartable.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/idl_floyd_warshall.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/rdl_floyd_warshall.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/fun_level.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/fun_solver.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/stratification.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/arith_atomtable.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/arith_vartable.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/diophantine_systems.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/gomory_cuts.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/integrality_constraints.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/matrices.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/offset_equalities.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/simplex.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_parameters.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ef_parameters.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ef_problem.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_pattern.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_cnstr.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/cnstr_learner.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/term_learner.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_instr.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_instr_stack.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_instance.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_compile.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/ematch_execute.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_ematching.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/quant/quant_solver.o ../build/x86_64-pc-linux-gnu-release/obj/terms/balanced_arith_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bit_expr.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bit_term_conversion.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv64_interval_abstraction.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv64_constants.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv64_polynomials.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith64_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith64_buffer_terms.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvarith_buffer_terms.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv_constants.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvfactor_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvlogic_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bvpoly_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv_polynomials.o ../build/x86_64-pc-linux-gnu-release/obj/terms/bv_slices.o ../build/x86_64-pc-linux-gnu-release/obj/terms/conditionals.o ../build/x86_64-pc-linux-gnu-release/obj/terms/elim_subst.o ../build/x86_64-pc-linux-gnu-release/obj/terms/extended_rationals.o ../build/x86_64-pc-linux-gnu-release/obj/terms/free_var_collector.o ../build/x86_64-pc-linux-gnu-release/obj/terms/full_subst.o ../build/x86_64-pc-linux-gnu-release/obj/terms/int_rational_hash_maps.o ../build/x86_64-pc-linux-gnu-release/obj/terms/ite_stack.o ../build/x86_64-pc-linux-gnu-release/obj/terms/mpq_aux.o ../build/x86_64-pc-linux-gnu-release/obj/terms/mpq_stores.o ../build/x86_64-pc-linux-gnu-release/obj/terms/poly_buffer.o ../build/x86_64-pc-linux-gnu-release/obj/terms/poly_buffer_terms.o ../build/x86_64-pc-linux-gnu-release/obj/terms/polynomials.o ../build/x86_64-pc-linux-gnu-release/obj/terms/power_products.o ../build/x86_64-pc-linux-gnu-release/obj/terms/pprod_table.o ../build/x86_64-pc-linux-gnu-release/obj/terms/rational_hash_maps.o ../build/x86_64-pc-linux-gnu-release/obj/terms/rationals.o ../build/x86_64-pc-linux-gnu-release/obj/terms/rba_buffer_terms.o ../build/x86_64-pc-linux-gnu-release/obj/terms/renaming_context.o ../build/x86_64-pc-linux-gnu-release/obj/terms/subst_cache.o ../build/x86_64-pc-linux-gnu-release/obj/terms/subst_context.o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_explorer.o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_manager.o ../build/x86_64-pc-linux-gnu-release/obj/terms/terms.o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_sets.o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_substitution.o ../build/x86_64-pc-linux-gnu-release/obj/terms/term_utils.o ../build/x86_64-pc-linux-gnu-release/obj/terms/types.o ../build/x86_64-pc-linux-gnu-release/obj/terms/variable_renaming.o ../build/x86_64-pc-linux-gnu-release/obj/utils/arena.o ../build/x86_64-pc-linux-gnu-release/obj/utils/backtrack_arrays.o ../build/x86_64-pc-linux-gnu-release/obj/utils/backtrack_int_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/cache.o ../build/x86_64-pc-linux-gnu-release/obj/utils/csets.o ../build/x86_64-pc-linux-gnu-release/obj/utils/cputime.o ../build/x86_64-pc-linux-gnu-release/obj/utils/dep_tables.o ../build/x86_64-pc-linux-gnu-release/obj/utils/error.o ../build/x86_64-pc-linux-gnu-release/obj/utils/gcd.o ../build/x86_64-pc-linux-gnu-release/obj/utils/generic_heap.o ../build/x86_64-pc-linux-gnu-release/obj/utils/hash_functions.o ../build/x86_64-pc-linux-gnu-release/obj/utils/index_vectors.o ../build/x86_64-pc-linux-gnu-release/obj/utils/indexed_table.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_array_hsets.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_array_sort2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_array_sort.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_bags.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_bv_sets.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_harray_store.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_classes.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_map2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_mmap.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_sets.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_hash_tables.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_heap2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_heap.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_partitions.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_powers.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_queues.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_stack.o ../build/x86_64-pc-linux-gnu-release/obj/utils/int_vectors.o ../build/x86_64-pc-linux-gnu-release/obj/utils/mark_vectors.o ../build/x86_64-pc-linux-gnu-release/obj/utils/memalloc.o ../build/x86_64-pc-linux-gnu-release/obj/utils/object_stack.o ../build/x86_64-pc-linux-gnu-release/obj/utils/object_stores.o ../build/x86_64-pc-linux-gnu-release/obj/utils/pair_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/pair_hash_map2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/pointer_vectors.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_array_sort2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_array_sort.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_hash_classes.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_heap.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_partitions.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_queues.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_sets.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_sets2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_stack.o ../build/x86_64-pc-linux-gnu-release/obj/utils/ptr_vectors.o ../build/x86_64-pc-linux-gnu-release/obj/utils/refcount_int_arrays.o ../build/x86_64-pc-linux-gnu-release/obj/utils/refcount_strings.o ../build/x86_64-pc-linux-gnu-release/obj/utils/resize_arrays.o ../build/x86_64-pc-linux-gnu-release/obj/utils/simple_cache.o ../build/x86_64-pc-linux-gnu-release/obj/utils/simple_int_stack.o ../build/x86_64-pc-linux-gnu-release/obj/utils/sparse_arrays.o ../build/x86_64-pc-linux-gnu-release/obj/utils/stable_sort.o ../build/x86_64-pc-linux-gnu-release/obj/utils/string_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/utils/string_utils.o ../build/x86_64-pc-linux-gnu-release/obj/utils/symbol_tables.o ../build/x86_64-pc-linux-gnu-release/obj/utils/tag_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/tuple_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_array_sort.o ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_array_sort2.o ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_rbtrees.o ../build/x86_64-pc-linux-gnu-release/obj/utils/use_vectors.o ../build/x86_64-pc-linux-gnu-release/obj/utils/vector_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/uint_learner.o ../build/x86_64-pc-linux-gnu-release/obj/mcsat/no_mcsat.o ../build/x86_64-pc-linux-gnu-release/obj/mcsat/options.o ../build/x86_64-pc-linux-gnu-release/obj/context/context_parameters.o ../build/x86_64-pc-linux-gnu-release/obj/context/context_printer.o ../build/x86_64-pc-linux-gnu-release/obj/context/dump_context.o ../build/x86_64-pc-linux-gnu-release/obj/context/internalization_printer.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/assumptions_and_core.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/assumption_table.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/bug_report.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/named_term_stacks.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/parameters.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/common/tables.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt1/smt_lexer.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt1/smt_parser.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt1/smt_term_stack.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/parenthesized_expr.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_commands.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_expressions.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_model_printer.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_parser.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_printer.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_symbol_printer.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_term_stack.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/smt2/smt2_type_printer.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/arith_solver_codes.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/labeled_assertions.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_help.o ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices/yices_reval.o ../build/x86_64-pc-linux-gnu-release/obj/model/large_bvsets.o ../build/x86_64-pc-linux-gnu-release/obj/model/rb_bvsets.o ../build/x86_64-pc-linux-gnu-release/obj/model/small_bvsets.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/bv/bvsolver_printer.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/clause_pool.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/gates_printer.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/sat_solver.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/cdcl/smt_core_printer.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/egraph/egraph_printer.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/idl_fw_printer.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/floyd_warshall/rdl_fw_printer.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/funs/fun_solver_printer.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/dsolver_printer.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/int_constraint_printer.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/simplex_printer.o ../build/x86_64-pc-linux-gnu-release/obj/solvers/simplex/simplex_prop_table.o ../build/x86_64-pc-linux-gnu-release/obj/terms/arith_buffers.o ../build/x86_64-pc-linux-gnu-release/obj/utils/command_line.o ../build/x86_64-pc-linux-gnu-release/obj/utils/memsize.o ../build/x86_64-pc-linux-gnu-release/obj/utils/pair_hash_sets.o ../build/x86_64-pc-linux-gnu-release/obj/utils/string_hash_map.o ../build/x86_64-pc-linux-gnu-release/obj/utils/timeout.o ../build/x86_64-pc-linux-gnu-release/obj/utils/union_find.o ../build/x86_64-pc-linux-gnu-release/obj/api/yices_version.o
+#7 91.16 ranlib ../build/x86_64-pc-linux-gnu-release/lib/libyices.a
+#7 91.19 clang -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector   \
+#7 91.19    -o ../build/x86_64-pc-linux-gnu-release/bin/yices ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices.o ../build/x86_64-pc-linux-gnu-release/lib/libyices.a -lgmp -lm 
+#7 91.26 clang -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector   \
+#7 91.26    -o ../build/x86_64-pc-linux-gnu-release/bin/yices_sat ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_sat.o ../build/x86_64-pc-linux-gnu-release/lib/libyices.a  -lm 
+#7 91.36 clang -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector   \
+#7 91.36    -o ../build/x86_64-pc-linux-gnu-release/bin/yices_sat_new ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_sat_new.o ../build/x86_64-pc-linux-gnu-release/lib/libyices.a  -lm 
+#7 91.40 strip -x ../build/x86_64-pc-linux-gnu-release/lib/libyices.so.2.7.0
+#7 91.42 clang -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector   \
+#7 91.42    -o ../build/x86_64-pc-linux-gnu-release/bin/yices_smt ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_smt.o ../build/x86_64-pc-linux-gnu-release/lib/libyices.a -lgmp -lm 
+#7 91.42 clang -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector   \
+#7 91.42    -o ../build/x86_64-pc-linux-gnu-release/bin/yices_smt2 ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_smt2.o ../build/x86_64-pc-linux-gnu-release/lib/libyices.a -lgmp -lm 
+#7 91.67 clang -fvisibility=hidden  -Wall -Wredundant-decls -O3 -fomit-frame-pointer -fno-stack-protector   \
+#7 91.67    -o ../build/x86_64-pc-linux-gnu-release/bin/yices_smtcomp ../build/x86_64-pc-linux-gnu-release/obj/frontend/yices_smtcomp.o ../build/x86_64-pc-linux-gnu-release/lib/libyices.a -lgmp -lm 
+#7 91.77 rm -r -f ../build/x86_64-pc-linux-gnu-release/dist/*
+#7 91.82 mkdir ../build/x86_64-pc-linux-gnu-release/dist/include
+#7 91.82 cp include/*.h ../build/x86_64-pc-linux-gnu-release/dist/include
+#7 91.83 mkdir ../build/x86_64-pc-linux-gnu-release/dist/bin
+#7 91.83 cp ../build/x86_64-pc-linux-gnu-release/bin/yices ../build/x86_64-pc-linux-gnu-release/dist/bin/yices
+#7 91.83 cp ../build/x86_64-pc-linux-gnu-release/bin/yices_smtcomp ../build/x86_64-pc-linux-gnu-release/dist/bin/yices-smt
+#7 91.83 cp ../build/x86_64-pc-linux-gnu-release/bin/yices_smt2 ../build/x86_64-pc-linux-gnu-release/dist/bin/yices-smt2
+#7 91.84 cp ../build/x86_64-pc-linux-gnu-release/bin/yices_sat ../build/x86_64-pc-linux-gnu-release/dist/bin/yices-sat
+#7 91.84 cp ../build/x86_64-pc-linux-gnu-release/bin/*.dll ../build/x86_64-pc-linux-gnu-release/dist/bin || true
+#7 91.84 cp: cannot stat '../build/x86_64-pc-linux-gnu-release/bin/*.dll': No such file or directory
+#7 91.84 mkdir ../build/x86_64-pc-linux-gnu-release/dist/lib
+#7 91.84 cp ../build/x86_64-pc-linux-gnu-release/lib/* ../build/x86_64-pc-linux-gnu-release/dist/lib
+#7 91.85 strip  ../build/x86_64-pc-linux-gnu-release/dist/bin/yices
+#7 91.85 strip  ../build/x86_64-pc-linux-gnu-release/dist/bin/yices-smt
+#7 91.86 strip  ../build/x86_64-pc-linux-gnu-release/dist/bin/yices-smt2
+#7 91.87 strip  ../build/x86_64-pc-linux-gnu-release/dist/bin/yices-sat
+#7 91.87 make[2]: Leaving directory '/tmp/yices2/src'
+#7 91.87 make[1]: Leaving directory '/tmp/yices2'
+#7 92.06 Mode:     release
+#7 92.06 Platform: x86_64-pc-linux-gnu
+#7 92.06 make[1]: Entering directory '/tmp/yices2'
+#7 92.06 /bin/mkdir -p /opt/yices2/usr/local/bin
+#7 92.06 /bin/mkdir -p /opt/yices2/usr/local/lib
+#7 92.06 /bin/mkdir -p /opt/yices2/usr/local/include
+#7 92.06 /usr/bin/install -c -m 664 build/x86_64-pc-linux-gnu-release/dist/include/* /opt/yices2/usr/local/include
+#7 92.07 /usr/bin/install -c build/x86_64-pc-linux-gnu-release/dist/bin/* /opt/yices2/usr/local/bin
+#7 92.07 /usr/bin/install -c build/x86_64-pc-linux-gnu-release/dist/lib/* /opt/yices2/usr/local/lib
+#7 92.08 (cd /opt/yices2/usr/local/lib && ln -s -f libyices.so.2.7.0 libyices.so.2.7 && ln -s -f libyices.so.2.7 libyices.so)
+#7 92.08 make[1]: Leaving directory '/tmp/yices2'
+#7 DONE 92.2s
+
+#8 [stage-2 1/1] COPY --from=build /opt/yices2 /yices2
+#8 DONE 0.1s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 1.1s done
+#9 preparing layers for inline cache
+#9 preparing layers for inline cache 0.0s done
+#9 exporting manifest sha256:92ca93f749e868ead0a55592a844674aa7e6e228bd716d552bf996ae3a040117 0.0s done
+#9 exporting config sha256:441b6f26ffd2b19a36434c863f4a98848de3db9b74d3a70208d51a75cd26cbfb 0.0s done
+#9 exporting attestation manifest sha256:11e49ab865c5458be39ca54e610d947b4fcd22d4427fe5353d7914c0eefb28df
+#9 exporting attestation manifest sha256:11e49ab865c5458be39ca54e610d947b4fcd22d4427fe5353d7914c0eefb28df 0.0s done
+#9 exporting manifest list sha256:a06a617f9ca9c8631e103826b295a84b5c945c555f841f80572cfa478b76fb42 0.0s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/pkg/yices2:latest done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/yices2:latest
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/pkg/yices2:latest 0.2s done
+#9 DONE 1.5s
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 --target version --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye -o dist debian/yices2
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 30B
+#1 transferring dockerfile: 1.38kB done
+#1 DONE 0.1s
+
+#2 [build 1/7] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#2 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#2 CACHED
+
+#3 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 56B done
+#5 DONE 0.0s
+
+#6 [build 2/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC  && apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]}  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && update-ca-certificates  && rm -rf /var/lib/apt/lists/*
+#6 CACHED
+
+#7 [build 3/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+#7 CACHED
+
+#8 [version 1/1] COPY --from=build /tmp/hdlc.yices2.version /
+#8 DONE 0.0s
+
+#9 exporting to client directory
+#9 copying files 63B done
+#9 DONE 0.0s
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/testpkg:yices2 --build-arg IMAGE=ghcr.io/hdl/amd64/debian/bullseye/pkg/yices2 --build-arg PACKAGE=yices2 -f /home/umarcor/containers/utils/pyHDLC/testpkg.dockerfile .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from testpkg.dockerfile
+#1 transferring dockerfile: 975B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/pkg/yices2:latest
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.6s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#5 resolve docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b 0.1s done
+#5 DONE 0.1s
+
+#6 [pkg 1/1] FROM ghcr.io/hdl/amd64/debian/bullseye/pkg/yices2:latest@sha256:a06a617f9ca9c8631e103826b295a84b5c945c555f841f80572cfa478b76fb42
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/yices2:latest@sha256:a06a617f9ca9c8631e103826b295a84b5c945c555f841f80572cfa478b76fb42
+#6 resolve ghcr.io/hdl/amd64/debian/bullseye/pkg/yices2:latest@sha256:a06a617f9ca9c8631e103826b295a84b5c945c555f841f80572cfa478b76fb42 0.1s done
+#6 DONE 0.1s
+
+#5 [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+#5 CACHED
+
+#7 [stage-1 2/3] COPY --from=pkg /yices2 /
+#7 DONE 0.5s
+
+#8 [stage-1 3/3] RUN apk add -U --no-cache file tree
+#8 1.431 (1/3) Installing libmagic (5.47-r2)
+#8 1.478 (2/3) Installing file (5.47-r2)
+#8 1.494 (3/3) Installing tree (2.3.2-r0)
+#8 1.508 Executing busybox-1.37.0-r31.trigger
+#8 1.516 OK: 18.4 MiB in 19 packages
+#8 DONE 1.6s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 1.4s done
+#9 preparing layers for inline cache
+#9 preparing layers for inline cache 0.0s done
+#9 exporting manifest sha256:bf5de6452697d50202e5979983065e45ad3748b082d342632c50b5f274df9b1d 0.0s done
+#9 exporting config sha256:94fb048d75081773b89e76c575fa585c12983f0d9e24e61532cfb22da7ca86d4 0.0s done
+#9 exporting attestation manifest sha256:a2eeee7dc35c19dafdb73d697a6d70dccee7014da120242693de7e102e667968
+#9 exporting attestation manifest sha256:a2eeee7dc35c19dafdb73d697a6d70dccee7014da120242693de7e102e667968 0.0s done
+#9 exporting manifest list sha256:c6d7603adf6fe80e22801280081d81fd59241a3c14ac7e51b53a815255ec2a8e 0.0s done
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/testpkg:yices2
+#9 naming to ghcr.io/hdl/amd64/debian/bullseye/testpkg:yices2 done
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:yices2
+#9 unpacking to ghcr.io/hdl/amd64/debian/bullseye/testpkg:yices2 0.3s done
+#9 DONE 1.9s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - InvalidDefaultArgInFrom: Default value for ARG $IMAGE results in empty or invalid base image name (line 25)
+· docker run --rm -v /home/umarcor/containers/test://wrk ghcr.io/hdl/amd64/debian/bullseye/testpkg:yices2 //wrk/yices2.pkg.sh
+/usr/local
+├── bin
+│   ├── yices
+│   ├── yices-sat
+│   ├── yices-smt
+│   └── yices-smt2
+├── include
+│   ├── yices.h
+│   ├── yices_exit_codes.h
+│   ├── yices_limits.h
+│   └── yices_types.h
+├── lib
+│   ├── libyices.a
+│   ├── libyices.so -> libyices.so.2.7
+│   ├── libyices.so.2.7 -> libyices.so.2.7.0
+│   └── libyices.so.2.7.0
+└── share
+
+5 directories, 12 files
+Ops! This test is not complete yet.
+Submit a PR! https://github.com/hdl/containers/compare
+=== PASS pkg/yices2 ===
+RESULT: PASS

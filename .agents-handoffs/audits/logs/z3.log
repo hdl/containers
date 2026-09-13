@@ -1,0 +1,549 @@
+Read images configuration file /home/umarcor/containers/utils/pyHDLC/images.yml (HDLC v0)
+Read jobs configuration file /home/umarcor/containers/utils/pyHDLC/jobs.yml (HDLC v0)
+TASK: z3 IMAGES: ['pkg/z3']
+=== BUILD pkg/z3 ===
+· docker build --progress=plain --build-arg BUILDKIT_INLINE_CACHE=1 --platform linux/amd64 -t ghcr.io/hdl/amd64/debian/bullseye/pkg/z3 --build-arg REGISTRY=ghcr.io/hdl/amd64/debian/bullseye debian/z3
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.39kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for ghcr.io/hdl/amd64/debian/bullseye/build/build:latest
+#2 DONE 0.1s
+
+#3 [build 1/7] FROM ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8
+#3 resolve ghcr.io/hdl/amd64/debian/bullseye/build/build:latest@sha256:2efef5e68e7b8604469bad05f262ac6b72fc4c0864de26b12c3851b6db9f00a8 0.0s done
+#3 CACHED
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.1s
+
+#5 [internal] load build context
+#5 transferring context: 2.56kB done
+#5 DONE 0.1s
+
+#6 [build 2/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC  && apt-get update -qq  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]}  && apt-get autoclean && apt-get clean && apt-get -y autoremove  && update-ca-certificates  && rm -rf /var/lib/apt/lists/*
+#6 2.153 Reading package lists...
+#6 2.955 Building dependency tree...
+#6 3.125 Reading state information...
+#6 3.580 binutils is already the newest version (2.35.2-2).
+#6 3.580 binutils set to manually installed.
+#6 3.580 The following NEW packages will be installed:
+#6 3.580   python3-distutils python3-lib2to3
+#6 3.626 0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+#6 3.626 Need to get 221 kB of archives.
+#6 3.626 After this operation, 1086 kB of additional disk space will be used.
+#6 3.626 Get:1 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-lib2to3 all 3.9.2-1 [77.8 kB]
+#6 3.866 Get:2 http://snapshot.debian.org/archive/debian/20260824T000000Z bullseye/main amd64 python3-distutils all 3.9.2-1 [143 kB]
+#6 3.942 Fetched 221 kB in 0s (801 kB/s)
+#6 3.946 debconf: delaying package configuration, since apt-utils is not installed
+#6 4.138 Selecting previously unselected package python3-lib2to3.
+#6 4.138 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14728 files and directories currently installed.)
+#6 4.156 Preparing to unpack .../python3-lib2to3_3.9.2-1_all.deb ...
+#6 4.166 Unpacking python3-lib2to3 (3.9.2-1) ...
+#6 4.660 Selecting previously unselected package python3-distutils.
+#6 4.660 Preparing to unpack .../python3-distutils_3.9.2-1_all.deb ...
+#6 4.661 Unpacking python3-distutils (3.9.2-1) ...
+#6 4.813 Setting up python3-lib2to3 (3.9.2-1) ...
+#6 5.199 Setting up python3-distutils (3.9.2-1) ...
+#6 5.523 Reading package lists...
+#6 6.535 Building dependency tree...
+#6 6.715 Reading state information...
+#6 6.756 Reading package lists...
+#6 7.984 Building dependency tree...
+#6 8.179 Reading state information...
+#6 8.368 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#6 8.371 Updating certificates in /etc/ssl/certs...
+#6 9.206 0 added, 0 removed; done.
+#6 9.211 Running hooks in /etc/ca-certificates/update.d...
+#6 9.211 done.
+#6 DONE 9.9s
+
+#7 [build 3/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+#7 0.793 Cloning into '/tmp/z3'...
+#7 30.72 Set Assembly Version (DEFAULT): 5 1 0 0
+#7 30.72 New component: 'util'
+#7 30.72 New component: 'polynomial'
+#7 30.72 New component: 'interval'
+#7 30.72 New component: 'dd'
+#7 30.72 New component: 'simplex'
+#7 30.72 New component: 'hilbert'
+#7 30.72 New component: 'realclosure'
+#7 30.72 New component: 'subpaving'
+#7 30.72 New component: 'ast'
+#7 30.72 New component: 'params'
+#7 30.72 New component: 'parser_util'
+#7 30.72 New component: 'grobner'
+#7 30.72 New component: 'rewriter'
+#7 30.72 New component: 'seq'
+#7 30.72 New component: 'euf'
+#7 30.72 New component: 'normal_forms'
+#7 30.72 New component: 'macros'
+#7 30.72 New component: 'model'
+#7 30.72 New component: 'converters'
+#7 30.72 New component: 'ast_sls'
+#7 30.72 New component: 'sat'
+#7 30.72 New component: 'nlsat'
+#7 30.72 New component: 'lp'
+#7 30.72 New component: 'bit_blaster'
+#7 30.72 New component: 'substitution'
+#7 30.72 New component: 'proofs'
+#7 30.72 New component: 'simplifiers'
+#7 30.72 New component: 'tactic'
+#7 30.72 New component: 'mbp'
+#7 30.72 New component: 'qe_lite'
+#7 30.72 New component: 'solver'
+#7 30.72 New component: 'cmd_context'
+#7 30.72 New component: 'smt2parser'
+#7 30.72 New component: 'pattern'
+#7 30.72 New component: 'aig_tactic'
+#7 30.72 New component: 'ackermannization'
+#7 30.72 New component: 'fpa'
+#7 30.72 New component: 'core_tactics'
+#7 30.72 New component: 'arith_tactics'
+#7 30.72 New component: 'solver_assertions'
+#7 30.72 New component: 'subpaving_tactic'
+#7 30.72 New component: 'proto_model'
+#7 30.72 New component: 'smt'
+#7 30.72 New component: 'sat_smt'
+#7 30.72 New component: 'sat_tactic'
+#7 30.72 New component: 'nlsat_tactic'
+#7 30.72 New component: 'bv_tactics'
+#7 30.72 New component: 'fuzzing'
+#7 30.72 New component: 'smt_tactic'
+#7 30.72 New component: 'sls_tactic'
+#7 30.72 New component: 'qe'
+#7 30.72 New component: 'sat_solver'
+#7 30.72 New component: 'fd_solver'
+#7 30.72 New component: 'muz'
+#7 30.72 New component: 'dataflow'
+#7 30.72 New component: 'transforms'
+#7 30.72 New component: 'rel'
+#7 30.72 New component: 'spacer'
+#7 30.72 New component: 'clp'
+#7 30.72 New component: 'tab'
+#7 30.72 New component: 'ddnf'
+#7 30.72 New component: 'bmc'
+#7 30.72 New component: 'fp'
+#7 30.72 New component: 'smtlogic_tactics'
+#7 30.72 New component: 'ufbv_tactic'
+#7 30.72 New component: 'fpa_tactics'
+#7 30.72 New component: 'portfolio'
+#7 30.72 New component: 'opt'
+#7 30.72 New component: 'extra_cmds'
+#7 30.72 New component: 'api'
+#7 30.72 New component: 'shell'
+#7 30.72 New component: 'test'
+#7 30.72 New component: 'api_dll'
+#7 30.72 New component: 'dotnet'
+#7 30.72 New component: 'java'
+#7 30.72 New component: 'ml'
+#7 30.72 New component: 'cpp'
+#7 30.72 Python bindings directory was detected.
+#7 30.72 New component: 'python'
+#7 30.72 New component: 'python_install'
+#7 30.72 New component: 'js'
+#7 30.72 New component: 'cpp_example'
+#7 30.72 New component: 'c_example'
+#7 30.72 New component: 'maxsat'
+#7 30.72 New component: 'dotnet_example'
+#7 30.72 New component: 'java_example'
+#7 30.72 New component: 'ml_example'
+#7 30.72 New component: 'py_example'
+#7 30.72 UpdateVersion: "Z3 5.1.0.0"
+#7 30.72 Generating src/util/z3_version.h from src/util/z3_version.h.in
+#7 30.72 Generated 'src/util/z3_version.h'
+#7 30.72 Generated 'src/nlsat/nlsat_params.hpp'
+#7 30.72 Generated 'src/solver/parallel_params.hpp'
+#7 30.72 Generated 'src/solver/combined_solver_params.hpp'
+#7 30.72 Generated 'src/math/realclosure/rcf_params.hpp'
+#7 30.72 Generated 'src/math/polynomial/algebraic_params.hpp'
+#7 30.72 Generated 'src/math/lp/lp_params_helper.hpp'
+#7 30.72 Generated 'src/muz/base/fp_params.hpp'
+#7 30.72 Generated 'src/sat/sat_simplifier_params.hpp'
+#7 30.72 Generated 'src/sat/sat_asymm_branch_params.hpp'
+#7 30.72 Generated 'src/sat/sat_scc_params.hpp'
+#7 30.72 Generated 'src/opt/opt_params.hpp'
+#7 30.72 Generated 'src/parsers/util/parser_params.hpp'
+#7 30.72 Generated 'src/params/tptp.hpp'
+#7 30.72 Generated 'src/params/rewriter_params.hpp'
+#7 30.72 Generated 'src/params/bv_rewriter_params.hpp'
+#7 30.72 Generated 'src/params/bool_rewriter_params.hpp'
+#7 30.72 Generated 'src/params/fpa2bv_rewriter_params.hpp'
+#7 30.72 Generated 'src/params/sls_params.hpp'
+#7 30.72 Generated 'src/params/pattern_inference_params_helper.hpp'
+#7 30.72 Generated 'src/params/sat_params.hpp'
+#7 30.72 Generated 'src/params/arith_rewriter_params.hpp'
+#7 30.72 Generated 'src/params/poly_rewriter_params.hpp'
+#7 30.72 Generated 'src/params/tactic_params.hpp'
+#7 30.72 Generated 'src/params/solver_params.hpp'
+#7 30.72 Generated 'src/params/smt_params_helper.hpp'
+#7 30.72 Generated 'src/params/array_rewriter_params.hpp'
+#7 30.72 Generated 'src/params/seq_rewriter_params.hpp'
+#7 30.72 Generated 'src/params/fpa_rewriter_params.hpp'
+#7 30.72 Generated 'src/tactic/smtlogics/qfufbv_tactic_params.hpp'
+#7 30.72 Generated 'src/model/model_params.hpp'
+#7 30.72 Generated 'src/model/model_evaluator_params.hpp'
+#7 30.72 Generated 'src/ackermannization/ackermannize_bv_tactic_params.hpp'
+#7 30.72 Generated 'src/ackermannization/ackermannization_params.hpp'
+#7 30.72 Generated 'src/ast/pp_params.hpp'
+#7 30.72 Generated 'src/ast/normal_forms/nnf_params.hpp'
+#7 30.72 Generated 'src/ast/pattern/database.h'
+#7 30.72 Component api
+#7 30.72 Component portfolio
+#7 30.72 Component simplifiers
+#7 30.72 Component euf
+#7 30.72 Component ast
+#7 30.72 Component util
+#7 30.72 Component polynomial
+#7 30.72 Component rewriter
+#7 30.72 Component interval
+#7 30.72 Component params
+#7 30.72 Component normal_forms
+#7 30.72 Component bit_blaster
+#7 30.72 Component converters
+#7 30.72 Component model
+#7 30.72 Component macros
+#7 30.72 Component substitution
+#7 30.72 Component smtlogic_tactics
+#7 30.72 Component ackermannization
+#7 30.72 Component solver
+#7 30.72 Component tactic
+#7 30.72 Component qe_lite
+#7 30.72 Component mbp
+#7 30.72 Component simplex
+#7 30.72 Component proofs
+#7 30.72 Component sat_solver
+#7 30.72 Component core_tactics
+#7 30.72 Component pattern
+#7 30.72 Component smt2parser
+#7 30.72 Component cmd_context
+#7 30.72 Component parser_util
+#7 30.72 Component aig_tactic
+#7 30.72 Component bv_tactics
+#7 30.72 Component arith_tactics
+#7 30.72 Component sat
+#7 30.72 Component dd
+#7 30.72 Component ast_sls
+#7 30.72 Component grobner
+#7 30.72 Component sat_tactic
+#7 30.72 Component sat_smt
+#7 30.72 Component smt
+#7 30.72 Component seq
+#7 30.72 Component proto_model
+#7 30.72 Component solver_assertions
+#7 30.72 Component fpa
+#7 30.72 Component lp
+#7 30.72 Component nlsat
+#7 30.72 Component nlsat_tactic
+#7 30.72 Component smt_tactic
+#7 30.72 Component fp
+#7 30.72 Component muz
+#7 30.72 Component qe
+#7 30.72 Component clp
+#7 30.72 Component transforms
+#7 30.72 Component hilbert
+#7 30.72 Component dataflow
+#7 30.72 Component tab
+#7 30.72 Component rel
+#7 30.72 Component bmc
+#7 30.72 Component fd_solver
+#7 30.72 Component ddnf
+#7 30.72 Component spacer
+#7 30.72 Component ufbv_tactic
+#7 30.72 Component fpa_tactics
+#7 30.72 Component sls_tactic
+#7 30.72 Component subpaving_tactic
+#7 30.72 Component subpaving
+#7 30.72 Component realclosure
+#7 30.72 Component opt
+#7 30.72 Component extra_cmds
+#7 30.72 Component shell
+#7 30.72 Generated 'src/shell/install_tactic.cpp'
+#7 30.72 Component api
+#7 30.72 Component portfolio
+#7 30.72 Component simplifiers
+#7 30.72 Component euf
+#7 30.72 Component ast
+#7 30.72 Component util
+#7 30.72 Component polynomial
+#7 30.72 Component rewriter
+#7 30.72 Component interval
+#7 30.72 Component params
+#7 30.72 Component normal_forms
+#7 30.72 Component bit_blaster
+#7 30.72 Component converters
+#7 30.72 Component model
+#7 30.72 Component macros
+#7 30.72 Component substitution
+#7 30.72 Component smtlogic_tactics
+#7 30.72 Component ackermannization
+#7 30.72 Component solver
+#7 30.72 Component tactic
+#7 30.72 Component qe_lite
+#7 30.72 Component mbp
+#7 30.72 Component simplex
+#7 30.72 Component proofs
+#7 30.72 Component sat_solver
+#7 30.72 Component core_tactics
+#7 30.72 Component pattern
+#7 30.72 Component smt2parser
+#7 30.72 Component cmd_context
+#7 30.72 Component parser_util
+#7 30.72 Component aig_tactic
+#7 30.72 Component bv_tactics
+#7 30.72 Component arith_tactics
+#7 30.72 Component sat
+#7 30.72 Component dd
+#7 30.72 Component ast_sls
+#7 30.72 Component grobner
+#7 30.72 Component sat_tactic
+#7 30.72 Component sat_smt
+#7 30.72 Component smt
+#7 30.72 Component seq
+#7 30.72 Component proto_model
+#7 30.72 Component solver_assertions
+#7 30.72 Component fpa
+#7 30.72 Component lp
+#7 30.72 Component nlsat
+#7 30.72 Component nlsat_tactic
+#7 30.72 Component smt_tactic
+#7 30.72 Component fp
+#7 30.72 Component muz
+#7 30.72 Component qe
+#7 30.72 Component clp
+#7 30.72 Component transforms
+#7 30.72 Component hilbert
+#7 30.72 Component dataflow
+#7 30.72 Component tab
+#7 30.72 Component rel
+#7 30.72 Component bmc
+#7 30.72 Component fd_solver
+#7 30.72 Component ddnf
+#7 30.72 Component spacer
+#7 30.72 Component ufbv_tactic
+#7 30.72 Component fpa_tactics
+#7 30.72 Component sls_tactic
+#7 30.72 Component subpaving_tactic
+#7 30.72 Component subpaving
+#7 30.72 Component realclosure
+#7 30.72 Component opt
+#7 30.72 Component extra_cmds
+#7 30.72 Component fuzzing
+#7 30.72 Component test
+#7 30.72 Generated 'src/test/install_tactic.cpp'
+#7 30.72 Component api
+#7 30.72 Component portfolio
+#7 30.72 Component simplifiers
+#7 30.72 Component euf
+#7 30.72 Component ast
+#7 30.72 Component util
+#7 30.72 Component polynomial
+#7 30.72 Component rewriter
+#7 30.72 Component interval
+#7 30.72 Component params
+#7 30.72 Component normal_forms
+#7 30.72 Component bit_blaster
+#7 30.72 Component converters
+#7 30.72 Component model
+#7 30.72 Component macros
+#7 30.72 Component substitution
+#7 30.72 Component smtlogic_tactics
+#7 30.72 Component ackermannization
+#7 30.72 Component solver
+#7 30.72 Component tactic
+#7 30.72 Component qe_lite
+#7 30.72 Component mbp
+#7 30.72 Component simplex
+#7 30.72 Component proofs
+#7 30.72 Component sat_solver
+#7 30.72 Component core_tactics
+#7 30.72 Component pattern
+#7 30.72 Component smt2parser
+#7 30.72 Component cmd_context
+#7 30.72 Component parser_util
+#7 30.72 Component aig_tactic
+#7 30.72 Component bv_tactics
+#7 30.72 Component arith_tactics
+#7 30.72 Component sat
+#7 30.72 Component dd
+#7 30.72 Component ast_sls
+#7 30.72 Component grobner
+#7 30.72 Component sat_tactic
+#7 30.72 Component sat_smt
+#7 30.72 Component smt
+#7 30.72 Component seq
+#7 30.72 Component proto_model
+#7 30.72 Component solver_assertions
+#7 30.72 Component fpa
+#7 30.72 Component lp
+#7 30.72 Component nlsat
+#7 30.72 Component nlsat_tactic
+#7 30.72 Component smt_tactic
+#7 30.72 Component fp
+#7 30.72 Component muz
+#7 30.72 Component qe
+#7 30.72 Component clp
+#7 30.72 Component transforms
+#7 30.72 Component hilbert
+#7 30.72 Component dataflow
+#7 30.72 Component tab
+#7 30.72 Component rel
+#7 30.72 Component bmc
+#7 30.72 Component fd_solver
+#7 30.72 Component ddnf
+#7 30.72 Component spacer
+#7 30.72 Component ufbv_tactic
+#7 30.72 Component fpa_tactics
+#7 30.72 Component sls_tactic
+#7 30.72 Component subpaving_tactic
+#7 30.72 Component subpaving
+#7 30.72 Component realclosure
+#7 30.72 Component opt
+#7 30.72 Component extra_cmds
+#7 30.72 Component api_dll
+#7 30.72 Generated 'src/api/dll/install_tactic.cpp'
+#7 30.72 Generated 'src/shell/mem_initializer.cpp'
+#7 30.72 Generated 'src/test/mem_initializer.cpp'
+#7 40.07 Generated 'src/api/dll/mem_initializer.cpp'
+#7 40.07 Generated 'src/shell/gparams_register_modules.cpp'
+#7 40.07 Generated 'src/test/gparams_register_modules.cpp'
+#7 40.07 Generated 'src/api/dll/gparams_register_modules.cpp'
+#7 40.07 Generated 'src/api/python/z3/z3consts.py
+#7 40.07 Generated 'src/api/api_log_macros.h'
+#7 40.07 Generated 'src/api/api_log_macros.cpp'
+#7 40.07 Generated 'src/api/api_commands.cpp'
+#7 40.07 Generated 'src/api/python/z3/z3core.py'
+#7 40.07 Listing 'src/api/python/z3'...
+#7 40.07 Compiling 'src/api/python/z3/__init__.py'...
+#7 40.07 Compiling 'src/api/python/z3/z3.py'...
+#7 40.07 Compiling 'src/api/python/z3/z3consts.py'...
+#7 40.07 Compiling 'src/api/python/z3/z3core.py'...
+#7 40.07 Compiling 'src/api/python/z3/z3num.py'...
+#7 40.07 Compiling 'src/api/python/z3/z3poly.py'...
+#7 40.07 Compiling 'src/api/python/z3/z3printer.py'...
+#7 40.07 Compiling 'src/api/python/z3/z3rcf.py'...
+#7 40.07 Compiling 'src/api/python/z3/z3regex.py'...
+#7 40.07 Compiling 'src/api/python/z3/z3types.py'...
+#7 40.07 Compiling 'src/api/python/z3/z3util.py'...
+#7 40.07 Generated python bytecode
+#7 40.07 Copied 'z3poly.py'
+#7 40.07 Copied 'z3types.py'
+#7 40.07 Copied 'z3rcf.py'
+#7 40.07 Copied 'z3.py'
+#7 40.07 Copied '__init__.py'
+#7 40.07 Copied 'z3core.py'
+#7 40.07 Copied 'z3printer.py'
+#7 40.07 Copied 'z3num.py'
+#7 40.07 Copied 'z3consts.py'
+#7 40.07 Copied 'z3util.py'
+#7 40.07 Copied 'z3regex.py'
+#7 40.07 Copied 'z3rcf.cpython-39.pyc'
+#7 40.07 Copied 'z3types.cpython-39.pyc'
+#7 40.07 Copied 'z3.cpython-39.pyc'
+#7 40.07 Copied 'z3util.cpython-39.pyc'
+#7 40.07 Copied 'z3core.cpython-39.pyc'
+#7 40.07 Copied 'z3poly.cpython-39.pyc'
+#7 40.07 Copied 'z3num.cpython-39.pyc'
+#7 40.07 Copied 'z3consts.cpython-39.pyc'
+#7 40.07 Copied 'z3regex.cpython-39.pyc'
+#7 40.07 Copied 'z3printer.cpython-39.pyc'
+#7 40.07 Copied '__init__.cpython-39.pyc'
+#7 40.07 Testing ar...
+#7 40.07 Testing clang++...
+#7 40.07 Testing clang...
+#7 40.07 Testing floating point support...
+#7 40.07 Host platform:  Linux
+#7 40.07 C++ Compiler:   clang++
+#7 40.07 C Compiler  :   clang
+#7 40.07 Archive Tool:   ar
+#7 40.07 Arithmetic:     internal
+#7 40.07 Prefix:         /usr
+#7 40.07 64-bit:         True
+#7 40.07 FP math:        SSE2-GCC
+#7 40.07 libatomic:      not required
+#7 40.07 Python pkg dir: /usr/lib/python3.9/site-packages
+#7 40.07 Python version: 3.9
+#7 40.07 Writing build/Makefile
+#7 40.07 Copied Z3Py example 'visitor.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'trafficjam.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'bincover.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'efsmt.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'socrates.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'union_sort.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'parallel.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'rc2.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'proofreplay.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'hs.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'example.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'all_interval_series.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'mini_quip.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'mini_ic3.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'simplify_formula.py' to 'build/python'
+#7 40.07 Copied Z3Py example 'prooflogs.py' to 'build/python'
+#7 40.07 Makefile was successfully generated.
+#7 40.07   compilation mode: Release
+#7 40.07 Type 'cd build; make' to build Z3
+#7 40.24 src/shell/datalog_frontend.cpp
+#7 45.43 src/shell/drat_frontend.cpp
+#7 49.76 src/shell/smtlib_frontend.cpp
+#7 52.59 In file included from ../src/shell/smtlib_frontend.cpp:30:
+#7 52.59 In file included from ../src/opt/opt_cmds.h:21:
+#7 52.59 In file included from ../src/opt/opt_context.h:29:
+#7 52.59 In file included from ../src/opt/maxsmt.h:25:
+#7 52.60 In file included from ../src/smt/smt_context.h:36:
+#7 52.60 ../src/smt/smt_conflict_resolution.h:97:65: error: no matching constructor for initialization of 'struct (anonymous struct at ../src/smt/smt_conflict_resolution.h:91:17)'
+#7 52.60             tp_elem(enode * lhs, enode * rhs):m_kind(EQUALITY), m_pair(lhs, rhs) {}
+#7 52.60                                                                 ^      ~~~~~~~~
+#7 52.60 ../src/smt/smt_conflict_resolution.h:91:17: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 2 were provided
+#7 52.60                 struct {
+#7 52.61                 ^
+#7 52.61 ../src/smt/smt_conflict_resolution.h:91:17: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 2 were provided
+#7 52.61 ../src/smt/smt_conflict_resolution.h:91:17: note: candidate constructor (the implicit default constructor) not viable: requires 0 arguments, but 2 were provided
+#7 55.14 1 error generated.
+#7 55.17 make: *** [Makefile:5083: shell/smtlib_frontend.o] Error 1
+#7 ERROR: process "/bin/bash -c . /tmp/ctx/HDLC && build" did not complete successfully: exit code: 2
+------
+ > [build 3/3] RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build:
+52.60 ../src/smt/smt_conflict_resolution.h:97:65: error: no matching constructor for initialization of 'struct (anonymous struct at ../src/smt/smt_conflict_resolution.h:91:17)'
+52.60             tp_elem(enode * lhs, enode * rhs):m_kind(EQUALITY), m_pair(lhs, rhs) {}
+52.60                                                                 ^      ~~~~~~~~
+52.60 ../src/smt/smt_conflict_resolution.h:91:17: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 2 were provided
+52.60                 struct {
+52.61                 ^
+52.61 ../src/smt/smt_conflict_resolution.h:91:17: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 2 were provided
+52.61 ../src/smt/smt_conflict_resolution.h:91:17: note: candidate constructor (the implicit default constructor) not viable: requires 0 arguments, but 2 were provided
+55.14 1 error generated.
+55.17 make: *** [Makefile:5083: shell/smtlib_frontend.o] Error 1
+------
+Dockerfile:37
+--------------------
+  35 |      && rm -rf /var/lib/apt/lists/*
+  36 |     
+  37 | >>> RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+  38 |     
+  39 |     #---
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -c . /tmp/ctx/HDLC && build" did not complete successfully: exit code: 2
+=== FAIL pkg/z3 (CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/pkg/z3', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', 'debian/z3']' returned non-zero exit status 1.) ===
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+  File "/home/umarcor/containers/utils/pyHDLC/__init__.py", line 456, in BuildImage
+    _exec(args=[
+    ~~~~~^^^^^^^
+        "docker", "build", *_commonCmd,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        str(contextPath)
+        ^^^^^^^^^^^^^^^^
+    ], dry=dry, collapse=f"🚧 Build {imageName}")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/umarcor/containers/utils/pyHDLC/run.py", line 46, in _exec
+    check_call(args, stderr=STDOUT)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 419, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['docker', 'build', '--progress=plain', '--build-arg', 'BUILDKIT_INLINE_CACHE=1', '--platform', 'linux/amd64', '-t', 'ghcr.io/hdl/amd64/debian/bullseye/pkg/z3', '--build-arg', 'REGISTRY=ghcr.io/hdl/amd64/debian/bullseye', 'debian/z3']' returned non-zero exit status 1.
+RESULT: FAIL
