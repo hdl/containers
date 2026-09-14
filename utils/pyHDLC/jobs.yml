@@ -69,7 +69,7 @@ default:
 
   apicula:        *SysDebianLegacyAmd64
   arachne-pnr:    *SysDebianDefaultArchSet
-  gtkwave:        *SysDebianLegacyDefaultArchSet
+  gtkwave:        *SysDebianDefaultArchSet
   icestorm:       *SysDebianDefaultArchSet
   irsim:
     <<: *SysDebianDefaultArchSet
