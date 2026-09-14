@@ -34,19 +34,16 @@ skip_release: bool = evname == 'pull_request'
 
 input_tasks: List[str]
 match evname:
-  case "push":
-    input_tasks = environ["HDLC_PUSH"].split()
   case "schedule":
     input_tasks = environ["HDLC_SCHEDULE"].split()
   case "workflow_dispatch":
     input_tasks = environ["GH_INPUT_TASKS"].split()
     skip_release = environ["GH_INPUT_SKIP-RELEASE"].lower() == 'true'
   case _:
-    input_tasks = []
-    raise Exception(f"Empty tasks list for event name <{evname}>!")
+    input_tasks = environ["HDLC_PUSH"].split()
 
 if not input_tasks:
-  raise Exception("Empty list of tasks!")
+  raise Exception(f"Empty list of tasks for event name <{evname}>!")
 
 skips: Dict[str, str] = {}
 for t, task in enumerate(input_tasks):
