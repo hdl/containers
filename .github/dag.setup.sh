@@ -22,8 +22,8 @@
 
 set -e
 
-cd $(dirname "$0")
+cd "$(dirname "$0")"
 
 $(command -v sudo) apt update -qq
 $(command -v sudo) apt install -y graphviz libgraphviz-dev
-pip3 install networkx pygraphviz
+"${PYTHON:-python3}" -m pip install networkx pygraphviz
