@@ -23,23 +23,33 @@
 
 set -e
 
-cd $(dirname "$0")
+cd "$(dirname "$0")"
 
-[ -z "$MSYSTEM" ] && pip3 install -e . || export PYTHONPATH="$(pwd)"
-
-if [ -z "$CI" ]; then
+if [ -n "${MSYSTEM:-}" ]; then
+  export PYTHONPATH="$(pwd)"
   export PATH="$PATH:$(pwd)/bin"
   exit 0
 fi
 
-echo "$(pwd)/bin" >> $GITHUB_PATH
+PYTHON="${PYTHON:-python3}"
 
-unset _arch
-case $1 in
+[ -n "${VIRTUAL_ENV:-}" ] || echo "WARNING: no active virtualenv; see doc/dev/Utils.rst" >&2
+
+"$PYTHON" -m pip install -e .
+
+"$PYTHON" -c 'import pyHDLC' || { echo "ERROR: pyHDLC installation failed" >&2; exit 1; }
+
+if [ -n "${GITHUB_PATH:-}" ]; then
+  echo "$(pwd)/bin" >> "$GITHUB_PATH"
+fi
+
+_arch=""
+case "${1:-}" in
   arm32v7) _arch="arm";;
   arm64v8) _arch="aarch64";;
   ppc64le|s390x|riscv64) _arch="$1";;
 esac
 if [ -n "$_arch" ]; then
-  docker run --rm --privileged aptman/qus -s -- -p $_arch
+  command -v docker >/dev/null 2>&1 || { echo "ERROR: docker required for cross-arch setup" >&2; exit 1; }
+  docker run --rm --privileged aptman/qus -s -- -p "$_arch"
 fi
