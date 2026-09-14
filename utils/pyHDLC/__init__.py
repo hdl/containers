@@ -370,6 +370,9 @@ def _NormaliseBuildParams(
     )
 
 
+_commonCmd = ["--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1"]
+
+
 def BuildImage(
     image: str | List[str],
     registry: str = DEFAULTS.registry,
@@ -429,26 +432,11 @@ def BuildImage(
 
         imageName: str = f"{registry}/{architecture}/{collection}/{img}"
 
-        cmd: List[str] = [
-            "docker", "build",
-            "--platform", _NormalisePlatform(architecture),
-            "-t", imageName,
-            "--progress=plain", "--build-arg", "BUILDKIT_INLINE_CACHE=1"
-        ]
-        cmd += [
-            "--build-arg",
-            (
-                f"SYSIMAGE={architecture}/{collection.replace('/', ':')}"
-                if dockerfile == "base" else
-                f"REGISTRY={registry}/{architecture}/{collection}"
-            )
-        ]
-
-        if argimg is not None:
-            cmd += ["--build-arg", f"IMAGE={argimg}"]
-
-        if target not in [None, ""]:
-            cmd += [f"--target={target}"]
+        sysArg: str = (
+            f"SYSIMAGE={architecture}/{collection.replace('/', ':')}"
+            if dockerfile == "base" else
+            f"REGISTRY={registry}/{architecture}/{collection}"
+        )
 
         for CollectionPath in [
             Path(collection.replace("/", "-")), # Search collection specific recipe first
@@ -465,26 +453,34 @@ def BuildImage(
         else:
             raise Exception(f"Dockerfile <{dockerfile}> not found for <{collection}>!")
 
-        if len(dockerfilePath.suffix) != 0:
-            cmd += ["-f", str(dockerfilePath)]
-
-        cmd += [str(contextPath)]
-
-        _exec(args=cmd, dry=dry, collapse=f"🚧 Build {imageName}")
+        _exec(args=[
+            "docker", "build", *_commonCmd,
+            "--platform", _NormalisePlatform(architecture),
+            "-t", imageName,
+            "--build-arg", sysArg,
+            *(["--build-arg", f"IMAGE={argimg}"] * bool(argimg)),
+            *(["--target", str(target)] * bool(target)),
+            *(["-f", str(dockerfilePath)] * bool(dockerfilePath.suffix)),
+            str(contextPath)
+        ], dry=dry, collapse=f"🚧 Build {imageName}")
 
         with dockerfilePath.open("r") as rfptr:
             for line in rfptr:
                 if re_search("FROM scratch AS version", line, re_IGNORECASE):
-                    _exec(
-                        args=["docker", "build", "--target", "version", "-o", "dist", str(contextPath)],
-                        dry=dry,
-                        collapse=f"🚧 Version {imageName}",
-                    )
+                    _exec(args=[
+                        "docker", "build", *_commonCmd,
+                        "--platform", _NormalisePlatform(architecture),
+                        "--target", "version",
+                        "--build-arg", sysArg,
+                        "-o", "dist",
+                        *(["--build-arg", f"IMAGE={argimg}"] * bool(argimg)),
+                        str(contextPath)
+                    ], dry=dry, collapse=f"🚧 Version {imageName}")
                     break
 
         if test:
             TestImage(
-                f"{img}{(f'#{withDir}' if withDir is not None else '')}",
+                img + (f'#{withDir}' * bool(withDir)),
                 registry,
                 collection,
                 architecture,
@@ -536,36 +532,22 @@ def TestImage(
             # Nevertheless, any other image name and/or tag might be used.
             testImage: str = f"{imagePrefix}/testpkg:{testScript}"
 
-            _exec(
-                args=[
-                    "docker",
-                    "build",
-                    "--platform", _NormalisePlatform(architecture),
-                    "-t", f"{testImage!s}",
-                    "--progress=plain",
-                    "--build-arg", "BUILDKIT_INLINE_CACHE=1",
-                    "--build-arg", f"IMAGE={imagePrefix!s}/pkg/{pimg!s}",
-                    "--build-arg", f"PACKAGE={pdir!s}",
-                    "-f", str(ROOT / "testpkg.dockerfile"),
-                    ".",
-                ],
-                dry=dry,
-                collapse=f"🚦 Build {testImage!s}",
-            )
+            _exec(args=[
+                "docker", "build", *_commonCmd,
+                "--platform", _NormalisePlatform(architecture),
+                "-t", f"{testImage!s}",
+                "--build-arg", f"IMAGE={imagePrefix!s}/pkg/{pimg!s}",
+                "--build-arg", f"PACKAGE={pdir!s}",
+                "-f", str(ROOT / "testpkg.dockerfile"),
+                ".",
+            ], dry=dry, collapse=f"🚦 Build {testImage!s}")
 
-            _exec(
-                args=[
-                    "docker",
-                    "run",
-                    "--rm",
-                    "-v",
-                    f"{Path.cwd() / 'test'}://wrk",
-                    f"{testImage!s}",
-                    f"//wrk/{testScript}.pkg.sh",
-                ],
-                dry=dry,
-                collapse=f"🚦 Test {testImage}",
-            )
+            _exec(args=[
+                "docker", "run", "--rm",
+                "-v", f"{Path.cwd() / 'test'}://wrk",
+                f"{testImage!s}",
+                f"//wrk/{testScript}.pkg.sh",
+            ], dry=dry, collapse=f"🚦 Test {testImage}")
 
             continue
 
@@ -573,30 +555,19 @@ def TestImage(
 
         imageName: str = f"{imagePrefix}/{img}"
 
-        _exec(
-            args=[
-                "docker",
-                "inspect",
-                """--format={{ println "Architecture:" .Architecture .Variant }}{{ println "Size:" .Size }}VirtualSize: {{ .VirtualSize }}""",
-                f"{imageName}",
-            ],
-            dry=dry,
-            collapse=f"🚦 Inspect {imageName}",
-        )
+        _exec(args=[
+            "docker",
+            "inspect",
+            """--format={{ println "Architecture:" .Architecture .Variant }}{{ println "Size:" .Size }}VirtualSize: {{ .VirtualSize }}""",
+            f"{imageName}",
+        ], dry=dry, collapse=f"🚦 Inspect {imageName}")
 
-        _exec(
-            args=[
-                "docker",
-                "run",
-                "--rm",
-                "-v",
-                f"{Path.cwd() / 'test'}://wrk",
-                f"{imageName!s}",
-                f"//wrk/{img.replace(':', '--').replace('/', '--')!s}.sh",
-            ],
-            dry=dry,
-            collapse=f"🚦 Test {imageName!s}",
-        )
+        _exec(args=[
+            "docker", "run", "--rm",
+            "-v", f"{Path.cwd() / 'test'}://wrk",
+            f"{imageName!s}",
+            f"//wrk/{img.replace(':', '--').replace('/', '--')!s}.sh",
+        ], dry=dry, collapse=f"🚦 Test {imageName!s}")
 
 
 def PushImage(
