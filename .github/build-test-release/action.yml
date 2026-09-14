@@ -92,7 +92,7 @@ runs:
       main: |
         # NOTE: the content of the shell if statement is executed if the command returns 0, thus,
         # the logic of the evaluations in Python is negated.
-        if python3 -c 'exit('${{ inputs.skip-release }}'.lower() not in ['true','skip','yes'])'; then
+        if python3 -c 'exit("${{ inputs.skip-release }}".lower() not in ["true","skip","yes"])'; then
           echo 'Skipping release...'
           exit 0
         fi
