@@ -57,12 +57,13 @@ G: Any = nx.nx_agraph.read_dot(ROOT/"needs.dot")
 if not nx.is_directed_acyclic_graph(G):
   raise RuntimeError("Dependency graph contains a cycle!")
 
-if 'base' not in input_tasks:
-  G.remove_node('base')
-
 # F>: descendants of F and F
 # >T: ancestors of T and T
 # F>T: nodes which are both descendants of F and ancestors of T, and both F and T
+
+if not any('base' in t for t in input_tasks):
+  G.remove_node('base')
+
 dnodes: Set[str] = set()
 for key in input_tasks:
   if '>' not in key:
