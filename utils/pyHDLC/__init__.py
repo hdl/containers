@@ -558,7 +558,7 @@ def TestImage(
         _exec(args=[
             "docker",
             "inspect",
-            """--format={{ println "Architecture:" .Architecture .Variant }}{{ println "Size:" .Size }}VirtualSize: {{ .VirtualSize }}""",
+            """--format={{ println "Architecture:" .Architecture (or (index . "Variant") "") }}{{ println "Size:" .Size }}""",
             f"{imageName}",
         ], dry=dry, collapse=f"🚦 Inspect {imageName}")
 
