@@ -23,7 +23,7 @@ ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
 #---
 
-FROM ghdl/pkg:bullseye-mcode AS build-mcode
+FROM docker.io/ghdl/pkg:bullseye-mcode AS build-mcode
 
 # TODO Build GHDL on $REGISTRY/build/build instead of picking ghdl/pkg:bullseye-mcode
 
@@ -35,7 +35,7 @@ COPY --from=build-mcode / /ghdl/usr/local/
 
 #---
 
-FROM ghdl/pkg:bullseye-llvm-11 AS build-llvm
+FROM docker.io/ghdl/pkg:bullseye-llvm-11 AS build-llvm
 
 # TODO Build GHDL on $REGISTRY/build/build instead of picking ghdl/pkg:bullseye-mcode
 
