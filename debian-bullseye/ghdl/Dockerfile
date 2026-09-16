@@ -1,6 +1,8 @@
 # Authors:
 #   Unai Martinez-Corral
 #     <unai.martinezcorral@ehu.eus>
+#   Niklaus Leuenberger
+#     <niklaus.leuenb@gmail.com>
 #
 # Copyright Unai Martinez-Corral
 #
@@ -18,32 +20,24 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian/trixie'
+ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
 #--
 
 FROM $REGISTRY/build/build AS build
 
-RUN apt-get update -qq \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    gnat-14 \
-    zlib1g-dev \
+    ${makedepends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
-
-# NOTE: gnat-14 ships no unversioned 'gnatmake' alternative (unlike gnat-9/12)
-RUN ln -s /usr/bin/gnatmake-14 /usr/bin/gnatmake
 
 #---
 
 FROM build AS build-mcode
 
-RUN git clone https://github.com/ghdl/ghdl.git /tmp/ghdl \
- && mkdir /tmp/ghdl/build \
- && cd /tmp/ghdl/build \
- && ../configure --default-pic \
- && make GNATMAKE="gnatmake -j$(nproc)" \
- && make DESTDIR=/opt/ghdl install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build_mcode
 
 #---
 
@@ -55,19 +49,14 @@ COPY --from=build-mcode /opt/ghdl /ghdl
 
 FROM build AS build-llvm
 
-RUN apt-get update -qq \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    libbacktrace-dev \
-    llvm-19-dev \
+    ${makedepends_llvm[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/ghdl/ghdl.git /tmp/ghdl \
- && mkdir /tmp/ghdl/build \
- && cd /tmp/ghdl/build \
- && ../configure --default-pic --with-llvm-config=llvm-config-19 --with-backtrace-lib=$(dpkg -L libbacktrace-dev | grep libbacktrace.a) \
- && make GNATMAKE="gnatmake -j$(nproc)" \
- && make DESTDIR=/opt/ghdl install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build_llvm
 
 #---
 
@@ -79,9 +68,10 @@ COPY --from=build-llvm /opt/ghdl /ghdl
 
 FROM $REGISTRY/build/base AS base
 
-RUN apt-get update -qq \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    libgnat-14 \
+    ${depends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
@@ -97,11 +87,9 @@ FROM base AS llvm
 
 COPY --from=build-llvm /opt/ghdl /
 
-RUN apt-get update -qq \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    gcc \
-    libc-dev \
-    libllvm19 \
-    zlib1g-dev \
+    ${depends_llvm[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
