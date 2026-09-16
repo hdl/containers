@@ -79,9 +79,11 @@ def _scheduler(idx: str) -> None:
         if not view['jobs']:
           view['jobs'] = jobs
         SCHEDULER.update({
+          'scheduler': view['conclusion'],
+          **{
           job['name'].split(' / ')[1].removesuffix('-results'): job['conclusion']
           for job in view['jobs'] if job['status'] == 'completed'
-        })
+        }})
   finally:
     SYNC.put((current_thread(), _watchout.CANCELLED if view['conclusion'] == 'cancelled' else _watchout.COMPLETED))
 
@@ -222,16 +224,19 @@ while active:
       LOGGER.put(('p', f"{key}: completed"))
       _completed(wthr)
     case _watchout.SCHEDULER:
-      if key not in SCHEDULER:
+      _unknown = key not in SCHEDULER
+      if _unknown and not bool(SCHEDULER.get('scheduler','')):
         inprogress.append(wthr)
       else:
+        if _unknown:
+          SCHEDULER[key] = 'hidden'
         match SCHEDULER[key]:
           case 'cancelled':
             LOGGER.put(('p', f"{key}: cancelled"))
             done[wthr['key']] = f"{wthr['idx']}!"
             _cancelled(wthr['out'])
           case _:
-            LOGGER.put(('p', f"{key}: completed"))
+            LOGGER.put(('p', f"{key}: completed {SCHEDULER[key]}"))
             _completed(wthr)
     case _:
       raise Exception(f"Unknown thread exit <{watchout}>!")
