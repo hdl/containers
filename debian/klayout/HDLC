@@ -25,6 +25,13 @@
 
 set -e
 
+case "$REGISTRY" in
+  *bullseye) HDLC_LIBGIT=libgit2-1.1; HDLC_LIBPYTHON=libpython3.9  ;;
+  *bookworm) HDLC_LIBGIT=libgit2-1.5; HDLC_LIBPYTHON=libpython3.11 ;;
+  *trixie)   HDLC_LIBGIT=libgit2-1.9; HDLC_LIBPYTHON=libpython3.13 ;;
+  *)         echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
+esac
+
 makedepends=(
   libgit2-dev
   libqt5svg5-dev
@@ -53,9 +60,9 @@ build() {
 }
 
 depends=(
-  libgit2-1.9
+  "$HDLC_LIBGIT"
   libpulse-mainloop-glib0
-  libpython3.13
+  "$HDLC_LIBPYTHON"
   libqt5core5a
   libqt5designer5
   libqt5gui5

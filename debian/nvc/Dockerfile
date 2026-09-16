@@ -19,15 +19,17 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian/trixie'
+ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
 #---
 
 FROM $REGISTRY/build/build AS build
+ARG REGISTRY
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    ${makedepends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/*
@@ -42,10 +44,12 @@ COPY --from=build /opt/nvc /nvc
 #---
 
 FROM $REGISTRY/build/base
+ARG REGISTRY
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    ${depends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 

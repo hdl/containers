@@ -1,11 +1,8 @@
-# HDLC nvc
-
 # Authors:
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
-#   Nick Gasson
-#     <nick@nickg.me.uk>
+#   Torsten Meissner
 #
 # Copyright Unai Martinez-Corral
 #
@@ -23,39 +20,29 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-set -e
+ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
-makedepends=(
-  automake
-  autoconf
-  check
-  flex
-  bison
-  libdw-dev
-  libffi-dev
-  llvm-dev
-  pkg-config
-  zlib1g-dev
-  libzstd-dev
-  tcl-dev
-)
+#---
 
-build() {
-  git clone https://github.com/nickg/nvc /tmp/nvc
-  cd /tmp/nvc
-  ./autogen.sh
-  mkdir build
-  cd build
-  ../configure
-  make -j$(nproc)
-  make DESTDIR=/opt/nvc install
-}
+FROM $REGISTRY/build/build AS build
+ARG REGISTRY
 
-depends=(
-  binutils
-  libdw1
-  libllvm11
-  make
-  libzstd1
-  libtcl8.6
-)
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    ${makedepends[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && update-ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
+
+#---
+
+FROM scratch AS version
+COPY --from=build /tmp/hdlc.cvc.version /
+
+#---
+
+FROM scratch
+COPY --from=build /opt/cvc /cvc

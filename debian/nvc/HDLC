@@ -1,10 +1,11 @@
-# HDLC cvc
+# HDLC nvc
 
 # Authors:
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
-#   Torsten Meissner
+#   Nick Gasson
+#     <nick@nickg.me.uk>
 #
 # Copyright Unai Martinez-Corral
 #
@@ -24,26 +25,44 @@
 
 set -e
 
+case "$REGISTRY" in
+  *bullseye) HDLC_LIBLLVM=libllvm11 ;;
+  *bookworm) HDLC_LIBLLVM=libllvm14 ;;
+  *trixie)   HDLC_LIBLLVM=libllvm19 ;;
+  *)         echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
+esac
+
 makedepends=(
-  cmake
-  libgmp-dev
+  automake
+  autoconf
+  check
   flex
-  libfl-dev
-  m4
-  patch
-  python3-pyparsing
-  python3-toml
-  python3-venv
-  openjdk-17-jre-headless
+  bison
+  libdw-dev
+  libffi-dev
+  llvm-dev
+  pkg-config
+  zlib1g-dev
+  libzstd-dev
+  tcl-dev
 )
 
 build() {
-  git clone https://github.com/cvc5/cvc5.git /tmp/cvc5
-  cd /tmp/cvc5
-  git tag -d latest
-  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//g' > /tmp/hdlc.cvc.version
-  ./configure.sh --auto-download
+  git clone https://github.com/nickg/nvc /tmp/nvc
+  cd /tmp/nvc
+  ./autogen.sh
+  mkdir build
   cd build
+  ../configure
   make -j$(nproc)
-  make DESTDIR=/opt/cvc install
+  make DESTDIR=/opt/nvc install
 }
+
+depends=(
+  binutils
+  libdw1
+  "$HDLC_LIBLLVM"
+  make
+  libzstd1
+  libtcl8.6
+)
