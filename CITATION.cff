@@ -9,6 +9,5 @@ authors:
   - given-names: Contributors
 title: "HDL Containers: building and deploying container images for open source electronic design automation (EDA)"
 license: Apache-2.0
-version: 0.0.0-main
 url: "https://hdl.github.io/containers/"
 repository-code: https://github.com/hdl/containers
