@@ -29,7 +29,7 @@ from json import dumps as json_dumps
 from dataclasses import dataclass, field
 from yamldataclassconfig.config import YamlDataClassConfig
 
-from pyHDLC.run import _exec, GHASummary
+from pyHDLC.run import _exec, GHAOutput, GHASummary
 
 
 ROOT: Path = Path(__file__).resolve().parent
@@ -274,8 +274,7 @@ def GenerateJobList(
     if dry:
         return
     if fmt.lower() in ["gha"]:
-        with open(environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as gho:
-            gho.write(f"matrix={json_dumps(jobs)}\n")
+        GHAOutput(['matrix='+json_dumps(jobs)])
         GHASummary(summary)
 
 

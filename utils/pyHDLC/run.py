@@ -71,3 +71,10 @@ def GHASummary(content: List[str]) -> None:
         return
     with open(environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as ghs:
         ghs.write('\n'.join(content)+'\n')
+
+def GHAOutput(content: List[str]) -> None:
+    if not isGHA:
+        print("· Printing GHA output skipped")
+        return
+    with open(environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as gho:
+        gho.write('\n'.join(content)+'\n')
