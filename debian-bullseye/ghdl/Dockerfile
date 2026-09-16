@@ -22,7 +22,7 @@
 
 ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
-#--
+#---
 
 FROM $REGISTRY/build/build AS build
 
@@ -64,7 +64,7 @@ FROM scratch AS pkg-llvm
 
 COPY --from=build-llvm /opt/ghdl /ghdl
 
-#--
+#---
 
 FROM $REGISTRY/build/base AS base
 
@@ -75,13 +75,13 @@ RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-#--
+#---
 
 FROM base AS mcode
 
 COPY --from=build-mcode /opt/ghdl /
 
-#--
+#---
 
 FROM base AS llvm
 
