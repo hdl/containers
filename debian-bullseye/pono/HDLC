@@ -40,7 +40,7 @@ makedepends=(
 )
 
 build() {
-  git clone https://github.com/upscale-project/pono.git /tmp/pono
+  git clone https://github.com/stanford-centaur/pono.git /tmp/pono
   cd /tmp/pono
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//g' > /tmp/hdlc.pono.version
   ./contrib/setup-smt-switch.sh
