@@ -29,4 +29,6 @@ cd $(dirname "$0")
 
 ./smoke-tests/ghdl.sh
 
+# TODO: get the testsuite matching the version in the container and run it
+
 ./_todo.sh

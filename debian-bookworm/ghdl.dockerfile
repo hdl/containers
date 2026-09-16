@@ -1,6 +1,5 @@
 # Authors:
 #   Unai Martinez-Corral
-#     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
 #
 # Copyright Unai Martinez-Corral
@@ -21,29 +20,56 @@
 
 ARG REGISTRY='ghcr.io/hdl/debian/bookworm'
 
+#--
+
+FROM $REGISTRY/build/build AS build
+
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    gnat-12 \
+    zlib1g-dev \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
+
 #---
 
-FROM ghdl/pkg:bookworm-mcode AS build-mcode
+FROM build AS build-mcode
 
-# TODO Build GHDL on $REGISTRY/build/build instead of picking ghdl/pkg:bookworm-mcode
+RUN git clone https://github.com/ghdl/ghdl.git /tmp/ghdl \
+ && mkdir /tmp/ghdl/build \
+ && cd /tmp/ghdl/build \
+ && ../configure --default-pic \
+ && make GNATMAKE="gnatmake -j$(nproc)" \
+ && make DESTDIR=/opt/ghdl install
 
 #---
 
 FROM scratch AS pkg-mcode
 
-COPY --from=build-mcode / /ghdl/usr/local/
+COPY --from=build-mcode /opt/ghdl /ghdl
 
 #---
 
-FROM ghdl/pkg:bookworm-llvm-14 AS build-llvm
+FROM build AS build-llvm
 
-# TODO Build GHDL on $REGISTRY/build/build instead of picking ghdl/pkg:bookworm-llvm-14
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    llvm-14-dev \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/ghdl/ghdl.git /tmp/ghdl \
+ && mkdir /tmp/ghdl/build \
+ && cd /tmp/ghdl/build \
+ && ../configure --default-pic --with-llvm-config=llvm-config-14 --with-backtrace-lib=$(dpkg -L libgcc-12-dev | grep libbacktrace.a) \
+ && make GNATMAKE="gnatmake -j$(nproc)" \
+ && make DESTDIR=/opt/ghdl install
 
 #---
 
 FROM scratch AS pkg-llvm
 
-COPY --from=build-llvm / /ghdl/usr/local/
+COPY --from=build-llvm /opt/ghdl /ghdl
 
 #--
 
@@ -53,25 +79,25 @@ RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     libgnat-12 \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists
+ && rm -rf /var/lib/apt/lists/*
 
 #--
 
 FROM base AS mcode
 
-COPY --from=build-mcode / /usr/local/
+COPY --from=build-mcode /opt/ghdl /
 
 #--
 
 FROM base AS llvm
 
-COPY --from=build-llvm / /usr/local/
+COPY --from=build-llvm /opt/ghdl /
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     gcc \
-    libgnat-12 \
+    libc-dev \
     libllvm14 \
     zlib1g-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists
+ && rm -rf /var/lib/apt/lists/*
