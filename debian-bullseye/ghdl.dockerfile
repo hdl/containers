@@ -29,22 +29,23 @@ FROM $REGISTRY/build/build AS build-mcode
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    gcc gnat libz-dev \
+    gnat-9 \
+    zlib1g-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/ghdl/ghdl /tmp/ghdl \
+RUN git clone https://github.com/ghdl/ghdl.git /tmp/ghdl \
  && mkdir /tmp/ghdl/build \
  && cd /tmp/ghdl/build \
- && ../configure --prefix=/opt/ghdl \
- && make \
- && make install
+ && ../configure --default-pic \
+ && make GNATMAKE="gnatmake -j$(nproc)" \
+ && make DESTDIR=/opt/ghdl install
 
 #---
 
 FROM scratch AS pkg-mcode
 
-COPY --from=build-mcode /opt/ghdl /ghdl/usr/local/
+COPY --from=build-mcode /opt/ghdl /ghdl
 
 #---
 
@@ -72,7 +73,7 @@ RUN apt-get update -qq \
 
 FROM base AS mcode
 
-COPY --from=build-mcode /opt/ghdl /usr/local/
+COPY --from=build-mcode /opt/ghdl /
 
 #--
 
