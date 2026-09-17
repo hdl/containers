@@ -27,8 +27,7 @@ ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 FROM $REGISTRY/build/base
 
 RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    xz-utils \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends xz-utils \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
