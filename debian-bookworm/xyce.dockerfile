@@ -142,5 +142,4 @@ RUN apt-get update -qq \
     liblapack3 \
     libsuitesparseconfig5 \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/*

@@ -33,7 +33,6 @@ RUN apt-get update -qq \
     make \
     python3-setuptools \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && update-ca-certificates  \
  && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /tmp/sby && cd /tmp/sby \

@@ -29,7 +29,6 @@ RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && setup
@@ -53,7 +52,6 @@ RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends_gui[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
