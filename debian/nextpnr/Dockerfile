@@ -22,31 +22,32 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian/bookworm'
+ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
 #---
 
 FROM $REGISTRY/build/base AS base
+ARG REGISTRY
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    libboost-all-dev \
-    libomp5 \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
 #---
 
 FROM $REGISTRY/build/dev AS build
+ARG REGISTRY
 
 ENV LDFLAGS="-Wl,--copy-dt-needed-entries"
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    libeigen3-dev \
-    libomp-dev \
- && git clone --recursive https://github.com/YosysHQ/nextpnr.git /tmp/nextpnr \
- && mkdir /tmp/nextpnr/build/
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/* \
+ && clone
 
 #---
 
@@ -54,16 +55,10 @@ RUN apt-get update -qq \
 FROM $REGISTRY/pkg/icestorm AS pkg-icestorm
 
 FROM $REGISTRY/build/nextpnr/build AS build-ice40
+ARG REGISTRY
 COPY --from=pkg-icestorm /icestorm/usr/local/share/icebox /usr/local/share/icebox
 
-RUN cd /tmp/nextpnr/build \
- && cmake .. \
-   -DARCH=ice40 \
-   -DBUILD_GUI=OFF \
-   -DBUILD_PYTHON=ON \
-   -DUSE_OPENMP=ON \
- && make \
- && make DESTDIR=/opt/nextpnr install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build ice40
 
 #---
 
@@ -86,16 +81,10 @@ COPY --from=pkg-icestorm /icestorm /
 FROM $REGISTRY/pkg/prjtrellis AS pkg-prjtrellis
 
 FROM $REGISTRY/build/nextpnr/build AS build-ecp5
+ARG REGISTRY
 COPY --from=pkg-prjtrellis /prjtrellis /
 
-RUN cd /tmp/nextpnr/build \
- && cmake .. \
-   -DARCH=ecp5 \
-   -DBUILD_GUI=OFF \
-   -DBUILD_PYTHON=ON \
-   -DUSE_OPENMP=ON \
- && make -j $(nproc) \
- && make DESTDIR=/opt/nextpnr install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build ecp5
 
 #---
 
@@ -118,16 +107,10 @@ COPY --from=pkg-prjtrellis /prjtrellis /
 FROM $REGISTRY/pkg/prjoxide AS pkg-prjoxide
 
 FROM $REGISTRY/build/nextpnr/build AS build-nexus
+ARG REGISTRY
 COPY --from=pkg-prjoxide /prjoxide /
 
-RUN cd /tmp/nextpnr/build \
- && cmake .. \
-   -DARCH=nexus \
-   -DBUILD_GUI=OFF \
-   -DBUILD_PYTHON=ON \
-   -DUSE_OPENMP=ON \
- && make -j $(nproc) \
- && make DESTDIR=/opt/nextpnr install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build nexus
 
 #---
 
@@ -147,15 +130,9 @@ COPY --from=pkg-prjoxide /prjoxide /
 #---
 
 FROM $REGISTRY/build/nextpnr/build AS build-generic
+ARG REGISTRY
 
-RUN cd /tmp/nextpnr/build \
- && cmake .. \
-   -DARCH=generic \
-   -DBUILD_GUI=OFF \
-   -DBUILD_PYTHON=ON \
-   -DUSE_OPENMP=ON \
- && make -j $(nproc) \
- && make DESTDIR=/opt/nextpnr install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build generic
 
 #---
 
