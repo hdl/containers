@@ -25,8 +25,10 @@ ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
 FROM $REGISTRY/sim
 
-RUN apt update -qq \
- && apt install -y imagemagick libssl-dev \
+RUN apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+    imagemagick \
+    libssl-dev \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/* \
  && python3 -m pip install matplotlib numpy --progress-bar off

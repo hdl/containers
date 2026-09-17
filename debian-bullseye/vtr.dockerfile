@@ -68,7 +68,7 @@ COPY --from=build /opt/vtr /
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     libgtk-3-bin \
- && apt-get autoclean -y && apt-get clean -y && apt-get autoremove -y \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
 CMD ["vpr"]

@@ -27,11 +27,11 @@ ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 FROM $REGISTRY/build/build AS build
 
 RUN apt-get update -qq \
-    && apt-get -y install --no-install-recommends gpg \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends gpg \
     && curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /usr/share/keyrings/bazel-archive-keyring.gpg \
     && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
     && apt-get update -qq \
-    && apt-get -y install --no-install-recommends bazel \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends bazel \
     && rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://github.com/chipsalliance/verible /tmp/verible \
