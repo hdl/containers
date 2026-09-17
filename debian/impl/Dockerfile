@@ -21,7 +21,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian/bookworm'
+ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
 #---
 
@@ -30,17 +30,16 @@ FROM $REGISTRY/pkg/ghdl-yosys-plugin AS pkg-ghdl-yosys-plugin
 FROM $REGISTRY/pkg/yosys AS pkg-yosys
 
 FROM $REGISTRY/ghdl/yosys AS base
+ARG REGISTRY
 
 COPY --from=pkg-ghdl-yosys-plugin /ghdl /
 COPY --from=pkg-yosys /yosys /
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    libboost-all-dev \
-    libomp5 \
-    make \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists
+ && rm -rf /var/lib/apt/lists/*
 
 #---
 
