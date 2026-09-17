@@ -35,11 +35,14 @@ makedepends=(
   libgmp-dev
   m4
   patch
+  pkg-config
   python3-toml
+  python3-pip
   openjdk-11-jre-headless
 )
 
 build() {
+  pip3 install meson ninja tomli pyparsing
   git clone https://github.com/stanford-centaur/pono.git /tmp/pono
   cd /tmp/pono
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//g' > /tmp/hdlc.pono.version
