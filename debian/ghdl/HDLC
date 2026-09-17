@@ -3,6 +3,8 @@
 # Authors:
 #   Unai Martinez-Corral
 #     <unai.martinezcorral@ehu.eus>
+#   Niklaus Leuenberger
+#     <niklaus.leuenb@gmail.com>
 #
 # Copyright Unai Martinez-Corral
 #
@@ -22,24 +24,31 @@
 
 set -e
 
+case "$REGISTRY" in
+  *bullseye) HDLC_GNAT=9;  HDLC_LLVM=11; HDLC_BACKTRACE=libgcc-9-dev ;;
+  *bookworm) HDLC_GNAT=12; HDLC_LLVM=14; HDLC_BACKTRACE=libgcc-12-dev ;;
+  *trixie)   HDLC_GNAT=14; HDLC_LLVM=19; HDLC_BACKTRACE=libbacktrace-dev ;;
+  *)         echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
+esac
+
 makedepends=(
-  gnat-14
+  "gnat-$HDLC_GNAT"
   zlib1g-dev
 )
 
 makedepends_llvm=(
-  libbacktrace-dev
-  llvm-19-dev
+  "$HDLC_BACKTRACE"
+  "llvm-$HDLC_LLVM-dev"
 )
 
 depends=(
-  libgnat-14
+  "libgnat-$HDLC_GNAT"
 )
 
 depends_llvm=(
   gcc
   libc-dev
-  libllvm19
+  "libllvm$HDLC_LLVM"
   zlib1g-dev
 )
 
@@ -57,13 +66,13 @@ build() {
 }
 
 build_mcode() {
-  setup_gnatmake 14
+  setup_gnatmake "$HDLC_GNAT"
   build
 }
 
 build_llvm() {
-  setup_gnatmake 14
+  setup_gnatmake "$HDLC_GNAT"
   build \
-    --with-llvm-config=llvm-config-19 \
-    --with-backtrace-lib=$(dpkg -L libbacktrace-dev | grep libbacktrace.a)
+    --with-llvm-config="llvm-config-$HDLC_LLVM" \
+    --with-backtrace-lib=$(dpkg -L "$HDLC_BACKTRACE" | grep libbacktrace.a)
 }

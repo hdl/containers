@@ -25,11 +25,11 @@ ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 #---
 
 FROM $REGISTRY/build/build AS build
+ARG REGISTRY
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    ${makedepends[@]} \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
@@ -51,8 +51,7 @@ FROM build AS build-llvm
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    ${makedepends_llvm[@]} \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends_llvm[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
@@ -67,11 +66,11 @@ COPY --from=build-llvm /opt/ghdl /ghdl
 #---
 
 FROM $REGISTRY/build/base AS base
+ARG REGISTRY
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    ${depends[@]} \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
@@ -89,7 +88,6 @@ COPY --from=build-llvm /opt/ghdl /
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    ${depends_llvm[@]} \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends_llvm[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
