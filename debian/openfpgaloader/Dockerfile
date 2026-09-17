@@ -2,7 +2,6 @@
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
-#   Sai Charan Lanka
 #
 # Copyright Unai Martinez-Corral
 #
@@ -24,53 +23,35 @@ ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
 #---
 
-FROM $REGISTRY/build/build AS build
+FROM $REGISTRY/build/dev AS build
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    csh \
-    libcairo2-dev \
-    libglu1-mesa-dev \
-    libncurses-dev \
-    libx11-dev \
-    m4 \
-    python3-dev \
-    tcl \
-    tcl-dev \
-    tcl-expect \
-    tcsh \
-    tk-dev \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-RUN git clone git://opencircuitdesign.com/netgen /tmp/netgen \
- && mkdir -p /opt/netgen/ \
- && cd /tmp/netgen \
- && ./configure \
- && make -j$(nproc) \
- && make install \
- && make DESTDIR=/opt/netgen install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
 FROM scratch AS pkg
-COPY --from=build /opt/netgen /netgen
+COPY --from=build /opt/openFPGALoader /openfpgaloader
 
 #---
 
 FROM $REGISTRY/build/base
+COPY --from=build /opt/openFPGALoader /
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    libcairo2 \
-    libglu1-mesa \
-    libncurses6 \
-    libx11-6 \
-    tcl \
-    tk \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /opt/netgen /
-
-CMD ["netgen"]
+# NOTE:
+# The following commands should be executed when the container is used.
+# See https://github.com/trabucayre/openFPGALoader#access-right
+# $ udevadm control --reload-rules
+# $ udevadm trigger
+# $ usermod -a YourUserName -G plugdev

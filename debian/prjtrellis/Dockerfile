@@ -20,48 +20,28 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
-ARG IMAGE="build/base"
 
 #---
 
-FROM $REGISTRY/build/build AS build
+FROM $REGISTRY/build/dev AS build
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    autoconf \
-    bison \
-    flex \
-    help2man \
-    libfl-dev \
- && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists/*
+ENV LDFLAGS="-Wl,--copy-dt-needed-entries"
 
-RUN git clone https://github.com/verilator/verilator \
- && cd verilator \
- && autoconf \
- && ./configure \
- && make -j$(nproc) \
- && make DESTDIR=/opt/verilator install \
- && git clone https://github.com/veripool/vcddiff \
- && make -C vcddiff CC=$CC \
- && cp -p vcddiff/vcddiff /opt/verilator/usr/local/bin/vcddiff
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
 FROM scratch AS pkg
-COPY --from=build /opt/verilator /verilator
+COPY --from=build /opt/prjtrellis /prjtrellis
 
 #---
 
-FROM $REGISTRY/$IMAGE
+FROM $REGISTRY/build/base
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    clang \
-    make \
-    perl \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /opt/verilator /
-CMD ["verilator"]
+COPY --from=build /opt/prjtrellis /

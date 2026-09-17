@@ -1,8 +1,10 @@
+# HDLC netgen
+
 # Authors:
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
-#   Torsten Meissner
+#   Sai Charan Lanka
 #
 # Copyright Unai Martinez-Corral
 #
@@ -20,26 +22,38 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
+set -e
 
-#---
+makedepends=(
+  csh
+  libcairo2-dev
+  libglu1-mesa-dev
+  libncurses-dev
+  libx11-dev
+  m4
+  python3-dev
+  tcl
+  tcl-dev
+  tcl-expect
+  tcsh
+  tk-dev
+)
 
-FROM $REGISTRY/build/base AS build
+build() {
+  git clone git://opencircuitdesign.com/netgen /tmp/netgen
+  mkdir -p /opt/netgen/
+  cd /tmp/netgen
+  ./configure
+  make -j$(nproc)
+  make install
+  make DESTDIR=/opt/netgen install
+}
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    binutils \
-    g++ \
-    make \
-    python3-setuptools \
- && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists/*
-
-RUN mkdir /tmp/sby && cd /tmp/sby \
- && curl -fsSL https://codeload.github.com/YosysHQ/sby/tar.gz/main | tar xzf - --strip-components=1 \
- && make DESTDIR=/opt/sby install
-
-#---
-
-FROM scratch
-COPY --from=build /opt/sby /sby
+depends=(
+  libcairo2
+  libglu1-mesa
+  libncurses6
+  libx11-6
+  tcl
+  tk
+)

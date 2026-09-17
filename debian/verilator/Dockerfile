@@ -20,32 +20,34 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
+ARG IMAGE="build/base"
 
 #---
 
-FROM $REGISTRY/build/dev AS build
+FROM $REGISTRY/build/build AS build
 
-ENV LDFLAGS="-Wl,--copy-dt-needed-entries"
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
+ && apt-get autoclean && apt-get clean && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
 
-RUN git clone --recurse-submodules https://github.com/YosysHQ/prjtrellis /tmp/prjtrellis \
- && cd /tmp/prjtrellis/libtrellis \
- && cmake -DCURRENT_GIT_VERSION="$(git describe --tags)" . \
- && make -j $(nproc) \
- && make DESTDIR=/opt/prjtrellis install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
 FROM scratch AS pkg
-COPY --from=build /opt/prjtrellis /prjtrellis
+COPY --from=build /opt/verilator /verilator
 
 #---
 
-FROM $REGISTRY/build/base
-COPY --from=build /opt/prjtrellis /
+FROM $REGISTRY/$IMAGE
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    libboost-all-dev \
-    make \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build /opt/verilator /
+CMD ["verilator"]

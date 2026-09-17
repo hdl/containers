@@ -1,3 +1,5 @@
+# HDLC iverilog
+
 # Authors:
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
@@ -19,25 +21,27 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
+set -e
 
-#---
+makedepends=(
+  autoconf
+  automake
+  bison
+  flex
+  gperf
+  libreadline-dev
+  zlib1g-dev
+)
 
-FROM $REGISTRY/build/build AS build
+build() {
+  git clone https://github.com/steveicarus/iverilog /tmp/iverilog
+  cd /tmp/iverilog
+  autoconf
+  ./configure
+  make -j$(nproc) check
+  make DESTDIR=/opt/iverilog install
+}
 
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
-RUN source "$HOME/.cargo/env" \
- && git clone --recurse-submodules https://github.com/gatecat/prjoxide /tmp/prjoxide \
- && cd /tmp/prjoxide/libprjoxide \
- && cargo install --path prjoxide --root /opt/prjoxide/usr/local
-
-#---
-
-FROM scratch AS pkg
-COPY --from=build /opt/prjoxide /prjoxide
-
-#---
-
-FROM $REGISTRY/build/base
-COPY --from=build /opt/prjoxide /
+depends=(
+  perl
+)

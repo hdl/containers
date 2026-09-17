@@ -2,6 +2,7 @@
 #   Unai Martinez-Corral
 #     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
+#   Torsten Meissner
 #
 # Copyright Unai Martinez-Corral
 #
@@ -23,41 +24,17 @@ ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
 #---
 
-FROM $REGISTRY/build/build AS build
+FROM $REGISTRY/build/base AS build
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    autoconf \
-    automake \
-    bison \
-    flex \
-    gperf \
-    libreadline-dev \
-    zlib1g-dev \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${makedepends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/steveicarus/iverilog \
- && cd iverilog \
- && autoconf \
- && ./configure \
- && make -j$(nproc) check \
- && make DESTDIR=/opt/iverilog install
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
-FROM scratch AS pkg
-COPY --from=build /opt/iverilog /iverilog
-
-#---
-
-FROM $REGISTRY/build/base
-
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    perl \
- && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists/*
-
-COPY --from=build /opt/iverilog /
-CMD ["iverilog"]
+FROM scratch
+COPY --from=build /opt/sby /sby
