@@ -24,12 +24,13 @@ ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 #---
 
 FROM $REGISTRY/yosys AS base
+ARG REGISTRY
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    libgnat-9 \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
- && rm -rf /var/lib/apt/lists
+ && rm -rf /var/lib/apt/lists/*
 
 #---
 
@@ -37,22 +38,17 @@ RUN apt-get update -qq \
 FROM $REGISTRY/pkg/ghdl AS pkg-ghdl
 
 FROM base AS plugin
+ARG REGISTRY
 
-COPY --from=pkg-ghdl /ghdl /opt/ghdl
+COPY --from=pkg-ghdl /ghdl /
 
-RUN mkdir /tmp/ghdl-yosys-plugin && cd /tmp/ghdl-yosys-plugin \
- && curl -fsSL https://codeload.github.com/ghdl/ghdl-yosys-plugin/tar.gz/master | tar xzf - --strip-components=1
-
-RUN cp -vr /opt/ghdl/* / \
- && cd /tmp/ghdl-yosys-plugin \
- && make \
- && cp ghdl.so /opt/ghdl/usr/local/lib/ghdl_yosys.so
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC && build
 
 #---
 
 FROM $REGISTRY/pkg/ghdl AS pkg
 
-COPY --from=plugin /opt/ghdl/usr/local/lib/ghdl_yosys.so /ghdl/usr/local/lib/ghdl_yosys.so
+COPY --from=plugin /usr/local/lib/ghdl_yosys.so /ghdl/usr/local/lib/ghdl_yosys.so
 
 #---
 
