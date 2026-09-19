@@ -43,8 +43,10 @@ FROM base AS build
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     clang \
+    cmake \
     git \
-    make
+    make \
+    python3-venv
 
 ENV CC=clang
 ENV CXX=clang++
@@ -55,7 +57,5 @@ FROM build
 
 RUN apt-get update -qq \
  && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    cmake \
     libboost-all-dev \
-    python3-dev \
-    python3-venv
+    python3-dev
