@@ -24,7 +24,6 @@
 set -e
 
 makedepends=(
-  cmake
   libftdi1-2
   libftdi1-dev
   libhidapi-dev

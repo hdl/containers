@@ -23,7 +23,7 @@ ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
 #---
 
-FROM $REGISTRY/build/dev AS build
+FROM $REGISTRY/build/build AS build
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
