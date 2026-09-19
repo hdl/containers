@@ -26,7 +26,6 @@ set -e
 
 makedepends=(
   binutils
-  cmake
   autoconf
 )
 

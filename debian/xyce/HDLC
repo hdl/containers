@@ -34,7 +34,6 @@ makedepends=(
   bison
   ca-certificates
   curl
-  cmake
   make
   gfortran
   libfl-dev

@@ -28,7 +28,6 @@ makedepends=(
   autoconf
   binutils
   bison
-  cmake
   flex
   libbison-dev
   libfl-dev

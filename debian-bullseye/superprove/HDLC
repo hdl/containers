@@ -28,7 +28,6 @@ CTX=/tmp/ctx
 
 makedepends=(
   binutils
-  cmake
   ninja-build
   patch
   python-setuptools
