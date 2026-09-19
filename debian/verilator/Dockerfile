@@ -25,6 +25,7 @@ ARG IMAGE="build/base"
 #---
 
 FROM $REGISTRY/build/build AS build
+ARG REGISTRY
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \

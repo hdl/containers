@@ -102,7 +102,7 @@ default:
   prjoxide:       *SysDebianAmd64
   prjtrellis:     *SysDebianAmd64
   verible:        *SysDebianLegacyAmd64
-  verilator:      *SysDebianLegacyDefaultArchSet
+  verilator:      *SysDebianDefaultArchSet
   vtr:            *SysDebianBullseyeAmd64
   xschem:         *SysDebianAmd64
   xyce:           *SysDebianLegacyAmd64

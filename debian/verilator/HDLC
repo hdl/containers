@@ -34,6 +34,13 @@ makedepends=(
 build() {
   git clone https://github.com/verilator/verilator
   cd verilator
+  case "$REGISTRY" in
+  *bullseye|*bookworm)
+    grep -q '        m_emptySet;' src/V3ClassGraph.h \
+      && sed -i 's#        m_emptySet;#        m_emptySet{};#' src/V3ClassGraph.h \
+      || { echo 'V3ClassGraph.h unexpectedly changed; source patch out of date' >&2; exit 1; }
+    ;;
+  esac
   autoconf
   ./configure
   make -j$(nproc)
