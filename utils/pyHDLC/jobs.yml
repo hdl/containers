@@ -111,7 +111,7 @@ default:
 pkgonly:
 
   boolector:  *SysDebianAmd64
-  cvc:        *SysDebianLegacyAmd64
+  cvc:        *SysDebianAmd64
   pono:       *SysDebianBullseyeAmd64
   superprove: *SysDebianBullseyeAmd64
   sby:        *SysDebianAmd64

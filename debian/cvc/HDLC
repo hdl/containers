@@ -25,8 +25,9 @@
 set -e
 
 case "$REGISTRY" in
-  *bullseye) HDLC_OPENJDK=openjdk-11-jre-headless ;;
+  *bullseye) HDLC_OPENJDK=openjdk-11-jre-headless; HDLC_CLANG=clang-13 ;;
   *bookworm) HDLC_OPENJDK=openjdk-17-jre-headless ;;
+  *trixie)   HDLC_OPENJDK=openjdk-21-jre-headless ;;
   *)         echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
 esac
 
@@ -43,12 +44,17 @@ makedepends=(
   "$HDLC_OPENJDK"
 )
 
+[ -n "${HDLC_CLANG:-}" ] && makedepends+=("$HDLC_CLANG")
+
 build() {
+  if [ -n "${HDLC_CLANG:-}" ]; then
+    export CC="$HDLC_CLANG" CXX="${HDLC_CLANG/clang/clang++}"
+  fi
   git clone https://github.com/cvc5/cvc5.git /tmp/cvc5
   cd /tmp/cvc5
   git tag -d latest
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//g' > /tmp/hdlc.cvc.version
-  ./configure.sh --auto-download
+  ./configure.sh --auto-download unrestricted
   cd build
   make -j$(nproc)
   make DESTDIR=/opt/cvc install
