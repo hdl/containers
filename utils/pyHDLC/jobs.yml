@@ -148,7 +148,7 @@ custom:
     images:
       - pkg/ghdl-yosys-plugin#ghdl
       - ghdl/yosys
-    sys: *SysDebianLegacyAmd64
+    sys: *SysDebianAmd64
   ghdl:
     images:
       - pkg/ghdl
