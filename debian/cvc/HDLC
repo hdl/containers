@@ -25,23 +25,18 @@
 set -e
 
 case "$REGISTRY" in
-  *bullseye) HDLC_OPENJDK=openjdk-11-jre-headless; HDLC_CLANG=clang-13 ;;
-  *bookworm) HDLC_OPENJDK=openjdk-17-jre-headless ;;
-  *trixie)   HDLC_OPENJDK=openjdk-21-jre-headless ;;
+  *bullseye) HDLC_OPENJDK=11 ; HDLC_CLANG=clang-13 ;;
+  *bookworm) HDLC_OPENJDK=17 ;;
+  *trixie)   HDLC_OPENJDK=21 ;;
   *)         echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
 esac
 
 makedepends=(
-  cmake
+  libfl-dev
   libgmp-dev
   flex
-  libfl-dev
   m4
-  patch
-  python3-pyparsing
-  python3-toml
-  python3-venv
-  "$HDLC_OPENJDK"
+  "openjdk-${HDLC_OPENJDK}-jre-headless"
 )
 
 [ -n "${HDLC_CLANG:-}" ] && makedepends+=("$HDLC_CLANG")
