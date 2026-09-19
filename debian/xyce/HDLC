@@ -32,7 +32,6 @@ esac
 
 makedepends=(
   bison
-  ca-certificates
   curl
   make
   gfortran
@@ -44,7 +43,6 @@ makedepends=(
 )
 
 depends=(
-  ca-certificates
   "libamd$HDLC_AMD"
   libgfortran5
   "libfftw3-$HDLC_FFTW"
