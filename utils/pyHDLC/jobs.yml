@@ -116,7 +116,7 @@ pkgonly:
   superprove: *SysDebianBullseyeAmd64
   sby:        *SysDebianAmd64
   yices2:     *SysDebianAmd64
-  z3:         *SysDebianLegacyAmd64
+  z3:         *SysDebianAmd64
 
 runonly:
 

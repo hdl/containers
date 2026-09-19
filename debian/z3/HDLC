@@ -25,17 +25,27 @@
 
 set -e
 
+case "$REGISTRY" in
+  *bullseye) HDLC_CMP=g++-10 ; export CC="${HDLC_CMP/++/cc}" CXX="$HDLC_CMP" ;;
+  *bookworm) HDLC_CMP=clang-16 ; export CC="$HDLC_CMP" CXX="${HDLC_CMP/clang/clang++}" ;;
+  *trixie)   ;;
+  *)         echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
+esac
+
 makedepends=(
   binutils
-  python3-distutils
 )
 
+[ -n "${HDLC_CMP:-}" ] && makedepends+=("$HDLC_CMP")
+
 build() {
- git clone https://github.com/Z3Prover/z3.git /tmp/z3
+  case "$REGISTRY" in
+    *bullseye|*bookworm) git clone -b z3-4.15.0 https://github.com/Z3Prover/z3.git /tmp/z3 ;;
+    *) git clone https://github.com/Z3Prover/z3.git /tmp/z3 ;;
+  esac
   cd /tmp/z3
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/^z3-//;s/-/./g;s/^v//g' > /tmp/hdlc.z3.version
-  python3 scripts/mk_make.py
-  cd build
-  make PREFIX=/usr/local
-  make DESTDIR=/opt/z3 PREFIX=/usr/local install
+  cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DZ3_BUILD_TEST_EXECUTABLES=OFF -DZ3_ENABLE_EXAMPLE_TARGETS=OFF
+  cmake --build build --parallel
+  DESTDIR=/opt/z3 cmake --install build
 }
