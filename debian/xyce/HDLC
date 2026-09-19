@@ -24,14 +24,13 @@
 set -e
 
 case "$REGISTRY" in
-  *bullseye) HDLC_FFTW=libfftw3-3 ;;
-  *bookworm) HDLC_FFTW=libfftw3-bin ;;
-  *)         echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
+  *bullseye) HDLC_FFTW=3 ;   HDLC_AMD=2 ; HDLC_SUITESSPCONFIG=5 ; HDLC_CMAKE=1 ;;
+  *bookworm) HDLC_FFTW=bin ; HDLC_AMD=2 ; HDLC_SUITESSPCONFIG=5 ; HDLC_CMAKE=1 ;;
+  *trixie)   HDLC_FFTW=bin ; HDLC_AMD=3 ; HDLC_SUITESSPCONFIG=7 ; HDLC_CMAKE=0 ;;
+  *)  echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
 esac
 
 makedepends=(
-  autoconf
-  automake
   bison
   ca-certificates
   curl
@@ -43,23 +42,21 @@ makedepends=(
   libsuitesparse-dev
   libblas-dev
   liblapack-dev
-  libtool
 )
 
 depends=(
   ca-certificates
-  libamd2
+  "libamd$HDLC_AMD"
   libgfortran5
-  "$HDLC_FFTW"
+  "libfftw3-$HDLC_FFTW"
   libblas3
   liblapack3
-  libsuitesparseconfig5
+  "libsuitesparseconfig$HDLC_SUITESSPCONFIG"
 )
 
 build_trilinos() {
-  cd /tmp/build/
   mkdir -p Trilinos/trilinos-source
-  curl -fsSL https://github.com/trilinos/Trilinos/archive/trilinos-release-12-12-1.tar.gz |
+  curl -fsSL https://github.com/trilinos/Trilinos/archive/trilinos-release-16-2-2.tar.gz |
     tar xz -C Trilinos/trilinos-source --strip-components=1
 
   cd Trilinos
@@ -84,7 +81,7 @@ build_trilinos() {
     -DTrilinos_ENABLE_AztecOO=ON \
     -DTrilinos_ENABLE_Belos=ON \
     -DTrilinos_ENABLE_Teuchos=ON \
-      -DTeuchos_ENABLE_COMPLEX=ON \
+      -DTrilinos_ENABLE_COMPLEX_DOUBLE=ON \
     -DTrilinos_ENABLE_Amesos=ON \
       -DAmesos_ENABLE_KLU=ON \
     -DTrilinos_ENABLE_Amesos2=ON \
@@ -94,7 +91,6 @@ build_trilinos() {
     -DTrilinos_ENABLE_Stokhos=ON \
     -DTrilinos_ENABLE_Kokkos=ON \
     -DTrilinos_ENABLE_ALL_OPTIONAL_PACKAGES=OFF \
-    -DTrilinos_ENABLE_CXX11=ON \
     -DTPL_ENABLE_AMD=ON \
     -DAMD_LIBRARY_DIRS="/usr/lib" \
     -DTPL_AMD_INCLUDE_DIRS="/usr/include/suitesparse" \
@@ -105,29 +101,34 @@ build_trilinos() {
 }
 
 build_xyce() {
-  cd /tmp/build/
   mkdir -p Xyce
   curl -fsSL https://codeload.github.com/Xyce/Xyce/tar.gz/master |
     tar xz -C Xyce --strip-components=1
 
   cd Xyce
-  ./bootstrap
   mkdir xyce-build
   cd xyce-build
-  xyceBuildDir=/opt/Xyce/xyce-build/
-  ../configure \
-    CXXFLAGS="-O3" \
-    LDFLAGS="-Wl,-rpath=$xyceBuildDir/utils/XyceCInterface -Wl,-rpath=$xyceBuildDir/lib" \
-    CPPFLAGS="-I/usr/include/suitesparse" \
-    ARCHDIR=$XYCE_OUTDIR \
-    --enable-shared \
-    --enable-xyce-shareable \
-    --enable-stokhos \
-    --enable-amesos2
+  cmake .. \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX="$XYCE_OUTDIR" \
+    -DCMAKE_PREFIX_PATH="/tmp/xyce${XYCE_OUTDIR}" \
+    -DBUILD_SHARED_LIBS=ON
   make DESTDIR=/tmp/xyce/ -j$(nproc) install
 }
 
 build() {
+  mkdir -p /tmp/build
+  cd /tmp/build
+
+  # Trilinos 16.2.2 requires CMake >= 3.23 and Xyce master requires >= 3.26;
+  # trixie ships CMake >= 3.31, bullseye/bookworm ship 3.18/3.25
+  if [ "$HDLC_CMAKE" = 1 ]; then
+    mkdir -p /opt/cmake
+    curl -fsSL https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1-linux-x86_64.tar.gz |
+      tar xz -C /opt/cmake --strip-components=1
+    export PATH="/opt/cmake/bin:$PATH"
+  fi
+
   build_trilinos
   build_xyce
 }

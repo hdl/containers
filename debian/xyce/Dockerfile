@@ -28,12 +28,6 @@ FROM $REGISTRY/build/build AS build
 ARG REGISTRY
 
 ENV XYCE_OUTDIR=/usr/local/
-ENV PATH="${PATH}:/tmp/xyce${XYCE_OUTDIR}bin"
-ENV LIBRARY_PATH="${LIBRARY_PATH}:/tmp/xyce${XYCE_OUTDIR}lib"
-ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/tmp/xyce${XYCE_OUTDIR}lib"
-ENV CPATH="${CPATH}:/tmp/xyce${XYCE_OUTDIR}include"
-
-WORKDIR /tmp/build/
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
