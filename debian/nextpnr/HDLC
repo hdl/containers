@@ -27,14 +27,14 @@
 set -e
 
 case "$REGISTRY" in
-  *bullseye) HDLC_LIBOMP=libomp5-11 ;;
-  *bookworm) HDLC_LIBOMP=libomp5 ;;
-  *)         echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
+  *bullseye) HDLC_LIBOMP=5-11 ;;
+  *bookworm|*trixie) HDLC_LIBOMP=5 ;;
+  *) echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
 esac
 
 depends=(
   libboost-all-dev
-  "$HDLC_LIBOMP"
+  "libomp$HDLC_LIBOMP"
 )
 
 makedepends=(
@@ -48,6 +48,11 @@ clone() {
 }
 
 build() {
+  case "$REGISTRY" in
+    *bullseye)
+      python3 -m venv /opt/cmake && /opt/cmake/bin/pip install --quiet 'cmake==3.28.1' && export PATH=/opt/cmake/bin:$PATH
+      ;;
+  esac
   cd /tmp/nextpnr/build
   cmake .. \
     -DARCH="$1" \
