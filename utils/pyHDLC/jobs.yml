@@ -106,7 +106,7 @@ default:
   vtr:            *SysDebianBullseyeAmd64
   xschem:         *SysDebianAmd64
   xyce:           *SysDebianAmd64
-  yosys:          *SysDebianLegacyAmd64
+  yosys:          *SysDebianAmd64
 
 pkgonly:
 

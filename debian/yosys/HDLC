@@ -21,11 +21,13 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+set -e
+
 makedepends=(
   bison
   flex
+  libfl-dev
   gawk
-  gcc
   pkg-config
   zlib1g-dev
   clang
@@ -33,21 +35,7 @@ makedepends=(
   make
 )
 
-testdepends=(
-  g++
-)
-
-build() {
-  git clone https://github.com/YosysHQ/yosys.git /tmp/yosys
-  cd /tmp/yosys
-  make -j $(nproc)
-  make DESTDIR=/opt/yosys install
-}
-
-runtests() {
-  cd /tmp/yosys
-  make test
-}
+testdepends=()
 
 depends=(
   libffi-dev
@@ -56,3 +44,55 @@ depends=(
   graphviz
   xdot
 )
+
+case "$REGISTRY" in
+
+*bullseye)
+  testdepends+=(libgtest-dev libgmock-dev)
+
+  build() {
+    git clone -b v0.66 --recursive https://github.com/YosysHQ/yosys.git /tmp/yosys
+    cd /tmp/yosys
+    make -j $(nproc)
+    make DESTDIR=/opt/yosys install
+  }
+
+  runtests() {
+    cd /tmp/yosys
+    make -j $(nproc) unit-test
+  }
+  ;;
+
+*bookworm|*trixie)
+
+  makedepends+=(libgtest-dev libgmock-dev)
+  case "$REGISTRY" in
+  *bookworm) makedepends+=(g++) ;;
+  esac
+
+  build() {
+    git clone --recursive https://github.com/YosysHQ/yosys.git /tmp/yosys
+    cd /tmp/yosys
+    CMAKE_ARGS=(-DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local)
+    case "$REGISTRY" in
+    *bookworm)
+      python3 -m venv /opt/cmake && /opt/cmake/bin/pip install --quiet 'cmake==3.28.1' && export PATH=/opt/cmake/bin:$PATH
+      CC=gcc CXX=g++ cmake -B build "${CMAKE_ARGS[@]}"
+      ;;
+    *trixie)
+      cmake -B build "${CMAKE_ARGS[@]}"
+      ;;
+    esac
+    cmake --build build -j $(nproc)
+    DESTDIR=/opt/yosys cmake --install build
+  }
+
+  runtests() {
+    cd /tmp/yosys
+    PATH="/opt/cmake/bin:$PATH" ctest --test-dir build/tests/unit -j $(nproc)
+  }
+
+  ;;
+
+*) echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
+esac

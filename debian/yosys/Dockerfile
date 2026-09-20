@@ -23,7 +23,8 @@ ARG REGISTRY='ghcr.io/hdl/debian/bullseye'
 
 #---
 
-FROM $REGISTRY/iverilog AS build
+FROM $REGISTRY/build/build AS build
+ARG REGISTRY
 
 RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
  && apt-get update -qq \
@@ -49,6 +50,7 @@ COPY --from=build /opt/yosys /yosys
 #---
 
 FROM $REGISTRY/build/build
+ARG REGISTRY
 
 COPY --from=build /opt/yosys /
 
