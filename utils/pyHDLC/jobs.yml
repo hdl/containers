@@ -120,7 +120,7 @@ pkgonly:
 
 runonly:
 
-  conda:                     *SysDebianLegacyDefaultArchSet
+  conda:                     *SysDebianAmd64
   prog:                      *SysDebianAmd64
   sim:                       *SysDebianLegacyAmd64
   conda/f4pga/xc7/toolchain: *SysDebianBullseyeAmd64
