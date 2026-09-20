@@ -159,7 +159,7 @@ custom:
   impl-build:
     images:
       - build/impl
-    sys: *SysDebianLegacyAmd64
+    sys: *SysDebianAmd64
   impl-prjs:
     images:
       - impl/${arch}
@@ -167,13 +167,13 @@ custom:
       - { arch: ice40, prj: icestorm   }
       - { arch: ecp5,  prj: prjtrellis }
       - { arch: nexus, prj: prjoxide   }
-    sys: *SysDebianLegacyAmd64
+    sys: *SysDebianAmd64
   impl:
     images:
       - impl/generic
       - impl/pnr
       - impl
-    sys: *SysDebianLegacyAmd64
+    sys: *SysDebianAmd64
   magic-irsim:
     images:
       - magic/irsim
