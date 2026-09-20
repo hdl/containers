@@ -81,7 +81,7 @@ default:
       - s390x
   iverilog:       *SysDebianAmd64
   klayout:        *SysDebianAmd64
-  magic:          *SysDebianLegacyDefaultArchSet
+  magic:          *SysDebianDefaultArchSet
   netgen:         *SysDebianDefaultArchSet
   nvc:
     *SysDebianAmd64
@@ -177,8 +177,7 @@ custom:
   magic-irsim:
     images:
       - magic/irsim
-    sys:
-      <<: *SysDebianLegacyDefaultArchSet
+    sys: *SysDebianDefaultArchSet
   nextpnr-build:
     images:
       - build/nextpnr/base

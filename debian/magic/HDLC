@@ -50,9 +50,12 @@ build() {
 }
 
 depends=(
-  libcairo2
+  libgl1
   libglu1-mesa
+  libice6
   libncurses6
+  libcairo2
+  libsm6
   libx11-6
   tcl
   tk
