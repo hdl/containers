@@ -209,7 +209,7 @@ custom:
     images:
       - pkg/osvb
       - sim/osvb
-    sys: *SysDebianLegacyAmd64
+    sys: *SysDebianAmd64
   cosim:
     images:
       - sim/${prj}-slim
