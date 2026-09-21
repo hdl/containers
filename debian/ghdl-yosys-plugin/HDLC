@@ -23,11 +23,20 @@
 
 set -e
 
+makedepends=()
+
 case "$REGISTRY" in
-  *bullseye) HDLC_GNAT=9  ;;
-  *bookworm) HDLC_GNAT=12 ;;
-  *trixie)   HDLC_GNAT=14 ;;
-  *)         echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
+  *bullseye)
+    HDLC_GNAT=9
+    ;;
+  *bookworm)
+    HDLC_GNAT=12
+    makedepends=(g++)
+    ;;
+  *trixie)
+    HDLC_GNAT=14
+    ;;
+  *) echo "ERROR: unsupported REGISTRY: $REGISTRY" >&2; exit 1 ;;
 esac
 
 depends=(
