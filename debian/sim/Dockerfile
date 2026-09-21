@@ -1,6 +1,5 @@
 # Authors:
 #   Unai Martinez-Corral
-#     <umartinezcorral@antmicro.com>
 #     <unai.martinezcorral@ehu.eus>
 #
 # Copyright Unai Martinez-Corral
@@ -29,24 +28,19 @@ FROM $REGISTRY/pkg/verilator AS pkg-verilator
 FROM $REGISTRY/pkg/iverilog AS pkg-iverilog
 
 FROM $REGISTRY/ghdl/llvm AS base
+ARG REGISTRY
 
 COPY --from=pkg-nvc /nvc /
 COPY --from=pkg-verilator /verilator /
 COPY --from=pkg-iverilog /iverilog /
 
-RUN apt-get update -qq \
- && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    binutils \
-    libdw1 \
-    libzstd1 \
-    make \
-    perl \
-    python3-pip \
-    python3-venv \
-    tcl \
+RUN --mount=type=bind,target=/tmp/ctx . /tmp/ctx/HDLC \
+ && apt-get update -qq \
+ && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends ${depends[@]} \
  && apt-get autoclean && apt-get clean && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
 ENV VIRTUAL_ENV=/opt/venv
-RUN python3 -m venv $VIRTUAL_ENV
+RUN python3 -m venv "$VIRTUAL_ENV"
+
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
