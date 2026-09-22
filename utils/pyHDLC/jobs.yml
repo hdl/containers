@@ -216,11 +216,11 @@ custom:
       - sim/${prj}
       - prj: scipy
       - prj: octave
-    sys: *SysDebianLegacyAmd64
+    sys: *SysDebianAmd64
   gnuplot:
     images:
       - sim/octave/gnuplot
-    sys: *SysDebianLegacyAmd64
+    sys: *SysDebianAmd64
   f4pga-xc7-devices:
     images:
       - [ conda/f4pga/xc7/a50t  ]
