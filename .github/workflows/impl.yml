@@ -102,10 +102,9 @@ jobs:
       fail-fast: false
       matrix:
         sys:
-
-          # Debian Bullseye
           - { os: debian/bullseye, arch: amd64 }
-
+          - { os: debian/bookworm, arch: amd64 }
+          - { os: debian/trixie, arch: amd64 }
         task:
           - { arch: ice40, prj: icestorm   }
           - { arch: ecp5,  prj: prjtrellis }
